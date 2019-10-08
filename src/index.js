@@ -80,5 +80,5 @@ export function SchemaForm({model: incomingModel, schema, form, onChange, ...pro
     const mapper = getMapper(props.mapper);
     return h(Context.Provider,
              {value: {model, schema, form: merged, mapper, getValue, setValue}},
-             h(SchemaField, {schema, form: merged[0]}));
+             h(SchemaField, {schema, form: merged[0], onChange}));
 }
