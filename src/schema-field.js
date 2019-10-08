@@ -12,7 +12,7 @@ export function SchemaField(props) {
     const Field  = mapper[form.type];
 
     if (!Field) {
-        log('SchemaField() : !Field : type : %o', form.type);
+        log('SchemaField(%o) : !Field : form : %o', form.key, form);
         return null;
     }
 

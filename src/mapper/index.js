@@ -1,16 +1,21 @@
 import {ArrayComponent} from './array';
 import {FieldSet} from './fieldset';
-import {Number} from './number';
+import {Integer, Number} from './number';
+import {Select} from './select';
 import {Text} from './text';
 
 export * from './rules';
-export * from './forms';
 
 export const defaultMapper = {
-    'text': Text,
-    'fieldset': FieldSet,
-    'number': Number,
-    'array': ArrayComponent,
+    password: Text,
+    text: Text,
+    // textarea: Text,
+    select: Select,
+    fieldset: FieldSet,
+    tuple: FieldSet,
+    number: Number,
+    integer: Integer,
+    array: ArrayComponent,
 };
 
 export function getMapper(mapper = {}) {

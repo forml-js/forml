@@ -1,18 +1,61 @@
 import debug from 'debug';
 
 import * as constants from '../constants';
+import {stdFormObj} from '../forms';
 import {getPreferredType} from '../util';
-
-import {stdFormObj} from './forms';
 
 const log = debug('rjsf:mapper:rules');
 
+export function enumToTitles(enm) {
+    const titles = [];
+    enm.forEach(value => {
+        titles.push(getNameFromValue(value));
+    });
+    return titles;
+}
+
+export function getNameFromValue(value) {
+    return Object.prototype.toString.call(value);
+}
+
 export const definitions = {
+    select(name, schema, options) {
+        if (schema.enum) {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'select';
+
+
+            if (!f.titles) {
+                f.titles = enumToTitles(schema.enum);
+            }
+
+            return f;
+        }
+
+        return undefined;
+    },
+    checkbox(name, schema, options) {
+        if (getPreferredType(schema.type) === 'boolean') {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'checkbox';
+            return f;
+        }
+
+        return undefined;
+    },
     text(name, schema, options) {
         if (schema.type === 'string') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'text';
-            f.key   = options.path;
+            return f;
+        }
+
+        return undefined;
+    },
+    integer(name, schema, options) {
+        if (schema.type === 'integer') {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'integer';
             return f;
         }
 
@@ -22,17 +65,35 @@ export const definitions = {
         if (schema.type === 'number') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'number';
-            f.key   = options.path;
             return f;
         }
 
         return undefined;
     },
+    tuple(name, schema, options) {
+        if (getPreferredType(schema.type) === 'array' && Array.isArray(schema.items)) {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'tuple';
+
+            f.items = [];
+            schema.items.forEach(function(item, index) {
+                const arrPath = options.path.slice();
+                arrPath.push(index);
+
+                const name = `${schema.title} #${index + 1}`;
+                const def = test(name, item, {...options, path: arrPath});
+
+                if (def)
+                    f.items.push(def);
+            });
+
+            return f;
+        }
+    },
     array(name, schema, options) {
         if (getPreferredType(schema.type) === 'array') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'array';
-            f.key   = options.path;
 
             if (schema.items !== undefined) {
                 const arrPath = options.path.slice();
@@ -51,7 +112,6 @@ export const definitions = {
         if (getPreferredType(schema.type) === 'object') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'fieldset';
-            f.key   = options.path;
 
             if (schema.properties) {
                 f.items = [];
@@ -77,14 +137,16 @@ export const definitions = {
 };
 
 export const rules = {
-    string: [definitions.text],
+    string: [definitions.select, definitions.text],
     object: [definitions.fieldset],
     number: [definitions.number],
-    array: [definitions.array],
+    integer: [definitions.integer],
+    boolean: [definitions.checkbox],
+    array: [definitions.tuple, definitions.array],
 };
 
 export function test(name, schema, options) {
-    const ruleSet = rules[schema.type];
+    const ruleSet = rules[getPreferredType(schema.type)];
 
     if (ruleSet) {
         for (let rule of ruleSet) {

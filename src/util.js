@@ -3,11 +3,12 @@ import debug from 'debug';
 const log = debug('rjsf:util');
 
 export function defaultForSchema(schema) {
-    if (schema.default) {
+    if (schema.default !== undefined) {
         return schema.default;
     }
 
-    switch (getPreferredType(schema.type)) {
+    const type = getPreferredType(schema.type);
+    switch (type) {
         case 'array':
             return [];
         case 'object':
@@ -21,6 +22,8 @@ export function defaultForSchema(schema) {
             return false;
         case 'null':
             return null;
+        default:
+            throw new Error(`Unhandled defaultForSchema type: ${type}`);
     }
 }
 

@@ -1,31 +1,41 @@
 import debug from 'debug';
-import {createElement as h} from 'react';
+import {createElement as h, useState} from 'react';
 import {render} from 'react-dom';
 
-import {SchemaForm} from '../src';
+import {SchemaForm} from 'rjsf';
 
 const log = debug('rjsf:example');
 
-async function init() {
-    const schema = {
-        type: 'array',
-        title: 'Foo Bars',
-        items: {
-            type: 'object',
-            title: 'Foo Bar',
-            properties: {
-                'foo': {type: 'string'},
-                'bar': {type: 'number'},
-            }
-        }
-    };
-    const form   = ['*'];
-    const model  = [];
-    render(h(SchemaForm, {schema, form, model, onChange}), document.getElementById('app'));
+function importAll(context) {
+    const keys   = context.keys();
+    const result = {};
 
-    function onChange(...args) {
-        log('onChange(%o)', args);
+    for (let key of keys) {
+        result[key] = context(key);
     }
+
+    return result;
+}
+
+const samples = importAll(require.context('./data/', false, /\.json$/));
+
+function Page(props) {
+    const enm    = Object.keys(samples);
+    const titles = enm.map(k => samples[k].schema.title);
+
+    const [model, setModel] = useState('');
+    const form   = [{key: [], title: 'Sample', titles}];
+    const schema = {type: 'string', enum: enm};
+
+    return h(SchemaForm, {schema, form, model, onChange});
+
+    function onChange(event, value) {
+        setModel(value);
+    }
+}
+
+async function init() {
+    render(h(Page), document.getElementById('app'));
 }
 
 document.addEventListener('DOMContentLoaded', init);
