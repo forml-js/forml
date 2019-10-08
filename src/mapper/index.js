@@ -1,4 +1,5 @@
 import {ArrayComponent} from './array';
+import {Checkbox} from './checkbox';
 import {FieldSet} from './fieldset';
 import {Integer, Number} from './number';
 import {Select} from './select';
@@ -16,6 +17,7 @@ export const defaultMapper = {
     number: Number,
     integer: Integer,
     array: ArrayComponent,
+    checkbox: Checkbox,
 };
 
 export function getMapper(mapper = {}) {
