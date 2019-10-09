@@ -7,8 +7,12 @@
     "prepublish": "babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Zachary Hueras",
+  "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/fauxsoup/rjsf.git"
+  },
   "peerDependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
