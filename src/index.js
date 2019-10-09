@@ -7,7 +7,7 @@ import Context from './context';
 import {merge} from './forms';
 import {getMapper, test} from './mapper';
 import {SchemaField} from './schema-field';
-import {findSchema, valueGetter, valueSetter} from './util';
+import * as util from './util';
 
 const log = debug('rjsf:index');
 
@@ -15,20 +15,23 @@ export function SchemaForm({model: incomingModel, schema, form, onChange, ...pro
     const [model, setModel] = useState(incomingModel);
     const ref               = useRef(model);
 
-    const getValue = valueGetter(model, schema);
-    const setValue = valueSetter(model, schema, setModel)
+    const getValue = util.valueGetter(model, schema);
+    const setValue = util.valueSetter(model, schema, setModel)
     const merged   = merge(schema, form);
 
     useEffect(function() {
-        setModel(props.model);
-    }, [props.model])
+        log('SchemaForm(%s) : useEffect() -> setModel(%o)', schema.title, props.model);
+        setModel(incomingModel);
+    }, [incomingModel])
 
-    log('SchemaForm() : model : %o', model);
-    log('SchemaForm() : merged : %o', merged);
-    log('SchemaForm() : schema : %o', schema);
+    log('SchemaForm(%s) : model : %o', schema.title, model);
+    log('SchemaForm(%s) : merged : %o', schema.title, merged);
+    log('SchemaForm(%s) : schema : %o', schema.title, schema);
 
     const mapper = getMapper(props.mapper);
     return h(Context.Provider,
              {value: {model, schema, form: merged, mapper, getValue, setValue}},
-             h(SchemaField, {schema, form: merged[0], onChange}));
+             merged.map(form => h(SchemaField, {schema, form, onChange})));
 }
+
+export {util};

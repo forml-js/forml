@@ -16,7 +16,10 @@ export function SchemaField(props) {
         return null;
     }
 
-    const value = model.getValue(form.key);
+    let value = undefined;
+    if (form.key) {
+        value = model.getValue(form.key);
+    }
 
     log('SchemaField(%o) : value : %o', form.key, value);
 

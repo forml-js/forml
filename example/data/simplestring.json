@@ -1,0 +1,7 @@
+{
+    "schema": {
+        "type": "string",
+        "title": "String Value"
+    },
+    "form": [{"key": [], "type": "text"}]
+}

@@ -52,7 +52,7 @@ export function merge(schema, form = ['*'], options = {}) {
         }
 
         if (Array.isArray(obj.items)) {
-            obj.items = merge(obj.schema, obj.items, options);
+            obj.items = merge(schema, obj.items, options);
         }
 
         if (Array.isArray(obj.tabs)) {

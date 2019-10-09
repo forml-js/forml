@@ -23,7 +23,8 @@ export function defaultForSchema(schema) {
         case 'null':
             return null;
         default:
-            throw new Error(`Unhandled defaultForSchema type: ${type}`);
+            // throw new Error(`Unhandled defaultForSchema type: ${type}`);
+            return undefined;
     }
 }
 
@@ -35,10 +36,19 @@ export function getPreferredType(types) {
 }
 
 export function valueGetter(model, schema) {
-    function getValue(keys) {
+    function get(keys) {
         if (!Array.isArray(keys)) {
             keys = [keys];
         }
+
+        if (keys.length === 0)
+            return model;
+
+        if (!model) {
+            return undefined;
+        }
+
+        log('valueGetter(%s)::get(%o) : %s', schema.title, keys, new Error().stack);
 
         let current       = model;
         let currentSchema = schema;
@@ -52,7 +62,7 @@ export function valueGetter(model, schema) {
         return current;
     }
 
-    return getValue;
+    return get;
 }
 
 function updateAndClone(keys, model, schema, value) {
@@ -107,24 +117,28 @@ export function findSchema(keys, schema) {
 }
 
 export function getNextSchema(schema, key) {
+    log('getNextSchema(%s) : %o', key, schema);
     if (schema.type === 'array') {
+        log('getNextSchema(%s) : array', key);
         if (Array.isArray(schema.items)) {
+            log('getNextSchema(%s) : tuple', key);
             return schema.items[key];
         }
         return schema.items;
     }
 
     if (schema.type === 'object') {
+        log('getNextSchema(%s) : object', key);
         if (key in schema.properties) {
+            log('getNextSchema(%s) : defined', key);
             return schema.properties[key];
         }
 
         if (schema.additionalProperties) {
+            log('getNextSchema(%s) : additionalProperties')
             return schema.additionalProperties;
         }
     }
-
-    throw new Error(`Unhandled nextSchema type: ${schema.type}`);
 }
 
 export function traverseForm(forms, visit) {

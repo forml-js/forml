@@ -1,0 +1,106 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Comment",
+    "required": ["comments"],
+    "properties": {
+      "comments": {
+        "type": "array",
+        "title": "Comments",
+        "maxItems": 2,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name":  {
+              "title": "Name",
+              "type": "string"
+            },
+            "email":  {
+              "title": "Email",
+              "type": "string",
+              "pattern": "^\\S+@\\S+$",
+              "description": "Email will be used for evil."
+            },
+            "spam": {
+              "title": "Spam",
+              "type": "boolean",
+              "default": true
+            },
+            "comment": {
+              "title": "Comment",
+              "type": "string",
+              "maxLength": 20,
+              "validationMessage": "Don't be greedy!"
+            },
+            "type": {
+                "title": "Type",
+                "type": "string",
+                "enum": ["home", "work", "mobile", "fax", "etc"]
+            },
+            "nested": {
+                "title": "Nested",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "first": {
+                            "title": "First",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+          },
+          "required": ["name","comment"]
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "help",
+      "description": "Array Example. Try adding a couple of forms, reorder by drag'n'drop.",
+      "variant": "h4",
+      "align": "left",
+      "color": "secondary"
+    },
+    {
+      "key": "comments",
+  	  "add": "New",
+  	  "style": {
+  		"add": "btn-success"
+	  },
+      "items": [
+        "comments[].name",
+        "comments[].email",
+        {
+          "key": "comments[].spam",
+          "type": "checkbox",
+          "title": "Yes I want spam.",
+          "condition": "model.comments[form.arrayIndex].email"
+        },
+        {
+          "key": "comments[].comment",
+          "type": "textarea"
+        },
+        {
+            "key": "comments[].type",
+            "type": "select",
+            "titleMap": [
+                { "name": "Home", "value": "home" },
+                { "name": "Work", "value": "work" },
+                { "name": "Mobile", "value": "mobile" },
+                { "name": "Fax", "value": "fax" },
+                { "name": "Etc", "value": "etc" }
+            ]
+        },
+        {
+            "key": "comments[].nested",
+            "items": [
+                "comments[].nested[].first"
+            ]
+        }
+      ]
+    }
+  ]
+}

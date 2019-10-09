@@ -15,7 +15,15 @@ export function enumToTitles(enm) {
 }
 
 export function getNameFromValue(value) {
-    return Object.prototype.toString.call(value);
+    switch (typeof value) {
+        case 'string':
+        case 'number':
+            return '' + value;
+        case 'object':
+            return JSON.stringify(value);
+        case 'undefined':
+            return 'undefined';
+    }
 }
 
 export const definitions = {
@@ -133,6 +141,13 @@ export const definitions = {
         }
 
         return undefined;
+    },
+    null(name, schema, options) {
+        if (getPreferredType(schema.type) === 'null') {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'null';
+            return f;
+        }
     }
 };
 
@@ -143,6 +158,7 @@ export const rules = {
     integer: [definitions.integer],
     boolean: [definitions.checkbox],
     array: [definitions.tuple, definitions.array],
+    null: [definitions.null],
 };
 
 export function test(name, schema, options) {
