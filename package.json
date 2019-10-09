@@ -1,7 +1,15 @@
 {
   "name": "rjsf",
   "version": "0.1.5",
-  "description": "",
+  "description": "React JSON Schema Form",
+  "keywords": [
+      "json schema",
+      "form",
+      "schema form",
+      "react",
+      "react-component",
+      "form"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "babel src --out-dir lib",
