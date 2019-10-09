@@ -26,7 +26,7 @@ export function SchemaField(props) {
     return h(Field, {schema, form, value, onChange});
 
     function onChange(e, value) {
-        log('onChange(%o, %o)', e, value);
+        log('onChange(%o, %o)', form.key, value);
         model.setValue(form.key, value);
 
         if (props.onChange) {

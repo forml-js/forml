@@ -65,26 +65,31 @@ export function valueGetter(model, schema) {
     return get;
 }
 
-function updateAndClone(keys, model, schema, value) {
-    log('updateAndClone(%o) : %o', keys, model);
+function updateAndClone(keys, model, schema, value, depth = 0) {
+    log('updateAndClone() %s> %o', '-'.repeat(depth), model);
+
     if (keys.length === 0) {
-        log('updateAndClone(%o) <- %o', keys, value);
+        log('updateAndClone() <%s %o', '-'.repeat(depth), value);
         return value;
     }
 
     const [next, ...rest] = keys;
     const nextSchema      = getNextSchema(schema, next);
     const nextModel       = updateAndClone(
-        rest, model[next] || defaultForSchema(nextSchema), nextSchema, value);
+        rest, model[next] || defaultForSchema(nextSchema), nextSchema, value, depth + 1);
 
     if (schema.type === 'array') {
         const firstSlice = model.slice(0, next);
         const lastSlice  = model.slice(next + 1);
-        return [...firstSlice, nextModel, ...lastSlice];
+        const result     = [...firstSlice, nextModel, ...lastSlice];
+        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        return result;
     }
 
     if (schema.type === 'object') {
-        return {...model, [next]: nextModel};
+        const result = {...model, [next]: nextModel};
+        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        return result;
     }
 
     throw new Error('Bad ObjectPath')
@@ -98,6 +103,7 @@ export function valueSetter(model, schema, setModel) {
 
         log('valueSetter::set(%o) <- %o', keys, value);
         const newModel = updateAndClone(keys, model, schema, value);
+        log('valueSetter::set(%o) -> %o', keys, newModel);
         return setModel(newModel)
     }
 
@@ -117,25 +123,19 @@ export function findSchema(keys, schema) {
 }
 
 export function getNextSchema(schema, key) {
-    log('getNextSchema(%s) : %o', key, schema);
     if (schema.type === 'array') {
-        log('getNextSchema(%s) : array', key);
         if (Array.isArray(schema.items)) {
-            log('getNextSchema(%s) : tuple', key);
             return schema.items[key];
         }
         return schema.items;
     }
 
     if (schema.type === 'object') {
-        log('getNextSchema(%s) : object', key);
         if (key in schema.properties) {
-            log('getNextSchema(%s) : defined', key);
             return schema.properties[key];
         }
 
         if (schema.additionalProperties) {
-            log('getNextSchema(%s) : additionalProperties')
             return schema.additionalProperties;
         }
     }

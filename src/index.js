@@ -11,7 +11,7 @@ import * as util from './util';
 
 const log = debug('rjsf:index');
 
-export function SchemaForm({model: incomingModel, schema, form, onChange, ...props}) {
+export function SchemaForm({model: incomingModel, schema, form, ...props}) {
     const [model, setModel] = useState(incomingModel);
     const ref               = useRef(model);
 
@@ -24,6 +24,10 @@ export function SchemaForm({model: incomingModel, schema, form, onChange, ...pro
         setModel(incomingModel);
     }, [incomingModel])
 
+    useEffect(function() {
+        props.onChange(null, model);
+    }, [model])
+
     log('SchemaForm(%s) : model : %o', schema.title, model);
     log('SchemaForm(%s) : merged : %o', schema.title, merged);
     log('SchemaForm(%s) : schema : %o', schema.title, schema);
@@ -31,7 +35,10 @@ export function SchemaForm({model: incomingModel, schema, form, onChange, ...pro
     const mapper = getMapper(props.mapper);
     return h(Context.Provider,
              {value: {model, schema, form: merged, mapper, getValue, setValue}},
-             merged.map(form => h(SchemaField, {schema, form, onChange})));
+             merged.map(form => {
+                 const {schema} = form;
+                 return h(SchemaField, {schema, form})
+             }));
 }
 
 export {util};

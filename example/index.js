@@ -1,6 +1,7 @@
 import * as MUI from '@material-ui/core';
 import debug from 'debug';
 import {Component, createElement as h, Fragment, useEffect, useState} from 'react';
+import AceEditor from 'react-ace';
 import {render} from 'react-dom';
 import {SchemaForm, util} from 'rjsf';
 import shortid from 'shortid';
@@ -81,23 +82,26 @@ function idFor(object) {
 }
 
 function RenderExample(props) {
-    const {schema, form} = props;
+    const {schema, form, className} = props;
     const [model, setModel] = useState(util.defaultForSchema(schema));
 
-    log('RenderExample() : model : %o', model);
-    schema.title = 'RenderExample';
     useEffect(function() {
         setModel(util.defaultForSchema(schema));
     }, [schema]);
 
-    return h(ErrorBoundary, {key: getKey()}, h(SchemaForm, {schema, form, model, onChange}))
+    return h(MUI.Card,
+             {className},
+             h(MUI.CardContent,
+               {},
+               h(ErrorBoundary, {key: getKey()}, h(SchemaForm, {schema, form, model, onChange}))));
 
     function onChange(event, model) {
+        log('onChange() : %o : %s', model, Error().stack);
         setModel(model);
     }
 
     function getKey() {
-        return idFor(schema) + idFor(model);
+        return idFor(schema);
     }
 }
 
@@ -108,10 +112,23 @@ function getSample(selected) {
     return {schema: {type: 'null'}, form: ['*']};
 }
 
+const useStyles = MUI.makeStyles(function(theme) {
+    return {
+        root: {display: 'flex', flexDirection: 'row'},
+        manager: {flex: '1 0 auto'},
+        example: {flex: '9 1 auto'},
+    };
+});
+
 function Page(props) {
+    const classes = useStyles();
+
     const [selected, setSelected] = useState('');
     const [schema, setSchema]     = useState({type: 'null'});
     const [form, setForm]         = useState(['*']);
+
+    const [schemaJSON, setSchemaJSON] = useState('');
+    const [formJSON, setFormJSON]     = useState('');
 
     useEffect(function() {
         const {schema, form} = getSample(selected);
@@ -119,12 +136,45 @@ function Page(props) {
         setForm(form);
     }, [selected]);
 
-    return h(Fragment, {}, [
+    useEffect(function() {
+        setSchemaJSON(JSON.stringify(schema, undefined, 2));
+        setFormJSON(JSON.stringify(form, undefined, 2));
+    }, [schema, form]);
+
+    return h('div', {className: classes.root}, [
+        h(RenderExample, {key: 'render', schema, form, className: classes.example}),
         h(MUI.Card,
-          {},
-          h(MUI.CardContent, {}, h(SelectExample, {key: 'select', selected, onChange}))),
-        h(RenderExample, {key: 'render', schema, form}),
+          {className: classes.manager},
+          h(MUI.CardContent,
+            {},
+            [
+                h(SelectExample, {key: 'select', selected, onChange}),
+                h(AceEditor, {value: schemaJSON, onChange: updateSchema}),
+                h(AceEditor, {value: formJSON, onChange: updateForm}),
+            ])),
     ]);
+
+    function updateForm(newForm) {
+        setFormJSON(newForm);
+
+        try {
+            const form = JSON.parse(newForm);
+            setForm(form);
+        } catch (err) {
+            log('updateForm() : error : %o', err);
+        }
+    }
+
+    function updateSchema(newSchema) {
+        setSchemaJSON(newSchema);
+
+        try {
+            const schema = JSON.parse(newSchema);
+            setSchema(schema);
+        } catch (err) {
+            log('updateSchema() : ')
+        }
+    }
 
     function onChange(event, example) {
         setSelected(example);
