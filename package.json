@@ -1,14 +1,14 @@
 {
   "name": "rjsf",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React JSON Schema Form",
   "keywords": [
-      "json schema",
-      "form",
-      "schema form",
-      "react",
-      "react-component",
-      "form"
+    "json schema",
+    "form",
+    "schema form",
+    "react",
+    "react-component",
+    "form"
   ],
   "main": "lib/index.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "author": "Zachary Hueras",
   "license": "MIT",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/fauxsoup/rjsf.git"
+    "type": "git",
+    "url": "https://github.com/fauxsoup/rjsf.git"
   },
   "peerDependencies": {
     "react": "^16.10.2",
