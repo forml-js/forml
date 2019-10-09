@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.5.0",
+    "classnames": "^2.2.6",
     "react": "^16.10.2",
     "react-ace": "^7.0.4",
     "react-dom": "^16.10.2",

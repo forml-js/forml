@@ -1,10 +1,47 @@
 import * as MUI from '@material-ui/core';
+import clsx from 'classnames';
 import debug from 'debug';
-import {Component, createElement as h, Fragment, useEffect, useState} from 'react';
+import _ from 'lodash';
+import {Component, createElement as h, Fragment, useEffect, useRef, useState} from 'react';
 import AceEditor from 'react-ace';
 import {render} from 'react-dom';
 import {SchemaForm, util} from 'rjsf';
 import shortid from 'shortid';
+
+function useEditable(defaultValue) {
+    const prev              = useRef({defaultValue});
+    const [value, setValue] = useState(defaultValue);
+    const [json, setJSON]   = useState(JSON.stringify(value, undefined, 2));
+
+    useEffect(function() {
+        log('useEditable()::useEffect(value)::setJSON()')
+        setJSON(JSON.stringify(value, undefined, 2));
+    }, [value]);
+
+    useEffect(function() {
+        if (_.isEqual(defaultValue, prev.current.defaultValue)) {
+            prev.current = {defaultValue};
+            return;
+        } else {
+            log('useEditable()::useEffect(defaultValue) : %o != %o', defaultValue, prev.current)
+        }
+
+        log('useEditable()::useEffect(defaultValue)::setJSON()')
+
+        setJSON(JSON.stringify(defaultValue, undefined, 2));
+    }, [defaultValue]);
+
+    useEffect(function() {
+        try {
+            log('useEditable()::useEffect(json)::setValue()')
+            setValue(JSON.parse(json));
+        } catch (err) {
+            log('useEditable() : error : %O', err);
+        }
+    }, [json]);
+
+    return {value, json, setValue, setJSON};
+}
 
 class ErrorBoundary extends Component {
     constructor(props) {
@@ -82,22 +119,12 @@ function idFor(object) {
 }
 
 function RenderExample(props) {
-    const {schema, form, className} = props;
-    const [model, setModel] = useState(util.defaultForSchema(schema));
+    const {schema, form, model, className} = props;
 
-    useEffect(function() {
-        setModel(util.defaultForSchema(schema));
-    }, [schema]);
+    return h(ErrorBoundary, {key: getKey()}, h(SchemaForm, {schema, form, model, onChange}));
 
-    return h(MUI.Card,
-             {className},
-             h(MUI.CardContent,
-               {},
-               h(ErrorBoundary, {key: getKey()}, h(SchemaForm, {schema, form, model, onChange}))));
-
-    function onChange(event, model) {
-        log('onChange() : %o : %s', model, Error().stack);
-        setModel(model);
+    function onChange(event, value) {
+        props.onChange(value);
     }
 
     function getKey() {
@@ -121,60 +148,47 @@ const useStyles = MUI.makeStyles(function(theme) {
 });
 
 function Page(props) {
-    const classes = useStyles();
-
+    const classes                 = useStyles();
     const [selected, setSelected] = useState('');
-    const [schema, setSchema]     = useState({type: 'null'});
-    const [form, setForm]         = useState(['*']);
-
-    const [schemaJSON, setSchemaJSON] = useState('');
-    const [formJSON, setFormJSON]     = useState('');
+    const schema                  = useEditable({type: 'null'});
+    const form                    = useEditable(['*']);
+    const model                   = useEditable(util.defaultForSchema(schema));
 
     useEffect(function() {
-        const {schema, form} = getSample(selected);
-        setSchema(schema);
-        setForm(form);
+        const sample = getSample(selected);
+        schema.setValue(sample.schema);
+        form.setValue(sample.form);
     }, [selected]);
 
-    useEffect(function() {
-        setSchemaJSON(JSON.stringify(schema, undefined, 2));
-        setFormJSON(JSON.stringify(form, undefined, 2));
-    }, [schema, form]);
+    log('Page() : schema : %O', schema);
+    log('Page() : form : %O', form);
+    log('Page() : model : %O', model);
 
     return h('div', {className: classes.root}, [
-        h(RenderExample, {key: 'render', schema, form, className: classes.example}),
+        h(MUI.Card,
+          {className: classes.example},
+          h(MUI.CardContent,
+            {},
+            [
+                h(RenderExample, {
+                    key: 'render',
+                    schema: schema.value,
+                    form: form.value,
+                    model: model.value,
+                    onChange: model.setValue
+                }),
+                h(AceEditor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
+            ])),
         h(MUI.Card,
           {className: classes.manager},
           h(MUI.CardContent,
             {},
             [
                 h(SelectExample, {key: 'select', selected, onChange}),
-                h(AceEditor, {value: schemaJSON, onChange: updateSchema}),
-                h(AceEditor, {value: formJSON, onChange: updateForm}),
+                h(AceEditor, {key: 'edit-schema', value: schema.json, onChange: schema.setJSON}),
+                h(AceEditor, {key: 'edit-form', value: form.json, onChange: form.setJSON}),
             ])),
     ]);
-
-    function updateForm(newForm) {
-        setFormJSON(newForm);
-
-        try {
-            const form = JSON.parse(newForm);
-            setForm(form);
-        } catch (err) {
-            log('updateForm() : error : %o', err);
-        }
-    }
-
-    function updateSchema(newSchema) {
-        setSchemaJSON(newSchema);
-
-        try {
-            const schema = JSON.parse(newSchema);
-            setSchema(schema);
-        } catch (err) {
-            log('updateSchema() : ')
-        }
-    }
 
     function onChange(event, example) {
         setSelected(example);
