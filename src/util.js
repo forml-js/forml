@@ -103,8 +103,9 @@ export function valueSetter(model, schema, setModel) {
 
         log('valueSetter::set(%o) <- %o', keys, value);
         const newModel = updateAndClone(keys, model, schema, value);
+        setModel(newModel)
         log('valueSetter::set(%o) -> %o', keys, newModel);
-        return setModel(newModel)
+        return newModel;
     }
 
     return set;

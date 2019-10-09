@@ -27,10 +27,10 @@ export function SchemaField(props) {
 
     function onChange(e, value) {
         log('onChange(%o, %o)', form.key, value);
-        model.setValue(form.key, value);
+        const newModel = model.setValue(form.key, value);
 
         if (props.onChange) {
-            props.onChange(e, value);
+            props.onChange(e, newModel);
         }
     }
 }

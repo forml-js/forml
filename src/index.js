@@ -24,10 +24,6 @@ export function SchemaForm({model: incomingModel, schema, form, ...props}) {
         setModel(incomingModel);
     }, [incomingModel])
 
-    useEffect(function() {
-        props.onChange(null, model);
-    }, [model])
-
     log('SchemaForm(%s) : model : %o', schema.title, model);
     log('SchemaForm(%s) : merged : %o', schema.title, merged);
     log('SchemaForm(%s) : schema : %o', schema.title, schema);
@@ -37,8 +33,18 @@ export function SchemaForm({model: incomingModel, schema, form, ...props}) {
              {value: {model, schema, form: merged, mapper, getValue, setValue}},
              merged.map(form => {
                  const {schema} = form;
-                 return h(SchemaField, {schema, form})
+                 return h(SchemaField, {schema, form, onChange})
              }));
+
+    function onChange(event, value) {
+        /**
+         * This value could be coming from any of our root forms; we're mostly
+         * just intercepting the event so we can trigger our parent!
+         */
+        if (props.onChange) {
+            props.onChange(event, value);
+        }
+    }
 }
 
 export {util};
