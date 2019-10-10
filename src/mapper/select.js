@@ -7,6 +7,7 @@ import debug from 'debug';
 import {createElement as h, useEffect, useState} from 'react';
 
 import {useModel} from '../context';
+import {idFor} from '../util';
 
 const log = debug('rjsf:mapper:select');
 
@@ -19,18 +20,18 @@ export function Select(props) {
     for (let i = 0; i < form.titles.length; i++) {
         const name  = form.titles[i];
         const value = schema.enum[i];
-        menuItems.push(h(MenuItem, {value}, name));
+        menuItems.push(h(MenuItem, {key: idFor(value), value}, name));
     }
 
     log('Select() : value : %O', value);
     log('Select() : menuItems : %O', menuItems);
 
     return h(FormControl, {fullWidth: true, error: !!error, ...form.otherProps}, [
-        h(InputLabel, {required: form.required}, form.title),
+        h(InputLabel, {key: 'label', required: form.required}, form.title),
         h(MuiSelect,
-          {value, placeholder: form.placeholder, disabled: form.readonly, onChange},
+          {key: 'select', value, placeholder: form.placeholder, disabled: form.readonly, onChange},
           menuItems),
-        h(FormHelperText, {}, error || form.description)
+        h(FormHelperText, {key: 'help'}, error || form.description)
     ]);
 
     function getLabel(item) {

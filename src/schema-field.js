@@ -30,7 +30,7 @@ export function SchemaField(props) {
         const newModel = model.setValue(form.key, value);
 
         if (props.onChange) {
-            props.onChange(e, newModel);
+            props.onChange(e, value);
         }
     }
 }

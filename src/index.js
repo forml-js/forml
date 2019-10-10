@@ -12,12 +12,16 @@ import * as util from './util';
 const log = debug('rjsf:index');
 
 export function SchemaForm({model: incomingModel, schema, form, ...props}) {
-    const [model, setModel] = useState(incomingModel);
-    const ref               = useRef(model);
+    const [model, setModel]   = useState(incomingModel);
+    const [merged, setMerged] = useState([]);
+    const mapper              = getMapper(props.mapper);
 
     const getValue = util.valueGetter(model, schema);
     const setValue = util.valueSetter(model, schema, setModel)
-    const merged   = merge(schema, form);
+
+    useEffect(function() {
+        setMerged(merge(schema, form))
+    }, [schema, form])
 
     useEffect(function() {
         log('SchemaForm(%s) : useEffect() -> setModel(%o)', schema.title, props.model);
@@ -28,7 +32,6 @@ export function SchemaForm({model: incomingModel, schema, form, ...props}) {
     log('SchemaForm(%s) : merged : %o', schema.title, merged);
     log('SchemaForm(%s) : schema : %o', schema.title, schema);
 
-    const mapper = getMapper(props.mapper);
     return h(Context.Provider,
              {value: {model, schema, form: merged, mapper, getValue, setValue}},
              merged.map(form => {

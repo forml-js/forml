@@ -15,7 +15,7 @@ import {createElement as h, Fragment, useState} from 'react';
 import {ARRAY_PLACEHOLDER} from '../constants';
 import {useModel} from '../context';
 import {SchemaField} from '../schema-field';
-import {defaultForSchema, getNextSchema, traverseForm} from '../util';
+import {defaultForSchema, getNextSchema, idFor, traverseForm} from '../util';
 
 const log = debug('rjsf:mapper:array');
 
@@ -73,8 +73,9 @@ export function ArrayItem(props) {
 
 export function ArrayComponent(props) {
     const {form, schema} = props;
-    const {value}        = props;
+    const {value = []}   = props;
     const arrays         = [];
+    const model          = useModel();
 
     log('ArrayComponent() : props : %o', props);
 
@@ -82,12 +83,15 @@ export function ArrayComponent(props) {
         const forms = form.items.map((form, index) => {
             const newForm = copyWithIndex(form, i);
             const schema  = newForm.schema;
-            const key     = ObjectPath.stringify(newForm.key);
+            const key     = idFor(form) + idFor(i) + idFor(index);
+
+            log('ArrayComponent(%d:%d) : key : %o', i, index, key);
 
             return h(ListItem, {key}, h(SchemaField, {form: newForm, schema}));
         });
 
-        const key = ObjectPath.stringify(form.key);
+        const key = idFor(form) + idFor(i);
+        log('ArrayComponent(%d) : key : %o', i, key);
         arrays.push(h(ArrayItem, {key, form, index: i}, forms));
     }
 

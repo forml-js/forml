@@ -1,4 +1,5 @@
 import debug from 'debug';
+import objectHash from 'object-hash';
 
 const log = debug('rjsf:util');
 
@@ -44,11 +45,11 @@ export function valueGetter(model, schema) {
         if (keys.length === 0)
             return model;
 
-        if (!model) {
-            return undefined;
+        if (model === undefined) {
+            model = defaultForSchema(schema);
         }
 
-        log('valueGetter(%s)::get(%o) : %s', schema.title, keys, new Error().stack);
+        log('valueGetter(%s)::get(%o)', schema.title, keys);
 
         let current       = model;
         let currentSchema = schema;
@@ -81,6 +82,11 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
     if (schema.type === 'array') {
         const firstSlice = model.slice(0, next);
         const lastSlice  = model.slice(next + 1);
+
+        while (firstSlice.length < next) {
+            firstSlice.push(undefined);
+        }
+
         const result     = [...firstSlice, nextModel, ...lastSlice];
         log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
@@ -99,6 +105,10 @@ export function valueSetter(model, schema, setModel) {
     function set(keys, value) {
         if (!Array.isArray(keys)) {
             keys = [keys];
+        }
+
+        if (model === undefined) {
+            model = defaultForSchema(schema);
         }
 
         log('valueSetter::set(%o) <- %o', keys, value);
@@ -153,3 +163,21 @@ export function traverseForm(forms, visit) {
             traverseForm(form.items, visit);
     }
 }
+
+const ids = new WeakMap();
+export function idFor(object) {
+    return objectHash(object);
+    // if (object === null)
+    //     return 'null';
+    // if (object === undefined)
+    //     return 'undefined';
+    // if (typeof object !== 'object')
+    //     return object;
+
+    // if (ids.has(object))
+    //     return ids.get(object);
+    // const id = shortid();
+    // ids.set(object, id);
+    // return id;
+}
+
