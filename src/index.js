@@ -11,13 +11,16 @@ import * as util from './util';
 
 const log = debug('rjsf:index');
 
-export function SchemaForm({model: incomingModel, schema, form, ...props}) {
+export function SchemaForm(
+    {model: incomingModel, schema, form, localizer = util.defaultLocalizer(), ...props}) {
     const [model, setModel]   = useState(incomingModel);
     const [merged, setMerged] = useState([]);
+    const [errors, setErrors] = useState({});
     const mapper              = getMapper(props.mapper);
 
     const getValue = util.valueGetter(model, schema);
     const setValue = util.valueSetter(model, schema, setModel)
+    const validate = util.validator(schema);
 
     useEffect(function() {
         setMerged(merge(schema, form))
@@ -33,7 +36,19 @@ export function SchemaForm({model: incomingModel, schema, form, ...props}) {
     log('SchemaForm(%s) : schema : %o', schema.title, schema);
 
     return h(Context.Provider,
-             {value: {model, schema, form: merged, mapper, getValue, setValue}},
+             {
+                 value: {
+                     model,
+                     schema,
+                     form: merged,
+                     mapper,
+                     getValue,
+                     setValue,
+                     onChange,
+                     validate,
+                     localizer,
+                 }
+             },
              merged.map(form => {
                  const {schema} = form;
                  return h(SchemaField, {schema, form, onChange})
@@ -44,6 +59,7 @@ export function SchemaForm({model: incomingModel, schema, form, ...props}) {
          * This value could be coming from any of our root forms; we're mostly
          * just intercepting the event so we can trigger our parent!
          */
+
         if (props.onChange) {
             props.onChange(event, value);
         }

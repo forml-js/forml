@@ -1,3 +1,4 @@
+import Ajv from 'ajv';
 import debug from 'debug';
 import objectHash from 'object-hash';
 
@@ -164,22 +165,51 @@ export function traverseForm(forms, visit) {
     }
 }
 
-const ids = new WeakMap();
-export function idFor(object) {
-    if (object === null)
+export function useKeyGenerator(disambiguator) {
+    const disambiguate = useDisambiguate();
+    function generateKey(form, value) {
+        if (form.title) {
+            return disambiguate(hash(form.title), value);
+        }
+        return disambiguate(hash(form), value);
+    }
+    return generateKey;
+}
+
+export function defaultLocalizer() {
+    function noop(id) {
+        return id;
+    }
+
+    return {
+        getLocalizedString: noop,
+        getLocalizedNumber: noop,
+        getLocalizedDate: noop,
+    };
+}
+
+export function hash(object) {
+    if (object === null) {
         return 'null';
-    if (object === undefined)
+    }
+    if (object === undefined) {
         return 'undefined';
-    if (typeof object !== 'object')
-        return object;
+    }
+    if (typeof object !== 'object') {
+        return '' + object;
+    }
     return objectHash(object);
 }
 
 export function useDisambiguate() {
     const keys = {};
 
-    function disambiguate(key) {
+    function disambiguate(key, disambiguator) {
         if (key in keys) {
+            if (disambiguator) {
+                return key + disambiguate(hash(disambiguator));
+            }
+
             const count = keys[key]++;
             return key + count;
         }
@@ -191,3 +221,19 @@ export function useDisambiguate() {
     return disambiguate;
 }
 
+export function validator(schema) {
+    const ajv      = new Ajv();
+    const compiled = ajv.compile(schema);
+
+    log('validator() : schema : %o', schema);
+
+    function validate(model) {
+        const valid    = compiled(model);
+
+        log('validator')
+
+        const {errors} = compiled;
+        return {valid, errors};
+    }
+    return validate;
+}

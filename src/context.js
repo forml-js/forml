@@ -9,6 +9,11 @@ export function useMapper() {
 }
 
 export function useModel(schema) {
-    const {getValue, setValue} = useContext(context);
-    return {getValue, setValue};
+    const {getValue, setValue, onChange} = useContext(context);
+    return {getValue, setValue, onChange};
+}
+
+export function useLocalizer() {
+    const {localizer} = useContext(context);
+    return localizer;
 }

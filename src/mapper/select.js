@@ -7,20 +7,20 @@ import debug from 'debug';
 import {createElement as h, useEffect, useState} from 'react';
 
 import {useModel} from '../context';
-import {idFor} from '../util';
+import {useKeyGenerator} from '../util';
 
 const log = debug('rjsf:mapper:select');
 
 export function Select(props) {
     const {form, schema, error, value} = props;
-    const model                 = useModel();
+    const generateKey                  = useKeyGenerator()
 
     const menuItems = [];
 
     for (let i = 0; i < form.titles.length; i++) {
         const name  = form.titles[i];
         const value = schema.enum[i];
-        menuItems.push(h(MenuItem, {key: idFor(value), value}, name));
+        menuItems.push(h(MenuItem, {key: generateKey(form, value), value}, name));
     }
 
     log('Select() : value : %O', value);

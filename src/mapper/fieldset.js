@@ -7,22 +7,23 @@ import ObjectPath from 'objectpath';
 import {createElement as h, useEffect, useState} from 'react';
 
 import {SchemaField} from '../schema-field';
-import {defaultForSchema, idFor} from '../util';
+import {defaultForSchema, useKeyGenerator} from '../util';
 
 const log = debug('rjsf:mapper:fieldset');
 
 export const useStyles = makeStyles(function(theme) {
-    return {root: {}};
+    return {root: {flex: '1'}};
 });
 
 export function FieldSet(props) {
-    const {form} = props;
-    const {title} = form;
-    const classes = useStyles();
+    const {form, onChange} = props;
+    const {title}          = form;
+    const classes          = useStyles();
+    const generateKey      = useKeyGenerator();
 
     const forms = form.items.map(function(form, index) {
         const {schema} = form;
-        const key      = idFor(form.key);
+        const key      = generateKey(form);
 
         log('FieldSet(%s) : form.items.map(%d) : key : %o', title, index, key)
 
@@ -30,6 +31,7 @@ export function FieldSet(props) {
             key,
             schema,
             form,
+            onChange,
         });
     });
 
