@@ -22,7 +22,7 @@ export function FieldSet(props) {
 
     const forms = form.items.map(function(form, index) {
         const {schema} = form;
-        const key      = idFor(form);
+        const key      = idFor(form.key);
 
         log('FieldSet(%s) : form.items.map(%d) : key : %o', title, index, key)
 
@@ -33,15 +33,16 @@ export function FieldSet(props) {
         });
     });
 
-    return h(FormControl,
-             {
-                 component: 'fieldset',
-                 className: clsx(classes.root, form.htmlClass),
-                 style: form.style,
-                 ...form.otherProps,
-             },
-             [
-                 h(FormLabel, {component: 'legend', required: form.required}, form.title),
-                 forms,
-             ]);
+    return h(
+        FormControl,
+        {
+            component: 'fieldset',
+            className: clsx(classes.root, form.htmlClass),
+            style: form.style,
+            ...form.otherProps,
+        },
+        [
+            h(FormLabel, {key: 'label', component: 'legend', required: form.required}, form.title),
+            forms,
+        ]);
 }

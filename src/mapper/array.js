@@ -70,32 +70,30 @@ export function ArrayItem(props) {
         setOpen(!open);
     }
 }
-
 export function ArrayComponent(props) {
     const {form, schema} = props;
     const {value = []}   = props;
     const arrays         = [];
-    const model          = useModel();
-
     log('ArrayComponent() : props : %o', props);
 
     for (let i = 0; i < value.length; ++i) {
         const forms = form.items.map((form, index) => {
             const newForm = copyWithIndex(form, i);
             const schema  = newForm.schema;
-            const key     = idFor(form) + idFor(i) + idFor(index);
+            const key     = idFor(newForm.key)
 
             log('ArrayComponent(%d:%d) : key : %o', i, index, key);
 
             return h(ListItem, {key}, h(SchemaField, {form: newForm, schema}));
         });
 
-        const key = idFor(form) + idFor(i);
+        const key = idFor(form.key) + idFor(i);
         log('ArrayComponent(%d) : key : %o', i, key);
         arrays.push(h(ArrayItem, {key, form, index: i}, forms));
     }
 
     return h('div', {}, [h(AddButton, {key: 'add', form}), h(List, {key: 'form'}, arrays)]);
+
 }
 
 function copyWithIndex(form, index) {

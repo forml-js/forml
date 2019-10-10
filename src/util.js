@@ -166,18 +166,28 @@ export function traverseForm(forms, visit) {
 
 const ids = new WeakMap();
 export function idFor(object) {
+    if (object === null)
+        return 'null';
+    if (object === undefined)
+        return 'undefined';
+    if (typeof object !== 'object')
+        return object;
     return objectHash(object);
-    // if (object === null)
-    //     return 'null';
-    // if (object === undefined)
-    //     return 'undefined';
-    // if (typeof object !== 'object')
-    //     return object;
+}
 
-    // if (ids.has(object))
-    //     return ids.get(object);
-    // const id = shortid();
-    // ids.set(object, id);
-    // return id;
+export function useDisambiguate() {
+    const keys = {};
+
+    function disambiguate(key) {
+        if (key in keys) {
+            const count = keys[key]++;
+            return key + count;
+        }
+
+        keys[key] = 0;
+        return key;
+    }
+
+    return disambiguate;
 }
 
