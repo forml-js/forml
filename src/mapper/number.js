@@ -26,8 +26,6 @@ export function Number(props) {
 
         value = parseFloat(value);
 
-        log('onChange() : %O', value);
-
         if (isNaN(value)) {
             e.preventDefault();
             return;

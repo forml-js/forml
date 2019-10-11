@@ -27,7 +27,6 @@ export function merge(schema, form = ['*'], options = {}) {
     const {lookup} = stdForm;
     form           = form.map(obj => {
         if (typeof obj === 'string') {
-            log('merge() <- %o', obj);
             obj = {key: obj};
         }
 
@@ -45,7 +44,6 @@ export function merge(schema, form = ['*'], options = {}) {
             obj.schema = findSchema(obj.key, schema);
 
             const strid = ObjectPath.stringify(obj.key);
-            log('lookup(%o) -> %O', strid, lookup[strid]);
             if (lookup[strid]) {
                 obj = {...lookup[strid], ...obj};
             }
@@ -61,12 +59,10 @@ export function merge(schema, form = ['*'], options = {}) {
             }
         }
 
-        log('merge() -> %o', obj);
 
         return obj;
     });
 
-    log('merge() -> %o', form);
 
     return form;
 }
@@ -79,7 +75,6 @@ export function stdFormObj(name, schema, options = {}) {
 
     if (options.lookup) {
         const strid = ObjectPath.stringify(f.key);
-        log('lookup(%o) <- %o', strid, f);
         options.lookup[strid] = f;
     }
 

@@ -77,7 +77,6 @@ export function ArrayComponent(props) {
     const {value = []}   = props;
     const arrays         = [];
     const onChange       = props;
-    log('ArrayComponent() : props : %o', props);
 
     for (let i = 0; i < value.length; ++i) {
         const forms = form.items.map((form, index) => {
@@ -85,13 +84,10 @@ export function ArrayComponent(props) {
             const schema  = newForm.schema;
             const key     = generateKey(newForm);
 
-            log('ArrayComponent(%d:%d) : key : %o', i, index, key);
-
             return h(ListItem, {key}, h(SchemaField, {form: newForm, schema}));
         });
 
         const key = generateKey(form);
-        log('ArrayComponent(%d) : key : %o', i, key);
         arrays.push(h(ArrayItem, {key, form, index: i}, forms));
     }
 
@@ -107,9 +103,7 @@ function copyWithIndex(form, index) {
 
 function setIndex(index) {
     return function(form) {
-        log('setIndex() : form : %o', form);
         if (form.key) {
-            log('setIndex(%o, %o)', form.key, index);
             form.key[form.key.indexOf(ARRAY_PLACEHOLDER)] = index;
         }
     }

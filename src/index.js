@@ -1,6 +1,6 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
-import {createElement as h, useEffect, useRef, useState} from 'react';
+import {createElement as h, useEffect, useMemo, useRef, useState} from 'react';
 
 import {ARRAY_PLACEHOLDER} from './constants';
 import Context from './context';
@@ -14,26 +14,20 @@ const log = debug('rjsf:index');
 export function SchemaForm(
     {model: incomingModel, schema, form, localizer = util.defaultLocalizer(), ...props}) {
     const [model, setModel]   = useState(incomingModel);
-    const [merged, setMerged] = useState([]);
-    const [errors, setErrors] = useState({});
-    const mapper              = getMapper(props.mapper);
+    const merged              = useMemo(() => merge(schema, form), [schema, form])
+    const validate            = useMemo(() => util.validator(schema), [schema]);
+    const errors              = useMemo(() => computeErrors(model), [model]);
+    const mapper              = useMemo(() => getMapper(props.mapper), [props.master]);
+    const generateKey         = util.useKeyGenerator();
 
     const getValue = util.valueGetter(model, schema);
     const setValue = util.valueSetter(model, schema, setModel)
-    const validate = util.validator(schema);
-
-    useEffect(function() {
-        setMerged(merge(schema, form))
-    }, [schema, form])
+    const getError = util.errorGetter(errors);
 
     useEffect(function() {
         log('SchemaForm(%s) : useEffect() -> setModel(%o)', schema.title, props.model);
         setModel(incomingModel);
     }, [incomingModel])
-
-    log('SchemaForm(%s) : model : %o', schema.title, model);
-    log('SchemaForm(%s) : merged : %o', schema.title, merged);
-    log('SchemaForm(%s) : schema : %o', schema.title, schema);
 
     return h(Context.Provider,
              {
@@ -44,14 +38,15 @@ export function SchemaForm(
                      mapper,
                      getValue,
                      setValue,
+                     getError,
                      onChange,
-                     validate,
                      localizer,
+                     errors,
                  }
              },
              merged.map(form => {
                  const {schema} = form;
-                 return h(SchemaField, {schema, form, onChange})
+                 return h(SchemaField, {key: generateKey(form), schema, form, onChange})
              }));
 
     function onChange(event, value) {
@@ -59,9 +54,26 @@ export function SchemaForm(
          * This value could be coming from any of our root forms; we're mostly
          * just intercepting the event so we can trigger our parent!
          */
-
         if (props.onChange) {
             props.onChange(event, value);
+        }
+    }
+
+    function computeErrors() {
+        const {valid, errors} = validate(model);
+        let errorMap          = {};
+
+        if (!valid) {
+            for (let error of errors) {
+                const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
+                errorMap[ObjectPath.stringify(keys)] = error.message;
+            }
+        }
+
+        return errorMap;
+
+        function setErrorMap(newErrorMap) {
+            errorMap = newErrorMap;
         }
     }
 }

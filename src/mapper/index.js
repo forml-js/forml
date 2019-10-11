@@ -1,5 +1,6 @@
 import {ArrayComponent} from './array';
 import {Checkbox} from './checkbox';
+import {Date} from './date';
 import {FieldSet} from './fieldset';
 import {Help} from './help';
 import {Null} from './null';
@@ -13,6 +14,7 @@ export * from './rules';
 export const defaultMapper = {
     array: ArrayComponent,
     checkbox: Checkbox,
+    date: Date,
     fieldset: FieldSet,
     help: Help,
     integer: Integer,

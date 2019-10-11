@@ -27,6 +27,13 @@ export function getNameFromValue(value) {
 }
 
 export const definitions = {
+    date(name, schema, options) {
+        if (getPreferredType(schema.type) === 'string' && schema.format === 'date') {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'date';
+            return f;
+        }
+    },
     select(name, schema, options) {
         if (schema.enum) {
             const f = stdFormObj(name, schema, options);
@@ -152,7 +159,7 @@ export const definitions = {
 };
 
 export const rules = {
-    string: [definitions.select, definitions.text],
+    string: [definitions.date, definitions.select, definitions.text],
     object: [definitions.fieldset],
     number: [definitions.number],
     integer: [definitions.integer],

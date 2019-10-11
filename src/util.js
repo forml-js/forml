@@ -1,6 +1,7 @@
 import Ajv from 'ajv';
 import debug from 'debug';
 import objectHash from 'object-hash';
+import objectPath from 'objectpath';
 
 const log = debug('rjsf:util');
 
@@ -50,8 +51,6 @@ export function valueGetter(model, schema) {
             model = defaultForSchema(schema);
         }
 
-        log('valueGetter(%s)::get(%o)', schema.title, keys);
-
         let current       = model;
         let currentSchema = schema;
 
@@ -67,11 +66,24 @@ export function valueGetter(model, schema) {
     return get;
 }
 
-function updateAndClone(keys, model, schema, value, depth = 0) {
-    log('updateAndClone() %s> %o', '-'.repeat(depth), model);
+export function errorSetter(errors, setErrors) {
+    return function(keys, error) {
+        const key = objectPath.stringify(keys);
+        const newErrors = {...errors, [key]: error};
+        setErrors(newErrors);
+        return newErrors;
+    }
+}
 
+export function errorGetter(errors) {
+    return function(keys) {
+        const key = objectPath.stringify(keys);
+        return errors[key];
+    }
+}
+
+function updateAndClone(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
-        log('updateAndClone() <%s %o', '-'.repeat(depth), value);
         return value;
     }
 
@@ -112,10 +124,8 @@ export function valueSetter(model, schema, setModel) {
             model = defaultForSchema(schema);
         }
 
-        log('valueSetter::set(%o) <- %o', keys, value);
         const newModel = updateAndClone(keys, model, schema, value);
         setModel(newModel)
-        log('valueSetter::set(%o) -> %o', keys, newModel);
         return newModel;
     }
 
@@ -222,18 +232,27 @@ export function useDisambiguate() {
 }
 
 export function validator(schema) {
-    const ajv      = new Ajv();
+    const ajv      = new Ajv({allErrors: true});
     const compiled = ajv.compile(schema);
-
-    log('validator() : schema : %o', schema);
 
     function validate(model) {
         const valid    = compiled(model);
-
-        log('validator')
-
         const {errors} = compiled;
         return {valid, errors};
     }
     return validate;
+}
+
+export function frequencyCap(fun) {
+    let timer = null;
+
+    return function cappedInvocation(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => invoke(...args), 100);
+    };
+
+    function invoke(...args) {
+        fun(...args)
+        timer = null;
+    }
 }

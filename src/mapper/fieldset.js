@@ -25,8 +25,6 @@ export function FieldSet(props) {
         const {schema} = form;
         const key      = generateKey(form);
 
-        log('FieldSet(%s) : form.items.map(%d) : key : %o', title, index, key)
-
         return h(SchemaField, {
             key,
             schema,

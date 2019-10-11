@@ -23,9 +23,6 @@ export function Select(props) {
         menuItems.push(h(MenuItem, {key: generateKey(form, value), value}, name));
     }
 
-    log('Select() : value : %O', value);
-    log('Select() : menuItems : %O', menuItems);
-
     return h(FormControl, {fullWidth: true, error: !!error, ...form.otherProps}, [
         h(InputLabel, {key: 'label', required: form.required}, form.title),
         h(MuiSelect,
@@ -45,8 +42,6 @@ export function Select(props) {
     }
 
     function onChange(event, what) {
-        log('onChange() : event : %O', event);
-        log('onChange() : what : %O', what);
         props.onChange(event, event.target.value);
     }
 }

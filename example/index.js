@@ -14,7 +14,6 @@ function useEditable(defaultValue) {
     const [json, setJSON]   = useState(JSON.stringify(value, undefined, 2));
 
     useEffect(function() {
-        log('useEditable()::useEffect(value)::setJSON()')
         setJSON(JSON.stringify(value, undefined, 2));
     }, [value]);
 
@@ -22,21 +21,15 @@ function useEditable(defaultValue) {
         if (_.isEqual(defaultValue, prev.current.defaultValue)) {
             prev.current = {defaultValue};
             return;
-        } else {
-            log('useEditable()::useEffect(defaultValue) : %o != %o', defaultValue, prev.current)
         }
-
-        log('useEditable()::useEffect(defaultValue)::setJSON()')
 
         setJSON(JSON.stringify(defaultValue, undefined, 2));
     }, [defaultValue]);
 
     useEffect(function() {
         try {
-            log('useEditable()::useEffect(json)::setValue()')
             setValue(JSON.parse(json));
         } catch (err) {
-            log('useEditable() : error : %O', err);
         }
     }, [json]);
 
@@ -75,6 +68,10 @@ function importAll(context) {
     for (let key of keys) {
         result[key] = context(key);
 
+        log('import(%o) : %o', key, result[key]);
+        if (result[key].default)
+            result[key] = result[key].default;
+
         if (!result[key].schema)
             delete result[key];
     }
@@ -82,7 +79,7 @@ function importAll(context) {
     return result;
 }
 
-const samples = importAll(require.context('./data/', false, /\.json$/));
+const samples = importAll(require.context('./data/', true, /\.js(on)?$/));
 
 function SelectExample(props) {
     const enm    = Object.keys(samples);
@@ -150,6 +147,7 @@ const useStyles = MUI.makeStyles(function(theme) {
 function Page(props) {
     const classes                 = useStyles();
     const [selected, setSelected] = useState('');
+    const [localizer, setLocalizer] = useState(undefined);
     const schema                  = useEditable({type: 'null'});
     const form                    = useEditable(['*']);
     const model                   = useEditable(util.defaultForSchema(schema));
@@ -158,6 +156,7 @@ function Page(props) {
         const sample = getSample(selected);
         schema.setValue(sample.schema);
         form.setValue(sample.form);
+        setLocalizer(sample.localization);
     }, [selected]);
 
     log('Page() : schema : %O', schema);
@@ -175,7 +174,8 @@ function Page(props) {
                     schema: schema.value,
                     form: form.value,
                     model: model.value,
-                    onChange: model.setValue
+                    onChange: onModelChange,
+                    localizer,
                 }),
                 h(AceEditor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
             ])),
@@ -192,6 +192,10 @@ function Page(props) {
 
     function onChange(event, example) {
         setSelected(example);
+    }
+
+    function onModelChange(value) {
+        model.setValue(value);
     }
 }
 
