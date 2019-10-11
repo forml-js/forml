@@ -4,30 +4,35 @@ import debug from 'debug';
 import _ from 'lodash';
 import {Component, createElement as h, Fragment, useEffect, useRef, useState} from 'react';
 import AceEditor from 'react-ace';
+
 import {render} from 'react-dom';
 import {SchemaForm, util} from 'rjsf';
 import shortid from 'shortid';
 
 function useEditable(defaultValue) {
-    const prev              = useRef({defaultValue});
     const [value, setValue] = useState(defaultValue);
     const [json, setJSON]   = useState(JSON.stringify(value, undefined, 2));
+    const prev              = useRef({defaultValue, value, json});
 
     useEffect(function() {
+        if (_.isEqual(value, prev.current.value))
+            return;
+        prev.current.value = value;
         setJSON(JSON.stringify(value, undefined, 2));
     }, [value]);
 
     useEffect(function() {
-        if (_.isEqual(defaultValue, prev.current.defaultValue)) {
-            prev.current = {defaultValue};
+        if (_.isEqual(defaultValue, prev.current.defaultValue))
             return;
-        }
-
+        prev.current.defaultValue = defaultValue;
         setJSON(JSON.stringify(defaultValue, undefined, 2));
     }, [defaultValue]);
 
     useEffect(function() {
         try {
+            if (_.isEqual(json, prev.current.json))
+                return;
+            prev.current.json = json;
             setValue(JSON.parse(json));
         } catch (err) {
         }
