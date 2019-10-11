@@ -36,6 +36,17 @@ function useEditable(defaultValue) {
     return {value, json, setValue, setJSON};
 }
 
+function Editor(props) {
+    return h(AceEditor, {
+        ...props,
+        mode: 'json',
+        theme: 'github',
+        height: '300px',
+        width: 'auto',
+        editorProps: {$blockScrolling: true}
+    });
+}
+
 class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
@@ -165,29 +176,44 @@ function Page(props) {
 
     return h('div', {className: classes.root}, [
         h(MUI.Card,
-          {className: classes.example},
-          h(MUI.CardContent,
-            {},
+            {className: classes.example},
             [
-                h(RenderExample, {
-                    key: 'render',
-                    schema: schema.value,
-                    form: form.value,
-                    model: model.value,
-                    onChange: onModelChange,
-                    localizer,
-                }),
-                h(AceEditor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
-            ])),
+                h(MUI.CardContent,
+                    {},
+                    [
+                        h(RenderExample, {
+                            key: 'render',
+                            schema: schema.value,
+                            form: form.value,
+                            model: model.value,
+                            onChange: onModelChange,
+                            localizer,
+                        }),
+                    ]),
+                h(MUI.CardContent,
+                    {},
+                    [
+                        h(MUI.Typography, {variant: 'h6'}, 'Model'),
+                        h(Editor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
+                    ])
+            ]),
         h(MUI.Card,
-          {className: classes.manager},
-          h(MUI.CardContent,
-            {},
+            {className: classes.manager},
             [
-                h(SelectExample, {key: 'select', selected, onChange}),
-                h(AceEditor, {key: 'edit-schema', value: schema.json, onChange: schema.setJSON}),
-                h(AceEditor, {key: 'edit-form', value: form.json, onChange: form.setJSON}),
-            ])),
+                h(MUI.CardContent, {}, h(SelectExample, {key: 'select', selected, onChange})),
+                h(MUI.CardContent,
+                    {},
+                    [
+                        h(MUI.Typography, {variant: 'h6'}, 'Schema'),
+                        h(Editor, {key: 'edit-schema', value: schema.json, onChange: schema.setJSON}),
+                    ]),
+                h(MUI.CardContent,
+                    {},
+                    [
+                        h(MUI.Typography, {variant: 'h6'}, 'Form'),
+                        h(Editor, {key: 'edit-form', value: form.json, onChange: form.setJSON}),
+                    ]),
+            ]),
     ]);
 
     function onChange(event, example) {

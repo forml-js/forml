@@ -4,7 +4,33 @@ import objectHash from 'object-hash';
 import objectPath from 'objectpath';
 
 const log = debug('rjsf:util');
+/**
+ * @namespace rjsf.util
+ */
 
+/**
+ * @typedef {Function} ValueGetter
+ * @param {Array<string|number>} keys - Object path to get
+ * @return {*} - The value found at keys
+ * @description Searches the enclosed model along the path of keys
+ */
+
+/**
+ * @typedef {Function} ValueSetter
+ * @param {Array<string|number>} keys - Object path to set
+ * @param {*} value - Value to set at keys
+ * @return {*} - The new model
+ * @description Updates the enclosed model with value along the path of keys
+ */
+
+
+/**
+ * Returns a default value for schema. If the schema defines a default value,
+ * that will be returned. If no default is specified, an "empty" value of the
+ * specified type will be returned.
+ * @param {object} schema
+ * @return {*}
+ */
 export function defaultForSchema(schema) {
     if (schema.default !== undefined) {
         return schema.default;
@@ -31,6 +57,10 @@ export function defaultForSchema(schema) {
     }
 }
 
+/**
+ * Return the first type from a type list
+ * @arg {string[]} types
+ */
 export function getPreferredType(types) {
     if (!Array.isArray(types))
         return types;
@@ -38,6 +68,11 @@ export function getPreferredType(types) {
     return types[0];
 }
 
+/**
+ * @arg {*} model
+ * @arg {object} schema
+ * @return {ValueGetter}
+ */
 export function valueGetter(model, schema) {
     function get(keys) {
         if (!Array.isArray(keys)) {
@@ -57,7 +92,7 @@ export function valueGetter(model, schema) {
         for (let i = 0; i < keys.length; ++i) {
             const key      = keys[i];
             currentSchema  = getNextSchema(currentSchema, key);
-            current        = current[key] || defaultForSchema(currentSchema);
+            current        = getNextValue(currentSchema, current, key);
         }
 
         return current;
@@ -66,6 +101,11 @@ export function valueGetter(model, schema) {
     return get;
 }
 
+/**
+ * @arg {object} errors - Existing errors
+ * @arg {Function} setErrors - Method to call when updating errors
+ * @return {Function}
+ */
 export function errorSetter(errors, setErrors) {
     return function(keys, error) {
         const key = objectPath.stringify(keys);
@@ -75,6 +115,10 @@ export function errorSetter(errors, setErrors) {
     }
 }
 
+/**
+ * @arg {object} errors - Map of object path to error
+ * @return {Function}
+ */
 export function errorGetter(errors) {
     return function(keys) {
         const key = objectPath.stringify(keys);
@@ -82,6 +126,17 @@ export function errorGetter(errors) {
     }
 }
 
+/**
+ * Walk a key path along a schema tree and model, updating the model according
+ * to the schema along the way, until reaching the final key, whereupon we set
+ * the supplied value. Returns the updated model or value set.
+ * @arg {Array<string|number>} keys - The object path to walk
+ * @arg {*} model - The model to update
+ * @arg {object} schema - The schema definition for the model
+ * @arg {*} value - The final value to write
+ * @arg {number} depth - The current depth of recursion
+ * @return {*}
+ */
 function updateAndClone(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
         return value;
@@ -114,6 +169,12 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
     throw new Error('Bad ObjectPath')
 }
 
+/**
+ * Set a value using a hook setter
+ * @arg {*} model
+ * @arg {object} schema
+ * @arg {Function} setModel
+ */
 export function valueSetter(model, schema, setModel) {
     function set(keys, value) {
         if (!Array.isArray(keys)) {
@@ -132,6 +193,12 @@ export function valueSetter(model, schema, setModel) {
     return set;
 }
 
+/**
+ * Walk the schema along the path of keys and return the last entry visited
+ * @arg {Array<string|number>} keys
+ * @arg {object} schema
+ * @return {object}
+ */
 export function findSchema(keys, schema) {
     if (keys.length === 0)
         return schema;
@@ -144,6 +211,11 @@ export function findSchema(keys, schema) {
     return schema;
 }
 
+/**
+ * Return the child schema defined by key in this schema
+ * @arg {object} schema
+ * @arg {string|number} key
+ */
 export function getNextSchema(schema, key) {
     if (schema.type === 'array') {
         if (Array.isArray(schema.items)) {
@@ -163,6 +235,26 @@ export function getNextSchema(schema, key) {
     }
 }
 
+/**
+ * Return the child model defined by key in this model, or if it is undefined
+ * the default value for the schema.
+ * @arg {object} schema
+ * @arg {*} value
+ * @arg {string|number} key
+ */
+export function getNextValue(schema, value, key) {
+    if (value[key] === undefined) {
+        return defaultForSchema(schema);
+    }
+
+    return value[key];
+}
+
+/**
+ * Invoke a function for every form in forms
+ * @arg {object[]} forms - The forms tree to visit
+ * @arg {Function} visitor - The visitor function to invoke
+ */
 export function traverseForm(forms, visit) {
     if (!Array.isArray(forms))
         forms = [forms];
@@ -175,7 +267,12 @@ export function traverseForm(forms, visit) {
     }
 }
 
-export function useKeyGenerator(disambiguator) {
+/**
+ * Use a function to generate keys for this component's children based on the
+ * supplied values
+ * @return {function(*,*):string}
+ */
+export function useKeyGenerator() {
     const disambiguate = useDisambiguate();
     function generateKey(form, value) {
         if (form.title) {
@@ -231,28 +328,15 @@ export function useDisambiguate() {
     return disambiguate;
 }
 
-export function validator(schema) {
-    const ajv      = new Ajv({allErrors: true});
-    const compiled = ajv.compile(schema);
+export function useValidator(schema) {
+    const ajv      = useMemo(() => new Ajv({allErrors: true}), []);
+    const compiled = useMemo(() => ajv.compile(schema), [schema]);
 
     function validate(model) {
         const valid    = compiled(model);
         const {errors} = compiled;
         return {valid, errors};
     }
+
     return validate;
-}
-
-export function frequencyCap(fun) {
-    let timer = null;
-
-    return function cappedInvocation(...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => invoke(...args), 100);
-    };
-
-    function invoke(...args) {
-        fun(...args)
-        timer = null;
-    }
 }

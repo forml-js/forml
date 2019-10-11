@@ -12,7 +12,6 @@ export function SchemaField(props) {
     const mapper              = useMapper();
     const model               = useModel();
     const Field               = mapper[form.type];
-
     if (!Field) {
         log('SchemaField(%o) : !Field : form : %o', form.key, form);
         return null;
@@ -28,19 +27,6 @@ export function SchemaField(props) {
     return h(Field, {schema, form, value, onChange, error});
 
     function onChange(e, value) {
-
-        // const validate        = validator(schema);
-        // const {valid, errors} = validate(value);
-        // log('onChange() : valid : %o', valid);
-        // log('onChange() : errors : %o', errors);
-
-        // if (!valid) {
-        //     log('onChange() : !valid : preventDefault()');
-        //     model.setError(form.key, errors[0].message);
-        // } else {
-        //     model.setError(form.key, null);
-        // }
-
         const newModel = model.setValue(form.key, value);
         if (model.onChange) {
             model.onChange(e, newModel);

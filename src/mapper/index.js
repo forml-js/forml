@@ -1,3 +1,6 @@
+/**
+ * @namespace rjsf.mapper
+ */
 import {ArrayComponent} from './array';
 import {Checkbox} from './checkbox';
 import {Date} from './date';
