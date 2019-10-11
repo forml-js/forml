@@ -2,6 +2,7 @@ import Ajv from 'ajv';
 import debug from 'debug';
 import objectHash from 'object-hash';
 import objectPath from 'objectpath';
+import {useMemo} from 'react';
 
 const log = debug('rjsf:util');
 /**
@@ -152,7 +153,7 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
         const lastSlice  = model.slice(next + 1);
 
         while (firstSlice.length < next) {
-            firstSlice.push(undefined);
+            firstSlice.push(defaultForSchema(getNextSchema(schema, firstSlice.length)));
         }
 
         const result     = [...firstSlice, nextModel, ...lastSlice];

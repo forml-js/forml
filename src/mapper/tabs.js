@@ -6,6 +6,7 @@ import clsx from 'classnames';
 import {createElement as h, useState} from 'react';
 
 import {SchemaField} from '../schema-field';
+import {useKeyGenerator} from '../util';
 
 const useStyles = makeStyles(function(theme) {
     return {
@@ -37,6 +38,7 @@ export function Tabs(props) {
     const [value, setValue] = useState(0);
     const classes           = useStyles();
     const {form}            = props;
+    const generateKey       = useKeyGenerator();
 
     const tabs = [];
     const panels = [];
@@ -44,15 +46,18 @@ export function Tabs(props) {
         const tab      = form.tabs[index];
         const {schema} = tab;
         const active   = value === index;
-        tabs.push(h(Tab, {label: tab.title}));
+        tabs.push(h(Tab, {key: generateKey(tab), label: tab.title}));
         panels.push(h('div',
-                      {className: clsx(classes.panel, {[classes.active]: value === index})},
+                      {
+                          key: generateKey(tab),
+                          className: clsx(classes.panel, {[classes.active]: value === index})
+                      },
                       h(SchemaField, {form: tab, schema})));
     }
 
     return h('div', {className: clsx(classes.root, form.htmlClass)}, [
-        h(AppBar, {position: 'static'}, h(MuiTabs, {onChange, value}, tabs)),
-        h('div', {className: classes.view}, panels),
+        h(AppBar, {key: 'bar', position: 'static'}, h(MuiTabs, {onChange, value}, tabs)),
+        h('div', {key: 'body', className: classes.view}, panels),
     ]);
 
     function onChange(event, value) {

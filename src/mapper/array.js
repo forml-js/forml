@@ -1,5 +1,4 @@
 import Collapse from '@material-ui/core/Collapse';
-import FormGroup from '@material-ui/core/FormGroup';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -11,6 +10,7 @@ import debug from 'debug';
 import {cloneDeep} from 'lodash';
 import ObjectPath from 'objectpath';
 import {createElement as h, Fragment, useState} from 'react';
+import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../constants';
 import {useModel} from '../context';
@@ -20,22 +20,20 @@ import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '..
 const log = debug('rjsf:mapper:array');
 
 export function AddButton(props) {
-    const {form} = props;
+    const {form, items} = props;
 
     const model      = useModel();
-    const current    = model.getValue(form.key);
-    const nextSchema = getNextSchema(form.schema, current.length);
 
     return h(IconButton, {onClick}, h(Icon, {}, 'add'));
 
     function onClick(e) {
         e.preventDefault();
-        model.setValue([...form.key, current.length], defaultForSchema(nextSchema));
+        items.add();
     }
 }
 
 export function DeleteButton(props) {
-    const {form, index} = props;
+    const {form, index, items} = props;
 
     const model = useModel();
 
@@ -43,13 +41,12 @@ export function DeleteButton(props) {
 
     function onClick(e) {
         e.preventDefault();
-        const value = model.getValue(form.key);
-        model.setValue(form.key, [...value.slice(0, index), ...value.slice(index + 1)])
+        items.destroy(index);
     }
 }
 
 export function ArrayItem(props) {
-    const {form, index}   = props;
+    const {form, index, items} = props;
     const [open, setOpen] = useState(false);
     const divider         = true;
     const button          = true;
@@ -58,40 +55,73 @@ export function ArrayItem(props) {
 
     return h(Fragment, {}, [
         h(ListItem,
-          {divider, button, onClick},
+          {key: 'header', divider, button, onClick},
           [
-              h(ListItemText, {primary: title}),
-              h(ListItemSecondaryAction, {}, h(DeleteButton, {form, index})),
+              h(ListItemText, {key: 'text', primary: title}),
+              h(ListItemSecondaryAction, {key: 'controls'}, h(DeleteButton, {items, index})),
           ]),
-        h(Collapse, {'in': open}, props.children),
+        h(Collapse, {key: 'body', 'in': open}, props.children),
     ]);
 
     function onClick() {
         setOpen(!open);
     }
 }
-export function ArrayComponent(props) {
-    const generateKey = useKeyGenerator();
 
-    const {form, schema} = props;
-    const {value = []}   = props;
-    const arrays         = [];
-    const onChange       = props;
+export function useArrayItems(form) {
+    const [items, setItems] = useState([]);
+    const model             = useModel();
 
-    for (let i = 0; i < value.length; ++i) {
+    function create() {
         const forms = form.items.map((form, index) => {
-            const newForm = copyWithIndex(form, i);
-            const schema  = newForm.schema;
-            const key     = generateKey(newForm);
+            const schema  = form.schema;
+            const key     = shortid();
 
-            return h(ListItem, {key}, h(SchemaField, {form: newForm, schema}));
+            return {form, key};
         });
 
-        const key = generateKey(form);
-        arrays.push(h(ArrayItem, {key, form, index: i}, forms));
+        const key = shortid();
+        return {forms, key};
     }
 
-    return h('div', {}, [h(AddButton, {key: 'add', form}), h(List, {key: 'form'}, arrays)]);
+    function add() {
+        const current    = model.getValue(form.key);
+        const nextSchema = getNextSchema(form.schema, current.length);
+        model.setValue([...form.key, current.length], defaultForSchema(nextSchema));
+        setItems([...items, create(current.length)]);
+    }
+
+    function destroy(index) {
+        const value = model.getValue(form.key);
+        model.setValue(form.key, [...value.slice(0, index), ...value.slice(index + 1)])
+        setItems([...items.slice(0, index), ...items.slice(index + 1)]);
+    }
+
+    return {items, add, destroy};
+}
+
+export function ArrayComponent(props) {
+    const {form, schema} = props;
+    const {value = []}   = props;
+
+    const generateKey = useKeyGenerator();
+    const items       = useArrayItems(form);
+
+    const arrays         = [];
+
+    for (let i = 0; i < value.length; ++i) {
+        const item  = items.items[i];
+        const forms = item.forms.map(function({form, schema, key}) {
+            const formCopy = copyWithIndex(form, i);
+            return h(ListItem, {key}, h(SchemaField, {form: formCopy, schema}));
+        });
+        arrays.push(h(ArrayItem, {key: item.key, form, index: i, items}, forms));
+    }
+
+    return h('div', {}, [
+        h(AddButton, {key: 'add', form, items}),
+        h(List, {key: 'form'}, arrays),
+    ]);
 }
 
 function copyWithIndex(form, index) {
