@@ -9,6 +9,8 @@ reading and writing values to and from the model.
 
 ## Examples
 
+You can view the [running demo](https://fauxsoup.github.io/rjsf).
+
 Examples were taken from `react-schema-form`, and not all of them work
 presently. Simply run:
 
