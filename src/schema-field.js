@@ -12,6 +12,7 @@ export function SchemaField(props) {
     const mapper              = useMapper();
     const model               = useModel();
     const Field               = mapper[form.type];
+
     if (!Field) {
         log('SchemaField(%o) : !Field : form : %o', form.key, form);
         return null;
@@ -27,8 +28,8 @@ export function SchemaField(props) {
     return h(Field, {schema, form, value, onChange, error});
 
     function onChange(e, value) {
-        const newModel = model.setValue(form.key, value);
         if (model.onChange) {
+            const newModel = model.setValue(form.key, value);
             model.onChange(e, newModel);
         }
     }

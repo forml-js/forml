@@ -6,19 +6,16 @@ import debug from 'debug';
 import ObjectPath from 'objectpath';
 import {createElement as h, useEffect, useState} from 'react';
 
+import {useDecorator} from '../context';
 import {SchemaField} from '../schema-field';
 import {defaultForSchema, useKeyGenerator} from '../util';
 
 const log = debug('rjsf:mapper:fieldset');
 
-export const useStyles = makeStyles(function(theme) {
-    return {root: {flex: '1'}};
-});
 
 export function FieldSet(props) {
     const {form, onChange} = props;
     const {title}          = form;
-    const classes          = useStyles();
     const generateKey      = useKeyGenerator();
 
     const forms = form.items.map(function(form, index) {
@@ -33,16 +30,7 @@ export function FieldSet(props) {
         });
     });
 
-    return h(
-        FormControl,
-        {
-            component: 'fieldset',
-            className: clsx(classes.root, form.htmlClass),
-            style: form.style,
-            ...form.otherProps,
-        },
-        [
-            h(FormLabel, {key: 'label', component: 'legend', required: form.required}, form.title),
-            forms,
-        ]);
+    const deco = useDecorator();
+
+    return h(deco.fieldset, {form}, forms);
 }

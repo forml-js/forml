@@ -2,6 +2,7 @@ import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
 import {get} from 'lodash';
 import {createElement as h} from 'react';
+import {useDecorator} from '../context';
 
 const log = debug('rjsf:mapper:number');
 
@@ -10,11 +11,15 @@ const valueExceptions = ['', '-'];
 export function Number(props) {
     const {form, schema, value} = props;
 
-    const fullWidth   = get(form, 'fullWidth', true);
+    const deco        = useDecorator();
+
     const placeholder = get(form, 'placeholder', '');
     const label       = get(form, 'title', get(form, 'key', ''));
 
-    return h(TextField, {value, onChange, fullWidth, label, placeholder});
+    return h(deco.inputGroup, {form}, [
+        h(deco.label, {form}, form.title),
+        h(deco.input, {value, onChange, placeholder, form}),
+    ]);
 
     function onChange(e) {
         let value = e.target.value;
@@ -38,11 +43,13 @@ export function Number(props) {
 export function Integer(props) {
     const {schema, value, form} = props;
 
-    const fullWidth   = get(form, 'fullWidth', true);
     const placeholder = get(form, 'placeholder', '');
     const label       = get(form, 'title', get(form, 'key', ''));
 
-    return h(TextField, {value, onChange, fullWidth, label, placeholder});
+    return h(deco.inputGroup, {form}, [
+        h(deco.label, {form}, form.title),
+        h(deco.input, {value, onChange, placeholder, form}),
+    ]);
 
     function onChange(e) {
         let value = e.target.value;

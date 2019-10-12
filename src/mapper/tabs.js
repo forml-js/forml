@@ -5,6 +5,7 @@ import MuiTabs from '@material-ui/core/Tabs';
 import clsx from 'classnames';
 import {createElement as h, useState} from 'react';
 
+import {useDecorator} from '../context';
 import {SchemaField} from '../schema-field';
 import {useKeyGenerator} from '../util';
 
@@ -39,6 +40,7 @@ export function Tabs(props) {
     const classes           = useStyles();
     const {form}            = props;
     const generateKey       = useKeyGenerator();
+    const deco              = useDecorator();
 
     const tabs = [];
     const panels = [];
@@ -46,19 +48,18 @@ export function Tabs(props) {
         const tab      = form.tabs[index];
         const {schema} = tab;
         const active   = value === index;
-        tabs.push(h(Tab, {key: generateKey(tab), label: tab.title}));
-        panels.push(h('div',
+        const activate = () => setValue(index);
+        tabs.push(h(deco.tabs.tab, {key: generateKey(tab), form: tab, active, activate}));
+        panels.push(h(deco.tabs.panel,
                       {
                           key: generateKey(tab),
-                          className: clsx(classes.panel, {[classes.active]: value === index})
+                          form: tab,
+                          active,
                       },
                       h(SchemaField, {form: tab, schema})));
     }
 
-    return h('div', {className: clsx(classes.root, form.htmlClass)}, [
-        h(AppBar, {key: 'bar', position: 'static'}, h(MuiTabs, {onChange, value}, tabs)),
-        h('div', {key: 'body', className: classes.view}, panels),
-    ]);
+    return h(deco.tabs.container, {className: form.htmlClass, form, value, tabs, panels});
 
     function onChange(event, value) {
         setValue(value)

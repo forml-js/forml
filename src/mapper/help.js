@@ -1,10 +1,15 @@
 import Typography from '@material-ui/core/Typography';
 import {createElement as h} from 'react';
 
-export function Help(props) {
-    const {form}                                                              = props;
-    const {description, variant, align, color, noWrap, paragraph, otherProps} = form;
+import {useDecorator, useLocalizer} from '../context';
 
-    return h(Typography, {variant, align, color, noWrap, paragraph, ...otherProps}, description);
+export function Help(props) {
+    const {form}       = props;
+    const {otherProps, description} = form;
+
+    const localize = useLocalizer();
+    const deco     = useDecorator();
+
+    return h(deco.text, {...otherProps}, localize.getLocalizedString(description));
 }
 

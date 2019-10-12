@@ -1,5 +1,11 @@
 import {createContext, useContext} from 'react';
-const context = createContext({});
+import {defaultDecorator} from './decorator';
+import {defaultLocalizer} from './localizer';
+
+const context = createContext({
+    decorator: defaultDecorator(),
+    localizer: defaultLocalizer(),
+});
 
 export default context;
 
@@ -16,4 +22,9 @@ export function useModel(schema) {
 export function useLocalizer() {
     const {localizer} = useContext(context);
     return localizer;
+}
+
+export function useDecorator() {
+    const {decorator} = useContext(context);
+    return decorator;
 }

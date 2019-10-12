@@ -138,7 +138,7 @@ export function errorGetter(errors) {
  * @arg {number} depth - The current depth of recursion
  * @return {*}
  */
-function updateAndClone(keys, model, schema, value, depth = 0) {
+function updateAndCloneRecursive(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
         return value;
     }
@@ -146,7 +146,7 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
     const [next, ...rest] = keys;
     const nextSchema      = getNextSchema(schema, next);
     const nextModel       = updateAndClone(
-        rest, model[next] || defaultForSchema(nextSchema), nextSchema, value, depth + 1);
+        rest, getNextValue(nextSchema, model, next), nextSchema, value, depth + 1);
 
     if (schema.type === 'array') {
         const firstSlice = model.slice(0, next);
@@ -156,14 +156,14 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
             firstSlice.push(defaultForSchema(getNextSchema(schema, firstSlice.length)));
         }
 
-        const result     = [...firstSlice, nextModel, ...lastSlice];
-        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        const result = [...firstSlice, nextModel, ...lastSlice];
+        // log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
     if (schema.type === 'object') {
         const result = {...model, [next]: nextModel};
-        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        // log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
@@ -171,12 +171,53 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
 }
 
 /**
+ * Walk a key path along a schema tree and model, updating the model according
+ * to the schema along the way, until reaching the final key, whereupon we set
+ * the supplied value. Returns the updated model or value set.
+ * @arg {Array<string|number>} keys - The object path to walk
+ * @arg {*} model - The model to update
+ * @arg {object} schema - The schema definition for the model
+ * @arg {*} value - The final value to write
+ * @return {*}
+ */
+function updateAndCloneImperative(keys, model, schema, value) {
+    if (keys.length === 0) {
+        return value;
+    }
+
+    let stack = [];
+    let key   = undefined;
+    for (let i = 0; i < keys.length; ++i) {
+        stack.push({key, model, schema});
+
+        key    = keys[i];
+        schema = getNextSchema(schema, key);
+        model  = getNextValue(schema, model, key);
+    }
+
+    model = value;
+
+    while (stack.length) {
+        const parent      = stack.pop();
+        parent.model[key] = model;
+
+
+        key    = parent.key;
+        model  = _.clone(parent.model);
+        schema = parent.schema;
+    }
+
+    return model;
+}
+
+export const updateAndClone = updateAndCloneRecursive;
+/**
  * Set a value using a hook setter
  * @arg {*} model
  * @arg {object} schema
  * @arg {Function} setModel
  */
-export function valueSetter(model, schema, setModel) {
+export function valueSetter(model, schema) {
     function set(keys, value) {
         if (!Array.isArray(keys)) {
             keys = [keys];
@@ -187,7 +228,6 @@ export function valueSetter(model, schema, setModel) {
         }
 
         const newModel = updateAndClone(keys, model, schema, value);
-        setModel(newModel)
         return newModel;
     }
 
@@ -275,25 +315,14 @@ export function traverseForm(forms, visit) {
  */
 export function useKeyGenerator() {
     const disambiguate = useDisambiguate();
+    let      counter   = 0;
     function generateKey(form, value) {
         if (form.title) {
-            return disambiguate(hash(form.title), value);
+            return disambiguate(form.title, value);
         }
-        return disambiguate(hash(form), value);
+        return disambiguate('' + counter++, value);
     }
     return generateKey;
-}
-
-export function defaultLocalizer() {
-    function noop(id) {
-        return id;
-    }
-
-    return {
-        getLocalizedString: noop,
-        getLocalizedNumber: noop,
-        getLocalizedDate: noop,
-    };
 }
 
 export function hash(object) {
@@ -312,12 +341,8 @@ export function hash(object) {
 export function useDisambiguate() {
     const keys = {};
 
-    function disambiguate(key, disambiguator) {
+    function disambiguate(key) {
         if (key in keys) {
-            if (disambiguator) {
-                return key + disambiguate(hash(disambiguator));
-            }
-
             const count = keys[key]++;
             return key + count;
         }

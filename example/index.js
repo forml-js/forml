@@ -2,41 +2,29 @@ import * as MUI from '@material-ui/core';
 import clsx from 'classnames';
 import debug from 'debug';
 import _ from 'lodash';
-import {Component, createElement as h, Fragment, useEffect, useRef, useState} from 'react';
+import {Component, createElement as h, Fragment, useEffect, useMemo, useRef, useState} from 'react';
 import AceEditor from 'react-ace';
-
 import {render} from 'react-dom';
-import {SchemaForm, util} from 'rjsf';
+import {decorators, SchemaForm, util} from 'rjsf';
 import shortid from 'shortid';
 
 function useEditable(defaultValue) {
-    const [value, setValue] = useState(defaultValue);
-    const [json, setJSON]   = useState(JSON.stringify(value, undefined, 2));
-    const prev              = useRef({defaultValue, value, json});
+    const [value, doSetValue] = useState(defaultValue);
+    const [json, doSetJSON]   = useState(JSON.stringify(value, undefined, 2));
 
-    useEffect(function() {
-        if (_.isEqual(value, prev.current.value))
-            return;
-        prev.current.value = value;
-        setJSON(JSON.stringify(value, undefined, 2));
-    }, [value]);
+    function setValue(value) {
+        doSetValue(value);
+        doSetJSON(JSON.stringify(value, undefined, 2));
+    }
 
-    useEffect(function() {
-        if (_.isEqual(defaultValue, prev.current.defaultValue))
-            return;
-        prev.current.defaultValue = defaultValue;
-        setJSON(JSON.stringify(defaultValue, undefined, 2));
-    }, [defaultValue]);
-
-    useEffect(function() {
+    function setJSON(json) {
+        doSetJSON(json);
         try {
-            if (_.isEqual(json, prev.current.json))
-                return;
-            prev.current.json = json;
-            setValue(JSON.parse(json));
+            doSetValue(JSON.parse(json));
         } catch (err) {
         }
-    }, [json]);
+    }
+
 
     return {value, json, setValue, setJSON};
 }
@@ -84,7 +72,6 @@ function importAll(context) {
     for (let key of keys) {
         result[key] = context(key);
 
-        log('import(%o) : %o', key, result[key]);
         if (result[key].default)
             result[key] = result[key].default;
 
@@ -104,45 +91,38 @@ function SelectExample(props) {
     const form              = [{key: [], title: 'Sample', titles}];
     const schema            = {type: 'string', enum: enm};
     const model             = props.selected;
+    const decorator         = decorators.mui;
 
     try {
-        return h(SchemaForm, {schema, form, model, onChange});
+        return h(SchemaForm, {schema, form, model, onChange, decorator, onModelChange});
     } catch (err) {
         return null;
     }
 
+    function onModelChange(model) {
+        log('onModelChange() : %o', model);
+        if (props.onModelChange) {
+            props.onModelChange(model);
+        }
+    }
+
     function onChange(event, value) {
+        log('onChange() : %o', value);
         props.onChange(event, value);
     }
 }
-const ids = new WeakMap();
-function idFor(object) {
-    if (object === null)
-        return 'null';
-    if (object === undefined)
-        return 'undefined';
-    if (typeof object !== 'object')
-        return object;
-
-    if (ids.has(object))
-        return ids.get(object);
-    const id = shortid();
-    ids.set(object, id);
-    return id;
-}
-
 function RenderExample(props) {
-    const {schema, form, model, className} = props;
+    const {schema, form, model} = props;
+    const {onChange, className} = props;
+    const decorator             = decorators.mui;
 
-    return h(ErrorBoundary, {key: getKey()}, h(SchemaForm, {schema, form, model, onChange}));
-
-    function onChange(event, value) {
-        props.onChange(value);
-    }
-
-    function getKey() {
-        return idFor(schema);
-    }
+    return h(ErrorBoundary, {}, h(SchemaForm, {
+                 schema,
+                 form,
+                 model,
+                 decorator,
+                 onChange,
+             }));
 }
 
 function getSample(selected) {
@@ -155,8 +135,8 @@ function getSample(selected) {
 const useStyles = MUI.makeStyles(function(theme) {
     return {
         root: {display: 'flex', flexDirection: 'row'},
-        manager: {flex: '1 0 auto'},
-        example: {flex: '9 1 auto'},
+        manager: {flex: '0 0 300px'},
+        example: {flex: '1 0 600px'},
     };
 });
 
@@ -166,7 +146,12 @@ function Page(props) {
     const [localizer, setLocalizer] = useState(undefined);
     const schema                  = useEditable({type: 'null'});
     const form                    = useEditable(['*']);
-    const model                   = useEditable(util.defaultForSchema(schema));
+    const defaultModel              = useMemo(() => util.defaultForSchema(schema), [schema]);
+    const model                     = useEditable(defaultModel);
+
+    function onModelChange(...args) {
+        model.setValue(args[0]);
+    }
 
     useEffect(function() {
         const sample = getSample(selected);
@@ -174,10 +159,6 @@ function Page(props) {
         form.setValue(sample.form);
         setLocalizer(sample.localization);
     }, [selected]);
-
-    log('Page() : schema : %O', schema);
-    log('Page() : form : %O', form);
-    log('Page() : model : %O', model);
 
     return h('div', {className: classes.root}, [
         h(MUI.Card,
@@ -190,6 +171,7 @@ function Page(props) {
                             key: 'render',
                             schema: schema.value,
                             form: form.value,
+                            // model: model.value,
                             model: model.value,
                             onChange: onModelChange,
                             localizer,
@@ -199,7 +181,8 @@ function Page(props) {
                     {},
                     [
                         h(MUI.Typography, {variant: 'h6'}, 'Model'),
-                        h(Editor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
+                        h('pre', {}, model.json),
+                        // h(Editor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
                     ])
             ]),
         h(MUI.Card,
@@ -222,10 +205,12 @@ function Page(props) {
     ]);
 
     function onChange(event, example) {
+        // event.preventDefault();
         setSelected(example);
     }
 
-    function onModelChange(value) {
+    function onModelChange(event, value) {
+        // event.preventDefault();
         model.setValue(value);
     }
 }

@@ -1,27 +1,29 @@
 import TextField from '@material-ui/core/TextField';
+import debug from 'debug';
 import {get} from 'lodash';
 import {createElement as h} from 'react';
-import {useLocalizer} from '../context';
+
+import {useDecorator, useLocalizer} from '../context';
+
+const log = debug('rjsf:mapper:text');
 
 export function Text(props) {
     const {schema, value, form, error} = props;
     const {otherProps}                 = props;
+    const {title, description}         = form;
     const localize                     = useLocalizer();
+    const deco                         = useDecorator();
 
-    return h(TextField, {
-        type: form.type,
-        disabled: form.readonly,
-        fullWidth: get(form, 'fullWidth', true),
-        placeholder: localize.getLocalizedString(get(form, 'placeholder')),
-        helperText:
-            (error || form.description) && localize.getLocalizedString(error || form.description),
-        error: !!error,
-        label: localize.getLocalizedString(get(form, 'title')),
-        value,
-        onChange,
-        ...otherProps,
-        ...form.otherProps,
-    });
+    const localizer = useLocalizer();
+
+    return h(deco.input.group, {form, error}, [
+        title && h(deco.label, {key: 'label', form, error}, localizer.getLocalizedString(title)),
+        h(deco.input.form, {key: 'form', form, onChange, value, error}),
+        (error || description) &&
+            h(deco.input.description,
+              {key: 'description', form, error},
+              localizer.getLocalizedString(error || description)),
+    ]);
 
     function onChange(e) {
         props.onChange(e, e.target.value);

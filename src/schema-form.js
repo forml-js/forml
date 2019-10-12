@@ -3,11 +3,13 @@
  */
 import debug from 'debug';
 import ObjectPath from 'objectpath';
-import {createElement as h, useEffect, useMemo, useRef, useState} from 'react';
+import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import {ARRAY_PLACEHOLDER} from './constants';
 import Context from './context';
+import {getDecorator} from './decorator';
 import {merge} from './forms';
+import {getLocalizer} from './localizer';
 import {getMapper, test} from './mapper';
 import {SchemaField} from './schema-field';
 import * as util from './util';
@@ -22,23 +24,18 @@ const log = debug('rjsf:index');
  * @property {object[]} forms - The rendering specification for the form
  * @property {object} localizer - Localization functions to be used
  */
-export function SchemaForm(
-    {model: incomingModel, schema, form, localizer = util.defaultLocalizer(), ...props}) {
-    const [model, setModel] = useState(incomingModel);
+export function SchemaForm({model, schema, form, ...props}) {
     const merged            = useMemo(() => merge(schema, form), [schema, form])
-    const validate          = util.useValidator(schema);
-    const errors            = useMemo(() => computeErrors(model), [model]);
-    const mapper            = useMemo(() => getMapper(props.mapper), [props.master]);
+    const validate          = useCallback(util.useValidator(schema), [schema]);
+    const mapper            = useMemo(() => getMapper(props.mapper), [props.mapper]);
+    const decorator         = useMemo(() => getDecorator(props.decorator), [props.decorator]);
+    const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
+    const errors            = useMemo(() => computeErrors(model), [model, validate]);
     const generateKey       = util.useKeyGenerator();
 
     const getValue = util.valueGetter(model, schema);
-    const setValue = util.valueSetter(model, schema, setModel)
+    const setValue = util.valueSetter(model, schema);
     const getError = util.errorGetter(errors);
-
-    useEffect(function() {
-        log('SchemaForm(%s) : useEffect() -> setModel(%o)', schema.title, props.model);
-        setModel(incomingModel);
-    }, [incomingModel])
 
     return h(Context.Provider,
              {
@@ -52,12 +49,13 @@ export function SchemaForm(
                      getError,
                      onChange,
                      localizer,
-                     errors,
+                     errors: {},
+                     decorator,
                  }
              },
              merged.map(form => {
                  const {schema} = form;
-                 return h(SchemaField, {key: generateKey(form), schema, form, onChange})
+                 return h(SchemaField, {key: generateKey('form'), schema, form, onChange})
              }));
 
     function onChange(event, value) {
