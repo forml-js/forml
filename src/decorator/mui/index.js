@@ -20,13 +20,19 @@ export function label(props) {
 }
 
 export function text(props) {
-    return h(MUI.Typography, props);
+    const {form} = props;
+    const {variant, align, color} = form;
+    const {noWrap, paragraph}     = form;
+
+    return h(MUI.Typography,
+             {variant, align, color, noWrap, paragraph, ...form.otherProps},
+             props.children);
 }
 
 export function group(props) {
     const {form}    = props;
-    const fullWidth = true;
-    return h(MUI.FormGroup, {fullWidth, ...props, ...form.otherProps});
+    const {fullWidth = true} = form;
+    return h(MUI.FormGroup, {fullWidth, ...form.otherProps}, props.children);
 }
 
 export function checkbox({title, description, error, form, checked, onChange}) {

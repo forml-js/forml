@@ -10,6 +10,6 @@ export function Help(props) {
     const localize = useLocalizer();
     const deco     = useDecorator();
 
-    return h(deco.text, {...otherProps}, localize.getLocalizedString(description));
+    return h(deco.text, {form}, localize.getLocalizedString(description));
 }
 
