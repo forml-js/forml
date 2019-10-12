@@ -1,6 +1,8 @@
 import debug from 'debug';
-import {merge} from 'lodash';
+import merge from 'deepmerge';
 import {createElement as h} from 'react';
+
+import {clone} from '../util';
 
 import * as barebones from './barebones';
 import * as mui       from './mui';
@@ -17,30 +19,6 @@ export function defaultDecorator() {
 }
 
 export function getDecorator(template) {
-    const decorator = merge({}, defaultDecorator(), template);
+    const decorator = merge(defaultDecorator(), template);
     return decorator;
-}
-
-function clone(value) {
-    log('typeof value : %s', typeof value);
-    switch (typeof value) {
-        case 'string':
-        case 'number':
-        case 'boolean':
-        case 'undefined':
-            return value;
-
-        case 'object':
-            if (Array.isArray(value)) {
-                return value.map((item) => clone(item));
-            }
-
-            const result = {};
-            for (let key in value) {
-                result[key] = clone(value[key]);
-            }
-            return result;
-        default:
-            return value;
-    }
 }

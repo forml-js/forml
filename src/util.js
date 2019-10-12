@@ -1,6 +1,5 @@
 import Ajv from 'ajv';
 import debug from 'debug';
-import objectHash from 'object-hash';
 import objectPath from 'objectpath';
 import {useMemo} from 'react';
 
@@ -325,19 +324,6 @@ export function useKeyGenerator() {
     return generateKey;
 }
 
-export function hash(object) {
-    if (object === null) {
-        return 'null';
-    }
-    if (object === undefined) {
-        return 'undefined';
-    }
-    if (typeof object !== 'object') {
-        return '' + object;
-    }
-    return objectHash(object);
-}
-
 export function useDisambiguate() {
     const keys = {};
 
@@ -365,4 +351,27 @@ export function useValidator(schema) {
     }
 
     return validate;
+}
+
+export function clone(value) {
+    switch (typeof value) {
+        case 'string':
+        case 'number':
+        case 'boolean':
+        case 'undefined':
+            return value;
+
+        case 'object':
+            if (Array.isArray(value)) {
+                return value.map((item) => clone(item));
+            }
+
+            const result = {};
+            for (let key in value) {
+                result[key] = clone(value[key]);
+            }
+            return result;
+        default:
+            return value;
+    }
 }

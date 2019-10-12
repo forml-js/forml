@@ -166,40 +166,37 @@ function Page(props) {
             [
                 h(MUI.CardContent,
                     {},
-                    [
-                        h(RenderExample, {
-                            key: 'render',
-                            schema: schema.value,
-                            form: form.value,
-                            // model: model.value,
-                            model: model.value,
-                            onChange: onModelChange,
-                            localizer,
-                        }),
-                    ]),
+                    h(RenderExample, {
+                        key: 'render',
+                        schema: schema.value,
+                        form: form.value,
+                        // model: model.value,
+                        model: model.value,
+                        onChange: onModelChange,
+                        localizer,
+                    })),
                 h(MUI.CardContent,
                     {},
                     [
-                        h(MUI.Typography, {variant: 'h6'}, 'Model'),
-                        h('pre', {}, model.json),
-                        // h(Editor, {value: model.json, onChange: model.setJSON, key: 'edit'}),
+                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Model'),
+                        h('pre', {key: 'body'}, model.json),
                     ])
             ]),
         h(MUI.Card,
             {className: classes.manager},
             [
-                h(MUI.CardContent, {}, h(SelectExample, {key: 'select', selected, onChange})),
+                h(MUI.CardContent, {key: 'select-example'}, h(SelectExample, {key: 'select', selected, onChange})),
                 h(MUI.CardContent,
-                    {},
+                    {key: 'schema'},
                     [
-                        h(MUI.Typography, {variant: 'h6'}, 'Schema'),
-                        h(Editor, {key: 'edit-schema', value: schema.json, onChange: schema.setJSON}),
+                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Schema'),
+                        h(Editor, {key: 'editor', value: schema.json, onChange: schema.setJSON}),
                     ]),
                 h(MUI.CardContent,
-                    {},
+                    {key: 'form'},
                     [
-                        h(MUI.Typography, {variant: 'h6'}, 'Form'),
-                        h(Editor, {key: 'edit-form', value: form.json, onChange: form.setJSON}),
+                        h(MUI.Typography, {key: 'title',variant: 'h6'}, 'Form'),
+                        h(Editor, {key: 'editor', value: form.json, onChange: form.setJSON}),
                     ]),
             ]),
     ]);

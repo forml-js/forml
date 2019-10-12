@@ -1,6 +1,5 @@
 import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
-import {get} from 'lodash';
 import {createElement as h} from 'react';
 import {useDecorator} from '../context';
 
@@ -13,8 +12,8 @@ export function Number(props) {
 
     const deco        = useDecorator();
 
-    const placeholder = get(form, 'placeholder', '');
-    const label       = get(form, 'title', get(form, 'key', ''));
+    const placeholder = form.placeholder;
+    const label       = form.title || form.key[form.key.length - 1];
 
     return h(deco.inputGroup, {form}, [
         h(deco.label, {form}, form.title),
@@ -43,8 +42,8 @@ export function Number(props) {
 export function Integer(props) {
     const {schema, value, form} = props;
 
-    const placeholder = get(form, 'placeholder', '');
-    const label       = get(form, 'title', get(form, 'key', ''));
+    const placeholder = form.placeholder;
+    const label       = form.title || form.key[form.key.length - 1];
 
     return h(deco.inputGroup, {form}, [
         h(deco.label, {form}, form.title),

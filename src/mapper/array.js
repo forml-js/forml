@@ -7,7 +7,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import debug from 'debug';
-import {cloneDeep} from 'lodash';
+import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
 import {createElement as h, Fragment, useCallback, useState} from 'react';
 import shortid from 'shortid';
