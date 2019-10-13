@@ -11,18 +11,15 @@ export function container(props) {
 }
 
 export function tab(props) {
-    const {form}  = props;
+    const {label}    = props;
     const {activate} = props;
-    const {title} = form;
-
-    const localizer = useLocalizer();
-    const label     = localizer.getLocalizedString(form.title);
 
     return h(MUI.Tab, {onClick: activate, label});
 }
 
 export function panel(props) {
     const {active} = props;
+
     if (!active)
         return null;
 

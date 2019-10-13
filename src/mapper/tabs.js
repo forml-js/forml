@@ -5,7 +5,7 @@ import MuiTabs from '@material-ui/core/Tabs';
 import clsx from 'classnames';
 import {createElement as h, useState} from 'react';
 
-import {useDecorator} from '../context';
+import {useDecorator, useLocalizer} from '../context';
 import {SchemaField} from '../schema-field';
 import {useKeyGenerator} from '../util';
 
@@ -41,6 +41,7 @@ export function Tabs(props) {
     const {form}            = props;
     const generateKey       = useKeyGenerator();
     const deco              = useDecorator();
+    const localizer         = useLocalizer();
 
     const tabs = [];
     const panels = [];
@@ -49,7 +50,13 @@ export function Tabs(props) {
         const {schema} = tab;
         const active   = value === index;
         const activate = () => setValue(index);
-        tabs.push(h(deco.tabs.tab, {key: generateKey(tab), form: tab, active, activate}));
+        tabs.push(h(deco.tabs.tab, {
+            key: generateKey(tab),
+            form: tab,
+            label: localizer.getLocalizedString(form.title),
+            active,
+            activate,
+        }));
         panels.push(h(deco.tabs.panel,
                       {
                           key: generateKey(tab),
