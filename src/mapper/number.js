@@ -8,16 +8,18 @@ const log = debug('rjsf:mapper:number');
 const valueExceptions = ['', '-'];
 
 export function Number(props) {
-    const {form, schema, value} = props;
+    const {form, schema, value, error} = props;
 
     const deco        = useDecorator();
 
     const placeholder = form.placeholder;
     const label       = form.title || form.key[form.key.length - 1];
+    const description = form.description;
 
-    return h(deco.inputGroup, {form}, [
+    return h(deco.input.group, {form}, [
         h(deco.label, {form}, form.title),
-        h(deco.input, {value, onChange, placeholder, form}),
+        h(deco.input.form, {value, onChange, placeholder, form}),
+        (error || description) && h(deco.input.description, {}, error || description),
     ]);
 
     function onChange(e) {
@@ -40,14 +42,16 @@ export function Number(props) {
 }
 
 export function Integer(props) {
-    const {schema, value, form} = props;
+    const {schema, value, form, error} = props;
 
     const placeholder = form.placeholder;
     const label       = form.title || form.key[form.key.length - 1];
+    const description = form.description;
 
-    return h(deco.inputGroup, {form}, [
+    return h(deco.input.group, {form}, [
         h(deco.label, {form}, form.title),
-        h(deco.input, {value, onChange, placeholder, form}),
+        h(deco.input.form, {value, onChange, placeholder, form}),
+        (error || description) && h(deco.input.description, {form, error}, error || description),
     ]);
 
     function onChange(e) {

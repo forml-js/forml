@@ -6,7 +6,8 @@ export function form(props) {
 }
 
 export function group(props) {
-    return h(MUI.FormControl, props);
+    const fullWidth = true;
+    return h(MUI.FormControl, {...props, fullWidth}, props.children);
 }
 
 export function description(props) {

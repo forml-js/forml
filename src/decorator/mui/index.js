@@ -30,7 +30,7 @@ export function text(props) {
 }
 
 export function group(props) {
-    const {form}    = props;
+    const {form}             = props;
     const {fullWidth = true} = form;
     return h(MUI.FormGroup, {fullWidth, ...form.otherProps}, props.children);
 }
