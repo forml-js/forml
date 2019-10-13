@@ -283,6 +283,9 @@ export function getNextSchema(schema, key) {
  * @arg {string|number} key
  */
 export function getNextValue(schema, value, key) {
+    if (!value)
+        return defaultForSchema(schema);
+
     if (value[key] === undefined) {
         return defaultForSchema(schema);
     }
@@ -308,38 +311,10 @@ export function traverseForm(forms, visit) {
 }
 
 /**
- * Use a function to generate keys for this component's children based on the
- * supplied values
- * @return {function(*,*):string}
+ * A hook that uses a memoized Ajv instance and a compiled version of the schema
+ * to produce a validate function.
+ * @arg object schema - The schema to compile for validation
  */
-export function useKeyGenerator() {
-    const disambiguate = useDisambiguate();
-    let      counter   = 0;
-    function generateKey(form, value) {
-        if (form.title) {
-            return disambiguate(form.title, value);
-        }
-        return disambiguate('' + counter++, value);
-    }
-    return generateKey;
-}
-
-export function useDisambiguate() {
-    const keys = {};
-
-    function disambiguate(key) {
-        if (key in keys) {
-            const count = keys[key]++;
-            return key + count;
-        }
-
-        keys[key] = 0;
-        return key;
-    }
-
-    return disambiguate;
-}
-
 export function useValidator(schema) {
     const ajv      = useMemo(() => new Ajv({allErrors: true}), []);
     const compiled = useMemo(() => ajv.compile(schema), [schema]);
@@ -353,6 +328,11 @@ export function useValidator(schema) {
     return validate;
 }
 
+/**
+ * A copy of clone that works on ES6 modules. Does not actually clone
+ * primitives.
+ * @arg * value - The value to clone
+ */
 export function clone(value) {
     switch (typeof value) {
         case 'string':

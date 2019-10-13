@@ -1,8 +1,8 @@
 import debug from 'debug';
 import {createElement as h, useState} from 'react';
 
-import {useMapper, useModel} from './context';
-import {validator} from './util';
+import {useMapper, useModel} from '../context';
+import {validator} from '../util';
 
 const log = debug('rjsf:schema-field');
 
@@ -30,6 +30,7 @@ export function SchemaField(props) {
     function onChange(e, value) {
         if (model.onChange) {
             const newModel = model.setValue(form.key, value);
+            log('onChange() : newModel : %O', newModel);
             model.onChange(e, newModel);
         }
     }

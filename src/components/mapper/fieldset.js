@@ -6,9 +6,9 @@ import debug from 'debug';
 import ObjectPath from 'objectpath';
 import {createElement as h, useEffect, useState} from 'react';
 
-import {useDecorator} from '../context';
+import {useDecorator} from '../../context';
+import {defaultForSchema} from '../../util';
 import {SchemaField} from '../schema-field';
-import {defaultForSchema, useKeyGenerator} from '../util';
 
 const log = debug('rjsf:mapper:fieldset');
 
@@ -16,11 +16,10 @@ const log = debug('rjsf:mapper:fieldset');
 export function FieldSet(props) {
     const {form, onChange} = props;
     const {title}          = form;
-    const generateKey      = useKeyGenerator();
 
     const forms = form.items.map(function(form, index) {
         const {schema} = form;
-        const key      = generateKey(form);
+        const key      = index.toString();
 
         return h(SchemaField, {
             key,

@@ -1,8 +1,10 @@
 import {createContext, useContext} from 'react';
-import {defaultDecorator} from './decorator';
+import {defaultDecorator} from './components/decorator';
+import {defaultMapper} from './components/mapper';
 import {defaultLocalizer} from './localizer';
 
 const context = createContext({
+    mapper: defaultMapper(),
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),
 });

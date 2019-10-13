@@ -1,8 +1,8 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 
+import {test} from './components/mapper';
 import {ARRAY_PLACEHOLDER} from './constants';
-import {test} from './mapper';
 import {findSchema} from './util';
 
 const log = debug('rjsf:mapper:forms')

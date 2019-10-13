@@ -2,7 +2,7 @@ import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
 import {createElement as h} from 'react';
 
-import {useDecorator, useLocalizer} from '../context';
+import {useDecorator, useLocalizer} from '../../context';
 
 const log = debug('rjsf:mapper:text');
 

@@ -6,22 +6,19 @@ import MuiSelect from '@material-ui/core/Select';
 import debug from 'debug';
 import {createElement as h, useEffect, useState} from 'react';
 
-import {useDecorator, useModel} from '../context';
-import {useKeyGenerator} from '../util';
+import {useDecorator, useModel} from '../../context';
 
 const log = debug('rjsf:mapper:select');
 
 export function Select(props) {
     const {form, schema, error, value} = props;
-    const generateKey                  = useKeyGenerator()
     const deco                         = useDecorator();
 
     const menuItems = [];
 
-    for (let i = 0; i < form.titles.length; i++) {
-        const name  = form.titles[i];
-        const value = schema.enum[i];
-        menuItems.push(h(deco.input.option, {key: generateKey(form, value), value}, name));
+    for (let i = 0; i < form.titleMap.length; i++) {
+        const {name, value} = form.titleMap[i];
+        menuItems.push(h(deco.input.option, {key: name, value}, name));
     }
 
     return h(deco.input.group, {form, error}, [
@@ -43,6 +40,7 @@ export function Select(props) {
     }
 
     function onChange(event, what) {
+        log('onChange(%o)', event);
         props.onChange(event, event.target.value);
     }
 }

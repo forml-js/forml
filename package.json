@@ -32,16 +32,18 @@
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
     "jsdoc": "^3.6.3",
+    "react-styleguidist": "^9.1.16",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "objectpath": "^1.2.2",
     "ajv": "^6.10.2",
     "classnames": "^2.2.6",
     "deepmerge": "^4.1.1",
     "lodash.clonedeep": "^4.5.0",
+    "objectpath": "^1.2.2",
+    "prop-types": "^15.7.2",
     "shortid": "^2.2.15"
   }
 }

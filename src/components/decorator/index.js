@@ -2,7 +2,7 @@ import debug from 'debug';
 import merge from 'deepmerge';
 import {createElement as h} from 'react';
 
-import {clone} from '../util';
+import {clone} from '../../util';
 
 import * as barebones from './barebones';
 import * as mui       from './mui';

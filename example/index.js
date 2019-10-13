@@ -10,7 +10,7 @@ import shortid from 'shortid';
 
 function useEditable(defaultValue) {
     const [value, doSetValue] = useState(defaultValue);
-    const [json, doSetJSON]   = useState(JSON.stringify(value, undefined, 2));
+    const [json, doSetJSON]   = useState('null');
 
     function setValue(value) {
         doSetValue(value);
@@ -24,7 +24,6 @@ function useEditable(defaultValue) {
         } catch (err) {
         }
     }
-
 
     return {value, json, setValue, setJSON};
 }

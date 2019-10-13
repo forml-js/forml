@@ -1,8 +1,8 @@
 import debug from 'debug';
 
-import * as constants from '../constants';
-import {stdFormObj} from '../forms';
-import {getPreferredType} from '../util';
+import * as constants from '../../constants';
+import {stdFormObj} from '../../forms';
+import {getPreferredType} from '../../util';
 
 const log = debug('rjsf:mapper:rules');
 
@@ -42,6 +42,13 @@ export const definitions = {
 
             if (!f.titles) {
                 f.titles = enumToTitles(schema.enum);
+            }
+
+            if (!f.titleMap) {
+                f.titleMap = f.titles.map((name, index) => {
+                    const value = schema.enum[index];
+                    return {name, value};
+                });
             }
 
             return f;

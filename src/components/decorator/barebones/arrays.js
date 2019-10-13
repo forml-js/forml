@@ -6,6 +6,8 @@ export function item(props) {
           {},
           [
               h('h6', props.title),
+              h('button', {onClick: props.moveUp}, 'move up'),
+              h('button', {onClick: props.moveDown}, 'move down'),
               h('button', {onClick: props.destroy}, 'delete'),
           ]),
         h('div', {}, props.children),

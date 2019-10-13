@@ -2,7 +2,7 @@ import MuiCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import {createElement as h} from 'react';
-import {useDecorator, useLocalizer} from '../context';
+import {useDecorator, useLocalizer} from '../../context';
 
 export function Checkbox(props) {
     const {schema, form}           = props;

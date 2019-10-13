@@ -3,16 +3,18 @@
  */
 import debug from 'debug';
 import ObjectPath from 'objectpath';
+import PropTypes from 'prop-types';
 import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {ARRAY_PLACEHOLDER} from './constants';
-import Context from './context';
+import {ARRAY_PLACEHOLDER} from '../constants';
+import Context from '../context';
+import {merge} from '../forms';
+import {getLocalizer} from '../localizer';
+import * as util from '../util';
+
 import {getDecorator} from './decorator';
-import {merge} from './forms';
-import {getLocalizer} from './localizer';
 import {getMapper, test} from './mapper';
 import {SchemaField} from './schema-field';
-import * as util from './util';
 
 const log = debug('rjsf:index');
 
@@ -31,7 +33,6 @@ export function SchemaForm({model, schema, form, ...props}) {
     const decorator         = useMemo(() => getDecorator(props.decorator), [props.decorator]);
     const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
     const errors            = useMemo(() => computeErrors(model), [model, validate]);
-    const generateKey       = util.useKeyGenerator();
 
     const getValue = util.valueGetter(model, schema);
     const setValue = util.valueSetter(model, schema);
@@ -53,9 +54,14 @@ export function SchemaForm({model, schema, form, ...props}) {
                      decorator,
                  }
              },
-             merged.map(form => {
+             merged.map((form, index) => {
                  const {schema} = form;
-                 return h(SchemaField, {key: generateKey('form'), schema, form, onChange})
+                 return h(SchemaField, {
+                     key: index.toString(),
+                     schema,
+                     form,
+                     onChange,
+                 })
              }));
 
     function onChange(event, value) {
@@ -86,3 +92,24 @@ export function SchemaForm({model, schema, form, ...props}) {
         }
     }
 }
+
+const formShape = PropTypes.shape({
+    key: PropTypes.arrayOf(PropTypes.string),
+    type: PropTypes.string,
+});
+formShape.items = PropTypes.arrayOf(formShape);
+
+SchemaForm.propTypes = {
+    model: PropTypes.any,
+    schema: PropTypes.object.required,
+    form: PropTypes.arrayOf(PropTypes.oneOf([
+        PropTypes.string,
+        formShape,
+    ])),
+};
+
+SchemaForm.defaultProps = {
+    model: null,
+    schema: {type: 'null'},
+    form: ['*'],
+};
