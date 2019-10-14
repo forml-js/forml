@@ -2,8 +2,8 @@ import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 
-import {test} from './components/mapper';
 import {ARRAY_PLACEHOLDER} from './constants';
+import {test} from './rules';
 import {findSchema} from './util';
 
 const log = debug('rjsf:mapper:forms')

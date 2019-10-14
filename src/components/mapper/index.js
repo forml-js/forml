@@ -12,8 +12,6 @@ import {Select} from './select';
 import {Tabs} from './tabs';
 import {Text, TextArea} from './text';
 
-export * from './rules';
-
 export function defaultMapper() {
     return {
         array: ArrayComponent,

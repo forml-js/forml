@@ -10,10 +10,11 @@ import {ARRAY_PLACEHOLDER} from '../constants';
 import Context from '../context';
 import {FormType, merge} from '../forms';
 import {getLocalizer} from '../localizer';
+import {test} from '../rules';
 import * as util from '../util';
 
 import {getDecorator} from './decorator';
-import {getMapper, test} from './mapper';
+import {getMapper} from './mapper';
 import {SchemaField} from './schema-field';
 
 const log = debug('rjsf:index');

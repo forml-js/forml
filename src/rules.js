@@ -1,8 +1,8 @@
 import debug from 'debug';
 
-import * as constants from '../../constants';
-import {stdFormObj} from '../../forms';
-import {getPreferredType} from '../../util';
+import * as constants from './constants';
+import {stdFormObj} from './forms';
+import {getPreferredType} from './util';
 
 const log = debug('rjsf:mapper:rules');
 
