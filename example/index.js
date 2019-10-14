@@ -113,6 +113,7 @@ function SelectExample(props) {
 function RenderExample(props) {
     const {schema, form, model} = props;
     const {onChange, className} = props;
+    const {localizer}           = props;
     const decorator             = decorators.mui;
 
     return h(ErrorBoundary, {}, h(SchemaForm, {
@@ -120,6 +121,7 @@ function RenderExample(props) {
                  form,
                  model,
                  decorator,
+                 localizer,
                  onChange,
              }));
 }
