@@ -8,7 +8,7 @@ import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} f
 
 import {ARRAY_PLACEHOLDER} from '../constants';
 import Context from '../context';
-import {merge} from '../forms';
+import {FormType, merge} from '../forms';
 import {getLocalizer} from '../localizer';
 import * as util from '../util';
 
@@ -93,19 +93,10 @@ export function SchemaForm({model, schema, form, ...props}) {
     }
 }
 
-const formShape = PropTypes.shape({
-    key: PropTypes.arrayOf(PropTypes.string),
-    type: PropTypes.string,
-});
-formShape.items = PropTypes.arrayOf(formShape);
-
 SchemaForm.propTypes = {
     model: PropTypes.any,
     schema: PropTypes.object.required,
-    form: PropTypes.arrayOf(PropTypes.oneOf([
-        PropTypes.string,
-        formShape,
-    ])),
+    form: FormType,
 };
 
 SchemaForm.defaultProps = {

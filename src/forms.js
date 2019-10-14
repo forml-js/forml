@@ -1,11 +1,25 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
+import PropTypes from 'prop-types';
 
 import {test} from './components/mapper';
 import {ARRAY_PLACEHOLDER} from './constants';
 import {findSchema} from './util';
 
 const log = debug('rjsf:mapper:forms')
+
+export const FormType  = PropTypes.shape({
+    key: PropTypes.arrayOf(PropTypes.string),
+    type: PropTypes.string,
+});
+FormType.items         = PropTypes.arrayOf(PropTypes.oneOf([
+    PropTypes.string,
+    FormType,
+]));
+export const FormsType = PropTypes.arrayOf(PropTypes.oneOf([
+    PropTypes.string,
+    FormType,
+]));
 
 export function getDefaults(schema) {
     const form   = [];

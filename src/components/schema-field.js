@@ -1,7 +1,9 @@
 import debug from 'debug';
+import PropTypes from 'prop-types';
 import {createElement as h, useState} from 'react';
 
 import {useMapper, useModel} from '../context';
+import {FormType} from '../forms';
 import {validator} from '../util';
 
 const log = debug('rjsf:schema-field');
@@ -34,4 +36,13 @@ export function SchemaField(props) {
             model.onChange(e, newModel);
         }
     }
+}
+
+SchemaField.propTypes = {
+    schema: PropTypes.object,
+    form: FormType
+};
+SchemaField.defaultProps = {
+    schema: {type: 'null'},
+    form: {},
 }
