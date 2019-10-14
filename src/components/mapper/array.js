@@ -9,13 +9,12 @@ import Typography from '@material-ui/core/Typography';
 import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
-import {createElement as h, Fragment, useMemo, useState} from 'react';
+import {createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
 import {useDecorator, useLocalizer, useModel} from '../../context';
 import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
-
 import {SchemaField} from '../schema-field';
 
 const log = debug('rjsf:mapper:array');

@@ -9,18 +9,26 @@ const log = debug('rjsf:mapper:text');
 export function Text(props) {
     const {schema, value, form, error} = props;
     const {otherProps}                 = props;
-    const {title, description}         = form;
     const localize                     = useLocalizer();
     const deco                         = useDecorator();
 
-    const localizer = useLocalizer();
+    const localizer   = useLocalizer();
 
-    return h(deco.input.group, {form, error}, [
+    const {title, description, placeholder} = form;
+
+    return h(deco.input.group, {form}, [
         title && h(deco.label, {key: 'label', form, error}, localizer.getLocalizedString(title)),
-        h(deco.input.form, {key: 'form', form, onChange, value, error}),
+        h(deco.input.form, {
+            key: 'form',
+            form,
+            onChange,
+            value,
+            error,
+            placeholder: localizer.getLocalizedString(placeholder),
+        }),
         (error || description) &&
             h(deco.input.description,
-              {key: 'description', form, error},
+              {key: 'description', form, error: !!error},
               localizer.getLocalizedString(error || description)),
     ]);
 
