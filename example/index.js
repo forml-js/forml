@@ -156,6 +156,7 @@ function Page(props) {
         const sample = getSample(selected);
         schema.setValue(sample.schema);
         form.setValue(sample.form);
+        model.setValue(defaultModel);
         setLocalizer(sample.localization);
     }, [selected]);
 
@@ -166,10 +167,9 @@ function Page(props) {
                 h(MUI.CardContent,
                     {},
                     h(RenderExample, {
-                        key: 'render',
+                        key: `render-${selected}`,
                         schema: schema.value,
                         form: form.value,
-                        // model: model.value,
                         model: model.value,
                         onChange: onModelChange,
                         localizer,
