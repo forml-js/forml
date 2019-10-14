@@ -54,7 +54,7 @@ export default function Tabs(props) {
         tabs.push(h(deco.Tabs.Tab, {
             key: `tab-${index}`,
             form: tab,
-            label: localizer.getLocalizedString(form.title),
+            label: localizer.getLocalizedString(tab.title) || localizer.getLocalizedNumber(index),
             active,
             activate,
         }));
