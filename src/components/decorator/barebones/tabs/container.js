@@ -1,5 +1,8 @@
 import {createElement as h} from 'react';
 
+/**
+ * @component
+ */
 export default function Container(props) {
     return h('div', {className: 'tabs-container'}, [
         h('div', {className: 'tabs'}, props.tabs),

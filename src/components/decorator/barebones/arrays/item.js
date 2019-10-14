@@ -1,5 +1,9 @@
+import t from 'prop-types';
 import {createElement as h} from 'react';
 
+/**
+ * @component
+ */
 export default function Item(props) {
     return h('li', {}, [
         h('div',
@@ -12,4 +16,23 @@ export default function Item(props) {
           ]),
         h('div', {}, props.children),
     ]);
+}
+
+Item.propTypes = {
+    /**
+     * Moves this item up one index in the array
+     */
+    moveUp: t.func,
+    /**
+     * Moves this item down one index in the array
+     */
+    moveDown: t.func,
+    /**
+     * Destroys this item
+     */
+    destroy: t.func,
+    /**
+     * The child form to be rendered
+     */
+    children: t.elementType,
 }

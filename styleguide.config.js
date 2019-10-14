@@ -8,6 +8,7 @@ function section(name, subdirectory, sections = []) {
 }
 module.exports = {
     pagePerSection: true,
+    webpackConfig: require('./example/webpack.config.js'),
     sections: [
         section('Exports', ''),
         section('Control Components', 'mapper'),

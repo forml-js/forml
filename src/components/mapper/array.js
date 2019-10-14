@@ -116,7 +116,7 @@ function ArrayItem(props) {
     const moveUp   = useMemo(() => items.upwardMover(index), [items, index]);
     const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
 
-    return h(deco.arrays.item, {key: 'header', title, destroy, moveUp, moveDown}, props.children);
+    return h(deco.Arrays.Item, {key: 'header', title, destroy, moveUp, moveDown}, props.children);
 }
 
 /**

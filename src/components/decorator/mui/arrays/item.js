@@ -1,6 +1,9 @@
 import * as MUI from '@material-ui/core';
 import {createElement as h, Fragment, useState} from 'react';
 
+/**
+ * @component
+ */
 export default function Item(props) {
     const [open, setOpen] = useState(false);
 

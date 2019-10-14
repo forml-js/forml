@@ -1,6 +1,9 @@
 import {createElement as h} from 'react';
 import * as Input from './input';
 
+/**
+ * @component
+ */
 export default function Checkbox({title, description, error, checked, form, onChange}) {
     return h('div', {}, [
         h('label',

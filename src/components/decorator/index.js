@@ -29,42 +29,42 @@ export function getDecorator(template) {
  */
 export const decoratorShape = PropTypes.shape({
     /** Array decorations */
-    arrays: PropTypes.shape({
+    Arrays: PropTypes.shape({
         /** Individual item */
-        item: PropTypes.elementType,
+        Item: PropTypes.elementType,
         /** Collection of items */
-        items: PropTypes.elementType,
+        Items: PropTypes.elementType,
     }),
     /** Tab decorations */
-    tabs: PropTypes.shape({
+    Tabs: PropTypes.shape({
         /** Outer wrapper */
-        container: PropTypes.elementType,
+        Container: PropTypes.elementType,
         /** Tab selector */
-        tab: PropTypes.elementType,
+        Tab: PropTypes.elementType,
         /** Tab body panel */
-        panel: PropTypes.elementType,
+        Panel: PropTypes.elementType,
     }),
     /** Input decorations */
-    input: PropTypes.shape({
+    Input: PropTypes.shape({
         /** Description and error wrapper */
-        description: PropTypes.elementType,
+        Description: PropTypes.elementType,
         /** Base input element */
-        form: PropTypes.elementType,
+        Form: PropTypes.elementType,
         /** Form and label wrapper */
-        group: PropTypes.elementType,
+        Group: PropTypes.elementType,
         /** Select menu option wrapper */
-        option: PropTypes.elementType,
+        Option: PropTypes.elementType,
         /** Select menu */
-        select: PropTypes.elementType,
+        Select: PropTypes.elementType,
     }),
     /** Specialized checkbox decorator */
-    checkbox: PropTypes.elementType,
+    Checkbox: PropTypes.elementType,
     /** Input collection decorator */
-    fieldset: PropTypes.elementType,
+    FieldSet: PropTypes.elementType,
     /** General collection decorator */
-    group: PropTypes.elementType,
+    Group: PropTypes.elementType,
     /** Input label decorator */
-    label: PropTypes.elementType,
+    Label: PropTypes.elementType,
     /** Basic text decorator */
-    text: PropTypes.elementType,
+    Text: PropTypes.elementType,
 });
