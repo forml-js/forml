@@ -49,7 +49,7 @@ export function Tabs(props) {
         const active   = value === index;
         const activate = () => setValue(index);
         tabs.push(h(deco.tabs.tab, {
-            key: index.toString(),
+            key: `tab-${index}`,
             form: tab,
             label: localizer.getLocalizedString(form.title),
             active,
@@ -57,7 +57,7 @@ export function Tabs(props) {
         }));
         panels.push(h(deco.tabs.panel,
                       {
-                          key: generateKey(tab),
+                          key: `panel-${index}`,
                           form: tab,
                           active,
                       },
