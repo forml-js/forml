@@ -3,7 +3,7 @@ import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 
-export function Help(props) {
+export default function Help(props) {
     const {form}       = props;
     const {otherProps, description} = form;
 

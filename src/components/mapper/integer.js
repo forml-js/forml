@@ -4,15 +4,12 @@ import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 
-const log = debug('rjsf:components:mapper:number');
-
 const valueExceptions = ['', '-'];
+export default function Integer(props) {
+    const {schema, value, form, error} = props;
 
-export default function Number(props) {
-    const {form, schema, value, error} = props;
-
-    const deco        = useDecorator();
-    const localizer   = useLocalizer();
+    const deco      = useDecorator();
+    const localizer = useLocalizer();
 
     const placeholder = localizer.getLocalizedString(form.placeholder);
     const label       = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
@@ -32,7 +29,7 @@ export default function Number(props) {
             return;
         }
 
-        value = parseFloat(value);
+        value = parseInt(value);
 
         if (isNaN(value)) {
             e.preventDefault();
@@ -42,4 +39,3 @@ export default function Number(props) {
         props.onChange(e, value);
     }
 }
-

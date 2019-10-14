@@ -4,7 +4,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import {createElement as h} from 'react';
 import {useDecorator, useLocalizer} from '../../context';
 
-export function Checkbox(props) {
+export default function Checkbox(props) {
     const {schema, form}           = props;
     const {error, value}           = props;
     const {title, description}     = form;

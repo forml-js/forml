@@ -10,7 +10,7 @@ import {useDecorator, useLocalizer, useModel} from '../../context';
 
 const log = debug('rjsf:mapper:select');
 
-export function Select(props) {
+export default function Select(props) {
     const {form, schema, error, value} = props;
 
     const deco                         = useDecorator();

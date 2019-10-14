@@ -13,7 +13,7 @@ import {SchemaField} from '../schema-field';
 const log = debug('rjsf:mapper:fieldset');
 
 
-export function FieldSet(props) {
+export default function FieldSet(props) {
     const {form, onChange} = props;
     const {title}          = form;
 

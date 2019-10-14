@@ -34,7 +34,7 @@ const useStyles = makeStyles(function(theme) {
     };
 });
 
-export function Tabs(props) {
+export default function Tabs(props) {
     const [value, setValue] = useState(0);
     const classes           = useStyles();
     const {form}            = props;

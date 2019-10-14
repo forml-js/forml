@@ -1,8 +1,8 @@
 import {createElement as h} from 'react';
 
-import {Text} from './text';
+import Text from './text';
 
-export function Date(props) {
+export default function Date(props) {
     const {form} = props;
     return h(Text, {
         ...props,

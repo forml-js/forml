@@ -1,20 +1,22 @@
 /**
  * @namespace rjsf.mapper
  */
-import {ArrayComponent} from './array';
-import {Checkbox} from './checkbox';
-import {Date} from './date';
-import {FieldSet} from './fieldset';
-import {Help} from './help';
-import {Null} from './null';
-import {Integer, Number} from './number';
-import {Select} from './select';
-import {Tabs} from './tabs';
-import {Text, TextArea} from './text';
+import Array from './array';
+import Checkbox from './checkbox';
+import Date from './date';
+import FieldSet from './fieldset';
+import Help from './help';
+import Integer from './integer';
+import Null from './null';
+import Number from './number';
+import Select from './select';
+import Tabs from './tabs';
+import Text from './text';
+import TextArea from './textarea';
 
 export function defaultMapper() {
     return {
-        array: ArrayComponent,
+        array: Array,
         checkbox: Checkbox,
         date: Date,
         fieldset: FieldSet,

@@ -6,7 +6,7 @@ import {useDecorator, useLocalizer} from '../../context';
 
 const log = debug('rjsf:mapper:text');
 
-export function Text(props) {
+export default function Text(props) {
     const {schema, value, form, error} = props;
     const {otherProps}                 = props;
     const localize                     = useLocalizer();
@@ -37,14 +37,3 @@ export function Text(props) {
     }
 }
 
-export function TextArea(props) {
-    const {form} = props;
-    return h(Text, {
-        ...props,
-        otherProps: {
-            multiline: true,
-            rows: form.rows,
-            rowMax: form.rowMax,
-        }
-    });
-}

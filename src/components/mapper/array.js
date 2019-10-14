@@ -119,7 +119,7 @@ export function ArrayItem(props) {
     return h(deco.arrays.item, {key: 'header', title, destroy, moveUp, moveDown}, props.children);
 }
 
-export function ArrayComponent(props) {
+export default function ArrayComponent(props) {
     const {form, schema} = props;
     const {value = []}   = props;
     const arrays         = [];
