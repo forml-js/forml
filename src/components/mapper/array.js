@@ -13,7 +13,7 @@ import {createElement as h, Fragment, useEffect, useMemo, useState} from 'react'
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
-import {use, useLocalizer, useModel} from '../../context';
+import {useDecorator, useLocalizer, useModel} from '../../context';
 import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
 import {SchemaField} from '../schema-field';
 
@@ -105,7 +105,7 @@ export function useArrayItems(form) {
 
 function ArrayItem(props) {
     const {form, index, items} = props;
-    const deco                 = use();
+    const deco                 = useDecorator();
     const localizer            = useLocalizer();
 
     const title = [
@@ -128,7 +128,7 @@ export default function ArrayComponent(props) {
     const arrays         = [];
 
     const items = useArrayItems(form);
-    const deco  = use();
+    const deco  = useDecorator();
 
     for (let i = 0; i < items.items.length; ++i) {
         const item  = items.items[i];
