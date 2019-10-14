@@ -1,6 +1,6 @@
 import {createElement as h} from 'react';
 
-export default function item(props) {
+export default function Item(props) {
     return h('li', {}, [
         h('div',
           {},

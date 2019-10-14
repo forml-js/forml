@@ -12,7 +12,9 @@ import {SchemaField} from '../schema-field';
 
 const log = debug('rjsf:mapper:fieldset');
 
-
+/**
+ * @component FieldSet
+ */
 export default function FieldSet(props) {
     const {form, onChange} = props;
     const {title}          = form;
@@ -31,5 +33,5 @@ export default function FieldSet(props) {
 
     const deco = useDecorator();
 
-    return h(deco.fieldset, {form}, forms);
+    return h(deco.FieldSet, {form}, forms);
 }

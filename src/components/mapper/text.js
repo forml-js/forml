@@ -6,6 +6,9 @@ import {useDecorator, useLocalizer} from '../../context';
 
 const log = debug('rjsf:mapper:text');
 
+/**
+ * @component Text
+ */
 export default function Text(props) {
     const {schema, value, form, error} = props;
     const {otherProps}                 = props;
@@ -16,9 +19,9 @@ export default function Text(props) {
 
     const {title, description, placeholder} = form;
 
-    return h(deco.input.group, {form}, [
+    return h(deco.Input.Group, {form}, [
         title && h(deco.label, {key: 'label', form, error}, localizer.getLocalizedString(title)),
-        h(deco.input.form, {
+        h(deco.Input.Form, {
             key: 'form',
             form,
             onChange,
@@ -27,7 +30,7 @@ export default function Text(props) {
             placeholder: localizer.getLocalizedString(placeholder),
         }),
         (error || description) &&
-            h(deco.input.description,
+            h(deco.Input.Description,
               {key: 'description', form, error: !!error},
               localizer.getLocalizedString(error || description)),
     ]);

@@ -13,7 +13,7 @@ import {createElement as h, Fragment, useEffect, useMemo, useState} from 'react'
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
-import {useDecorator, useLocalizer, useModel} from '../../context';
+import {use, useLocalizer, useModel} from '../../context';
 import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
 import {SchemaField} from '../schema-field';
 
@@ -103,9 +103,9 @@ export function useArrayItems(form) {
     return {items, add, destroyer, upwardMover, downwardMover};
 }
 
-export function ArrayItem(props) {
+function ArrayItem(props) {
     const {form, index, items} = props;
-    const deco                 = useDecorator();
+    const deco                 = use();
     const localizer            = useLocalizer();
 
     const title = [
@@ -119,13 +119,16 @@ export function ArrayItem(props) {
     return h(deco.arrays.item, {key: 'header', title, destroy, moveUp, moveDown}, props.children);
 }
 
+/**
+ * @component ArrayComponent
+ */
 export default function ArrayComponent(props) {
     const {form, schema} = props;
     const {value = []}   = props;
     const arrays         = [];
 
     const items = useArrayItems(form);
-    const deco  = useDecorator();
+    const deco  = use();
 
     for (let i = 0; i < items.items.length; ++i) {
         const item  = items.items[i];
@@ -136,7 +139,7 @@ export default function ArrayComponent(props) {
         arrays.push(h(ArrayItem, {key: item.key, form, index: i, items}, forms));
     }
 
-    return h(deco.arrays.items, {add: items.add}, arrays);
+    return h(deco.Arrays.Items, {add: items.add}, arrays);
 }
 
 function copyWithIndex(form, index) {

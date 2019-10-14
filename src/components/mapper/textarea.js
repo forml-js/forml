@@ -5,6 +5,9 @@ import Text from './text';
 
 const log = debug('rjsf:mapper:text');
 
+/**
+ * @component TextArea
+ */
 export default function TextArea(props) {
     const {form} = props;
     return h(Text, {

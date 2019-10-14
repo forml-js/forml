@@ -34,6 +34,9 @@ const useStyles = makeStyles(function(theme) {
     };
 });
 
+/**
+ * @component Tabs
+ */
 export default function Tabs(props) {
     const [value, setValue] = useState(0);
     const classes           = useStyles();
@@ -48,14 +51,14 @@ export default function Tabs(props) {
         const {schema} = tab;
         const active   = value === index;
         const activate = () => setValue(index);
-        tabs.push(h(deco.tabs.tab, {
+        tabs.push(h(deco.Tabs.Tab, {
             key: `tab-${index}`,
             form: tab,
             label: localizer.getLocalizedString(form.title),
             active,
             activate,
         }));
-        panels.push(h(deco.tabs.panel,
+        panels.push(h(deco.Tabs.Panel,
                       {
                           key: `panel-${index}`,
                           form: tab,
@@ -64,7 +67,7 @@ export default function Tabs(props) {
                       h(SchemaField, {form: tab, schema})));
     }
 
-    return h(deco.tabs.container, {className: form.htmlClass, form, value, tabs, panels});
+    return h(deco.Tabs.Container, {className: form.htmlClass, form, value, tabs, panels});
 
     function onChange(event, value) {
         setValue(value)

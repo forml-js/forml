@@ -1,6 +1,6 @@
 import {createElement as h} from 'react';
 
-export default function form(props) {
+export default function Form(props) {
     const {form}   = props;
     const type     = form.type;
     const value    = props.value;

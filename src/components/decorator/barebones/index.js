@@ -1,13 +1,20 @@
 import {createElement as h} from 'react';
 
-import * as arrays from './arrays';
-import checkbox from './checkbox';
-import fieldset from './fieldset';
-import group from './group';
-import * as input from './input';
-import label from './label';
-import * as tabs from './tabs';
-import text from './text';
+import * as Arrays from './arrays';
+import Checkbox from './checkbox';
+import FieldSet from './fieldset';
+import Group from './group';
+import * as Input from './input';
+import Label from './label';
+import * as Tabs from './tabs';
+import Text from './text';
 
-export {arrays, checkbox, fieldset, group, input, tabs};
+export {
+    Arrays,
+    Checkbox,
+    FieldSet,
+    Group,
+    Input,
+    Tabs,
+};
 

@@ -5,6 +5,10 @@ import {createElement as h} from 'react';
 import {useDecorator, useLocalizer} from '../../context';
 
 const valueExceptions = ['', '-'];
+
+/**
+ * @component Integer
+ */
 export default function Integer(props) {
     const {schema, value, form, error} = props;
 
@@ -15,10 +19,10 @@ export default function Integer(props) {
     const label       = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
     const description = localizer.getLocalizedString(form.description);
 
-    return h(deco.input.group, {form}, [
-        h(deco.label, {form}, label),
-        h(deco.input.form, {value, onChange, placeholder, form}),
-        (error || description) && h(deco.input.description, {error: !!error}, error || description),
+    return h(deco.Input.Group, {form}, [
+        h(deco.Label, {form}, label),
+        h(deco.Input.Form, {value, onChange, placeholder, form}),
+        (error || description) && h(deco.Input.Description, {error: !!error}, error || description),
     ]);
 
     function onChange(e) {

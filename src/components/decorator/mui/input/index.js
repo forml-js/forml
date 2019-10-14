@@ -1,7 +1,7 @@
-import description from './description';
-import form from './form';
-import group from './group';
-import option from './option';
-import select from './select';
+import Description from './description';
+import Form from './form';
+import Group from './group';
+import Option from './option';
+import Select from './select';
 
-export {description, form, group, option, select};
+export {Description, Form, Group, Option, Select};

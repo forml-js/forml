@@ -3,6 +3,9 @@ import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 
+/**
+ * @component Help
+ */
 export default function Help(props) {
     const {form}       = props;
     const {otherProps, description} = form;
@@ -10,6 +13,6 @@ export default function Help(props) {
     const localize = useLocalizer();
     const deco     = useDecorator();
 
-    return h(deco.text, {form}, localize.getLocalizedString(description));
+    return h(deco.Text, {form}, localize.getLocalizedString(description));
 }
 

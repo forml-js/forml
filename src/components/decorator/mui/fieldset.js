@@ -1,7 +1,7 @@
 import * as MUI from '@material-ui/core';
 import {createElement as h, useState} from 'react';
 
-export default function fieldset(props) {
+export default function FieldSet(props) {
     const {form} = props;
     return h(MUI.Card,
              {},

@@ -202,7 +202,7 @@ function updateAndCloneImperative(keys, model, schema, value) {
 
 
         key    = parent.key;
-        model  = _.clone(parent.model);
+        model  = clone(parent.model);
         schema = parent.schema;
     }
 

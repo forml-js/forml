@@ -1,6 +1,7 @@
 import {createElement as h} from 'react';
+import * as Input from './input';
 
-export default function checkbox({title, description, error, checked, form, onChange}) {
+export default function Checkbox({title, description, error, checked, form, onChange}) {
     return h('div', {}, [
         h('label',
           {},
@@ -8,7 +9,7 @@ export default function checkbox({title, description, error, checked, form, onCh
               h('input', {type: 'checkbox', checked, onChange}),
               title,
           ]),
-        (error || description) && h(input.description, {}, error || description),
+        (error || description) && h(Input.Description, {}, error || description),
     ]);
 }
 

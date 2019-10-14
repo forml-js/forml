@@ -10,6 +10,9 @@ import {useDecorator, useLocalizer, useModel} from '../../context';
 
 const log = debug('rjsf:mapper:select');
 
+/**
+ * @component Select
+ */
 export default function Select(props) {
     const {form, schema, error, value} = props;
 
@@ -23,16 +26,16 @@ export default function Select(props) {
     const menuItems = [];
     for (let i = 0; i < form.titleMap.length; i++) {
         const {name, value} = form.titleMap[i];
-        menuItems.push(h(deco.input.option, {key: name, value}, name));
+        menuItems.push(h(deco.Input.Option, {key: name, value}, name));
     }
 
-    return h(deco.input.group, {form, error}, [
-        h(deco.label, {key: 'label', required: form.required}, title),
-        h(deco.input.select,
+    return h(deco.Input.Group, {form, error}, [
+        h(deco.Label, {key: 'label', required: form.required}, title),
+        h(deco.Input.Select,
           {key: 'select', value, placeholder, disabled: form.readonly, onChange},
           menuItems),
         (error || description) &&
-            h(deco.input.description,
+            h(deco.Input.Description,
               {key: 'help', error: !!error},
               localizer.getLocalizedString(error || description))
     ]);

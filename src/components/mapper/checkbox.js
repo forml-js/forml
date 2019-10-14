@@ -4,6 +4,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import {createElement as h} from 'react';
 import {useDecorator, useLocalizer} from '../../context';
 
+/**
+ * @component Checkbox
+ */
 export default function Checkbox(props) {
     const {schema, form}           = props;
     const {error, value}           = props;
@@ -12,7 +15,7 @@ export default function Checkbox(props) {
     const deco                     = useDecorator();
     const localize                 = useLocalizer();
 
-    return h(deco.checkbox, {
+    return h(deco.Checkbox, {
         form,
         checked: value,
         title: localize.getLocalizedString(title),

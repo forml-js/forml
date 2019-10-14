@@ -1,7 +1,7 @@
 import * as MUI from '@material-ui/core';
 import {createElement as h, useState} from 'react';
 
-export default function panel(props) {
+export default function Panel(props) {
     const {active} = props;
 
     if (!active)

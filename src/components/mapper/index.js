@@ -1,6 +1,8 @@
 /**
  * @namespace rjsf.mapper
  */
+import PropTypes from 'prop-types';
+
 import Array from './array';
 import Checkbox from './checkbox';
 import Date from './date';
@@ -32,6 +34,29 @@ export function defaultMapper() {
         tuple: FieldSet,
     };
 }
+
+/**
+ * We're strictly a keyed collection of elements, so generate our
+ * PropTypes.shape from an array of keys
+ */
+export const mapperShape = PropTypes.shape([
+    'array',
+    'checkbox',
+    'date',
+    'fieldset',
+    'help',
+    'integer',
+    'null',
+    'number',
+    'password',
+    'select',
+    'tabs',
+    'text',
+    'textarea',
+    'tuple',
+].reduce(function(acc, key) {
+    return {...acc, [key]: PropTypes.element};
+}));
 
 export function getMapper(mapper = {}) {
     return {...defaultMapper(), ...mapper};

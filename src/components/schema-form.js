@@ -13,19 +13,16 @@ import {getLocalizer} from '../localizer';
 import {test} from '../rules';
 import * as util from '../util';
 
-import {getDecorator} from './decorator';
-import {getMapper} from './mapper';
+import {decoratorShape, getDecorator} from './decorator';
+import {getMapper, mapperShape} from './mapper';
 import {SchemaField} from './schema-field';
 
 const log = debug('rjsf:index');
 
 /**
- * Renders a form from the provided schema, using the provided model as a value
+ * @component SchemaForm
+ * @description Renders a form from the provided schema, using the provided model as a value
  * and the provided forms as a guide.
- * @property {*} model - The model to use as value for the form
- * @property {object} schema - The schema to use as a definition for the form
- * @property {object[]} forms - The rendering specification for the form
- * @property {object} localizer - Localization functions to be used
  */
 export function SchemaForm({model, schema, form, ...props}) {
     const merged            = useMemo(() => merge(schema, form), [schema, form])
@@ -95,9 +92,22 @@ export function SchemaForm({model, schema, form, ...props}) {
 }
 
 SchemaForm.propTypes = {
+    /** The current value of the form */
     model: PropTypes.any,
+    /** The schema to build against */
     schema: PropTypes.object.required,
+    /** The forms to render */
     form: FormType,
+    /** A set of localization functions to use */
+    localizer: PropTypes.shape({
+        getLocalizedDate: PropTypes.func,
+        getLocalizedNumber: PropTypes.func,
+        getLocalizedString: PropTypes.func,
+    }),
+    /** The map of control components to be recognized by SchemaField in a form's type */
+    mapper: mapperShape,
+    /** The tree of decorative components used by control components to build forms */
+    decorator: decoratorShape,
 };
 
 SchemaForm.defaultProps = {

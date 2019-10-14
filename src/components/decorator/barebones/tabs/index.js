@@ -1,5 +1,9 @@
-import container from './container';
-import panel from './panel';
-import tab from './tab';
+import Container from './container';
+import Panel from './panel';
+import Tab from './tab';
 
-export {container, panel, tab};
+export {
+    Container,
+    Panel,
+    Tab,
+};
