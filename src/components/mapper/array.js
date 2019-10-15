@@ -9,11 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
+import t from 'prop-types';
 import {createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
 import {useDecorator, useLocalizer, useModel} from '../../context';
+import {FormType} from '../../forms';
 import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
 import {SchemaField} from '../schema-field';
 
@@ -108,15 +110,13 @@ function ArrayItem(props) {
     const deco                 = useDecorator();
     const localizer            = useLocalizer();
 
-    const title = [
-        localizer.getLocalizedString(form.title),
-        localizer.getLocalizedNumber(index),
-    ].join(' ');
+    const title    = localizer.getLocalizedString(form.title);
     const destroy  = useMemo(() => items.destroyer(index), [items, index]);
     const moveUp   = useMemo(() => items.upwardMover(index), [items, index]);
     const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
 
-    return h(deco.Arrays.Item, {key: 'header', title, destroy, moveUp, moveDown}, props.children);
+    return h(
+        deco.Arrays.Item, {key: 'header', title, destroy, moveUp, moveDown, index}, props.children);
 }
 
 /**
@@ -124,11 +124,12 @@ function ArrayItem(props) {
  */
 export default function ArrayComponent(props) {
     const {form, schema} = props;
-    const {value = []}   = props;
+    const {value, error} = props;
     const arrays         = [];
 
-    const items = useArrayItems(form);
-    const deco  = useDecorator();
+    const items     = useArrayItems(form);
+    const deco      = useDecorator();
+    const localizer = useLocalizer();
 
     for (let i = 0; i < items.items.length; ++i) {
         const item  = items.items[i];
@@ -139,8 +140,24 @@ export default function ArrayComponent(props) {
         arrays.push(h(ArrayItem, {key: item.key, form, index: i, items}, forms));
     }
 
-    return h(deco.Arrays.Items, {add: items.add}, arrays);
+    const label = localizer.getLocalizedString(form.title);
+    const description = localizer.getLocalizedString(form.description);
+
+    return h(deco.Arrays.Items, {add: items.add, label, description, error}, arrays);
 }
+
+ArrayComponent.propTypes = {
+    /** The configuration object for this section of the form */
+    form: FormType,
+    /** The schema for the array */
+    schema: t.object,
+    /** The current value of the array */
+    value: t.array,
+};
+
+ArrayComponent.defaultProps = {
+    value: [],
+};
 
 function copyWithIndex(form, index) {
     const copy      = cloneDeep(form);
