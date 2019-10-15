@@ -1,8 +1,10 @@
 import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
+import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
+import {FormType} from '../../types';
 
 const valueExceptions = ['', '-'];
 
@@ -43,3 +45,10 @@ export default function Integer(props) {
         props.onChange(e, value);
     }
 }
+
+Integer.propTypes = {
+    form: FormType,
+    schema: t.object,
+    error: t.string,
+    value: t.number,
+};

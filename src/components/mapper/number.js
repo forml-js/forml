@@ -1,8 +1,10 @@
 import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
+import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
+import {FormType} from '../../types';
 
 const log = debug('rjsf:components:mapper:number');
 
@@ -46,3 +48,13 @@ export default function Number(props) {
     }
 }
 
+Number.propTypes = {
+    /** The configuration object for this section of the form */
+    form: FormType,
+    /** The schema for the array */
+    schema: t.object,
+    /** Any errors associated with the form's key */
+    error: t.string,
+    /** The current value of the number */
+    value: t.number,
+}

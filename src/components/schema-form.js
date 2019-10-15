@@ -8,10 +8,11 @@ import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} f
 
 import {ARRAY_PLACEHOLDER} from '../constants';
 import Context from '../context';
-import {FormType, merge} from '../forms';
+import {merge} from '../forms';
 import {getLocalizer} from '../localizer';
 import {test} from '../rules';
-import * as util from '../util';
+import * as Types from '../types';
+import * as util  from '../util';
 
 import {decoratorShape, getDecorator} from './decorator';
 import {getMapper, mapperShape} from './mapper';
@@ -97,7 +98,7 @@ SchemaForm.propTypes = {
     /** The schema to build against */
     schema: PropTypes.object.required,
     /** The forms to render */
-    form: FormType,
+    form: Types.FormType,
     /** A set of localization functions to use */
     localizer: PropTypes.shape({
         getLocalizedDate: PropTypes.func,

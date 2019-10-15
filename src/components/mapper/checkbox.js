@@ -1,8 +1,11 @@
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import t from 'prop-types';
 import {createElement as h} from 'react';
+
 import {useDecorator, useLocalizer} from '../../context';
+import {FormType} from '../../types';
 
 /**
  * @component Checkbox
@@ -27,13 +30,11 @@ export default function Checkbox(props) {
         console.error('Checkbox() : event : %o', event);
         props.onChange(event, event.target.checked);
     }
-
-    // return h(FormGroup, {row: true}, h(FormControlLabel, {
-    //              label: form.title,
-    //              control: h(MuiCheckbox, {
-    //                  checked: value,
-    //                  disabled: form.readonly,
-    //                  onChange,
-    //              }),
-    //          }));
 }
+
+Checkbox.propTypes = {
+    schema: t.object,
+    form: FormType,
+    error: t.string,
+    value: t.boolean,
+};

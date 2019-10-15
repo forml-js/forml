@@ -15,7 +15,7 @@ import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
 import {useDecorator, useLocalizer, useModel} from '../../context';
-import {FormType} from '../../forms';
+import {FormType} from '../../types';
 import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
 import {SchemaField} from '../schema-field';
 
@@ -151,6 +151,8 @@ ArrayComponent.propTypes = {
     form: FormType,
     /** The schema for the array */
     schema: t.object,
+    /** Any errors associated with the form's key */
+    error: t.string,
     /** The current value of the array */
     value: t.array,
 };

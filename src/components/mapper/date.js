@@ -1,4 +1,7 @@
+import t from 'prop-types';
 import {createElement as h} from 'react';
+
+import {FormType} from '../../types';
 
 import Text from './text';
 
@@ -15,3 +18,10 @@ export default function Date(props) {
         ...form.otherProps
     });
 }
+
+Date.propTypes = {
+    form: FormType,
+    schema: t.object,
+    error: t.string,
+    value: t.string
+};

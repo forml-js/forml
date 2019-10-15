@@ -4,9 +4,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiSelect from '@material-ui/core/Select';
 import debug from 'debug';
+import t from 'prop-types';
 import {createElement as h, useEffect, useState} from 'react';
 
 import {useDecorator, useLocalizer, useModel} from '../../context';
+import {FormType} from '../../types';
 
 const log = debug('rjsf:mapper:select');
 
@@ -54,4 +56,15 @@ export default function Select(props) {
         log('onChange(%o)', event);
         props.onChange(event, event.target.value);
     }
+}
+
+Select.propTypes = {
+    /** The configuration object for this section of the form */
+    form: FormType,
+    /** The schema for the array */
+    schema: t.object,
+    /** Any errors associated with the form's key */
+    error: t.string,
+    /** The current value of the string */
+    value: t.string,
 }

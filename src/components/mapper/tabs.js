@@ -2,10 +2,11 @@ import AppBar from '@material-ui/core/AppBar';
 import {makeStyles} from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
-import clsx from 'classnames';
+import clsx from 'clsx';
 import {createElement as h, useState} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
+import {FormType} from '../../types';
 import {SchemaField} from '../schema-field';
 
 const useStyles = makeStyles(function(theme) {
@@ -72,4 +73,9 @@ export default function Tabs(props) {
     function onChange(event, value) {
         setValue(value)
     }
+}
+
+Tabs.propTypes = {
+    /** The configuration object for this section of the form */
+    form: FormType,
 }

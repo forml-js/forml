@@ -1,12 +1,14 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import {makeStyles} from '@material-ui/core/styles';
-import clsx from 'classnames';
+import clsx from 'clsx';
 import debug from 'debug';
 import ObjectPath from 'objectpath';
+import t from 'prop-types';
 import {createElement as h, useEffect, useState} from 'react';
 
 import {useDecorator} from '../../context';
+import {FormType} from '../../types';
 import {defaultForSchema} from '../../util';
 import {SchemaField} from '../schema-field';
 
@@ -35,3 +37,8 @@ export default function FieldSet(props) {
 
     return h(deco.FieldSet, {form}, forms);
 }
+
+FieldSet.propTypes = {
+    form: FormType,
+    onChange: t.func
+};
