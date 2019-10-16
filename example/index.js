@@ -1,12 +1,19 @@
 import * as MUI from '@material-ui/core';
-import clsx from 'classnames';
 import debug from 'debug';
-import _ from 'lodash';
-import {Component, createElement as h, Fragment, useEffect, useMemo, useRef, useState} from 'react';
-import AceEditor from 'react-ace';
+import Prism from 'prismjs';
+import {Component, createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
 import {render} from 'react-dom';
+import SimpleEditor from 'react-simple-code-editor';
 import {decorators, SchemaForm, util} from 'rjsf';
-import shortid from 'shortid';
+
+// import clike from 'prismjs/components/prism-clike';
+// import javascript from 'prismjs/components/prism-javascript';
+
+async function loadPrism() {
+    await import('prismjs/components/prism-clike');
+    await import('prismjs/components/prism-javascript');
+}
+
 
 function useEditable(defaultValue) {
     const [value, doSetValue] = useState(defaultValue);
@@ -29,14 +36,21 @@ function useEditable(defaultValue) {
 }
 
 function Editor(props) {
-    return h(AceEditor, {
-        ...props,
-        mode: 'json',
-        theme: 'github',
-        height: '300px',
-        width: 'auto',
-        editorProps: {$blockScrolling: true}
+    console.error('Editor() : props.value : %o', props.value);
+    return h(SimpleEditor, {
+        value: props.value,
+        highlight: (code) => {
+            console.error('Editor() : Prism.highlight() : code : %o', code);
+            return Prism.highlight(code, Prism.languages.javascript, 'javascript')
+        },
+        padding: 10,
+        style: {fontFamily: 'Hack, monospace', fontSize: 12},
+        onValueChange,
     });
+
+    function onValueChange(value) {
+        props.onChange({target: {value}}, value);
+    }
 }
 
 class ErrorBoundary extends Component {
@@ -169,7 +183,7 @@ function Page(props) {
                 h(MUI.CardContent,
                     {},
                     h(RenderExample, {
-                        key: `render-${selected}`,
+                        key: `render-${schema.json}${form.json}`,
                         schema: schema.value,
                         form: form.value,
                         model: model.value,
@@ -191,13 +205,13 @@ function Page(props) {
                     {key: 'schema'},
                     [
                         h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Schema'),
-                        h(Editor, {key: 'editor', value: schema.json, onChange: schema.setJSON}),
+                        h(Editor, {key: 'editor', value: schema.json, onChange: (e) => schema.setJSON(e.target.value)}),
                     ]),
                 h(MUI.CardContent,
                     {key: 'form'},
                     [
-                        h(MUI.Typography, {key: 'title',variant: 'h6'}, 'Form'),
-                        h(Editor, {key: 'editor', value: form.json, onChange: form.setJSON}),
+                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Form'),
+                        h(Editor, {key: 'editor', value: form.json, onChange: (e) => form.setJSON(e.target.value)}),
                     ]),
             ]),
     ]);
@@ -214,6 +228,7 @@ function Page(props) {
 }
 
 async function init() {
+    await loadPrism();
     render(h(Page), document.getElementById('app'));
 }
 
