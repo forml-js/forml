@@ -1,6 +1,6 @@
 {
   "name": "rjsf",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "React JSON Schema Form",
   "keywords": [
     "json schema",
