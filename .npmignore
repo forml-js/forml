@@ -2,3 +2,5 @@
 example/
 src/
 out/
+styleguide/
+*.config.js1
