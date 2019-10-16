@@ -1,10 +1,9 @@
 import debug from 'debug';
 import PropTypes from 'prop-types';
-import {createElement as h, useState} from 'react';
+import {createElement as h} from 'react';
 
 import {useMapper, useModel} from '../context';
 import {FormType} from '../types';
-import {validator} from '../util';
 
 const log = debug('rjsf:schema-field');
 

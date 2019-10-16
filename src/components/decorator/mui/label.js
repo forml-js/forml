@@ -1,5 +1,5 @@
 import * as MUI from '@material-ui/core';
-import {createElement as h, useState} from 'react';
+import {createElement as h} from 'react';
 
 /**
  * @component

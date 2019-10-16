@@ -4,7 +4,7 @@ import * as Input from './input';
 /**
  * @component
  */
-export default function Checkbox({title, description, error, checked, form, onChange}) {
+export default function Checkbox({title, description, error, checked, onChange}) {
     return h('div', {}, [
         h('label',
           {},

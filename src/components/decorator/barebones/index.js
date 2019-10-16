@@ -1,5 +1,3 @@
-import {createElement as h} from 'react';
-
 import * as Arrays from './arrays';
 import Checkbox from './checkbox';
 import FieldSet from './fieldset';
@@ -15,6 +13,8 @@ export {
     FieldSet,
     Group,
     Input,
+    Label,
     Tabs,
+    Text,
 };
 

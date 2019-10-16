@@ -1,14 +1,11 @@
-import debug from 'debug';
 import merge from 'deepmerge';
 import PropTypes from 'prop-types';
-import {createElement as h} from 'react';
 
 import {clone} from '../../util';
 
 import * as barebones from './barebones';
 import * as mui       from './mui';
 
-const log = debug('rjsf:decorator');
 
 export const decorators = {
     mui: clone(mui),

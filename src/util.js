@@ -137,7 +137,7 @@ export function errorGetter(errors) {
  * @arg {number} depth - The current depth of recursion
  * @return {*}
  */
-function updateAndCloneRecursive(keys, model, schema, value, depth = 0) {
+function updateAndClone(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
         return value;
     }
@@ -169,47 +169,6 @@ function updateAndCloneRecursive(keys, model, schema, value, depth = 0) {
     throw new Error('Bad ObjectPath')
 }
 
-/**
- * Walk a key path along a schema tree and model, updating the model according
- * to the schema along the way, until reaching the final key, whereupon we set
- * the supplied value. Returns the updated model or value set.
- * @arg {Array<string|number>} keys - The object path to walk
- * @arg {*} model - The model to update
- * @arg {object} schema - The schema definition for the model
- * @arg {*} value - The final value to write
- * @return {*}
- */
-function updateAndCloneImperative(keys, model, schema, value) {
-    if (keys.length === 0) {
-        return value;
-    }
-
-    let stack = [];
-    let key   = undefined;
-    for (let i = 0; i < keys.length; ++i) {
-        stack.push({key, model, schema});
-
-        key    = keys[i];
-        schema = getNextSchema(schema, key);
-        model  = getNextValue(schema, model, key);
-    }
-
-    model = value;
-
-    while (stack.length) {
-        const parent      = stack.pop();
-        parent.model[key] = model;
-
-
-        key    = parent.key;
-        model  = clone(parent.model);
-        schema = parent.schema;
-    }
-
-    return model;
-}
-
-export const updateAndClone = updateAndCloneRecursive;
 /**
  * Set a value using a hook setter
  * @arg {*} model
@@ -338,20 +297,24 @@ export function clone(value) {
         case 'string':
         case 'number':
         case 'boolean':
-        case 'undefined':
+        case 'undefined': {
             return value;
+        }
 
-        case 'object':
+        case 'object': {
             if (Array.isArray(value)) {
                 return value.map((item) => clone(item));
             }
 
-            const result = {};
+            let result = {};
             for (let key in value) {
                 result[key] = clone(value[key]);
             }
             return result;
-        default:
+        }
+
+        default: {
             return value;
+        }
     }
 }

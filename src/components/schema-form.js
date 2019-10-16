@@ -1,24 +1,19 @@
 /**
  * @namespace rjsf.SchemaForm
  */
-import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {createElement as h, useCallback, useMemo} from 'react';
 
-import {ARRAY_PLACEHOLDER} from '../constants';
 import Context from '../context';
 import {merge} from '../forms';
 import {defaultLocalizer, getLocalizer} from '../localizer';
-import {test} from '../rules';
 import * as Types from '../types';
 import * as util  from '../util';
 
 import {decoratorShape, defaultDecorator, getDecorator} from './decorator';
 import {defaultMapper, getMapper, mapperShape} from './mapper';
 import {SchemaField} from './schema-field';
-
-const log = debug('rjsf:index');
 
 /**
  * @component SchemaForm
@@ -80,15 +75,12 @@ export function SchemaForm({model, schema, form, ...props}) {
         if (!valid) {
             for (let error of errors) {
                 const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
-                errorMap[ObjectPath.stringify(keys)] = error.message;
+                const normal = ObjectPath.stringify(keys);
+                errorMap     = {...errorMap, [normal]: error.message};
             }
         }
 
         return errorMap;
-
-        function setErrorMap(newErrorMap) {
-            errorMap = newErrorMap;
-        }
     }
 }
 
