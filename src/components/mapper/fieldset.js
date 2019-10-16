@@ -22,13 +22,12 @@ export default function FieldSet(props) {
             key,
             onChange,
             schema,
-            title,
         });
     });
 
     const deco = useDecorator();
 
-    return h(deco.FieldSet, {form}, forms);
+    return h(deco.FieldSet, {form, title}, forms);
 }
 
 FieldSet.propTypes = {
