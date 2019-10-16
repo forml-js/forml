@@ -1,5 +1,6 @@
 import TextField from '@material-ui/core/TextField';
 import debug from 'debug';
+import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';

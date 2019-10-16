@@ -6,6 +6,10 @@ import {getPreferredType} from './util';
 
 const log = debug('rjsf:mapper:rules');
 
+/**
+ * @param {Array<*>} enm - The enumeration values to produce titles for
+ * @return {Array<string>}
+ */
 export function enumToTitles(enm) {
     const titles = [];
     enm.forEach(value => {
@@ -14,6 +18,10 @@ export function enumToTitles(enm) {
     return titles;
 }
 
+/**
+ * @param {*} value - The value to convert to represent as a string
+ * @return {string}
+ */
 export function getNameFromValue(value) {
     switch (typeof value) {
         case 'string':
@@ -26,7 +34,17 @@ export function getNameFromValue(value) {
     }
 }
 
+/**
+ * @typedef FormDefinition
+ * @param {string} type - The type of field to be rendered for this form
+ * @param {(string|Array<string>)} key - The key path this form renders relative
+ * to the schema
+ */
 export const definitions = {
+    /**
+     * Catch any date-formatted strings
+     * @return {FormDefinition}
+     */
     date(name, schema, options) {
         if (getPreferredType(schema.type) === 'string' && schema.format === 'date') {
             const f = stdFormObj(name, schema, options);
@@ -34,6 +52,10 @@ export const definitions = {
             return f;
         }
     },
+    /**
+     * Catch any enumerations in the schema
+     * @return {FormDefinition}
+     */
     select(name, schema, options) {
         if (schema.enum) {
             const f = stdFormObj(name, schema, options);
@@ -56,6 +78,10 @@ export const definitions = {
 
         return undefined;
     },
+    /**
+     * Defines boolean forms
+     * @return {FormDefinition}
+     */
     checkbox(name, schema, options) {
         if (getPreferredType(schema.type) === 'boolean') {
             const f = stdFormObj(name, schema, options);
@@ -65,6 +91,10 @@ export const definitions = {
 
         return undefined;
     },
+    /**
+     * Defines basic string forms
+     * @return {FormDefinition}
+     */
     text(name, schema, options) {
         if (schema.type === 'string') {
             const f = stdFormObj(name, schema, options);
@@ -74,6 +104,11 @@ export const definitions = {
 
         return undefined;
     },
+
+    /**
+     * Defines basic integer forms
+     * @return {FormDefinition}
+     */
     integer(name, schema, options) {
         if (schema.type === 'integer') {
             const f = stdFormObj(name, schema, options);
@@ -83,6 +118,10 @@ export const definitions = {
 
         return undefined;
     },
+    /**
+     * Defines basic number forms
+     * @return {FormDefinition}
+     */
     number(name, schema, options) {
         if (schema.type === 'number') {
             const f = stdFormObj(name, schema, options);
@@ -92,6 +131,10 @@ export const definitions = {
 
         return undefined;
     },
+    /**
+     * Defines forms for schemas that describe tuples
+     * @return {FormDefinition}
+     */
     tuple(name, schema, options) {
         if (getPreferredType(schema.type) === 'array' && Array.isArray(schema.items)) {
             const f = stdFormObj(name, schema, options);
@@ -112,8 +155,12 @@ export const definitions = {
             return f;
         }
     },
+    /**
+     * Defines forms for schemas that describe lists
+     * @return {FormDefinition}
+     */
     array(name, schema, options) {
-        if (getPreferredType(schema.type) === 'array') {
+        if (getPreferredType(schema.type) === 'array' && !Array.isArray(schema.items)) {
             const f = stdFormObj(name, schema, options);
             f.type  = 'array';
 
@@ -130,6 +177,10 @@ export const definitions = {
             return f;
         }
     },
+    /**
+     * Define forms for object types
+     * @return {FormDefinition}
+     */
     fieldset(name, schema, options) {
         if (getPreferredType(schema.type) === 'object') {
             const f = stdFormObj(name, schema, options);
@@ -156,6 +207,10 @@ export const definitions = {
 
         return undefined;
     },
+    /**
+     * Define forms for the null type
+     * @return {FormDefinition}
+     */
     null(name, schema, options) {
         if (getPreferredType(schema.type) === 'null') {
             const f = stdFormObj(name, schema, options);
@@ -165,28 +220,54 @@ export const definitions = {
     }
 };
 
-export const rules = {
-    string: [definitions.date, definitions.select, definitions.text],
-    object: [definitions.fieldset],
-    number: [definitions.number],
-    integer: [definitions.integer],
-    boolean: [definitions.checkbox],
-    array: [definitions.tuple, definitions.array],
-    null: [definitions.null],
-};
+export const rules = [
+    // Detect enumerations
+    definitions.select,
 
+    // Handle basic strings and other primitives
+    definitions.null,
+    definitions.date,
+    definitions.text,
+    definitions.number,
+    definitions.integer,
+    definitions.checkbox,
+
+    // Handle complex types
+    definitions.tuple,
+    definitions.array,
+    definitions.fieldset,
+];
+
+// export const rules = {
+//     string: [definitions.date, definitions.select, definitions.text],
+//     object: [definitions.select, definitions.fieldset],
+//     number: [definitions.select, definitions.number],
+//     integer: [definitions.select, definitions.integer],
+//     boolean: [definitions.select, definitions.checkbox],
+//     array: [definitions.select, definitions.tuple, definitions.array],
+//     null: [definitions.select, definitions.null],
+// };
+
+/**
+ * Test definitions against the schema and produce a representative form object
+ * @param {?string} name - Reserved for future use
+ * @param {object} schema - The schema to test
+ * @param {object} options - Settings and lookup table for the test logic
+ * @return {FormDefinition}
+ */
 export function test(name, schema, options) {
-    const ruleSet = rules[getPreferredType(schema.type)];
+    return rules.find(rule => rule(name, schema, options));
+    // const ruleSet = rules[getPreferredType(schema.type)];
 
-    if (ruleSet) {
-        for (let rule of ruleSet) {
-            const result = rule(name, schema, options);
+    // if (ruleSet) {
+    //     for (let rule of ruleSet) {
+    //         const result = rule(name, schema, options);
 
-            if (result !== undefined) {
-                return result;
-            }
-        }
-    }
+    //         if (result !== undefined) {
+    //             return result;
+    //         }
+    //     }
+    // }
 
-    return undefined;
+    // return undefined;
 }

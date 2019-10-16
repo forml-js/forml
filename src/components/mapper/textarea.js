@@ -1,5 +1,7 @@
 import debug from 'debug';
+import t from 'prop-types';
 import {createElement as h} from 'react';
+
 import {FormType} from '../../types';
 
 import Text from './text';

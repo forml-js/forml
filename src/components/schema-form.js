@@ -9,13 +9,13 @@ import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} f
 import {ARRAY_PLACEHOLDER} from '../constants';
 import Context from '../context';
 import {merge} from '../forms';
-import {getLocalizer} from '../localizer';
+import {defaultLocalizer, getLocalizer} from '../localizer';
 import {test} from '../rules';
 import * as Types from '../types';
 import * as util  from '../util';
 
-import {decoratorShape, getDecorator} from './decorator';
-import {getMapper, mapperShape} from './mapper';
+import {decoratorShape, defaultDecorator, getDecorator} from './decorator';
+import {defaultMapper, getMapper, mapperShape} from './mapper';
 import {SchemaField} from './schema-field';
 
 const log = debug('rjsf:index');
@@ -93,12 +93,16 @@ export function SchemaForm({model, schema, form, ...props}) {
 }
 
 SchemaForm.propTypes = {
-    /** The current value of the form */
+    /**
+     * The current value of the form
+     */
     model: PropTypes.any,
-    /** The schema to build against */
-    schema: PropTypes.object.required,
+    /**
+     * The schema to build against
+     */
+    schema: PropTypes.object.isRequired,
     /** The forms to render */
-    form: Types.FormType,
+    form: Types.FormsType,
     /** A set of localization functions to use */
     localizer: PropTypes.shape({
         getLocalizedDate: PropTypes.func,
@@ -115,4 +119,7 @@ SchemaForm.defaultProps = {
     model: null,
     schema: {type: 'null'},
     form: ['*'],
+    decorator: defaultDecorator(),
+    localizer: defaultLocalizer(),
+    mapper: defaultMapper(),
 };
