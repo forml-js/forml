@@ -1,9 +1,7 @@
 import Ajv from 'ajv';
-import debug from 'debug';
 import objectPath from 'objectpath';
 import {useMemo} from 'react';
 
-const log = debug('rjsf:util');
 /**
  * @namespace rjsf.util
  */
@@ -274,8 +272,8 @@ export function traverseForm(forms, visit) {
  * to produce a validate function.
  * @arg object schema - The schema to compile for validation
  */
+const ajv = new Ajv({allErrors: true});
 export function useValidator(schema) {
-    const ajv      = useMemo(() => new Ajv({allErrors: true}), []);
     const compiled = useMemo(() => ajv.compile(schema), [schema]);
 
     function validate(model) {

@@ -1,35 +1,28 @@
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import {makeStyles} from '@material-ui/core/styles';
-import clsx from 'clsx';
-import debug from 'debug';
-import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, useEffect, useState} from 'react';
+import {createElement as h} from 'react';
 
-import {useDecorator} from '../../context';
+import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
-import {defaultForSchema} from '../../util';
 import {SchemaField} from '../schema-field';
-
-const log = debug('rjsf:mapper:fieldset');
 
 /**
  * @component FieldSet
  */
 export default function FieldSet(props) {
     const {form, onChange} = props;
-    const {title}          = form;
+    const localizer        = useLocalizer();
+    const title            = localizer.getLocalizedString(form.title);
 
     const forms = form.items.map(function(form, index) {
         const {schema} = form;
         const key      = index.toString();
 
         return h(SchemaField, {
-            key,
-            schema,
             form,
+            key,
             onChange,
+            schema,
+            title,
         });
     });
 

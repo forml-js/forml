@@ -1,35 +1,22 @@
-import Collapse from '@material-ui/core/Collapse';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
-import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
+import {createElement as h, useMemo, useState} from 'react';
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
 import {useDecorator, useLocalizer, useModel} from '../../context';
 import {FormType} from '../../types';
-import {defaultForSchema, getNextSchema, traverseForm, useKeyGenerator} from '../../util';
+import {defaultForSchema, getNextSchema, traverseForm} from '../../util';
 import {SchemaField} from '../schema-field';
 
-const log = debug('rjsf:mapper:array');
 
 export function useArrayItems(form) {
     const [items, setItems] = useState([]);
     const model             = useModel();
 
     function create() {
-        const forms = form.items.map((form, index) => {
-            const schema  = form.schema;
+        const forms = form.items.map((form) => {
             const key     = shortid();
-
             return {form, key};
         });
 
@@ -123,9 +110,9 @@ function ArrayItem(props) {
  * @component ArrayComponent
  */
 export default function ArrayComponent(props) {
-    const {form, schema} = props;
-    const {value, error} = props;
-    const arrays         = [];
+    const {form}  = props;
+    const {error} = props;
+    const arrays  = [];
 
     const items     = useArrayItems(form);
     const deco      = useDecorator();
@@ -133,9 +120,9 @@ export default function ArrayComponent(props) {
 
     for (let i = 0; i < items.items.length; ++i) {
         const item  = items.items[i];
-        const forms = item.forms.map(function({form, schema, key}) {
+        const forms = item.forms.map(function({form, key}) {
             const formCopy = copyWithIndex(form, i);
-            return h(SchemaField, {form: formCopy, schema});
+            return h(SchemaField, {key, form: formCopy, schema: formCopy.schema});
         });
         arrays.push(h(ArrayItem, {key: item.key, form, index: i, items}, forms));
     }

@@ -1,5 +1,3 @@
-import TextField from '@material-ui/core/TextField';
-import debug from 'debug';
 import t from 'prop-types';
 import {createElement as h} from 'react';
 
@@ -12,7 +10,7 @@ const valueExceptions = ['', '-'];
  * @component Integer
  */
 export default function Integer(props) {
-    const {schema, value, form, error} = props;
+    const {value, form, error} = props;
 
     const deco      = useDecorator();
     const localizer = useLocalizer();

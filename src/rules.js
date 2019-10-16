@@ -27,6 +27,8 @@ export function getNameFromValue(value) {
             return JSON.stringify(value);
         case 'undefined':
             return 'undefined';
+        default:
+            return value.toString();
     }
 }
 
@@ -252,7 +254,11 @@ export const rules = [
  * @return {FormDefinition}
  */
 export function test(name, schema, options) {
-    return rules.find(rule => rule(name, schema, options));
+    for (let rule of rules) {
+        const form = rule(name, schema, options);
+        if (form)
+            return form;
+    }
     // const ruleSet = rules[getPreferredType(schema.type)];
 
     // if (ruleSet) {

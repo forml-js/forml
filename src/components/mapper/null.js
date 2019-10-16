@@ -2,7 +2,7 @@ import {FormType} from '../../types';
 /**
  * @component Null
  */
-export default function Null(props) {
+export default function Null() {
     return null;
 }
 

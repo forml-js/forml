@@ -1,12 +1,8 @@
-import TextField from '@material-ui/core/TextField';
-import debug from 'debug';
 import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
-
-const log = debug('rjsf:components:mapper:number');
 
 const valueExceptions = ['', '-'];
 
@@ -14,7 +10,7 @@ const valueExceptions = ['', '-'];
  * @component Number
  */
 export default function Number(props) {
-    const {form, schema, value, error} = props;
+    const {form, value, error} = props;
 
     const deco        = useDecorator();
     const localizer   = useLocalizer();

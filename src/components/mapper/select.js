@@ -1,16 +1,8 @@
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import MuiSelect from '@material-ui/core/Select';
-import debug from 'debug';
 import t from 'prop-types';
-import {createElement as h, useEffect, useState} from 'react';
+import {createElement as h} from 'react';
 
-import {useDecorator, useLocalizer, useModel} from '../../context';
+import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
-
-const log = debug('rjsf:mapper:select');
 
 /**
  * @component Select
@@ -27,7 +19,8 @@ export default function Select(props) {
 
     const menuItems = [];
     for (let i = 0; i < form.titleMap.length; i++) {
-        const {name, value} = form.titleMap[i];
+        const name    = getLabel(form.titleMap[i]);
+        const {value} = form.titleMap[i];
         menuItems.push(h(deco.Input.Option, {key: name, value}, name));
     }
 
@@ -43,7 +36,7 @@ export default function Select(props) {
     ]);
 
     function getLabel(item) {
-        const {displayFn, noLocalization} = schema;
+        const {displayFn} = schema;
 
         if (displayFn) {
             return displayFn(item);
@@ -52,8 +45,7 @@ export default function Select(props) {
         return item.name;
     }
 
-    function onChange(event, what) {
-        log('onChange(%o)', event);
+    function onChange(event) {
         props.onChange(event, event.target.value);
     }
 }

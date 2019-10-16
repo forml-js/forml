@@ -1,12 +1,9 @@
-import debug from 'debug';
 import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {FormType} from '../../types';
 
 import Text from './text';
-
-const log = debug('rjsf:mapper:text');
 
 /**
  * @component TextArea

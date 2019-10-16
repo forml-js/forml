@@ -1,23 +1,17 @@
-import TextField from '@material-ui/core/TextField';
-import debug from 'debug';
 import t from 'prop-types';
 import {createElement as h} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
 
-const log = debug('rjsf:mapper:text');
-
 /**
  * @component Text
  */
 export default function Text(props) {
-    const {schema, value, form, error} = props;
-    const {otherProps}                 = props;
-    const localize                     = useLocalizer();
-    const deco                         = useDecorator();
+    const {value, form, error} = props;
 
-    const localizer   = useLocalizer();
+    const localizer = useLocalizer();
+    const deco      = useDecorator();
 
     const {title, description, placeholder} = form;
 

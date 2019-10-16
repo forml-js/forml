@@ -26,7 +26,7 @@ export function SchemaForm({model, schema, form, ...props}) {
     const mapper            = useMemo(() => getMapper(props.mapper), [props.mapper]);
     const decorator         = useMemo(() => getDecorator(props.decorator), [props.decorator]);
     const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
-    const errors            = useMemo(() => computeErrors(model), [model, validate]);
+    const errors            = useMemo(computeErrors, [model, validate]);
 
     const getValue = util.valueGetter(model, schema);
     const setValue = util.valueSetter(model, schema);
