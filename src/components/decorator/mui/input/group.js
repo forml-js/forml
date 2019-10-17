@@ -1,4 +1,4 @@
-import * as MUI from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
 import {createElement as h} from 'react';
 
 /**
@@ -6,5 +6,5 @@ import {createElement as h} from 'react';
  */
 export default function Group(props) {
     const fullWidth = true;
-    return h(MUI.FormControl, {...props, fullWidth}, props.children);
+    return h(FormControl, {...props, fullWidth}, props.children);
 }

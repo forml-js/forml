@@ -1,9 +1,9 @@
-import * as MUI from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 import {createElement as h} from 'react';
 
 /**
  * @component
  */
 export default function Label(props) {
-    return h(MUI.InputLabel, props);
+    return h(InputLabel, props);
 }

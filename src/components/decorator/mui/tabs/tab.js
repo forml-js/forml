@@ -1,4 +1,4 @@
-import * as MUI from '@material-ui/core';
+import MuiTab from '@material-ui/core/Tab';
 import {createElement as h} from 'react';
 
 /**
@@ -8,7 +8,5 @@ export default function Tab(props) {
     const {label}    = props;
     const {activate} = props;
 
-    console.error('Tab() : label : %o', label);
-
-    return h(MUI.Tab, {onClick: activate, label}, label);
+    return h(MuiTab, {onClick: activate, label}, label);
 }

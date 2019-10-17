@@ -1,4 +1,7 @@
-import * as MUI from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import {createElement as h} from 'react';
 
 /**
@@ -6,10 +9,8 @@ import {createElement as h} from 'react';
  */
 export default function FieldSet(props) {
     const {title} = props;
-    return h(MUI.Card,
-             {},
-             h(MUI.CardContent, {}, h(MUI.FormControl, {fullWidth: true, component: 'fieldset'}, [
-                   h(MUI.FormLabel, {key: 'label', component: 'legend'}, title),
-                   props.children,
-               ])));
+    return h(Card, {}, h(CardContent, {}, h(FormControl, {fullWidth: true, component: 'fieldset'}, [
+                             h(FormLabel, {key: 'label', component: 'legend'}, title),
+                             props.children,
+                         ])));
 }

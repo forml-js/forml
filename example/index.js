@@ -1,4 +1,7 @@
-import * as MUI from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import {makeStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import debug from 'debug';
 import Prism from 'prismjs';
 import {Component, createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
@@ -29,6 +32,7 @@ function useEditable(defaultValue) {
         try {
             doSetValue(JSON.parse(json));
         } catch (err) {
+            /** noop */
         }
     }
 
@@ -66,9 +70,9 @@ class ErrorBoundary extends Component {
     render() {
         if (this.state.hasError) {
             return h(Fragment, {}, [
-                h(MUI.Typography, {variant: 'h6'}, 'Something went wrong'),
-                h(MUI.Typography, {variant: 'body1'}, this.state.error.stack),
-                h(MUI.Typography, {variant: 'caption'}, JSON.stringify(this.state.info)),
+                h(Typography, {variant: 'h6'}, 'Something went wrong'),
+                h(Typography, {variant: 'body1'}, this.state.error.stack),
+                h(Typography, {variant: 'caption'}, JSON.stringify(this.state.info)),
             ]);
         }
 
@@ -89,7 +93,7 @@ function importAll(context) {
             result[key] = result[key].default;
 
         if (!result[key].schema)
-            delete result[key];
+            Reflect.deleteProperty(result, key);
     }
 
     return result;
@@ -126,7 +130,7 @@ function SelectExample(props) {
 }
 function RenderExample(props) {
     const {schema, form, model} = props;
-    const {onChange, className} = props;
+    const {onChange}            = props;
     const {localizer}           = props;
     const decorator             = decorators.mui;
 
@@ -147,7 +151,7 @@ function getSample(selected) {
     return {schema: {type: 'null'}, form: ['*']};
 }
 
-const useStyles = MUI.makeStyles(function(theme) {
+const useStyles = makeStyles(function() {
     return {
         root: {display: 'flex', flexDirection: 'row'},
         manager: {flex: '0 0 300px'},
@@ -155,7 +159,7 @@ const useStyles = MUI.makeStyles(function(theme) {
     };
 });
 
-function Page(props) {
+function Page() {
     const classes                 = useStyles();
     const [selected, setSelected] = useState('');
     const [localizer, setLocalizer] = useState(undefined);
@@ -177,10 +181,10 @@ function Page(props) {
     }, [selected]);
 
     return h('div', {className: classes.root}, [
-        h(MUI.Card,
+        h(Card,
             {className: classes.example},
             [
-                h(MUI.CardContent,
+                h(CardContent,
                     {},
                     h(RenderExample, {
                         key: `render-${schema.json}${form.json}`,
@@ -190,27 +194,27 @@ function Page(props) {
                         onChange: onModelChange,
                         localizer,
                     })),
-                h(MUI.CardContent,
+                h(CardContent,
                     {},
                     [
-                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Model'),
+                        h(Typography, {key: 'title', variant: 'h6'}, 'Model'),
                         h('pre', {key: 'body'}, model.json),
                     ])
             ]),
-        h(MUI.Card,
+        h(Card,
             {className: classes.manager},
             [
-                h(MUI.CardContent, {key: 'select-example'}, h(SelectExample, {key: 'select', selected, onChange})),
-                h(MUI.CardContent,
+                h(CardContent, {key: 'select-example'}, h(SelectExample, {key: 'select', selected, onChange})),
+                h(CardContent,
                     {key: 'schema'},
                     [
-                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Schema'),
+                        h(Typography, {key: 'title', variant: 'h6'}, 'Schema'),
                         h(Editor, {key: 'editor', value: schema.json, onChange: (e) => schema.setJSON(e.target.value)}),
                     ]),
-                h(MUI.CardContent,
+                h(CardContent,
                     {key: 'form'},
                     [
-                        h(MUI.Typography, {key: 'title', variant: 'h6'}, 'Form'),
+                        h(Typography, {key: 'title', variant: 'h6'}, 'Form'),
                         h(Editor, {key: 'editor', value: form.json, onChange: (e) => form.setJSON(e.target.value)}),
                     ]),
             ]),
@@ -219,11 +223,6 @@ function Page(props) {
     function onChange(event, example) {
         // event.preventDefault();
         setSelected(example);
-    }
-
-    function onModelChange(event, value) {
-        // event.preventDefault();
-        model.setValue(value);
     }
 }
 

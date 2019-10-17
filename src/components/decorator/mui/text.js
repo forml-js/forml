@@ -1,4 +1,4 @@
-import * as MUI from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import {createElement as h} from 'react';
 
 /**
@@ -9,7 +9,6 @@ export default function Text(props) {
     const {variant, align, color} = form;
     const {noWrap, paragraph}     = form;
 
-    return h(MUI.Typography,
-             {variant, align, color, noWrap, paragraph, ...form.otherProps},
-             props.children);
+    return h(
+        Typography, {variant, align, color, noWrap, paragraph, ...form.otherProps}, props.children);
 }

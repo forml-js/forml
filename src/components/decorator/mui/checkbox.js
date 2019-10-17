@@ -1,12 +1,15 @@
-import * as MUI from '@material-ui/core';
+import MuiCheckbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import {createElement as h} from 'react';
 
 /**
  * @component
  */
 export default function Checkbox({title, description, error, checked, onChange}) {
-    return h(MUI.FormGroup, {row: true}, [
-        h(MUI.FormControlLabel, {label: title, control: h(MUI.Checkbox, {checked, onChange})}),
-        (error || description) && h(MUI.FormHelperText, {error}, (error || description)),
+    return h(FormGroup, {row: true}, [
+        h(FormControlLabel, {label: title, control: h(MuiCheckbox, {checked, onChange})}),
+        (error || description) && h(FormHelperText, {error}, (error || description)),
     ])
 }

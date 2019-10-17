@@ -1,4 +1,4 @@
-import * as MUI from '@material-ui/core';
+import FormGroup from '@material-ui/core/FormGroup';
 import {createElement as h} from 'react';
 
 /**
@@ -7,5 +7,5 @@ import {createElement as h} from 'react';
 export default function Group(props) {
     const {form}             = props;
     const {fullWidth = true} = form;
-    return h(MUI.FormGroup, {fullWidth, ...form.otherProps}, props.children);
+    return h(FormGroup, {fullWidth, ...form.otherProps}, props.children);
 }

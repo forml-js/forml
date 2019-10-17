@@ -1,8 +1,15 @@
-import * as MUI from '@material-ui/core';
+import Collapse from '@material-ui/core/Collapse';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import {makeStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import {createElement as h, Fragment, useState} from 'react';
 
-const useStyles = MUI.makeStyles(function(theme) {
+const useStyles = makeStyles(function(theme) {
     return {
         title: {},
         expansionIcon: {
@@ -24,30 +31,30 @@ export default function Item(props) {
     const classes         = useStyles();
     const {index}         = props;
 
-    const title = h(MUI.Typography, {variant: 'subtitle1'}, [
+    const title = h(Typography, {variant: 'subtitle1'}, [
         ` [${index}] `,
         props.title,
     ]);
 
     return h(Fragment, {}, [
-        h(MUI.ListItem,
+        h(ListItem,
           {button: true, divider: true, onClick: toggle},
           [
-              h(MUI.Icon,
+              h(Icon,
                 {
                     className: clsx(classes.expansionIcon, {[classes.expansionIconActive]: open}),
                 },
                 'chevron_right'),
-              h(MUI.ListItemText, {primary: title}),
-              h(MUI.ListItemSecondaryAction,
+              h(ListItemText, {primary: title}),
+              h(ListItemSecondaryAction,
                 {},
                 [
-                    h(MUI.IconButton, {onClick: props.moveUp}, h(MUI.Icon, {}, 'arrow_upward')),
-                    h(MUI.IconButton, {onClick: props.moveDown}, h(MUI.Icon, {}, 'arrow_downward')),
-                    h(MUI.IconButton, {onClick: props.destroy}, h(MUI.Icon, {}, 'delete_forever')),
+                    h(IconButton, {onClick: props.moveUp}, h(Icon, {}, 'arrow_upward')),
+                    h(IconButton, {onClick: props.moveDown}, h(Icon, {}, 'arrow_downward')),
+                    h(IconButton, {onClick: props.destroy}, h(Icon, {}, 'delete_forever')),
                 ]),
           ]),
-        h(MUI.Collapse, {className: {[classes.contentOpen]: open}, 'in': open}, props.children),
+        h(Collapse, {className: {[classes.contentOpen]: open}, 'in': open}, props.children),
     ]);
 
     function toggle() {
