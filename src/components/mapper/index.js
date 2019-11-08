@@ -7,6 +7,7 @@ import Array from './array';
 import Checkbox from './checkbox';
 import Date from './date';
 import FieldSet from './fieldset';
+import File from './file';
 import Help from './help';
 import Integer from './integer';
 import Null from './null';
@@ -32,6 +33,7 @@ export function defaultMapper() {
         text: Text,
         textarea: TextArea,
         tuple: FieldSet,
+        file: File,
     };
 }
 

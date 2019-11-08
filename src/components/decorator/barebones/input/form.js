@@ -10,4 +10,3 @@ export default function Form(props) {
     const onChange = props.onChange;
     return h('input', {type, value, onChange})
 }
-

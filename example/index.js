@@ -168,7 +168,7 @@ function Page() {
     const defaultModel              = useMemo(() => util.defaultForSchema(schema), [schema]);
     const model                     = useEditable(defaultModel);
 
-    function onModelChange(...args) {
+    function onModelChange(event, ...args) {
         model.setValue(args[0]);
     }
 
