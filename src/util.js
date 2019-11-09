@@ -274,7 +274,16 @@ export function traverseForm(forms, visit) {
  */
 const ajv = new Ajv({allErrors: true});
 export function useValidator(schema) {
-    const compiled = useMemo(() => ajv.compile(schema), [schema]);
+    const compiled = useMemo(() => {
+        try {
+            const validator = ajv.compile(schema);
+            return validator;
+        } catch (err) {
+            const validator = () => false;
+            validator.errors     = {'': 'invalid schema'};
+            return validator;
+        }
+    }, [schema]);
 
     function validate(model) {
         const valid    = compiled(model);
