@@ -5,6 +5,6 @@ import {createElement as h} from 'react';
  * @component
  */
 export default function Label(props) {
-    const shrink = props.shrink === undefined ? !!props.value : props.shrink;
-    return h(InputLabel, {...props, shrink});
+    const shrink = !!props.value;
+    return h(InputLabel, {shrink, ...props});
 }

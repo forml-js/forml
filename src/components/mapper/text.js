@@ -16,7 +16,8 @@ export default function Text(props) {
     const {title, description, placeholder} = form;
 
     return h(deco.Input.Group, {form}, [
-        title && h(deco.Label, {key: 'label', form, error}, localizer.getLocalizedString(title)),
+        title &&
+            h(deco.Label, {key: 'label', form, value, error}, localizer.getLocalizedString(title)),
         h(deco.Input.Form, {
             key: 'form',
             form,
@@ -27,7 +28,7 @@ export default function Text(props) {
         }),
         (error || description) &&
             h(deco.Input.Description,
-              {key: 'description', form, error: !!error},
+              {key: 'description', form, value, error: !!error},
               localizer.getLocalizedString(error || description)),
     ]);
 
