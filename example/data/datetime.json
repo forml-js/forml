@@ -9,7 +9,7 @@
             },
             "date": {
                 "title": "Date",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": ["name", "date"]
