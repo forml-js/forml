@@ -51,6 +51,17 @@ export const definitions = {
         }
     },
     /**
+     * Catch any date-time formatted strings
+     * @return {FormDefiniton}
+     */
+    datetime(name, schema, options) {
+        if (getPreferredType(schema.type) === 'string' && schema.format === 'date-time') {
+            const f = stdFormObj(name, schema, options);
+            f.type  = 'datetime';
+            return f;
+        }
+    },
+    /**
      * Catch any enumerations in the schema
      * @return {FormDefinition}
      */
@@ -225,6 +236,7 @@ export const rules = [
     // Handle basic strings and other primitives
     definitions.null,
     definitions.date,
+    definitions.datetime,
     definitions.text,
     definitions.number,
     definitions.integer,
