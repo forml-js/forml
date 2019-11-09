@@ -28,26 +28,41 @@ export function SchemaForm({model, schema, form, ...props}) {
     const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
     const errors            = useMemo(computeErrors, [model, validate]);
 
-    const getValue = util.valueGetter(model, schema);
-    const setValue = util.valueSetter(model, schema);
-    const getError = util.errorGetter(errors);
+    const getValue = useCallback(util.valueGetter(model, schema), [model, schema]);
+    const setValue = useCallback(util.valueSetter(model, schema), [model, schema]);
+    const getError = useCallback(util.errorGetter(errors), [errors]);
+
+    const contextValue = useMemo(
+        function() {
+            return {
+                model,
+                schema,
+                form: merged,
+                mapper,
+                getValue,
+                setValue,
+                getError,
+                onChange,
+                localizer,
+                errors: {},
+                decorator,
+            };
+        },
+        [
+            model,
+            schema,
+            merged,
+            mapper,
+            decorator,
+            localizer,
+            errors,
+            getValue,
+            setValue,
+            getError,
+        ]);
 
     return h(Context.Provider,
-             {
-                 value: {
-                     model,
-                     schema,
-                     form: merged,
-                     mapper,
-                     getValue,
-                     setValue,
-                     getError,
-                     onChange,
-                     localizer,
-                     errors: {},
-                     decorator,
-                 }
-             },
+             {value: contextValue},
              merged.map((form, index) => {
                  const {schema} = form;
                  return h(SchemaField, {
@@ -74,7 +89,7 @@ export function SchemaForm({model, schema, form, ...props}) {
 
         if (!valid) {
             for (let error of errors) {
-                const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
+                const keys   = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
                 const normal = ObjectPath.stringify(keys);
                 errorMap     = {...errorMap, [normal]: error.message};
             }
