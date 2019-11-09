@@ -15,11 +15,11 @@ export default function Select(props) {
 
     const title       = localizer.getLocalizedString(form.title);
     const placeholder = localizer.getLocalizedString(form.placeholder);
-    const description = form.description;
+    const description = localizer.getLocalizedString(form.description);
 
     const menuItems = [];
     for (let i = 0; i < form.titleMap.length; i++) {
-        const name    = getLabel(form.titleMap[i]);
+        const name    = localizer.getLocalizedString(getLabel(form.titleMap[i]));
         const {value} = form.titleMap[i];
         menuItems.push(h(deco.Input.Option, {key: name, value}, name));
     }
