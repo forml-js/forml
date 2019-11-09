@@ -1,8 +1,11 @@
+import MomentUtils from '@date-io/moment';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import debug from 'debug';
+import moment from 'moment';
 import Prism from 'prismjs';
 import {Component, createElement as h, Fragment, useEffect, useMemo, useState} from 'react';
 import {render} from 'react-dom';
@@ -228,7 +231,9 @@ function Page() {
 
 async function init() {
     await loadPrism();
-    render(h(Page), document.getElementById('app'));
+
+    render(h(MuiPickersUtilsProvider, {utils: MomentUtils}, h(Page)),
+           document.getElementById('app'));
 }
 
 document.addEventListener('DOMContentLoaded', init);

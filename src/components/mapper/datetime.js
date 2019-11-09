@@ -5,9 +5,9 @@ import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
 
 /**
- * @component Date
+ * @component DateTime
  */
-export default function Date(props) {
+export default function DateTime(props) {
     const localizer = useLocalizer();
     const deco      = useDecorator();
 
@@ -27,7 +27,8 @@ export default function Date(props) {
      */
     return h(deco.Input.Group, {form, value, error}, [
         title && h(deco.Label, {key: 'label', form, value, error}, title),
-        h(deco.Input.Form, {key: 'form', type: 'date', onChange, form, value, error, placeholder}),
+        h(deco.Input.Form,
+          {key: 'form', type: 'datetime-local', onChange, form, value, error, placeholder}),
         (error || description) &&
             h(deco.Input.Description,
               {key: 'description', form, value, error: !!error},
@@ -39,7 +40,7 @@ export default function Date(props) {
     }
 }
 
-Date.propTypes = {
+DateTime.propTypes = {
     form: FormType,
     schema: t.object,
     error: t.string,

@@ -14,6 +14,7 @@ module.exports = {
             react: path.resolve('./node_modules/react'),
             'react-dom': path.resolve('./node_modules/react-dom'),
             '@material-ui/core': path.resolve('./node_modules/@material-ui/core'),
+            '@material-ui/pickers': path.resolve('./node_modules/@material-ui/pickers'),
         }
     },
     module: {

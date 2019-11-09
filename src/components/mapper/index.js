@@ -6,6 +6,7 @@ import t from 'prop-types';
 import Array from './array';
 import Checkbox from './checkbox';
 import Date from './date';
+import DateTime from './datetime';
 import FieldSet from './fieldset';
 import File from './file';
 import Help from './help';
@@ -22,6 +23,7 @@ export function defaultMapper() {
         array: Array,
         checkbox: Checkbox,
         date: Date,
+        datetime: DateTime,
         fieldset: FieldSet,
         help: Help,
         integer: Integer,
@@ -45,6 +47,7 @@ const mapperTypes = [
     'array',
     'checkbox',
     'date',
+    'dateTime',
     'fieldset',
     'help',
     'integer',
@@ -63,6 +66,7 @@ export const mapperShape = t.shape({
     array: t.elementType,
     checkbox: t.elementType,
     date: t.elementType,
+    datetime: t.elementType,
     fieldset: t.elementType,
     help: t.elementType,
     integer: t.elementType,
