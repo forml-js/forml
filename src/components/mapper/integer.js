@@ -20,9 +20,10 @@ export default function Integer(props) {
     const description = localizer.getLocalizedString(form.description);
 
     return h(deco.Input.Group, {form}, [
-        h(deco.Label, {form}, label),
-        h(deco.Input.Form, {value, onChange, placeholder, form}),
-        (error || description) && h(deco.Input.Description, {error: !!error}, error || description),
+        h(deco.Label, {form, value, error}, label),
+        h(deco.Input.Form, {value, onChange, placeholder, form, error}),
+        (error || description) &&
+            h(deco.Input.Description, {form, value, error: !!error}, error || description),
     ]);
 
     function onChange(e) {

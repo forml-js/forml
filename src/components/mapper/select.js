@@ -25,13 +25,22 @@ export default function Select(props) {
     }
 
     return h(deco.Input.Group, {form, error}, [
-        h(deco.Label, {key: 'label', required: form.required}, title),
+        h(deco.Label, {key: 'label', required: form.required, form, value, error}, title),
         h(deco.Input.Select,
-          {key: 'select', value, placeholder, disabled: form.readonly, onChange},
+          {
+              key: 'select',
+              value,
+              placeholder,
+              disabled: form.readonly,
+              onChange,
+              form,
+              value,
+              error
+          },
           menuItems),
         (error || description) &&
             h(deco.Input.Description,
-              {key: 'help', error: !!error},
+              {key: 'help', error: !!error, form, value},
               localizer.getLocalizedString(error || description))
     ]);
 
