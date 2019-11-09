@@ -280,7 +280,7 @@ export function useValidator(schema) {
             return validator;
         } catch (err) {
             const validator = () => false;
-            validator.errors     = {'': 'invalid schema'};
+            validator.errors     = [{dataPath: '.', message: 'invalid schema'}];
             return validator;
         }
     }, [schema]);
