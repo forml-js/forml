@@ -77,12 +77,12 @@ export function valueGetter(model, schema) {
             keys = [keys];
         }
 
-        if (keys.length === 0)
-            return model;
-
         if (model === undefined) {
             model = defaultForSchema(schema);
         }
+
+        if (keys.length === 0)
+            return model;
 
         let current       = model;
         let currentSchema = schema;
