@@ -105,7 +105,7 @@ export const definitions = {
      * @return {FormDefinition}
      */
     text(name, schema, options) {
-        if (schema.type === 'string') {
+        if (getPreferredType(schema.type) === 'string') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'text';
             return f;
@@ -119,7 +119,7 @@ export const definitions = {
      * @return {FormDefinition}
      */
     integer(name, schema, options) {
-        if (schema.type === 'integer') {
+        if (getPreferredType(schema.type) === 'integer') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'integer';
             return f;
@@ -132,7 +132,7 @@ export const definitions = {
      * @return {FormDefinition}
      */
     number(name, schema, options) {
-        if (schema.type === 'number') {
+        if (getPreferredType(schema.type) === 'number') {
             const f = stdFormObj(name, schema, options);
             f.type  = 'number';
             return f;
