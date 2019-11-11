@@ -9,7 +9,6 @@ import {FormType} from '../../types';
 import {defaultForSchema, getNextSchema, traverseForm} from '../../util';
 import {SchemaField} from '../schema-field';
 
-
 export function useArrayItems(form) {
     const [items, setItems] = useState([]);
     const model             = useModel();
@@ -97,7 +96,15 @@ function ArrayItem(props) {
     const deco                 = useDecorator();
     const localizer            = useLocalizer();
 
-    const title    = localizer.getLocalizedString(form.title);
+    let title = form.title;
+
+    if (form.titleFun) {
+        const {item} = props;
+        title        = form.titleFun(item);
+    }
+
+    title = localizer.getLocalizedString(title);
+
     const destroy  = useMemo(() => items.destroyer(index), [items, index]);
     const moveUp   = useMemo(() => items.upwardMover(index), [items, index]);
     const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
@@ -124,7 +131,7 @@ export default function ArrayComponent(props) {
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {key, form: formCopy, schema: formCopy.schema});
         });
-        arrays.push(h(ArrayItem, {key: item.key, form, index: i, items}, forms));
+        arrays.push(h(ArrayItem, {key: item.key, form, index: i, items, item}, forms));
     }
 
     const label = localizer.getLocalizedString(form.title);
