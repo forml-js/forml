@@ -93,14 +93,15 @@ export function useArrayItems(form) {
 
 function ArrayItem(props) {
     const {form, index, items} = props;
+    const model                = useModel();
     const deco                 = useDecorator();
     const localizer            = useLocalizer();
 
     let title = form.title;
 
     if (form.titleFun) {
-        const {item} = props;
-        title        = form.titleFun(item);
+        const value = model.getValue([...form.key, index]);
+        title       = form.titleFun(value);
     }
 
     title = localizer.getLocalizedString(title);
