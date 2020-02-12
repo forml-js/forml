@@ -70,6 +70,9 @@ export const definitions = {
             const f = stdFormObj(name, schema, options);
             f.type  = 'select';
 
+            if (schema.enumNames) {
+                f.titles = schema.enumNames;
+            }
 
             if (!f.titles) {
                 f.titles = enumToTitles(schema.enum);
