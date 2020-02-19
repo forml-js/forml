@@ -9,6 +9,7 @@ import {FormType} from '../../types';
  */
 export default function Text(props) {
     const {value, form, error} = props;
+    const {multiline}          = props;
 
     const localizer = useLocalizer();
     const deco      = useDecorator();
@@ -24,6 +25,7 @@ export default function Text(props) {
             onChange,
             value,
             error,
+            multiline,
             placeholder: localizer.getLocalizedString(placeholder),
         }),
         (error || description) &&
