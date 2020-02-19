@@ -9,12 +9,11 @@ import {FormType} from '../../types';
  */
 export default function Text(props) {
     const {value, form, error} = props;
-    const {multiline}          = props;
 
     const localizer = useLocalizer();
     const deco      = useDecorator();
 
-    const {title, description, placeholder} = form;
+    const {title, description, placeholder, multiline} = form;
 
     return h(deco.Input.Group, {form}, [
         title &&

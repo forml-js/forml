@@ -12,11 +12,9 @@ export default function TextArea(props) {
     const {form} = props;
     return h(Text, {
         ...props,
-        otherProps: {
-            multiline: true,
-            rows: form.rows,
-            rowMax: form.rowMax,
-        }
+        multiline: true,
+        rows: form.rows,
+        rowMax: form.rowMax,
     });
 }
 
