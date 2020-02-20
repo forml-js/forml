@@ -14,7 +14,7 @@ export default function Text(props) {
     const localizer = useLocalizer();
     const deco      = useDecorator();
 
-    const {title, description, placeholder, multiline} = form;
+    const {title, description, placeholder} = form;
 
     return h(deco.Input.Group, {form}, [
         title &&
@@ -25,7 +25,6 @@ export default function Text(props) {
             onChange,
             value,
             error,
-            multiline,
             placeholder: localizer.getLocalizedString(placeholder),
             ...otherProps,
         }),
