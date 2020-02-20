@@ -9,6 +9,7 @@ import {FormType} from '../../types';
  */
 export default function Text(props) {
     const {value, form, error} = props;
+    const {otherProps}         = props;
 
     const localizer = useLocalizer();
     const deco      = useDecorator();
@@ -26,6 +27,7 @@ export default function Text(props) {
             error,
             multiline,
             placeholder: localizer.getLocalizedString(placeholder),
+            ...otherProps,
         }),
         (error || description) &&
             h(deco.Input.Description,
