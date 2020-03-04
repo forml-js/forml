@@ -33,5 +33,5 @@ Checkbox.propTypes = {
     schema: t.object,
     form: FormType,
     error: t.string,
-    value: t.boolean,
+    value: t.bool,
 };
