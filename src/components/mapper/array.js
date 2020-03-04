@@ -1,6 +1,7 @@
+import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
 import t from 'prop-types';
-import {createElement as h, useMemo, useState} from 'react';
+import {createElement as h, useEffect, useMemo, useState} from 'react';
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
@@ -9,9 +10,25 @@ import {FormType} from '../../types';
 import {defaultForSchema, getNextSchema, traverseForm} from '../../util';
 import {SchemaField} from '../schema-field';
 
+const log = debug('rjsf:mapper:array');
+
 export function useArrayItems(form) {
     const [items, setItems] = useState([]);
     const model             = useModel();
+
+    useEffect(function() {
+        log('useArrayItems(%O)', form);
+        const value = model.getValue(form.key);
+        const items = [];
+
+        for (let i = 0; i < value.length; ++i) {
+            items.push(create(i));
+        }
+
+        log('useArrayItems() : initialItems : %o', items);
+
+        setItems(items);
+    }, []);
 
     function create() {
         const forms = form.items.map((form) => {
