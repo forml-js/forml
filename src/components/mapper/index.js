@@ -11,6 +11,7 @@ import FieldSet from './fieldset';
 import File from './file';
 import Help from './help';
 import Integer from './integer';
+import Multiselect from './multiselect';
 import Null from './null';
 import Number from './number';
 import Select from './select';
@@ -27,6 +28,7 @@ export function defaultMapper() {
         fieldset: FieldSet,
         help: Help,
         integer: Integer,
+        multiselect: Multiselect,
         null: Null,
         number: Number,
         password: Text,
@@ -51,6 +53,7 @@ const mapperTypes = [
     'fieldset',
     'help',
     'integer',
+    'multiselect',
     'null',
     'number',
     'password',
@@ -70,6 +73,7 @@ export const mapperShape = t.shape({
     fieldset: t.elementType,
     help: t.elementType,
     integer: t.elementType,
+    multiselect: t.elementType,
     null: t.elementType,
     number: t.elementType,
     password: t.elementType,
