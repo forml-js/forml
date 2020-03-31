@@ -1,8 +1,11 @@
+import debug from 'debug';
 import ObjectPath from 'objectpath';
 
 import {ARRAY_PLACEHOLDER} from './constants';
 import {test} from './rules';
 import {findSchema} from './util';
+
+const log = debug('rjsf:forms');
 
 export function getDefaults(schema) {
     const form   = [];
@@ -54,6 +57,14 @@ export function merge(schema, form = ['*'], options = {}) {
             for (let tab of obj.tabs) {
                 tab.items = merge(schema, tab.items, options);
             }
+        }
+
+        if (obj.titles && !obj.titleMap) {
+            const values = obj.schema.enum || obj.schema.items.enum;
+            obj.titleMap = obj.titles.map((name, index) => {
+                const value = values[index];
+                return {name, value};
+            });
         }
 
 

@@ -10,6 +10,8 @@ const log = debug('rjsf:schema-field');
 export function SchemaField(props) {
     const {schema, form}  = props;
 
+    log('SchemaField(%o) : form.type : %o', form.key, form.type);
+
     const mapper              = useMapper();
     const model               = useModel();
     const Field               = mapper[form.type];

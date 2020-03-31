@@ -1,6 +1,7 @@
 /**
  * @namespace rjsf.SchemaForm
  */
+import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import {createElement as h, useCallback, useMemo} from 'react';
@@ -14,6 +15,8 @@ import * as util  from '../util';
 import {decoratorShape, defaultDecorator, getDecorator} from './decorator';
 import {defaultMapper, getMapper, mapperShape} from './mapper';
 import {SchemaField} from './schema-field';
+
+const log = debug('rjsf:schema-form');
 
 /**
  * @component SchemaForm
@@ -60,6 +63,8 @@ export function SchemaForm({model, schema, form, ...props}) {
             setValue,
             getError,
         ]);
+
+    log('SchemaForm() : form : %O', merged);
 
     return h(Context.Provider,
              {value: contextValue},

@@ -1,6 +1,9 @@
+import debug from 'debug';
 import * as constants from './constants';
 import {stdFormObj} from './forms';
 import {getPreferredType} from './util';
+
+const log = debug('rjsf:rules');
 
 /**
  * @param {Array<*>} enm - The enumeration values to produce titles for
@@ -78,13 +81,6 @@ export const definitions = {
                 f.titles = enumToTitles(schema.enum);
             }
 
-            if (!f.titleMap) {
-                f.titleMap = f.titles.map((name, index) => {
-                    const value = schema.enum[index];
-                    return {name, value};
-                });
-            }
-
             return f;
         }
 
@@ -126,6 +122,31 @@ export const definitions = {
             const f = stdFormObj(name, schema, options);
             f.type  = 'integer';
             return f;
+        }
+
+        return undefined;
+    },
+    /**
+     * Defines complex mutliselect forms
+     */
+    multiselect(name, schema, options) {
+        if (getPreferredType(schema.type) === 'array') {
+            if (typeof schema.items === 'object' && schema.items.enum) {
+                if (schema.uniqueItems === true) {
+                    const f = stdFormObj(name, schema, options);
+                    f.type  = 'multiselect';
+
+                    if (schema.items.enumNames) {
+                        f.titles = schema.items.enumNames;
+                    }
+
+                    if (!f.titles) {
+                        f.titles = enumToTitles(schema.items.enum);
+                    }
+
+                    return f;
+                }
+            }
         }
 
         return undefined;
@@ -234,6 +255,7 @@ export const definitions = {
 
 export const rules = [
     // Detect enumerations
+    definitions.multiselect,
     definitions.select,
 
     // Handle basic strings and other primitives
