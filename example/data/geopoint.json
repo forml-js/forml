@@ -18,11 +18,10 @@
             },
             "coordinates": {
                 "type": "array",
-                "minItems": 2,
-                "maxItems": 2,
-                "items": {
-                    "type": "number"
-                }
+                "items": [
+                    {"type": "number", "title": "X"},
+                    {"type": "number", "title": "Y"}
+                ]
             }
         }
     },
