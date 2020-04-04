@@ -10,7 +10,7 @@ import {createElement as h} from 'react';
  */
 const useStyles = makeStyles(function(theme) {
     return {
-        root: {margin: theme.spacing(0, 0, 0, 1)},
+        root: {margin: theme.spacing(0, 0, 1, 0)},
     };
 });
 export default function FieldSet(props) {
