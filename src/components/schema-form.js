@@ -5,6 +5,8 @@ import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import {createElement as h, useCallback, useMemo} from 'react';
+import {DndProvider} from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 
 import Context from '../context';
 import {merge} from '../forms';
@@ -68,7 +70,7 @@ export function SchemaForm({model, schema, form, ...props}) {
 
     return h(Context.Provider,
              {value: contextValue},
-             merged.map((form, index) => {
+             h(DndProvider, {backend: Backend}, merged.map((form, index) => {
                  const {schema} = form;
                  return h(SchemaField, {
                      key: index.toString(),
@@ -76,7 +78,7 @@ export function SchemaForm({model, schema, form, ...props}) {
                      form,
                      onChange,
                  })
-             }));
+             })));
 
     function onChange(event, value) {
         /**

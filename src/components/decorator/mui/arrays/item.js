@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import {createElement as h, Fragment, useState} from 'react';
+import {createElement as h, forwardRef, Fragment, useState} from 'react';
 
 const useStyles = makeStyles(function(theme) {
     return {
@@ -26,19 +26,20 @@ const useStyles = makeStyles(function(theme) {
 /**
  * @component
  */
-export default function Item(props) {
+export function ItemComponent(props) {
     const [open, setOpen] = useState(false);
     const classes         = useStyles();
     const {index}         = props;
+    const {dragDropRef}   = props;
 
     const title = h(Typography, {variant: 'subtitle1'}, [
         ` [${index}] `,
         props.title,
     ]);
 
-    return h(Fragment, {}, [
+    return h('div', {}, [
         h(ListItem,
-          {button: true, divider: true, onClick: toggle},
+          {button: true, divider: true, onClick: toggle, ref: dragDropRef},
           [
               h(Icon,
                 {
@@ -61,3 +62,7 @@ export default function Item(props) {
         setOpen(!open);
     }
 }
+
+export default forwardRef((props, ref) => {
+    return h(ItemComponent, {...props, dragDropRef: ref});
+});

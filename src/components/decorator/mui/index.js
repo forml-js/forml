@@ -4,6 +4,7 @@ import FieldSet from './fieldset';
 import Group from './group';
 import * as Input from './input';
 import Label from './label';
+import Preview from './preview';
 import * as Tabs from './tabs';
 import Text from './text';
 
@@ -14,6 +15,7 @@ export {
     Group,
     Input,
     Label,
+    Preview,
     Tabs,
     Text,
 };

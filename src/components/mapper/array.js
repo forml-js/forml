@@ -1,7 +1,10 @@
 import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
+import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, useEffect, useMemo, useState} from 'react';
+import {createElement as h, useEffect, useMemo, useRef, useState} from 'react';
+import {DndProvider, useDrag, useDragLayer, useDrop} from 'react-dnd';
+import {getEmptyImage} from 'react-dnd-html5-backend';
 import shortid from 'shortid';
 
 import {ARRAY_PLACEHOLDER} from '../../constants';
@@ -105,21 +108,32 @@ export function useArrayItems(form) {
         return mover;
     }
 
-    return {items, add, destroyer, upwardMover, downwardMover};
+    function move(startIndex, newIndex) {
+        const dragItem = items[startIndex];
+        items.splice(startIndex, 1);
+        items.splice(newIndex, 0, dragItem);
+        setItems([...items]);
+    }
+
+    return {items, add, destroyer, upwardMover, downwardMover, move};
 }
 
 function ArrayItem(props) {
     const {form, index, items} = props;
+    const {type}               = props;
     const model                = useModel();
     const deco                 = useDecorator();
     const localizer            = useLocalizer();
+    const value                = model.getValue([...form.key, index]);
 
     let title = form.title;
-
     if (form.titleFun) {
-        const value = model.getValue([...form.key, index]);
-        title       = form.titleFun(value);
+        title = form.titleFun(value);
     }
+
+    const [dragProps, dragRef, preview] = useDrag(
+        {item: {index, type, value, title, form}, begin, collect});
+    const [dropProps, dropRef]          = useDrop({accept: type, drop, hover});
 
     title = localizer.getLocalizedString(title);
 
@@ -127,8 +141,73 @@ function ArrayItem(props) {
     const moveUp   = useMemo(() => items.upwardMover(index), [items, index]);
     const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
 
-    return h(
-        deco.Arrays.Item, {key: 'header', title, destroy, moveUp, moveDown, index}, props.children);
+    const ref = dragRef(dropRef(useRef()));
+
+    useEffect(function() {
+        preview(getEmptyImage(), {captureDragginState: true});
+    });
+
+    return h(deco.Arrays.Item,
+             {
+                 key: 'header',
+                 title,
+                 destroy,
+                 moveUp,
+                 moveDown,
+                 index,
+                 ref,
+                 ...dragProps,
+                 ...dropProps,
+             },
+             props.children);
+
+    function begin(monitor) {
+        log('ArrayItem() : begin() : %O', monitor);
+    }
+
+    function drop(item, monitor) {
+        log('ArrayComponent() : drop() : item : %O', item);
+    }
+
+    function collect(monitor) {
+        return {
+            isDragging: monitor.isDragging(),
+        };
+    }
+
+    function hover(item, monitor) {
+        if (!ref.current)
+            return;
+
+        const dragIndex = item.index;
+        const hoverIndex = index;
+
+        log('hover(%o, %o) : ref : %O', dragIndex, hoverIndex, ref);
+        if (dragIndex === hoverIndex)
+            return;
+
+        log('hover(%o) : dragIndex : %o', index, dragIndex);
+        log('hover(%o) : hoverIndex : %o', index, hoverIndex);
+
+        const hoverBoundingRect = ref.current.getBoundingClientRect();
+        const hoverMiddleY      = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+        const clientOffset      = monitor.getClientOffset();
+        const hoverClientY      = clientOffset.y - hoverBoundingRect.top;
+
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+            return;
+        }
+
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+            return;
+        }
+
+        log('items.move(%o, %o)', dragIndex, hoverIndex);
+        items.move(dragIndex, hoverIndex);
+
+        item.index = hoverIndex;
+    }
 }
 
 /**
@@ -139,6 +218,7 @@ export default function ArrayComponent(props) {
     const {error} = props;
     const arrays  = [];
 
+    const type      = useMemo(() => ObjectPath.stringify(form.key));
     const items     = useArrayItems(form);
     const deco      = useDecorator();
     const localizer = useLocalizer();
@@ -149,13 +229,54 @@ export default function ArrayComponent(props) {
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {key, form: formCopy, schema: formCopy.schema});
         });
-        arrays.push(h(ArrayItem, {key: item.key, form, index: i, items, item}, forms));
+        arrays.push(h(ArrayItem, {key: item.key, form, index: i, items, item, type}, forms));
     }
 
     const label = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
 
-    return h(deco.Arrays.Items, {add: items.add, label, description, error}, arrays);
+    return h(deco.Arrays.Items,
+             {add: items.add, label, description, error},
+             [h(DragLayer, {renderItem: deco.preview}), arrays]);
+}
+
+function getItemStyles(initialOffset, currentOffset) {
+    if (!initialOffset || !currentOffset) {
+        return {display: 'none'};
+    }
+
+    let {x, y} = currentOffset;
+
+    const transform = `translate(${x}px, ${y}px)`;
+    return {transform, WebkitTransform: transform};
+}
+
+function DragLayer(props) {
+    const {item, isDragging, initialOffset, currentOffset} = useDragLayer(
+        (monitor) => ({
+            item: monitor.getItem(),
+            initialOffset: monitor.getInitialSourceClientOffset(),
+            currentOffset: monitor.getClientOffset(),
+            isDragging: monitor.isDragging(),
+        }));
+    const deco = useDecorator();
+
+    if (!isDragging)
+        return null;
+
+    return h('div',
+             {
+                 style: {
+                     position: 'fixed',
+                     pointerEvents: 'none',
+                     zIndex: 100,
+                     left: 0,
+                     top: 0,
+                     width: '100%',
+                     height: '100%'
+                 }
+             },
+             h('div', {style: getItemStyles(initialOffset, currentOffset)}, h(deco.Preview, item)));
 }
 
 ArrayComponent.propTypes = {

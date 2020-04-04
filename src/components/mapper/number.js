@@ -1,5 +1,6 @@
+import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h} from 'react';
+import {createElement as h, useState} from 'react';
 
 import {useDecorator, useLocalizer} from '../../context';
 import {FormType} from '../../types';
@@ -19,9 +20,12 @@ export default function Number(props) {
     const label       = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
     const description = localizer.getLocalizedString(form.description);
 
+    const id = ObjectPath.stringify(form.key);
+    const [focused, setFocused] = useState(false);
+
     return h(deco.Input.Group, {form}, [
-        h(deco.Label, {form, value, error}, label),
-        h(deco.Input.Form, {value, error, onChange, placeholder, form}),
+        h(deco.Label, {form, value, error, htmlFor: id, focused}, label),
+        h(deco.Input.Form, {value, error, onChange, placeholder, form, id, onFocus}),
         (error || description) &&
             h(deco.Input.Description, {form, value, error: !!error}, error || description),
     ]);
@@ -42,6 +46,14 @@ export default function Number(props) {
         }
 
         props.onChange(e, value);
+    }
+
+    function onFocus() {
+        setFocused(true);
+    }
+
+    function onBlur() {
+        setFocused(false);
     }
 }
 
