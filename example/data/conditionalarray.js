@@ -22,17 +22,31 @@ module.exports = {
             'key': 'notes',
             'type': 'array',
             'items': [
-                'notes[].basicInfo',
-                'notes[].additionalInfoRequired',
                 {
-                    'key': 'notes[].additionalInfo',
-                    'type': 'textarea',
+                    type: 'dynamic',
+                    key: 'notes[]',
+                    generate(props, model) {
+                        const forms = [
+                            'basicInfo',
+                            'additionalInfoRequired',
+                        ];
+
+                        if (model.additionalInfoRequired) {
+                            forms.push({
+                                'key': 'additionalInfo',
+                                'type': 'textarea',
+                            });
+                        }
+
+                        forms.push({
+                            'type': 'help',
+                            'description':
+                                'key will be: [\'notes\', x, \'additionalInfo\'], where x is the index of the array, so use \'form.key[1]\' to get index'
+                        });
+
+                        return forms;
+                    }
                 },
-                {
-                    'type': 'help',
-                    'description':
-                        'key will be: [\'notes\', x, \'additionalInfo\'], where x is the index of the array, so use \'form.key[1]\' to get index'
-                }
             ]
         }];
     }

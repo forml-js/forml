@@ -45,6 +45,9 @@ function useEditable(defaultValue) {
 }
 
 function Editor(props) {
+    if (!props.value)
+        return null;
+
     return h(SimpleEditor, {
         value: props.value,
         highlight: (code) => {
