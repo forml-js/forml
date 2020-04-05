@@ -2,7 +2,7 @@ import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, useEffect, useMemo, useRef, useState} from 'react';
+import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {DndProvider, useDrag, useDragLayer, useDrop} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 import shortid from 'shortid';
@@ -109,9 +109,18 @@ export function useArrayItems(form) {
     }
 
     function move(startIndex, newIndex) {
+        const value = model.getValue(form.key);
+
         const dragItem = items[startIndex];
+        const dragValue = value[startIndex];
+
         items.splice(startIndex, 1);
         items.splice(newIndex, 0, dragItem);
+        value.splice(startIndex, 1);
+        value.splice(newIndex, 0, dragValue);
+
+        const nextModel = model.setValue(form.key, [...value]);
+        model.onChange(event, nextModel);
         setItems([...items]);
     }
 
@@ -131,15 +140,14 @@ function ArrayItem(props) {
         title = form.titleFun(value);
     }
 
-    const [dragProps, dragRef, preview] = useDrag(
-        {item: {index, type, value, title, form}, begin, collect});
-    const [dropProps, dropRef]          = useDrop({accept: type, drop, hover});
+    const [dragProps, dragRef, preview] = useDrag({item: {index, type, value, title}, collect});
+    const [dropProps, dropRef]          = useDrop({accept: type, hover});
 
     title = localizer.getLocalizedString(title);
 
-    const destroy  = useMemo(() => items.destroyer(index), [items, index]);
-    const moveUp   = useMemo(() => items.upwardMover(index), [items, index]);
-    const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
+    const destroy  = useCallback(items.destroyer(index), [items, index]);
+    const moveUp   = useCallback(items.upwardMover(index), [items, index]);
+    const moveDown = useCallback(items.downwardMover(index), [items, index]);
 
     const ref = dragRef(dropRef(useRef()));
 
@@ -161,14 +169,6 @@ function ArrayItem(props) {
              },
              props.children);
 
-    function begin(monitor) {
-        log('ArrayItem() : begin() : %O', monitor);
-    }
-
-    function drop(item, monitor) {
-        log('ArrayComponent() : drop() : item : %O', item);
-    }
-
     function collect(monitor) {
         return {
             isDragging: monitor.isDragging(),
@@ -182,12 +182,8 @@ function ArrayItem(props) {
         const dragIndex = item.index;
         const hoverIndex = index;
 
-        log('hover(%o, %o) : ref : %O', dragIndex, hoverIndex, ref);
         if (dragIndex === hoverIndex)
             return;
-
-        log('hover(%o) : dragIndex : %o', index, dragIndex);
-        log('hover(%o) : hoverIndex : %o', index, hoverIndex);
 
         const hoverBoundingRect = ref.current.getBoundingClientRect();
         const hoverMiddleY      = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -203,7 +199,6 @@ function ArrayItem(props) {
             return;
         }
 
-        log('items.move(%o, %o)', dragIndex, hoverIndex);
         items.move(dragIndex, hoverIndex);
 
         item.index = hoverIndex;
@@ -218,7 +213,7 @@ export default function ArrayComponent(props) {
     const {error} = props;
     const arrays  = [];
 
-    const type      = useMemo(() => ObjectPath.stringify(form.key));
+    const type      = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
     const items     = useArrayItems(form);
     const deco      = useDecorator();
     const localizer = useLocalizer();
@@ -226,6 +221,8 @@ export default function ArrayComponent(props) {
     for (let i = 0; i < items.items.length; ++i) {
         const item  = items.items[i];
         const forms = item.forms.map(function({form, key}) {
+            if (!form)
+                return;
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {key, form: formCopy, schema: formCopy.schema});
         });
