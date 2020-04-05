@@ -12,6 +12,8 @@ import {render} from 'react-dom';
 import SimpleEditor from 'react-simple-code-editor';
 import {decorators, SchemaForm, util} from 'rjsf';
 
+const log = debug('rjsf:example');
+
 // import clike from 'prismjs/components/prism-clike';
 // import javascript from 'prismjs/components/prism-javascript';
 
@@ -43,11 +45,9 @@ function useEditable(defaultValue) {
 }
 
 function Editor(props) {
-    console.error('Editor() : props.value : %o', props.value);
     return h(SimpleEditor, {
         value: props.value,
         highlight: (code) => {
-            console.error('Editor() : Prism.highlight() : code : %o', code);
             return Prism.highlight(code, Prism.languages.javascript, 'javascript')
         },
         padding: 10,
@@ -82,8 +82,6 @@ class ErrorBoundary extends Component {
         return this.props.children;
     }
 }
-
-const log = debug('rjsf:example');
 
 function importAll(context) {
     const keys   = context.keys();
@@ -135,16 +133,20 @@ function RenderExample(props) {
     const {schema, form, model} = props;
     const {onChange}            = props;
     const {localizer}           = props;
+    const {mapper}              = props;
     const decorator             = decorators.mui;
 
-    return h(ErrorBoundary, {}, h(SchemaForm, {
-                 schema,
-                 form,
-                 model,
-                 decorator,
-                 localizer,
-                 onChange,
-             }));
+    const formProps = {
+        schema,
+        form,
+        model,
+        decorator,
+        localizer,
+        onChange,
+        mapper,
+    };
+
+    return h(ErrorBoundary, {}, h(SchemaForm, formProps));
 }
 
 function getSample(selected) {
@@ -163,11 +165,12 @@ const useStyles = makeStyles(function() {
 });
 
 function Page() {
-    const classes                 = useStyles();
-    const [selected, setSelected] = useState('');
+    const classes                   = useStyles();
+    const [selected, setSelected]   = useState('');
     const [localizer, setLocalizer] = useState(undefined);
-    const schema                  = useEditable({type: 'null'});
-    const form                    = useEditable(['*']);
+    const [mapper, setMapper]       = useState(undefined);
+    const schema                    = useEditable({type: 'null'});
+    const form                      = useEditable(['*']);
     const defaultModel              = useMemo(() => util.defaultForSchema(schema), [schema]);
     const model                     = useEditable(defaultModel);
 
@@ -180,32 +183,34 @@ function Page() {
         schema.setValue(sample.schema);
         form.setValue(sample.form);
         model.setValue(defaultModel);
+        setMapper(sample.mapper);
         setLocalizer(sample.localization);
     }, [selected]);
 
     return h('div', {className: classes.root}, [
         h(Card,
-            {className: classes.example},
+            {className: classes.example, key: 'primary-viewport'},
             [
                 h(CardContent,
-                    {},
+                    {key: 'example'},
                     h(RenderExample, {
                         key: `render-${schema.json}${form.json}`,
                         schema: schema.value,
                         form: form.value,
                         model: model.value,
                         onChange: onModelChange,
+                        mapper,
                         localizer,
                     })),
                 h(CardContent,
-                    {},
+                    {key: 'model'},
                     [
                         h(Typography, {key: 'title', variant: 'h6'}, 'Model'),
                         h('pre', {key: 'body'}, model.json),
                     ])
             ]),
         h(Card,
-            {className: classes.manager},
+            {className: classes.manager, key: 'secondary-viewport'},
             [
                 h(CardContent, {key: 'select-example'}, h(SelectExample, {key: 'select', selected, onChange})),
                 h(CardContent,

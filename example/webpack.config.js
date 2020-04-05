@@ -10,7 +10,7 @@ module.exports = {
     devtool: 'eval-source-map',
     resolve: {
         alias: {
-            rjsf: '../src',
+            rjsf: path.resolve(__dirname, '../src'),
             react: path.resolve('./node_modules/react'),
             'react-dom': path.resolve('./node_modules/react-dom'),
             '@material-ui/core': path.resolve('./node_modules/@material-ui/core'),
