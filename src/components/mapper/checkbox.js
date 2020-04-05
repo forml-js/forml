@@ -15,14 +15,14 @@ export default function Checkbox(props) {
     const deco     = useDecorator();
     const localize = useLocalizer();
 
-    return h(deco.Checkbox, {
-        form,
-        checked: value,
-        title: localize.getLocalizedString(title),
-        description: localize.getLocalizedString(description),
-        error,
-        onChange,
-    });
+    return h(deco.Input.Group, {form}, h(deco.Checkbox, {
+                 form,
+                 checked: value,
+                 title: localize.getLocalizedString(title),
+                 description: localize.getLocalizedString(description),
+                 error,
+                 onChange,
+             }));
 
     function onChange(event) {
         props.onChange(event, event.target.checked);
