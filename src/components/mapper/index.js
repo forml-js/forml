@@ -7,6 +7,7 @@ import Array from './array';
 import Checkbox from './checkbox';
 import Date from './date';
 import DateTime from './datetime';
+import Dynamic from './dynamic';
 import FieldSet from './fieldset';
 import File from './file';
 import Help from './help';
@@ -25,6 +26,7 @@ export function defaultMapper() {
         checkbox: Checkbox,
         date: Date,
         datetime: DateTime,
+        dynamic: Dynamic,
         fieldset: FieldSet,
         help: Help,
         integer: Integer,
