@@ -8,7 +8,10 @@ import File from './file';
 /**
  * @component
  */
-export default function Form(props) {
+export default function Form({error, ...props}) {
+    error = !!error;
+    props = {error, ...props};
+
     if (props.type === 'file') {
         return h(File, props);
     }

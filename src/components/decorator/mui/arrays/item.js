@@ -28,7 +28,7 @@ const useStyles = makeStyles(function(theme) {
  */
 export function ItemComponent(props) {
     const [open, setOpen] = useState(false);
-    const classes         = useStyles();
+    const classes         = useStyles(props);
     const {index}         = props;
     const {dragDropRef}   = props;
 
