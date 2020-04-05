@@ -1,6 +1,9 @@
 import Ajv from 'ajv';
+import debug from 'debug';
 import objectPath from 'objectpath';
 import {useMemo} from 'react';
+
+const log = debug('rjsf:util');
 
 /**
  * @namespace rjsf.util
@@ -137,15 +140,19 @@ export function errorGetter(errors) {
  */
 function updateAndClone(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
+        log('updateAndClone() %s> %O', '-'.repeat(depth), model);
+        log('updateAndClone() <%s %O', '-'.repeat(depth), value);
         return value;
     }
+
+    log('updateAndClone() %s> %o', '-'.repeat(depth), model);
 
     const [next, ...rest] = keys;
     const nextSchema      = getNextSchema(schema, next);
     const nextModel       = updateAndClone(
         rest, getNextValue(nextSchema, model, next), nextSchema, value, depth + 1);
 
-    if (schema.type === 'array') {
+    if (getPreferredType(schema.type) === 'array') {
         const firstSlice = model.slice(0, next);
         const lastSlice  = model.slice(next + 1);
 
@@ -154,13 +161,13 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
         }
 
         const result = [...firstSlice, nextModel, ...lastSlice];
-        // log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
-    if (schema.type === 'object') {
+    if (getPreferredType(schema.type) === 'object') {
         const result = {...model, [next]: nextModel};
-        // log('updateAndClone() <%s %o', '-'.repeat(depth), result);
+        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 

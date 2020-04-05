@@ -1,4 +1,4 @@
-import {createContext, useContext} from 'react';
+import {createContext, useContext as useReactContext} from 'react';
 import {defaultDecorator} from './components/decorator';
 import {defaultMapper} from './components/mapper';
 import {defaultLocalizer} from './localizer';
@@ -16,16 +16,21 @@ const context = createContext({
     mapper: defaultMapper(),
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),
+    version: 0,
 });
 
 export default context;
+
+export function useContext() {
+    return useReactContext(context);
+}
 
 /**
  * A hook to import the closest parent form's mapper
  * @return {Mapper}
  */
 export function useMapper() {
-    const ctx = useContext(context);
+    const ctx = useContext();
     return ctx.mapper;
 }
 
@@ -35,8 +40,8 @@ export function useMapper() {
  * @return {ModelMethods}
  */
 export function useModel() {
-    const {getValue, setValue, getError, setError, onChange} = useContext(context);
-    return {getValue, setValue, getError, setError, onChange};
+    const {getValue, setValue, getError, setError, onChange, version} = useContext();
+    return {getValue, setValue, getError, setError, onChange, version};
 }
 
 /**
@@ -44,7 +49,7 @@ export function useModel() {
  * @return {Localizer}``
  */
 export function useLocalizer() {
-    const {localizer} = useContext(context);
+    const {localizer} = useContext();
     return localizer;
 }
 
@@ -53,6 +58,6 @@ export function useLocalizer() {
  * @return {Decorator}
  */
 export function useDecorator() {
-    const {decorator} = useContext(context);
+    const {decorator} = useContext();
     return decorator;
 }

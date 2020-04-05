@@ -4,7 +4,7 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import {createElement as h, useCallback, useMemo} from 'react';
+import {createElement as h, useCallback, useEffect, useMemo, useState} from 'react';
 import {DndProvider} from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 
@@ -20,12 +20,40 @@ import {SchemaField} from './schema-field';
 
 const log = debug('rjsf:schema-form');
 
+function useGenerator(generator, props, model, deps) {
+    const [value, setValue] = useState(null);
+
+    useEffect(function() {
+        if (typeof generator === 'function') {
+            Promise.resolve(generator(props, model)).then(setValue);
+        } else {
+            setValue(generator);
+        }
+    }, deps);
+
+    return value;
+}
+
+function getDeps(deps, props, model) {
+    if (typeof deps === 'function') {
+        return [...deps(props), model];
+    }
+
+    return [model];
+}
+
 /**
  * @component SchemaForm
  * @description Renders a form from the provided schema, using the provided model as a value
  * and the provided forms as a guide.
  */
-export function SchemaForm({model, schema, form, ...props}) {
+let versions = 0;
+
+export function SchemaForm({model, schema: schemaGenerator, form: formGenerator, ...props}) {
+    const schema = useGenerator(
+        schemaGenerator, props, undefined, getDeps(props.schemaDeps, props, undefined));
+    const form = useGenerator(formGenerator, props, model, getDeps(props.formDeps, props, model));
+
     const merged            = useMemo(() => merge(schema, form), [schema, form])
     const validate          = useCallback(util.useValidator(schema), [schema]);
     const mapper            = useMemo(() => getMapper(props.mapper), [props.mapper]);
@@ -33,6 +61,7 @@ export function SchemaForm({model, schema, form, ...props}) {
     const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
     const errors            = useMemo(computeErrors, [model, validate]);
 
+    const version  = useMemo(() => versions++, [model]);
     const getValue = useCallback(util.valueGetter(model, schema), [model, schema]);
     const setValue = useCallback(util.valueSetter(model, schema), [model, schema]);
     const getError = useCallback(util.errorGetter(errors), [errors]);
@@ -47,10 +76,11 @@ export function SchemaForm({model, schema, form, ...props}) {
                 getValue,
                 setValue,
                 getError,
-                onChange,
+                onChange: props.onChange,
                 localizer,
                 errors: {},
                 decorator,
+                version,
             };
         },
         [
@@ -64,31 +94,24 @@ export function SchemaForm({model, schema, form, ...props}) {
             getValue,
             setValue,
             getError,
+            version,
+            props.onChange,
         ]);
 
-    log('SchemaForm() : form : %O', merged);
-
-    return h(Context.Provider,
-             {value: contextValue},
-             h(DndProvider, {backend: Backend}, merged.map((form, index) => {
+    return h(DndProvider,
+             {backend: Backend},
+             h(Context.Provider, {value: contextValue}, merged.map((form, index) => {
+                 if (!form)
+                     return;
                  const {schema} = form;
                  return h(SchemaField, {
-                     key: index.toString(),
+                     key: index,
                      schema,
                      form,
-                     onChange,
+                     onChange: props.onChange,
                  })
              })));
 
-    function onChange(event, value) {
-        /**
-         * This value could be coming from any of our root forms; we're mostly
-         * just intercepting the event so we can trigger our parent!
-         */
-        if (props.onChange) {
-            props.onChange(event, value);
-        }
-    }
 
     function computeErrors() {
         const {valid, errors} = validate(model);
@@ -116,7 +139,7 @@ SchemaForm.propTypes = {
      */
     schema: PropTypes.object.isRequired,
     /** The forms to render */
-    form: Types.FormsType,
+    form: PropTypes.oneOfType([PropTypes.function, Types.FormsType]),
     /** A set of localization functions to use */
     localizer: PropTypes.shape({
         getLocalizedDate: PropTypes.func,

@@ -17,6 +17,11 @@ export function getDefaults(schema) {
 }
 
 export function merge(schema, form = ['*'], options = {}) {
+    if (!schema)
+        return [];
+    if (!form)
+        return [];
+
     const stdForm = getDefaults(schema);
 
     const idx = form.indexOf('*');
@@ -26,6 +31,14 @@ export function merge(schema, form = ['*'], options = {}) {
 
     const {lookup} = stdForm;
     form           = form.map(obj => {
+        if (obj === undefined) {
+            return;
+        }
+
+        if (typeof obj === 'function') {
+            return;
+        }
+
         if (typeof obj === 'string') {
             obj = {key: obj};
         }

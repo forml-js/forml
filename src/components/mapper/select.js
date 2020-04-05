@@ -1,3 +1,4 @@
+import ObjectPath from 'objectpath';
 import t from 'prop-types';
 import {createElement as h} from 'react';
 
@@ -20,8 +21,9 @@ export default function Select(props) {
     const menuItems = [];
     for (let i = 0; i < form.titleMap.length; i++) {
         const name    = localizer.getLocalizedString(getLabel(form.titleMap[i]));
+        const key     = ObjectPath.stringify(form.key);
         const {value} = form.titleMap[i];
-        menuItems.push(h(deco.Input.Option, {key: name, value}, name));
+        menuItems.push(h(deco.Input.Option, {key, value}, name));
     }
 
     return h(deco.Input.Group, {form, error}, [
