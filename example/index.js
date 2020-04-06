@@ -24,24 +24,24 @@ async function loadPrism() {
 
 
 function useEditable(defaultValue) {
-    const [value, doSetValue] = useState(defaultValue);
-    const [json, doSetJSON]   = useState('null');
+    const [value, doSetValue] = useState({value: defaultValue});
+    const [json, doSetJSON]   = useState({value: JSON.stringify(defaultValue, undefined, 2)});
 
     function setValue(value) {
-        doSetValue(value);
-        doSetJSON(JSON.stringify(value, undefined, 2));
+        doSetValue({value});
+        doSetJSON({value: JSON.stringify(value, undefined, 2)});
     }
 
     function setJSON(json) {
-        doSetJSON(json);
+        doSetJSON({value: json});
         try {
-            doSetValue(JSON.parse(json));
+            doSetValue({value: JSON.parse(json)});
         } catch (err) {
             /** noop */
         }
     }
 
-    return {value, json, setValue, setJSON};
+    return {value: value.value, json: json.value, setValue, setJSON};
 }
 
 function Editor(props) {
@@ -174,21 +174,17 @@ function Page() {
     const [mapper, setMapper]       = useState(undefined);
     const schema                    = useEditable({type: 'null'});
     const form                      = useEditable(['*']);
-    const defaultModel              = useMemo(() => util.defaultForSchema(schema), [schema]);
+    const defaultModel              = useMemo(() => {
+        return util.defaultForSchema(schema.value);
+    }, [schema.value]);
     const model                     = useEditable(defaultModel);
 
     function onModelChange(event, ...args) {
         model.setValue(args[0]);
     }
 
-    useEffect(function() {
-        const sample = getSample(selected);
-        schema.setValue(sample.schema);
-        form.setValue(sample.form);
-        model.setValue(defaultModel);
-        setMapper(sample.mapper);
-        setLocalizer(sample.localization);
-    }, [selected]);
+    log('model : %o', model.value);
+    log('rendering');
 
     return h('div', {className: classes.root}, [
         h(Card,
@@ -233,6 +229,12 @@ function Page() {
 
     function onChange(event, example) {
         // event.preventDefault();
+        const sample = getSample(example);
+        schema.setValue(sample.schema);
+        form.setValue(sample.form);
+        model.setValue(util.defaultForSchema(sample.schema));
+        setMapper(sample.mapper);
+        setLocalizer(sample.localization);
         setSelected(example);
     }
 }
