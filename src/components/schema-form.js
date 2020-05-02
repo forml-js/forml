@@ -21,17 +21,13 @@ import {SchemaField} from './schema-field';
 const log = debug('rjsf:schema-form');
 
 function useGenerator(generator, props, model, deps) {
-    const [value, setValue] = useState(null);
+    if (typeof generator === 'function') {
+        // The genrator is a hook; use it
+        return generator(props, model, deps)
+    }
 
-    useEffect(function() {
-        if (typeof generator === 'function') {
-            Promise.resolve(generator(props, model)).then(setValue);
-        } else {
-            setValue(generator);
-        }
-    }, deps);
-
-    return value;
+    // The genrator is a value; return it
+    return generator;
 }
 
 function getDeps(deps, props, model) {
@@ -49,10 +45,9 @@ function getDeps(deps, props, model) {
  */
 let versions = 0;
 
-export function SchemaForm({model, schema: schemaGenerator, form: formGenerator, ...props}) {
-    const schema = useGenerator(
-        schemaGenerator, props, undefined, getDeps(props.schemaDeps, props, undefined));
-    const form = useGenerator(formGenerator, props, model, getDeps(props.formDeps, props, model));
+export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) {
+    const schema = useGenerator(useSchema, props, model, props.schemaDeps);
+    const form   = useGenerator(useForm, props, model, props.formDeps);
 
     const merged            = useMemo(() => merge(schema, form), [schema, form])
     const validate          = useCallback(util.useValidator(schema), [schema]);
