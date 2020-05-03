@@ -114,11 +114,7 @@ function SelectExample(props) {
     const model             = props.selected;
     const decorator         = decorators.mui;
 
-    try {
-        return h(SchemaForm, {schema, form, model, onChange, decorator, onModelChange});
-    } catch (err) {
-        return null;
-    }
+    return h(SchemaForm, {schema, form, model, onChange, decorator, onModelChange});
 
     function onModelChange(model) {
         log('onModelChange() : %o', model);

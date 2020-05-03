@@ -94,10 +94,7 @@ export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) 
         ]);
 
     function onChange(event, model) {
-        log('onChange(%o, %O)', event.type, model);
-
         if (props.onChange) {
-            log('onChange(%o, %O) : props.onChnge(...)', event.type, model);
             props.onChange(event, model);
         }
     }
