@@ -37,24 +37,46 @@ export function defaultForSchema(schema) {
         return schema.default;
     }
 
-    const type = getPreferredType(schema.type);
-    switch (type) {
-        case 'array':
-            return [];
-        case 'object':
-            return {};
-        case 'string':
-            return '';
-        case 'number':
-        case 'integer':
-            return 0;
-        case 'boolean':
-            return false;
-        case 'null':
-            return null;
-        default:
-            // throw new Error(`Unhandled defaultForSchema type: ${type}`);
-            return undefined;
+    return buildSchema(schema);
+
+    function buildSchema(schema) {
+        const type = getPreferredType(schema.type);
+        let base   = undefined;
+        switch (type) {
+            case 'array':
+                base = [];
+                if (Array.isArray(schema.items)) {
+                    for (let item of schema.items) {
+                        base.push(defaultForSchema(item));
+                    }
+                }
+                break;
+            case 'object':
+                base = {};
+                for (let property in schema.properties) {
+                    let item       = defaultForSchema(schema.properties[property]);
+                    base[property] = item;
+                }
+                break;
+            case 'string':
+                base = '';
+                break;
+            case 'number':
+            case 'integer':
+                base = 0;
+                break;
+            case 'boolean':
+                base = false;
+                break;
+            case 'null':
+                base = null;
+                break;
+            default:
+                // throw new Error(`Unhandled defaultForSchema type: ${type}`);
+                base = undefined;
+        }
+
+        return base;
     }
 }
 

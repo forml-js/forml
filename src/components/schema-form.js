@@ -71,7 +71,7 @@ export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) 
                 getValue,
                 setValue,
                 getError,
-                onChange: props.onChange,
+                onChange,
                 localizer,
                 errors: {},
                 decorator,
@@ -93,6 +93,15 @@ export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) 
             props.onChange,
         ]);
 
+    function onChange(event, model) {
+        log('onChange(%o, %O)', event.type, model);
+
+        if (props.onChange) {
+            log('onChange(%o, %O) : props.onChnge(...)', event.type, model);
+            props.onChange(event, model);
+        }
+    }
+
     return h(DndProvider,
              {backend: Backend},
              h(Context.Provider, {value: contextValue}, merged.map((form, index) => {
@@ -103,7 +112,7 @@ export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) 
                      key: index,
                      schema,
                      form,
-                     onChange: props.onChange,
+                     onChange,
                  })
              })));
 
