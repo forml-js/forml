@@ -17,7 +17,7 @@ export const schema = {
             'description': 'Email will be used for evil.'
         },
         'spam': {'title': 'Spam', 'type': 'boolean', 'default': true},
-        'tos': {'title': 'Terms and Conditions', 'type': 'boolean', 'default': 'false'},
+        'tos': {'title': 'Terms and Conditions', 'type': 'boolean', 'default': false},
         'comment': {
             'title': 'Comment',
             'type': 'string',
@@ -58,7 +58,7 @@ export function form(props, model) {
     return [
         'name',
         'email',
-        model.email && {
+        'email' in model && {
             'key': 'spam',
             'type': 'checkbox',
             'title': 'Yes I want spam.',
