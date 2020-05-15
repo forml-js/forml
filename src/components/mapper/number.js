@@ -1,9 +1,9 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, useState} from 'react';
+import { createElement as h, useState } from 'react';
 
-import {useDecorator, useLocalizer} from '../../context';
-import {FormType} from '../../types';
+import { useDecorator, useLocalizer } from '../../context';
+import { FormType } from '../../types';
 
 const valueExceptions = ['', '-'];
 
@@ -11,23 +11,39 @@ const valueExceptions = ['', '-'];
  * @component Number
  */
 export default function Number(props) {
-    const {form, value, error} = props;
+    const { form, value, error } = props;
+    const { readonly: disabled } = form;
 
-    const deco        = useDecorator();
-    const localizer   = useLocalizer();
+    const deco = useDecorator();
+    const localizer = useLocalizer();
 
     const placeholder = localizer.getLocalizedString(form.placeholder);
-    const label       = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
+    const label = localizer.getLocalizedString(
+        form.title || form.key[form.key.length - 1]
+    );
     const description = localizer.getLocalizedString(form.description);
 
     const id = ObjectPath.stringify(form.key);
     const [focused, setFocused] = useState(false);
 
-    return h(deco.Input.Group, {form}, [
-        h(deco.Label, {form, value, error, htmlFor: id, focused}, label),
-        h(deco.Input.Form, {value, error, onChange, placeholder, form, id, onFocus}),
+    return h(deco.Input.Group, { form }, [
+        h(deco.Label, { form, value, error, htmlFor: id, focused }, label),
+        h(deco.Input.Form, {
+            value,
+            error,
+            onChange,
+            placeholder,
+            form,
+            id,
+            onFocus,
+            disabled,
+        }),
         (error || description) &&
-            h(deco.Input.Description, {form, value, error: !!error}, error || description),
+            h(
+                deco.Input.Description,
+                { form, value, error: !!error },
+                error || description
+            ),
     ]);
 
     function onChange(e) {
@@ -66,4 +82,4 @@ Number.propTypes = {
     error: t.string,
     /** The current value of the number */
     value: t.number,
-}
+};
