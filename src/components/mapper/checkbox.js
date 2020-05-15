@@ -1,18 +1,19 @@
 import t from 'prop-types';
-import {createElement as h} from 'react';
+import { createElement as h } from 'react';
 
-import {useDecorator, useLocalizer} from '../../context';
-import {FormType} from '../../types';
+import { useDecorator, useLocalizer } from '../../context';
+import { FormType } from '../../types';
 
 /**
  * @component Checkbox
  */
 export default function Checkbox(props) {
-    const {form}               = props;
-    const {error, value}       = props;
-    const {title, description} = form;
+    const { form } = props;
+    const { error, value } = props;
+    const { title, description } = form;
+    const { readonly: disabled } = form;
 
-    const deco     = useDecorator();
+    const deco = useDecorator();
     const localize = useLocalizer();
 
     return h(deco.Checkbox, {
@@ -22,6 +23,7 @@ export default function Checkbox(props) {
         description: localize.getLocalizedString(description),
         error,
         onChange,
+        disabled,
     });
 
     function onChange(event) {

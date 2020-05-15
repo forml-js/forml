@@ -1,49 +1,59 @@
 import t from 'prop-types';
-import {createElement as h, useState} from 'react';
+import { createElement as h, useState } from 'react';
 
-import {useDecorator, useLocalizer} from '../../context';
-import {FormType} from '../../types';
+import { useDecorator, useLocalizer } from '../../context';
+import { FormType } from '../../types';
 
 export default function Multiselect(props) {
-    const {value, schema, error, form} = props;
+    const { value, schema, error, form } = props;
+    const { readonly: disabled } = form;
 
-    const deco      = useDecorator();
+    const deco = useDecorator();
     const localizer = useLocalizer();
 
-    const title       = localizer.getLocalizedString(form.title);
+    const title = localizer.getLocalizedString(form.title);
     const placeholder = localizer.getLocalizedString(form.placeholder);
     const description = localizer.getLocalizedString(form.description);
 
     const menuItems = [];
     for (let i = 0; i < form.titleMap.length; i++) {
         const name = localizer.getLocalizedString(getLabel(form.titleMap[i]));
-        const {value} = form.titleMap[i];
-        menuItems.push(h(deco.Input.Option, {key: name, value}, name));
+        const { value } = form.titleMap[i];
+        menuItems.push(h(deco.Input.Option, { key: name, value }, name));
     }
 
-    return h(deco.Input.Group, {form, error}, [
-        h(deco.Label, {key: 'label', required: form.required, form, value, error}, title),
-        h(deco.Input.Select,
-          {
-              key: 'select',
-              multiple: true,
-              value,
-              placeholder,
-              disabled: form.readonly,
-              onChange,
-              form,
-              value,
-              error
-          },
-          menuItems),
+    return h(deco.Input.Group, { form, error }, [
+        h(
+            deco.Label,
+            { key: 'label', required: form.required, form, value, error },
+            title
+        ),
+        h(
+            deco.Input.Select,
+            {
+                key: 'select',
+                multiple: true,
+                value,
+                placeholder,
+                disabled: form.readonly,
+                onChange,
+                form,
+                value,
+                error,
+                disabled,
+            },
+            menuItems
+        ),
         (error || description) &&
-            h(deco.Input.Description,
-              {key: 'help', error: !!error, form, value},
-              localizer.getLocalizedString(error || description)),
+            h(
+                deco.Input.Description,
+                { key: 'help', error: !!error, form, value },
+                localizer.getLocalizedString(error || description)
+            ),
     ]);
 
     function getLabel(item) {
-        const {displayFn} = schema;
+        const { displayFn } = schema;
 
         if (displayFn) {
             return displayFn(item);
