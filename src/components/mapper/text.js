@@ -1,37 +1,45 @@
 import t from 'prop-types';
-import {createElement as h} from 'react';
+import { createElement as h } from 'react';
 
-import {useDecorator, useLocalizer} from '../../context';
-import {FormType} from '../../types';
+import { useDecorator, useLocalizer } from '../../context';
+import { FormType } from '../../types';
 
 /**
  * @component Text
  */
 export default function Text(props) {
-    const {value, form, error} = props;
-    const {otherProps}         = props;
+    const { value, form, error } = props;
+    const { otherProps } = props;
 
     const localizer = useLocalizer();
-    const deco      = useDecorator();
+    const deco = useDecorator();
 
-    const {title, description, placeholder} = form;
+    const { title, description, placeholder } = form;
+    const { readonly: disabled } = form;
 
-    return h(deco.Input.Group, {form}, [
+    return h(deco.Input.Group, { form }, [
         title &&
-            h(deco.Label, {key: 'label', form, value, error}, localizer.getLocalizedString(title)),
+            h(
+                deco.Label,
+                { key: 'label', form, value, error },
+                localizer.getLocalizedString(title)
+            ),
         h(deco.Input.Form, {
             key: 'form',
             form,
             onChange,
             value,
             error,
+            disabled,
             placeholder: localizer.getLocalizedString(placeholder),
             ...otherProps,
         }),
         (error || description) &&
-            h(deco.Input.Description,
-              {key: 'description', form, value, error: !!error},
-              localizer.getLocalizedString(error || description)),
+            h(
+                deco.Input.Description,
+                { key: 'description', form, value, error: !!error },
+                localizer.getLocalizedString(error || description)
+            ),
     ]);
 
     function onChange(e) {
