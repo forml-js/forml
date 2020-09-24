@@ -2,9 +2,16 @@ import debug from 'debug';
 import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {createElement as h, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {DndProvider, useDrag, useDragLayer, useDrop} from 'react-dnd';
-import {getEmptyImage} from 'react-dnd-html5-backend';
+import {
+    createElement as h,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
+import { DndProvider, useDrag, useDragLayer, useDrop } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import shortid from 'shortid';
 
 import { ARRAY_PLACEHOLDER } from '../../constants';
@@ -158,7 +165,6 @@ function ArrayItem(props) {
 
     const [dragProps, dragRef, preview] = useDrag({
         item: { index, type, value, title, form },
-        begin,
         collect,
     });
     const [dropProps, dropRef] = useDrop({ accept: type, drop, hover });
@@ -203,7 +209,7 @@ function ArrayItem(props) {
         const dragIndex = item.index;
         const hoverIndex = index;
 
-            return;
+        return;
 
         const hoverBoundingRect = ref.current.getBoundingClientRect();
         const hoverMiddleY =
@@ -236,16 +242,15 @@ export default function ArrayComponent(props) {
 
     const { readonly: disabled } = form;
 
-    const type      = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
-    const items     = useArrayItems(form);
-    const deco      = useDecorator();
+    const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
+    const items = useArrayItems(form);
+    const deco = useDecorator();
     const localizer = useLocalizer();
 
     for (let i = 0; i < items.items.length; ++i) {
-        const item  = items.items[i];
-        const forms = item.forms.map(function({form, key}) {
-            if (!form)
-                return;
+        const item = items.items[i];
+        const forms = item.forms.map(function ({ form, key }) {
+            if (!form) return;
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {
                 key,
