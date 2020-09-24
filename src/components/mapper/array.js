@@ -167,7 +167,7 @@ function ArrayItem(props) {
         item: { index, type, value, title, form },
         collect,
     });
-    const [dropProps, dropRef] = useDrop({ accept: type, drop, hover });
+    const [dropProps, dropRef] = useDrop({ accept: type, hover });
 
     title = localizer.getLocalizedString(title);
 
