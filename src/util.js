@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import debug from 'debug';
 import objectPath from 'objectpath';
-import {useMemo} from 'react';
+import { useMemo } from 'react';
 
 const log = debug('rjsf:util');
 
@@ -24,7 +24,6 @@ const log = debug('rjsf:util');
  * @description Updates the enclosed model with value along the path of keys
  */
 
-
 /**
  * Returns a default value for schema. If the schema defines a default value,
  * that will be returned. If no default is specified, an "empty" value of the
@@ -41,7 +40,7 @@ export function defaultForSchema(schema) {
 
     function buildSchema(schema) {
         const type = getPreferredType(schema.type);
-        let base   = undefined;
+        let base = undefined;
         switch (type) {
             case 'array':
                 base = [];
@@ -54,7 +53,7 @@ export function defaultForSchema(schema) {
             case 'object':
                 base = {};
                 for (let property in schema.properties) {
-                    let item       = defaultForSchema(schema.properties[property]);
+                    let item = defaultForSchema(schema.properties[property]);
                     base[property] = item;
                 }
                 break;
@@ -89,8 +88,7 @@ export function getPreferredType(types) {
 
     let index = 0;
 
-    if (!Array.isArray(types))
-        return types;
+    if (!Array.isArray(types)) return types;
 
     // Skip ignored types
     while (ignoredTypes.has(types[index])) index++;
@@ -116,16 +114,15 @@ export function valueGetter(model, schema) {
             model = defaultForSchema(schema);
         }
 
-        if (keys.length === 0)
-            return model;
+        if (keys.length === 0) return model;
 
-        let current       = model;
+        let current = model;
         let currentSchema = schema;
 
         for (let i = 0; i < keys.length; ++i) {
-            const key      = keys[i];
-            currentSchema  = getNextSchema(currentSchema, key);
-            current        = getNextValue(currentSchema, current, key);
+            const key = keys[i];
+            currentSchema = getNextSchema(currentSchema, key);
+            current = getNextValue(currentSchema, current, key);
         }
 
         return assertType(currentSchema, current);
@@ -136,15 +133,13 @@ export function valueGetter(model, schema) {
 
 export function assertType(schema, value) {
     let preferred = getPreferredType(schema.type);
-    let allowed = new Set(Array.isArray(schema.type)? schema.type : [schema.type]);
+    let allowed = new Set(
+        Array.isArray(schema.type) ? schema.type : [schema.type]
+    );
     let type = getTypeOf(schema, value);
 
-    log('assertType() : preferred : %o', preferred);
-    log('assertType() : allowed : %o', allowed);
-    log('assertType() : type : %o', type);
-
-    if (preferred != type && !value) return defaultForSchema(schema);
-    else if (allowed.has('null') && !value) return null;
+    if (allowed.has('null') && !value) return null;
+    else if (preferred != type && !value) return defaultForSchema(schema);
     else if (allowed.has(type)) return value;
     else return defaultForSchema(schema);
 }
@@ -155,12 +150,12 @@ export function assertType(schema, value) {
  * @return {Function}
  */
 export function errorSetter(errors, setErrors) {
-    return function(keys, error) {
+    return function (keys, error) {
         const key = objectPath.stringify(keys);
-        const newErrors = {...errors, [key]: error};
+        const newErrors = { ...errors, [key]: error };
         setErrors(newErrors);
         return newErrors;
-    }
+    };
 }
 
 /**
@@ -168,10 +163,10 @@ export function errorSetter(errors, setErrors) {
  * @return {Function}
  */
 export function errorGetter(errors) {
-    return function(keys) {
+    return function (keys) {
         const key = objectPath.stringify(keys);
         return errors[key];
-    }
+    };
 }
 
 /**
@@ -195,16 +190,23 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
     log('updateAndClone() %s> %o', '-'.repeat(depth), model);
 
     const [next, ...rest] = keys;
-    const nextSchema      = getNextSchema(schema, next);
-    const nextModel       = updateAndClone(
-        rest, getNextValue(nextSchema, model, next), nextSchema, value, depth + 1);
+    const nextSchema = getNextSchema(schema, next);
+    const nextModel = updateAndClone(
+        rest,
+        getNextValue(nextSchema, model, next),
+        nextSchema,
+        value,
+        depth + 1
+    );
 
     if (getPreferredType(schema.type) === 'array') {
         const firstSlice = model.slice(0, next);
-        const lastSlice  = model.slice(next + 1);
+        const lastSlice = model.slice(next + 1);
 
         while (firstSlice.length < next) {
-            firstSlice.push(defaultForSchema(getNextSchema(schema, firstSlice.length)));
+            firstSlice.push(
+                defaultForSchema(getNextSchema(schema, firstSlice.length))
+            );
         }
 
         const result = [...firstSlice, nextModel, ...lastSlice];
@@ -213,12 +215,12 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
     }
 
     if (getPreferredType(schema.type) === 'object') {
-        const result = {...model, [next]: nextModel};
+        const result = { ...model, [next]: nextModel };
         log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
-    throw new Error('Bad ObjectPath')
+    throw new Error('Bad ObjectPath');
 }
 
 /**
@@ -251,12 +253,11 @@ export function valueSetter(model, schema) {
  * @return {object}
  */
 export function findSchema(keys, schema) {
-    if (keys.length === 0)
-        return schema;
+    if (keys.length === 0) return schema;
 
     for (let i = 0; i < keys.length; ++i) {
         const key = keys[i];
-        schema    = getNextSchema(schema, key);
+        schema = getNextSchema(schema, key);
     }
 
     return schema;
@@ -294,8 +295,7 @@ export function getNextSchema(schema, key) {
  * @arg {string|number} key
  */
 export function getNextValue(schema, value, key) {
-    if (!value)
-        return defaultForSchema(schema);
+    if (!value) return defaultForSchema(schema);
 
     if (value[key] === undefined) {
         return defaultForSchema(schema);
@@ -317,14 +317,12 @@ export function getTypeOf(schema, value) {
  * @arg {Function} visitor - The visitor function to invoke
  */
 export function traverseForm(forms, visit) {
-    if (!Array.isArray(forms))
-        forms = [forms];
+    if (!Array.isArray(forms)) forms = [forms];
 
     for (let form of forms) {
         visit(form);
 
-        if (form.items)
-            traverseForm(form.items, visit);
+        if (form.items) traverseForm(form.items, visit);
     }
 }
 
@@ -333,7 +331,7 @@ export function traverseForm(forms, visit) {
  * to produce a validate function.
  * @arg object schema - The schema to compile for validation
  */
-const ajv = new Ajv({allErrors: true});
+const ajv = new Ajv({ allErrors: true });
 export function useValidator(schema) {
     const compiled = useMemo(() => {
         try {
@@ -341,15 +339,15 @@ export function useValidator(schema) {
             return validator;
         } catch (err) {
             const validator = () => false;
-            validator.errors     = [{dataPath: '.', message: 'invalid schema'}];
+            validator.errors = [{ dataPath: '.', message: 'invalid schema' }];
             return validator;
         }
     }, [schema]);
 
     function validate(model) {
-        const valid    = compiled(model);
-        const {errors} = compiled;
-        return {valid, errors};
+        const valid = compiled(model);
+        const { errors } = compiled;
+        return { valid, errors };
     }
 
     return validate;
