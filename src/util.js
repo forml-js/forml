@@ -85,10 +85,20 @@ export function defaultForSchema(schema) {
  * @arg {string[]} types
  */
 export function getPreferredType(types) {
+    const ignoredTypes = new Set(['null']);
+
+    let index = 0;
+
     if (!Array.isArray(types))
         return types;
 
-    return types[0];
+    // Skip ignored types
+    while (ignoredTypes.has(types[index])) index++;
+
+    // If we've run past the end, just use the first type
+    if (index >= types.length) index = 0;
+
+    return types[index];
 }
 
 /**
@@ -118,10 +128,24 @@ export function valueGetter(model, schema) {
             current        = getNextValue(currentSchema, current, key);
         }
 
-        return current;
+        return assertType(currentSchema, current);
     }
 
     return get;
+}
+
+export function assertType(schema, value) {
+    let preferred = getPreferredType(schema.type);
+    let allowed = new Set(Array.isArray(schema.type)? schema.type : [schema.type]);
+    let type = getTypeOf(schema, value);
+
+    log('assertType() : preferred : %o', preferred);
+    log('assertType() : allowed : %o', allowed);
+    log('assertType() : type : %o', type);
+
+    if (preferred != type && !value) return defaultForSchema(schema);
+    else if (allowed.has(type)) return value;
+    else return defaultForSchema(schema);
 }
 
 /**
@@ -213,7 +237,7 @@ export function valueSetter(model, schema) {
         }
 
         const newModel = updateAndClone(keys, model, schema, value);
-        return newModel;
+        return assertType(schema, newModel);
     }
 
     return set;
@@ -276,7 +300,14 @@ export function getNextValue(schema, value, key) {
         return defaultForSchema(schema);
     }
 
-    return value[key];
+    return assertType(schema, value[key]);
+}
+
+export function getTypeOf(schema, value) {
+    if (value === undefined) return getPreferredType(schema.type);
+    else if (value === null) return 'null';
+    else if (Array.isArray(value)) return 'array';
+    else return typeof value;
 }
 
 /**
