@@ -144,6 +144,7 @@ export function assertType(schema, value) {
     log('assertType() : type : %o', type);
 
     if (preferred != type && !value) return defaultForSchema(schema);
+    else if (allowed.has('null') && !value) return null;
     else if (allowed.has(type)) return value;
     else return defaultForSchema(schema);
 }
