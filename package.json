@@ -1,14 +1,16 @@
 {
   "name": "rjsf",
   "version": "1.1.7",
-  "description": "React JSON Schema Form",
+  "description": "Small, fast, and powerful JSON-schema form generator for React.",
   "keywords": [
-    "json schema",
+    "json",
+    "schema",
     "form",
+    "json schema",
     "schema form",
+    "json form",
     "react",
-    "react-component",
-    "form"
+    "react-component"
   ],
   "main": "lib/index.js",
   "scripts": {
