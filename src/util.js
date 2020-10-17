@@ -75,7 +75,7 @@ export function defaultForSchema(schema) {
                 base = undefined;
         }
 
-        return base;
+        return assertType(schema, base);
     }
 }
 
@@ -182,12 +182,8 @@ export function errorGetter(errors) {
  */
 function updateAndClone(keys, model, schema, value, depth = 0) {
     if (keys.length === 0) {
-        log('updateAndClone() %s> %O', '-'.repeat(depth), model);
-        log('updateAndClone() <%s %O', '-'.repeat(depth), value);
-        return value;
+        return assertType(schema, value);
     }
-
-    log('updateAndClone() %s> %o', '-'.repeat(depth), model);
 
     const [next, ...rest] = keys;
     const nextSchema = getNextSchema(schema, next);
@@ -210,13 +206,11 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
         }
 
         const result = [...firstSlice, nextModel, ...lastSlice];
-        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
     if (getPreferredType(schema.type) === 'object') {
         const result = { ...model, [next]: nextModel };
-        log('updateAndClone() <%s %o', '-'.repeat(depth), result);
         return result;
     }
 
