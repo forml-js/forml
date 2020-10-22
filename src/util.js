@@ -138,10 +138,22 @@ export function assertType(schema, value) {
     );
     let type = getTypeOf(schema, value);
 
-    if (allowed.has('null') && !value) return null;
-    else if (preferred != type && !value) return defaultForSchema(schema);
-    else if (allowed.has(type)) return value;
-    else return defaultForSchema(schema);
+    if (allowed.has('null') && !value) {
+        return null;
+    } else if (preferred != type && !value) {
+        return defaultForSchema(schema);
+    } else if (allowed.has(type)) {
+        return value;
+    } else if (type === 'number') {
+        let isInteger = Number.isInteger(value);
+        if ((isInteger && allowed.has('integer')) || allowed.has('number')) {
+            return value;
+        } else {
+            return defaultForSchema(schema);
+        }
+    } else {
+        return defaultForSchema(schema);
+    }
 }
 
 /**
