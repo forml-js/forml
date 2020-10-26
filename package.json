@@ -14,9 +14,9 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "babel src --out-dir lib",
-    "watch": "babel src --out-dir lib --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build && npm run test",
+    "test": "jest --coverage --verbose"
   },
   "author": "Zachary Hueras",
   "license": "MIT",
