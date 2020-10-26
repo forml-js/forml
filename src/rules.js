@@ -1,9 +1,6 @@
-import debug from 'debug';
 import * as constants from './constants';
-import {stdFormObj} from './forms';
-import {getPreferredType} from './util';
-
-const log = debug('rjsf:rules');
+import { stdFormObj } from './forms';
+import { getPreferredType } from './util';
 
 /**
  * @param {Array<*>} enm - The enumeration values to produce titles for
@@ -46,10 +43,10 @@ export const definitions = {
      * Catch any date-formatted strings
      * @return {FormDefinition}
      */
-    date(name, schema, options) {
+    date(schema, options) {
         if (getPreferredType(schema.type) === 'string' && schema.format === 'date') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'date';
+            const f = stdFormObj(schema, options);
+            f.type = 'date';
             return f;
         }
     },
@@ -57,10 +54,10 @@ export const definitions = {
      * Catch any date-time formatted strings
      * @return {FormDefiniton}
      */
-    datetime(name, schema, options) {
+    datetime(schema, options) {
         if (getPreferredType(schema.type) === 'string' && schema.format === 'date-time') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'datetime';
+            const f = stdFormObj(schema, options);
+            f.type = 'datetime';
             return f;
         }
     },
@@ -68,10 +65,10 @@ export const definitions = {
      * Catch any enumerations in the schema
      * @return {FormDefinition}
      */
-    select(name, schema, options) {
+    select(schema, options) {
         if (schema.enum) {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'select';
+            const f = stdFormObj(schema, options);
+            f.type = 'select';
 
             if (schema.enumNames) {
                 f.titles = schema.enumNames;
@@ -90,10 +87,10 @@ export const definitions = {
      * Defines boolean forms
      * @return {FormDefinition}
      */
-    checkbox(name, schema, options) {
+    checkbox(schema, options) {
         if (getPreferredType(schema.type) === 'boolean') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'checkbox';
+            const f = stdFormObj(schema, options);
+            f.type = 'checkbox';
             return f;
         }
 
@@ -103,10 +100,10 @@ export const definitions = {
      * Defines basic string forms
      * @return {FormDefinition}
      */
-    text(name, schema, options) {
+    text(schema, options) {
         if (getPreferredType(schema.type) === 'string') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'text';
+            const f = stdFormObj(schema, options);
+            f.type = 'text';
             return f;
         }
 
@@ -117,10 +114,10 @@ export const definitions = {
      * Defines basic integer forms
      * @return {FormDefinition}
      */
-    integer(name, schema, options) {
+    integer(schema, options) {
         if (getPreferredType(schema.type) === 'integer') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'integer';
+            const f = stdFormObj(schema, options);
+            f.type = 'integer';
             return f;
         }
 
@@ -129,12 +126,12 @@ export const definitions = {
     /**
      * Defines complex mutliselect forms
      */
-    multiselect(name, schema, options) {
+    multiselect(schema, options) {
         if (getPreferredType(schema.type) === 'array') {
             if (typeof schema.items === 'object' && schema.items.enum) {
                 if (schema.uniqueItems === true) {
-                    const f = stdFormObj(name, schema, options);
-                    f.type  = 'multiselect';
+                    const f = stdFormObj(schema, options);
+                    f.type = 'multiselect';
 
                     if (schema.items.enumNames) {
                         f.titles = schema.items.enumNames;
@@ -155,10 +152,10 @@ export const definitions = {
      * Defines basic number forms
      * @return {FormDefinition}
      */
-    number(name, schema, options) {
+    number(schema, options) {
         if (getPreferredType(schema.type) === 'number') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'number';
+            const f = stdFormObj(schema, options);
+            f.type = 'number';
             return f;
         }
 
@@ -168,18 +165,17 @@ export const definitions = {
      * Defines forms for schemas that describe tuples
      * @return {FormDefinition}
      */
-    tuple(name, schema, options) {
+    tuple(schema, options) {
         if (getPreferredType(schema.type) === 'array' && Array.isArray(schema.items)) {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'tuple';
+            const f = stdFormObj(schema, options);
+            f.type = 'tuple';
 
             f.items = [];
             schema.items.forEach(function(item, index) {
                 const arrPath = options.path.slice();
                 arrPath.push(index);
 
-                const name = `${schema.title} #${index + 1}`;
-                const def = test(name, item, {...options, path: arrPath});
+                const def = test(item, { ...options, path: arrPath });
 
                 if (def)
                     f.items.push(def);
@@ -192,15 +188,15 @@ export const definitions = {
      * Defines forms for schemas that describe lists
      * @return {FormDefinition}
      */
-    array(name, schema, options) {
+    array(schema, options) {
         if (getPreferredType(schema.type) === 'array' && !Array.isArray(schema.items)) {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'array';
+            const f = stdFormObj(schema, options);
+            f.type = 'array';
 
             if (schema.items !== undefined) {
                 const arrPath = options.path.slice();
                 arrPath.push(constants.ARRAY_PLACEHOLDER);
-                const def = test(name, schema.items, {...options, path: arrPath});
+                const def = test(schema.items, { ...options, path: arrPath });
 
                 if (def) {
                     f.items = [def];
@@ -214,19 +210,19 @@ export const definitions = {
      * Define forms for object types
      * @return {FormDefinition}
      */
-    fieldset(name, schema, options) {
+    fieldset(schema, options) {
         if (getPreferredType(schema.type) === 'object') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'fieldset';
+            const f = stdFormObj(schema, options);
+            f.type = 'fieldset';
 
             if (schema.properties) {
                 f.items = [];
 
                 for (let key in schema.properties) {
                     const propertySchema = schema.properties[key];
-                    const path           = options.path.slice();
+                    const path = options.path.slice();
                     path.push(key);
-                    const def = test(null, propertySchema, {...options, path});
+                    const def = test(propertySchema, { ...options, path });
 
                     if (def) {
                         def.schema = propertySchema;
@@ -244,12 +240,14 @@ export const definitions = {
      * Define forms for the null type
      * @return {FormDefinition}
      */
-    null(name, schema, options) {
+    null(schema, options) {
         if (getPreferredType(schema.type) === 'null') {
-            const f = stdFormObj(name, schema, options);
-            f.type  = 'null';
+            const f = stdFormObj(schema, options);
+            f.type = 'null';
             return f;
         }
+
+        return undefined;
     }
 };
 
@@ -263,8 +261,7 @@ export const rules = [
     definitions.date,
     definitions.datetime,
     definitions.text,
-    definitions.number,
-    definitions.integer,
+    definitions.number, definitions.integer,
     definitions.checkbox,
 
     // Handle complex types
@@ -285,14 +282,13 @@ export const rules = [
 
 /**
  * Test definitions against the schema and produce a representative form object
- * @param {?string} name - Reserved for future use
  * @param {object} schema - The schema to test
  * @param {object} options - Settings and lookup table for the test logic
  * @return {FormDefinition}
  */
-export function test(name, schema, options) {
+export function test(schema, options) {
     for (let rule of rules) {
-        const form = rule(name, schema, options);
+        const form = rule(schema, options);
         if (form)
             return form;
     }
@@ -300,7 +296,7 @@ export function test(name, schema, options) {
 
     // if (ruleSet) {
     //     for (let rule of ruleSet) {
-    //         const result = rule(name, schema, options);
+    //         const result = rule(schema, options);
 
     //         if (result !== undefined) {
     //             return result;

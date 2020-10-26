@@ -1,19 +1,19 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 
-import {ARRAY_PLACEHOLDER} from './constants';
-import {test} from './rules';
-import {findSchema} from './util';
+import { ARRAY_PLACEHOLDER } from './constants';
+import { test } from './rules';
+import { findSchema } from './util';
 
 const log = debug('rjsf:forms');
 
 export function getDefaults(schema) {
-    const form   = [];
+    const form = [];
     const lookup = {};
 
-    form.push(test(null, schema, {path: [], lookup}));
+    form.push(test(schema, { path: [], lookup }));
 
-    return {form, lookup};
+    return { form, lookup };
 }
 
 export function merge(schema, form = ['*'], options = {}) {
@@ -29,8 +29,8 @@ export function merge(schema, form = ['*'], options = {}) {
         form = form.slice(0, idx).concat(stdForm.form).concat(form.slice(idx + 1));
     }
 
-    const {lookup} = stdForm;
-    form           = form.map(obj => {
+    const { lookup } = stdForm;
+    form = form.map(obj => {
         if (obj === undefined) {
             return;
         }
@@ -40,7 +40,7 @@ export function merge(schema, form = ['*'], options = {}) {
         }
 
         if (typeof obj === 'string') {
-            obj = {key: obj};
+            obj = { key: obj };
         }
 
         if (typeof obj.key === 'string') {
@@ -58,7 +58,7 @@ export function merge(schema, form = ['*'], options = {}) {
 
             const strid = ObjectPath.stringify(obj.key);
             if (lookup[strid]) {
-                obj = {...lookup[strid], ...obj};
+                obj = { ...lookup[strid], ...obj };
             }
         }
 
@@ -76,7 +76,7 @@ export function merge(schema, form = ['*'], options = {}) {
             const values = obj.schema.enum || obj.schema.items.enum;
             obj.titleMap = obj.titles.map((name, index) => {
                 const value = values[index];
-                return {name, value};
+                return { name, value };
             });
         }
 
@@ -88,11 +88,11 @@ export function merge(schema, form = ['*'], options = {}) {
     return form;
 }
 
-export function stdFormObj(name, schema, options = {}) {
+export function stdFormObj(schema, options = {}) {
     const f = {};
 
     f.title = schema.title || name;
-    f.key   = options.path.slice();
+    f.key = options.path.slice();
 
     if (options.lookup) {
         const strid = ObjectPath.stringify(f.key);
