@@ -1,5 +1,4 @@
 import debug from 'debug';
-import cloneDeep from 'lodash.clonedeep';
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
 import {
@@ -17,7 +16,7 @@ import shortid from 'shortid';
 import { ARRAY_PLACEHOLDER } from '../../constants';
 import { useDecorator, useLocalizer, useModel } from '../../context';
 import { FormType } from '../../types';
-import { defaultForSchema, getNextSchema, traverseForm } from '../../util';
+import { clone, defaultForSchema, getNextSchema, traverseForm } from '../../util';
 import { SchemaField } from '../schema-field';
 
 const log = debug('rjsf:mapper:array');
@@ -26,7 +25,7 @@ export function useArrayItems(form, disabled = false) {
     const [items, setItems] = useState([]);
     const model = useModel();
 
-    useEffect(function () {
+    useEffect(function() {
         log('useArrayItems(%O)', form);
         const value = model.getValue(form.key);
         const items = [];
@@ -177,7 +176,7 @@ function ArrayItem(props) {
 
     const ref = dragRef(dropRef(useRef()));
 
-    useEffect(function () {
+    useEffect(function() {
         preview(getEmptyImage(), { captureDragginState: true });
     });
 
@@ -249,7 +248,7 @@ export default function ArrayComponent(props) {
 
     for (let i = 0; i < items.items.length; ++i) {
         const item = items.items[i];
-        const forms = item.forms.map(function ({ form, key }) {
+        const forms = item.forms.map(function({ form, key }) {
             if (!form) return;
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {
@@ -337,14 +336,14 @@ ArrayComponent.defaultProps = {
 };
 
 function copyWithIndex(form, index) {
-    const copy = cloneDeep(form);
+    const copy = clone(form);
     copy.arrayIndex = index;
     traverseForm(copy, setIndex(index));
     return copy;
 }
 
 function setIndex(index) {
-    return function (form) {
+    return function(form) {
         if (form.key) {
             form.key[form.key.indexOf(ARRAY_PLACEHOLDER)] = index;
         }

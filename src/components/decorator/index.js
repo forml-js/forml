@@ -1,10 +1,10 @@
 import merge from 'deepmerge';
 import PropTypes from 'prop-types';
 
-import {clone} from '../../util';
+import { clone } from '../../util';
 
 import * as barebones from './barebones';
-import * as mui       from './mui';
+import * as mui from './mui';
 
 
 export const decorators = {

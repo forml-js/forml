@@ -4,19 +4,19 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import {createElement as h, useCallback, useEffect, useMemo, useState} from 'react';
-import {DndProvider} from 'react-dnd';
+import { createElement as h, useCallback, useEffect, useMemo, useState } from 'react';
+import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 
 import Context from '../context';
-import {merge} from '../forms';
-import {defaultLocalizer, getLocalizer} from '../localizer';
+import { merge } from '../forms';
+import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
-import * as util  from '../util';
+import * as util from '../util';
 
-import {decoratorShape, defaultDecorator, getDecorator} from './decorator';
-import {defaultMapper, getMapper, mapperShape} from './mapper';
-import {SchemaField} from './schema-field';
+import { decoratorShape, defaultDecorator, getDecorator } from './decorator';
+import { defaultMapper, getMapper, mapperShape } from './mapper';
+import { SchemaField } from './schema-field';
 
 const log = debug('rjsf:schema-form');
 
@@ -45,18 +45,18 @@ function getDeps(deps, props, model) {
  */
 let versions = 0;
 
-export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) {
+export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }) {
     const schema = useGenerator(useSchema, props, model, props.schemaDeps);
-    const form   = useGenerator(useForm, props, model, props.formDeps);
+    const form = useGenerator(useForm, props, model, props.formDeps);
 
-    const merged            = useMemo(() => merge(schema, form), [schema, form])
-    const validate          = useCallback(util.useValidator(schema), [schema]);
-    const mapper            = useMemo(() => getMapper(props.mapper), [props.mapper]);
-    const decorator         = useMemo(() => getDecorator(props.decorator), [props.decorator]);
-    const localizer         = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
-    const errors            = useMemo(computeErrors, [model, validate]);
+    const merged = useMemo(() => merge(schema, form), [schema, form])
+    const validate = useCallback(util.useValidator(schema), [schema]);
+    const mapper = useMemo(() => getMapper(props.mapper), [props.mapper]);
+    const decorator = useMemo(() => getDecorator(props.decorator), [props.decorator]);
+    const localizer = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
+    const errors = useMemo(computeErrors, [model, validate]);
 
-    const version  = useMemo(() => versions++, [model]);
+    const version = useMemo(() => versions++, [model]);
     const getValue = useCallback(util.valueGetter(model, schema), [model, schema]);
     const setValue = useCallback(util.valueSetter(model, schema), [model, schema]);
     const getError = useCallback(util.errorGetter(errors), [errors]);
@@ -100,29 +100,29 @@ export function SchemaForm({model, schema: useSchema, form: useForm, ...props}) 
     }
 
     return h(DndProvider,
-             {backend: Backend},
-             h(Context.Provider, {value: contextValue}, merged.map((form, index) => {
-                 if (!form)
-                     return;
-                 const {schema} = form;
-                 return h(SchemaField, {
-                     key: index,
-                     schema,
-                     form,
-                     onChange,
-                 })
-             })));
+        { backend: Backend },
+        h(Context.Provider, { value: contextValue }, merged.map((form, index) => {
+            if (!form)
+                return;
+            const { schema } = form;
+            return h(SchemaField, {
+                key: index,
+                schema,
+                form,
+                onChange,
+            })
+        })));
 
 
     function computeErrors() {
-        const {valid, errors} = validate(model);
-        let errorMap          = {};
+        const { valid, errors } = validate(model);
+        let errorMap = {};
 
         if (!valid) {
             for (let error of errors) {
-                const keys   = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
+                const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
                 const normal = ObjectPath.stringify(keys);
-                errorMap     = {...errorMap, [normal]: error.message};
+                errorMap = { ...errorMap, [normal]: error.message };
             }
         }
 
@@ -140,7 +140,7 @@ SchemaForm.propTypes = {
      */
     schema: PropTypes.object.isRequired,
     /** The forms to render */
-    form: PropTypes.oneOfType([PropTypes.function, Types.FormsType]),
+    form: PropTypes.oneOfType([PropTypes.func, Types.FormsType]),
     /** A set of localization functions to use */
     localizer: PropTypes.shape({
         getLocalizedDate: PropTypes.func,
@@ -155,7 +155,7 @@ SchemaForm.propTypes = {
 
 SchemaForm.defaultProps = {
     model: null,
-    schema: {type: 'null'},
+    schema: { type: 'null' },
     form: ['*'],
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),

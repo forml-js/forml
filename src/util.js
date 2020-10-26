@@ -1,9 +1,6 @@
 import Ajv from 'ajv';
-import debug from 'debug';
 import objectPath from 'objectpath';
 import { useMemo } from 'react';
-
-const log = debug('rjsf:util');
 
 /**
  * @namespace rjsf.util
@@ -61,6 +58,8 @@ export function defaultForSchema(schema) {
                 base = '';
                 break;
             case 'number':
+                base = 0.0;
+                break;
             case 'integer':
                 base = 0;
                 break;
@@ -140,34 +139,32 @@ export function assertType(schema, value) {
 
     if (allowed.has('null') && !value) {
         return null;
+    } else if (preferred === 'integer') {
+        if (allowed.has(type)) {
+            return value;
+        } else {
+            if (type === 'number' && Number.isInteger(value)) return value;
+            else if (type === 'number') return Math.floor(value);
+            else if (type === 'string') return parseInt(value);
+            else return defaultForSchema(schema);
+        }
+    } else if (preferred === 'number') {
+        if (allowed.has(type)) {
+            return value;
+        } else if (type === 'string') {
+            return parseFloat(value);
+        } else {
+            return defaultForSchema(schema);
+        }
+    } else if (preferred === 'string' && type === 'number') {
+        return value.toString();
     } else if (preferred != type && !value) {
         return defaultForSchema(schema);
     } else if (allowed.has(type)) {
         return value;
-    } else if (type === 'number') {
-        let isInteger = Number.isInteger(value);
-        if ((isInteger && allowed.has('integer')) || allowed.has('number')) {
-            return value;
-        } else {
-            return defaultForSchema(schema);
-        }
     } else {
         return defaultForSchema(schema);
     }
-}
-
-/**
- * @arg {object} errors - Existing errors
- * @arg {Function} setErrors - Method to call when updating errors
- * @return {Function}
- */
-export function errorSetter(errors, setErrors) {
-    return function (keys, error) {
-        const key = objectPath.stringify(keys);
-        const newErrors = { ...errors, [key]: error };
-        setErrors(newErrors);
-        return newErrors;
-    };
 }
 
 /**
@@ -175,7 +172,7 @@ export function errorSetter(errors, setErrors) {
  * @return {Function}
  */
 export function errorGetter(errors) {
-    return function (keys) {
+    return function(keys) {
         const key = objectPath.stringify(keys);
         return errors[key];
     };
@@ -375,7 +372,7 @@ export function clone(value) {
 
         case 'object': {
             if (Array.isArray(value)) {
-                return value.map((item) => clone(item));
+                return value.map(clone);
             }
 
             let result = {};

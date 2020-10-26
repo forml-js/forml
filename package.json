@@ -34,17 +34,20 @@
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0"
+    "babel-jest": "^26.6.1",
+    "babel-loader": "^8.1.0",
+    "jest": "^26.6.1",
+    "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
     "ajv": "^6.12.4",
     "clsx": "^1.1.1",
     "deepmerge": "^4.2.2",
-    "lodash.clonedeep": "^4.5.0",
     "objectpath": "^1.2.2",
     "prop-types": "^15.7.2",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
+    "react-dom": "^17.0.1",
     "shortid": "^2.2.15"
   }
 }

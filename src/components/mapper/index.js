@@ -65,7 +65,7 @@ const mapperTypes = [
     'textarea',
     'tuple',
 ].reduce(function(acc, key) {
-    return {...acc, [key]: t.element};
+    return { ...acc, [key]: t.element };
 });
 export const mapperShape = t.shape({
     array: t.elementType,
@@ -85,8 +85,7 @@ export const mapperShape = t.shape({
     textarea: t.elementType,
     tuple: t.elementType
 });
-console.error('mapperShape : %o', mapperShape);
 
 export function getMapper(mapper = {}) {
-    return {...defaultMapper(), ...mapper};
+    return { ...defaultMapper(), ...mapper };
 }
