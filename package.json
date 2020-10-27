@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "prepublish": "npm run build && npm run test",
+    "prepublish": "npm run build",
     "test": "jest --coverage --verbose"
   },
   "author": "Zachary Hueras",
