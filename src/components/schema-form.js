@@ -51,7 +51,7 @@ export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }
 
     const merged = useMemo(() => merge(schema, form), [schema, form])
     const validate = useCallback(util.useValidator(schema), [schema]);
-    const mapper = useMemo(() => getMapper(props.mapper), [props.mapper]);
+    const mapper = useMemo(() => getMapper(props.mapper, SchemaForm), [props.mapper]);
     const decorator = useMemo(() => getDecorator(props.decorator), [props.decorator]);
     const localizer = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
     const errors = useMemo(computeErrors, [model, validate]);
@@ -159,5 +159,5 @@ SchemaForm.defaultProps = {
     form: ['*'],
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),
-    mapper: defaultMapper(),
+    mapper: defaultMapper(SchemaForm),
 };

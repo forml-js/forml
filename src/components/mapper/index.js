@@ -20,13 +20,13 @@ import Tabs from './tabs';
 import Text from './text';
 import TextArea from './textarea';
 
-export function defaultMapper() {
+export function defaultMapper(SchemaForm = null) {
     return {
         array: Array,
         checkbox: Checkbox,
         date: Date,
         datetime: DateTime,
-        dynamic: Dynamic,
+        dynamic: Dynamic(SchemaForm),
         fieldset: FieldSet,
         help: Help,
         integer: Integer,
@@ -47,11 +47,11 @@ export function defaultMapper() {
  * We're strictly a keyed collection of elements, so generate our
  * PropTypes.shape from an array of keys
  */
-const mapperTypes = [
+export const mapperTypes = [
     'array',
     'checkbox',
     'date',
-    'dateTime',
+    'datetime',
     'fieldset',
     'help',
     'integer',
@@ -64,9 +64,7 @@ const mapperTypes = [
     'text',
     'textarea',
     'tuple',
-].reduce(function(acc, key) {
-    return { ...acc, [key]: t.element };
-});
+];
 export const mapperShape = t.shape({
     array: t.elementType,
     checkbox: t.elementType,
@@ -86,6 +84,6 @@ export const mapperShape = t.shape({
     tuple: t.elementType
 });
 
-export function getMapper(mapper = {}) {
-    return { ...defaultMapper(), ...mapper };
+export function getMapper(mapper = {}, SchemaForm = null) {
+    return { ...defaultMapper(SchemaForm), ...mapper };
 }
