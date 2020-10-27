@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rendering includes a label for checkbox if supplied 1`] = `
+<div>
+  <label>
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    test
+  </label>
+</div>
+`;
+
+exports[`rendering includes a label for date if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "date",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="date"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for datetime if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "datetime",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="datetime"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for integer if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "integer",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="integer"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for multiselect if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "multiselect",
+      }
+    }
+  >
+    test
+  </label>
+  <select
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "multiselect",
+      }
+    }
+    multiple={true}
+    onChange={[Function]}
+  />
+</div>
+`;
+
+exports[`rendering includes a label for number if supplied 1`] = `
+<div>
+  <label
+    focused={false}
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "number",
+      }
+    }
+    htmlFor=""
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for password if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "password",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="password"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for select if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "select",
+      }
+    }
+  >
+    test
+  </label>
+  <select
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "select",
+      }
+    }
+    onChange={[Function]}
+  />
+</div>
+`;
+
+exports[`rendering includes a label for text if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "text",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;
+
+exports[`rendering includes a label for textarea if supplied 1`] = `
+<div>
+  <label
+    form={
+      Object {
+        "items": Array [],
+        "key": Array [],
+        "schema": Object {
+          "type": "null",
+        },
+        "tabs": Array [],
+        "title": "test",
+        "titleMap": Array [],
+        "type": "textarea",
+      }
+    }
+  >
+    test
+  </label>
+  <input
+    onChange={[Function]}
+    type="textarea"
+  />
+</div>
+`;
