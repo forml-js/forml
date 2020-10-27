@@ -1,8 +1,8 @@
 import t from 'prop-types';
-import {createElement as h} from 'react';
+import { createElement as h } from 'react';
 
-import {useDecorator, useLocalizer} from '../../context';
-import {FormType} from '../../types';
+import { useDecorator, useLocalizer } from '../../context';
+import { FormType } from '../../types';
 
 const valueExceptions = ['', '-'];
 
@@ -10,20 +10,20 @@ const valueExceptions = ['', '-'];
  * @component Integer
  */
 export default function Integer(props) {
-    const {value, form, error} = props;
+    const { value, form, error } = props;
 
-    const deco      = useDecorator();
+    const deco = useDecorator();
     const localizer = useLocalizer();
 
     const placeholder = localizer.getLocalizedString(form.placeholder);
-    const label       = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
+    const label = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
     const description = localizer.getLocalizedString(form.description);
 
-    return h(deco.Input.Group, {form}, [
-        h(deco.Label, {form, value, error}, label),
-        h(deco.Input.Form, {value, onChange, placeholder, form, error}),
+    return h(deco.Input.Group, { form }, [
+        h(deco.Label, { key: 'label', form, value, error }, label),
+        h(deco.Input.Form, { key: 'input', value, onChange, placeholder, form, error }),
         (error || description) &&
-            h(deco.Input.Description, {form, value, error: !!error}, error || description),
+        h(deco.Input.Description, { key: 'description', form, value, error: !!error }, error || description),
     ]);
 
     function onChange(e) {

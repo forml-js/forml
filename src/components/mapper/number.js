@@ -27,8 +27,9 @@ export default function Number(props) {
     const [focused, setFocused] = useState(false);
 
     return h(deco.Input.Group, { form }, [
-        h(deco.Label, { form, value, error, htmlFor: id, focused }, label),
+        h(deco.Label, { key: 'label', form, value, error, htmlFor: id, focused }, label),
         h(deco.Input.Form, {
+            key: 'input',
             value,
             error,
             onChange,
@@ -39,11 +40,11 @@ export default function Number(props) {
             disabled,
         }),
         (error || description) &&
-            h(
-                deco.Input.Description,
-                { form, value, error: !!error },
-                error || description
-            ),
+        h(
+            deco.Input.Description,
+            { key: 'description', form, value, error: !!error },
+            error || description
+        ),
     ]);
 
     function onChange(e) {
