@@ -1,10 +1,10 @@
 import { wrapInTestContext } from 'react-dnd-test-utils';
 import { DndProvider } from 'react-dnd';
-import Context from '../../../src/context';
-import { getDecorator } from '../../../src/components/decorator';
-import { getMapper } from '../../../src/components/mapper';
-import { getLocalizer } from '../../../src/localizer';
-import * as util from '../../../src/util';
+import Context from '../../../lib/context';
+import { getDecorator } from '../../../lib/components/decorator';
+import { getMapper } from '../../../lib/components/mapper';
+import { getLocalizer } from '../../../lib/localizer';
+import * as util from '../../../lib/util';
 import { createElement as h } from 'react';
 import renderer from 'react-test-renderer';
 
@@ -59,22 +59,22 @@ describe('getMapper', function() {
     })
 })
 
-
 describe('rendering', function() {
     const mapper = getMapper({});
     const localizer = getLocalizer({});
     const decorator = getDecorator({});
     const context = { mapper, localizer, decorator }
 
-    mapperTypes.forEach(rendersElement('label', ['tabs', 'array', 'tuple', 'help', 'fieldset', 'null']))
+    mapperTypes.forEach(rendersElement('title', 'label', ['tabs', 'array', 'tuple', 'help', 'fieldset', 'null']))
+    mapperTypes.forEach(rendersElement('description', 'p', ['tuple', 'tabs', 'array', 'help', 'fieldset', 'null']));
 
-    function rendersElement(element, excluded = []) {
+    function rendersElement(name, element, excluded = []) {
         return function callback(type) {
             if (excluded.includes(type)) return;
 
-            test(`includes a ${element} for ${type} if supplied`, function() {
+            test(`includes a ${name} (<${element}>) for ${type} if supplied`, function() {
                 const schema = { type: 'null' };
-                const form = { type, schema, key: [], title: 'test', titleMap: [], items: [], tabs: [] };
+                const form = { type, schema, key: [], title: 'test', description: 'test', titleMap: [], items: [], tabs: [] };
                 const getValue = jest.fn(util.valueGetter(null, schema));
                 const setValue = jest.fn(util.valueSetter(null, schema));
                 const mappedComponent = wrapInTestContext(mapper[type]);

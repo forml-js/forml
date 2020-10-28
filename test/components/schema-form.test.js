@@ -1,4 +1,4 @@
-import { SchemaForm } from '../../src/components/schema-form';
+import { SchemaForm } from '../../lib/components/schema-form';
 import { createElement as h } from 'react';
 import renderer from 'react-test-renderer';
 

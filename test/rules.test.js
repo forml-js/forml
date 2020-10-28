@@ -1,5 +1,5 @@
-import { ARRAY_PLACEHOLDER } from '../src/constants';
-import * as rules from '../src/rules';
+import { ARRAY_PLACEHOLDER } from '../lib/constants';
+import * as rules from '../lib/rules';
 
 describe('enumToTitles', function() {
     test('stringifies values to create titles', function() {

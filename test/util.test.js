@@ -1,4 +1,4 @@
-import * as util from '../src/util';
+import * as util from '../lib/util';
 
 describe('getPreferredType', function() {
     test('accepts a single string', function() {
