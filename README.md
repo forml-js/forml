@@ -11,6 +11,7 @@
 <a id="org4dec357"></a>
 
 # rjsf
+[![Build Status](https://travis-ci.org/fauxsoup/rjsf.svg?branch=master)](https://travis-ci.org/fauxsoup/rjsf)
 
 rjsf - react json schema form
 
