@@ -44,6 +44,7 @@
     {
       "key": "comment",
       "type": "textarea",
+      "rows": 20,
       "placeholder": "Make a comment"
     }
   ]

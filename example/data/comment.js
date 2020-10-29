@@ -1,7 +1,7 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
-import {createElement as h, useCallback, useMemo} from 'react';
-import {SchemaForm, useContext, useModel} from 'rjsf';
+import { createElement as h, useCallback, useMemo } from 'react';
+import { SchemaForm, useContext, useModel } from 'rjsf';
 
 const log = debug('rjsf:example:data:comment');
 
@@ -9,15 +9,15 @@ export const schema = {
     'type': 'object',
     'title': 'Comment',
     'properties': {
-        'name': {'title': 'Name', 'type': 'string'},
+        'name': { 'title': 'Name', 'type': 'string' },
         'email': {
             'title': 'Email',
             'type': 'string',
             'pattern': '^\\S+@\\S+$',
             'description': 'Email will be used for evil.'
         },
-        'spam': {'title': 'Spam', 'type': 'boolean', 'default': true},
-        'tos': {'title': 'Terms and Conditions', 'type': 'boolean', 'default': false},
+        'spam': { 'title': 'Spam', 'type': 'boolean', 'default': true },
+        'tos': { 'title': 'Terms and Conditions', 'type': 'boolean', 'default': false },
         'comment': {
             'title': 'Comment',
             'type': 'string',
@@ -25,12 +25,12 @@ export const schema = {
             'validationMessage': 'Don\'t be greedy!'
         },
         'type':
-            {'title': 'Type', 'type': 'string', 'enum': ['home', 'work', 'mobile', 'fax', 'etc']},
+            { 'title': 'Type', 'type': 'string', 'enum': ['home', 'work', 'mobile', 'fax', 'etc'] },
         'nested': {
             'title': 'Nested',
             'type': 'array',
             'items':
-                {'type': 'object', 'properties': {'first': {'title': 'First', 'type': 'string'}}}
+                { 'type': 'object', 'properties': { 'first': { 'title': 'First', 'type': 'string' } } }
         }
     },
     'required': ['name', 'comment']
@@ -38,9 +38,9 @@ export const schema = {
 
 export const mapper = {
     comment(props) {
-        const {form: parent, value}          = props;
-        const ctx                            = useContext();
-        const {decorator, mapper, localizer} = ctx;
+        const { form: parent, value } = props;
+        const ctx = useContext();
+        const { decorator, mapper, localizer } = ctx;
 
         return h(SchemaForm, {
             ...props,
@@ -63,19 +63,19 @@ export function form(props, model) {
             'type': 'checkbox',
             'title': 'Yes I want spam.',
         },
-        {'key': 'tos'},
-        {'key': 'comment', 'type': 'textarea'},
+        { 'key': 'tos' },
+        { 'key': 'comment', 'type': 'textarea', 'rows': 20 },
         {
             'key': 'type',
             'type': 'select',
             'titleMap': [
-                {'name': 'Home', 'value': 'home'},
-                {'name': 'Work', 'value': 'work'},
-                {'name': 'Mobile', 'value': 'mobile'},
-                {'name': 'Fax', 'value': 'fax'},
-                {'name': 'Etc', 'value': 'etc'}
+                { 'name': 'Home', 'value': 'home' },
+                { 'name': 'Work', 'value': 'work' },
+                { 'name': 'Mobile', 'value': 'mobile' },
+                { 'name': 'Fax', 'value': 'fax' },
+                { 'name': 'Etc', 'value': 'etc' }
             ]
         },
-        {'key': 'nested', 'items': ['nested[].first']}
+        { 'key': 'nested', 'items': ['nested[].first'] }
     ];
 }

@@ -26,7 +26,7 @@ export default function Number(props) {
     const id = ObjectPath.stringify(form.key);
     const [focused, setFocused] = useState(false);
 
-    return h(deco.Input.Group, { form }, [
+    return h(deco.Input.Group, { key: id, form }, [
         h(deco.Label, { key: 'label', form, value, error, htmlFor: id, focused }, label),
         h(deco.Input.Form, {
             key: 'input',

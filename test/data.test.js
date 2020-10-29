@@ -4,6 +4,8 @@ import * as renderer from 'react-test-renderer';
 import { createElement as h } from 'react';
 import { SchemaForm, decorators } from '../lib';
 import * as util from '../lib/util';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 function importAll(directory) {
     const files = fs.readdirSync(directory, { withFileTypes: true });
@@ -43,21 +45,35 @@ describe('samples', function() {
                     schema,
                     form,
                     model,
-                })).toJSON();
+                }));
 
                 expect(component).toMatchSnapshot();
             });
+
+            test('renders with the barebones decorator', async function() {
+                let { schema, form } = await samples[file];
+                let model = util.defaultForSchema(schema);
+
+                const component = renderer.create(h(MuiPickersUtilsProvider, { utils: MomentUtils }, h(SchemaForm, {
+                    schema,
+                    form,
+                    model,
+                    decorator: decorators.barebones,
+                })));
+
+                expect(component).toMatchSnapshot();
+            })
 
             test('renders with the MaterialUI decorator', async function() {
                 let { schema, form } = await samples[file];
                 let model = util.defaultForSchema(schema);
 
-                const component = renderer.create(h(SchemaForm, {
+                const component = renderer.create(h(MuiPickersUtilsProvider, { utils: MomentUtils }, h(SchemaForm, {
                     schema,
                     form,
                     model,
                     decorator: decorators.mui,
-                })).toJSON();
+                })));
 
                 expect(component).toMatchSnapshot();
             })
