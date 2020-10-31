@@ -34,7 +34,7 @@ Array [
     Array Example. Try adding a couple of forms, reorder by drag'n'drop.
   </h4>,
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -46,7 +46,7 @@ Array [
           className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
         >
           <h6
-            className="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+            className="MuiTypography-root makeStyles-title-32 MuiTypography-h6"
           >
             Comments
           </h6>
@@ -1153,16 +1153,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -2344,7 +2340,7 @@ Array [
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-3 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-checked-4 Mui-checked MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-213 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-checked-214 Mui-checked MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -2363,13 +2359,13 @@ Array [
         >
           <input
             checked={true}
-            className="PrivateSwitchBase-input-6"
+            className="PrivateSwitchBase-input-216"
             data-indeterminate={false}
             onChange={[Function]}
             type="checkbox"
           />
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             className="MuiSvgIcon-root"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2395,7 +2391,7 @@ Array [
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-3 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-213 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -2414,13 +2410,13 @@ Array [
         >
           <input
             checked={false}
-            className="PrivateSwitchBase-input-6"
+            className="PrivateSwitchBase-input-216"
             data-indeterminate={false}
             onChange={[Function]}
             type="checkbox"
           />
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             className="MuiSvgIcon-root"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2700,16 +2696,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -2776,7 +2768,7 @@ Array [
     </p>
   </div>,
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -2788,7 +2780,7 @@ Array [
           className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
         >
           <h6
-            className="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+            className="MuiTypography-root makeStyles-title-32 MuiTypography-h6"
           >
             Nested
           </h6>
@@ -4538,16 +4530,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -4917,16 +4905,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -5774,7 +5758,7 @@ exports[`samples conditionalarray renders with a defaultForSchema model 1`] = `
 
 exports[`samples conditionalarray renders with the MaterialUI decorator 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
 >
   <div
     className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -5919,7 +5903,7 @@ exports[`samples date renders with the MaterialUI decorator 1`] = `
         onFocus={[Function]}
         required={false}
         type="text"
-        value="2020-10-28T21:29:42-04:00"
+        value="2020/10/31"
       />
       <div
         className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -5946,7 +5930,7 @@ exports[`samples date renders with the MaterialUI decorator 1`] = `
             className="MuiIconButton-label"
           >
             <svg
-              aria-hidden={true}
+              aria-hidden="true"
               className="MuiSvgIcon-root"
               focusable="false"
               viewBox="0 0 24 24"
@@ -6207,7 +6191,7 @@ Array [
               className="MuiIconButton-label"
             >
               <svg
-                aria-hidden={true}
+                aria-hidden="true"
                 className="MuiSvgIcon-root"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -6590,16 +6574,12 @@ Array [
         Point
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value="Point"
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -6648,7 +6628,7 @@ Array [
     </p>
   </div>,
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiCardContent-root"
@@ -7237,7 +7217,7 @@ exports[`samples htmlclass renders with a defaultForSchema model 1`] = `
 
 exports[`samples htmlclass renders with the MaterialUI decorator 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
 >
   <div
     className="MuiCardContent-root"
@@ -7916,7 +7896,6 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
       >
         <div
           className="MuiTabs-flexContainer"
-          onKeyDown={[Function]}
           role="tablist"
         >
           <button
@@ -7935,7 +7914,7 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             role="tab"
-            tabIndex={-1}
+            tabIndex={0}
             type="button"
           >
             <span
@@ -7963,7 +7942,7 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             role="tab"
-            tabIndex={-1}
+            tabIndex={0}
             type="button"
           >
             <span
@@ -7977,7 +7956,7 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
           </button>
         </div>
         <span
-          className="PrivateTabIndicator-root-9 PrivateTabIndicator-colorSecondary-11 MuiTabs-indicator"
+          className="PrivateTabIndicator-root-297 PrivateTabIndicator-colorSecondary-299 MuiTabs-indicator"
           style={
             Object {
               "left": 0,
@@ -8102,7 +8081,7 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
       }
     >
       <div
-        className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <div
           className="MuiCardContent-root"
@@ -8548,16 +8527,12 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
                   />
                 </div>
                 <input
-                  aria-hidden={true}
-                  className="MuiSelect-nativeInput"
                   onAnimationStart={[Function]}
-                  onChange={[Function]}
-                  required={false}
-                  tabIndex={-1}
+                  type="hidden"
                   value=""
                 />
                 <svg
-                  aria-hidden={true}
+                  aria-hidden="true"
                   className="MuiSvgIcon-root MuiSelect-icon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -8748,7 +8723,7 @@ exports[`samples kitchenSink renders with the MaterialUI decorator 1`] = `
                 </button>
               </div>
               <input
-                className="makeStyles-fileInput-8"
+                className="makeStyles-fileInput-267"
                 onChange={[Function]}
                 type="file"
               />
@@ -9455,7 +9430,7 @@ Array [
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-3 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-213 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -9474,13 +9449,13 @@ Array [
         >
           <input
             checked={false}
-            className="PrivateSwitchBase-input-6"
+            className="PrivateSwitchBase-input-216"
             data-indeterminate={false}
             onChange={[Function]}
             type="checkbox"
           />
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             className="MuiSvgIcon-root"
             focusable="false"
             viewBox="0 0 24 24"
@@ -10143,16 +10118,12 @@ exports[`samples multiselect renders with the MaterialUI decorator 1`] = `
       />
     </div>
     <input
-      aria-hidden={true}
-      className="MuiSelect-nativeInput"
       onAnimationStart={[Function]}
-      onChange={[Function]}
-      required={false}
-      tabIndex={-1}
+      type="hidden"
       value=""
     />
     <svg
-      aria-hidden={true}
+      aria-hidden="true"
       className="MuiSvgIcon-root MuiSelect-icon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -10821,7 +10792,7 @@ Array [
     </p>
   </div>,
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiCardContent-root"
@@ -10905,7 +10876,7 @@ Array [
           </div>
         </div>
         <div
-          className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+          className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
             className="MuiCardContent-root"
@@ -12152,7 +12123,7 @@ Array [
     >
       <span
         aria-disabled={true}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-3 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-disabled-5 Mui-disabled MuiIconButton-colorSecondary Mui-disabled Mui-disabled"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-213 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-disabled-215 Mui-disabled MuiIconButton-colorSecondary Mui-disabled Mui-disabled"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -12171,14 +12142,14 @@ Array [
         >
           <input
             checked={false}
-            className="PrivateSwitchBase-input-6"
+            className="PrivateSwitchBase-input-216"
             data-indeterminate={false}
             disabled={true}
             onChange={[Function]}
             type="checkbox"
           />
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             className="MuiSvgIcon-root"
             focusable="false"
             viewBox="0 0 24 24"
@@ -12401,16 +12372,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
         focusable="false"
         viewBox="0 0 24 24"
@@ -12567,7 +12534,7 @@ Array [
               className="MuiIconButton-label"
             >
               <svg
-                aria-hidden={true}
+                aria-hidden="true"
                 className="MuiSvgIcon-root"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -13647,16 +13614,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -13914,16 +13877,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -15134,16 +15093,12 @@ Array [
         />
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput"
         onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
+        type="hidden"
         value=""
       />
       <svg
-        aria-hidden={true}
+        aria-hidden="true"
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -15711,7 +15666,7 @@ exports[`samples simplearray renders with a defaultForSchema model 1`] = `
 
 exports[`samples simplearray renders with the MaterialUI decorator 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
 >
   <div
     className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -15723,7 +15678,7 @@ exports[`samples simplearray renders with the MaterialUI decorator 1`] = `
         className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
       >
         <h6
-          className="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+          className="MuiTypography-root makeStyles-title-32 MuiTypography-h6"
         >
           Comments
         </h6>
@@ -15969,7 +15924,7 @@ exports[`samples tuple renders with a defaultForSchema model 1`] = `
 
 exports[`samples tuple renders with the MaterialUI decorator 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
 >
   <div
     className="MuiCardContent-root"
@@ -15983,7 +15938,7 @@ exports[`samples tuple renders with the MaterialUI decorator 1`] = `
         Tuples
       </legend>
       <div
-        className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <div
           className="MuiCardContent-root"
@@ -16139,7 +16094,7 @@ exports[`samples tuple renders with the MaterialUI decorator 1`] = `
               </div>
             </div>
             <div
-              className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+              className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
             >
               <div
                 className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -16151,7 +16106,7 @@ exports[`samples tuple renders with the MaterialUI decorator 1`] = `
                     className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
                   >
                     <h6
-                      className="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+                      className="MuiTypography-root makeStyles-title-32 MuiTypography-h6"
                     >
                       Addresses
                     </h6>
@@ -16412,7 +16367,7 @@ Array [
 exports[`samples tuple-advanced renders with the MaterialUI decorator 1`] = `
 Array [
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiCardContent-root"
@@ -16426,7 +16381,7 @@ Array [
           Nested
         </legend>
         <div
-          className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+          className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
             className="MuiCardContent-root"
@@ -16587,7 +16542,7 @@ Array [
           </div>
         </div>
         <div
-          className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+          className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
             className="MuiCardContent-root"
@@ -16751,7 +16706,7 @@ Array [
     </div>
   </div>,
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
       className="MuiFormControl-root MuiFormControl-fullWidth"
@@ -16763,7 +16718,7 @@ Array [
           className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
         >
           <h6
-            className="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+            className="MuiTypography-root makeStyles-title-32 MuiTypography-h6"
           >
             Array
           </h6>
@@ -17266,7 +17221,7 @@ exports[`samples types renders with a defaultForSchema model 1`] = `
 
 exports[`samples types renders with the MaterialUI decorator 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-7 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root makeStyles-root-244 MuiPaper-elevation1 MuiPaper-rounded"
 >
   <div
     className="MuiCardContent-root"
@@ -17557,7 +17512,7 @@ exports[`samples types renders with the MaterialUI decorator 1`] = `
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-3 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-213 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -17576,14 +17531,14 @@ exports[`samples types renders with the MaterialUI decorator 1`] = `
             >
               <input
                 checked={false}
-                className="PrivateSwitchBase-input-6"
+                className="PrivateSwitchBase-input-216"
                 data-indeterminate={false}
                 disabled={false}
                 onChange={[Function]}
                 type="checkbox"
               />
               <svg
-                aria-hidden={true}
+                aria-hidden="true"
                 className="MuiSvgIcon-root"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -17748,16 +17703,12 @@ exports[`samples types renders with the MaterialUI decorator 1`] = `
             />
           </div>
           <input
-            aria-hidden={true}
-            className="MuiSelect-nativeInput"
             onAnimationStart={[Function]}
-            onChange={[Function]}
-            required={false}
-            tabIndex={-1}
+            type="hidden"
             value=""
           />
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
             className="MuiSvgIcon-root MuiSelect-icon"
             focusable="false"
             viewBox="0 0 24 24"
