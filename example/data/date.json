@@ -9,7 +9,7 @@
               },
             "date": {
                 "title": "Birthday",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": [
@@ -19,7 +19,7 @@
     },
     "form": [
         {
-            "key": "date",
+            "key": ["date"],
             "type": "date"
         }
     ]
