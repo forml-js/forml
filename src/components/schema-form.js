@@ -175,7 +175,6 @@ SchemaForm.propTypes = {
     mapper: mapperShape,
     /** The tree of decorative components used by control components to build forms */
     decorator: decoratorShape,
-    dndBackend: PropTypes.any,
 };
 
 SchemaForm.defaultProps = {
@@ -185,5 +184,4 @@ SchemaForm.defaultProps = {
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),
     mapper: defaultMapper(SchemaForm),
-    dndBackend: HTML5Backend,
 };
