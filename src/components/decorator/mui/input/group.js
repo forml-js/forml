@@ -1,13 +1,10 @@
 import FormControl from '@material-ui/core/FormControl';
-import {createElement as h} from 'react';
+import { createElement as h } from 'react';
 
 /**
  * @component
  */
-export default function Group({error, ...props}) {
-    error = !!error;
-    props = {error, ...props};
-
+export default function Group({ error, ...props }) {
     const fullWidth = true;
-    return h(FormControl, {...props, fullWidth}, props.children);
+    return h(FormControl, { error: !!error, fullWidth }, props.children);
 }

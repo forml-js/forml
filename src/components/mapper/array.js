@@ -8,15 +8,20 @@ import {
     useMemo,
     useRef,
     useState,
+    forwardRef,
 } from 'react';
-import { DndProvider, useDrag, useDragLayer, useDrop } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
 import { ARRAY_PLACEHOLDER } from '../../constants';
 import { useDecorator, useLocalizer, useModel } from '../../context';
 import { FormType } from '../../types';
-import { clone, defaultForSchema, getNextSchema, traverseForm } from '../../util';
+import {
+    clone,
+    defaultForSchema,
+    getNextSchema,
+    traverseForm,
+} from '../../util';
 import { SchemaField } from '../schema-field';
 
 const log = debug('rjsf:mapper:array');
@@ -25,16 +30,13 @@ export function useArrayItems(form, disabled = false) {
     const [items, setItems] = useState([]);
     const model = useModel();
 
-    useEffect(function() {
-        log('useArrayItems(%O)', form);
+    useEffect(function () {
         const value = model.getValue(form.key);
         const items = [];
 
         for (let i = 0; i < value.length; ++i) {
             items.push(create(i));
         }
-
-        log('useArrayItems() : initialItems : %o', items);
 
         setItems(items);
     }, []);
@@ -149,7 +151,7 @@ export function useArrayItems(form, disabled = false) {
     return result;
 }
 
-function ArrayItem(props) {
+function BaseArrayItem(props, ref) {
     const { form, index, items } = props;
     const { type } = props;
     const model = useModel();
@@ -162,93 +164,57 @@ function ArrayItem(props) {
         title = form.titleFun(value);
     }
 
-    const [dragProps, dragRef, preview] = useDrag({
-        item: { index, type, value, title, form },
-        collect,
-    });
-    const [dropProps, dropRef] = useDrop({ accept: type, hover });
-
     title = localizer.getLocalizedString(title);
 
     const destroy = useMemo(() => items.destroyer(index), [items, index]);
     const moveUp = useMemo(() => items.upwardMover(index), [items, index]);
     const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
 
-    const ref = dragRef(dropRef(useRef()));
-
-    useEffect(function() {
-        preview(getEmptyImage(), { captureDragginState: true });
-    });
-
-    return h(
-        deco.Arrays.Item,
-        {
-            key: 'header',
-            title,
-            destroy,
-            moveUp,
-            moveDown,
-            index,
-            ref,
-            ...dragProps,
-            ...dropProps,
-        },
-        props.children
+    return h(Draggable, { draggableId: props.id, index }, (provided) =>
+        h(
+            deco.Arrays.Item,
+            {
+                key: 'header',
+                title,
+                destroy,
+                moveUp,
+                moveDown,
+                index,
+                ref: (e) => {
+                    provided.innerRef(e);
+                    if (ref) ref(e);
+                },
+                otherProps: {
+                    draggableProps: provided.draggableProps,
+                    dragHandleProps: provided.dragHandleProps,
+                },
+            },
+            props.children
+        )
     );
-
-    function collect(monitor) {
-        return {
-            isDragging: monitor.isDragging(),
-        };
-    }
-
-    function hover(item, monitor) {
-        if (!ref.current) return;
-
-        const dragIndex = item.index;
-        const hoverIndex = index;
-
-        return;
-
-        const hoverBoundingRect = ref.current.getBoundingClientRect();
-        const hoverMiddleY =
-            (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-        const clientOffset = monitor.getClientOffset();
-        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-            return;
-        }
-
-        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-            return;
-        }
-
-        items.move(dragIndex, hoverIndex);
-
-        item.index = hoverIndex;
-    }
 }
+
+export const ArrayItem = forwardRef(BaseArrayItem);
 
 /**
  * @component ArrayComponent
  */
-export default function ArrayComponent(props) {
-    const { form } = props;
+function ArrayComponent(props, ref) {
+    const { form, value } = props;
     const { error } = props;
     const arrays = [];
 
     const { readonly: disabled } = form;
 
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
+    const droppableId = useMemo(shortid);
     const items = useArrayItems(form);
     const deco = useDecorator();
     const localizer = useLocalizer();
 
     for (let i = 0; i < items.items.length; ++i) {
         const item = items.items[i];
-        const forms = item.forms.map(function({ form, key }) {
+        const forms = item.forms.map(function ({ form, key }) {
             if (!form) return;
             const formCopy = copyWithIndex(form, i);
             return h(SchemaField, {
@@ -260,7 +226,15 @@ export default function ArrayComponent(props) {
         arrays.push(
             h(
                 ArrayItem,
-                { key: item.key, form, index: i, items, item, type },
+                {
+                    key: item.key,
+                    id: item.key,
+                    form,
+                    index: i,
+                    items,
+                    item,
+                    type,
+                },
                 forms
             )
         );
@@ -269,56 +243,39 @@ export default function ArrayComponent(props) {
     const label = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
 
-    return h(deco.Arrays.Items, { add: items.add, label, description, error }, [
-        h(DragLayer, { renderItem: deco.preview }),
-        arrays,
-    ]);
-}
-
-function getItemStyles(initialOffset, currentOffset) {
-    if (!initialOffset || !currentOffset) {
-        return { display: 'none' };
-    }
-
-    let { x, y } = currentOffset;
-
-    const transform = `translate(${x}px, ${y}px)`;
-    return { transform, WebkitTransform: transform };
-}
-
-function DragLayer(props) {
-    const { item, isDragging, initialOffset, currentOffset } = useDragLayer(
-        (monitor) => ({
-            item: monitor.getItem(),
-            initialOffset: monitor.getInitialSourceClientOffset(),
-            currentOffset: monitor.getClientOffset(),
-            isDragging: monitor.isDragging(),
+    return h(
+        DragDropContext,
+        { onDragEnd },
+        h(Droppable, { droppableId }, (provided) => {
+            const ref = provided.innerRef;
+            const otherProps = provided.droppableProps;
+            return h(
+                deco.Arrays.Items,
+                {
+                    add: items.add,
+                    value,
+                    label,
+                    description,
+                    error,
+                    ref,
+                    otherProps,
+                },
+                [arrays, provided.placeholder]
+            );
         })
     );
-    const deco = useDecorator();
 
-    if (!isDragging) return null;
-
-    return h(
-        'div',
-        {
-            style: {
-                position: 'fixed',
-                pointerEvents: 'none',
-                zIndex: 100,
-                left: 0,
-                top: 0,
-                width: '100%',
-                height: '100%',
-            },
-        },
-        h(
-            'div',
-            { style: getItemStyles(initialOffset, currentOffset) },
-            h(deco.Preview, item)
-        )
-    );
+    function onDragEnd(result) {
+        if (!result.destination) {
+            return;
+        } else if (result.destination.index === result.source.index) {
+            return;
+        } else {
+            items.move(result.destination.index, result.source.index);
+        }
+    }
 }
+export default forwardRef(ArrayComponent);
 
 ArrayComponent.propTypes = {
     /** The configuration object for this section of the form */
@@ -343,7 +300,7 @@ function copyWithIndex(form, index) {
 }
 
 function setIndex(index) {
-    return function(form) {
+    return function (form) {
         if (form.key) {
             form.key[form.key.indexOf(ARRAY_PLACEHOLDER)] = index;
         }

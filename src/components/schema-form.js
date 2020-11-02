@@ -4,9 +4,13 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import { createElement as h, useCallback, useEffect, useMemo, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import {
+    createElement as h,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 
 import Context from '../context';
 import { merge } from '../forms';
@@ -23,7 +27,7 @@ const log = debug('rjsf:schema-form');
 function useGenerator(generator, props, model, deps) {
     if (typeof generator === 'function') {
         // The genrator is a hook; use it
-        return generator(props, model, deps)
+        return generator(props, model, deps);
     }
 
     // The genrator is a value; return it
@@ -45,24 +49,41 @@ function getDeps(deps, props, model) {
  */
 let versions = 0;
 
-export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }) {
+export function SchemaForm({
+    model,
+    schema: useSchema,
+    form: useForm,
+    ...props
+}) {
     const schema = useGenerator(useSchema, props, model, props.schemaDeps);
     const form = useGenerator(useForm, props, model, props.formDeps);
 
-    const merged = useMemo(() => merge(schema, form), [schema, form])
+    const merged = useMemo(() => merge(schema, form), [schema, form]);
     const validate = useCallback(util.useValidator(schema), [schema]);
-    const mapper = useMemo(() => getMapper(props.mapper, SchemaForm), [props.mapper]);
-    const decorator = useMemo(() => getDecorator(props.decorator), [props.decorator]);
-    const localizer = useMemo(() => getLocalizer(props.localizer), [props.localizer]);
+    const mapper = useMemo(() => getMapper(props.mapper, SchemaForm), [
+        props.mapper,
+    ]);
+    const decorator = useMemo(() => getDecorator(props.decorator), [
+        props.decorator,
+    ]);
+    const localizer = useMemo(() => getLocalizer(props.localizer), [
+        props.localizer,
+    ]);
     const errors = useMemo(computeErrors, [model, validate]);
 
     const version = useMemo(() => versions++, [model]);
-    const getValue = useCallback(util.valueGetter(model, schema), [model, schema]);
-    const setValue = useCallback(util.valueSetter(model, schema), [model, schema]);
+    const getValue = useCallback(util.valueGetter(model, schema), [
+        model,
+        schema,
+    ]);
+    const setValue = useCallback(util.valueSetter(model, schema), [
+        model,
+        schema,
+    ]);
     const getError = useCallback(util.errorGetter(errors), [errors]);
 
     const contextValue = useMemo(
-        function() {
+        function () {
             return {
                 model,
                 schema,
@@ -91,7 +112,8 @@ export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }
             getError,
             version,
             props.onChange,
-        ]);
+        ]
+    );
 
     function onChange(event, model) {
         if (props.onChange) {
@@ -99,20 +121,20 @@ export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }
         }
     }
 
-    return h(DndProvider,
-        { backend: Backend },
-        h(Context.Provider, { value: contextValue }, merged.map((form, index) => {
-            if (!form)
-                return;
+    return h(
+        Context.Provider,
+        { value: contextValue },
+        merged.map((form, index) => {
+            if (!form) return;
             const { schema } = form;
             return h(SchemaField, {
                 key: index,
                 schema,
                 form,
                 onChange,
-            })
-        })));
-
+            });
+        })
+    );
 
     function computeErrors() {
         const { valid, errors } = validate(model);
@@ -120,7 +142,9 @@ export function SchemaForm({ model, schema: useSchema, form: useForm, ...props }
 
         if (!valid) {
             for (let error of errors) {
-                const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ''));
+                const keys = ObjectPath.parse(
+                    error.dataPath.replace(/^\./, '')
+                );
                 const normal = ObjectPath.stringify(keys);
                 errorMap = { ...errorMap, [normal]: error.message };
             }
@@ -151,6 +175,7 @@ SchemaForm.propTypes = {
     mapper: mapperShape,
     /** The tree of decorative components used by control components to build forms */
     decorator: decoratorShape,
+    dndBackend: PropTypes.any,
 };
 
 SchemaForm.defaultProps = {
@@ -160,4 +185,5 @@ SchemaForm.defaultProps = {
     decorator: defaultDecorator(),
     localizer: defaultLocalizer(),
     mapper: defaultMapper(SchemaForm),
+    dndBackend: HTML5Backend,
 };

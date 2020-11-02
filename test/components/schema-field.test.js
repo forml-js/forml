@@ -1,40 +1,11 @@
-import Context, { useMapper } from '../../lib/context';
-import { SchemaField } from '../../lib/components/schema-field';
+import Context, { useMapper } from '../../src/context';
+import { SchemaField } from '../../src/components/schema-field';
 import { createElement as h } from 'react';
-import { defaultMapper, getMapper } from '../../lib/components/mapper';
-import { getDecorator } from '../../lib/components/decorator';
-import { getLocalizer } from '../../lib/localizer';
-import * as util from '../../lib/util';
+import { defaultMapper, getMapper } from '../../src/components/mapper';
+import { getDecorator } from '../../src/components/decorator';
+import { getLocalizer } from '../../src/localizer';
+import * as util from '../../src/util';
 import renderer from 'react-test-renderer';
-
-jest.mock('../../src/components/mapper', function(...args) {
-    const mapper = new Proxy({}, {
-        get(target, prop, receiver) {
-            if (prop in target) {
-                return target[prop];
-            }
-        },
-        set(target, prop, value) {
-            if (prop in target) {
-                target[prop].mockImplementation(value);
-            } else {
-                target[prop] = jest.fn(value);
-            }
-            return target[prop];
-        }
-    });
-    return {
-        defaultMapper() {
-            return mapper();
-        },
-        getMapper(additional = {}) {
-            for (let key in additional) {
-                mapper[key] = additional[key];
-            }
-            return mapper;
-        }
-    }
-});
 
 function getContext(schema, model = '', errors = {}) {
     const decorator = getDecorator({});
@@ -63,29 +34,40 @@ function getContext(schema, model = '', errors = {}) {
         file: jest.fn(() => 'file'),
     });
     return { mapper, decorator, localizer, getValue, setValue, getError };
-
 }
 
-test('does not render if no mapped Field is found for type', function() {
+test('does not render if no mapped Field is found for type', function () {
     const schema = { type: 'object' };
-    const form = { key: [], type: 'custom', schema }
+    const form = { key: [], type: 'custom', schema };
     const context = getContext(schema, {});
 
-    const component = renderer.create(h(Context.Provider, { value: context }, h(SchemaField, { form, schema })));
+    const component = renderer.create(
+        h(
+            Context.Provider,
+            { value: context },
+            h(SchemaField, { form, schema })
+        )
+    );
     expect(component).toMatchSnapshot();
 });
 
-test('uses mapper from context', function() {
+test('uses mapper from context', function () {
     const schema = { type: 'string' };
     const form = { key: [], type: 'text', schema };
     const context = getContext(schema);
 
-    const component = renderer.create(h(Context.Provider, {
-        value: context
-    }, h(SchemaField, {
-        form, schema
-    })));
+    const component = renderer.create(
+        h(
+            Context.Provider,
+            {
+                value: context,
+            },
+            h(SchemaField, {
+                form,
+                schema,
+            })
+        )
+    );
 
     expect(context.mapper.text).toHaveBeenCalled();
 });
-

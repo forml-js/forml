@@ -27,8 +27,13 @@ export default function Select(props) {
     }
 
     return h(deco.Input.Group, { form, error }, [
-        h(deco.Label, { key: 'label', required: form.required, form, value, error }, title),
-        h(deco.Input.Select,
+        h(
+            deco.Label,
+            { key: 'label', required: form.required, form, value, error },
+            title
+        ),
+        h(
+            deco.Input.Select,
             {
                 key: 'select',
                 value,
@@ -37,13 +42,16 @@ export default function Select(props) {
                 onChange,
                 form,
                 value,
-                error
+                error,
             },
-            menuItems),
+            menuItems
+        ),
         (error || description) &&
-        h(deco.Input.Description,
-            { key: 'help', error: !!error, form, value },
-            localizer.getLocalizedString(error || description))
+            h(
+                deco.Input.Description,
+                { key: 'help', error: !!error, form, value },
+                localizer.getLocalizedString(error || description)
+            ),
     ]);
 
     function getLabel(item) {
@@ -70,4 +78,4 @@ Select.propTypes = {
     error: t.string,
     /** The current value of the string */
     value: t.string,
-}
+};

@@ -1,11 +1,8 @@
-import debug from 'debug';
 import ObjectPath from 'objectpath';
 
 import { ARRAY_PLACEHOLDER } from './constants';
 import { test } from './rules';
 import { findSchema } from './util';
-
-const log = debug('rjsf:forms');
 
 export function getDefaults(schema) {
     const form = [];
@@ -17,20 +14,21 @@ export function getDefaults(schema) {
 }
 
 export function merge(schema, form = ['*'], options = {}) {
-    if (!schema)
-        return [];
-    if (!form)
-        return [];
+    if (!schema) return [];
+    if (!form) return [];
 
     const stdForm = getDefaults(schema);
 
     const idx = form.indexOf('*');
     if (idx !== -1) {
-        form = form.slice(0, idx).concat(stdForm.form).concat(form.slice(idx + 1));
+        form = form
+            .slice(0, idx)
+            .concat(stdForm.form)
+            .concat(form.slice(idx + 1));
     }
 
     const { lookup } = stdForm;
-    form = form.map(obj => {
+    form = form.map((obj) => {
         if (obj === undefined) {
             return;
         }
@@ -80,10 +78,8 @@ export function merge(schema, form = ['*'], options = {}) {
             });
         }
 
-
         return obj;
     });
-
 
     return form;
 }

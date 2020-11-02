@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`each item can be dragged into a new position 1`] = `
+<div>
+  <div
+    class="array"
+  >
+    <button
+      class="add"
+    >
+      Add Item
+    </button>
+    <ul>
+      <li
+        class="item"
+      >
+        <div
+          class="controls"
+        >
+          <h6 />
+          <button
+            class="move-up"
+          >
+            move up
+          </button>
+          <button
+            class="move-down"
+          >
+            move down
+          </button>
+          <button
+            class="delete"
+          >
+            delete
+          </button>
+        </div>
+        <div
+          class="content"
+        >
+          <div>
+            <label
+              for="['0']"
+            >
+              0
+            </label>
+            <input
+              type="number"
+              value="1"
+            />
+          </div>
+        </div>
+      </li>
+      <li
+        class="item"
+      >
+        <div
+          class="controls"
+        >
+          <h6 />
+          <button
+            class="move-up"
+          >
+            move up
+          </button>
+          <button
+            class="move-down"
+          >
+            move down
+          </button>
+          <button
+            class="delete"
+          >
+            delete
+          </button>
+        </div>
+        <div
+          class="content"
+        >
+          <div>
+            <label
+              for="['1']"
+            >
+              1
+            </label>
+            <input
+              type="number"
+              value="2"
+            />
+          </div>
+        </div>
+      </li>
+      <li
+        class="item"
+      >
+        <div
+          class="controls"
+        >
+          <h6 />
+          <button
+            class="move-up"
+          >
+            move up
+          </button>
+          <button
+            class="move-down"
+          >
+            move down
+          </button>
+          <button
+            class="delete"
+          >
+            delete
+          </button>
+        </div>
+        <div
+          class="content"
+        >
+          <div>
+            <label
+              for="['2']"
+            >
+              2
+            </label>
+            <input
+              type="number"
+              value="3"
+            />
+          </div>
+        </div>
+      </li>
+      <li
+        class="item"
+      >
+        <div
+          class="controls"
+        >
+          <h6 />
+          <button
+            class="move-up"
+          >
+            move up
+          </button>
+          <button
+            class="move-down"
+          >
+            move down
+          </button>
+          <button
+            class="delete"
+          >
+            delete
+          </button>
+        </div>
+        <div
+          class="content"
+        >
+          <div>
+            <label
+              for="['3']"
+            >
+              3
+            </label>
+            <input
+              type="number"
+              value="4"
+            />
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`items container is rendered 1`] = `
+<div>
+  <div
+    class="array"
+  >
+    <button
+      class="add"
+    >
+      Add Item
+    </button>
+    <ul />
+  </div>
+</div>
+`;

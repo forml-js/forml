@@ -1,46 +1,122 @@
-import AppBar from '@material-ui/core/AppBar';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import clsx from 'clsx';
+import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import {makeStyles} from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {createElement as h} from 'react';
+import { createElement as h, forwardRef, useState } from 'react';
 
-const useStyles = makeStyles(function(theme) {
+const useStyles = makeStyles(function (theme) {
     return {
-        root: {
-            margin: theme.spacing(1),
+        root: {},
+        list: {
+            display: 'flex',
+            flexDirection: 'column',
         },
-        title: {flexGrow: 1},
+        controls: {
+            justifyContent: 'flex-end',
+        },
     };
 });
 
 /**
  * @component
  */
-export default function Items(props) {
-    const {label}              = props;
-    const {error, description} = props;
+function Items(props, ref) {
+    const { label, otherProps } = props;
+    const { error, description } = props;
+    const { value } = props;
 
     const classes = useStyles();
-    const color   = error ? 'error' : 'initial';
+    const color = error ? 'error' : 'initial';
+
+    console.error('children : %O', props.children);
 
     return h(
-        Card, {className: classes.root}, h(FormControl, {fullWidth: true, error: !!error}, [
-            h(AppBar,
-              {position: 'static'},
-              h(Toolbar,
-                {variant: 'dense'},
-                [
-                    label && h(Typography, {className: classes.title, color, variant: 'h6'}, label),
-                    h(IconButton, {onClick: props.add, color}, h(Icon, {}, 'add')),
-                ])),
-            (error || description) &&
-                h(CardContent, {}, h(Typography, {variant: 'body1', color}, error || description)),
-            h(List, {}, props.children),
-        ]));
+        Paper,
+        { className: clsx(classes.root, { [classes.open]: open }) },
+        h(
+            List,
+            {
+                disablePadding: true,
+                dense: true,
+                ref,
+                ...otherProps,
+                className: clsx(
+                    otherProps && otherProps.className,
+                    classes.list
+                ),
+            },
+            [
+                h(
+                    ListItem,
+                    {
+                        key: 'title',
+                        dense: false,
+                        divider: true,
+                    },
+                    [
+                        h(
+                            ListItemIcon,
+                            { key: 'icon', edge: 'start' },
+                            h(Icon, { color }, 'view_list')
+                        ),
+                        h(ListItemText, {
+                            key: 'text',
+                            primaryTypographyProps: {
+                                color,
+                                variant: 'subtitle2',
+                            },
+                            primary: label,
+                            secondary: error || description,
+                            secondaryTypographyProps: {
+                                color,
+                                variant: 'caption',
+                            },
+                        }),
+                    ]
+                ),
+                ...props.children,
+                value &&
+                    value.length === 0 &&
+                    h(
+                        ListItem,
+                        { divider: true },
+                        h(ListItemText, {
+                            secondary: 'empty',
+                            secondaryTypographyProps: { align: 'center' },
+                        })
+                    ),
+                h(
+                    ListItem,
+                    {
+                        key: 'controls',
+                        dense: true,
+                        className: classes.controls,
+                    },
+                    h(
+                        Button,
+                        {
+                            onClick: props.add,
+                            color,
+                            edge: 'end',
+                            startIcon: h(Icon, {}, 'add'),
+                        },
+                        `Add ${label}`
+                    )
+                ),
+            ]
+        )
+    );
 }
+export default forwardRef(Items);
