@@ -57,8 +57,7 @@ const useStyles = makeStyles(function (theme) {
             padding: theme.spacing(1.5),
         },
         destroy: {
-            marginTop: '-1px',
-            alignSelf: 'flex-end',
+            marginTop: 'auto',
             borderRadius: '0',
             borderTopWidth: '1px',
             borderTopStyle: 'solid',
