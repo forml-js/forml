@@ -6,7 +6,7 @@ import clsx from 'clsx';
  * @component
  */
 export function Item(props, ref) {
-    const { otherProps } = props;
+    const { otherProps, disabled } = props;
     const { draggableProps, dragHandleProps } = otherProps;
     return h(
         'li',
@@ -28,6 +28,7 @@ export function Item(props, ref) {
                         key: 'move-up',
                         onClick: props.moveUp,
                         className: 'move-up',
+                        disabled,
                     },
                     'move up'
                 ),
@@ -37,6 +38,7 @@ export function Item(props, ref) {
                         key: 'move-down',
                         onClick: props.moveDown,
                         className: 'move-down',
+                        disabled,
                     },
                     'move down'
                 ),
@@ -46,6 +48,7 @@ export function Item(props, ref) {
                         key: 'delete',
                         onClick: props.destroy,
                         className: 'delete',
+                        disabled,
                     },
                     'delete'
                 ),

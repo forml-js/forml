@@ -26,21 +26,21 @@ import { SchemaField } from '../schema-field';
 
 const log = debug('rjsf:mapper:array');
 
-export function useArrayItems(form, disabled = false) {
-    const [items, setItems] = useState([]);
-    const model = useModel();
-
-    useEffect(function () {
-        const value = model.getValue(form.key);
-        const items = [];
-
-        for (let i = 0; i < value.length; ++i) {
-            items.push(create(i));
+export function mover(items, value) {
+    return move;
+    function move(start, end) {
+        return [reorder(items, start, end), reorder(value, start, end)];
+        function reorder(list, start, end) {
+            const result = Array.from(list);
+            const [removed] = result.splice(start, 1);
+            result.splice(end, 0, removed);
+            return result;
         }
+    }
+}
 
-        setItems(items);
-    }, []);
-
+export function creator(form) {
+    return create;
     function create() {
         const forms = form.items.map((form) => {
             const key = shortid();
@@ -50,27 +50,47 @@ export function useArrayItems(form, disabled = false) {
         const key = shortid();
         return { forms, key };
     }
+}
+
+export function useArrayItems(form, disabled = false) {
+    const [items, setItems] = useState([]);
+    const model = useModel();
+
+    const value = model.getValue(form.key);
+    const move = mover(items, value);
+    const create = creator(form);
+
+    useEffect(function () {
+        const items = [];
+
+        for (let i = 0; i < value.length; ++i) {
+            items.push(create(i));
+        }
+
+        setItems(items);
+    }, []);
 
     function add(event) {
-        const current = model.getValue(form.key);
-        const nextSchema = getNextSchema(form.schema, current.length);
+        const nextSchema = getNextSchema(form.schema, value.length);
         const nextModel = model.setValue(
-            [...form.key, current.length],
+            [...form.key, value.length],
             defaultForSchema(nextSchema)
         );
         model.onChange(event, nextModel);
-        setItems([...items, create(current.length)]);
+        setItems([...items, create(items.length)]);
     }
 
     function destroyer(index) {
         function destroy(event) {
-            const value = model.getValue(form.key);
-            const nextModel = model.setValue(form.key, [
-                ...value.slice(0, index),
-                ...value.slice(index + 1),
-            ]);
+            const nextValue = Array.from(value);
+            nextValue.splice(index, 1);
+
+            const nextItems = Array.from(items);
+            nextItems.splice(index, 1);
+
+            const nextModel = model.setValue(form.key, nextValue);
             model.onChange(event, nextModel);
-            setItems([...items.slice(0, index), ...items.slice(index + 1)]);
+            setItems(nextItems);
         }
 
         return destroy;
@@ -79,19 +99,10 @@ export function useArrayItems(form, disabled = false) {
     function upwardMover(index) {
         function mover(event) {
             if (index > 0) {
-                const value = model.getValue(form.key);
-
-                let tempValue = value[index];
-                let tempForm = items[index];
-
-                items[index] = items[index - 1];
-                items[index - 1] = tempForm;
-                value[index] = value[index - 1];
-                value[index - 1] = tempValue;
-
-                const nextModel = model.setValue(form.key, [...value]);
+                const [nextItems, nextValue] = move(index, index - 1);
+                const nextModel = model.setValue(form.key, nextValue);
                 model.onChange(event, nextModel);
-                setItems([...items]);
+                setItems(nextItems);
             }
         }
 
@@ -101,39 +112,14 @@ export function useArrayItems(form, disabled = false) {
     function downwardMover(index) {
         function mover(event) {
             if (index < items.length - 1) {
-                const value = model.getValue(form.key);
-
-                let tempValue = value[index];
-                let tempForm = items[index];
-
-                items[index] = items[index + 1];
-                items[index + 1] = tempForm;
-                value[index] = value[index + 1];
-                value[index + 1] = tempValue;
-
-                const nextModel = model.setValue(form.key, [...value]);
+                const [nextItems, nextValue] = move(index, index + 1);
+                const nextModel = model.setValue(form.key, nextValue);
                 model.onChange(event, nextModel);
-                setItems([...items]);
+                setItems(nextItems);
             }
         }
 
         return mover;
-    }
-
-    function move(startIndex, newIndex) {
-        const value = model.getValue(form.key);
-
-        const dragItem = items[startIndex];
-        const dragValue = value[startIndex];
-
-        items.splice(startIndex, 1);
-        items.splice(newIndex, 0, dragItem);
-        value.splice(startIndex, 1);
-        value.splice(newIndex, 0, dragValue);
-
-        const nextModel = model.setValue(form.key, [...value]);
-        model.onChange(event, nextModel);
-        setItems([...items]);
     }
 
     let result = { items };
@@ -146,6 +132,15 @@ export function useArrayItems(form, disabled = false) {
             downwardMover,
             move,
         };
+    } else {
+        result = {
+            ...result,
+            add: () => null,
+            destroyer: () => null,
+            upwardMover: () => null,
+            downwardMover: () => null,
+            move: () => null,
+        };
     }
 
     return result;
@@ -154,6 +149,7 @@ export function useArrayItems(form, disabled = false) {
 function BaseArrayItem(props, ref) {
     const { form, index, items } = props;
     const { type } = props;
+    const { disabled } = form;
     const model = useModel();
     const deco = useDecorator();
     const localizer = useLocalizer();
@@ -175,6 +171,7 @@ function BaseArrayItem(props, ref) {
             deco.Arrays.Item,
             {
                 key: 'header',
+                disabled,
                 title,
                 destroy,
                 moveUp,
@@ -204,11 +201,11 @@ function ArrayComponent(props, ref) {
     const { error } = props;
     const arrays = [];
 
-    const { readonly: disabled } = form;
+    const { readonly: disabled, titleFun } = form;
 
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
     const droppableId = useMemo(shortid);
-    const items = useArrayItems(form);
+    const items = useArrayItems(form, disabled);
     const deco = useDecorator();
     const localizer = useLocalizer();
 
@@ -217,6 +214,17 @@ function ArrayComponent(props, ref) {
         const forms = item.forms.map(function ({ form, key }) {
             if (!form) return;
             const formCopy = copyWithIndex(form, i);
+
+            /**
+             * Override properties of the child form
+             * titleFun - to generate a title for the sub-form
+             * disabled - to propagate the disabled state to children
+             */
+            formCopy.titleFun =
+                'titleFun' in formCopy ? formCopy.titleFun : titleFun;
+            formCopy.disabled =
+                'disabled' in formCopy ? formCopy.disabled : disabled;
+
             return h(SchemaField, {
                 key,
                 form: formCopy,
@@ -259,19 +267,27 @@ function ArrayComponent(props, ref) {
                     error,
                     ref,
                     otherProps,
+                    disabled,
                 },
                 [arrays, provided.placeholder]
             );
         })
     );
 
+    /* istanbul ignore next */
     function onDragEnd(result) {
         if (!result.destination) {
             return;
         } else if (result.destination.index === result.source.index) {
             return;
         } else {
-            items.move(result.destination.index, result.source.index);
+            const [nextItems, nextValue] = items.move(
+                result.destination.index,
+                result.source.index
+            );
+            const nextModel = model.setValue(form.key, nextValue);
+            model.onChange({ target: { value: nextModel } }, nextModel);
+            setItems(nextItems);
         }
     }
 }

@@ -74,7 +74,7 @@ const useStyles = makeStyles(function (theme) {
  */
 export function ItemComponent(props, ref) {
     const classes = useStyles(props);
-    const { index } = props;
+    const { index, disabled } = props;
     const { dragDropRef } = props;
     const { draggableProps, dragHandleProps } = props.otherProps;
 
@@ -106,6 +106,7 @@ export function ItemComponent(props, ref) {
                     {
                         onClick: props.moveUp,
                         size: 'small',
+                        disabled,
                     },
                     h(Icon, {}, 'keyboard_arrow_up')
                 ),
@@ -114,6 +115,7 @@ export function ItemComponent(props, ref) {
                     {
                         onClick: props.moveDown,
                         size: 'small',
+                        disabled,
                     },
                     h(Icon, {}, 'keyboard_arrow_down')
                 ),
@@ -124,6 +126,7 @@ export function ItemComponent(props, ref) {
                         className: classes.destroy,
                         color: 'secondary',
                         size: 'small',
+                        disabled,
                     },
                     h(Icon, {}, 'delete_forever')
                 ),

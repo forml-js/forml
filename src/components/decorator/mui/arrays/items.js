@@ -35,7 +35,7 @@ const useStyles = makeStyles(function (theme) {
 function Items(props, ref) {
     const { label, otherProps } = props;
     const { error, description } = props;
-    const { value } = props;
+    const { value, disabled } = props;
 
     const classes = useStyles();
     const color = error ? 'error' : 'initial';
@@ -109,6 +109,7 @@ function Items(props, ref) {
                             color,
                             edge: 'end',
                             startIcon: h(Icon, {}, 'add'),
+                            disabled,
                         },
                         `Add ${label}`
                     )
