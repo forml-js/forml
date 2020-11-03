@@ -160,8 +160,6 @@ function BaseArrayItem(props, ref) {
         title = form.titleFun(value);
     }
 
-    console.error('disabled : %o', disabled);
-
     title = localizer.getLocalizedString(title);
 
     const destroy = useMemo(() => items.destroyer(index), [items, index]);
