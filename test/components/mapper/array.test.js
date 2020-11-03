@@ -19,7 +19,8 @@ describe('item mover', function () {
             items: [{ type: 'number', key: [constants.ARRAY_PLACEHOLDER] }],
             schema: { type: 'array', items: { type: 'number' } },
         };
-        items = ['1', '2', '3', '4'];
+        create = creator(form);
+        items = [create(), create(), create(), create()];
         value = [1, 2, 3, 4];
         move = mover(items, value);
     });
@@ -27,21 +28,25 @@ describe('item mover', function () {
     test('can move one space down', function () {
         const [nextItems, nextValue] = move(0, 1);
         expect(nextValue).toMatchObject([2, 1, 3, 4]);
-        expect(nextItems).toMatchObject(['2', '1', '3', '4']);
+
+        const [one, two, three, four] = items;
+        expect(nextItems).toMatchObject([two, one, three, four]);
     });
 
     test('can move two spaces down', function () {
         const [nextItems, nextValue] = move(0, 2);
         expect(nextValue).toMatchObject([2, 3, 1, 4]);
-        expect(nextItems).toMatchObject(['2', '3', '1', '4']);
+
+        const [one, two, three, four] = items;
+        expect(nextItems).toMatchObject([two, three, one, four]);
     });
 
-    test('can move three spaces down', function () {
+    test('can move all the way to the end', function () {
         const [nextItems, nextValue] = move(0, 3);
         expect(nextValue).toMatchObject([2, 3, 4, 1]);
 
         const [one, two, three, four] = items;
-        expect(nextItems).toMatchObject(['2', '3', '4', '1']);
+        expect(nextItems).toMatchObject([two, three, four, one]);
     });
 });
 
@@ -105,8 +110,6 @@ describe('items container', function () {
 
         await fireEvent.click(add);
         await rerender(h(SchemaForm, { schema, model, form, onChange }));
-
-        expect(container.querySelectorAll('ul li').length).toBe(1);
 
         // 4 because move up, move down, destroy, and add
         // as long as we only have 1 item in the model we're good
