@@ -251,7 +251,7 @@ function Page() {
         const sample = getSample(example);
         schema.setValue(sample.schema);
         form.setValue(sample.form);
-        model.setValue(util.defaultForSchema(sample.schema));
+        model.setValue(sample.model || util.defaultForSchema(sample.schema));
         setMapper(sample.mapper);
         setLocalizer(sample.localization);
         setSelected(example);
