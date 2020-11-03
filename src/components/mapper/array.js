@@ -135,11 +135,11 @@ export function useArrayItems(form, disabled = false) {
     } else {
         result = {
             ...result,
-            add: () => null,
+            add: /* istanbul ignore next */ () => null,
             destroyer: () => null,
             upwardMover: () => null,
             downwardMover: () => null,
-            move: () => null,
+            move: /* istanbul ignore next */ () => null,
         };
     }
 
@@ -149,7 +149,7 @@ export function useArrayItems(form, disabled = false) {
 function BaseArrayItem(props, ref) {
     const { form, index, items } = props;
     const { type } = props;
-    const { disabled } = form;
+    const { readonly: disabled } = form;
     const model = useModel();
     const deco = useDecorator();
     const localizer = useLocalizer();
@@ -159,6 +159,8 @@ function BaseArrayItem(props, ref) {
     if (form.titleFun) {
         title = form.titleFun(value);
     }
+
+    console.error('disabled : %o', disabled);
 
     title = localizer.getLocalizedString(title);
 
@@ -179,6 +181,7 @@ function BaseArrayItem(props, ref) {
                 index,
                 ref: (e) => {
                     provided.innerRef(e);
+                    /* istanbul ignore if */
                     if (ref) ref(e);
                 },
                 otherProps: {
@@ -222,8 +225,8 @@ function ArrayComponent(props, ref) {
              */
             formCopy.titleFun =
                 'titleFun' in formCopy ? formCopy.titleFun : titleFun;
-            formCopy.disabled =
-                'disabled' in formCopy ? formCopy.disabled : disabled;
+            formCopy.readonly =
+                'readonly' in formCopy ? formCopy.readonly : disabled;
 
             return h(SchemaField, {
                 key,
