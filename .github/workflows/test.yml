@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       # Runs a single command using the runners shell
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm build
       - name: Test
