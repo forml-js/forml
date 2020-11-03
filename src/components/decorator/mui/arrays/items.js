@@ -40,8 +40,6 @@ function Items(props, ref) {
     const classes = useStyles();
     const color = error ? 'error' : 'initial';
 
-    console.error('children : %O', props.children);
-
     return h(
         Paper,
         { className: clsx(classes.root, { [classes.open]: open }) },
