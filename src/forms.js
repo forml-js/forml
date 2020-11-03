@@ -28,13 +28,14 @@ export function merge(schema, form = ['*'], options = {}) {
     }
 
     const { lookup } = stdForm;
-    form = form.map((obj) => {
+    form = form.reduce((acc, obj) => {
         if (obj === undefined) {
-            return;
+            return acc;
         }
 
         if (typeof obj === 'function') {
-            return;
+            acc.push(obj);
+            return acc;
         }
 
         if (typeof obj === 'string') {
@@ -61,12 +62,12 @@ export function merge(schema, form = ['*'], options = {}) {
         }
 
         if (Array.isArray(obj.items)) {
-            obj.items = merge(schema, obj.items, options);
+            obj.items = merge(schema, obj.items, { ...options });
         }
 
         if (Array.isArray(obj.tabs)) {
             for (let tab of obj.tabs) {
-                tab.items = merge(schema, tab.items, options);
+                tab.items = merge(schema, tab.items, { ...options });
             }
         }
 
@@ -78,17 +79,21 @@ export function merge(schema, form = ['*'], options = {}) {
             });
         }
 
-        return obj;
-    });
+        acc.push(obj);
+        return acc;
+    }, []);
 
     return form;
 }
 
-export function stdFormObj(schema, options = {}) {
+export function standardForm(schema, options = {}) {
     const f = {};
 
-    f.title = schema.title || name;
-    f.key = options.path.slice();
+    f.key = Array.from(options.path);
+
+    if ('title' in schema) {
+        f.title = schema.title;
+    }
 
     if (options.lookup) {
         const strid = ObjectPath.stringify(f.key);
@@ -98,22 +103,32 @@ export function stdFormObj(schema, options = {}) {
     if (schema.description) {
         f.description = schema.description;
     }
-    if (options.required === true || schema.required === true) {
-        f.required = true;
+
+    if ('required' in schema) {
+        f.required = options.required = schema.required;
+    } else if ('required' in options) {
+        f.required = options.required;
     }
+
     if (schema.maxLength) {
-        f.maxlength = schema.maxLength;
+        f.maxLength = schema.maxLength;
     }
     if (schema.minLength) {
-        f.minlength = schema.minLength;
+        f.minLength = schema.minLength;
     }
-    if (schema.readOnly || schema.readonly) {
-        f.readonly = true;
+
+    if ('readOnly' in schema) {
+        f.readonly = schema.readOnly;
+    } else if ('readonly' in schema) {
+        f.readonly = schema.readonly;
+    } else if ('readonly' in options) {
+        f.readonly = options.readonly;
     }
-    if (schema.minimum) {
+
+    if ('minimum' in schema) {
         f.minimum = schema.minimum + (schema.exclusiveMinimum ? 1 : 0);
     }
-    if (schema.maximum) {
+    if ('maximum' in schema) {
         f.maximum = schema.maximum - (schema.exclusiveMaximum ? 1 : 0);
     }
 
