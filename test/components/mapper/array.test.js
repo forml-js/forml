@@ -231,6 +231,49 @@ describe('each item', function () {
         expect(onChange).toHaveBeenCalled();
     });
 
+    describe('in readonly mode', function () {
+        test('propagates readonly', function () {
+            model = [1];
+            form = [
+                {
+                    key: '',
+                    type: 'array',
+                    readonly: true,
+                    items: [{ type: 'number', key: '[]' }],
+                },
+            ];
+
+            const { container } = render(
+                h(SchemaForm, { schema, model, form })
+            );
+
+            expect(container.querySelectorAll('button[disabled]').length).toBe(
+                4
+            );
+            expect(container.querySelector('input').disabled).toBe(true);
+        });
+        test('can be overrideden by explicit setting', function () {
+            model = [1];
+            form = [
+                {
+                    key: '',
+                    type: 'array',
+                    readonly: true,
+                    items: [{ type: 'number', key: '[]', readonly: false }],
+                },
+            ];
+
+            const { container } = render(
+                h(SchemaForm, { schema, model, form })
+            );
+
+            expect(container.querySelectorAll('button[disabled]').length).toBe(
+                4
+            );
+            expect(container.querySelector('input').disabled).toBe(false);
+        });
+    });
+
     describe('has controls', function () {
         test('to move up', function () {
             model = [1, 2];
