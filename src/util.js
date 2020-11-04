@@ -216,6 +216,8 @@ export function assertType(schema, value) {
         } else {
             if (type === 'number' && Number.isInteger(value)) return value;
             else if (type === 'number') return Math.floor(value);
+            else if (value === '') return value;
+            else if (value === '-') return value;
             else if (type === 'string') return parseInt(value);
             else return defaultForSchema(schema);
         }
