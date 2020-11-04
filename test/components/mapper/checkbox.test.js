@@ -1,14 +1,15 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util } from '../../../src';
 
-describe('fieldset', function () {
+import { SchemaForm, getLocalizer, util } from '../../../src';
+import { createElement as h } from 'react';
+
+describe('checkbox mapper', function () {
     let schema, form, model, onChange, localizer;
 
     beforeEach(function () {
-        schema = { type: 'object', properties: { foo: { type: 'string' } } };
-        form = [{ type: 'fieldset', items: ['foo'] }];
+        schema = { type: 'boolean' };
+        form = [{ type: 'checkbox', key: [] }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
     });
@@ -18,14 +19,15 @@ describe('fieldset', function () {
             h(SchemaForm, { model, form, schema, onChange })
         );
 
-        expect(container.querySelector('fieldset')).not.toBeNull();
-        expect(container.querySelector('fieldset input')).not.toBeNull();
+        expect(
+            container.querySelector('input[type="checkbox"]')
+        ).not.toBeNull();
     });
 
     test('uses localizer for title and description', function () {
         const form = [
             {
-                type: 'fieldset',
+                type: 'checkbox',
                 items: [],
                 title: 'title',
                 description: 'description',

@@ -3,12 +3,12 @@ import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
 import { SchemaForm, getLocalizer, util } from '../../../src';
 
-describe('fieldset', function () {
+describe('date', function () {
     let schema, form, model, onChange, localizer;
 
     beforeEach(function () {
-        schema = { type: 'object', properties: { foo: { type: 'string' } } };
-        form = [{ type: 'fieldset', items: ['foo'] }];
+        schema = { type: 'string', format: 'date' };
+        form = [{ key: [], type: 'date' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
     });
@@ -18,14 +18,13 @@ describe('fieldset', function () {
             h(SchemaForm, { model, form, schema, onChange })
         );
 
-        expect(container.querySelector('fieldset')).not.toBeNull();
-        expect(container.querySelector('fieldset input')).not.toBeNull();
+        expect(container.querySelector('input[type=date]')).not.toBeNull();
     });
 
     test('uses localizer for title and description', function () {
         const form = [
             {
-                type: 'fieldset',
+                type: 'checkbox',
                 items: [],
                 title: 'title',
                 description: 'description',
