@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import Ajv from 'ajv';
 import objectPath from 'objectpath';
 import { useMemo } from 'react';
@@ -72,6 +73,76 @@ export function defaultForSchema(schema) {
             default:
                 // throw new Error(`Unhandled defaultForSchema type: ${type}`);
                 base = undefined;
+        }
+
+        return assertType(schema, base);
+    }
+}
+
+export function randomForSchema(schema) {
+    if (schema.default !== undefined) {
+        return schema.default;
+    }
+
+    return buildSchema(schema);
+
+    function buildSchema(schema) {
+        const type = getPreferredType(schema.type);
+        let base = undefined;
+
+        switch (type) {
+            case 'array':
+                base = [];
+                if (Array.isArray(schema.items)) {
+                    for (let item of schema.items) {
+                        base.push(randomForSchema(item));
+                    }
+                } else {
+                    base.push(randomForSchema(schema.items));
+                }
+                break;
+            case 'object':
+                base = {};
+                for (let property in schema.properties) {
+                    let item = randomForSchema(schema.properties[property]);
+                    base[property] = item;
+                }
+                break;
+            case 'string':
+                base = shortid();
+                if (schema.format === 'date') {
+                    let date = new Date(
+                        Math.floor(Math.random() * new Date().getTime())
+                    );
+                    base = date
+                        .toISOString()
+                        .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
+                } else if (schema.format === 'date-time') {
+                    base = new Date(
+                        Math.floor(Math.random() * new Date().getTime())
+                    ).toISOString();
+                }
+                break;
+            case 'number':
+                base = Math.random();
+                break;
+            case 'integer':
+                base = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+                break;
+            case 'boolean':
+                base = Math.random() > 0.5 ? true : false;
+                break;
+            case 'null':
+                base = null;
+                break;
+            default:
+                // throw new Error(`Unhandled randomForSchema type: ${type}`);
+                base = undefined;
+        }
+
+        if (schema.enum) {
+            const index = Math.floor(Math.random() * (schema.enum.length - 1));
+            base = schema.enum[index];
         }
 
         return assertType(schema, base);
@@ -172,7 +243,7 @@ export function assertType(schema, value) {
  * @return {Function}
  */
 export function errorGetter(errors) {
-    return function(keys) {
+    return function (keys) {
         const key = objectPath.stringify(keys);
         return errors[key];
     };

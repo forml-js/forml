@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import { createElement as h } from 'react';
+import { createElement as h, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';
@@ -12,23 +12,26 @@ export default function FieldSet(props) {
     const { form, onChange } = props;
     const localizer = useLocalizer();
     const title = localizer.getLocalizedString(form.title);
+    const description = localizer.getLocalizedString(form.description);
     const { readonly: disabled } = form;
 
-    const forms = form.items.map(function (form, index) {
-        const { schema } = form;
-        const key = index.toString();
+    const forms = useMemo(() =>
+        form.items.map(function (form, index) {
+            const { schema } = form;
+            const key = index.toString();
 
-        return h(SchemaField, {
-            form,
-            key,
-            onChange,
-            schema,
-        });
-    });
+            return h(SchemaField, {
+                form,
+                key,
+                onChange,
+                schema,
+            });
+        })
+    );
 
     const deco = useDecorator();
 
-    return h(deco.FieldSet, { form, title, disabled }, forms);
+    return h(deco.FieldSet, { form, title, description, disabled }, forms);
 }
 
 FieldSet.propTypes = {
