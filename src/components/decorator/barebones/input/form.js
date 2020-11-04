@@ -5,9 +5,9 @@ import { createElement as h } from 'react';
  */
 export default function Form(props) {
     const { form } = props;
-    const type = form.type;
+    //const type = form.type;
     const value = props.value;
     const onChange = props.onChange;
     const disabled = props.disabled;
-    return h('input', { type, value, onChange, disabled });
+    return h('input', { type: 'text', value, onChange, disabled });
 }

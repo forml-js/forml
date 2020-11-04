@@ -24,10 +24,9 @@ export default function Number(props) {
     const description = localizer.getLocalizedString(form.description);
 
     const id = ObjectPath.stringify(form.key);
-    const [focused, setFocused] = useState(false);
 
     return h(deco.Input.Group, { key: id, form }, [
-        h(deco.Label, { key: 'label', form, value, error, htmlFor: id, focused }, label),
+        h(deco.Label, { key: 'label', form, value, error, htmlFor: id }, label),
         h(deco.Input.Form, {
             key: 'input',
             value,
@@ -36,15 +35,14 @@ export default function Number(props) {
             placeholder,
             form,
             id,
-            onFocus,
             disabled,
         }),
         (error || description) &&
-        h(
-            deco.Input.Description,
-            { key: 'description', form, value, error: !!error },
-            error || description
-        ),
+            h(
+                deco.Input.Description,
+                { key: 'description', form, value, error: !!error },
+                error || description
+            ),
     ]);
 
     function onChange(e) {
@@ -63,14 +61,6 @@ export default function Number(props) {
         }
 
         props.onChange(e, value);
-    }
-
-    function onFocus() {
-        setFocused(true);
-    }
-
-    function onBlur() {
-        setFocused(false);
     }
 }
 
