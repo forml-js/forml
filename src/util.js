@@ -225,7 +225,9 @@ export function assertType(schema, value) {
         if (allowed.has(type)) {
             return value;
         } else if (type === 'string') {
-            return parseFloat(value);
+            if (value === '') return value;
+            else if (value === '-') return value;
+            else return parseFloat(value);
         } else {
             return defaultForSchema(schema);
         }

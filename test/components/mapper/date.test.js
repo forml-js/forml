@@ -18,7 +18,7 @@ describe('date', function () {
             h(SchemaForm, { model, form, schema, onChange })
         );
 
-        expect(container.querySelector('input[type=date]')).not.toBeNull();
+        expect(container.querySelector('input')).not.toBeNull();
     });
 
     test('uses localizer for title and description', function () {

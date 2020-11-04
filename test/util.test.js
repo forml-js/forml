@@ -176,7 +176,13 @@ describe('assertType', function () {
             });
         });
         describe('when the type is a string', function () {
-            test('parses an integer', function () {
+            test('allows it if empty', function () {
+                expect(util.assertType({ type: 'integer' }, '')).toBe('');
+            });
+            test('allows the minus character', function () {
+                expect(util.assertType({ type: 'integer' }, '-')).toBe('-');
+            });
+            test('othewise parses an integer', function () {
                 expect(util.assertType({ type: 'integer' }, '1.5')).toBe(1);
                 expect(util.assertType({ type: 'integer' }, '2')).toBe(2);
             });
@@ -199,6 +205,12 @@ describe('assertType', function () {
             });
         });
         describe('when the type is a string', function () {
+            test('allows it if empty', function () {
+                expect(util.assertType({ type: 'number' }, '')).toBe('');
+            });
+            test('allows the minus character', function () {
+                expect(util.assertType({ type: 'number' }, '-')).toBe('-');
+            });
             test('parses a float', function () {
                 expect(util.assertType({ type: 'number' }, '1.5')).toBe(1.5);
                 expect(util.assertType({ type: 'number' }, '2')).toBe(2);
