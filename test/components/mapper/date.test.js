@@ -1,21 +1,22 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util } from '../../../src';
+import { SchemaForm, getLocalizer, decorators, util } from '../../../src';
 
 describe('date', function () {
-    let schema, form, model, onChange, localizer;
+    let schema, form, model, onChange, localizer, decorator;
 
     beforeEach(function () {
         schema = { type: 'string', format: 'date' };
         form = [{ key: [], type: 'date' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
+        decorator = decorators.barebones;
     });
 
     test('renders itself', function () {
         const { container } = render(
-            h(SchemaForm, { model, form, schema, onChange })
+            h(SchemaForm, { model, form, schema, onChange, decorator })
         );
 
         expect(container.querySelector('input')).not.toBeNull();
@@ -34,7 +35,14 @@ describe('date', function () {
             getLocalizedString: jest.fn((id) => id),
         });
         const { container } = render(
-            h(SchemaForm, { model, form, schema, onChange, localizer })
+            h(SchemaForm, {
+                model,
+                form,
+                schema,
+                onChange,
+                localizer,
+                decorator,
+            })
         );
 
         expect(localizer.getLocalizedString).toHaveBeenCalledWith('title');

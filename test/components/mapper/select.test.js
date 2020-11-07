@@ -4,7 +4,7 @@ import { config } from 'react-transition-group';
 
 config.disabled = true;
 
-import { SchemaForm, util } from '../../../src';
+import { SchemaForm, util, decorators } from '../../../src';
 import { createElement as h } from 'react';
 
 describe('select mapper', function () {
@@ -22,7 +22,13 @@ describe('select mapper', function () {
 
     test('is updated onChange', async function () {
         const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange })
+            h(SchemaForm, {
+                schema,
+                form,
+                model,
+                onChange,
+                decorator: decorators.barebones,
+            })
         );
         const [button0, button1] = container.querySelectorAll('option');
         expect(button1).toBeDefined();

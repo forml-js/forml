@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { createElement as h, forwardRef, useState } from 'react';
 
-const useStyles = makeStyles(function(theme) {
+const useStyles = makeStyles(function (theme) {
     return {
         root: {
             margin: theme.spacing(1),
@@ -39,7 +39,6 @@ const useStyles = makeStyles(function(theme) {
     };
 });
 
-
 /**
  * @component
  */
@@ -51,10 +50,10 @@ function Items(props, ref) {
     const classes = useStyles();
     const color = error ? 'error' : 'initial';
 
-    console.error('Array.Items() : form : %O', form);
-
-    const disablePadding = 'disablePadding' in form ? form.disablePadding : false;
-    const disableGutters = 'disableGutters' in form ? form.disableGutters : false;
+    const disablePadding =
+        'disablePadding' in form ? form.disablePadding : false;
+    const disableGutters =
+        'disableGutters' in form ? form.disableGutters : false;
 
     return h(
         Paper,
@@ -62,8 +61,8 @@ function Items(props, ref) {
             className: clsx(classes.root, {
                 [classes.open]: open,
                 [classes.disablePadding]: disablePadding,
-                [classes.disableGutters]: disableGutters
-            })
+                [classes.disableGutters]: disableGutters,
+            }),
         },
         h(
             List,
@@ -108,15 +107,15 @@ function Items(props, ref) {
                 ),
                 ...props.children,
                 value &&
-                value.length === 0 &&
-                h(
-                    ListItem,
-                    { divider: true },
-                    h(ListItemText, {
-                        secondary: 'empty',
-                        secondaryTypographyProps: { align: 'center' },
-                    })
-                ),
+                    value.length === 0 &&
+                    h(
+                        ListItem,
+                        { divider: true },
+                        h(ListItemText, {
+                            secondary: 'empty',
+                            secondaryTypographyProps: { align: 'center' },
+                        })
+                    ),
                 h(
                     ListItem,
                     {

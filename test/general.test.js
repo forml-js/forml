@@ -1,12 +1,13 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import { SchemaForm, getLocalizer, util } from '../src';
+import { SchemaForm, getLocalizer, util, decorators } from '../src';
 import { createElement as h } from 'react';
 
 describe('mapper', function () {
     const title = 'title';
     const description = 'description';
+    const decorator = decorators.barebones;
     let forms = [
         [
             {
@@ -127,7 +128,7 @@ describe('mapper', function () {
                 getLocalizedString: jest.fn((id) => id),
             });
             const { container } = render(
-                h(SchemaForm, { model, form, schema, localizer })
+                h(SchemaForm, { model, form, schema, localizer, decorator })
             );
 
             expect(localizer.getLocalizedString).toHaveBeenCalledWith('title');
@@ -143,7 +144,7 @@ describe('mapper', function () {
                 let newModel = jest.fn();
                 let onChange = (event, nextModel) => newModel(nextModel);
                 let { container } = render(
-                    h(SchemaForm, { model, form, schema, onChange })
+                    h(SchemaForm, { model, form, schema, onChange, decorator })
                 );
 
                 let inputs = container.querySelectorAll(

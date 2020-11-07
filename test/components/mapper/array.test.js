@@ -2,7 +2,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { ArrayComponent } from '../../../src/components/mapper/array';
 import '@testing-library/jest-dom/extend-expect';
 
-import { SchemaForm, util, constants } from '../../../src';
+import { SchemaForm, util, constants, decorators } from '../../../src';
 import { mover, creator } from '../../../src/components/mapper/array';
 import { createElement as h } from 'react';
 
@@ -12,6 +12,7 @@ describe('item mover', function () {
     let move;
     let items;
     let value;
+    let decorator;
 
     beforeEach(function () {
         form = {
@@ -23,6 +24,7 @@ describe('item mover', function () {
         items = [create(), create(), create(), create()];
         value = [1, 2, 3, 4];
         move = mover(items, value);
+        decorator = decorators.barebones;
     });
 
     test('can move one space down', function () {
@@ -54,15 +56,24 @@ describe('items container', function () {
     let schema;
     let form;
     let model;
+    let decorator;
 
     beforeEach(function () {
         schema = { type: 'array', items: { type: 'number' } };
         form = ['*'];
         model = [];
+        decorator = decorators.barebones;
     });
 
     test('is rendered', function () {
-        const { container } = render(h(SchemaForm, { schema, form, model }));
+        const { container } = render(
+            h(SchemaForm, {
+                schema,
+                form,
+                model,
+                decorator,
+            })
+        );
 
         expect(container).toMatchSnapshot();
 
@@ -74,7 +85,7 @@ describe('items container', function () {
     describe('with an add button', function () {
         test('which renders', function () {
             const { container } = render(
-                h(SchemaForm, { schema, form, model })
+                h(SchemaForm, { schema, form, model, decorator })
             );
 
             const button = container.querySelector('button');
@@ -85,7 +96,7 @@ describe('items container', function () {
                 model = newModel;
             });
             const { container } = render(
-                h(SchemaForm, { schema, form, model, onChange })
+                h(SchemaForm, { schema, form, model, onChange, decorator })
             );
 
             const button = container.querySelector('button');
@@ -103,7 +114,7 @@ describe('items container', function () {
         };
         let model = [1];
         let { container, rerender } = render(
-            h(SchemaForm, { schema, form, model, onChange })
+            h(SchemaForm, { schema, form, model, onChange, decorator })
         );
 
         const add = container.querySelector('button.add');
@@ -183,6 +194,7 @@ describe('each item', function () {
     let setter = null;
     let getter = null;
     let onChange = null;
+    let decorator = null;
 
     beforeEach(function () {
         schema = { type: 'array', items: { type: 'number' } };
@@ -193,6 +205,7 @@ describe('each item', function () {
         onChange = jest.fn((event, newModel) => {
             model = newModel;
         });
+        decorator = decorators.barebones;
 
         mockGetComputedSpacing();
     });
@@ -208,7 +221,9 @@ describe('each item', function () {
     }
 
     test('is rendered', function () {
-        const { container } = render(h(SchemaForm, { schema, form, model }));
+        const { container } = render(
+            h(SchemaForm, { schema, form, model, decorator })
+        );
         expect(container.querySelector('.array ul li')).not.toBeNull();
     });
 
@@ -217,7 +232,9 @@ describe('each item', function () {
     test.skip('can be dragged into a new position', async function () {
         const onChange = jest.fn();
         model = [1, 2, 3, 4];
-        const utils = render(h(SchemaForm, { model, schema, form, onChange }));
+        const utils = render(
+            h(SchemaForm, { model, schema, form, onChange, decorator })
+        );
         const { container } = utils;
 
         mockElementSpacing(utils);
@@ -247,7 +264,7 @@ describe('each item', function () {
             ];
 
             const { container } = render(
-                h(SchemaForm, { schema, model, form })
+                h(SchemaForm, { schema, model, form, decorator })
             );
 
             expect(container.querySelectorAll('button[disabled]').length).toBe(
@@ -267,7 +284,7 @@ describe('each item', function () {
             ];
 
             const { container } = render(
-                h(SchemaForm, { schema, model, form })
+                h(SchemaForm, { schema, model, form, decorator })
             );
 
             expect(container.querySelectorAll('button[disabled]').length).toBe(
@@ -281,7 +298,7 @@ describe('each item', function () {
         test('to move up', function () {
             model = [1, 2];
             const { container } = render(
-                h(SchemaForm, { schema, form, model, onChange })
+                h(SchemaForm, { schema, form, model, onChange, decorator })
             );
 
             let buttons = container.querySelectorAll('.array .item .move-up');
@@ -302,7 +319,7 @@ describe('each item', function () {
         test('to move down', function () {
             model = [1, 2];
             const { container } = render(
-                h(SchemaForm, { schema, form, model, onChange })
+                h(SchemaForm, { schema, form, model, onChange, decorator })
             );
 
             let buttons = container.querySelectorAll('.array .item .move-down');
@@ -323,7 +340,7 @@ describe('each item', function () {
         test('to be destroyed', function () {
             model = [1, 2];
             const { container } = render(
-                h(SchemaForm, { schema, form, model, onChange })
+                h(SchemaForm, { schema, form, model, onChange, decorator })
             );
 
             let button = container.querySelectorAll('.array .item .delete');
@@ -353,7 +370,7 @@ describe('each item', function () {
             ];
 
             const { container } = render(
-                h(SchemaForm, { form, model, schema })
+                h(SchemaForm, { form, model, schema, decorator })
             );
 
             expect(container.querySelector('ul li h6')).not.toBeNull();

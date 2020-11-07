@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import { SchemaForm, getLocalizer, util } from '../../../src';
+import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
 import { createElement as h } from 'react';
 
 describe('checkbox mapper', function () {
@@ -37,7 +37,14 @@ describe('checkbox mapper', function () {
             getLocalizedString: jest.fn((id) => id),
         });
         const { container } = render(
-            h(SchemaForm, { model, form, schema, onChange, localizer })
+            h(SchemaForm, {
+                model,
+                form,
+                schema,
+                onChange,
+                localizer,
+                decorator: decorators.barebones,
+            })
         );
 
         expect(localizer.getLocalizedString).toHaveBeenCalledWith('title');

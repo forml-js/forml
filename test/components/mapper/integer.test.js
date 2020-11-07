@@ -1,16 +1,17 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util } from '../../../src';
+import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
 
 describe('integer', function () {
-    let schema, form, model, onChange;
+    let schema, form, model, onChange, decorator;
 
     beforeEach(function () {
         schema = { type: 'integer' };
         form = [{ key: [], type: 'integer' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
+        decorator = decorators.barebones;
     });
 
     test('tolerates empty strings onChange', function () {
@@ -28,7 +29,13 @@ describe('integer', function () {
 
     test('tolerates minus character onChange', function () {
         const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange })
+            h(SchemaForm, {
+                schema,
+                form,
+                model,
+                onChange,
+                decorator: decorators.mui,
+            })
         );
 
         fireEvent.change(container.querySelector('input'), {
