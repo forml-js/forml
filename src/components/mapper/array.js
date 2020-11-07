@@ -283,6 +283,7 @@ function ArrayComponent(props, ref) {
                     ref,
                     otherProps,
                     disabled,
+                    form,
                 },
                 [arrays, provided.placeholder]
             );
