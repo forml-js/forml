@@ -21,6 +21,7 @@
   },
   "author": "Zachary Hueras",
   "license": "MIT",
+  "homepage": "https://www.rjsf.io/",
   "repository": {
     "type": "git",
     "url": "https://github.com/fauxsoup/rjsf.git"

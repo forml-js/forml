@@ -195,7 +195,20 @@ function BaseArrayItem(props, ref) {
 export const ArrayItem = forwardRef(BaseArrayItem);
 
 /**
+ * @name ArrayComponent
  * @component ArrayComponent
+ * @description
+ * A wrapper for the array that utilizes the useArrayItems hook
+ * to keep track of its children. Invokes the [Context's](/docs/context)
+ *
+ * Usage:
+ *
+ * ```jsx
+ * const value = ['a', 'b', 'c'];
+ * const form = {type: 'array', items: {type: 'string'}};
+ * const error = null;
+ * <ArrayComponent value={value} form={form} error={error} />
+ * ```
  */
 function ArrayComponent(props, ref) {
     const { form, value } = props;
