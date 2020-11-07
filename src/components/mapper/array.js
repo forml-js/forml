@@ -222,10 +222,11 @@ function ArrayComponent(props, ref) {
     const items = useArrayItems(form, disabled);
     const deco = useDecorator();
     const localizer = useLocalizer();
+    const model = useModel();
 
     for (let i = 0; i < items.items.length; ++i) {
         const item = items.items[i];
-        const forms = item.forms.map(function ({ form, key }) {
+        const forms = item.forms.map(function({ form, key }) {
             if (!form) return;
             const formCopy = copyWithIndex(form, i);
 
