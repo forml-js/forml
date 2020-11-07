@@ -11,7 +11,10 @@
 # rjsf
 
 [![Build Status](https://travis-ci.org/fauxsoup/rjsf.svg?branch=master)](https://travis-ci.org/fauxsoup/rjsf)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/rjsf)
 [![Coverage Status](https://coveralls.io/repos/github/fauxsoup/rjsf/badge.svg?branch=master)](https://coveralls.io/github/fauxsoup/rjsf?branch=master)
+![npm](https://img.shields.io/npm/v/rjsf)
+![npm](https://img.shields.io/npm/l/rjsf)
 
 rjsf - react json schema form
 
