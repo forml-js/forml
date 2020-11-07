@@ -1,6 +1,6 @@
 {
   "name": "rjsf",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Small, fast, and powerful JSON-schema form generator for React.",
   "keywords": [
     "json",
