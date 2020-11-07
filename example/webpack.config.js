@@ -7,7 +7,7 @@ module.exports = {
         publicPath: '/rjsf/dist/',
         path: path.resolve('../dist'),
     },
-    devtool: 'eval-source-map',
+    devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
     resolve: {
         alias: {
             rjsf: path.resolve(__dirname, '../src'),
