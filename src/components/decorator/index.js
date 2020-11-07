@@ -6,14 +6,13 @@ import { clone } from '../../util';
 import * as barebones from './barebones';
 import * as mui from './mui';
 
-
 export const decorators = {
     mui: clone(mui),
-    barebones: clone(barebones)
+    barebones: clone(barebones),
 };
 
 export function defaultDecorator() {
-    return decorators.barebones;
+    return decorators.mui;
 }
 
 export function getDecorator(template) {
