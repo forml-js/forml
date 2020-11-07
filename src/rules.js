@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import { stdFormObj } from './forms';
+import { standardForm } from './forms';
 import { getPreferredType } from './util';
 
 /**
@@ -8,7 +8,7 @@ import { getPreferredType } from './util';
  */
 export function enumToTitles(enm) {
     const titles = [];
-    enm.forEach(value => {
+    enm.forEach((value) => {
         titles.push(getNameFromValue(value));
     });
     return titles;
@@ -44,8 +44,11 @@ export const definitions = {
      * @return {FormDefinition}
      */
     date(schema, options) {
-        if (getPreferredType(schema.type) === 'string' && schema.format === 'date') {
-            const f = stdFormObj(schema, options);
+        if (
+            getPreferredType(schema.type) === 'string' &&
+            schema.format === 'date'
+        ) {
+            const f = standardForm(schema, options);
             f.type = 'date';
             return f;
         }
@@ -55,8 +58,11 @@ export const definitions = {
      * @return {FormDefiniton}
      */
     datetime(schema, options) {
-        if (getPreferredType(schema.type) === 'string' && schema.format === 'date-time') {
-            const f = stdFormObj(schema, options);
+        if (
+            getPreferredType(schema.type) === 'string' &&
+            schema.format === 'date-time'
+        ) {
+            const f = standardForm(schema, options);
             f.type = 'datetime';
             return f;
         }
@@ -67,7 +73,7 @@ export const definitions = {
      */
     select(schema, options) {
         if (schema.enum) {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'select';
 
             if (schema.enumNames) {
@@ -89,7 +95,7 @@ export const definitions = {
      */
     checkbox(schema, options) {
         if (getPreferredType(schema.type) === 'boolean') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'checkbox';
             return f;
         }
@@ -102,7 +108,7 @@ export const definitions = {
      */
     text(schema, options) {
         if (getPreferredType(schema.type) === 'string') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'text';
             return f;
         }
@@ -116,7 +122,7 @@ export const definitions = {
      */
     integer(schema, options) {
         if (getPreferredType(schema.type) === 'integer') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'integer';
             return f;
         }
@@ -130,7 +136,7 @@ export const definitions = {
         if (getPreferredType(schema.type) === 'array') {
             if (typeof schema.items === 'object' && schema.items.enum) {
                 if (schema.uniqueItems === true) {
-                    const f = stdFormObj(schema, options);
+                    const f = standardForm(schema, options);
                     f.type = 'multiselect';
 
                     if (schema.items.enumNames) {
@@ -154,7 +160,7 @@ export const definitions = {
      */
     number(schema, options) {
         if (getPreferredType(schema.type) === 'number') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'number';
             return f;
         }
@@ -166,19 +172,21 @@ export const definitions = {
      * @return {FormDefinition}
      */
     tuple(schema, options) {
-        if (getPreferredType(schema.type) === 'array' && Array.isArray(schema.items)) {
-            const f = stdFormObj(schema, options);
+        if (
+            getPreferredType(schema.type) === 'array' &&
+            Array.isArray(schema.items)
+        ) {
+            const f = standardForm(schema, options);
             f.type = 'tuple';
 
             f.items = [];
-            schema.items.forEach(function(item, index) {
+            schema.items.forEach(function (item, index) {
                 const arrPath = options.path.slice();
                 arrPath.push(index);
 
                 const def = test(item, { ...options, path: arrPath });
 
-                if (def)
-                    f.items.push(def);
+                if (def) f.items.push(def);
             });
 
             return f;
@@ -189,8 +197,11 @@ export const definitions = {
      * @return {FormDefinition}
      */
     array(schema, options) {
-        if (getPreferredType(schema.type) === 'array' && !Array.isArray(schema.items)) {
-            const f = stdFormObj(schema, options);
+        if (
+            getPreferredType(schema.type) === 'array' &&
+            !Array.isArray(schema.items)
+        ) {
+            const f = standardForm(schema, options);
             f.type = 'array';
 
             if (schema.items !== undefined) {
@@ -212,7 +223,7 @@ export const definitions = {
      */
     fieldset(schema, options) {
         if (getPreferredType(schema.type) === 'object') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'fieldset';
 
             if (schema.properties) {
@@ -242,13 +253,13 @@ export const definitions = {
      */
     null(schema, options) {
         if (getPreferredType(schema.type) === 'null') {
-            const f = stdFormObj(schema, options);
+            const f = standardForm(schema, options);
             f.type = 'null';
             return f;
         }
 
         return undefined;
-    }
+    },
 };
 
 export const rules = [
@@ -261,7 +272,8 @@ export const rules = [
     definitions.date,
     definitions.datetime,
     definitions.text,
-    definitions.number, definitions.integer,
+    definitions.number,
+    definitions.integer,
     definitions.checkbox,
 
     // Handle complex types
@@ -289,8 +301,7 @@ export const rules = [
 export function test(schema, options) {
     for (let rule of rules) {
         const form = rule(schema, options);
-        if (form)
-            return form;
+        if (form) return form;
     }
     // const ruleSet = rules[getPreferredType(schema.type)];
 

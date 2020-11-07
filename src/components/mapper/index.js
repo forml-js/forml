@@ -65,6 +65,7 @@ export const mapperTypes = [
     'textarea',
     'tuple',
 ];
+
 export const mapperShape = t.shape({
     array: t.elementType,
     checkbox: t.elementType,
@@ -81,7 +82,7 @@ export const mapperShape = t.shape({
     tabs: t.elementType,
     text: t.elementType,
     textarea: t.elementType,
-    tuple: t.elementType
+    tuple: t.elementType,
 });
 
 export function getMapper(mapper = {}, SchemaForm = null) {

@@ -28,7 +28,11 @@ module.exports = {
         {
             key: 'comments',
             add: 'New',
+            disabled: true,
             items: [{ key: 'comments[]', type: 'comment' }],
         },
     ],
+    model: {
+        comments: [{ name: 'test', comment: 'foo bar' }],
+    },
 };

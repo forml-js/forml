@@ -15,12 +15,12 @@ export default function Checkbox({
     onChange,
     disabled,
 }) {
-    return h(FormGroup, { row: true }, [
+    return h(FormGroup, { row: false }, [
         h(FormControlLabel, {
             label: title,
             control: h(MuiCheckbox, { checked, onChange, disabled }),
         }),
         (error || description) &&
-            h(FormHelperText, { error }, error || description),
+        h(FormHelperText, { error }, error || description),
     ]);
 }

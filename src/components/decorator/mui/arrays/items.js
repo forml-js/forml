@@ -16,9 +16,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { createElement as h, forwardRef, useState } from 'react';
 
-const useStyles = makeStyles(function (theme) {
+const useStyles = makeStyles(function(theme) {
     return {
-        root: {},
+        root: {
+            margin: theme.spacing(1),
+        },
+        disablePadding: {
+            marginTop: 0,
+            marginBottom: 0,
+        },
+        disableGutters: {
+            marginLeft: 0,
+            marginRight: 0,
+        },
         list: {
             display: 'flex',
             flexDirection: 'column',
@@ -29,22 +39,32 @@ const useStyles = makeStyles(function (theme) {
     };
 });
 
+
 /**
  * @component
  */
 function Items(props, ref) {
-    const { label, otherProps } = props;
+    const { label, form, otherProps } = props;
     const { error, description } = props;
-    const { value } = props;
+    const { value, disabled } = props;
 
     const classes = useStyles();
     const color = error ? 'error' : 'initial';
 
-    console.error('children : %O', props.children);
+    console.error('Array.Items() : form : %O', form);
+
+    const disablePadding = 'disablePadding' in form ? form.disablePadding : false;
+    const disableGutters = 'disableGutters' in form ? form.disableGutters : false;
 
     return h(
         Paper,
-        { className: clsx(classes.root, { [classes.open]: open }) },
+        {
+            className: clsx(classes.root, {
+                [classes.open]: open,
+                [classes.disablePadding]: disablePadding,
+                [classes.disableGutters]: disableGutters
+            })
+        },
         h(
             List,
             {
@@ -88,15 +108,15 @@ function Items(props, ref) {
                 ),
                 ...props.children,
                 value &&
-                    value.length === 0 &&
-                    h(
-                        ListItem,
-                        { divider: true },
-                        h(ListItemText, {
-                            secondary: 'empty',
-                            secondaryTypographyProps: { align: 'center' },
-                        })
-                    ),
+                value.length === 0 &&
+                h(
+                    ListItem,
+                    { divider: true },
+                    h(ListItemText, {
+                        secondary: 'empty',
+                        secondaryTypographyProps: { align: 'center' },
+                    })
+                ),
                 h(
                     ListItem,
                     {
@@ -111,6 +131,7 @@ function Items(props, ref) {
                             color,
                             edge: 'end',
                             startIcon: h(Icon, {}, 'add'),
+                            disabled,
                         },
                         `Add ${label}`
                     )

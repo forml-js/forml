@@ -1,5 +1,17 @@
 import * as util from '../src/util';
 
+expect.extend({
+    toBeString(received) {
+        return { pass: typeof received === 'string' };
+    },
+    toBeNumber(received) {
+        return { pass: typeof received === 'number' };
+    },
+    toBeBoolean(received) {
+        return { pass: typeof received === 'boolean' };
+    },
+});
+
 describe('getPreferredType', function () {
     test('accepts a single string', function () {
         expect(util.getPreferredType('string')).toBe('string');
@@ -10,6 +22,45 @@ describe('getPreferredType', function () {
     test('returns the first non-null type', function () {
         expect(util.getPreferredType(['string', 'null'])).toBe('string');
         expect(util.getPreferredType(['null', 'string'])).toBe('string');
+    });
+});
+describe('randomForSchema', function () {
+    describe('when given one type', function () {
+        test('returns an random value of the type', function () {
+            expect(util.randomForSchema({ type: 'null' })).toBeNull();
+            expect(util.randomForSchema({ type: 'string' })).toBeString();
+            expect(util.randomForSchema({ type: 'number' })).toBeNumber();
+            expect(util.randomForSchema({ type: 'integer' })).toBeNumber();
+            expect(util.randomForSchema({ type: 'boolean' })).toBeBoolean();
+
+            const list = util.randomForSchema({
+                type: 'array',
+                items: { type: 'string' },
+            });
+            expect(list).toBeInstanceOf(Array);
+            expect(list.length).toBe(1);
+            expect(list[0]).toBeString();
+
+            const tuple = util.randomForSchema({
+                type: 'array',
+                items: [{ type: 'string' }],
+            });
+            expect(tuple).toBeInstanceOf(Array);
+            expect(tuple.length).toBe(1);
+            expect(tuple[0]).toBeString();
+
+            const empty = util.randomForSchema({ type: 'object' });
+            expect(empty).toBeInstanceOf(Object);
+
+            const populated = util.randomForSchema({
+                type: 'object',
+                properties: { test: { type: 'string' } },
+            });
+            expect(populated).toBeInstanceOf(Object);
+            expect(populated.test).toBeString();
+
+            expect(util.randomForSchema({ type: 'unknown' })).toBeUndefined();
+        });
     });
 });
 describe('defaultForSchema', function () {
@@ -125,7 +176,13 @@ describe('assertType', function () {
             });
         });
         describe('when the type is a string', function () {
-            test('parses an integer', function () {
+            test('allows it if empty', function () {
+                expect(util.assertType({ type: 'integer' }, '')).toBe('');
+            });
+            test('allows the minus character', function () {
+                expect(util.assertType({ type: 'integer' }, '-')).toBe('-');
+            });
+            test('othewise parses an integer', function () {
                 expect(util.assertType({ type: 'integer' }, '1.5')).toBe(1);
                 expect(util.assertType({ type: 'integer' }, '2')).toBe(2);
             });
@@ -148,6 +205,12 @@ describe('assertType', function () {
             });
         });
         describe('when the type is a string', function () {
+            test('allows it if empty', function () {
+                expect(util.assertType({ type: 'number' }, '')).toBe('');
+            });
+            test('allows the minus character', function () {
+                expect(util.assertType({ type: 'number' }, '-')).toBe('-');
+            });
             test('parses a float', function () {
                 expect(util.assertType({ type: 'number' }, '1.5')).toBe(1.5);
                 expect(util.assertType({ type: 'number' }, '2')).toBe(2);
