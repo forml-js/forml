@@ -270,7 +270,7 @@ exports[`Material UI with no model renders empty root number consistently 1`] = 
 
 exports[`Material UI with no model renders empty root object consistently 1`] = `
 <div>
-  <fieldset
+  <div
     class="MuiFormControl-root makeStyles-root-1"
   >
     <legend
@@ -279,7 +279,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
     <p
       class="MuiTypography-root MuiTypography-body1"
     />
-    <fieldset
+    <div
       class="makeStyles-vertical-6"
     >
       <div
@@ -297,7 +297,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
           />
         </div>
       </div>
-      <fieldset
+      <div
         class="MuiFormControl-root makeStyles-root-1"
       >
         <legend
@@ -306,7 +306,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
         <p
           class="MuiTypography-root MuiTypography-body1"
         />
-        <fieldset
+        <div
           class="makeStyles-vertical-6"
         >
           <div
@@ -331,10 +331,10 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
               />
             </div>
           </div>
-        </fieldset>
-      </fieldset>
-    </fieldset>
-  </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 

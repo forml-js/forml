@@ -27,7 +27,7 @@ import { SchemaField } from '../schema-field';
 const log = debug('rjsf:mapper:array');
 
 export function mover(items, value) {
-    return useCallback(move, [items, value]);
+    return move;
     function move(start, end) {
         return [reorder(items, start, end), reorder(value, start, end)];
         function reorder(list, start, end) {
@@ -40,7 +40,7 @@ export function mover(items, value) {
 }
 
 export function creator(form) {
-    return useCallback(create, [form]);
+    return create;
     function create() {
         const forms = form.items.map(({ ...form }) => {
             const key = shortid();
