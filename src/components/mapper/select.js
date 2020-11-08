@@ -1,6 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import { createElement as h } from 'react';
+import { createElement as h, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';
@@ -18,13 +18,21 @@ export default function Select(props) {
     const placeholder = localizer.getLocalizedString(form.placeholder);
     const description = localizer.getLocalizedString(form.description);
 
-    const menuItems = [];
-    for (let i = 0; i < form.titleMap.length; i++) {
-        const name = localizer.getLocalizedString(getLabel(form.titleMap[i]));
-        const key = ObjectPath.stringify([...form.key, i]);
-        const { value } = form.titleMap[i];
-        menuItems.push(h(deco.Input.Option, { key, value }, name));
-    }
+    const menuItems = useMemo(
+        function () {
+            let menuItems = [];
+            for (let i = 0; i < form.titleMap.length; i++) {
+                const name = localizer.getLocalizedString(
+                    getLabel(form.titleMap[i])
+                );
+                const key = ObjectPath.stringify([...form.key, i]);
+                const { value } = form.titleMap[i];
+                menuItems.push(h(deco.Input.Option, { key, value }, name));
+            }
+            return menuItems;
+        },
+        [form, value]
+    );
 
     return h(deco.Input.Group, { form, error }, [
         h(

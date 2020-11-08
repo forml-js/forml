@@ -27,7 +27,7 @@ import { SchemaField } from '../schema-field';
 const log = debug('rjsf:mapper:array');
 
 export function mover(items, value) {
-    return move;
+    return useCallback(move, [items, value]);
     function move(start, end) {
         return [reorder(items, start, end), reorder(value, start, end)];
         function reorder(list, start, end) {
@@ -40,9 +40,9 @@ export function mover(items, value) {
 }
 
 export function creator(form) {
-    return create;
+    return useCallback(create, [form]);
     function create() {
-        const forms = form.items.map((form) => {
+        const forms = form.items.map(({ ...form }) => {
             const key = shortid();
             return { form, key };
         });
@@ -60,15 +60,29 @@ export function useArrayItems(form, disabled = false) {
     const move = mover(items, value);
     const create = creator(form);
 
-    useEffect(function () {
-        const items = [];
+    useEffect(
+        function () {
+            const nextItems = items ? [...items] : [];
 
-        for (let i = 0; i < value.length; ++i) {
-            items.push(create(i));
-        }
+            for (let i = 0; i < value.length; ++i) {
+                if (nextItems[i]) {
+                    nextItems[i].forms = nextItems[i].forms.map(
+                        ({ form: subForm, key }, index) => {
+                            subForm = { ...form.items[index] };
+                            return { form: subForm, key };
+                        }
+                    );
+                } else {
+                    const item = create(i);
+                    log('pushItem : %o', item);
+                    nextItems.push(item);
+                }
+            }
 
-        setItems(items);
-    }, []);
+            setItems(nextItems);
+        },
+        [form, value]
+    );
 
     function add(event) {
         const nextSchema = getNextSchema(form.schema, value.length);
@@ -122,7 +136,7 @@ export function useArrayItems(form, disabled = false) {
         return mover;
     }
 
-    let result = { items };
+    let result = { items, setItems };
     if (!disabled) {
         result = {
             ...result,
@@ -162,9 +176,17 @@ function BaseArrayItem(props, ref) {
 
     title = localizer.getLocalizedString(title);
 
-    const destroy = useMemo(() => items.destroyer(index), [items, index]);
-    const moveUp = useMemo(() => items.upwardMover(index), [items, index]);
-    const moveDown = useMemo(() => items.downwardMover(index), [items, index]);
+    const destroy = useMemo(() => items.destroyer(index), [items, form, index]);
+    const moveUp = useMemo(() => items.upwardMover(index), [
+        items,
+        form,
+        index,
+    ]);
+    const moveDown = useMemo(() => items.downwardMover(index), [
+        items,
+        form,
+        index,
+    ]);
 
     return h(Draggable, { draggableId: props.id, index }, (provided) =>
         h(
@@ -213,7 +235,6 @@ export const ArrayItem = forwardRef(BaseArrayItem);
 function ArrayComponent(props, ref) {
     const { form, value } = props;
     const { error } = props;
-    const arrays = [];
 
     const { readonly: disabled, titleFun } = form;
 
@@ -224,44 +245,56 @@ function ArrayComponent(props, ref) {
     const localizer = useLocalizer();
     const model = useModel();
 
-    for (let i = 0; i < items.items.length; ++i) {
-        const item = items.items[i];
-        const forms = item.forms.map(function({ form, key }) {
-            if (!form) return;
-            const formCopy = copyWithIndex(form, i);
+    const arrays = useMemo(
+        function () {
+            const arrays = [];
+            for (let i = 0; i < items.items.length; ++i) {
+                const item = items.items[i];
+                log('item.forms : %o', item.forms);
+                const forms = item.forms.map(function ({ form, key }) {
+                    if (!form) return;
+                    log('form : %o', form);
+                    const formCopy = copyWithIndex(form, i);
 
-            /**
-             * Override properties of the child form
-             * titleFun - to generate a title for the sub-form
-             * disabled - to propagate the disabled state to children
-             */
-            formCopy.titleFun =
-                'titleFun' in formCopy ? formCopy.titleFun : titleFun;
-            formCopy.readonly =
-                'readonly' in formCopy ? formCopy.readonly : disabled;
+                    log('formCopy : %o', formCopy);
 
-            return h(SchemaField, {
-                key,
-                form: formCopy,
-                schema: formCopy.schema,
-            });
-        });
-        arrays.push(
-            h(
-                ArrayItem,
-                {
-                    key: item.key,
-                    id: item.key,
-                    form,
-                    index: i,
-                    items,
-                    item,
-                    type,
-                },
-                forms
-            )
-        );
-    }
+                    /**
+                     * Override properties of the child form
+                     * titleFun - to generate a title for the sub-form
+                     * disabled - to propagate the disabled state to children
+                     */
+                    formCopy.titleFun =
+                        'titleFun' in formCopy ? formCopy.titleFun : titleFun;
+                    formCopy.readonly =
+                        'readonly' in formCopy ? formCopy.readonly : disabled;
+
+                    return h(SchemaField, {
+                        key,
+                        form: formCopy,
+                        schema: formCopy.schema,
+                    });
+                });
+
+                arrays.push(
+                    h(
+                        ArrayItem,
+                        {
+                            key: item.key,
+                            id: item.key,
+                            form,
+                            index: i,
+                            items,
+                            item,
+                            type,
+                        },
+                        forms
+                    )
+                );
+            }
+            return arrays;
+        },
+        [form, items]
+    );
 
     const label = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
@@ -303,7 +336,7 @@ function ArrayComponent(props, ref) {
             );
             const nextModel = model.setValue(form.key, nextValue);
             model.onChange({ target: { value: nextModel } }, nextModel);
-            setItems(nextItems);
+            items.setItems(nextItems);
         }
     }
 }
