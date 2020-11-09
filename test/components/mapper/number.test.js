@@ -40,6 +40,39 @@ describe('number', function () {
         expect(model).toBe('-');
     });
 
+    test('tolerates trailing points despite parseFloat', function () {
+        const { container } = render(
+            h(SchemaForm, { schema, form, model, onChange })
+        );
+
+        fireEvent.change(container.querySelector('input'), {
+            target: { value: '3.' },
+        });
+
+        expect(onChange).toHaveBeenCalled();
+        expect(model).toBe('3.');
+
+        fireEvent.change(container.querySelector('input'), {
+            target: { value: '3..' },
+        });
+
+        expect(onChange).toHaveBeenCalled();
+        expect(model).toBe('3.');
+    });
+
+    test('tolerates only one decimal point', function () {
+        const { container } = render(
+            h(SchemaForm, { schema, form, model, onChange })
+        );
+
+        fireEvent.change(container.querySelector('input'), {
+            target: { value: '3.1.' },
+        });
+
+        expect(onChange).toHaveBeenCalled();
+        expect(model).toBe(3.1);
+    });
+
     test('does not tolerate non-numeric strings', function () {
         const { container } = render(
             h(SchemaForm, { schema, form, model, onChange, decorator })

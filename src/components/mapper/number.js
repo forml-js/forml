@@ -53,12 +53,16 @@ export default function Number(props) {
             return;
         }
 
+        let appendPoint = /\.$/.test(value);
+
         value = parseFloat(value);
 
         if (isNaN(value)) {
             e.preventDefault();
             return;
         }
+
+        if (appendPoint) value = `${value}.`;
 
         props.onChange(e, value);
     }
