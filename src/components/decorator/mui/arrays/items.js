@@ -47,7 +47,7 @@ function Items(props, ref) {
     const { error, description } = props;
     const { value, disabled } = props;
 
-    const classes = useStyles();
+    const classes = useStyles(props);
     const color = error ? 'error' : 'initial';
 
     const disablePadding =
