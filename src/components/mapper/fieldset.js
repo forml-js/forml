@@ -15,18 +15,20 @@ export default function FieldSet(props) {
     const description = localizer.getLocalizedString(form.description);
     const { readonly: disabled } = form;
 
-    const forms = useMemo(() =>
-        form.items.map(function (form, index) {
-            const { schema } = form;
-            const key = index.toString();
+    const forms = useMemo(
+        () =>
+            form.items.map(function (form, index) {
+                const { schema } = form;
+                const key = index.toString();
 
-            return h(SchemaField, {
-                form,
-                key,
-                onChange,
-                schema,
-            });
-        })
+                return h(SchemaField, {
+                    form,
+                    key,
+                    onChange,
+                    schema,
+                });
+            }),
+        [form.items]
     );
 
     const deco = useDecorator();
