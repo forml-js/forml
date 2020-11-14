@@ -27,6 +27,8 @@ export default function DateTime(props) {
         autoOk,
         openTo,
         format,
+        TextFieldComponent: ({ InputProps, ...props }) =>
+            h(Input, { ...props, ...InputProps }),
         disabled,
     });
 

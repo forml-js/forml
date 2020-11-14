@@ -1,4 +1,5 @@
 import { KeyboardDatePicker } from '@material-ui/pickers';
+import Input from '@material-ui/core/Input';
 import { createElement as h } from 'react';
 
 export default function Date(props) {
@@ -7,7 +8,7 @@ export default function Date(props) {
     const fullWidth = 'fullWidth' in form ? form.fullWidth : true;
     const disablePast = 'disablePast' in form ? form.disablePast : false;
     const disableFuture = 'disableFuture' in form ? form.disableFuture : false;
-    const variant = 'variant' in form ? form.variant : 'dialog';
+    const variant = 'variant' in form ? form.variant : 'inline';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
     const openTo = 'openTo' in form ? form.openTo : 'date';
     const format = 'format' in form ? form.format : 'YYYY/MM/DD';
@@ -23,6 +24,8 @@ export default function Date(props) {
         autoOk,
         openTo,
         format,
+        TextFieldComponent: ({ InputProps, ...props }) =>
+            h(Input, { ...props, ...InputProps }),
         disabled,
     });
 
