@@ -20,18 +20,23 @@ export default function Tabs(props) {
     const panels = [];
     for (let index = 0; index < form.tabs.length; ++index) {
         const tab = form.tabs[index];
-        const { schema } = tab;
         const active = value === index;
         const activate = () => setValue(index);
+
+        const { schema } = tab;
+
+        const title = localizer.getLocalizedString(tab.title);
+        const description = localizer.getLocalizedString(tab.description);
+
         tabs.push(
             h(deco.Tabs.Tab, {
                 key: `tab-${index}`,
                 form: tab,
-                label:
-                    localizer.getLocalizedString(tab.title) ||
-                    localizer.getLocalizedNumber(index),
+                title,
+                description,
                 active,
                 activate,
+                parent: form,
             })
         );
         panels.push(
@@ -40,6 +45,7 @@ export default function Tabs(props) {
                 {
                     key: `panel-${index}`,
                     form: tab,
+                    parent: form,
                     active,
                 },
                 h(SchemaField, { form: tab, schema })

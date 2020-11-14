@@ -1,13 +1,61 @@
-import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Icon from '@material-ui/core/Icon';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
 import { createElement as h } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        '&$horizontal': {
+            flexDirection: 'row',
+        },
+        '&$vertical': {
+            flexDirection: 'column',
+        },
+    },
     content: {
         display: 'flex',
-        flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'column',
+    },
+    panels: {
+        display: 'flex',
+        flex: 1,
         overflow: 'hidden',
+        position: 'relative',
+    },
+    tabs: {
+        display: 'flex',
+        flex: 0,
+        zIndex: 10,
+        alignItems: 'flex-start',
+        '&$vertical': {
+            flexDirection: 'row',
+            borderBottom: '1px solid black',
+            borderBottomColor: theme.palette.divider,
+        },
+        '&$horizontal': {
+            flexDirection: 'column',
+            borderRight: '1px solid black',
+            borderRightColor: theme.palette.divider,
+        },
+    },
+    vertical: {},
+    horizontal: {},
+    title: {
+        flex: '0 0 0',
+        '$vertical &': {
+            borderRight: '1px solid black',
+            borderRightColor: theme.palette.divider,
+        },
     },
 }));
 
@@ -15,18 +63,54 @@ const useStyles = makeStyles((theme) => ({
  * @component
  */
 export default function Container(props) {
-    const { value } = props;
+    const { value, title, description, form } = props;
     const classes = useStyles(props);
-    return h('div', {}, [
+
+    const layout = 'layout' in form ? form.layout : 'vertical';
+
+    return h(Paper, { className: clsx(classes.root, classes[layout]) }, [
         h(
-            AppBar,
-            { key: 'tab-bar', position: 'static' },
-            h(Tabs, { value }, props.tabs)
+            List,
+            {
+                className: clsx(classes.tabs, classes[layout]),
+                dense: true,
+                disablePadding: true,
+            },
+            [
+                title &&
+                    h(
+                        ListItem,
+                        {
+                            key: 'tab-bar',
+                            className: classes.title,
+                            divider: layout === 'horizontal',
+                        },
+                        [
+                            h(
+                                ListItemIcon,
+                                {},
+                                h(Icon, { fonSize: 'small' }, 'view_carousel')
+                            ),
+                            h(ListItemText, {
+                                primaryTypographyProps: {
+                                    variant: 'subtitle2',
+                                    color: 'textPrimary',
+                                    noWrap: true,
+                                },
+                                primary: title,
+                                secondaryTypographyProps: {
+                                    variant: 'caption',
+                                    noWrap: true,
+                                },
+                                secondary: description,
+                            }),
+                        ]
+                    ),
+                props.tabs,
+            ]
         ),
-        h(
-            'div',
-            { key: 'tab-panel', className: classes.content },
-            props.panels
-        ),
+        h('div', { key: 'tab-panel', className: classes.panels }, [
+            props.panels,
+        ]),
     ]);
 }
