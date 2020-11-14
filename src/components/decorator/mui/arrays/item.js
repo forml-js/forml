@@ -27,7 +27,6 @@ const useStyles = makeStyles(function (theme) {
             borderRightWidth: '1px',
             borderRightStyle: 'solid',
             borderRightColor: theme.palette.divider,
-            padding: theme.spacing(1, 1),
         },
         controls: {
             display: 'flex',
