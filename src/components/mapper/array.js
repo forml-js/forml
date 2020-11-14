@@ -24,7 +24,7 @@ import {
 } from '../../util';
 import { SchemaField } from '../schema-field';
 
-const log = debug('rjsf:mapper:array');
+const log = debug('rjsf:array');
 
 export function mover(items, value) {
     return move;
@@ -74,14 +74,13 @@ export function useArrayItems(form, disabled = false) {
                     );
                 } else {
                     const item = create(i);
-                    log('pushItem : %o', item);
                     nextItems.push(item);
                 }
             }
 
             setItems(nextItems);
         },
-        [form, value]
+        [form]
     );
 
     function add(event) {
@@ -250,13 +249,9 @@ function ArrayComponent(props, ref) {
             const arrays = [];
             for (let i = 0; i < items.items.length; ++i) {
                 const item = items.items[i];
-                log('item.forms : %o', item.forms);
                 const forms = item.forms.map(function ({ form, key }) {
                     if (!form) return;
-                    log('form : %o', form);
                     const formCopy = copyWithIndex(form, i);
-
-                    log('formCopy : %o', formCopy);
 
                     /**
                      * Override properties of the child form
@@ -293,7 +288,7 @@ function ArrayComponent(props, ref) {
             }
             return arrays;
         },
-        [form, items]
+        [items.items]
     );
 
     const label = localizer.getLocalizedString(form.title);
@@ -308,6 +303,7 @@ function ArrayComponent(props, ref) {
             return h(
                 deco.Arrays.Items,
                 {
+                    className: form.htmlClass,
                     add: items.add,
                     value,
                     label,
