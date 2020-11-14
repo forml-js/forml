@@ -62,10 +62,14 @@
     "form": [
         {
             "type": "tabs",
+            "title": "Settings",
+            "description": "A multi-page example for your consideration",
+            "layout": "horizontal",
             "tabs": [
                 {
                     "type": "fieldset",
                     "title": "Simple Keys",
+                    "description": "Forms rendered without customization",
                     "items": [
                         "textWithDefault",
                         "textNoDefault",
@@ -77,6 +81,7 @@
                 {
                     "type": "fieldset",
                     "title": "Full Forms",
+                    "description": "Highly customized forms",
                     "items": [
                         {
                             "key": "textArea",

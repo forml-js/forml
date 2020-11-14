@@ -10,7 +10,11 @@ export const schema = {
     title: 'Comment',
     description: 'Tell the internet your feelings',
     properties: {
-        name: { title: 'Name', type: 'string', description: 'First and last name' },
+        name: {
+            title: 'Name',
+            type: 'string',
+            description: 'First and last name',
+        },
         email: {
             title: 'Email',
             type: 'string',
@@ -21,7 +25,7 @@ export const schema = {
             title: 'Phone Number',
             type: 'string',
             pattern: '^[0-9]{3}-[0-9]{3}-[0-9]{4}',
-            description: 'The best number at which to reach you'
+            description: 'The best number at which to reach you',
         },
         spam: { title: 'Spam', type: 'boolean', default: true },
         tos: { title: 'Terms and Conditions', type: 'boolean', default: false },
@@ -37,14 +41,16 @@ export const schema = {
             enum: ['home', 'work', 'mobile', 'fax', 'etc'],
         },
         nested: {
-            title: 'Nested',
+            title: 'References',
             type: 'array',
-            description: 'A nested array of people',
+            description: 'A list of references who can support your comment',
             items: {
                 type: 'object',
+                title: 'Reference',
+                description: 'Someone you have worked with',
                 properties: {
                     first: { title: 'First', type: 'string' },
-                    last: { title: 'Last', type: 'string' }
+                    last: { title: 'Last', type: 'string' },
                 },
             },
         },
@@ -76,6 +82,8 @@ export function form(props, model) {
             type: 'fieldset',
             disablePadding: true,
             disableGutters: true,
+            title: 'Contact Information',
+            description: 'Let us know how to reach you!',
             items: [
                 {
                     type: 'fieldset',
@@ -88,7 +96,7 @@ export function form(props, model) {
                             title: 'Yes I want spam.',
                         },
                     ],
-                    layout: 'vertical'
+                    layout: 'vertical',
                 },
                 {
                     type: 'fieldset',
@@ -106,41 +114,41 @@ export function form(props, model) {
                                 { name: 'Etc', value: 'etc' },
                             ],
                         },
-                    ]
+                    ],
                 },
             ],
-            layout: 'horizontal'
+            layout: 'horizontal',
         },
         {
             type: 'fieldset',
             layout: 'vertical',
-            disableGutters: false,
+            items: [{ key: 'comment', type: 'textarea' }],
+        },
+        {
+            type: 'fieldset',
             items: [
-                { key: 'comment', type: 'textarea' },
                 {
                     type: 'array',
-                    disablePadding: false,
                     disableGutters: true,
                     key: 'nested',
                     items: [
                         {
                             type: 'fieldset',
+                            key: 'nested[]',
                             layout: 'vertical',
-                            items: [
-                                'nested[].first',
-                                'nested[].last'
-                            ]
-                        }
-                    ]
+                            disablePadding: true,
+                            disableMargin: true,
+                            elevation: 0,
+                            items: ['nested[].first', 'nested[].last'],
+                        },
+                    ],
                 },
-            ]
+            ],
         },
         {
             type: 'fieldset',
             alignItems: 'flex-end',
-            items: [
-                { key: 'tos' },
-            ],
+            items: [{ key: 'tos' }],
             layout: 'vertical',
         },
     ];

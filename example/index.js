@@ -179,6 +179,7 @@ const useStyles = makeStyles(function () {
         root: { display: 'flex', flexDirection: 'row' },
         manager: { flex: '0 0 300px' },
         example: { flex: '1 0 600px' },
+        exampleContent: { display: 'flex', flexDirection: 'column' },
     };
 });
 
@@ -198,14 +199,14 @@ function Page() {
         model.setValue(args[0]);
     }
 
-    log('model : %o', model.value);
-    log('rendering');
-
     return h('div', { className: classes.root }, [
         h(Card, { className: classes.example, key: 'primary-viewport' }, [
             h(
                 CardContent,
-                { key: 'example' },
+                {
+                    key: 'example',
+                    className: classes.exampleContent,
+                },
                 h(RenderExample, {
                     key: `render-${schema.json}${form.json}`,
                     schema: schema.value,
