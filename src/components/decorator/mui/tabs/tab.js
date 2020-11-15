@@ -58,8 +58,11 @@ export default function Tab(props) {
             }),
         },
         [
-            h(ListItemIcon, {}, [h(Icon, { fontSize: 'small' }, icon)]),
+            h(ListItemIcon, { key: 'icon' }, [
+                h(Icon, { fontSize: 'small' }, icon),
+            ]),
             h(ListItemText, {
+                key: 'title',
                 primary: title,
                 primaryTypographyProps: { noWrap: true },
                 secondary: description,

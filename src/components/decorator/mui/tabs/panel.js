@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
         transition: 'all 0.3s',
         flex: '1 1 100%',
         height: '100%',
-        zIndex: '0',
+        zIndex: 1,
         '&$active': {
             position: 'relative',
+            zIndex: 99,
         },
         '&$vertical': {
             transform: 'translateX(-100vw)',

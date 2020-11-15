@@ -84,14 +84,16 @@ export default function Container(props) {
                             key: 'tab-bar',
                             className: classes.title,
                             divider: layout === 'horizontal',
+                            disableGutters: layout === 'vertical',
                         },
                         [
                             h(
                                 ListItemIcon,
-                                {},
+                                { key: 'icon' },
                                 h(Icon, { fonSize: 'small' }, 'view_carousel')
                             ),
                             h(ListItemText, {
+                                key: 'title',
                                 primaryTypographyProps: {
                                     variant: 'subtitle2',
                                     color: 'textPrimary',
@@ -109,8 +111,6 @@ export default function Container(props) {
                 props.tabs,
             ]
         ),
-        h('div', { key: 'tab-panel', className: classes.panels }, [
-            props.panels,
-        ]),
+        h('div', { key: 'tab-panel', className: classes.panels }, props.panels),
     ]);
 }
