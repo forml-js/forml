@@ -29,6 +29,12 @@ const useStyles = makeStyles(function (theme) {
             paddingRight: theme.spacing(0),
         },
         disablePadding: {
+            '&$vertical, &$horizontal': {
+                marginTop: theme.spacing(0),
+                marginBottom: theme.spacing(0),
+                paddingTop: theme.spacing(0),
+                paddingBottom: theme.spacing(0),
+            },
             marginTop: theme.spacing(0),
             marginBottom: theme.spacing(0),
             paddingTop: theme.spacing(0),
