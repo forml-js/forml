@@ -25,6 +25,10 @@ const useStyles = makeStyles(function (theme) {
             margin: theme.spacing(0),
         },
         disableGutters: {
+            '&$vertical, &$horizontal': {
+                paddingLeft: theme.spacing(0),
+                paddingRight: theme.spacing(0),
+            },
             paddingLeft: theme.spacing(0),
             paddingRight: theme.spacing(0),
         },
