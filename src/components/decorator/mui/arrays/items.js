@@ -54,6 +54,7 @@ function Items(props, ref) {
         'disablePadding' in form ? form.disablePadding : false;
     const disableGutters =
         'disableGutters' in form ? form.disableGutters : false;
+    const icon = 'icon' in form ? form.icon : 'view_list';
 
     return h(
         Paper,
@@ -85,11 +86,12 @@ function Items(props, ref) {
                         divider: true,
                     },
                     [
-                        h(
-                            ListItemIcon,
-                            { key: 'icon', edge: 'start' },
-                            h(Icon, { color }, 'view_list')
-                        ),
+                        icon &&
+                            h(
+                                ListItemIcon,
+                                { key: 'icon', edge: 'start' },
+                                h(Icon, { color }, icon)
+                            ),
                         h(ListItemText, {
                             key: 'text',
                             primaryTypographyProps: {
