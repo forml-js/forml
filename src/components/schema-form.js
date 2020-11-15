@@ -1,16 +1,9 @@
 /**
  * @namespace rjsf.SchemaForm
  */
-import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import {
-    createElement as h,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
+import { createElement as h, useCallback, useMemo } from 'react';
 
 import Context from '../context';
 import { merge } from '../forms';
@@ -22,8 +15,6 @@ import { decoratorShape, defaultDecorator, getDecorator } from './decorator';
 import { defaultMapper, getMapper, mapperShape } from './mapper';
 import { SchemaField } from './schema-field';
 
-const log = debug('rjsf:schema-form');
-
 function useGenerator(generator, props, model, deps) {
     if (typeof generator === 'function') {
         // The genrator is a hook; use it
@@ -32,14 +23,6 @@ function useGenerator(generator, props, model, deps) {
 
     // The genrator is a value; return it
     return generator;
-}
-
-function getDeps(deps, props, model) {
-    if (typeof deps === 'function') {
-        return [...deps(props), model];
-    }
-
-    return [model];
 }
 
 /**

@@ -1,7 +1,7 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import { createElement as h, useCallback, useMemo } from 'react';
+import { createElement as h } from 'react';
 
 import { useMapper, useModel } from '../context';
 import { FormType } from '../types';
