@@ -3,6 +3,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { createElement as h } from 'react';
 import clsx from 'clsx';
@@ -60,9 +62,25 @@ const useStyles = makeStyles(function (theme) {
             flexDirection: 'column',
             padding: theme.spacing(1.0),
         },
-        header: {
+        title: {
             display: 'flex',
             flexDirection: 'column',
+        },
+        formLabel: {
+            color: theme.palette.text.primary,
+        },
+        formHelperText: {
+            color: theme.palette.text.primary,
+        },
+        icon: {
+            display: 'inline-flex',
+            minWidth: theme.spacing(6),
+            color: theme.palette.action.active,
+        },
+        header: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
             padding: theme.spacing(1.0, 2.0),
             borderBottom: '1px solid black',
             borderBottomColor: theme.palette.divider,
@@ -84,6 +102,7 @@ export default function FieldSet(props) {
     const fullWidth = 'fullWidth' in form ? form.fullWidth : false;
     const component = 'component' in form ? form.component : 'div';
     const elevation = 'elevation' in form ? form.elevation : 1;
+    const icon = 'icon' in form ? form.icon : null;
 
     let content = h(
         FormGroup,
@@ -98,12 +117,33 @@ export default function FieldSet(props) {
         [
             (title || description) &&
                 h('div', { className: classes.header }, [
-                    h(FormLabel, { key: 'label' }, title),
-                    h(
-                        FormHelperText,
-                        { key: 'help', variant: 'caption' },
-                        description
-                    ),
+                    icon &&
+                        h(Icon, { key: 'icon', className: classes.icon }, icon),
+                    h('div', { className: classes.title }, [
+                        h(
+                            FormLabel,
+                            {
+                                key: 'label',
+                                className: classes.formLabel,
+                            },
+                            h(
+                                Typography,
+                                {
+                                    variant: 'subtitle2',
+                                },
+                                title
+                            )
+                        ),
+                        h(
+                            FormHelperText,
+                            {
+                                key: 'help',
+                                variant: 'caption',
+                                className: classes.formHelperText,
+                            },
+                            description
+                        ),
+                    ]),
                 ]),
             h(
                 component,

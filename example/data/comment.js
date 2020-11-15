@@ -80,55 +80,69 @@ export function form(props, model) {
     return [
         {
             type: 'fieldset',
-            disablePadding: true,
-            disableGutters: true,
-            title: 'Contact Information',
-            description: 'Let us know how to reach you!',
+            layout: 'vertical',
+            icon: 'alternate_email',
+            title: 'Comment Submission',
+            description:
+                'Give us some feedback that could help improve your experience.',
             items: [
                 {
                     type: 'fieldset',
+                    disablePadding: true,
+                    disableGutters: true,
+                    disableMargin: true,
                     items: [
-                        'name',
-                        'email',
-                        'email' in model && {
-                            key: 'spam',
-                            type: 'checkbox',
-                            title: 'Yes I want spam.',
-                        },
-                    ],
-                    layout: 'vertical',
-                },
-                {
-                    type: 'fieldset',
-                    layout: 'vertical',
-                    items: [
-                        'phoneNumber',
                         {
-                            key: 'type',
-                            type: 'select',
-                            titleMap: [
-                                { name: 'Home', value: 'home' },
-                                { name: 'Work', value: 'work' },
-                                { name: 'Mobile', value: 'mobile' },
-                                { name: 'Fax', value: 'fax' },
-                                { name: 'Etc', value: 'etc' },
+                            type: 'fieldset',
+                            items: [
+                                'name',
+                                'email',
+                                'email' in model && {
+                                    key: 'spam',
+                                    type: 'checkbox',
+                                    title: 'Yes I want spam.',
+                                },
+                            ],
+                            layout: 'vertical',
+                        },
+                        {
+                            type: 'fieldset',
+                            layout: 'vertical',
+                            items: [
+                                'phoneNumber',
+                                {
+                                    key: 'type',
+                                    type: 'select',
+                                    titleMap: [
+                                        { name: 'Home', value: 'home' },
+                                        { name: 'Work', value: 'work' },
+                                        { name: 'Mobile', value: 'mobile' },
+                                        { name: 'Fax', value: 'fax' },
+                                        { name: 'Etc', value: 'etc' },
+                                    ],
+                                },
                             ],
                         },
                     ],
+                    layout: 'horizontal',
+                },
+                {
+                    type: 'fieldset',
+                    alignItems: 'flex-end',
+                    items: [
+                        { key: 'comment', type: 'textarea' },
+                        { key: 'tos' },
+                    ],
+                    layout: 'vertical',
                 },
             ],
-            layout: 'horizontal',
-        },
-        {
-            type: 'fieldset',
-            layout: 'vertical',
-            items: [{ key: 'comment', type: 'textarea' }],
         },
         {
             type: 'fieldset',
             items: [
                 {
                     type: 'array',
+                    icon: 'contacts',
                     disableGutters: true,
                     key: 'nested',
                     items: [
@@ -136,20 +150,14 @@ export function form(props, model) {
                             type: 'fieldset',
                             key: 'nested[]',
                             layout: 'vertical',
-                            disablePadding: true,
                             disableMargin: true,
                             elevation: 0,
+                            icon: 'person',
                             items: ['nested[].first', 'nested[].last'],
                         },
                     ],
                 },
             ],
-        },
-        {
-            type: 'fieldset',
-            alignItems: 'flex-end',
-            items: [{ key: 'tos' }],
-            layout: 'vertical',
         },
     ];
 }
