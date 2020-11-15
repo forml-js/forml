@@ -1,14 +1,13 @@
 import { createElement as h } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
 import clsx from 'clsx';
 
 /**
  * @component
  */
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         position: 'absolute',
         display: 'flex',
@@ -49,13 +48,6 @@ export default function Panel(props) {
 
     const elevation = 'elevation' in form ? form.elevation : 0;
     const layout = 'layout' in parent ? parent.layout : 'horizontal';
-
-    let direction = null;
-    if (layout == 'horizontal') {
-        direction = 'left';
-    } else {
-        direction = 'up';
-    }
 
     return h(Paper, {
         ...props,

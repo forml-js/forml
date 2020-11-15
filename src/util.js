@@ -227,7 +227,7 @@ export function assertType(schema, value) {
         } else if (type === 'string') {
             if (value === '') return value;
             else if (value === '-') return value;
-            else if (/\.$/.test(value) && !/^[^\.]+\.[^\.]+\.$/.test(value))
+            else if (/\.$/.test(value) && !/^[^.]+\.[^.]+\.$/.test(value))
                 return value;
             else return parseFloat(value);
         } else {

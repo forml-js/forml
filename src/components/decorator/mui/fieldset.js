@@ -1,7 +1,6 @@
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';

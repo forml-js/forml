@@ -1,6 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import { createElement as h, useState } from 'react';
+import { createElement as h } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';

@@ -1,12 +1,9 @@
-import debug from 'debug';
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
 import {
     createElement as h,
-    useCallback,
     useEffect,
     useMemo,
-    useRef,
     useState,
     forwardRef,
 } from 'react';
@@ -23,8 +20,6 @@ import {
     traverseForm,
 } from '../../util';
 import { SchemaField } from '../schema-field';
-
-const log = debug('rjsf:array');
 
 export function mover(items, value) {
     return move;
@@ -161,7 +156,6 @@ export function useArrayItems(form, disabled = false) {
 
 function BaseArrayItem(props, ref) {
     const { form, index, items } = props;
-    const { type } = props;
     const { readonly: disabled } = form;
     const model = useModel();
     const deco = useDecorator();
@@ -298,7 +292,7 @@ function ArrayComponent(props, ref) {
         DragDropContext,
         { onDragEnd },
         h(Droppable, { droppableId }, (provided) => {
-            const ref = provided.innerRef;
+            const innerRef = provided.innerRef;
             const otherProps = provided.droppableProps;
             return h(
                 deco.Arrays.Items,
@@ -309,7 +303,10 @@ function ArrayComponent(props, ref) {
                     label,
                     description,
                     error,
-                    ref,
+                    ref(...args) {
+                        innerRef(...args);
+                        if (ref) ref(...args);
+                    },
                     otherProps,
                     disabled,
                     form,

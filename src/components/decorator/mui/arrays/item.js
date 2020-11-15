@@ -1,19 +1,9 @@
-import debug from 'debug';
 import Button from '@material-ui/core/Button';
-import Collapse from '@material-ui/core/Collapse';
 import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import { createElement as h, forwardRef, Fragment, useState } from 'react';
-
-const log = debug('rjsf:decorator:mui:array:item');
+import { createElement as h, forwardRef } from 'react';
 
 const useStyles = makeStyles(function (theme) {
     return {
@@ -72,8 +62,7 @@ const useStyles = makeStyles(function (theme) {
  */
 export function ItemComponent(props, ref) {
     const classes = useStyles(props);
-    const { index, disabled } = props;
-    const { dragDropRef } = props;
+    const { disabled } = props;
     const { draggableProps, dragHandleProps } = props.otherProps;
 
     return h(

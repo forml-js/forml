@@ -4,9 +4,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Icon from '@material-ui/core/Icon';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
 import { createElement as h } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -63,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
  * @component
  */
 export default function Container(props) {
-    const { value, title, description, form } = props;
+    const { title, description, form } = props;
     const classes = useStyles(props);
 
     const layout = 'layout' in form ? form.layout : 'vertical';

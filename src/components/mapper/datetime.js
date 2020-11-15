@@ -26,8 +26,13 @@ export default function DateTime(props) {
     /**
      * Render
      */
-    return h(deco.Input.Group, { form, value, error }, [
-        title && h(deco.Label, { key: 'label', form, value, error }, title),
+    return h(deco.Input.Group, { form, value, error, disabled }, [
+        title &&
+            h(
+                deco.Label,
+                { key: 'label', form, value, error, disabled },
+                title
+            ),
         h(deco.Input.Form, {
             key: 'form',
             type: 'datetime-local',
@@ -35,12 +40,13 @@ export default function DateTime(props) {
             form,
             value,
             error,
+            disabled,
             placeholder,
         }),
         (error || description) &&
             h(
                 deco.Input.Description,
-                { key: 'description', form, value, error: !!error },
+                { key: 'description', form, disabled, value, error: !!error },
                 error || description
             ),
     ]);

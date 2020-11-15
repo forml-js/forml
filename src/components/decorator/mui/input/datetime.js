@@ -2,10 +2,6 @@ import { KeyboardDateTimePicker } from '@material-ui/pickers';
 import Input from '@material-ui/core/Input';
 import { createElement as h } from 'react';
 
-function labelFunc(date, invalid) {
-    return date.toLocaleString();
-}
-
 export default function DateTime(props) {
     const { value, form } = props;
 

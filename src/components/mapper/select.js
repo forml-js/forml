@@ -49,7 +49,6 @@ export default function Select(props) {
                 disabled: form.readonly,
                 onChange,
                 form,
-                value,
                 error,
             },
             menuItems

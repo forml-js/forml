@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import { createElement as h, useState } from 'react';
+import { createElement as h } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';
@@ -35,10 +35,8 @@ export default function Multiselect(props) {
                 multiple: true,
                 value,
                 placeholder,
-                disabled: form.readonly,
                 onChange,
                 form,
-                value,
                 error,
                 disabled,
             },

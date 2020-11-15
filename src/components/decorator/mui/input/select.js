@@ -10,10 +10,8 @@ export default function Select({
     value,
     placeholder,
     disabled,
-    form,
     children,
     multiple,
-    ...props
 }) {
     const selectProps = {
         error: !!error,
