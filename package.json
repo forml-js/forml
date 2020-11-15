@@ -14,7 +14,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint src/**/*.js",
     "build": "babel src --out-dir lib",
     "watch": "babel src --out-dir lib --watch",
     "prepublish": "npm run build",
