@@ -1,0 +1,53 @@
+import t from 'prop-types';
+import {createElement as h} from 'react';
+
+import {useDecorator, useLocalizer} from '../../context';
+import {FormType} from '../../types';
+
+const valueExceptions = ['', '-'];
+
+/**
+ * @component Integer
+ */
+export default function Integer(props) {
+  const {value, form, error} = props;
+
+  const deco = useDecorator();
+  const localizer = useLocalizer();
+
+  const placeholder = localizer.getLocalizedString(form.placeholder);
+  const label = localizer.getLocalizedString(form.title || form.key[form.key.length - 1]);
+  const description = localizer.getLocalizedString(form.description);
+
+  return h(deco.Input.Group, {form}, [
+    h(deco.Label, {key: 'label', form, value, error}, label),
+    h(deco.Input.Form, {key: 'input', value, onChange, placeholder, form, error}),
+    (error || description) &&
+        h(deco.Input.Description, {key: 'description', form, value, error: !!error}, error || description),
+  ]);
+
+  function onChange(e) {
+    let value = e.target.value;
+
+    if (valueExceptions.includes(value)) {
+      props.onChange(e, value);
+      return;
+    }
+
+    value = parseInt(value);
+
+    if (isNaN(value)) {
+      e.preventDefault();
+      return;
+    }
+
+    props.onChange(e, value);
+  }
+}
+
+Integer.propTypes = {
+  form: FormType,
+  schema: t.object,
+  error: t.string,
+  value: t.number,
+};

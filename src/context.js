@@ -1,4 +1,4 @@
-import { createContext, useContext as useReactContext } from 'react';
+import {createContext, useContext as useReactContext} from 'react';
 
 /**
  * @typedef {Object} ModelMethods
@@ -10,16 +10,16 @@ import { createContext, useContext as useReactContext } from 'react';
  */
 
 const context = createContext({
-    mapper: {},
-    decorator: {},
-    localizer: {},
-    version: 0,
+  mapper: {},
+  decorator: {},
+  localizer: {},
+  version: 0,
 });
 
 export default context;
 
 export function useContext() {
-    return useReactContext(context);
+  return useReactContext(context);
 }
 
 /**
@@ -27,8 +27,8 @@ export function useContext() {
  * @return {Mapper}
  */
 export function useMapper() {
-    const ctx = useContext();
-    return ctx.mapper;
+  const ctx = useContext();
+  return ctx.mapper;
 }
 
 
@@ -37,8 +37,8 @@ export function useMapper() {
  * @return {ModelMethods}
  */
 export function useModel() {
-    const { getValue, setValue, getError, setError, onChange, version } = useContext();
-    return { getValue, setValue, getError, setError, onChange, version };
+  const {getValue, setValue, getError, setError, onChange, version} = useContext();
+  return {getValue, setValue, getError, setError, onChange, version};
 }
 
 /**
@@ -46,8 +46,8 @@ export function useModel() {
  * @return {Localizer}``
  */
 export function useLocalizer() {
-    const { localizer } = useContext();
-    return localizer;
+  const {localizer} = useContext();
+  return localizer;
 }
 
 /**
@@ -55,6 +55,6 @@ export function useLocalizer() {
  * @return {Decorator}
  */
 export function useDecorator() {
-    const { decorator } = useContext();
-    return decorator;
+  const {decorator} = useContext();
+  return decorator;
 }

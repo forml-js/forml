@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import Ajv from 'ajv';
 import objectPath from 'objectpath';
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 
 /**
  * @namespace rjsf.util
@@ -30,123 +30,123 @@ import { useMemo } from 'react';
  * @return {*}
  */
 export function defaultForSchema(schema) {
-    if (schema.default !== undefined) {
-        return schema.default;
-    }
+  if (schema.default !== undefined) {
+    return schema.default;
+  }
 
-    return buildSchema(schema);
+  return buildSchema(schema);
 
-    function buildSchema(schema) {
-        const type = getPreferredType(schema.type);
-        let base = undefined;
-        switch (type) {
-            case 'array':
-                base = [];
-                if (Array.isArray(schema.items)) {
-                    for (let item of schema.items) {
-                        base.push(defaultForSchema(item));
-                    }
-                }
-                break;
-            case 'object':
-                base = {};
-                for (let property in schema.properties) {
-                    let item = defaultForSchema(schema.properties[property]);
-                    base[property] = item;
-                }
-                break;
-            case 'string':
-                base = '';
-                break;
-            case 'number':
-                base = 0.0;
-                break;
-            case 'integer':
-                base = 0;
-                break;
-            case 'boolean':
-                base = false;
-                break;
-            case 'null':
-                base = null;
-                break;
-            default:
-                // throw new Error(`Unhandled defaultForSchema type: ${type}`);
-                base = undefined;
+  function buildSchema(schema) {
+    const type = getPreferredType(schema.type);
+    let base = undefined;
+    switch (type) {
+      case 'array':
+        base = [];
+        if (Array.isArray(schema.items)) {
+          for (const item of schema.items) {
+            base.push(defaultForSchema(item));
+          }
         }
-
-        return assertType(schema, base);
+        break;
+      case 'object':
+        base = {};
+        for (const property in schema.properties) {
+          const item = defaultForSchema(schema.properties[property]);
+          base[property] = item;
+        }
+        break;
+      case 'string':
+        base = '';
+        break;
+      case 'number':
+        base = 0.0;
+        break;
+      case 'integer':
+        base = 0;
+        break;
+      case 'boolean':
+        base = false;
+        break;
+      case 'null':
+        base = null;
+        break;
+      default:
+        // throw new Error(`Unhandled defaultForSchema type: ${type}`);
+        base = undefined;
     }
+
+    return assertType(schema, base);
+  }
 }
 
 export function randomForSchema(schema) {
-    if (schema.default !== undefined) {
-        return schema.default;
+  if (schema.default !== undefined) {
+    return schema.default;
+  }
+
+  return buildSchema(schema);
+
+  function buildSchema(schema) {
+    const type = getPreferredType(schema.type);
+    let base = undefined;
+
+    switch (type) {
+      case 'array':
+        base = [];
+        if (Array.isArray(schema.items)) {
+          for (const item of schema.items) {
+            base.push(randomForSchema(item));
+          }
+        } else {
+          base.push(randomForSchema(schema.items));
+        }
+        break;
+      case 'object':
+        base = {};
+        for (const property in schema.properties) {
+          const item = randomForSchema(schema.properties[property]);
+          base[property] = item;
+        }
+        break;
+      case 'string':
+        base = shortid();
+        if (schema.format === 'date') {
+          const date = new Date(
+              Math.floor(Math.random() * new Date().getTime()),
+          );
+          base = date
+              .toISOString()
+              .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
+        } else if (schema.format === 'date-time') {
+          base = new Date(
+              Math.floor(Math.random() * new Date().getTime()),
+          ).toISOString();
+        }
+        break;
+      case 'number':
+        base = Math.random();
+        break;
+      case 'integer':
+        base = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+        break;
+      case 'boolean':
+        base = Math.random() > 0.5 ? true : false;
+        break;
+      case 'null':
+        base = null;
+        break;
+      default:
+        // throw new Error(`Unhandled randomForSchema type: ${type}`);
+        base = undefined;
     }
 
-    return buildSchema(schema);
-
-    function buildSchema(schema) {
-        const type = getPreferredType(schema.type);
-        let base = undefined;
-
-        switch (type) {
-            case 'array':
-                base = [];
-                if (Array.isArray(schema.items)) {
-                    for (let item of schema.items) {
-                        base.push(randomForSchema(item));
-                    }
-                } else {
-                    base.push(randomForSchema(schema.items));
-                }
-                break;
-            case 'object':
-                base = {};
-                for (let property in schema.properties) {
-                    let item = randomForSchema(schema.properties[property]);
-                    base[property] = item;
-                }
-                break;
-            case 'string':
-                base = shortid();
-                if (schema.format === 'date') {
-                    let date = new Date(
-                        Math.floor(Math.random() * new Date().getTime())
-                    );
-                    base = date
-                        .toISOString()
-                        .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
-                } else if (schema.format === 'date-time') {
-                    base = new Date(
-                        Math.floor(Math.random() * new Date().getTime())
-                    ).toISOString();
-                }
-                break;
-            case 'number':
-                base = Math.random();
-                break;
-            case 'integer':
-                base = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-                break;
-            case 'boolean':
-                base = Math.random() > 0.5 ? true : false;
-                break;
-            case 'null':
-                base = null;
-                break;
-            default:
-                // throw new Error(`Unhandled randomForSchema type: ${type}`);
-                base = undefined;
-        }
-
-        if (schema.enum) {
-            const index = Math.floor(Math.random() * (schema.enum.length - 1));
-            base = schema.enum[index];
-        }
-
-        return assertType(schema, base);
+    if (schema.enum) {
+      const index = Math.floor(Math.random() * (schema.enum.length - 1));
+      base = schema.enum[index];
     }
+
+    return assertType(schema, base);
+  }
 }
 
 /**
@@ -154,19 +154,19 @@ export function randomForSchema(schema) {
  * @arg {string[]} types
  */
 export function getPreferredType(types) {
-    const ignoredTypes = new Set(['null']);
+  const ignoredTypes = new Set(['null']);
 
-    let index = 0;
+  let index = 0;
 
-    if (!Array.isArray(types)) return types;
+  if (!Array.isArray(types)) return types;
 
-    // Skip ignored types
-    while (ignoredTypes.has(types[index])) index++;
+  // Skip ignored types
+  while (ignoredTypes.has(types[index])) index++;
 
-    // If we've run past the end, just use the first type
-    if (index >= types.length) index = 0;
+  // If we've run past the end, just use the first type
+  if (index >= types.length) index = 0;
 
-    return types[index];
+  return types[index];
 }
 
 /**
@@ -175,73 +175,73 @@ export function getPreferredType(types) {
  * @return {ValueGetter}
  */
 export function valueGetter(model, schema) {
-    function get(keys) {
-        if (!Array.isArray(keys)) {
-            keys = [keys];
-        }
-
-        if (model === undefined) {
-            model = defaultForSchema(schema);
-        }
-
-        if (keys.length === 0) return model;
-
-        let current = model;
-        let currentSchema = schema;
-
-        for (let i = 0; i < keys.length; ++i) {
-            const key = keys[i];
-            currentSchema = getNextSchema(currentSchema, key);
-            current = getNextValue(currentSchema, current, key);
-        }
-
-        return assertType(currentSchema, current);
+  function get(keys) {
+    if (!Array.isArray(keys)) {
+      keys = [keys];
     }
 
-    return get;
+    if (model === undefined) {
+      model = defaultForSchema(schema);
+    }
+
+    if (keys.length === 0) return model;
+
+    let current = model;
+    let currentSchema = schema;
+
+    for (let i = 0; i < keys.length; ++i) {
+      const key = keys[i];
+      currentSchema = getNextSchema(currentSchema, key);
+      current = getNextValue(currentSchema, current, key);
+    }
+
+    return assertType(currentSchema, current);
+  }
+
+  return get;
 }
 
 export function assertType(schema, value) {
-    let preferred = getPreferredType(schema.type);
-    let allowed = new Set(
-        Array.isArray(schema.type) ? schema.type : [schema.type]
-    );
-    let type = getTypeOf(schema, value);
+  const preferred = getPreferredType(schema.type);
+  const allowed = new Set(
+        Array.isArray(schema.type) ? schema.type : [schema.type],
+  );
+  const type = getTypeOf(schema, value);
 
-    if (allowed.has('null') && !value) {
-        return null;
-    } else if (preferred === 'integer') {
-        if (allowed.has(type)) {
-            return value;
-        } else {
-            if (type === 'number' && Number.isInteger(value)) return value;
-            else if (type === 'number') return Math.floor(value);
-            else if (value === '') return value;
-            else if (value === '-') return value;
-            else if (type === 'string') return parseInt(value);
-            else return defaultForSchema(schema);
-        }
-    } else if (preferred === 'number') {
-        if (allowed.has(type)) {
-            return value;
-        } else if (type === 'string') {
-            if (value === '') return value;
-            else if (value === '-') return value;
-            else if (/\.$/.test(value) && !/^[^.]+\.[^.]+\.$/.test(value))
-                return value;
-            else return parseFloat(value);
-        } else {
-            return defaultForSchema(schema);
-        }
-    } else if (preferred === 'string' && type === 'number') {
-        return value.toString();
-    } else if (preferred != type && !value) {
-        return defaultForSchema(schema);
-    } else if (allowed.has(type)) {
-        return value;
+  if (allowed.has('null') && !value) {
+    return null;
+  } else if (preferred === 'integer') {
+    if (allowed.has(type)) {
+      return value;
     } else {
-        return defaultForSchema(schema);
+      if (type === 'number' && Number.isInteger(value)) return value;
+      else if (type === 'number') return Math.floor(value);
+      else if (value === '') return value;
+      else if (value === '-') return value;
+      else if (type === 'string') return parseInt(value);
+      else return defaultForSchema(schema);
     }
+  } else if (preferred === 'number') {
+    if (allowed.has(type)) {
+      return value;
+    } else if (type === 'string') {
+      if (value === '') return value;
+      else if (value === '-') return value;
+      else if (/\.$/.test(value) && !/^[^.]+\.[^.]+\.$/.test(value)) {
+        return value;
+      } else return parseFloat(value);
+    } else {
+      return defaultForSchema(schema);
+    }
+  } else if (preferred === 'string' && type === 'number') {
+    return value.toString();
+  } else if (preferred != type && !value) {
+    return defaultForSchema(schema);
+  } else if (allowed.has(type)) {
+    return value;
+  } else {
+    return defaultForSchema(schema);
+  }
 }
 
 /**
@@ -249,10 +249,10 @@ export function assertType(schema, value) {
  * @return {Function}
  */
 export function errorGetter(errors) {
-    return function (keys) {
-        const key = objectPath.stringify(keys);
-        return errors[key];
-    };
+  return function(keys) {
+    const key = objectPath.stringify(keys);
+    return errors[key];
+  };
 }
 
 /**
@@ -267,40 +267,40 @@ export function errorGetter(errors) {
  * @return {*}
  */
 function updateAndClone(keys, model, schema, value, depth = 0) {
-    if (keys.length === 0) {
-        return assertType(schema, value);
+  if (keys.length === 0) {
+    return assertType(schema, value);
+  }
+
+  const [next, ...rest] = keys;
+  const nextSchema = getNextSchema(schema, next);
+  const nextModel = updateAndClone(
+      rest,
+      getNextValue(nextSchema, model, next),
+      nextSchema,
+      value,
+      depth + 1,
+  );
+
+  if (getPreferredType(schema.type) === 'array') {
+    const firstSlice = model.slice(0, next);
+    const lastSlice = model.slice(next + 1);
+
+    while (firstSlice.length < next) {
+      firstSlice.push(
+          defaultForSchema(getNextSchema(schema, firstSlice.length)),
+      );
     }
 
-    const [next, ...rest] = keys;
-    const nextSchema = getNextSchema(schema, next);
-    const nextModel = updateAndClone(
-        rest,
-        getNextValue(nextSchema, model, next),
-        nextSchema,
-        value,
-        depth + 1
-    );
+    const result = [...firstSlice, nextModel, ...lastSlice];
+    return result;
+  }
 
-    if (getPreferredType(schema.type) === 'array') {
-        const firstSlice = model.slice(0, next);
-        const lastSlice = model.slice(next + 1);
+  if (getPreferredType(schema.type) === 'object') {
+    const result = {...model, [next]: nextModel};
+    return result;
+  }
 
-        while (firstSlice.length < next) {
-            firstSlice.push(
-                defaultForSchema(getNextSchema(schema, firstSlice.length))
-            );
-        }
-
-        const result = [...firstSlice, nextModel, ...lastSlice];
-        return result;
-    }
-
-    if (getPreferredType(schema.type) === 'object') {
-        const result = { ...model, [next]: nextModel };
-        return result;
-    }
-
-    throw new Error('Bad ObjectPath');
+  throw new Error('Bad ObjectPath');
 }
 
 /**
@@ -310,20 +310,20 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
  * @arg {Function} setModel
  */
 export function valueSetter(model, schema) {
-    function set(keys, value) {
-        if (!Array.isArray(keys)) {
-            keys = [keys];
-        }
-
-        if (model === undefined) {
-            model = defaultForSchema(schema);
-        }
-
-        const newModel = updateAndClone(keys, model, schema, value);
-        return assertType(schema, newModel);
+  function set(keys, value) {
+    if (!Array.isArray(keys)) {
+      keys = [keys];
     }
 
-    return set;
+    if (model === undefined) {
+      model = defaultForSchema(schema);
+    }
+
+    const newModel = updateAndClone(keys, model, schema, value);
+    return assertType(schema, newModel);
+  }
+
+  return set;
 }
 
 /**
@@ -333,14 +333,14 @@ export function valueSetter(model, schema) {
  * @return {object}
  */
 export function findSchema(keys, schema) {
-    if (keys.length === 0) return schema;
+  if (keys.length === 0) return schema;
 
-    for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
-        schema = getNextSchema(schema, key);
-    }
+  for (let i = 0; i < keys.length; ++i) {
+    const key = keys[i];
+    schema = getNextSchema(schema, key);
+  }
 
-    return schema;
+  return schema;
 }
 
 /**
@@ -349,22 +349,22 @@ export function findSchema(keys, schema) {
  * @arg {string|number} key
  */
 export function getNextSchema(schema, key) {
-    if (schema.type === 'array') {
-        if (Array.isArray(schema.items)) {
-            return schema.items[key];
-        }
-        return schema.items;
+  if (schema.type === 'array') {
+    if (Array.isArray(schema.items)) {
+      return schema.items[key];
+    }
+    return schema.items;
+  }
+
+  if (schema.type === 'object') {
+    if (key in schema.properties) {
+      return schema.properties[key];
     }
 
-    if (schema.type === 'object') {
-        if (key in schema.properties) {
-            return schema.properties[key];
-        }
-
-        if (schema.additionalProperties) {
-            return schema.additionalProperties;
-        }
+    if (schema.additionalProperties) {
+      return schema.additionalProperties;
     }
+  }
 }
 
 /**
@@ -375,20 +375,20 @@ export function getNextSchema(schema, key) {
  * @arg {string|number} key
  */
 export function getNextValue(schema, value, key) {
-    if (!value) return defaultForSchema(schema);
+  if (!value) return defaultForSchema(schema);
 
-    if (value[key] === undefined) {
-        return defaultForSchema(schema);
-    }
+  if (value[key] === undefined) {
+    return defaultForSchema(schema);
+  }
 
-    return assertType(schema, value[key]);
+  return assertType(schema, value[key]);
 }
 
 export function getTypeOf(schema, value) {
-    if (value === undefined) return getPreferredType(schema.type);
-    else if (value === null) return 'null';
-    else if (Array.isArray(value)) return 'array';
-    else return typeof value;
+  if (value === undefined) return getPreferredType(schema.type);
+  else if (value === null) return 'null';
+  else if (Array.isArray(value)) return 'array';
+  else return typeof value;
 }
 
 /**
@@ -397,13 +397,13 @@ export function getTypeOf(schema, value) {
  * @arg {Function} visitor - The visitor function to invoke
  */
 export function traverseForm(forms, visit) {
-    if (!Array.isArray(forms)) forms = [forms];
+  if (!Array.isArray(forms)) forms = [forms];
 
-    for (let form of forms) {
-        visit(form);
+  for (const form of forms) {
+    visit(form);
 
-        if (form.items) traverseForm(form.items, visit);
-    }
+    if (form.items) traverseForm(form.items, visit);
+  }
 }
 
 /**
@@ -411,26 +411,26 @@ export function traverseForm(forms, visit) {
  * to produce a validate function.
  * @arg object schema - The schema to compile for validation
  */
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({allErrors: true});
 export function useValidator(schema) {
-    const compiled = useMemo(() => {
-        try {
-            const validator = ajv.compile(schema);
-            return validator;
-        } catch (err) {
-            const validator = () => false;
-            validator.errors = [{ dataPath: '.', message: 'invalid schema' }];
-            return validator;
-        }
-    }, [schema]);
-
-    function validate(model) {
-        const valid = compiled(model);
-        const { errors } = compiled;
-        return { valid, errors };
+  const compiled = useMemo(() => {
+    try {
+      const validator = ajv.compile(schema);
+      return validator;
+    } catch (err) {
+      const validator = () => false;
+      validator.errors = [{dataPath: '.', message: 'invalid schema'}];
+      return validator;
     }
+  }, [schema]);
 
-    return validate;
+  function validate(model) {
+    const valid = compiled(model);
+    const {errors} = compiled;
+    return {valid, errors};
+  }
+
+  return validate;
 }
 
 /**
@@ -439,28 +439,28 @@ export function useValidator(schema) {
  * @arg * value - The value to clone
  */
 export function clone(value) {
-    switch (typeof value) {
-        case 'string':
-        case 'number':
-        case 'boolean':
-        case 'undefined': {
-            return value;
-        }
-
-        case 'object': {
-            if (Array.isArray(value)) {
-                return value.map(clone);
-            }
-
-            let result = {};
-            for (let key in value) {
-                result[key] = clone(value[key]);
-            }
-            return result;
-        }
-
-        default: {
-            return value;
-        }
+  switch (typeof value) {
+    case 'string':
+    case 'number':
+    case 'boolean':
+    case 'undefined': {
+      return value;
     }
+
+    case 'object': {
+      if (Array.isArray(value)) {
+        return value.map(clone);
+      }
+
+      const result = {};
+      for (const key in value) {
+        result[key] = clone(value[key]);
+      }
+      return result;
+    }
+
+    default: {
+      return value;
+    }
+  }
 }
