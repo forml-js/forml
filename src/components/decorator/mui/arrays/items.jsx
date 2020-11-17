@@ -49,89 +49,59 @@ function Items(props, ref) {
         'disableGutters' in form ? form.disableGutters : false;
     const icon = 'icon' in form ? form.icon : 'view_list';
 
-    return h(
-        Paper,
-        {
-            className: clsx(classes.root, {
+    return (
+        <Paper
+            className={clsx(classes.root, {
                 [classes.open]: open,
                 [classes.disablePadding]: disablePadding,
                 [classes.disableGutters]: disableGutters,
-            }),
-        },
-        h(
-            List,
-            {
-                disablePadding: true,
-                dense: true,
-                ref,
-                ...otherProps,
-                className: clsx(
+            })}
+        >
+            <List
+                disablePadding
+                dense
+                ref={ref}
+                {...otherProps}
+                className={clsx(
                     otherProps && otherProps.className,
                     classes.list
-                ),
-            },
-            [
-                h(
-                    ListItem,
-                    {
-                        key: 'title',
-                        dense: false,
-                        divider: true,
-                    },
-                    [
-                        icon &&
-                            h(
-                                ListItemIcon,
-                                { key: 'icon', edge: 'start' },
-                                h(Icon, { color }, icon)
-                            ),
-                        h(ListItemText, {
-                            key: 'text',
-                            primaryTypographyProps: {
-                                color,
-                                variant: 'subtitle2',
-                            },
-                            primary: label,
-                            secondary: error || description,
-                            secondaryTypographyProps: {
-                                color,
-                                variant: 'caption',
-                            },
-                        }),
-                    ]
-                ),
-                ...props.children,
-                value &&
-                    value.length === 0 &&
-                    h(
-                        ListItem,
-                        { divider: true },
-                        h(ListItemText, {
-                            secondary: 'empty',
-                            secondaryTypographyProps: { align: 'center' },
-                        })
-                    ),
-                h(
-                    ListItem,
-                    {
-                        key: 'controls',
-                        dense: true,
-                        className: classes.controls,
-                    },
-                    h(
-                        Button,
-                        {
-                            onClick: props.add,
-                            color,
-                            edge: 'end',
-                            startIcon: h(Icon, {}, 'add'),
-                            disabled,
-                        },
-                        `Add ${label}`
-                    )
-                ),
-            ]
-        )
+                )}
+            >
+                <ListItem key="title" dense={false} divider>
+                    {icon && (
+                        <ListItemIcon key="icon" edge="start">
+                            <Icon color={color}>{icon}</Icon>
+                        </ListItemIcon>
+                    )}
+                    <ListItemText
+                        key="text"
+                        primaryTypographyProps={{ color, variant: 'subtitle2' }}
+                        primary={label}
+                        secondary={error || description}
+                    />
+                </ListItem>
+                {props.children}
+                {value && value.length === 0 && (
+                    <ListItem key="empty" divider>
+                        <ListItemText
+                            secondary="empty"
+                            secondaryTypographyProps={{ align: 'center' }}
+                        />
+                    </ListItem>
+                )}
+                <ListItem key="controls" dense className={classes.controls}>
+                    <Button
+                        onClick={props.add}
+                        color={color}
+                        edge="end"
+                        startIcon={<Icon>add</Icon>}
+                        disabled={disdabled}
+                    >
+                        {getLocalizedString('Add')} {label}
+                    </Button>
+                </ListItem>
+            </List>
+        </Paper>
     );
 }
 export default forwardRef(Items);

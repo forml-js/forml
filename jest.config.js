@@ -8,6 +8,6 @@ module.exports = async () => {
             ['lcov', { projectRoot: __dirname }],
         ],
         collectCoverage: true,
-        collectCoverageFrom: ['src/**/*.js'],
+        collectCoverageFrom: ['src/**/*.js', 'src/**/*.jsx'],
     };
 };
