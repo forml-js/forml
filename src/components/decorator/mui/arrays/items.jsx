@@ -7,7 +7,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import { createElement as h, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
+import { useLocalizer } from '../../../../context';
 
 const useStyles = makeStyles(function (theme) {
     return {
@@ -42,6 +43,7 @@ function Items(props, ref) {
 
     const classes = useStyles(props);
     const color = error ? 'error' : 'initial';
+    const localizer = useLocalizer();
 
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
@@ -95,9 +97,9 @@ function Items(props, ref) {
                         color={color}
                         edge="end"
                         startIcon={<Icon>add</Icon>}
-                        disabled={disdabled}
+                        disabled={disabled}
                     >
-                        {getLocalizedString('Add')} {label}
+                        {localizer.getLocalizedString('Add')} {label}
                     </Button>
                 </ListItem>
             </List>

@@ -1,5 +1,5 @@
 import Input from '@material-ui/core/Input';
-import { createElement as h } from 'react';
+import React from 'react';
 
 import Date from './date';
 import DateTime from './datetime';

@@ -1,5 +1,5 @@
 import MuiSelect from '@material-ui/core/Select';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

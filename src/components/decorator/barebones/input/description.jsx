@@ -1,2 +1,2 @@
-import { createElement as h } from 'react';
+import React from 'react';
 export default (props) => <p>{props.children}</p>;

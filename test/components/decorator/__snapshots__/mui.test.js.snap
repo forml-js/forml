@@ -117,10 +117,6 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
   <div
     class="MuiFormControl-root"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-error Mui-error"
-      data-shrink="false"
-    />
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-formControl MuiInput-formControl"
     >
@@ -165,10 +161,6 @@ exports[`Material UI with no model renders empty root integer consistently 1`] =
   <div
     class="MuiFormControl-root"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
-      data-shrink="true"
-    />
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
       form="[object Object]"
@@ -189,10 +181,6 @@ exports[`Material UI with no model renders empty root multiselect consistently 1
   <div
     class="MuiFormControl-root"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-      data-shrink="true"
-    />
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
     >
@@ -232,10 +220,6 @@ exports[`Material UI with no model renders empty root number consistently 1`] = 
   <div
     class="MuiFormControl-root"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
-      data-shrink="true"
-    />
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
       form="[object Object]"

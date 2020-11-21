@@ -1,4 +1,5 @@
 import * as Input from './input';
+import React from 'react';
 
 /**
  * @component

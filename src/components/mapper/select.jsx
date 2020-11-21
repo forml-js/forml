@@ -1,6 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import { createElement as h, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';
@@ -59,7 +59,9 @@ export default function Select(props) {
                 onChange={onChange}
                 form={form}
                 error={error}
-            />
+            >
+                {menuItems}
+            </deco.Input.Select>
             {(error || description) && (
                 <deco.Input.Description
                     key="help"

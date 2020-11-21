@@ -2,7 +2,7 @@ import MuiCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

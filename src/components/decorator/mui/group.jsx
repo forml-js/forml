@@ -1,5 +1,5 @@
 import FormGroup from '@material-ui/core/FormGroup';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

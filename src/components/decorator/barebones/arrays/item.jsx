@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React, { createElement as h, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 
 /**
@@ -17,7 +17,7 @@ export function Item(props, ref) {
         >
             <div key="controls" className="controls">
                 <h6 key="title" {...dragHandleProps} className="title">
-                    ,{props.title}
+                    {props.title}
                 </h6>
                 <button
                     key="move-up"

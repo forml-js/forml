@@ -1,12 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import {
-    createElement as h,
-    useEffect,
-    useMemo,
-    useState,
-    forwardRef,
-} from 'react';
+import React, { useEffect, useMemo, useState, forwardRef } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
@@ -240,6 +234,8 @@ function ArrayComponent(props, ref) {
     const localizer = useLocalizer();
     const model = useModel();
 
+    const { otherProps } = form;
+
     const arrays = useMemo(
         function () {
             const arrays = [];
@@ -259,11 +255,13 @@ function ArrayComponent(props, ref) {
                     formCopy.readonly =
                         'readonly' in formCopy ? formCopy.readonly : disabled;
 
-                    return h(SchemaField, {
-                        key,
-                        form: formCopy,
-                        schema: formCopy.schema,
-                    });
+                    return (
+                        <SchemaField
+                            key={key}
+                            form={formCopy}
+                            schema={formCopy.schema}
+                        />
+                    );
                 });
 
                 arrays.push(
@@ -300,7 +298,7 @@ function ArrayComponent(props, ref) {
                         description={description}
                         error={error}
                         ref={(...args) => {
-                            innerRef(...args);
+                            provided.innerRef(...args);
                             if (ref) ref(...args);
                         }}
                         otherProps={otherProps}

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { createElement as h } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
 /**
@@ -99,7 +99,7 @@ export default function FieldSet(props) {
         'disablePadding' in form ? form.disablePadding : false;
     const disableMargin = 'disableMargin' in form ? form.disableMargin : false;
     const fullWidth = 'fullWidth' in form ? form.fullWidth : false;
-    const component = 'component' in form ? form.component : 'div';
+    const Component = 'component' in form ? form.component : 'div';
     const elevation = 'elevation' in form ? form.elevation : 1;
     const icon = 'icon' in form ? form.icon : null;
 
@@ -110,7 +110,7 @@ export default function FieldSet(props) {
                 [classes.disablePadding]: true,
             })}
             fullWidth={fullWidth}
-            component={component}
+            component={Component}
         >
             {title ||
                 (description && (
@@ -139,14 +139,14 @@ export default function FieldSet(props) {
                         </div>
                     </div>
                 ))}
-            <component
+            <Component
                 className={clsx(classes[layout], {
                     [classes.disableGutters]: disableGutters,
                     [classes.disablePadding]: disablePadding,
                 })}
             >
                 {props.children}
-            </component>
+            </Component>
         </FormGroup>
     );
 

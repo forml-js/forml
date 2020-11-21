@@ -1,5 +1,5 @@
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

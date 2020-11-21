@@ -1,5 +1,5 @@
 import MenuItem from '@material-ui/core/MenuItem';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

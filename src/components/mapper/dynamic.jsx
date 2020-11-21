@@ -1,4 +1,4 @@
-import { createElement as h } from 'react';
+import React from 'react';
 
 import { useContext } from '../../context';
 

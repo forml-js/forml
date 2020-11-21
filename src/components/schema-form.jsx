@@ -3,7 +3,7 @@
  */
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import { createElement as h, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import Context from '../context';
 import { merge } from '../forms';

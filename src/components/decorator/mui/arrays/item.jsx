@@ -3,7 +3,7 @@ import Icon from '@material-ui/core/Icon';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React, { createElement as h, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 const useStyles = makeStyles(function (theme) {
     return {

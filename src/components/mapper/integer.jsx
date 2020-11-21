@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import { createElement as h } from 'react';
+import React from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';
@@ -23,7 +23,7 @@ export default function Integer(props) {
 
     return (
         <deco.Input.Group form={form}>
-            {title && (
+            {label && (
                 <deco.Label key="label" form={form} value={value} error={error}>
                     {label}
                 </deco.Label>

@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import { createElement as h } from 'react';
+import React from 'react';
 
 import { FormType } from '../../types';
 

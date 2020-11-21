@@ -3,7 +3,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
-import { createElement as h } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({

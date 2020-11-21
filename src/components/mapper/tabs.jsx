@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useDecorator, useLocalizer } from '../../context';
 import { FormType } from '../../types';

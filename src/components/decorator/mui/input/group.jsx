@@ -1,5 +1,5 @@
 import FormControl from '@material-ui/core/FormControl';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

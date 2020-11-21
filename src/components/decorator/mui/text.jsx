@@ -1,5 +1,5 @@
 import Typography from '@material-ui/core/Typography';
-import { createElement as h } from 'react';
+import React from 'react';
 
 /**
  * @component

@@ -1,4 +1,4 @@
-import { createElement as h, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useLocalizer } from '../../../../context';
 
 /**
