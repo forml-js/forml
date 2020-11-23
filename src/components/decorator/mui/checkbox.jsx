@@ -27,10 +27,11 @@ export default function Checkbox({
                     />
                 }
             />
-            {error || description} &&{' '}
-            <FormHelperText error={error}>
-                {error || description}
-            </FormHelperText>
+            {(error || description) && (
+                <FormHelperText error={error}>
+                    {error || description}
+                </FormHelperText>
+            )}
         </FormGroup>
     );
 }

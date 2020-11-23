@@ -112,33 +112,27 @@ export default function FieldSet(props) {
             fullWidth={fullWidth}
             component={Component}
         >
-            {title ||
-                (description && (
-                    <div className={classes.header}>
-                        {icon && (
-                            <Icon key="icon" className={classes.icon}>
-                                {icon}
-                            </Icon>
-                        )}
-                        <div key="title" className={classes.title}>
-                            <FormLabel
-                                key="label"
-                                className={classes.formLabel}
-                            >
-                                <Typography variant="subtitle2">
-                                    title
-                                </Typography>
-                            </FormLabel>
-                            <FormHelperText
-                                key="help"
-                                variant="caption"
-                                className={classes.formHelperText}
-                            >
-                                {description}
-                            </FormHelperText>
-                        </div>
+            {(title || description) && (
+                <div className={classes.header}>
+                    {icon && (
+                        <Icon key="icon" className={classes.icon}>
+                            {icon}
+                        </Icon>
+                    )}
+                    <div key="title" className={classes.title}>
+                        <FormLabel key="label" className={classes.formLabel}>
+                            <Typography variant="subtitle2">title</Typography>
+                        </FormLabel>
+                        <FormHelperText
+                            key="help"
+                            variant="caption"
+                            className={classes.formHelperText}
+                        >
+                            {description}
+                        </FormHelperText>
                     </div>
-                ))}
+                </div>
+            )}
             <Component
                 className={clsx(classes[layout], {
                     [classes.disableGutters]: disableGutters,

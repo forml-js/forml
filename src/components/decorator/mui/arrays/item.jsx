@@ -66,6 +66,11 @@ export function ItemComponent(props, ref) {
     const { disabled } = props;
     const { draggableProps, dragHandleProps } = props.otherProps;
 
+    const dragHandleClass = clsx(
+        dragHandleProps ? dragHandleProps.className : null,
+        classes.dragHandle
+    );
+
     return (
         <ListItem
             divider={true}
@@ -74,10 +79,7 @@ export function ItemComponent(props, ref) {
             disableGutters={true}
             {...draggableProps}
         >
-            <div
-                {...dragHandleProps}
-                className={clsx(dragHandleProps.className, classes.dragHandle)}
-            >
+            <div {...dragHandleProps} className={dragHandleClass}>
                 <Icon>drag_handle</Icon>,
             </div>
             <div className={classes.forms}>{props.children}</div>,

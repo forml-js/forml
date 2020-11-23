@@ -174,33 +174,51 @@ function BaseArrayItem(props, ref) {
         index,
     ]);
 
-    return (
-        <Draggable draggableId={props.id} index={index}>
-            {(provided) => {
-                return (
-                    <deco.Arrays.Item
-                        key="header"
-                        disabled={disabled}
-                        title={title}
-                        destroy={destroy}
-                        moveUp={moveUp}
-                        moveDown={moveDown}
-                        index={index}
-                        ref={(e) => {
-                            provided.innerRef(e);
-                            if (ref) ref(e);
-                        }}
-                        otherProps={{
-                            draggableProps: provided.draggableProps,
-                            dragHandleProps: provided.dragHandleProps,
-                        }}
-                    >
-                        {props.children}
-                    </deco.Arrays.Item>
-                );
-            }}
-        </Draggable>
-    );
+    if (form.dragDrop) {
+        return (
+            <Draggable draggableId={props.id} index={index}>
+                {(provided) => {
+                    return (
+                        <deco.Arrays.Item
+                            disabled={disabled}
+                            title={title}
+                            destroy={destroy}
+                            moveUp={moveUp}
+                            moveDown={moveDown}
+                            index={index}
+                            form={form}
+                            ref={(e) => {
+                                provided.innerRef(e);
+                                if (ref) ref(e);
+                            }}
+                            otherProps={{
+                                draggableProps: provided.draggableProps,
+                                dragHandleProps: provided.dragHandleProps,
+                            }}
+                        >
+                            {props.children}
+                        </deco.Arrays.Item>
+                    );
+                }}
+            </Draggable>
+        );
+    } else {
+        return (
+            <deco.Arrays.Item
+                disabled={disabled}
+                title={title}
+                destroy={destroy}
+                moveUp={moveUp}
+                moveDown={moveDown}
+                index={index}
+                ref={ref}
+                form={form}
+                otherProps={{}}
+            >
+                {props.children}
+            </deco.Arrays.Item>
+        );
+    }
 }
 
 export const ArrayItem = forwardRef(BaseArrayItem);
@@ -234,7 +252,9 @@ function ArrayComponent(props, ref) {
     const localizer = useLocalizer();
     const model = useModel();
 
-    const { otherProps } = form;
+    let { otherProps } = form;
+
+    if (!otherProps) otherProps = {};
 
     const arrays = useMemo(
         function () {
@@ -283,35 +303,54 @@ function ArrayComponent(props, ref) {
         [items.items]
     );
 
-    const label = localizer.getLocalizedString(form.title);
+    const title = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
 
-    return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId={droppableId}>
-                {(provided) => (
-                    <deco.Arrays.Items
-                        className={form.htmlClass}
-                        add={items.add}
-                        value={value}
-                        label={label}
-                        description={description}
-                        error={error}
-                        ref={(...args) => {
-                            provided.innerRef(...args);
-                            if (ref) ref(...args);
-                        }}
-                        otherProps={otherProps}
-                        disabled={disabled}
-                        form={form}
-                    >
-                        {arrays}
-                        {provided.placeholder}
-                    </deco.Arrays.Items>
-                )}
-            </Droppable>
-        </DragDropContext>
-    );
+    if (form.dragDrop) {
+        return (
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId={droppableId}>
+                    {(provided) => (
+                        <deco.Arrays.Items
+                            className={form.htmlClass}
+                            add={items.add}
+                            value={value}
+                            title={title}
+                            description={description}
+                            error={error}
+                            ref={(...args) => {
+                                provided.innerRef(...args);
+                                if (ref) ref(...args);
+                            }}
+                            otherProps={otherProps}
+                            disabled={disabled}
+                            form={form}
+                        >
+                            {arrays}
+                            {provided.placeholder}
+                        </deco.Arrays.Items>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        );
+    } else {
+        return (
+            <deco.Arrays.Items
+                className={form.htmlClass}
+                add={items.add}
+                value={value}
+                title={title}
+                description={description}
+                error={error}
+                ref={ref}
+                otherProps={otherProps}
+                disabled={disabled}
+                form={form}
+            >
+                {arrays}
+            </deco.Arrays.Items>
+        );
+    }
 
     /* istanbul ignore next */
     function onDragEnd(result) {

@@ -15,10 +15,16 @@ export default function Form(props) {
     const ref = useRef();
     const classes = useStyles();
 
-    const endAdornment = h(Fragment, {}, [
-        h(Button, { onClick, key: 'attach' }, h(Icon, {}, 'attach_file')),
-        h(Button, { onClick: clear, key: 'clear' }, h(Icon, {}, 'clear')),
-    ]);
+    const endAdornment = (
+        <>
+            <Button onClick={onClick} key="attach">
+                <Icon>attach_file</Icon>
+            </Button>
+            <Button onClick={clear} key="clear">
+                <Icon>clear</Icon>
+            </Button>
+        </>
+    );
 
     return (
         <>
