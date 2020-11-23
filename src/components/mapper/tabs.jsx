@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useDecorator, useLocalizer } from '../../context';
+import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
 import { SchemaField } from '../schema-field';
 

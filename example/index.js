@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+import Button from '@material-ui/core/Button';
 import MomentUtils from '@date-io/moment';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,12 +16,48 @@ import {
     useEffect,
     useMemo,
     useState,
+    useRef,
 } from 'react';
+import jsPDF from 'jspdf';
 import { render } from 'react-dom';
 import SimpleEditor from 'react-simple-code-editor';
 import { decorators, SchemaForm, util } from 'rjsf';
+import ReactPDF from '@react-pdf/renderer';
+
+import MaterialIcons from 'material-icons/iconfont/MaterialIcons-Regular.ttf';
+import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
+import RobotoBold from 'fontsource-roboto/files/roboto-all-700-normal.woff';
+import RobotoLight from 'fontsource-roboto/files/roboto-all-300-normal.woff';
+
+ReactPDF.Font.register({
+    family: 'Material Icons',
+    src: MaterialIcons,
+    fontStyle: 'normal',
+});
+ReactPDF.Font.register({
+    family: 'Roboto',
+    fonts: [
+        {
+            src: Roboto,
+            fontWeight: 'normal',
+            fontStyle: 'normal',
+        },
+        {
+            src: RobotoBold,
+            fontWeight: 'bold',
+            fontStyle: 'normal',
+        },
+        {
+            src: RobotoLight,
+            fontWeight: 'light',
+            fontStyle: 'normal',
+        },
+    ],
+});
 
 const log = debug('rjsf:example');
+
+log('Roboto : %o', Roboto);
 
 // import clike from 'prismjs/components/prism-clike';
 // import javascript from 'prismjs/components/prism-javascript';
@@ -148,24 +186,55 @@ function SelectExample(props) {
         props.onChange(event, value);
     }
 }
+
+function SelectDecorator(props) {
+    return h(SchemaForm, {
+        schema: { type: 'string', enum: Object.keys(decorators) },
+        form: [{ key: [] }],
+        model: props.decorator,
+        onChange,
+    });
+    function onChange(event, nextModel) {
+        props.onChange(nextModel);
+    }
+}
 function RenderExample(props) {
     const { schema, form, model } = props;
     const { onChange } = props;
     const { localizer } = props;
     const { mapper } = props;
-    const decorator = decorators.mui;
+    const { decorator } = props;
+    const { wrapInDocument } = props;
+
+    const key = useMemo(() => shortid(), [decorator]);
 
     const formProps = {
         schema,
         form,
         model,
-        decorator,
+        decorator: decorators[decorator],
         localizer,
         onChange,
         mapper,
     };
 
-    return h(ErrorBoundary, {}, h(SchemaForm, formProps));
+    let child = h(SchemaForm, formProps);
+    if (decorator === 'pdf') {
+        if (wrapInDocument) {
+            child = h(
+                ReactPDF.Document,
+                {},
+                h(ReactPDF.Page, { size: 'A4' }, child)
+            );
+        }
+        child = h(
+            ReactPDF.PDFViewer,
+            { key, style: { width: '100vw', height: '100vh' } },
+            child
+        );
+    }
+
+    return h(ErrorBoundary, {}, child);
 }
 
 function getSample(selected) {
@@ -184,9 +253,11 @@ const useStyles = makeStyles(function () {
 });
 
 function Page() {
+    const pdfRef = useRef();
     const classes = useStyles();
     const [selected, setSelected] = useState('');
     const [localizer, setLocalizer] = useState(undefined);
+    const [decorator, setDecorator] = useState('mui');
     const [mapper, setMapper] = useState(undefined);
     const schema = useEditable({ type: 'null' });
     const form = useEditable(['*']);
@@ -199,6 +270,8 @@ function Page() {
         model.setValue(args[0]);
     }
 
+    log('selected : %o', selected);
+
     return h('div', { className: classes.root }, [
         h(Card, { className: classes.example, key: 'primary-viewport' }, [
             h(
@@ -206,15 +279,18 @@ function Page() {
                 {
                     key: 'example',
                     className: classes.exampleContent,
+                    ref: pdfRef,
                 },
                 h(RenderExample, {
-                    key: `render-${schema.json}${form.json}`,
+                    key: `render-${decorator}-${schema.json}-${form.json}`,
                     schema: schema.value,
                     form: form.value,
                     model: model.value,
                     onChange: onModelChange,
+                    wrapInDocument: selected != './kitchenSink.js',
                     mapper,
                     localizer,
+                    decorator,
                 })
             ),
             h(CardContent, { key: 'model' }, [
@@ -228,6 +304,12 @@ function Page() {
                 { key: 'select-example' },
                 h(SelectExample, { key: 'select', selected, onChange })
             ),
+            h(
+                CardContent,
+                { key: 'select-decorator' },
+                h(SelectDecorator, { decorator, onChange: setDecorator })
+            ),
+            h(CardContent, {}, h(Button, { onClick: savePDF }, 'Save PDF')),
             h(CardContent, { key: 'schema' }, [
                 h(Typography, { key: 'title', variant: 'h6' }, 'Schema'),
                 h(Editor, {
@@ -246,6 +328,17 @@ function Page() {
             ]),
         ]),
     ]);
+
+    function savePDF() {
+        if (pdfRef.current) {
+            const doc = new jsPDF();
+            doc.html(pdfRef.current, {
+                callback: function (doc) {
+                    doc.save();
+                },
+            });
+        }
+    }
 
     function onChange(event, example) {
         // event.preventDefault();

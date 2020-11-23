@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDecorator, useLocalizer } from '../../context';
+import { useDecorator, useLocalizer } from '@forml/hooks';
 
 /**
  * @component File

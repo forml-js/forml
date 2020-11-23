@@ -1,10 +1,11 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { config } from 'react-transition-group';
+import * as barebones from '@forml/decorator-barebones';
 
 config.disabled = true;
 
-import { SchemaForm, util, decorators } from '../../../src';
+import { SchemaForm, util } from '../../../src';
 import { createElement as h } from 'react';
 
 describe('select mapper', function () {
@@ -27,7 +28,7 @@ describe('select mapper', function () {
                 form,
                 model,
                 onChange,
-                decorator: decorators.barebones,
+                decorator: barebones,
             })
         );
         const [button0, button1] = container.querySelectorAll('option');

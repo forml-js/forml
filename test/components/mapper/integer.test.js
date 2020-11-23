@@ -1,7 +1,8 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
+import { SchemaForm, getLocalizer, util } from '../../../src';
+import * as barebones from '@forml/decorator-barebones';
 
 describe('integer', function () {
     let schema, form, model, onChange, decorator;
@@ -11,12 +12,12 @@ describe('integer', function () {
         form = [{ key: [], type: 'integer' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
-        decorator = decorators.barebones;
+        decorator = barebones;
     });
 
     test('tolerates empty strings onChange', function () {
         const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange })
+            h(SchemaForm, { schema, form, model, onChange, decorator })
         );
 
         fireEvent.change(container.querySelector('input'), {
@@ -34,7 +35,7 @@ describe('integer', function () {
                 form,
                 model,
                 onChange,
-                decorator: decorators.mui,
+                decorator,
             })
         );
 
@@ -48,7 +49,7 @@ describe('integer', function () {
 
     test('does not tolerate non-numeric strings', function () {
         const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange })
+            h(SchemaForm, { schema, form, model, onChange, decorator })
         );
 
         fireEvent.change(container.querySelector('input'), {

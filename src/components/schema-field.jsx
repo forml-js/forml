@@ -3,7 +3,7 @@ import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useMapper, useModel } from '../context';
+import { useMapper, useModel } from '@forml/hooks';
 import { FormType } from '../types';
 
 const log = debug('rjsf:schema-field');

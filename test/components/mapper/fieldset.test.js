@@ -2,6 +2,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
 import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
+import * as barebones from '@forml/decorator-barebones';
 
 describe('fieldset', function () {
     let schema, form, model, onChange, localizer, decorator;
@@ -11,7 +12,7 @@ describe('fieldset', function () {
         form = [{ type: 'fieldset', items: ['foo'] }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
-        decorator = decorators.barebones;
+        decorator = barebones;
     });
 
     test('renders itself', function () {

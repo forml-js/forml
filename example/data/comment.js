@@ -41,8 +41,8 @@ export const schema = {
             enum: ['home', 'work', 'mobile', 'fax', 'etc'],
         },
         nested: {
-            title: 'References',
             type: 'array',
+            title: 'References',
             description: 'A list of references who can support your comment',
             items: {
                 type: 'object',
@@ -139,19 +139,22 @@ export function form(props, model) {
         },
         {
             type: 'fieldset',
+            disableGutters: true,
             items: [
                 {
                     type: 'array',
                     icon: 'contacts',
                     disableGutters: true,
+                    disableMargin: true,
                     key: 'nested',
+                    wrap: false,
                     items: [
                         {
                             type: 'fieldset',
                             key: 'nested[]',
                             layout: 'vertical',
-                            disableMargin: true,
                             elevation: 0,
+                            wrap: false,
                             icon: 'person',
                             items: ['nested[].first', 'nested[].last'],
                         },

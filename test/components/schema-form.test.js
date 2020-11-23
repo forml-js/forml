@@ -39,7 +39,8 @@ test('uses the supplied localizer', function () {
 test('uses the supplied decorator', function () {
     const decorator = {
         Input: {
-            Form: jest.fn((_props) => h('div')),
+            Group: jest.fn((props) => h('div', props)),
+            Form: jest.fn((props) => h('div', props)),
         },
     };
 

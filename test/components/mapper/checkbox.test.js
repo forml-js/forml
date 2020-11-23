@@ -1,7 +1,8 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import * as barebones from '@forml/decorator-barebones';
 
-import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
+import { SchemaForm, getLocalizer, util } from '../../../src';
 import { createElement as h } from 'react';
 
 describe('checkbox mapper', function () {
@@ -16,7 +17,13 @@ describe('checkbox mapper', function () {
 
     test('renders itself', function () {
         const { container } = render(
-            h(SchemaForm, { model, form, schema, onChange })
+            h(SchemaForm, {
+                model,
+                form,
+                schema,
+                onChange,
+                decorator: barebones,
+            })
         );
 
         expect(
@@ -43,7 +50,7 @@ describe('checkbox mapper', function () {
                 schema,
                 onChange,
                 localizer,
-                decorator: decorators.barebones,
+                decorator: barebones,
             })
         );
 

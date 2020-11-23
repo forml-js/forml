@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useContext } from '../../context';
+import { useContext } from '@forml/hooks';
 
 export default function Dynamic(SchemaForm) {
     return function (props) {

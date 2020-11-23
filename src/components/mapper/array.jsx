@@ -5,7 +5,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
 import { ARRAY_PLACEHOLDER } from '../../constants';
-import { useDecorator, useLocalizer, useModel } from '../../context';
+import { useDecorator, useLocalizer, useModel } from '@forml/hooks';
 import { FormType } from '../../types';
 import {
     clone,
@@ -174,7 +174,9 @@ function BaseArrayItem(props, ref) {
         index,
     ]);
 
-    if (form.dragDrop) {
+    const dragDrop = 'dragDrop' in form ? form.dragDrop : true;
+
+    if (dragDrop) {
         return (
             <Draggable draggableId={props.id} index={index}>
                 {(provided) => {
@@ -305,8 +307,9 @@ function ArrayComponent(props, ref) {
 
     const title = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
+    const dragDrop = 'dragDrop' in form ? form.dragDrop : true;
 
-    if (form.dragDrop) {
+    if (dragDrop) {
         return (
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId={droppableId}>

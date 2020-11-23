@@ -8,11 +8,24 @@ module.exports = {
         path: path.resolve('./dist'),
     },
     devtool: 'eval-source-map',
+    node: {
+        module: 'empty',
+        dgram: 'empty',
+        dns: 'mock',
+        fs: 'empty',
+        http2: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        child_process: 'empty',
+    },
     resolve: {
         alias: {
             rjsf: path.resolve(__dirname, '../src'),
             react: path.resolve('./node_modules/react'),
             'react-dom': path.resolve('./node_modules/react-dom'),
+            '@react-pdf/renderer': path.resolve(
+                './node_modules/@react-pdf/renderer'
+            ),
             '@material-ui/core': path.resolve(
                 './node_modules/@material-ui/core'
             ),
@@ -28,6 +41,18 @@ module.exports = {
                 test: /\.m?jsx?$/,
                 exclude: /node_modules/,
                 use: { loader: 'babel-loader' },
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/',
+                        },
+                    },
+                ],
             },
         ],
     },

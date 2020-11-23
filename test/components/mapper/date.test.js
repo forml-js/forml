@@ -1,7 +1,8 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, decorators, util } from '../../../src';
+import { SchemaForm, getLocalizer, util } from '../../../src';
+import * as barebones from '@forml/decorator-barebones';
 
 describe('date', function () {
     let schema, form, model, onChange, localizer, decorator;
@@ -11,7 +12,7 @@ describe('date', function () {
         form = [{ key: [], type: 'date' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
-        decorator = decorators.barebones;
+        decorator = barebones;
     });
 
     test('renders itself', function () {

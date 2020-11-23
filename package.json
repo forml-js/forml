@@ -1,8 +1,9 @@
 {
-  "name": "rjsf",
-  "version": "1.4.4",
+  "name": "@forml/core",
+  "version": "2.0.0",
   "description": "Small, fast, and powerful JSON-schema form generator for React.",
   "keywords": [
+    "forml",
     "json",
     "schema",
     "form",
@@ -14,7 +15,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.jsx",
     "build": "babel src --out-dir lib",
     "watch": "babel src --out-dir lib --watch",
     "prepublish": "npm run build",
@@ -22,10 +23,10 @@
   },
   "author": "Zachary Hueras",
   "license": "MIT",
-  "homepage": "https://www.rjsf.io/",
+  "homepage": "https://forml.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fauxsoup/rjsf.git"
+    "url": "https://github.com/fauxsoup/forml.git"
   },
   "peerDependencies": {
     "react": "^16.10.2",
@@ -39,6 +40,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.12.5",
     "@date-io/moment": "^2.10.6",
+    "@forml/decorator-barebones": "^1.0.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
     "@testing-library/jest-dom": "^5.11.5",
@@ -57,6 +59,8 @@
     "react-transition-group": "^4.4.1"
   },
   "dependencies": {
+    "@forml/context": "^1.0.0",
+    "@forml/hooks": "^1.0.1",
     "ajv": "^6.12.4",
     "clsx": "^1.1.1",
     "deepmerge": "^4.2.2",

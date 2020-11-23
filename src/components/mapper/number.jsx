@@ -2,7 +2,7 @@ import ObjectPath from 'objectpath';
 import t from 'prop-types';
 import React from 'react';
 
-import { useDecorator, useLocalizer } from '../../context';
+import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
 
 const valueExceptions = ['', '-'];

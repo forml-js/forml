@@ -5,13 +5,13 @@ import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
-import Context from '../context';
+import Context from '@forml/context';
 import { merge } from '../forms';
 import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
 import * as util from '../util';
 
-import { decoratorShape, defaultDecorator, getDecorator } from './decorator';
+import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
 import { defaultMapper, getMapper, mapperShape } from './mapper';
 import { SchemaField } from './schema-field';
 

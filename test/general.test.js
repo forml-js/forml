@@ -1,13 +1,14 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import { SchemaForm, getLocalizer, util, decorators } from '../src';
+import { SchemaForm, getLocalizer, util } from '../src';
 import { createElement as h } from 'react';
+import * as barebones from '@forml/decorator-barebones';
 
 describe('mapper', function () {
     const title = 'title';
     const description = 'description';
-    const decorator = decorators.barebones;
+    const decorator = barebones;
     let forms = [
         [
             {

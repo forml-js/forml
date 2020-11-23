@@ -1,14 +1,15 @@
-import Context, { useMapper } from '../../src/context';
+import Context from '@forml/context';
+import { useMapper } from '@forml/hooks';
 import { SchemaField } from '../../src/components/schema-field';
 import { createElement as h } from 'react';
 import { defaultMapper, getMapper } from '../../src/components/mapper';
-import { getDecorator } from '../../src/components/decorator';
 import { getLocalizer } from '../../src/localizer';
 import * as util from '../../src/util';
 import renderer from 'react-test-renderer';
+import * as barebones from '@forml/decorator-barebones';
 
 function getContext(schema, model = '', errors = {}) {
-    const decorator = getDecorator({});
+    const decorator = barebones;
     const localizer = getLocalizer({});
     const getValue = jest.fn(util.valueGetter(model, schema));
     const setValue = jest.fn(util.valueSetter(model, schema));

@@ -2,9 +2,10 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { ArrayComponent } from '../../../src/components/mapper/array';
 import '@testing-library/jest-dom/extend-expect';
 
-import { SchemaForm, util, constants, decorators } from '../../../src';
+import { SchemaForm, util, constants } from '../../../src';
 import { mover, creator } from '../../../src/components/mapper/array';
 import { createElement as h } from 'react';
+import * as barebones from '@forml/decorator-barebones';
 
 describe('item mover', function () {
     let form;
@@ -24,7 +25,7 @@ describe('item mover', function () {
         items = [create(), create(), create(), create()];
         value = [1, 2, 3, 4];
         move = mover(items, value);
-        decorator = decorators.barebones;
+        decorator = barebones;
     });
 
     test('can move one space down', function () {
@@ -62,7 +63,7 @@ describe('items container', function () {
         schema = { type: 'array', items: { type: 'number' } };
         form = ['*'];
         model = [];
-        decorator = decorators.barebones;
+        decorator = barebones;
     });
 
     test('is rendered', function () {
@@ -120,7 +121,9 @@ describe('items container', function () {
         const add = container.querySelector('button.add');
 
         await fireEvent.click(add);
-        await rerender(h(SchemaForm, { schema, model, form, onChange }));
+        await rerender(
+            h(SchemaForm, { schema, model, form, onChange, decorator })
+        );
 
         // 4 because move up, move down, destroy, and add
         // as long as we only have 1 item in the model we're good
@@ -205,7 +208,7 @@ describe('each item', function () {
         onChange = jest.fn((event, newModel) => {
             model = newModel;
         });
-        decorator = decorators.barebones;
+        decorator = barebones;
 
         mockGetComputedSpacing();
     });
