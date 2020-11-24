@@ -12,7 +12,7 @@
 
 # forml
 
-[![Build Status](https://travis-ci.com/forml-js/forml.svg?branch=master)](https://travis-ci.org/forml-js/forml)
+[![Build Status](https://travis-ci.com/forml-js/forml.svg?branch=master)](https://travis-ci.com/forml-js/forml)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/@forml/core)
 [![Coverage Status](https://coveralls.io/repos/github/forml-js/forml/badge.svg?branch=master)](https://coveralls.io/github/forml-js/forml?branch=master)
 ![npm](https://img.shields.io/npm/v/@forml/core)

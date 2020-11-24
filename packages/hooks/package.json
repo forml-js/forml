@@ -49,5 +49,6 @@
   "peerDependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
-  }
+  },
+  "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }

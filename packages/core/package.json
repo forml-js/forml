@@ -49,5 +49,6 @@
     "prop-types": "^15.7.2",
     "react-beautiful-dnd": "^13.0.0",
     "shortid": "^2.2.16"
-  }
+  },
+  "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }
