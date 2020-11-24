@@ -26,7 +26,7 @@ A lightweight, efficient form rendering library for use with your JSON schemas. 
 
 ## Documentation
 
-View the documentation at [forml.io](https://www.forml.io)!
+View the documentation at [forml.dev](https://www.forml.dev)!
 
 <a id="org3b18bac"></a>
 
