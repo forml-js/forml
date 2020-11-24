@@ -12,11 +12,11 @@
 
 # forml
 
-[![Build Status](https://travis-ci.org/forml-js/forml.svg?branch=master)](https://travis-ci.org/forml-js/forml)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/forml/core)
+[![Build Status](https://travis-ci.com/forml-js/forml.svg?branch=master)](https://travis-ci.org/forml-js/forml)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/@forml/core)
 [![Coverage Status](https://coveralls.io/repos/github/forml-js/forml/badge.svg?branch=master)](https://coveralls.io/github/forml-js/forml?branch=master)
-![npm](https://img.shields.io/npm/v/forml/core)
-![npm](https://img.shields.io/npm/l/forml/core)
+![npm](https://img.shields.io/npm/v/@forml/core)
+![npm](https://img.shields.io/npm/l/@forml/core)
 
 forml - react json schema form
 
@@ -56,7 +56,7 @@ npm i @forml/core @forml/decorator-mui
 Basic usage is as follows:
 
 ```jsx
-import { SchemaForm } from '@forml/core;
+import { SchemaForm } from '@forml/core';
 import * as decorator from '@forml/decorator-mui';
 import { useState } from 'react';
 
@@ -100,7 +100,7 @@ Appearance/final rendering is handled by the `decorator` components. Currently a
 `forml` supports localization via injection. To inject a localizer:
 
 ```jsx
-import { SchemaForm, decorators } from '@forml/core;
+import { SchemaForm, decorators } from '@forml/core';
 import * as decorator from '@forml/decorator-mui';
 import { useTranslate } from 'react-i18next';
 import { useState } from 'react';
