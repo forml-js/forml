@@ -1,6 +1,6 @@
 {
   "name": "@forml/core",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "A JSON Schema-based form generator powered by React",
   "main": "lib/index.js",
   "scripts": {
@@ -34,8 +34,8 @@
     "react-dom": "^16.14.0"
   },
   "dependencies": {
-    "@forml/context": "^1.0.0",
-    "@forml/hooks": "^1.0.2"
+    "@forml/context": "^1.0.1",
+    "@forml/hooks": "^1.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
