@@ -1,0 +1,46 @@
+{
+  "name": "@forml/context",
+  "version": "1.0.0",
+  "description": "React context for @forml",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.jsx",
+    "build": "babel src --out-dir lib",
+    "watch": "babel src --out-dir lib --watch",
+    "prepublish": "npm run build",
+    "test": "jest --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forml-js/forml.git"
+  },
+  "keywords": [
+    "forml",
+    "context",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
+  "author": "Zachary Hueras",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forml-js/forml/issues"
+  },
+  "homepage": "https://www.forml.dev",
+  "devDependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.14.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.21.5"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1"
+  }
+}

@@ -1,0 +1,317 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Material UI with no model renders empty root date consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd"
+      helpertext="Invalid Date Format"
+    >
+      <input
+        aria-invalid="true"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+        type="text"
+        value=""
+      />
+      <div
+        class="MuiInputAdornment-root MuiInputAdornment-positionEnd"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+              />
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <p
+      class="MuiFormHelperText-root Mui-error"
+    >
+      should match format "date"
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root date-time consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd"
+      helpertext="Invalid Date Format"
+    >
+      <input
+        aria-invalid="true"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+        type="text"
+        value=""
+      />
+      <div
+        class="MuiInputAdornment-root MuiInputAdornment-positionEnd"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+              />
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <p
+      class="MuiFormHelperText-root Mui-error"
+    >
+      should match format "date-time"
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root enumeration consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-formControl MuiInput-formControl"
+    >
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        role="button"
+        tabindex="0"
+      >
+        <span>
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        tabindex="-1"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+    <p
+      class="MuiFormHelperText-root Mui-error"
+    >
+      should be equal to one of the allowed values
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root integer consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      form="[object Object]"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input"
+        type="text"
+        value="0"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root multiselect consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+    >
+      <div
+        aria-haspopup="listbox"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        role="button"
+        tabindex="0"
+      >
+        <span>
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        tabindex="-1"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root number consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      form="[object Object]"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input"
+        id=""
+        type="text"
+        value="0"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root object consistently 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5"
+    component="div"
+  >
+    <div
+      class="makeStyles-vertical-8"
+    >
+      <div
+        class="MuiFormControl-root"
+      >
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          form="[object Object]"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiInput-input"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5"
+        component="div"
+      >
+        <div
+          class="makeStyles-vertical-8"
+        >
+          <div
+            class="MuiFormControl-root"
+          >
+            <label
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+              data-shrink="true"
+            >
+              property
+            </label>
+            <div
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              form="[object Object]"
+            >
+              <input
+                aria-invalid="false"
+                class="MuiInputBase-input MuiInput-input"
+                id="['nested']['property']"
+                type="text"
+                value="0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Material UI with no model renders empty root string consistently 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      form="[object Object]"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;

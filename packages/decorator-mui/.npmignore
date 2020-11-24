@@ -1,0 +1,11 @@
+.*
+example/
+src/
+out/
+styleguide/
+*.config.js
+.log
+test/
+docs/
+coverage/
+stats.json

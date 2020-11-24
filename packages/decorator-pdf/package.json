@@ -1,0 +1,31 @@
+{
+  "name": "@forml/decorator-pdf",
+  "version": "1.0.0",
+  "description": "A forml decorator designed to produce PDF forms!",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forml-js/forml.git"
+  },
+  "keywords": [
+    "forml",
+    "decorator",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
+  "author": "Zachary Hueras",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forml-js/forml/issues"
+  },
+  "homepage": "https://github.com/forml-js/forml#readme",
+  "dependencies": {
+    "@forml/hooks": "^1.0.2",
+    "@react-pdf/renderer": "^1.6.12"
+  }
+}
