@@ -1,26 +1,26 @@
 import React from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import {useDecorator, useLocalizer} from '@forml/hooks';
+import {FormType} from '../../types';
 
 /**
  * @component Help
  */
 export default function Help(props) {
-    const { form } = props;
-    const { description } = form;
+  const {form} = props;
+  const {description} = form;
 
-    const localize = useLocalizer();
-    const deco = useDecorator();
-    const title = localize.getLocalizedString(form.title);
+  const localize = useLocalizer();
+  const deco = useDecorator();
+  const title = localize.getLocalizedString(form.title);
 
-    return (
-        <deco.Text form={form} title={title}>
-            {localize.getLocalizedString(description)}
-        </deco.Text>
-    );
+  return (
+    <deco.Text form={form} title={title}>
+      {localize.getLocalizedString(description)}
+    </deco.Text>
+  );
 }
 
 Help.propTypes = {
-    form: FormType,
+  form: FormType,
 };
