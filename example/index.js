@@ -21,13 +21,19 @@ import {
 import jsPDF from 'jspdf';
 import { render } from 'react-dom';
 import SimpleEditor from 'react-simple-code-editor';
-import { decorators, SchemaForm, util } from 'rjsf';
+import { SchemaForm, util } from '@forml/core';
+import * as mui from '@forml/decorator-mui';
+import * as barebones from '@forml/decorator-barebones';
+//import * as pdf from '@forml/decorator-pdf';
 import ReactPDF from '@react-pdf/renderer';
 
 import MaterialIcons from 'material-icons/iconfont/MaterialIcons-Regular.ttf';
 import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
 import RobotoBold from 'fontsource-roboto/files/roboto-all-700-normal.woff';
 import RobotoLight from 'fontsource-roboto/files/roboto-all-300-normal.woff';
+
+const decorators = { mui: util.clone(mui), barebones: util.clone(barebones) };
+console.error('decorators : %O', Object.keys(decorators));
 
 ReactPDF.Font.register({
     family: 'Material Icons',
@@ -189,10 +195,15 @@ function SelectExample(props) {
 
 function SelectDecorator(props) {
     return h(SchemaForm, {
-        schema: { type: 'string', enum: Object.keys(decorators) },
+        schema: {
+            type: 'string',
+            enum: Object.keys(decorators),
+            enumNames: Object.keys(decorators),
+        },
         form: [{ key: [] }],
         model: props.decorator,
         onChange,
+        decorator: mui,
     });
     function onChange(event, nextModel) {
         props.onChange(nextModel);

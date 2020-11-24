@@ -1,7 +1,8 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import { createElement as h, useCallback, useMemo } from 'react';
-import { SchemaForm, useContext, useModel } from 'rjsf';
+import { SchemaForm } from '@forml/core';
+import { useContext, useModel } from '@forml/hooks';
 
 const log = debug('rjsf:example:data:comment');
 

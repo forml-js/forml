@@ -1,6 +1,6 @@
 {
   "name": "@forml/core",
-  "version": "2.1.0",
+  "version": "1.5.0",
   "description": "Small, fast, and powerful JSON-schema form generator for React.",
   "keywords": [
     "forml",
