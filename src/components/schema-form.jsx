@@ -1,5 +1,5 @@
 /**
- * @namespace rjsf.SchemaForm
+ * @namespace forml.SchemaForm
  */
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';

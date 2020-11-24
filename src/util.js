@@ -4,7 +4,7 @@ import objectPath from 'objectpath';
 import {useMemo} from 'react';
 
 /**
- * @namespace rjsf.util
+ * @namespace forml.util
  */
 
 /**

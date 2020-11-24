@@ -1,5 +1,5 @@
 /**
- * @namespace rjsf
+ * @namespace forml
  */
 
 import * as util from './util';

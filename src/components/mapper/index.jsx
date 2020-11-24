@@ -1,5 +1,5 @@
 /**
- * @namespace rjsf.mapper
+ * @namespace forml.mapper
  */
 import t from 'prop-types';
 

@@ -6,7 +6,7 @@ import React from 'react';
 import {useMapper, useModel} from '@forml/hooks';
 import {FormType} from '../types';
 
-const log = debug('rjsf:schema-field');
+const log = debug('forml:schema-field');
 
 export function SchemaField(props) {
   const {schema, form} = props;
