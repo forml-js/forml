@@ -32,7 +32,7 @@ View the documentation at [forml.io](https://www.forml.io)!
 
 ## Examples
 
-You can view the [running demo](https://fauxsoup.github.io/forml).
+You can view the [running demo](https://forml-js.github.io/forml).
 
 Alternatively, you can run them yourself.
 
