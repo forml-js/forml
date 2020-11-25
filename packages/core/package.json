@@ -35,20 +35,20 @@
   },
   "dependencies": {
     "@forml/context": "^1.0.1",
-    "@forml/hooks": "^1.0.3"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.12.8",
-    "@babel/core": "^7.12.8",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/preset-env": "^7.12.7",
-    "@babel/preset-react": "^7.12.7",
+    "@forml/hooks": "^1.0.3",
     "ajv": "^6.12.6",
     "deepmerge": "^4.2.2",
     "objectpath": "^2.0.0",
     "prop-types": "^15.7.2",
     "react-beautiful-dnd": "^13.0.0",
     "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7"
   },
   "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }
