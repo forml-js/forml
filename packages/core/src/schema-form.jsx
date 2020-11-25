@@ -1,22 +1,23 @@
 /**
  * @namespace forml.SchemaForm
  */
-import ObjectPath from 'objectpath';
-import PropTypes from 'prop-types';
-import React, {useCallback, useMemo} from 'react';
+import ObjectPath from "objectpath";
+import PropTypes from "prop-types";
+import React, { useCallback, useMemo } from "react";
 
-import Context from '@forml/context';
-import {merge} from '../forms';
-import {defaultLocalizer, getLocalizer} from '../localizer';
-import * as Types from '../types';
-import * as util from '../util';
+import Context from "@forml/context";
+import { merge } from "../forms";
+import * as Types from "../types";
+import * as util from "../util";
 
-import {decoratorShape, defaultDecorator, getDecorator} from '../decorators';
-import {defaultMapper, getMapper, mapperShape} from './mapper';
-import {SchemaField} from './schema-field';
+import { decoratorShape, defaultDecorator, getDecorator } from "@forml/ware";
+import { defaultLocalizer, getLocalizer } from "@forml/ware";
+import { defaultMapper, getMapper, mapperShape } from "@forml/ware";
+
+import { SchemaField } from "./schema-field";
 
 function useGenerator(generator, props, model, deps) {
-  if (typeof generator === 'function') {
+  if (typeof generator === "function") {
     // The genrator is a hook; use it
     return generator(props, model, deps);
   }
@@ -66,36 +67,36 @@ export function SchemaForm({
   const getError = useCallback(util.errorGetter(errors), [errors]);
 
   const contextValue = useMemo(
-      function() {
-        return {
-          model,
-          schema,
-          form: merged,
-          mapper,
-          getValue,
-          setValue,
-          getError,
-          onChange,
-          localizer,
-          errors: {},
-          decorator,
-          version,
-        };
-      },
-      [
+    function () {
+      return {
         model,
         schema,
-        merged,
+        form: merged,
         mapper,
-        decorator,
-        localizer,
-        errors,
         getValue,
         setValue,
         getError,
+        onChange,
+        localizer,
+        errors: {},
+        decorator,
         version,
-        props.onChange,
-      ],
+      };
+    },
+    [
+      model,
+      schema,
+      merged,
+      mapper,
+      decorator,
+      localizer,
+      errors,
+      getValue,
+      setValue,
+      getError,
+      version,
+      props.onChange,
+    ]
   );
 
   function onChange(event, model) {
@@ -108,7 +109,7 @@ export function SchemaForm({
     <Context.Provider value={contextValue}>
       {merged.map((form, index) => {
         if (!form) return;
-        const {schema} = form;
+        const { schema } = form;
         return (
           <SchemaField
             key={index}
@@ -122,16 +123,14 @@ export function SchemaForm({
   );
 
   function computeErrors() {
-    const {valid, errors} = validate(model);
+    const { valid, errors } = validate(model);
     let errorMap = {};
 
     if (!valid) {
       for (const error of errors) {
-        const keys = ObjectPath.parse(
-            error.dataPath.replace(/^\./, ''),
-        );
+        const keys = ObjectPath.parse(error.dataPath.replace(/^\./, ""));
         const normal = ObjectPath.stringify(keys);
-        errorMap = {...errorMap, [normal]: error.message};
+        errorMap = { ...errorMap, [normal]: error.message };
       }
     }
 
@@ -141,12 +140,12 @@ export function SchemaForm({
 
 SchemaForm.propTypes = {
   /**
-     * The current value of the form
-     */
+   * The current value of the form
+   */
   model: PropTypes.any,
   /**
-     * The schema to build against
-     */
+   * The schema to build against
+   */
   schema: PropTypes.object.isRequired,
   /** The forms to render */
   form: PropTypes.oneOfType([PropTypes.func, Types.FormsType]),
@@ -164,8 +163,8 @@ SchemaForm.propTypes = {
 
 SchemaForm.defaultProps = {
   model: null,
-  schema: {type: 'null'},
-  form: ['*'],
+  schema: { type: "null" },
+  form: ["*"],
   decorator: defaultDecorator(),
   localizer: defaultLocalizer(),
   mapper: defaultMapper(SchemaForm),

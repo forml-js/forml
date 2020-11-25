@@ -1,0 +1,30 @@
+{
+  "name": "@forml/ware",
+  "version": "1.0.0",
+  "description": "Collection of plugins for @forml/core",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forml-js/forml.git"
+  },
+  "keywords": [
+    "forml",
+    "ware",
+    "react",
+    "json",
+    "schema",
+    "form",
+    "generator",
+    "schemaform",
+    "jsonschema"
+  ],
+  "author": "Zachary Hueras",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forml-js/forml/issues"
+  },
+  "homepage": "https://github.com/forml-js/forml#readme"
+}
