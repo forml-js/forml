@@ -180,7 +180,7 @@ exports[`items container is rendered 1`] = `
     <button
       class="add"
     >
-      Add Item
+      Add
     </button>
     <ul />
   </div>

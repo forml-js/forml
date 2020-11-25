@@ -283,7 +283,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
               <input
                 aria-invalid="false"
                 class="MuiInputBase-input MuiInput-input"
-                id="['nested']['property']"
+                id="nested.property"
                 type="text"
                 value="0"
               />

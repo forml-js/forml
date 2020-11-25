@@ -8,20 +8,13 @@
     "build": "babel src --out-dir lib",
     "watch": "babel src --out-dir lib --watch",
     "prepublish": "npm run build",
-    "test": "jest --coverage --verbose"
+    "test": "jest --coverage --verbose --passWithNoTests"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": [
-    "forml",
-    "hooks",
-    "react",
-    "json",
-    "schema",
-    "form"
-  ],
+  "keywords": ["forml", "hooks", "react", "json", "schema", "form"],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
