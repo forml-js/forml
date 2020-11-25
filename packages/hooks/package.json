@@ -1,6 +1,6 @@
 {
   "name": "@forml/hooks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hooks for use with @forml/core",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": ["forml", "hooks", "react", "json", "schema", "form"],
+  "keywords": [
+    "forml",
+    "hooks",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
@@ -37,7 +44,7 @@
     "jest": "^26.6.3"
   },
   "dependencies": {
-    "@forml/context": "^1.0.1"
+    "@forml/context": "^1.0.2"
   },
   "peerDependencies": {
     "react": "^17.0.1",

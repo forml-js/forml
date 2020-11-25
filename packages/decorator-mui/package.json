@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-mui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A forml decorator using MaterialUI",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": ["forml", "decorator", "react", "json", "schema", "form"],
+  "keywords": [
+    "forml",
+    "decorator",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
@@ -44,7 +51,7 @@
     "moment": "^2.29.1"
   },
   "dependencies": {
-    "@forml/hooks": "^1.0.3"
+    "@forml/hooks": "^1.0.4"
   },
   "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }

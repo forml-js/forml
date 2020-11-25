@@ -1,6 +1,6 @@
 {
   "name": "@forml/context",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React context for @forml",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": ["forml", "context", "react", "json", "schema", "form"],
+  "keywords": [
+    "forml",
+    "context",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
