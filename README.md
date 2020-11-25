@@ -20,7 +20,8 @@
 
 forml - react json schema form
 
-A lightweight, efficient form rendering library for use with your JSON schemas. Automatically generate and customize working forms for use in your application. Great for rapid prototyping and general usage.
+A lightweight, efficient, and powerful form rendering library for use with your JSON schemas. Automatically generate
+and customize working forms for use in your application. Great for rapid prototyping or production!
 
 <a id="documentation"></a>
 
@@ -100,7 +101,7 @@ Appearance/final rendering is handled by the `decorator` components. Currently a
 `forml` supports localization via injection. To inject a localizer:
 
 ```jsx
-import { SchemaForm, decorators } from '@forml/core';
+import { SchemaForm } from '@forml/core';
 import * as decorator from '@forml/decorator-mui';
 import { useTranslate } from 'react-i18next';
 import { useState } from 'react';
@@ -136,3 +137,9 @@ export function MyTranslatedForm(props) {
     }
 }
 ```
+
+<a id="contributing"></a>
+
+## Contributing
+
+forml prides itself on being easily extensible. More UI packages are being added and contributions are welcome.
