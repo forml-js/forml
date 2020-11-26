@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-barebones",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A barebones decorator for forml; intended for testing, not production",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": ["forml", "decorator", "react", "json", "schema", "form"],
+  "keywords": [
+    "forml",
+    "decorator",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
@@ -31,8 +38,8 @@
     "@babel/core": "^7.12.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
-    "@forml/hooks": "^1.0.4",
-    "@babel/preset-react": "^7.12.7"
+    "@babel/preset-react": "^7.12.7",
+    "@forml/hooks": "^1.0.6"
   },
   "dependencies": {
     "clsx": "^1.1.1",
