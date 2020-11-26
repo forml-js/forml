@@ -43,6 +43,7 @@
     "@testing-library/react": "^11.2.2",
     "ajv": "^6.12.6",
     "clsx": "^1.1.1",
+    "lerna": "^3.22.1",
     "moment": "^2.29.1",
     "objectpath": "^2.0.0",
     "prop-types": "^15.7.2",
