@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-mui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A forml decorator using MaterialUI",
   "main": "lib/index.js",
   "scripts": {
@@ -49,6 +49,5 @@
     "@material-ui/pickers": "^3.2.10",
     "react": "^16.8.5"
   },
-  "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b",
-  "dependencies": {}
+  "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-barebones",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A barebones decorator for forml; intended for testing, not production",
   "main": "lib/index.js",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-pdf",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A forml decorator designed to produce PDF forms!",
   "main": "lib/index.js",
   "scripts": {
