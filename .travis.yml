@@ -1,6 +1,7 @@
 language: node_js
 install:
   - npm ci
+  - \[\[ "$(npm -v)" != 7* \]\] && npx lerna bootstrap
   - npm run build
 node_js:
   - node
