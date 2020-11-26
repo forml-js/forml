@@ -4,20 +4,17 @@
   "description": "A forml decorator designed to produce PDF forms!",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest --passWithNoTests"
+    "lint": "eslint src/**/*.js",
+    "build": "babel src --out-dir lib",
+    "watch": "babel src --out-dir lib --watch",
+    "prepublish": "npm run build",
+    "test": "jest --coverage --verbose --passWithNoTests"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": [
-    "forml",
-    "decorator",
-    "react",
-    "json",
-    "schema",
-    "form"
-  ],
+  "keywords": ["forml", "decorator", "react", "json", "schema", "form"],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
@@ -30,6 +27,14 @@
   },
   "dependencies": {
     "@react-pdf/renderer": "^1.6.12"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@forml/hooks": "^1.0.4",
+    "@babel/preset-react": "^7.12.7"
   },
   "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }
