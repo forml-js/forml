@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/forml-js/forml.git"
   },
-  "keywords": ["forml", "hooks", "react", "json", "schema", "form"],
+  "keywords": [
+    "forml",
+    "hooks",
+    "react",
+    "json",
+    "schema",
+    "form"
+  ],
   "author": "Zachary Hueras",
   "license": "MIT",
   "bugs": {
