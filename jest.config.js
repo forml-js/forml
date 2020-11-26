@@ -7,6 +7,7 @@ module.exports = async () => {
       "clover",
       ["lcov", { projectRoot: __dirname }],
     ],
+    testPathIgnorePatterns: ["/node_modules/", "/lib/"],
     collectCoverage: true,
     collectCoverageFrom: ["packages/*/src/**/*.js", "packages/*/src/**/*.jsx"],
   };
