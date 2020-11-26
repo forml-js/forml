@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,6 +31,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install
         run: npm ci
+      - name: Bootstrap
+        run: npx lerna bootstrap
       - name: Build
         run: npm build
       - name: Test
@@ -39,4 +41,3 @@ jobs:
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.github_token }}
-        
