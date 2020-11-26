@@ -48,7 +48,8 @@
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
-    "@babel/preset-react": "^7.12.7"
+    "@babel/preset-react": "^7.12.7",
+    "@forml/decorator-barebones": "^1.0.4"
   },
   "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
 }
