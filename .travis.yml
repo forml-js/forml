@@ -1,7 +1,8 @@
 language: node_js
 install:
-    - npm ci
-    - npm run build
+  - npm ci
+  - npx lerna bootstrap
+  - npm run build
 node_js:
-    - node
-    - lts/*
+  - node
+  - lts/*
