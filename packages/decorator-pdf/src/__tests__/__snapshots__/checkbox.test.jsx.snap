@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders when checked 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex-direction: column; flex: 1;"
+    >
+      <view
+        style="display: flex; flex-direction: row; align-items: center;"
+      >
+        <view
+          style="display: inline-flex; font-family: Material Icons; font-size: 16pt; padding: 4pt 0px; min-width: 20pt;"
+        >
+          <text>
+            check_box
+          </text>
+        </view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+      </view>
+      <view
+        style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+      >
+        <text>
+          description
+        </text>
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex-direction: column; flex: 1;"
+    >
+      <view
+        style="display: flex; flex-direction: row; align-items: center;"
+      >
+        <view
+          style="display: inline-flex; font-family: Material Icons; font-size: 16pt; padding: 4pt 0px; min-width: 20pt;"
+        >
+          <text>
+            check_box_outline_blank
+          </text>
+        </view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        />
+      </view>
+      <view
+        style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+      >
+        <text />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with optional formStyles 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex-direction: column; flex: 1; border: 1px solid red;"
+    >
+      <view
+        style="display: flex; flex-direction: row; align-items: center; border: 1px solid red;"
+      >
+        <view
+          style="display: inline-flex; font-family: Material Icons; font-size: 16pt; padding: 4pt 0px; min-width: 20pt; border: 1px solid red;"
+        >
+          <text>
+            check_box_outline_blank
+          </text>
+        </view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+      </view>
+      <view
+        style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+      >
+        <text>
+          description
+        </text>
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title but no description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex-direction: column; flex: 1;"
+    >
+      <view
+        style="display: flex; flex-direction: row; align-items: center;"
+      >
+        <view
+          style="display: inline-flex; font-family: Material Icons; font-size: 16pt; padding: 4pt 0px; min-width: 20pt;"
+        >
+          <text>
+            check_box_outline_blank
+          </text>
+        </view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+      </view>
+      <view
+        style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+      >
+        <text />
+      </view>
+    </view>
+  </page>
+</div>
+`;

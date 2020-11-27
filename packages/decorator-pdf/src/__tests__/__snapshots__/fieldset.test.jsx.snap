@@ -1,0 +1,485 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            title
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options break false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options break true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableGutters false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableGutters true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 0px 4pt 0px 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableMargin false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableMargin true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 0px; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disablePadding false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disablePadding true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt 0px 4pt 0px; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options layout horizontal 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: row;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options layout vertical 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options wrap false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options wrap true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1;"
+    >
+      <view
+        style="padding: 4pt; flex-direction: column;"
+      />
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-family: Roboto; font-size: 9pt; font-weight: 200; padding-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; margin: 4pt; border: 1pt solid black; padding: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1;"
+      >
+        <view
+          style="padding: 4pt; background-color: rgb(238, 238, 238);"
+        >
+          <text
+            style="font-family: Roboto; font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+        </view>
+        <view
+          style="padding: 4pt; flex-direction: column;"
+        />
+      </view>
+    </view>
+  </page>
+</div>
+`;
