@@ -51,5 +51,5 @@
     "@babel/preset-react": "^7.12.7",
     "@forml/decorator-barebones": "^1.0.5"
   },
-  "gitHead": "5eac06f4aef45bd7c4ec09e965eb791e2cf7015b"
+  "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }
