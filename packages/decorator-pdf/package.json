@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-pdf",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A forml decorator designed to produce PDF forms!",
   "main": "lib/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
-    "@forml/hooks": "^1.0.6"
+    "@forml/hooks": "^1.0.7"
   },
   "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-mui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A forml decorator using MaterialUI",
   "main": "lib/index.js",
   "scripts": {
@@ -35,8 +35,8 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@date-io/moment": "^1.3.13",
-    "@forml/core": "^1.5.7",
-    "@forml/hooks": "^1.0.6",
+    "@forml/core": "^1.5.8",
+    "@forml/hooks": "^1.0.7",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
     "@testing-library/jest-dom": "^5.11.6",
