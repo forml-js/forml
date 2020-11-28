@@ -5,6 +5,10 @@ import { render } from "@testing-library/react";
 import * as decorator from "../../";
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import moment from 'moment';
+import 'moment-timezone';
+
+moment.tz.setDefault('GMT')
 
 describe("renders", function() {
     let form;
