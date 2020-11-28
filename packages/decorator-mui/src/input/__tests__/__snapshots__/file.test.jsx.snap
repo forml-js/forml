@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders consistently 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+  >
+    <input
+      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      type="text"
+      value=""
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          attach_file
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          clear
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <input
+    class="makeStyles-fileInput-3"
+    type="file"
+  />
+</div>
+`;
+
+exports[`renders with form options format data_url 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+  >
+    <input
+      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      type="text"
+      value=""
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          attach_file
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          clear
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <input
+    class="makeStyles-fileInput-1"
+    type="file"
+  />
+</div>
+`;
+
+exports[`renders with form options format name 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+  >
+    <input
+      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      type="text"
+      value=""
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          attach_file
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root"
+        >
+          clear
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <input
+    class="makeStyles-fileInput-2"
+    type="file"
+  />
+</div>
+`;

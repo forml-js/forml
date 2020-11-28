@@ -11,7 +11,7 @@ export default function Date(props) {
     const variant = 'variant' in form ? form.variant : 'inline';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
     const openTo = 'openTo' in form ? form.openTo : 'date';
-    const format = 'format' in form ? form.format : 'YYYY/MM/DD';
+    const format = 'format' in form ? form.format : undefined;
     const disabled = 'readonly' in form ? form.readonly : false;
 
     return (

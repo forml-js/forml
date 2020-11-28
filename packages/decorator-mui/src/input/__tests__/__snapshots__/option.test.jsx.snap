@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders consistently 1`] = `
+<div>
+  <li
+    aria-disabled="false"
+    class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+    role="menuitem"
+    tabindex="-1"
+    value="1"
+  >
+    1
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </li>
+</div>
+`;

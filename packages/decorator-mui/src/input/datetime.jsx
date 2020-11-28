@@ -11,7 +11,7 @@ export default function DateTime(props) {
     const variant = 'variant' in form ? form.variant : 'dialog';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
     const openTo = 'openTo' in form ? form.openTo : 'hours';
-    const format = 'format' in form ? form.format : 'YYYY/MM/DD HH:mm';
+    const format = 'format' in form ? form.format : undefined;
     const disabled = 'readonly' in form ? form.readonly : false;
 
     return (

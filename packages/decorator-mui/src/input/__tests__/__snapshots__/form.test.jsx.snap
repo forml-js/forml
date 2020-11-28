@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders consistently 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline"
+    form="[object Object]"
+  >
+    <input
+      aria-invalid="false"
+      class="MuiInputBase-input MuiInput-input"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
