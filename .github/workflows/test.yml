@@ -33,6 +33,8 @@ jobs:
         run: npm ci
       - name: Bootstrap
         run: npx lerna bootstrap
+      - name: Link
+        run: npx lerna link
       - name: Build
         run: npm build
       - name: Test
