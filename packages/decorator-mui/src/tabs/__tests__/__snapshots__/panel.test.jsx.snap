@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with form options elevation 0 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-17 makeStyles-horizontal-19 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 0 with layout 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-21 makeStyles-horizontal-23 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 1 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-25 makeStyles-horizontal-27 MuiPaper-elevation1 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 1 with layout 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-29 makeStyles-horizontal-31 MuiPaper-elevation1 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation undefined 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-33 makeStyles-horizontal-35 MuiPaper-elevation1 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation undefined with layout 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-37 makeStyles-horizontal-39 MuiPaper-elevation1 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options icon person 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-1 makeStyles-horizontal-3 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options icon person with layout 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-5 makeStyles-horizontal-7 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options icon undefined 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-9 makeStyles-horizontal-11 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;
+
+exports[`renders with form options icon undefined with layout 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-13 makeStyles-horizontal-15 MuiPaper-elevation0 MuiPaper-rounded"
+    description="description"
+    form="[object Object]"
+    parent="[object Object]"
+    title="title"
+  />
+</div>
+`;

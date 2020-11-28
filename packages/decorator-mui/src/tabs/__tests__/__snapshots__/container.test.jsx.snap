@@ -1,0 +1,413 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-61 makeStyles-vertical-65 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-64 makeStyles-vertical-65 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root makeStyles-title-67 MuiListItem-dense"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            view_carousel
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            title
+          </span>
+        </div>
+      </li>
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-68 makeStyles-vertical-69 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-63"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-72 makeStyles-horizontal-74 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options layout horizontal 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-1 makeStyles-horizontal-6 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-4 makeStyles-horizontal-6 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root makeStyles-title-7 MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            view_carousel
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-colorTextPrimary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            title
+          </span>
+          <span
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            description
+          </span>
+        </div>
+      </li>
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-8 makeStyles-vertical-9 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-3"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-12 makeStyles-horizontal-14 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options layout vertical 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-16 makeStyles-vertical-20 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-19 makeStyles-vertical-20 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root makeStyles-title-22 MuiListItem-dense"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            view_carousel
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-colorTextPrimary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            title
+          </span>
+          <span
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            description
+          </span>
+        </div>
+      </li>
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-23 makeStyles-vertical-24 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-18"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-27 makeStyles-horizontal-29 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-76 makeStyles-vertical-80 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-79 makeStyles-vertical-80 MuiList-dense"
+    >
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-83 makeStyles-vertical-84 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-78"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-87 makeStyles-horizontal-89 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-31 makeStyles-vertical-35 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-34 makeStyles-vertical-35 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root makeStyles-title-37 MuiListItem-dense"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            view_carousel
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-colorTextPrimary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            title
+          </span>
+          <span
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            description
+          </span>
+        </div>
+      </li>
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-38 makeStyles-vertical-39 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-33"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-42 makeStyles-horizontal-44 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-46 makeStyles-vertical-50 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-tabs-49 makeStyles-vertical-50 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root makeStyles-title-52 MuiListItem-dense"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            view_carousel
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-colorTextPrimary MuiTypography-noWrap MuiTypography-displayBlock"
+          >
+            title
+          </span>
+        </div>
+      </li>
+      <div
+        aria-disabled="false"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-53 makeStyles-vertical-54 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+          >
+            dynamic_form
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </div>
+    </ul>
+    <div
+      class="makeStyles-panels-48"
+    >
+      <div
+        class="MuiPaper-root makeStyles-root-57 makeStyles-horizontal-59 MuiPaper-elevation0 MuiPaper-rounded"
+        form="[object Object]"
+        parent="[object Object]"
+      >
+        Test Panel
+      </div>
+    </div>
+  </div>
+</div>
+`;

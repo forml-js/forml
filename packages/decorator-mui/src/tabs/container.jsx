@@ -72,7 +72,7 @@ export default function Container(props) {
                 dense
                 disablePadding
             >
-                {title && (
+                {(title || description) && (
                     <ListItem
                         key="tab-bar"
                         className={classes.title}
