@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with form options align left 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft"
+  />
+</div>
+`;
+
+exports[`renders with form options align right 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight"
+  />
+</div>
+`;
+
+exports[`renders with form options align undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options color primary 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"
+  />
+</div>
+`;
+
+exports[`renders with form options color secondary 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorSecondary"
+  />
+</div>
+`;
+
+exports[`renders with form options color undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options noWrap false 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options noWrap true 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+  />
+</div>
+`;
+
+exports[`renders with form options noWrap undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options otherProps [object Object] 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options otherProps undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options paragraph false 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options paragraph true 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"
+  />
+</div>
+`;
+
+exports[`renders with form options paragraph undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;
+
+exports[`renders with form options variant h1 1`] = `
+<div>
+  <h1
+    class="MuiTypography-root MuiTypography-h1"
+  />
+</div>
+`;
+
+exports[`renders with form options variant h2 1`] = `
+<div>
+  <h2
+    class="MuiTypography-root MuiTypography-h2"
+  />
+</div>
+`;
+
+exports[`renders with form options variant undefined 1`] = `
+<div>
+  <p
+    class="MuiTypography-root MuiTypography-body1"
+  />
+</div>
+`;

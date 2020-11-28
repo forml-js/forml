@@ -1,0 +1,804 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-267 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-268 makeStyles-disableGutters-270 makeStyles-disablePadding-271"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-279"
+      >
+        <div
+          class="makeStyles-title-275"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-276"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-277"
+          >
+            title
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-274"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options Component div 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-141 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-142 makeStyles-disableGutters-144 makeStyles-disablePadding-145"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-153"
+      >
+        <div
+          class="makeStyles-title-149"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-150"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-151"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-148"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options Component fieldset 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-155 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-156 makeStyles-disableGutters-158 makeStyles-disablePadding-159"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-167"
+      >
+        <div
+          class="makeStyles-title-163"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-164"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-165"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-162"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableGutters false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-43 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-44 makeStyles-disableGutters-46 makeStyles-disablePadding-47"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-55"
+      >
+        <div
+          class="makeStyles-title-51"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-52"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-53"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-50"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableGutters true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-29 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-30 makeStyles-disableGutters-32 makeStyles-disablePadding-33"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-41"
+      >
+        <div
+          class="makeStyles-title-37"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-38"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-39"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-36 makeStyles-disableGutters-32"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableMargin false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-99 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-100 makeStyles-disableGutters-102 makeStyles-disablePadding-103"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-111"
+      >
+        <div
+          class="makeStyles-title-107"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-108"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-109"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-106"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableMargin true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-85 makeStyles-disableMargin-87 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-86 makeStyles-disableGutters-88 makeStyles-disablePadding-89"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-97"
+      >
+        <div
+          class="makeStyles-title-93"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-94"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-95"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-92"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disablePadding false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-71 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-72 makeStyles-disableGutters-74 makeStyles-disablePadding-75"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-83"
+      >
+        <div
+          class="makeStyles-title-79"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-80"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-81"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-78"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disablePadding true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-57 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-58 makeStyles-disableGutters-60 makeStyles-disablePadding-61"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-69"
+      >
+        <div
+          class="makeStyles-title-65"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-66"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-67"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-64 makeStyles-disablePadding-61"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options elevation 0 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-169 MuiPaper-elevation0 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-170 makeStyles-disableGutters-172 makeStyles-disablePadding-173"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-181"
+      >
+        <div
+          class="makeStyles-title-177"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-178"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-179"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-176"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options elevation 1 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-183 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-184 makeStyles-disableGutters-186 makeStyles-disablePadding-187"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-195"
+      >
+        <div
+          class="makeStyles-title-191"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-192"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-193"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-190"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options elevation 2 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-197 MuiPaper-elevation2 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-198 makeStyles-disableGutters-200 makeStyles-disablePadding-201"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-209"
+      >
+        <div
+          class="makeStyles-title-205"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-206"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-207"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-204"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options fullWidth false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-127 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-128 makeStyles-disableGutters-130 makeStyles-disablePadding-131"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-139"
+      >
+        <div
+          class="makeStyles-title-135"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-136"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-137"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-134"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options fullWidth true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-113 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-114 makeStyles-disableGutters-116 makeStyles-disablePadding-117"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-125"
+      >
+        <div
+          class="makeStyles-title-121"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-122"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-123"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-120"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options icon favorite 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-225 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-226 makeStyles-disableGutters-228 makeStyles-disablePadding-229"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-237"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root makeStyles-icon-236"
+        >
+          favorite
+        </span>
+        <div
+          class="makeStyles-title-233"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-234"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-235"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-232"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options icon person 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-211 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-212 makeStyles-disableGutters-214 makeStyles-disablePadding-215"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-223"
+      >
+        <span
+          aria-hidden="true"
+          class="material-icons MuiIcon-root makeStyles-icon-222"
+        >
+          person
+        </span>
+        <div
+          class="makeStyles-title-219"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-220"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-221"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-218"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options layout horizontal 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-1 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-13"
+      >
+        <div
+          class="makeStyles-title-9"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-10"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-11"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-horizontal-7"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with form options layout vertical 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-15 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-16 makeStyles-disableGutters-18 makeStyles-disablePadding-19"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-27"
+      >
+        <div
+          class="makeStyles-title-23"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-24"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-25"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-22"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root makeStyles-root-282 makeStyles-disableGutters-284 makeStyles-disablePadding-285"
+    component="div"
+  >
+    <div
+      class="makeStyles-vertical-288"
+    />
+  </div>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-239 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-240 makeStyles-disableGutters-242 makeStyles-disablePadding-243"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-251"
+      >
+        <div
+          class="makeStyles-title-247"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-248"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-249"
+          >
+            description
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-246"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper-253 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiFormGroup-root makeStyles-root-254 makeStyles-disableGutters-256 makeStyles-disablePadding-257"
+      component="div"
+    >
+      <div
+        class="makeStyles-header-265"
+      >
+        <div
+          class="makeStyles-title-261"
+        >
+          <label
+            class="MuiFormLabel-root makeStyles-formLabel-262"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2"
+            >
+              title
+            </h6>
+          </label>
+          <p
+            class="MuiFormHelperText-root makeStyles-formHelperText-263"
+          />
+        </div>
+      </div>
+      <div
+        class="makeStyles-vertical-260"
+      />
+    </div>
+  </div>
+</div>
+`;

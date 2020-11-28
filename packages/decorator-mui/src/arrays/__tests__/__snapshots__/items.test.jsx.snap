@@ -1,0 +1,659 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-41 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-44 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            title
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-45 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableGutters false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-6 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-9 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-10 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disableGutters true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-1 makeStyles-disableGutters-3 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-4 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-5 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disablePadding false 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-16 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-19 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-20 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options disablePadding true 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-11 makeStyles-disablePadding-12 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-14 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-15 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options icon favorite 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-26 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-29 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            favorite
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-30 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with form options icon person 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-21 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-24 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            person
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-25 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-46 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-49 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-50 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-31 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-34 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        >
+          <p
+            class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+          >
+            description
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-35 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-root-36 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <ul
+      class="MuiList-root makeStyles-list-39 MuiList-dense"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+      >
+        <div
+          class="MuiListItemIcon-root"
+          edge="start"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            view_list
+          </span>
+        </div>
+        <div
+          class="MuiListItemText-root MuiListItemText-dense"
+        />
+      </li>
+      <li
+        class="MuiListItem-root makeStyles-controls-40 MuiListItem-dense MuiListItem-gutters"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          edge="end"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden="true"
+                class="material-icons MuiIcon-root"
+              >
+                add
+              </span>
+            </span>
+            Add
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

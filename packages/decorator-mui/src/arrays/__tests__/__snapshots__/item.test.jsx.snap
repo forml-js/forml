@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders consistently 1`] = `
+<div>
+  <li
+    class="MuiListItem-root makeStyles-item-3 MuiListItem-divider"
+  >
+    <div
+      class="makeStyles-dragHandle-5"
+    >
+      <span
+        aria-hidden="true"
+        class="material-icons MuiIcon-root"
+      >
+        drag_handle
+      </span>
+      ,
+    </div>
+    <div
+      class="makeStyles-forms-1"
+    />
+    ,
+    <div
+      class="makeStyles-controls-2"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            keyboard_arrow_up
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            keyboard_arrow_down
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-destroy-6 MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            delete_forever
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </li>
+</div>
+`;

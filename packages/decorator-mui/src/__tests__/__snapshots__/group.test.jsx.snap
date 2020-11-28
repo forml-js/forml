@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options Component div 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options Component group 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disableGutters false 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disableGutters true 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disableMargin false 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disableMargin true 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disablePadding false 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options disablePadding true 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 0 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 1 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options elevation 2 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options fullWidth false 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options fullWidth true 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options icon favorite 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options icon person 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options layout horizontal 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with form options layout vertical 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <div
+    class="MuiFormGroup-root"
+  />
+</div>
+`;
