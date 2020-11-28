@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders when checked 1`] = `
+<div>
+  <div>
+    <label>
+      <input
+        checked=""
+        type="checkbox"
+      />
+       
+      title
+    </label>
+    <p>
+      description
+    </p>
+  </div>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <div>
+    <label>
+      <input
+        type="checkbox"
+      />
+       
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders with title but no description 1`] = `
+<div>
+  <div>
+    <label>
+      <input
+        type="checkbox"
+      />
+       
+      title
+    </label>
+  </div>
+</div>
+`;

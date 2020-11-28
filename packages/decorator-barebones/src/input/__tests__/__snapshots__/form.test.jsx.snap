@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders its children 1`] = `
+<div>
+  <input
+    type="text"
+    value="test"
+  />
+</div>
+`;

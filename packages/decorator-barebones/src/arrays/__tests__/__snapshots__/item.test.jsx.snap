@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders its children 1`] = `
+<div>
+  <li
+    class="item"
+  >
+    <div
+      class="controls"
+    >
+      <h6
+        class="title"
+      />
+      <button
+        class="move-up"
+      >
+        move up
+      </button>
+      <button
+        class="move-down"
+      >
+        move down
+      </button>
+      <button
+        class="delete"
+      >
+        delete
+      </button>
+    </div>
+    <div
+      class="content"
+    >
+      <div
+        id="test"
+      >
+        test
+      </div>
+    </div>
+  </li>
+</div>
+`;

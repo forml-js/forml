@@ -7,8 +7,11 @@ import React from 'react';
 export default function FieldSet(props) {
     return (
         <fieldset>
-            <legend>{props.title}</legend>
-            {props.children}
+            {props.title && <legend>{props.title}</legend>}
+            {props.description && <p>{props.description}</p>}
+            <div>
+                {props.children}
+            </div>
         </fieldset>
     );
 }

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders its children 1`] = `
+<div>
+  <div
+    class="array"
+  >
+    <button
+      class="add"
+    >
+      Add
+    </button>
+    <ul>
+      <div
+        id="test"
+      >
+        test
+      </div>
+    </ul>
+  </div>
+</div>
+`;
