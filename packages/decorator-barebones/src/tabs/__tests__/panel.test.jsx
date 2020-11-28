@@ -1,15 +1,18 @@
-import Form from '../form';
+import Panel from '../panel';
 import React from 'react';
 import { render } from '@testing-library/react';
 
 describe('renders', function() {
+    let form;
+    beforeEach(function() {
+        form = { type: 'tabs', tabs: [] };
+    })
     test('its children', function() {
         const { container } = render(
-            <Form value="test" />
+            <Panel form={form}><div id="test">test</div></Panel>
         );
 
         expect(container).toMatchSnapshot();
-        expect(container.querySelector('input')).not.toBeNull();
-        expect(container.querySelector('input').value).toBe('test');
+        expect(container.querySelector('#test')).not.toBeNull();
     })
 })

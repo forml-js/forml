@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders its tabs and panels 1`] = `
+<div>
+  <div
+    class="tabs-container"
+  >
+    <div
+      class="tabs"
+    >
+      <button>
+        tab title
+      </button>
+    </div>
+    <div
+      class="panels"
+    >
+      <div>
+        <div
+          id="panel_test"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
