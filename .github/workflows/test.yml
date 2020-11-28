@@ -36,7 +36,7 @@ jobs:
       - name: Link
         run: npx lerna link
       - name: Build
-        run: npm build
+        run: npm run build
       - name: Test
         run: npm test
       - name: Coveralls
