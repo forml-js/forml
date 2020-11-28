@@ -14,9 +14,12 @@ const styles = ReactPDF.StyleSheet.create({
 
 export default function Form(props) {
     const { form, value } = props;
-    let { styles: formStyles } = form;
 
-    if (!formStyles) formStyles = {};
+    const formStyles = 'styles' in form ? form.styles : {};
 
-    return <ReactPDF.Text style={styles.input}>{value}</ReactPDF.Text>;
+    return (
+        <ReactPDF.View style={{ ...styles.input, ...formStyles.input }}>
+            <ReactPDF.Text>{value}</ReactPDF.Text>
+        </ReactPDF.View>
+    );
 }

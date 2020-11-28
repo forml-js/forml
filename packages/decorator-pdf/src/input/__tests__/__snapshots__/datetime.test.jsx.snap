@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <page>
+    <view>
+      <view>
+        <view
+          style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+        >
+          <text>
+            title
+          </text>
+        </view>
+      </view>
+      <text
+        style="border: 1pt solid black; margin: 5cm; border-bottom-width: 0;"
+      />
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <page>
+    <view>
+      <text
+        style="border: 1pt solid black; margin: 5cm; border-bottom-width: 0;"
+      />
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with relevant formStyles 1`] = `
+<div>
+  <page>
+    <view
+      style="border: 1pt solid red;"
+    >
+      <view
+        style="border: 1pt solid red;"
+      >
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+        <view
+          style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+        >
+          <text>
+            description
+          </text>
+        </view>
+      </view>
+      <text
+        style="border: 1pt solid red; margin: 5cm; border-bottom-width: 0;"
+      />
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <page>
+    <view>
+      <view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+        <view
+          style="margin-top: 2pt; font-size: 9pt; color: rgba(0, 0, 0, 0.54);"
+        >
+          <text>
+            description
+          </text>
+        </view>
+      </view>
+      <text
+        style="border: 1pt solid black; margin: 5cm; border-bottom-width: 0;"
+      />
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <page>
+    <view>
+      <view>
+        <text
+          style="font-size: 10pt; font-weight: bold; padding-top: 4pt; margin-bottom: 2pt;"
+        >
+          title
+        </text>
+      </view>
+      <text
+        style="border: 1pt solid black; margin: 5cm; border-bottom-width: 0;"
+      />
+    </view>
+  </page>
+</div>
+`;

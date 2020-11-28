@@ -1,11 +1,11 @@
-import FieldSet from "../fieldset";
+import ArrayComponent from "../items";
 import Context from "@forml/context";
 import React from "react";
 import ReactPDF from "@react-pdf/renderer";
 import { render } from "@testing-library/react";
-import * as decorator from "../";
+import * as decorator from "../../";
 
-describe("renders", function () {
+describe("renders", function() {
   let form;
   let schema;
   let title = "title";
@@ -16,41 +16,25 @@ describe("renders", function () {
   let content;
   let paper;
 
-  beforeEach(function () {
+  beforeEach(function() {
     schema = { type: "string" };
-    form = { type: "fieldset", items: [{ key: [] }] };
-    root = jest.fn(() => ({ border: "1px solid red" }));
-    content = jest.fn(() => ({ border: "1px solid red" }));
-
-    styles = {
-      get root() {
-        return root();
-      },
-      get content() {
-        return content();
-      },
-    };
+    form = { type: "array", items: [{ key: [] }] };
   });
 
-  describe("with form options", function () {
+  describe("with form options", function() {
     let fields = {
-      layout: ["horizontal", "vertical"],
-      disableGutters: [true, false],
-      disablePadding: [true, false],
       disableMargin: [true, false],
-      wrap: [true, false],
-      break: [true, false],
     };
 
-    Object.keys(fields).forEach(function (field) {
-      fields[field].forEach(function (value) {
-        describe(`${field}`, function () {
-          test(`${value}`, function () {
+    Object.keys(fields).forEach(function(field) {
+      fields[field].forEach(function(value) {
+        describe(`${field}`, function() {
+          test(`${value}`, function() {
             form = { ...form, [field]: value };
             const { container } = render(
               <ReactPDF.Page>
                 <Context.Provider value={{ decorator }}>
-                  <FieldSet
+                  <ArrayComponent
                     form={form}
                     title={title}
                     description={description}
@@ -66,11 +50,11 @@ describe("renders", function () {
     });
   });
 
-  test("with title and description", function () {
+  test("with title and description", function() {
     const { container } = render(
       <ReactPDF.Page>
         <Context.Provider value={{ decorator }}>
-          <FieldSet form={form} title={title} description={description} />
+          <ArrayComponent form={form} title={title} description={description} />
         </Context.Provider>
       </ReactPDF.Page>
     );
@@ -78,11 +62,11 @@ describe("renders", function () {
     expect(container).toMatchSnapshot();
   });
 
-  test("with title and no description", function () {
+  test("with title and no description", function() {
     const { container } = render(
       <ReactPDF.Page>
         <Context.Provider value={{ decorator }}>
-          <FieldSet form={form} title={title} />
+          <ArrayComponent form={form} title={title} />
         </Context.Provider>
       </ReactPDF.Page>
     );
@@ -90,11 +74,11 @@ describe("renders", function () {
     expect(container).toMatchSnapshot();
   });
 
-  test("with description and no title", function () {
+  test("with description and no title", function() {
     const { container } = render(
       <ReactPDF.Page>
         <Context.Provider value={{ decorator }}>
-          <FieldSet form={form} description={title} />
+          <ArrayComponent form={form} description={title} />
         </Context.Provider>
       </ReactPDF.Page>
     );
@@ -102,11 +86,11 @@ describe("renders", function () {
     expect(container).toMatchSnapshot();
   });
 
-  test("with no title or description", function () {
+  test("with no title or description", function() {
     const { container } = render(
       <ReactPDF.Page>
         <Context.Provider value={{ decorator }}>
-          <FieldSet form={form} />
+          <ArrayComponent form={form} />
         </Context.Provider>
       </ReactPDF.Page>
     );
@@ -114,19 +98,5 @@ describe("renders", function () {
     expect(container).toMatchSnapshot();
   });
 
-  test("with relevant formStyles", function () {
-    form = { ...form, styles };
-
-    const { container } = render(
-      <ReactPDF.Page>
-        <Context.Provider value={{ decorator }}>
-          <FieldSet form={form} />
-        </Context.Provider>
-      </ReactPDF.Page>
-    );
-
-    expect(container).toMatchSnapshot();
-    expect(root).toHaveBeenCalled();
-    expect(content).toHaveBeenCalled();
-  });
+  test("with relevant formStyles", function() { });
 });

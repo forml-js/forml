@@ -2,6 +2,7 @@ import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 
 export default function Description(props) {
+    const { form } = props;
     const styles = {
         description: {
             marginTop: '2pt',
@@ -10,8 +11,10 @@ export default function Description(props) {
         },
     };
 
+    const formStyles = 'styles' in form ? form.styles : {};
+
     return (
-        <ReactPDF.View style={styles.description}>
+        <ReactPDF.View style={{ ...styles.description, ...formStyles.description }}>
             <ReactPDF.Text>{props.children}</ReactPDF.Text>
         </ReactPDF.View>
     );

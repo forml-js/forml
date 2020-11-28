@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 4pt;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view
+          style="background-color: rgb(238, 238, 238); display: flex; flex-direction: column; padding: 4pt; margin-bottom: 4pt;"
+        >
+          <text
+            style="font-size: 9pt; font-weight: 200; margin-top: 2pt;"
+          >
+            title
+          </text>
+        </view>
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableMargin false 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 4pt;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view
+          style="background-color: rgb(238, 238, 238); display: flex; flex-direction: column; padding: 4pt; margin-bottom: 4pt;"
+        >
+          <text
+            style="font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-size: 9pt; font-weight: 200; margin-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with form options disableMargin true 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 0px;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view
+          style="background-color: rgb(238, 238, 238); display: flex; flex-direction: column; padding: 4pt; margin-bottom: 4pt;"
+        >
+          <text
+            style="font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-size: 9pt; font-weight: 200; margin-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 4pt;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 4pt;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view
+          style="background-color: rgb(238, 238, 238); display: flex; flex-direction: column; padding: 4pt; margin-bottom: 4pt;"
+        >
+          <text
+            style="font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+          <text
+            style="font-size: 9pt; font-weight: 200; margin-top: 2pt;"
+          >
+            description
+          </text>
+        </view>
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <page>
+    <view
+      style="display: flex; flex: 1; flex-direction: column; border: 1pt solid black; margin: 4pt;"
+    >
+      <view
+        style="display: flex; flex: 1; flex-direction: column;"
+      >
+        <view
+          style="background-color: rgb(238, 238, 238); display: flex; flex-direction: column; padding: 4pt; margin-bottom: 4pt;"
+        >
+          <text
+            style="font-size: 12pt; font-weight: 400;"
+          >
+            title
+          </text>
+        </view>
+        <view />
+      </view>
+    </view>
+  </page>
+</div>
+`;

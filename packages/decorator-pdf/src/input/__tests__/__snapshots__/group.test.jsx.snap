@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with relevant formStyles 1`] = `
+<div>
+  <page>
+    <view
+      style="margin: 2pt; padding: 2pt; border: 1px solid red;"
+    />
+  </page>
+</div>
+`;
+
+exports[`renders without formStyles 1`] = `
+<div>
+  <page>
+    <view
+      style="margin: 2pt; padding: 2pt;"
+    />
+  </page>
+</div>
+`;

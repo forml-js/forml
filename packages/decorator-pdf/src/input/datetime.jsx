@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
-import { useLocalizer } from '@forml/hooks';
+import { useDecorator } from '@forml/hooks';
 
 const styles = ReactPDF.StyleSheet.create({
     content: {
@@ -11,26 +11,27 @@ const styles = ReactPDF.StyleSheet.create({
 });
 
 export default function DateTime(props) {
-    const { title, description } = props;
-    const localizer = useLocalizer();
+    const { title, description, form } = props;
+    const formStyles = 'styles' in form ? form.styles : {};
+    const deco = useDecorator();
     return (
-        <ReactPDF.View style={styles.container}>
+        <ReactPDF.View style={{ ...styles.root, ...formStyles.root }}>
             {(title || description) && (
-                <ReactPDF.View style="header">
+                <ReactPDF.View style={{ ...styles.header, ...formStyles.header }}>
                     {title && (
-                        <ReactPDF.Text style={styles.title}>
+                        <deco.Label form={form}>
                             {title}
-                        </ReactPDF.Text>
+                        </deco.Label>
                     )}
                     {description && (
-                        <ReactPDF.Text style={styles.description}>
+                        <deco.Input.Description form={form}>
                             {description}
-                        </ReactPDF.Text>
+                        </deco.Input.Description>
                     )}
                 </ReactPDF.View>
             )}
-            <ReactPDF.Text style={styles.content}>
-                {localizer.getLocalizedDate(props.children)}
+            <ReactPDF.Text style={{ ...styles.content, ...formStyles.content }}>
+                {props.children}
             </ReactPDF.Text>
         </ReactPDF.View>
     );

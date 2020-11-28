@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with relevant formStyles 1`] = `
+<div>
+  <page>
+    <view
+      style="min-height: 14pt; font-family: Roboto; font-size: 10pt; flex: 1; padding: 2pt; border: 1pt solid red;"
+    >
+      <text />
+    </view>
+  </page>
+</div>
+`;
