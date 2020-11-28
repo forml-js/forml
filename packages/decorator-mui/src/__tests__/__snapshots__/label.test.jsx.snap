@@ -1,33 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders with form options fullWidth false 1`] = `
-<div>
-  <label
-    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
-    data-shrink="false"
-  />
-</div>
-`;
-
-exports[`renders with form options fullWidth true 1`] = `
-<div>
-  <label
-    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
-    data-shrink="false"
-  />
-</div>
-`;
-
 exports[`renders with no shrink 1`] = `
-<div>
-  <label
-    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
-    data-shrink="false"
-  />
-</div>
-`;
-
-exports[`renders with no title or description 1`] = `
 <div>
   <label
     class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
