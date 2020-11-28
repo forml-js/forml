@@ -2,6 +2,7 @@ language: node_js
 install:
   - npm ci
   - npx lerna bootstrap
+  - npx lerna link
   - npm run build
 node_js:
   - node
