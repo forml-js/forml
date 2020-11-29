@@ -24,6 +24,7 @@ import SimpleEditor from 'react-simple-code-editor';
 import { SchemaForm, util } from '@forml/core';
 import * as mui from '@forml/decorator-mui';
 import * as barebones from '@forml/decorator-barebones';
+import * as pdf from '@forml/decorator-pdf';
 //import * as pdf from '@forml/decorator-pdf';
 import ReactPDF from '@react-pdf/renderer';
 
@@ -32,7 +33,7 @@ import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
 import RobotoBold from 'fontsource-roboto/files/roboto-all-700-normal.woff';
 import RobotoLight from 'fontsource-roboto/files/roboto-all-300-normal.woff';
 
-const decorators = { mui: util.clone(mui), barebones: util.clone(barebones) };
+const decorators = { mui: util.clone(mui), barebones: util.clone(barebones), pdf: util.clone(pdf) };
 
 console.error('decorators : %O', decorators);
 
@@ -255,7 +256,7 @@ function getSample(selected) {
     return { schema: { type: 'null' }, form: ['*'] };
 }
 
-const useStyles = makeStyles(function () {
+const useStyles = makeStyles(function() {
     return {
         root: { display: 'flex', flexDirection: 'row' },
         manager: { flex: '0 0 300px' },
@@ -345,7 +346,7 @@ function Page() {
         if (pdfRef.current) {
             const doc = new jsPDF();
             doc.html(pdfRef.current, {
-                callback: function (doc) {
+                callback: function(doc) {
                     doc.save();
                 },
             });
