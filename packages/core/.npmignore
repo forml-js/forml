@@ -1,0 +1,8 @@
+.*
+src/
+*.config.js
+.log
+test/
+docs/
+coverage/
+stats.json
