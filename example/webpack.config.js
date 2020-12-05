@@ -1,7 +1,7 @@
 const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    entry: path.resolve('./index.js'),
+    entry: path.resolve('./src/index.js'),
     output: {
         filename: 'bundle.js',
         publicPath: '/forml/dist/',
@@ -19,6 +19,7 @@ module.exports = {
                 './node_modules/@material-ui/pickers'
             ),
         },
+        extensions: ["*", ".js", ".jsx"]
     },
     module: {
         rules: [
