@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-mui",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A forml decorator using MaterialUI",
   "main": "lib/index.js",
   "scripts": {
