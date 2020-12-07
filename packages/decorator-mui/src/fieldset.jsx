@@ -11,7 +11,7 @@ import clsx from 'clsx';
 /**
  * @component
  */
-const useStyles = makeStyles(function (theme) {
+const useStyles = makeStyles(function(theme) {
     return {
         paper: {
             flex: 1,
@@ -121,7 +121,7 @@ export default function FieldSet(props) {
                     )}
                     <div key="title" className={classes.title}>
                         <FormLabel key="label" className={classes.formLabel}>
-                            <Typography variant="subtitle2">title</Typography>
+                            <Typography variant="subtitle2">{title}</Typography>
                         </FormLabel>
                         <FormHelperText
                             key="help"

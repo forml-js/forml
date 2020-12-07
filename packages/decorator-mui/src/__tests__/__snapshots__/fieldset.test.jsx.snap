@@ -20,9 +20,7 @@ exports[`renders with description and no title 1`] = `
           >
             <h6
               class="MuiTypography-root MuiTypography-subtitle2"
-            >
-              title
-            </h6>
+            />
           </label>
           <p
             class="MuiFormHelperText-root makeStyles-formHelperText-277"
