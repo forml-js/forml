@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
         flex: '0 0 auto',
         zIndex: 10,
         alignItems: 'flex-start',
+        whiteSpace: 'nowrap',
         '&$vertical': {
             flexDirection: 'row',
             borderBottom: '1px solid black',
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     horizontal: {},
     title: {
         flex: '0 0 0',
-        '$vertical &': {
+        '$vertical>&': {
             borderRight: '1px solid black',
             borderRightColor: theme.palette.divider,
         },
