@@ -9,7 +9,7 @@ exports[`renders with description and no title 1`] = `
       class="MuiList-root makeStyles-tabs-64 makeStyles-vertical-65 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-67 MuiListItem-dense"
+        class="MuiListItem-root makeStyles-title-67 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -154,7 +154,7 @@ exports[`renders with form options layout vertical 1`] = `
       class="MuiList-root makeStyles-tabs-19 makeStyles-vertical-20 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-22 MuiListItem-dense"
+        class="MuiListItem-root makeStyles-title-22 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -276,7 +276,7 @@ exports[`renders with title and description 1`] = `
       class="MuiList-root makeStyles-tabs-34 makeStyles-vertical-35 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-37 MuiListItem-dense"
+        class="MuiListItem-root makeStyles-title-37 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -351,7 +351,7 @@ exports[`renders with title and no description 1`] = `
       class="MuiList-root makeStyles-tabs-49 makeStyles-vertical-50 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-52 MuiListItem-dense"
+        class="MuiListItem-root makeStyles-title-52 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
