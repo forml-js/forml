@@ -19,8 +19,18 @@ const useStyles = makeStyles((theme) => ({
         borderRightColor: theme.palette.primary.main,
     },
     vertical: {
+        display: 'inline-flex',
+        flex: '0 0 auto',
+        width: 'auto',
+        maxWidth: theme.spacing(7),
+        overflow: 'hidden',
         paddingBottom: theme.spacing(0.5),
         '&$active': {
+            borderBottomWidth: theme.spacing(0.5),
+            paddingBottom: theme.spacing(0.1),
+        },
+        '&:hover': {
+            maxWidth: '100%',
             borderBottomWidth: theme.spacing(0.5),
             paddingBottom: theme.spacing(0.1),
         },
@@ -28,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
     horizontal: {
         paddingRight: theme.spacing(2),
         '&$active': {
+            borderRightWidth: theme.spacing(0.5),
+            paddingRight: theme.spacing(1.5),
+        },
+        '&:hover': {
             borderRightWidth: theme.spacing(0.5),
             paddingRight: theme.spacing(1.5),
         },

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
     tabs: {
         display: 'flex',
-        flex: 0,
+        flex: '0 0 auto',
         zIndex: 10,
         alignItems: 'flex-start',
         '&$vertical': {
@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             borderRight: '1px solid black',
             borderRightColor: theme.palette.divider,
+            overflow: 'hidden',
+            maxWidth: theme.spacing(7),
+            transition: 'all 0.6s',
+            '&:hover': {
+                maxWidth: '100%'
+            },
         },
     },
     vertical: {},
@@ -78,7 +84,6 @@ export default function Container(props) {
                         key="tab-bar"
                         className={classes.title}
                         divider={layout === 'horizontal'}
-                        disableGutters={layout === 'vertical'}
                     >
                         <ListItemIcon key="icon">
                             <Icon fontSize="small">view_carousel</Icon>
