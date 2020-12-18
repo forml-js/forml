@@ -11,6 +11,7 @@ import clsx from 'clsx';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flex: 1,
         '&$horizontal': {
             flexDirection: 'row',
         },
