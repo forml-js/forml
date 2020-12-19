@@ -18,22 +18,35 @@ const useStyles = makeStyles((theme) => ({
         borderRightStyle: 'solid',
         borderRightColor: theme.palette.primary.main,
     },
+    image: {
+        objectFit: 'contain',
+        maxWidth: theme.spacing(7),
+        marginLeft: theme.spacing(-2),
+        marginRight: theme.spacing(2),
+    },
     vertical: {
         display: 'inline-flex',
-        flex: '0 0 auto',
+        flex: '1 1 auto',
         width: 'auto',
-        maxWidth: theme.spacing(7),
-        overflow: 'hidden',
         paddingBottom: theme.spacing(0.5),
         '&$active': {
             borderBottomWidth: theme.spacing(0.5),
             paddingBottom: theme.spacing(0.1),
         },
         '&:hover': {
-            maxWidth: '100%',
             borderBottomWidth: theme.spacing(0.5),
             paddingBottom: theme.spacing(0.1),
         },
+    },
+    collapse: {
+        '&$vertical': {
+            maxWidth: theme.spacing(7),
+            overflow: 'hidden',
+            transition: 'all 0.3s',
+            '&:hover,&$active': {
+                maxWidth: '100%',
+            }
+        }
     },
     horizontal: {
         paddingRight: theme.spacing(2),
@@ -60,19 +73,35 @@ export default function Tab(props) {
     const classes = useStyles(props);
 
     const layout = 'layout' in parent ? parent.layout : 'vertical';
+    const collapse = 'collapse' in parent ? parent.collapse : false;
+
     const icon = 'icon' in form ? form.icon : 'dynamic_form';
+    const image = 'image' in form ? form.image : null;
+
+    let imageOrIcon = null;
+    if (image) {
+        imageOrIcon = (
+            <img src={image} className={classes.image} />
+        );
+    } else if (icon) {
+        imageOrIcon = (
+            <ListItemIcon key="icon">
+                <Icon>{icon}</Icon>
+            </ListItemIcon>
+        );
+    }
 
     return (
         <ListItem
             onClick={activate}
             button
+            divider
             className={clsx(classes.root, classes[layout], {
                 [classes.active]: active,
+                [classes.collapse]: collapse,
             })}
         >
-            <ListItemIcon key="icon">
-                <Icon fontSize="small">{icon}</Icon>
-            </ListItemIcon>
+            {imageOrIcon}
             <ListItemText
                 key="title"
                 primary={title}

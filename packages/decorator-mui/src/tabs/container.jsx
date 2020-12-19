@@ -42,17 +42,21 @@ const useStyles = makeStyles((theme) => ({
             borderBottomColor: theme.palette.divider,
         },
         '&$horizontal': {
+            flex: '0 0 auto',
             flexDirection: 'column',
             borderRight: '1px solid black',
             borderRightColor: theme.palette.divider,
-            overflow: 'hidden',
-            maxWidth: theme.spacing(7),
-            transition: 'all 0.6s',
-            '&:hover': {
-                maxWidth: '100%'
+            '&$collapse': {
+                overflow: 'hidden',
+                maxWidth: theme.spacing(7),
+                transition: 'all 0.6s',
+                '&:hover': {
+                    maxWidth: '100%'
+                },
             },
         },
     },
+    collapse: {},
     vertical: {},
     horizontal: {},
     title: {
@@ -72,11 +76,18 @@ export default function Container(props) {
     const classes = useStyles(props);
 
     const layout = 'layout' in form ? form.layout : 'vertical';
+    const collapse = 'collapse' in form ? form.collapse : false;
 
     return (
         <Paper className={clsx(classes.root, classes[layout])}>
             <List
-                className={clsx(classes.tabs, classes[layout])}
+                className={clsx(
+                    classes.tabs,
+                    classes[layout],
+                    {
+                        [classes.collapse]: collapse
+                    }
+                )}
                 dense
                 disablePadding
             >
