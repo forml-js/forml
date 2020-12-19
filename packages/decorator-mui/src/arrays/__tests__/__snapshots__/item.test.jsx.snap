@@ -14,7 +14,6 @@ exports[`renders consistently 1`] = `
       >
         drag_handle
       </span>
-      ,
     </div>
     <div
       class="makeStyles-forms-1"

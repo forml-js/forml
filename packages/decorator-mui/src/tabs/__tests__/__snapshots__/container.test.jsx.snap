@@ -3,13 +3,13 @@
 exports[`renders with description and no title 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-61 makeStyles-vertical-65 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-73 makeStyles-vertical-78 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-64 makeStyles-vertical-65 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-76 makeStyles-vertical-78 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-67 MuiListItem-dense MuiListItem-gutters"
+        class="MuiListItem-root makeStyles-title-80 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -33,7 +33,7 @@ exports[`renders with description and no title 1`] = `
       </li>
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-68 makeStyles-vertical-69 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-81 makeStyles-vertical-83 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -42,7 +42,7 @@ exports[`renders with description and no title 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -56,10 +56,10 @@ exports[`renders with description and no title 1`] = `
       </div>
     </ul>
     <div
-      class="makeStyles-panels-63"
+      class="makeStyles-panels-75"
     >
       <div
-        class="MuiPaper-root makeStyles-root-72 makeStyles-horizontal-74 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-87 makeStyles-horizontal-89 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >
@@ -73,13 +73,13 @@ exports[`renders with description and no title 1`] = `
 exports[`renders with form options layout horizontal 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-1 makeStyles-horizontal-6 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-1 makeStyles-horizontal-7 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-4 makeStyles-horizontal-6 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-4 makeStyles-horizontal-7 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-7 MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
+        class="MuiListItem-root makeStyles-title-8 MuiListItem-dense MuiListItem-gutters MuiListItem-divider"
       >
         <div
           class="MuiListItemIcon-root"
@@ -108,7 +108,7 @@ exports[`renders with form options layout horizontal 1`] = `
       </li>
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-8 makeStyles-vertical-9 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-9 makeStyles-vertical-11 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -117,7 +117,7 @@ exports[`renders with form options layout horizontal 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -134,7 +134,7 @@ exports[`renders with form options layout horizontal 1`] = `
       class="makeStyles-panels-3"
     >
       <div
-        class="MuiPaper-root makeStyles-root-12 makeStyles-horizontal-14 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-15 makeStyles-horizontal-17 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >
@@ -148,13 +148,13 @@ exports[`renders with form options layout horizontal 1`] = `
 exports[`renders with form options layout vertical 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-16 makeStyles-vertical-20 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-19 makeStyles-vertical-24 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-19 makeStyles-vertical-20 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-22 makeStyles-vertical-24 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-22 MuiListItem-dense MuiListItem-gutters"
+        class="MuiListItem-root makeStyles-title-26 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -183,7 +183,7 @@ exports[`renders with form options layout vertical 1`] = `
       </li>
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-23 makeStyles-vertical-24 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-27 makeStyles-vertical-29 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -192,7 +192,7 @@ exports[`renders with form options layout vertical 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -206,10 +206,10 @@ exports[`renders with form options layout vertical 1`] = `
       </div>
     </ul>
     <div
-      class="makeStyles-panels-18"
+      class="makeStyles-panels-21"
     >
       <div
-        class="MuiPaper-root makeStyles-root-27 makeStyles-horizontal-29 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-33 makeStyles-horizontal-35 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >
@@ -223,14 +223,14 @@ exports[`renders with form options layout vertical 1`] = `
 exports[`renders with no title or description 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-76 makeStyles-vertical-80 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-91 makeStyles-vertical-96 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-79 makeStyles-vertical-80 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-94 makeStyles-vertical-96 MuiList-dense"
     >
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-83 makeStyles-vertical-84 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-99 makeStyles-vertical-101 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -239,7 +239,7 @@ exports[`renders with no title or description 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -253,10 +253,10 @@ exports[`renders with no title or description 1`] = `
       </div>
     </ul>
     <div
-      class="makeStyles-panels-78"
+      class="makeStyles-panels-93"
     >
       <div
-        class="MuiPaper-root makeStyles-root-87 makeStyles-horizontal-89 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-105 makeStyles-horizontal-107 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >
@@ -270,13 +270,13 @@ exports[`renders with no title or description 1`] = `
 exports[`renders with title and description 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-31 makeStyles-vertical-35 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-37 makeStyles-vertical-42 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-34 makeStyles-vertical-35 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-40 makeStyles-vertical-42 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-37 MuiListItem-dense MuiListItem-gutters"
+        class="MuiListItem-root makeStyles-title-44 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -305,7 +305,7 @@ exports[`renders with title and description 1`] = `
       </li>
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-38 makeStyles-vertical-39 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-45 makeStyles-vertical-47 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -314,7 +314,7 @@ exports[`renders with title and description 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -328,10 +328,10 @@ exports[`renders with title and description 1`] = `
       </div>
     </ul>
     <div
-      class="makeStyles-panels-33"
+      class="makeStyles-panels-39"
     >
       <div
-        class="MuiPaper-root makeStyles-root-42 makeStyles-horizontal-44 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-51 makeStyles-horizontal-53 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >
@@ -345,13 +345,13 @@ exports[`renders with title and description 1`] = `
 exports[`renders with title and no description 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-root-46 makeStyles-vertical-50 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root makeStyles-root-55 makeStyles-vertical-60 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <ul
-      class="MuiList-root makeStyles-tabs-49 makeStyles-vertical-50 MuiList-dense"
+      class="MuiList-root makeStyles-tabs-58 makeStyles-vertical-60 MuiList-dense"
     >
       <li
-        class="MuiListItem-root makeStyles-title-52 MuiListItem-dense MuiListItem-gutters"
+        class="MuiListItem-root makeStyles-title-62 MuiListItem-dense MuiListItem-gutters"
       >
         <div
           class="MuiListItemIcon-root"
@@ -375,7 +375,7 @@ exports[`renders with title and no description 1`] = `
       </li>
       <div
         aria-disabled="false"
-        class="MuiButtonBase-root MuiListItem-root makeStyles-root-53 makeStyles-vertical-54 MuiListItem-dense MuiListItem-gutters MuiListItem-button"
+        class="MuiButtonBase-root MuiListItem-root makeStyles-root-63 makeStyles-vertical-65 MuiListItem-dense MuiListItem-gutters MuiListItem-divider MuiListItem-button"
         role="button"
         tabindex="0"
       >
@@ -384,7 +384,7 @@ exports[`renders with title and no description 1`] = `
         >
           <span
             aria-hidden="true"
-            class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+            class="material-icons MuiIcon-root"
           >
             dynamic_form
           </span>
@@ -398,10 +398,10 @@ exports[`renders with title and no description 1`] = `
       </div>
     </ul>
     <div
-      class="makeStyles-panels-48"
+      class="makeStyles-panels-57"
     >
       <div
-        class="MuiPaper-root makeStyles-root-57 makeStyles-horizontal-59 MuiPaper-elevation0 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-root-69 makeStyles-horizontal-71 MuiPaper-elevation0 MuiPaper-rounded"
         form="[object Object]"
         parent="[object Object]"
       >

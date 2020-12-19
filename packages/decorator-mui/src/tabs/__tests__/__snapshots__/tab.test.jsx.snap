@@ -4,7 +4,7 @@ exports[`renders with form options elevation 0 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-17 makeStyles-vertical-18 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-25 makeStyles-vertical-27 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -13,7 +13,7 @@ exports[`renders with form options elevation 0 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -43,7 +43,7 @@ exports[`renders with form options elevation 0 with layout 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-21 makeStyles-horizontal-23 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-31 makeStyles-horizontal-35 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -52,7 +52,7 @@ exports[`renders with form options elevation 0 with layout 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -82,7 +82,7 @@ exports[`renders with form options elevation 1 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-25 makeStyles-vertical-26 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-37 makeStyles-vertical-39 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -91,7 +91,7 @@ exports[`renders with form options elevation 1 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -121,7 +121,7 @@ exports[`renders with form options elevation 1 with layout 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-29 makeStyles-horizontal-31 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-43 makeStyles-horizontal-47 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -130,7 +130,7 @@ exports[`renders with form options elevation 1 with layout 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -160,7 +160,7 @@ exports[`renders with form options elevation undefined 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-33 makeStyles-vertical-34 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-49 makeStyles-vertical-51 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -169,7 +169,7 @@ exports[`renders with form options elevation undefined 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -199,7 +199,7 @@ exports[`renders with form options elevation undefined with layout 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-37 makeStyles-horizontal-39 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-55 makeStyles-horizontal-59 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -208,7 +208,7 @@ exports[`renders with form options elevation undefined with layout 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         dynamic_form
       </span>
@@ -238,7 +238,7 @@ exports[`renders with form options icon person 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-1 makeStyles-vertical-2 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-1 makeStyles-vertical-3 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -247,7 +247,7 @@ exports[`renders with form options icon person 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         person
       </span>
@@ -277,7 +277,7 @@ exports[`renders with form options icon person with layout 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-5 makeStyles-horizontal-7 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-7 makeStyles-horizontal-11 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
@@ -286,7 +286,7 @@ exports[`renders with form options icon person with layout 1`] = `
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+        class="material-icons MuiIcon-root"
       >
         person
       </span>
@@ -316,18 +316,10 @@ exports[`renders with form options icon undefined 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-9 makeStyles-vertical-10 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-13 makeStyles-vertical-15 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
-    <div
-      class="MuiListItemIcon-root"
-    >
-      <span
-        aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
-      />
-    </div>
     <div
       class="MuiListItemText-root MuiListItemText-multiline"
     >
@@ -353,18 +345,10 @@ exports[`renders with form options icon undefined with layout 1`] = `
 <div>
   <div
     aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-13 makeStyles-horizontal-15 MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root makeStyles-root-19 makeStyles-horizontal-23 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
     role="button"
     tabindex="0"
   >
-    <div
-      class="MuiListItemIcon-root"
-    >
-      <span
-        aria-hidden="true"
-        class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
-      />
-    </div>
     <div
       class="MuiListItemText-root MuiListItemText-multiline"
     >
