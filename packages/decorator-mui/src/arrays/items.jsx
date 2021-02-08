@@ -45,8 +45,6 @@ function Items(props, ref) {
     const color = error ? 'error' : 'initial';
     const localizer = useLocalizer();
 
-    console.error('localizer : %o', localizer);
-
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
     const disableGutters =
