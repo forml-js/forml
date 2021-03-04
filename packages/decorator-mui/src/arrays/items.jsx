@@ -1,4 +1,3 @@
-import debug from 'debug';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
@@ -10,8 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { forwardRef } from 'react';
 import { useLocalizer } from '@forml/hooks';
-
-const log = debug('forml:decorator-mui:array:items');
 
 const useStyles = makeStyles(function(theme) {
     return {
