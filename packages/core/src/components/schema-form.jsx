@@ -147,7 +147,7 @@ SchemaForm.propTypes = {
   /**
      * The schema to build against
      */
-  schema: PropTypes.object.isRequired,
+  schema: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   /** The forms to render */
   form: PropTypes.oneOfType([PropTypes.func, Types.FormsType]),
   /** A set of localization functions to use */
