@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint pacakges/*/src/**/*.jsx",
     "build": "lerna run build",
-    "watch": "lerna run watch",
+    "watch": "lerna run --parallel watch",
     "test": "jest --coverage --verbose"
   },
   "author": "Zachary Hueras",
