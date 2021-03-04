@@ -1,6 +1,6 @@
 {
   "name": "@forml/core",
-  "version": "1.5.13",
+  "version": "1.5.14",
   "description": "A JSON Schema-based form generator powered by React",
   "main": "lib/index.js",
   "scripts": {
