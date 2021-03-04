@@ -1,6 +1,6 @@
 {
   "name": "@forml/core",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "description": "A JSON Schema-based form generator powered by React",
   "main": "lib/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@forml/context": "^1.0.6",
-    "@forml/hooks": "^1.0.8",
+    "@forml/hooks": "^1.0.9",
     "ajv": "^6.12.6",
     "deepmerge": "^4.2.2",
     "objectpath": "^2.0.0",
@@ -49,7 +49,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
-    "@forml/decorator-barebones": "^1.0.8"
+    "@forml/decorator-barebones": "^1.0.9"
   },
   "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }
