@@ -1,5 +1,8 @@
 import context from '@forml/context';
-import {useContext as useReactContext} from 'react';
+import { useContext as useReactContext } from 'react';
+import debug from 'debug';
+
+const log = debug('forml:hooks');
 
 /**
  * Hook to use the entire forml context
@@ -31,7 +34,7 @@ export function useModel() {
     onChange,
     version,
   } = useContext();
-  return {getValue, setValue, getError, setError, onChange, version};
+  return { getValue, setValue, getError, setError, onChange, version };
 }
 
 /**
@@ -39,7 +42,11 @@ export function useModel() {
  * @return {Localizer}``
  */
 export function useLocalizer() {
-  const {localizer} = useContext();
+  const context = useContext();
+
+  log('useLocalizer() : context : %o', context);
+
+  const { localizer } = context;
   return localizer;
 }
 
@@ -48,6 +55,6 @@ export function useLocalizer() {
  * @return {Decorator}
  */
 export function useDecorator() {
-  const {decorator} = useContext();
+  const { decorator } = useContext();
   return decorator;
 }

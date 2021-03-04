@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with description and no title 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;
+
+exports[`renders with form options layout horizontal 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;
+
+exports[`renders with form options layout vertical 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;
+
+exports[`renders with no title or description 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;
+
+exports[`renders with title and description 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;
+
+exports[`renders with title and no description 1`] = `
+<div>
+  <document>
+    <page>
+      <view>
+        Test Panel
+      </view>
+    </page>
+  </document>
+</div>
+`;

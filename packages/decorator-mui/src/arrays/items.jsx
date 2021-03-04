@@ -1,3 +1,4 @@
+import debug from 'debug';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
@@ -10,7 +11,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { forwardRef } from 'react';
 import { useLocalizer } from '@forml/hooks';
 
-const useStyles = makeStyles(function (theme) {
+const log = debug('forml:decorator-mui:array:items');
+
+const useStyles = makeStyles(function(theme) {
     return {
         root: {
             margin: theme.spacing(1),

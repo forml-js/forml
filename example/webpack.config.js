@@ -4,7 +4,7 @@ module.exports = {
     entry: path.resolve('./src/index.js'),
     output: {
         filename: 'bundle.js',
-        publicPath: '/forml/dist/',
+        publicPath: '/',
         path: path.resolve('../dist'),
     },
     devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
@@ -18,6 +18,12 @@ module.exports = {
             '@material-ui/pickers': path.resolve(
                 './node_modules/@material-ui/pickers'
             ),
+            '@forml/core': path.resolve('./node_modules/@forml/core'),
+            '@forml/hooks': path.resolve('./node_modules/@forml/hooks'),
+            '@forml/context': path.resolve('./node_modules/@forml/context'),
+            '@forml/decorator-barebones': path.resolve('./node_modules/@forml/decorator-barebones'),
+            '@forml/decorator-mui': path.resolve('./node_modules/@forml/decorator-mui'),
+            '@forml/decorator-pdf': path.resolve('./node_modules/@forml/decorator-pdf'),
         },
         extensions: ["*", ".js", ".jsx"]
     },

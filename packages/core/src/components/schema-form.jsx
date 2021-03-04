@@ -3,17 +3,17 @@
  */
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import React, {useCallback, useMemo} from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import Context from '@forml/context';
-import {merge} from '../forms';
-import {defaultLocalizer, getLocalizer} from '../localizer';
+import { merge } from '../forms';
+import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
 import * as util from '../util';
 
-import {decoratorShape, defaultDecorator, getDecorator} from '../decorators';
-import {defaultMapper, getMapper, mapperShape} from './mapper';
-import {SchemaField} from './schema-field';
+import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
+import { defaultMapper, getMapper, mapperShape } from './mapper';
+import { SchemaField } from './schema-field';
 
 function useGenerator(generator, props, model, deps) {
   if (typeof generator === 'function') {
@@ -66,36 +66,36 @@ export function SchemaForm({
   const getError = useCallback(util.errorGetter(errors), [errors]);
 
   const contextValue = useMemo(
-      function() {
-        return {
-          model,
-          schema,
-          form: merged,
-          mapper,
-          getValue,
-          setValue,
-          getError,
-          onChange,
-          localizer,
-          errors: {},
-          decorator,
-          version,
-        };
-      },
-      [
+    function() {
+      return {
         model,
         schema,
-        merged,
+        form: merged,
         mapper,
-        decorator,
-        localizer,
-        errors,
         getValue,
         setValue,
         getError,
+        onChange,
+        localizer,
+        errors: {},
+        decorator,
         version,
-        props.onChange,
-      ],
+      };
+    },
+    [
+      model,
+      schema,
+      merged,
+      mapper,
+      decorator,
+      localizer,
+      errors,
+      getValue,
+      setValue,
+      getError,
+      version,
+      props.onChange,
+    ],
   );
 
   function onChange(event, model) {
@@ -108,7 +108,7 @@ export function SchemaForm({
     <Context.Provider value={contextValue}>
       {merged.map((form, index) => {
         if (!form) return;
-        const {schema} = form;
+        const { schema } = form;
         return (
           <SchemaField
             key={index}
@@ -122,16 +122,16 @@ export function SchemaForm({
   );
 
   function computeErrors() {
-    const {valid, errors} = validate(model);
+    const { valid, errors } = validate(model);
     let errorMap = {};
 
     if (!valid) {
       for (const error of errors) {
         const keys = ObjectPath.parse(
-            error.dataPath.replace(/^\./, ''),
+          error.dataPath.replace(/^\./, ''),
         );
         const normal = ObjectPath.stringify(keys);
-        errorMap = {...errorMap, [normal]: error.message};
+        errorMap = { ...errorMap, [normal]: error.message };
       }
     }
 
@@ -164,7 +164,7 @@ SchemaForm.propTypes = {
 
 SchemaForm.defaultProps = {
   model: null,
-  schema: {type: 'null'},
+  schema: { type: 'null' },
   form: ['*'],
   decorator: defaultDecorator(),
   localizer: defaultLocalizer(),
