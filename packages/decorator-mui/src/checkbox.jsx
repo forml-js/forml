@@ -1,5 +1,6 @@
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
@@ -18,7 +19,19 @@ export default function Checkbox({
     return (
         <FormGroup row={false}>
             <FormControlLabel
-                label={title}
+                checked={checked}
+                label={(
+                    <>
+                        <FormLabel>
+                            {title}
+                        </FormLabel>
+                        {(error || description) && (
+                            <FormHelperText error={error}>
+                                {error || description}
+                            </FormHelperText>
+                        )}
+                    </>
+                )}
                 control={
                     <MuiCheckbox
                         checked={checked}
@@ -27,11 +40,6 @@ export default function Checkbox({
                     />
                 }
             />
-            {(error || description) && (
-                <FormHelperText error={error}>
-                    {error || description}
-                </FormHelperText>
-            )}
         </FormGroup>
     );
 }
