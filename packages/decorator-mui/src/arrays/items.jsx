@@ -37,7 +37,7 @@ const useStyles = makeStyles(function(theme) {
  * @component
  */
 function Items(props, ref) {
-    const { label, form, otherProps } = props;
+    const { title, form, otherProps } = props;
     const { error, description } = props;
     const { value, disabled } = props;
 
@@ -77,7 +77,7 @@ function Items(props, ref) {
                     <ListItemText
                         key="text"
                         primaryTypographyProps={{ color, variant: 'subtitle2' }}
-                        primary={label}
+                        primary={title}
                         secondary={error || description}
                     />
                 </ListItem>
@@ -98,7 +98,7 @@ function Items(props, ref) {
                         startIcon={<Icon>add</Icon>}
                         disabled={disabled}
                     >
-                        {localizer.getLocalizedString('Add')} {label}
+                        {localizer.getLocalizedString('Add')} {title}
                     </Button>
                 </ListItem>
             </List>
