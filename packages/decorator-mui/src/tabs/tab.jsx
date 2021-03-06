@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     image: {
         objectFit: 'contain',
         maxWidth: theme.spacing(7),
+        marginRight: theme.spacing(2),
     },
     vertical: {
         display: 'inline-flex',
