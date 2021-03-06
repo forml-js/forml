@@ -9,7 +9,7 @@ import {FormType} from '../types';
 const log = debug('forml:schema-field');
 
 export function SchemaField(props) {
-  const {schema, form} = props;
+  const {schema, form, parent} = props;
 
   const mapper = useMapper();
   const model = useModel();
@@ -35,6 +35,7 @@ export function SchemaField(props) {
       value={value}
       onChange={onChange}
       error={error}
+      parent={parent}
     />
   );
 

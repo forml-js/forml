@@ -15,6 +15,7 @@ export default function FieldSet(props) {
   const description = localizer.getLocalizedString(form.description);
   const {readonly: disabled} = form;
 
+  const parent = form;
   const forms = useMemo(
       () =>
         form.items.map(function(form, index) {
@@ -27,6 +28,7 @@ export default function FieldSet(props) {
               key={key}
               onChange={onChange}
               schema={schema}
+              parent={parent}
             />
           );
         }),

@@ -258,6 +258,7 @@ function ArrayComponent(props, ref) {
 
   if (!otherProps) otherProps = {};
 
+  const parent = form;
   const arrays = useMemo(
       function() {
         const arrays = [];
@@ -282,6 +283,7 @@ function ArrayComponent(props, ref) {
                 key={key}
                 form={formCopy}
                 schema={formCopy.schema}
+                parent={parent}
               />
             );
           });

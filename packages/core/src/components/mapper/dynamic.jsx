@@ -17,6 +17,7 @@ export default function Dynamic(SchemaForm) {
         localizer={localizer}
         form={form}
         model={value}
+        parent={parent}
       />
     );
   };
