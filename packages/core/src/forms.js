@@ -66,15 +66,7 @@ export function merge(schema, form = ['*'], options = {}) {
     }
 
     if (Array.isArray(obj.tabs)) {
-      for (const tab of obj.tabs) {
-        if (tab.items) {
-          tab.items = merge(schema, tab.items, {...options});
-        }
-
-        if (tab.tabs) {
-          tab.tabs = merge(schema, tab.tabs, {...options});
-        }
-      }
+      obj.tabs = merge(schema, obj.tabs, {...options});
     }
 
     if (obj.titles && !obj.titleMap) {
