@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flex: '0 0 0',
         transition: 'all 0.3s',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
         borderBottomWidth: 0,
         borderBottomStyle: 'solid',
         borderBottomColor: theme.palette.primary.main,
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     vertical: {
         display: 'inline-flex',
-        flex: '1 1 auto',
+        flex: '1 1 48px',
         width: 'auto',
         paddingBottom: theme.spacing(0.5),
         '&$active': {

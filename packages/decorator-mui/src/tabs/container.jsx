@@ -80,22 +80,12 @@ export default function Container(props) {
 
     return (
         <Paper className={clsx(classes.root, classes[layout])}>
-            <List
-                className={clsx(
-                    classes.tabs,
-                    classes[layout],
-                    {
-                        [classes.collapse]: collapse
-                    }
-                )}
-                dense
-                disablePadding
-            >
-                {(title || description) && (
+            {(title || description) && (
+                <List className={classes.titleRoot} dense disablePadding>
                     <ListItem
                         key="tab-bar"
                         className={classes.title}
-                        divider={layout === 'horizontal'}
+                        divider
                     >
                         <ListItemIcon key="icon">
                             <Icon fontSize="small">view_carousel</Icon>
@@ -115,7 +105,19 @@ export default function Container(props) {
                             secondary={description}
                         />
                     </ListItem>
+                </List>
+            )}
+            <List
+                className={clsx(
+                    classes.tabs,
+                    classes[layout],
+                    {
+                        [classes.collapse]: collapse
+                    }
                 )}
+                dense
+                disablePadding
+            >
                 {props.tabs}
             </List>
             <div key="tab-panel" className={classes.panels}>
