@@ -27,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-flex',
         flex: '1 1 48px',
         width: 'auto',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
         paddingBottom: theme.spacing(0.5),
         '&$active': {
             borderBottomWidth: theme.spacing(0.5),
@@ -50,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     horizontal: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
         paddingRight: theme.spacing(2),
         '&$active': {
             borderRightWidth: theme.spacing(0.5),
