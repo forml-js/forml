@@ -11,13 +11,8 @@ import clsx from 'clsx';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flexDirection: 'column',
         flex: 1,
-        '&$horizontal': {
-            flexDirection: 'row',
-        },
-        '&$vertical': {
-            flexDirection: 'column',
-        },
     },
     content: {
         display: 'flex',
@@ -57,8 +52,21 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     collapse: {},
-    vertical: {},
-    horizontal: {},
+    titleRoot: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 0,
+    },
+    horizontal: {
+        display: 'flex',
+        flexDirection: 'row',
+        flex: 1,
+    },
+    vertical: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+    },
     title: {
         flex: '0 0 0',
         '$vertical>&': {
@@ -79,7 +87,7 @@ export default function Container(props) {
     const collapse = 'collapse' in form ? form.collapse : false;
 
     return (
-        <Paper className={clsx(classes.root, classes[layout])}>
+        <Paper className={classes.root}>
             {(title || description) && (
                 <List className={classes.titleRoot} dense disablePadding>
                     <ListItem
@@ -107,21 +115,23 @@ export default function Container(props) {
                     </ListItem>
                 </List>
             )}
-            <List
-                className={clsx(
-                    classes.tabs,
-                    classes[layout],
-                    {
-                        [classes.collapse]: collapse
-                    }
-                )}
-                dense
-                disablePadding
-            >
-                {props.tabs}
-            </List>
-            <div key="tab-panel" className={classes.panels}>
-                {props.panels}
+            <div className={classes[layout]}>
+                <List
+                    className={clsx(
+                        classes.tabs,
+                        classes[layout],
+                        {
+                            [classes.collapse]: collapse
+                        }
+                    )}
+                    dense
+                    disablePadding
+                >
+                    {props.tabs}
+                </List>
+                <div key="tab-panel" className={classes.panels}>
+                    {props.panels}
+                </div>
             </div>
         </Paper>
     );
