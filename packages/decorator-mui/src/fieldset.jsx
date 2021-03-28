@@ -20,6 +20,7 @@ const useStyles = makeStyles(function(theme) {
         },
         root: {
             padding: theme.spacing(1),
+            minWidth: '0',
             flex: 1,
         },
         disableMargin: {
@@ -60,6 +61,7 @@ const useStyles = makeStyles(function(theme) {
             display: 'flex',
             flexDirection: 'column',
             padding: theme.spacing(1.0),
+            maxWidth: 'fill-available',
         },
         title: {
             display: 'flex',
