@@ -56,6 +56,7 @@ const useStyles = makeStyles(function(theme) {
             display: 'flex',
             flexDirection: 'row',
             padding: theme.spacing(1.0),
+            maxWidth: 'fill-available',
         },
         vertical: {
             display: 'flex',
