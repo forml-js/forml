@@ -35,7 +35,7 @@ export default function DateTime(props) {
     );
 
     function onChange(value) {
-        value = value ? value.toISOString() : value;
+        value = value ? value.toISOString(true) : value;
         if (props.onChange) {
             props.onChange({ target: { value } });
         }
