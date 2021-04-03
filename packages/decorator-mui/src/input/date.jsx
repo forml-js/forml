@@ -13,6 +13,7 @@ export default function Date(props) {
     const openTo = 'openTo' in form ? form.openTo : 'date';
     const format = 'format' in form ? form.format : undefined;
     const disabled = 'readonly' in form ? form.readonly : false;
+    const otherProps = 'otherProps' in form ? form.otherProps : {};
 
     return (
         <KeyboardDatePicker
@@ -29,6 +30,7 @@ export default function Date(props) {
                 <Input {...props} {...InputProps} />
             )}
             disabled={disabled}
+            {...otherProps}
         />
     );
 
