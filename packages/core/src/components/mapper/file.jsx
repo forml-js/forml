@@ -1,19 +1,23 @@
-import React from 'react';
+import debug from 'debug';
+import React, { useState } from 'react';
 
-import {useDecorator, useLocalizer} from '@forml/hooks';
+import { useDecorator, useLocalizer } from '@forml/hooks';
+
+const log = debug('forml:core:mapper:file');
 
 /**
  * @component File
  */
 export default function File(props) {
-  const {value, form} = props;
-  let {error} = props;
+  const { value, form } = props;
+  const [display, setDisplay] = useState('');
+  let { error } = props;
 
   const localizer = useLocalizer();
   const deco = useDecorator();
 
-  let {title, description, placeholder} = form;
-  const {readonly: disabled} = form;
+  let { title, description, placeholder } = form;
+  const { readonly: disabled } = form;
 
   title = localizer.getLocalizedString(title);
   description = localizer.getLocalizedString(description);
@@ -21,9 +25,9 @@ export default function File(props) {
   error = localizer.getLocalizedString(error);
 
   return (
-    <deco.Input.Group form={form} value={value} error={error}>
+    <deco.Input.Group form={form} value={display} error={error}>
       {title && (
-        <deco.Label key="label" form={form} value={value} error={error}>
+        <deco.Label key="label" form={form} value={display} error={error}>
           {title}
         </deco.Label>
       )}
@@ -32,7 +36,7 @@ export default function File(props) {
         type="file"
         form={form}
         onChange={onChange}
-        value={value}
+        value={display}
         error={error}
         placeholder={placeholder}
         disabled={disabled}
@@ -41,7 +45,7 @@ export default function File(props) {
         <deco.Input.Description
           key="description"
           form={form}
-          value={value}
+          value={display}
           error={!!error}
         >
           {error || description}
@@ -50,7 +54,39 @@ export default function File(props) {
     </deco.Input.Group>
   );
 
-  function onChange(e, value) {
-    return props.onChange(e, value || e.target.value);
+  async function onChange(event) {
+    const [file] = event.target.files;
+    let result = '';
+
+    if (file) {
+      result = await getFileFormat(form.format, file);
+      setDisplay(file.name);
+    } else {
+      setDisplay('');
+    }
+
+    log('result : %o', result);
+
+    return props.onChange(event, result);
+  }
+}
+
+function readAsDataURL(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      resolve(reader.result);
+    });
+    reader.readAsDataURL(file);
+  });
+}
+
+function getFileFormat(format, file) {
+  switch (format) {
+    case 'data_url':
+      return readAsDataURL(file);
+    case 'name':
+    default:
+      return file.name;
   }
 }

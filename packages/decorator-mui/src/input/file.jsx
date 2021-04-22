@@ -7,7 +7,7 @@ import React, { Fragment, useRef } from 'react';
 /**
  * @component
  */
-const useStyles = makeStyles(function () {
+const useStyles = makeStyles(function() {
     return { fileInput: { display: 'none' } };
 });
 export default function Form(props) {
@@ -46,14 +46,7 @@ export default function Form(props) {
     );
 
     async function onChange(event) {
-        const [file] = event.target.files;
-        let result = file.name;
-
-        if (form.format) {
-            result = await getFileFormat(form.format, file);
-        }
-
-        props.onChange(event, result);
+        props.onChange(event);
     }
 
     function onClick(event) {
@@ -68,25 +61,6 @@ export default function Form(props) {
     function clear(event) {
         event.preventDefault();
         event.stopPropagation();
-
-        props.onChange(event, '');
+        props.onChange(event);
     }
-}
-
-function getFileFormat(format, file) {
-    switch (format) {
-        case 'data_url':
-            return readAsDataURL(file);
-        case 'name':
-        default:
-            return file.name;
-    }
-}
-
-function readAsDataURL(file) {
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', resolve);
-        reader.readAsDataURL(file);
-    });
 }
