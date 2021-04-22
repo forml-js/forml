@@ -1,0 +1,14 @@
+{
+    "name": "File",
+    "schema": {
+        "title": "File",
+        "type": "string"
+    },
+    "form": [
+        {
+            "key": [],
+            "type": "file",
+            "format": "data_url"
+        }
+    ]
+}
