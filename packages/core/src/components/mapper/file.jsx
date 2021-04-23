@@ -10,7 +10,7 @@ const log = debug('forml:core:mapper:file');
  */
 export default function File(props) {
   const { value, form } = props;
-  const [display, setDisplay] = useState('');
+  const [display, setDisplay] = useState(value);
   let { error } = props;
 
   const localizer = useLocalizer();
