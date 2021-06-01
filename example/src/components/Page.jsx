@@ -57,6 +57,10 @@ export default function Page() {
                         decorator={decorator}
                     />
                 </CardContent>
+              <CardContent key="model">
+                <Typography key="title" variant="h6">Model</Typography>
+                <Editor key="editor" value={model.json} />
+              </CardContent>
             </Card>
             <Card className={classes.manager} key="secondary-viewport">
                 <CardContent key="select-example">
