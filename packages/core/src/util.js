@@ -49,8 +49,9 @@ export function defaultForSchema(schema) {
         }
         break;
       case 'object':
+        const required = schema.required || [];
         base = {};
-        for (const property in schema.properties) {
+        for (const property of required) {
           const item = defaultForSchema(schema.properties[property]);
           base[property] = item;
         }
@@ -296,11 +297,34 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
   }
 
   if (getPreferredType(schema.type) === 'object') {
-    const result = {...model, [next]: nextModel};
-    return result;
+    if (isRequired(schema, next) || isSaturated(nextModel)) {
+      const result = {...model, [next]: nextModel};
+      return result;
+    } else {
+      const {[next]: oldModel, ...nextResult} = model;
+      return nextResult;
+    }
   }
 
   throw new Error('Bad ObjectPath');
+}
+
+export function isRequired(schema, key) {
+  if (schema.required) {
+    return schema.required.includes(key);
+  } else {
+    return false;
+  }
+}
+
+export function isSaturated(value) {
+  if (Array.isArray(value)) {
+    return value.length > 0;
+  } else if (typeof value === 'object') {
+    return Object.keys(value).length > 0;
+  } else {
+    return !!value;
+  }
 }
 
 /**
