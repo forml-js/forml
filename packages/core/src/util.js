@@ -321,7 +321,11 @@ export function isSaturated(value) {
   if (Array.isArray(value)) {
     return value.length > 0;
   } else if (typeof value === 'object') {
-    return Object.keys(value).length > 0;
+    if (value === null) {
+      return false;
+    } else {
+      return Object.keys(value).length > 0;
+    }
   } else {
     return !!value;
   }
