@@ -1,0 +1,50 @@
+{
+  "name": "@forml/decorator-bootstrap",
+  "version": "1.1.0",
+  "description": "Bootstrap V4 forml decorator",
+  "keywords": [
+    "react",
+    "json",
+    "schema",
+    "form",
+    "jsonschema",
+    "generator",
+    "form-generator"
+  ],
+  "author": "Zachary Hueras <zhueras@amdtelemedicine.com>",
+  "homepage": "https://forml.dev/packages/decorator-bootstrap",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forml-js/forml.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/forml-js/forml/issues"
+  },
+  "peerDependencies": {
+    "bootstrap": "^4.5.3",
+    "react-bootstrap": "^1.4.0"
+  },
+  "dependencies": {
+    "@forml/hooks": "^1.1.0"
+  },
+  "devDependencies": {
+    "@forml/context": "^1.1.0",
+    "bootstrap": "^4.5.3",
+    "react-bootstrap": "^1.4.0"
+  }
+}
