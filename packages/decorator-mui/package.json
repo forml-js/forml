@@ -47,10 +47,10 @@
     "moment": "^2.29.1"
   },
   "peerDependencies": {
-    "@forml/hooks": "^1.0.1",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/pickers": "^3.2.10",
-    "react": "^16.8.5"
+    "@forml/hooks": ">=1.0.0",
+    "@material-ui/core": ">=4.0.0",
+    "@material-ui/pickers": ">=3.0.0",
+    "react": "^16.8.0 || ^17.0.0"
   },
   "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }

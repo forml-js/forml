@@ -30,12 +30,12 @@
   },
   "homepage": "https://www.forml.dev",
   "peerDependencies": {
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "dependencies": {
-    "@forml/context": "^1.0.6",
-    "@forml/hooks": "^1.0.9",
+    "@forml/context": "^1.0.0",
+    "@forml/hooks": "^1.0.0",
     "ajv": "^6.12.6",
     "deepmerge": "^4.2.2",
     "objectpath": "^2.0.0",
