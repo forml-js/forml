@@ -90,8 +90,13 @@ exports[`renders with form options disableGutters false 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -123,6 +128,7 @@ exports[`renders with form options disableGutters false 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -157,8 +163,13 @@ exports[`renders with form options disableGutters true 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -190,6 +201,7 @@ exports[`renders with form options disableGutters true 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -224,8 +236,13 @@ exports[`renders with form options disablePadding false 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -257,6 +274,7 @@ exports[`renders with form options disablePadding false 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -291,8 +309,13 @@ exports[`renders with form options disablePadding true 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -324,6 +347,7 @@ exports[`renders with form options disablePadding true 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -358,8 +382,13 @@ exports[`renders with form options icon favorite 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -391,6 +420,7 @@ exports[`renders with form options icon favorite 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -425,8 +455,13 @@ exports[`renders with form options icon person 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -458,6 +493,7 @@ exports[`renders with form options icon person 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -553,8 +589,13 @@ exports[`renders with title and description 1`] = `
           </span>
         </div>
         <div
-          class="MuiListItemText-root MuiListItemText-dense"
+          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline"
         >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
           <p
             class="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
           >
@@ -586,6 +627,7 @@ exports[`renders with title and description 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -621,7 +663,13 @@ exports[`renders with title and no description 1`] = `
         </div>
         <div
           class="MuiListItemText-root MuiListItemText-dense"
-        />
+        >
+          <span
+            class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle2 MuiTypography-displayBlock"
+          >
+            title
+          </span>
+        </div>
       </li>
       <li
         class="MuiListItem-root makeStyles-controls-40 MuiListItem-dense MuiListItem-gutters"
@@ -647,6 +695,7 @@ exports[`renders with title and no description 1`] = `
             </span>
             Add
              
+            title
           </span>
           <span
             class="MuiTouchRipple-root"

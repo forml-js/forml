@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import Ajv from 'ajv';
 import objectPath from 'objectpath';
-import {useMemo} from 'react';
+import { useMemo } from 'react';
 
 /**
  * @namespace forml.util
@@ -113,14 +113,14 @@ export function randomForSchema(schema) {
         base = shortid();
         if (schema.format === 'date') {
           const date = new Date(
-              Math.floor(Math.random() * new Date().getTime()),
+            Math.floor(Math.random() * new Date().getTime()),
           );
           base = date
-              .toISOString()
-              .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
+            .toISOString()
+            .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
         } else if (schema.format === 'date-time') {
           base = new Date(
-              Math.floor(Math.random() * new Date().getTime()),
+            Math.floor(Math.random() * new Date().getTime()),
           ).toISOString();
         }
         break;
@@ -205,7 +205,7 @@ export function valueGetter(model, schema) {
 export function assertType(schema, value) {
   const preferred = getPreferredType(schema.type);
   const allowed = new Set(
-        Array.isArray(schema.type) ? schema.type : [schema.type],
+    Array.isArray(schema.type) ? schema.type : [schema.type],
   );
   const type = getTypeOf(schema, value);
 
@@ -275,11 +275,11 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
   const [next, ...rest] = keys;
   const nextSchema = getNextSchema(schema, next);
   const nextModel = updateAndClone(
-      rest,
-      getNextValue(nextSchema, model, next),
-      nextSchema,
-      value,
-      depth + 1,
+    rest,
+    getNextValue(nextSchema, model, next),
+    nextSchema,
+    value,
+    depth + 1,
   );
 
   if (getPreferredType(schema.type) === 'array') {
@@ -288,7 +288,12 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
 
     while (firstSlice.length < next) {
       firstSlice.push(
-          defaultForSchema(getNextSchema(schema, firstSlice.length)),
+        defaultForSchema(
+          getNextSchema(
+            schema,
+            firstSlice.length
+          )
+        ),
       );
     }
 
@@ -298,10 +303,10 @@ function updateAndClone(keys, model, schema, value, depth = 0) {
 
   if (getPreferredType(schema.type) === 'object') {
     if (isRequired(schema, next) || isSaturated(nextModel)) {
-      const result = {...model, [next]: nextModel};
+      const result = { ...model, [next]: nextModel };
       return result;
     } else {
-      const {[next]: oldModel, ...nextResult} = model;
+      const { [next]: oldModel, ...nextResult } = model;
       return nextResult;
     }
   }
@@ -403,8 +408,6 @@ export function getNextSchema(schema, key) {
  * @arg {string|number} key
  */
 export function getNextValue(schema, value, key) {
-  if (!value) return defaultForSchema(schema);
-
   if (value[key] === undefined) {
     return defaultForSchema(schema);
   }
@@ -439,7 +442,7 @@ export function traverseForm(forms, visit) {
  * to produce a validate function.
  * @arg object schema - The schema to compile for validation
  */
-const ajv = new Ajv({allErrors: true});
+const ajv = new Ajv({ allErrors: true });
 export function useValidator(schema) {
   const compiled = useMemo(() => {
     try {
@@ -447,15 +450,15 @@ export function useValidator(schema) {
       return validator;
     } catch (err) {
       const validator = () => false;
-      validator.errors = [{dataPath: '.', message: 'invalid schema'}];
+      validator.errors = [{ dataPath: '.', message: 'invalid schema' }];
       return validator;
     }
   }, [schema]);
 
   function validate(model) {
     const valid = compiled(model);
-    const {errors} = compiled;
-    return {valid, errors};
+    const { errors } = compiled;
+    return { valid, errors };
   }
 
   return validate;

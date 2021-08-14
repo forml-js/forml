@@ -40,14 +40,18 @@ exports[`renders when checked 1`] = `
       <span
         class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
       >
-        title
+        <label
+          class="MuiFormLabel-root"
+        >
+          title
+        </label>
+        <p
+          class="MuiFormHelperText-root"
+        >
+          description
+        </p>
       </span>
     </label>
-    <p
-      class="MuiFormHelperText-root"
-    >
-      description
-    </p>
   </div>
 </div>
 `;
@@ -90,7 +94,11 @@ exports[`renders with no title or description 1`] = `
       </span>
       <span
         class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
-      />
+      >
+        <label
+          class="MuiFormLabel-root"
+        />
+      </span>
     </label>
   </div>
 </div>
@@ -135,7 +143,11 @@ exports[`renders with title but no description 1`] = `
       <span
         class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
       >
-        title
+        <label
+          class="MuiFormLabel-root"
+        >
+          title
+        </label>
       </span>
     </label>
   </div>
