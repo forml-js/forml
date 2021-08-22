@@ -236,7 +236,7 @@ export function assertType(schema, value) {
     }
   } else if (preferred === 'string' && type === 'number') {
     return value.toString();
-  } else if (preferred != type && !value) {
+  } else if (preferred != type && value === undefined) {
     return defaultForSchema(schema);
   } else if (allowed.has(type)) {
     return value;
@@ -332,7 +332,7 @@ export function isSaturated(value) {
       return Object.keys(value).length > 0;
     }
   } else {
-    return !!value;
+    return value !== undefined;
   }
 }
 

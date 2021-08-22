@@ -65,7 +65,11 @@ describe('randomForSchema', function() {
 });
 describe('defaultForSchema', function() {
     test('returns the default value if specified in the schema', function() {
-        expect(util.defaultForSchema({ type: 'string', default: 'test' })).toBe;
+        expect(util.defaultForSchema({ type: 'string', default: 'test' })).toBe('test');
+        expect(util.defaultForSchema({ type: 'boolean', default: true })).toBe(true);
+        expect(util.defaultForSchema({ type: 'boolean', default: false })).toBe(false);
+        expect(util.defaultForSchema({ type: 'number', default: 3 })).toBe(3);
+        expect(util.defaultForSchema({ type: 'number', default: 3.1 })).toBeCloseTo(3.1);
     });
     describe('when given one type', function() {
         test('returns an empty value of the type', function() {
@@ -166,6 +170,7 @@ describe('assertType', function() {
         expect(util.assertType({ type: 'integer' }, 2)).toBe(2);
         expect(util.assertType({ type: 'string' }, 'test')).toBe('test');
         expect(util.assertType({ type: 'boolean' }, true)).toBe(true);
+        expect(util.assertType({ type: 'boolean' }, false)).toBe(false);
 
         const array = [1, 2, 3];
         expect(util.assertType({ type: 'array' }, array)).toBe(array);
@@ -173,6 +178,30 @@ describe('assertType', function() {
         const object = { a: 1, b: 2, c: 3 };
         expect(util.assertType({ type: 'object' }, object)).toBe(object);
     });
+    describe('when there is a default value', function() {
+        test('it allows the default to be overwritten', function() {
+            expect(util.assertType({
+                type: 'integer',
+                default: 1
+            }, 2)).toBe(2);
+            expect(util.assertType({
+                type: 'number',
+                default: 1.1
+            }, 3.1)).toBeCloseTo(3.1);
+            expect(util.assertType({
+                type: 'string',
+                default: 'test'
+            }, 'testb')).toBe('testb');
+            expect(util.assertType({
+                type: 'boolean',
+                default: true,
+            }, false)).toBe(false);
+            expect(util.assertType({
+                type: 'boolean',
+                default: false,
+            }, true)).toBe(true);
+        });
+    })
     describe('when the preferred type is an integer', function() {
         describe('when the type is allowed', function() {
             test('allows the value', function() {
@@ -334,24 +363,33 @@ describe('valueGetter', function() {
         expect(get(0)).toBeNull();
         expect(get([1, 0])).toBe(3);
     });
-    test('when encountering undefined, uses defaultForSchema', function() {
-        const get = util.valueGetter(undefined, {
-            type: 'object',
-            required: ['test'],
-            properties: {
-                test: {
-                    type: 'object',
-                    required: ['property'],
-                    properties: {
-                        property: { type: 'string', default: 'a' },
+    describe('when encountering undefined', function() {
+        test('treats empty strings like numbers', function() {
+            const get = util.valueGetter('', {
+                type: 'integer'
+            });
+
+            expect(get([])).toBe('');
+        })
+        test('uses defaultForSchema', function() {
+            const get = util.valueGetter(undefined, {
+                type: 'object',
+                required: ['test'],
+                properties: {
+                    test: {
+                        type: 'object',
+                        required: ['property'],
+                        properties: {
+                            property: { type: 'string', default: 'a' },
+                        },
                     },
                 },
-            },
-        });
+            });
 
-        expect(get(['test', 'property'])).toBe('a');
-        expect(get([])).toMatchObject({ test: { property: 'a' } });
-    });
+            expect(get(['test', 'property'])).toBe('a');
+            expect(get([])).toMatchObject({ test: { property: 'a' } });
+        });
+    })
 });
 describe('valueSetter', function() {
     test('traverses objects to set a value', function() {
@@ -415,6 +453,15 @@ describe('valueSetter', function() {
             test: { property: 'a' },
         });
     });
+    test('respects number parsing rules regarding empty strings', function() {
+        const set = util.valueSetter(750, {
+            type: 'integer',
+            default: 750
+        });
+
+        expect(set([], '')).toBe('');
+        expect(set([], '0')).toBe(0);
+    });
     test('pads arrays with defaultForSchema when traversing to an index > length', function() {
         const set = util.valueSetter([null, []], {
             type: 'array',
@@ -426,6 +473,39 @@ describe('valueSetter', function() {
 
         expect(set([1, 2], 1)).toMatchObject([null, [0, 0, 1]]);
     });
+    test('overwrites defaulted booleans when required', function() {
+        const setFalse = util.valueSetter(true, {
+            type: 'boolean',
+            default: true
+        });
+        expect(setFalse([], false)).toBe(false);
+
+        const setTrue = util.valueSetter(false, {
+            type: 'boolean',
+            default: false
+        });
+        expect(setTrue([], true)).toBe(true);
+
+        const setObjectFalse = util.valueSetter({}, {
+            type: 'object',
+            properties: {
+                bool: { type: 'boolean', default: true }
+            }
+        })
+        expect(setObjectFalse(['bool'], false)).toMatchObject({
+            bool: false
+        });
+
+        const setObjectTrue = util.valueSetter({}, {
+            type: 'object',
+            properties: {
+                bool: { type: 'boolean', default: false }
+            }
+        })
+        expect(setObjectTrue(['bool'], true)).toMatchObject({
+            bool: true
+        });
+    })
 });
 describe('traverseForm', function() {
     test('takes a single form object or an array', function() {
