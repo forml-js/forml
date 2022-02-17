@@ -30,10 +30,8 @@
   "homepage": "https://github.com/forml-js/forml#readme",
   "peerDependencies": {
     "@forml/hooks": ">=1.0.0",
-    "react": "^16.8.0 || ^17.0.0"
-  },
-  "dependencies": {
-    "@react-pdf/renderer": "^1.6.12"
+    "react": "^16.8.0 || ^17.0.0",
+    "@react-pdf/renderer": "^2.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.7",

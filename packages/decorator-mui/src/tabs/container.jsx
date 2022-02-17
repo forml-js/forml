@@ -8,7 +8,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -24,8 +24,12 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
         overflow: 'hidden',
         position: 'relative',
+        zIndex: 5,
     },
     tabs: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
         display: 'flex',
         flex: '0 0 auto',
         zIndex: 10,
@@ -35,8 +39,12 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'row',
             borderBottom: '1px solid black',
             borderBottomColor: theme.palette.divider,
+            right: 0,
+            bottom: 'auto',
         },
         '&$horizontal': {
+            bottom: 0,
+            right: 'auto',
             flex: '0 0 auto',
             flexDirection: 'column',
             borderRight: '1px solid black',
@@ -44,14 +52,23 @@ const useStyles = makeStyles((theme) => ({
             '&$collapse': {
                 overflow: 'hidden',
                 maxWidth: theme.spacing(7),
-                transition: 'all 0.6s',
+                transition: 'all 0.3s',
                 '&:hover': {
-                    maxWidth: '100%'
+                    maxWidth: '100%',
                 },
             },
         },
     },
     collapse: {},
+    content: {
+        position: 'relative',
+        '&$horizontal': {
+            paddingLeft: theme.spacing(8),
+        },
+        '&$vertical': {
+            paddingTop: theme.spacing(7),
+        },
+    },
     titleRoot: {
         display: 'flex',
         flexDirection: 'column',
@@ -90,11 +107,7 @@ export default function Container(props) {
         <Paper className={classes.root}>
             {(title || description) && (
                 <List className={classes.titleRoot} dense disablePadding>
-                    <ListItem
-                        key="tab-bar"
-                        className={classes.title}
-                        divider
-                    >
+                    <ListItem key="tab-bar" className={classes.title} divider>
                         <ListItemIcon key="icon">
                             <Icon fontSize="small">view_carousel</Icon>
                         </ListItemIcon>
@@ -115,21 +128,19 @@ export default function Container(props) {
                     </ListItem>
                 </List>
             )}
-            <div className={classes[layout]}>
-                <List
-                    className={clsx(
-                        classes.tabs,
-                        classes[layout],
-                        {
-                            [classes.collapse]: collapse
-                        }
-                    )}
-                    dense
-                    disablePadding
+            <div className={clsx(classes.content, classes[layout])}>
+                <Paper
+                    square
+                    elevation={0}
+                    className={clsx(classes.tabs, classes[layout], {
+                        [classes.collapse]: collapse,
+                    })}
                 >
-                    {props.tabs}
-                </List>
-                <div key="tab-panel" className={classes.panels}>
+                    <List dense disablePadding>
+                        {props.tabs}
+                    </List>
+                </Paper>
+                <div key="tab-panel" className={clsx(classes.panels)}>
                     {props.panels}
                 </div>
             </div>
