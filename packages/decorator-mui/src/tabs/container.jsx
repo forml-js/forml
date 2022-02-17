@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     content: {
         position: 'relative',
         '&$horizontal': {
-            paddingLeft: theme.spacing(8),
+            paddingLeft: theme.spacing(7) + 1,
         },
         '&$vertical': {
             paddingTop: theme.spacing(7),
