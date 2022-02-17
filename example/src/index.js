@@ -47,11 +47,9 @@ async function init() {
     await loadPrism();
 
     render(
-        (
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <Page />
-            </MuiPickersUtilsProvider>
-        ),
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+            <Page />
+        </MuiPickersUtilsProvider>,
         document.getElementById('app')
     );
 }
