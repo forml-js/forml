@@ -5,5 +5,9 @@ import React from 'react';
  * @component
  */
 export default function Group({ error, ...props }) {
-    return <FormControl error={!!error}>{props.children}</FormControl>;
+    return (
+        <FormControl variant="standard" error={!!error}>
+            {props.children}
+        </FormControl>
+    );
 }

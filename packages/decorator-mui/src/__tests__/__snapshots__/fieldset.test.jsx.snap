@@ -3,10 +3,10 @@
 exports[`renders with description and no title 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-267 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-267 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-268 makeStyles-disableGutters-270 makeStyles-disablePadding-271"
+      class="MuiFormGroup-root makeStyles-root-268 makeStyles-disableGutters-270 makeStyles-disablePadding-271 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -16,14 +16,14 @@ exports[`renders with description and no title 1`] = `
           class="makeStyles-title-275"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-276"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-276 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             />
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-277"
+            class="MuiFormHelperText-root makeStyles-formHelperText-277 css-1d1r5q-MuiFormHelperText-root"
           >
             title
           </p>
@@ -40,10 +40,10 @@ exports[`renders with description and no title 1`] = `
 exports[`renders with form options Component div 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-141 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-141 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-142 makeStyles-disableGutters-144 makeStyles-disablePadding-145"
+      class="MuiFormGroup-root makeStyles-root-142 makeStyles-disableGutters-144 makeStyles-disablePadding-145 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -53,16 +53,16 @@ exports[`renders with form options Component div 1`] = `
           class="makeStyles-title-149"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-150"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-150 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-151"
+            class="MuiFormHelperText-root makeStyles-formHelperText-151 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -79,10 +79,10 @@ exports[`renders with form options Component div 1`] = `
 exports[`renders with form options Component fieldset 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-155 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-155 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-156 makeStyles-disableGutters-158 makeStyles-disablePadding-159"
+      class="MuiFormGroup-root makeStyles-root-156 makeStyles-disableGutters-158 makeStyles-disablePadding-159 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -92,16 +92,16 @@ exports[`renders with form options Component fieldset 1`] = `
           class="makeStyles-title-163"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-164"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-164 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-165"
+            class="MuiFormHelperText-root makeStyles-formHelperText-165 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -118,10 +118,10 @@ exports[`renders with form options Component fieldset 1`] = `
 exports[`renders with form options disableGutters false 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-43 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-43 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-44 makeStyles-disableGutters-46 makeStyles-disablePadding-47"
+      class="MuiFormGroup-root makeStyles-root-44 makeStyles-disableGutters-46 makeStyles-disablePadding-47 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -131,16 +131,16 @@ exports[`renders with form options disableGutters false 1`] = `
           class="makeStyles-title-51"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-52"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-52 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-53"
+            class="MuiFormHelperText-root makeStyles-formHelperText-53 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -157,10 +157,10 @@ exports[`renders with form options disableGutters false 1`] = `
 exports[`renders with form options disableGutters true 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-29 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-29 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-30 makeStyles-disableGutters-32 makeStyles-disablePadding-33"
+      class="MuiFormGroup-root makeStyles-root-30 makeStyles-disableGutters-32 makeStyles-disablePadding-33 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -170,16 +170,16 @@ exports[`renders with form options disableGutters true 1`] = `
           class="makeStyles-title-37"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-38"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-38 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-39"
+            class="MuiFormHelperText-root makeStyles-formHelperText-39 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -196,10 +196,10 @@ exports[`renders with form options disableGutters true 1`] = `
 exports[`renders with form options disableMargin false 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-99 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-99 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-100 makeStyles-disableGutters-102 makeStyles-disablePadding-103"
+      class="MuiFormGroup-root makeStyles-root-100 makeStyles-disableGutters-102 makeStyles-disablePadding-103 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -209,16 +209,16 @@ exports[`renders with form options disableMargin false 1`] = `
           class="makeStyles-title-107"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-108"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-108 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-109"
+            class="MuiFormHelperText-root makeStyles-formHelperText-109 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -235,10 +235,10 @@ exports[`renders with form options disableMargin false 1`] = `
 exports[`renders with form options disableMargin true 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-85 makeStyles-disableMargin-87 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-85 makeStyles-disableMargin-87 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-86 makeStyles-disableGutters-88 makeStyles-disablePadding-89"
+      class="MuiFormGroup-root makeStyles-root-86 makeStyles-disableGutters-88 makeStyles-disablePadding-89 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -248,16 +248,16 @@ exports[`renders with form options disableMargin true 1`] = `
           class="makeStyles-title-93"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-94"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-94 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-95"
+            class="MuiFormHelperText-root makeStyles-formHelperText-95 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -274,10 +274,10 @@ exports[`renders with form options disableMargin true 1`] = `
 exports[`renders with form options disablePadding false 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-71 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-71 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-72 makeStyles-disableGutters-74 makeStyles-disablePadding-75"
+      class="MuiFormGroup-root makeStyles-root-72 makeStyles-disableGutters-74 makeStyles-disablePadding-75 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -287,16 +287,16 @@ exports[`renders with form options disablePadding false 1`] = `
           class="makeStyles-title-79"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-80"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-80 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-81"
+            class="MuiFormHelperText-root makeStyles-formHelperText-81 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -313,10 +313,10 @@ exports[`renders with form options disablePadding false 1`] = `
 exports[`renders with form options disablePadding true 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-57 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-57 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-58 makeStyles-disableGutters-60 makeStyles-disablePadding-61"
+      class="MuiFormGroup-root makeStyles-root-58 makeStyles-disableGutters-60 makeStyles-disablePadding-61 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -326,16 +326,16 @@ exports[`renders with form options disablePadding true 1`] = `
           class="makeStyles-title-65"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-66"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-66 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-67"
+            class="MuiFormHelperText-root makeStyles-formHelperText-67 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -352,10 +352,10 @@ exports[`renders with form options disablePadding true 1`] = `
 exports[`renders with form options elevation 0 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-169 MuiPaper-elevation0 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-paper-169 css-ee20y-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-170 makeStyles-disableGutters-172 makeStyles-disablePadding-173"
+      class="MuiFormGroup-root makeStyles-root-170 makeStyles-disableGutters-172 makeStyles-disablePadding-173 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -365,16 +365,16 @@ exports[`renders with form options elevation 0 1`] = `
           class="makeStyles-title-177"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-178"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-178 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-179"
+            class="MuiFormHelperText-root makeStyles-formHelperText-179 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -391,10 +391,10 @@ exports[`renders with form options elevation 0 1`] = `
 exports[`renders with form options elevation 1 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-183 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-183 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-184 makeStyles-disableGutters-186 makeStyles-disablePadding-187"
+      class="MuiFormGroup-root makeStyles-root-184 makeStyles-disableGutters-186 makeStyles-disablePadding-187 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -404,16 +404,16 @@ exports[`renders with form options elevation 1 1`] = `
           class="makeStyles-title-191"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-192"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-192 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-193"
+            class="MuiFormHelperText-root makeStyles-formHelperText-193 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -430,10 +430,10 @@ exports[`renders with form options elevation 1 1`] = `
 exports[`renders with form options elevation 2 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-197 MuiPaper-elevation2 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 makeStyles-paper-197 css-1mbunh-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-198 makeStyles-disableGutters-200 makeStyles-disablePadding-201"
+      class="MuiFormGroup-root makeStyles-root-198 makeStyles-disableGutters-200 makeStyles-disablePadding-201 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -443,16 +443,16 @@ exports[`renders with form options elevation 2 1`] = `
           class="makeStyles-title-205"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-206"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-206 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-207"
+            class="MuiFormHelperText-root makeStyles-formHelperText-207 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -469,10 +469,10 @@ exports[`renders with form options elevation 2 1`] = `
 exports[`renders with form options fullWidth false 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-127 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-127 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-128 makeStyles-disableGutters-130 makeStyles-disablePadding-131"
+      class="MuiFormGroup-root makeStyles-root-128 makeStyles-disableGutters-130 makeStyles-disablePadding-131 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -482,16 +482,16 @@ exports[`renders with form options fullWidth false 1`] = `
           class="makeStyles-title-135"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-136"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-136 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-137"
+            class="MuiFormHelperText-root makeStyles-formHelperText-137 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -508,10 +508,10 @@ exports[`renders with form options fullWidth false 1`] = `
 exports[`renders with form options fullWidth true 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-113 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-113 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-114 makeStyles-disableGutters-116 makeStyles-disablePadding-117"
+      class="MuiFormGroup-root makeStyles-root-114 makeStyles-disableGutters-116 makeStyles-disablePadding-117 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -521,16 +521,16 @@ exports[`renders with form options fullWidth true 1`] = `
           class="makeStyles-title-121"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-122"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-122 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-123"
+            class="MuiFormHelperText-root makeStyles-formHelperText-123 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -547,10 +547,10 @@ exports[`renders with form options fullWidth true 1`] = `
 exports[`renders with form options icon favorite 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-225 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-225 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-226 makeStyles-disableGutters-228 makeStyles-disablePadding-229"
+      class="MuiFormGroup-root makeStyles-root-226 makeStyles-disableGutters-228 makeStyles-disablePadding-229 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -558,7 +558,7 @@ exports[`renders with form options icon favorite 1`] = `
       >
         <span
           aria-hidden="true"
-          class="material-icons MuiIcon-root makeStyles-icon-236"
+          class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium makeStyles-icon-236 css-kp9ftd-MuiIcon-root"
         >
           favorite
         </span>
@@ -566,16 +566,16 @@ exports[`renders with form options icon favorite 1`] = `
           class="makeStyles-title-233"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-234"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-234 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-235"
+            class="MuiFormHelperText-root makeStyles-formHelperText-235 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -592,10 +592,10 @@ exports[`renders with form options icon favorite 1`] = `
 exports[`renders with form options icon person 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-211 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-211 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-212 makeStyles-disableGutters-214 makeStyles-disablePadding-215"
+      class="MuiFormGroup-root makeStyles-root-212 makeStyles-disableGutters-214 makeStyles-disablePadding-215 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -603,7 +603,7 @@ exports[`renders with form options icon person 1`] = `
       >
         <span
           aria-hidden="true"
-          class="material-icons MuiIcon-root makeStyles-icon-222"
+          class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium makeStyles-icon-222 css-kp9ftd-MuiIcon-root"
         >
           person
         </span>
@@ -611,16 +611,16 @@ exports[`renders with form options icon person 1`] = `
           class="makeStyles-title-219"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-220"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-220 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-221"
+            class="MuiFormHelperText-root makeStyles-formHelperText-221 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -637,10 +637,10 @@ exports[`renders with form options icon person 1`] = `
 exports[`renders with form options layout horizontal 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-1 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-1 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5"
+      class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -650,16 +650,16 @@ exports[`renders with form options layout horizontal 1`] = `
           class="makeStyles-title-9"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-10"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-10 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-11"
+            class="MuiFormHelperText-root makeStyles-formHelperText-11 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -676,10 +676,10 @@ exports[`renders with form options layout horizontal 1`] = `
 exports[`renders with form options layout vertical 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-15 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-15 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-16 makeStyles-disableGutters-18 makeStyles-disablePadding-19"
+      class="MuiFormGroup-root makeStyles-root-16 makeStyles-disableGutters-18 makeStyles-disablePadding-19 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -689,16 +689,16 @@ exports[`renders with form options layout vertical 1`] = `
           class="makeStyles-title-23"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-24"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-24 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-25"
+            class="MuiFormHelperText-root makeStyles-formHelperText-25 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -715,7 +715,7 @@ exports[`renders with form options layout vertical 1`] = `
 exports[`renders with no title or description 1`] = `
 <div>
   <div
-    class="MuiFormGroup-root makeStyles-root-282 makeStyles-disableGutters-284 makeStyles-disablePadding-285"
+    class="MuiFormGroup-root makeStyles-root-282 makeStyles-disableGutters-284 makeStyles-disablePadding-285 css-dmmspl-MuiFormGroup-root"
     component="div"
   >
     <div
@@ -728,10 +728,10 @@ exports[`renders with no title or description 1`] = `
 exports[`renders with title and description 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-239 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-239 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-240 makeStyles-disableGutters-242 makeStyles-disablePadding-243"
+      class="MuiFormGroup-root makeStyles-root-240 makeStyles-disableGutters-242 makeStyles-disablePadding-243 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -741,16 +741,16 @@ exports[`renders with title and description 1`] = `
           class="makeStyles-title-247"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-248"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-248 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-249"
+            class="MuiFormHelperText-root makeStyles-formHelperText-249 css-1d1r5q-MuiFormHelperText-root"
           >
             description
           </p>
@@ -767,10 +767,10 @@ exports[`renders with title and description 1`] = `
 exports[`renders with title and no description 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper-253 MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper-253 css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiFormGroup-root makeStyles-root-254 makeStyles-disableGutters-256 makeStyles-disablePadding-257"
+      class="MuiFormGroup-root makeStyles-root-254 makeStyles-disableGutters-256 makeStyles-disablePadding-257 css-dmmspl-MuiFormGroup-root"
       component="div"
     >
       <div
@@ -780,16 +780,16 @@ exports[`renders with title and no description 1`] = `
           class="makeStyles-title-261"
         >
           <label
-            class="MuiFormLabel-root makeStyles-formLabel-262"
+            class="MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-formLabel-262 css-u4tvz2-MuiFormLabel-root"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
             >
               title
             </h6>
           </label>
           <p
-            class="MuiFormHelperText-root makeStyles-formHelperText-263"
+            class="MuiFormHelperText-root makeStyles-formHelperText-263 css-1d1r5q-MuiFormHelperText-root"
           />
         </div>
       </div>

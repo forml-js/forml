@@ -26,7 +26,7 @@ export default function Date(props) {
             autoOk={autoOk}
             openTo={openTo}
             format={format}
-            TextFieldComponent={({ InputProps, ...props }) => (
+            renderInput={({ InputProps, ...props }) => (
                 <Input {...props} {...InputProps} />
             )}
             disabled={disabled}

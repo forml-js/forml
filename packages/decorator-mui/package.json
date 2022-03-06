@@ -14,7 +14,14 @@
         "type": "git",
         "url": "git+https://github.com/forml-js/forml.git"
     },
-    "keywords": ["forml", "decorator", "react", "json", "schema", "form"],
+    "keywords": [
+        "forml",
+        "decorator",
+        "react",
+        "json",
+        "schema",
+        "form"
+    ],
     "author": "Zachary Hueras",
     "license": "MIT",
     "bugs": {
@@ -38,14 +45,17 @@
         "moment": "^2.29.1"
     },
     "peerDependencies": {
-        "@forml/hooks": ">=1.0.0",
-        "react": "^17.0.2",
         "@emotion/react": "^11.8.1",
         "@emotion/styled": "^11.8.1",
+        "@forml/hooks": ">=1.0.0",
         "@mui/icons-material": "^5.4.4",
         "@mui/lab": "^5.0.0-alpha.71",
         "@mui/material": "^5.4.4",
-        "@mui/styles": "^5.4.4"
+        "@mui/styles": "^5.4.4",
+        "react": "^17.0.2"
     },
-    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
+    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef",
+    "dependencies": {
+        "nanoid": "^3.3.1"
+    }
 }

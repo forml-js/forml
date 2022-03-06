@@ -3,7 +3,7 @@
 exports[`renders with form options align left 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft css-zpphrz-MuiTypography-root"
   />
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`renders with form options align left 1`] = `
 exports[`renders with form options align right 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignRight css-hlnzui-MuiTypography-root"
   />
 </div>
 `;
@@ -19,7 +19,7 @@ exports[`renders with form options align right 1`] = `
 exports[`renders with form options align undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -27,7 +27,7 @@ exports[`renders with form options align undefined 1`] = `
 exports[`renders with form options color primary 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"
+    class="MuiTypography-root MuiTypography-body1 css-vkc4v8-MuiTypography-root"
   />
 </div>
 `;
@@ -35,7 +35,7 @@ exports[`renders with form options color primary 1`] = `
 exports[`renders with form options color secondary 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorSecondary"
+    class="MuiTypography-root MuiTypography-body1 css-18brw8f-MuiTypography-root"
   />
 </div>
 `;
@@ -43,7 +43,7 @@ exports[`renders with form options color secondary 1`] = `
 exports[`renders with form options color undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -51,7 +51,7 @@ exports[`renders with form options color undefined 1`] = `
 exports[`renders with form options noWrap false 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -59,7 +59,7 @@ exports[`renders with form options noWrap false 1`] = `
 exports[`renders with form options noWrap true 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-fvtpii-MuiTypography-root"
   />
 </div>
 `;
@@ -67,7 +67,7 @@ exports[`renders with form options noWrap true 1`] = `
 exports[`renders with form options noWrap undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -75,7 +75,7 @@ exports[`renders with form options noWrap undefined 1`] = `
 exports[`renders with form options otherProps [object Object] 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -83,7 +83,7 @@ exports[`renders with form options otherProps [object Object] 1`] = `
 exports[`renders with form options otherProps undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -91,7 +91,7 @@ exports[`renders with form options otherProps undefined 1`] = `
 exports[`renders with form options paragraph false 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -99,7 +99,7 @@ exports[`renders with form options paragraph false 1`] = `
 exports[`renders with form options paragraph true 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-z2eky3-MuiTypography-root"
   />
 </div>
 `;
@@ -107,7 +107,7 @@ exports[`renders with form options paragraph true 1`] = `
 exports[`renders with form options paragraph undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;
@@ -115,7 +115,7 @@ exports[`renders with form options paragraph undefined 1`] = `
 exports[`renders with form options variant h1 1`] = `
 <div>
   <h1
-    class="MuiTypography-root MuiTypography-h1"
+    class="MuiTypography-root MuiTypography-h1 css-o2w69a-MuiTypography-root"
   />
 </div>
 `;
@@ -123,7 +123,7 @@ exports[`renders with form options variant h1 1`] = `
 exports[`renders with form options variant h2 1`] = `
 <div>
   <h2
-    class="MuiTypography-root MuiTypography-h2"
+    class="MuiTypography-root MuiTypography-h2 css-1sra7t5-MuiTypography-root"
   />
 </div>
 `;
@@ -131,7 +131,7 @@ exports[`renders with form options variant h2 1`] = `
 exports[`renders with form options variant undefined 1`] = `
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   />
 </div>
 `;

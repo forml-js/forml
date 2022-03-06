@@ -13,7 +13,8 @@ import { useLocalizer } from '@forml/hooks';
 const useStyles = makeStyles(function (theme) {
     return {
         root: {
-            margin: theme.spacing(1),
+            margin: theme.spacing?.(1),
+            flex: '1 1 auto',
         },
         disablePadding: {
             marginTop: 0,
@@ -26,6 +27,7 @@ const useStyles = makeStyles(function (theme) {
         list: {
             display: 'flex',
             flexDirection: 'column',
+            flex: '1 1 auto',
         },
         controls: {
             justifyContent: 'flex-end',
@@ -42,7 +44,7 @@ function Items(props, ref) {
     const { value, disabled } = props;
 
     const classes = useStyles(props);
-    const color = error ? 'error' : 'initial';
+    const color = error ? 'error' : 'info';
     const localizer = useLocalizer();
 
     const disablePadding =

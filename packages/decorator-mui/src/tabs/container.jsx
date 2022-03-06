@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 5,
     },
     tabs: {
-        position: 'absolute',
+        position: 'relative',
         top: 0,
         left: 0,
         display: 'flex',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         '&$vertical': {
             flexDirection: 'row',
             borderBottom: '1px solid black',
-            borderBottomColor: theme.palette.divider,
+            borderBottomColor: theme.palette?.divider,
             right: 0,
             bottom: 'auto',
         },
@@ -48,10 +48,10 @@ const useStyles = makeStyles((theme) => ({
             flex: '0 0 auto',
             flexDirection: 'column',
             borderRight: '1px solid black',
-            borderRightColor: theme.palette.divider,
+            borderRightColor: theme.palette?.divider,
             '&$collapse': {
                 overflow: 'hidden',
-                maxWidth: theme.spacing(7),
+                maxWidth: theme.spacing?.(7),
                 transition: 'all 0.3s',
                 '&:hover': {
                     maxWidth: '100%',
@@ -62,12 +62,6 @@ const useStyles = makeStyles((theme) => ({
     collapse: {},
     content: {
         position: 'relative',
-        '&$horizontal': {
-            paddingLeft: theme.spacing(7) + 1,
-        },
-        '&$vertical': {
-            paddingTop: theme.spacing(7),
-        },
     },
     titleRoot: {
         display: 'flex',
@@ -88,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
         flex: '0 0 0',
         '$vertical>&': {
             borderRight: '1px solid black',
-            borderRightColor: theme.palette.divider,
+            borderRightColor: theme.palette?.divider,
         },
     },
 }));

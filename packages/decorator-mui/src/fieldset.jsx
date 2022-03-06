@@ -16,35 +16,35 @@ const useStyles = makeStyles(function (theme) {
         paper: {
             flex: 1,
             flexDirection: 'inherit',
-            margin: theme.spacing(1),
+            margin: theme.spacing?.(1),
         },
         root: {
-            padding: theme.spacing(1),
+            padding: theme.spacing?.(1),
             minWidth: '0',
             flex: 1,
         },
         disableMargin: {
-            margin: theme.spacing(0),
+            margin: theme.spacing?.(0),
         },
         disableGutters: {
             '&$vertical, &$horizontal': {
-                paddingLeft: theme.spacing(0),
-                paddingRight: theme.spacing(0),
+                paddingLeft: theme.spacing?.(0),
+                paddingRight: theme.spacing?.(0),
             },
-            paddingLeft: theme.spacing(0),
-            paddingRight: theme.spacing(0),
+            paddingLeft: theme.spacing?.(0),
+            paddingRight: theme.spacing?.(0),
         },
         disablePadding: {
             '&$vertical, &$horizontal': {
-                marginTop: theme.spacing(0),
-                marginBottom: theme.spacing(0),
-                paddingTop: theme.spacing(0),
-                paddingBottom: theme.spacing(0),
+                marginTop: theme.spacing?.(0),
+                marginBottom: theme.spacing?.(0),
+                paddingTop: theme.spacing?.(0),
+                paddingBottom: theme.spacing?.(0),
             },
-            marginTop: theme.spacing(0),
-            marginBottom: theme.spacing(0),
-            paddingTop: theme.spacing(0),
-            paddingBottom: theme.spacing(0),
+            marginTop: theme.spacing?.(0),
+            marginBottom: theme.spacing?.(0),
+            paddingTop: theme.spacing?.(0),
+            paddingBottom: theme.spacing?.(0),
         },
         alignItems: (props) => {
             const { form } = props;
@@ -55,38 +55,36 @@ const useStyles = makeStyles(function (theme) {
         horizontal: {
             display: 'flex',
             flexDirection: 'row',
-            padding: theme.spacing(1.0),
+            padding: theme.spacing?.(1.0),
             maxWidth: 'fill-available',
         },
         vertical: {
             display: 'flex',
             flexDirection: 'column',
-            padding: theme.spacing(1.0),
+            padding: theme.spacing?.(1.0),
             maxWidth: 'fill-available',
         },
         title: {
             display: 'flex',
             flexDirection: 'column',
         },
-        formLabel: {
-            color: theme.palette.text.primary,
-        },
+        formLabel: {},
         formHelperText: {
-            color: theme.palette.text.primary,
+            color: theme.palette?.text?.primary,
         },
         icon: {
             display: 'inline-flex',
-            minWidth: theme.spacing(6),
-            color: theme.palette.action.active,
+            minWidth: theme.spacing?.(6),
+            color: theme.palette?.action?.active,
         },
         header: {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            padding: theme.spacing(1.0, 2.0),
+            padding: theme.spacing?.(1.0, 2.0),
             borderBottom: '1px solid black',
-            borderBottomColor: theme.palette.divider,
-            marginBottom: theme.spacing(0.5),
+            borderBottomColor: theme.palette?.divider,
+            marginBottom: theme.spacing?.(0.5),
         },
     };
 });
@@ -101,7 +99,6 @@ export default function FieldSet(props) {
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
     const disableMargin = 'disableMargin' in form ? form.disableMargin : false;
-    const fullWidth = 'fullWidth' in form ? form.fullWidth : false;
     const Component = 'component' in form ? form.component : 'div';
     const elevation = 'elevation' in form ? form.elevation : 1;
     const icon = 'icon' in form ? form.icon : null;
@@ -112,7 +109,6 @@ export default function FieldSet(props) {
                 [classes.disableGutters]: true,
                 [classes.disablePadding]: true,
             })}
-            fullWidth={fullWidth}
             component={Component}
         >
             {(title || description) && (

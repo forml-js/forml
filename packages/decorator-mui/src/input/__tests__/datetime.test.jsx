@@ -3,8 +3,8 @@ import Context from '@forml/context';
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as decorator from '../../';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterMoment from '@mui/lab/AdapterMoment';
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -37,11 +37,11 @@ describe('renders', function () {
                     test(`${value}`, function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
-                            <MuiPickersUtilsProvider utils={MomentUtils}>
+                            <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <Context.Provider value={{ decorator }}>
                                     <DateTime form={form} value={inputValue} />
                                 </Context.Provider>
-                            </MuiPickersUtilsProvider>
+                            </LocalizationProvider>
                         );
 
                         expect(container).toMatchSnapshot();

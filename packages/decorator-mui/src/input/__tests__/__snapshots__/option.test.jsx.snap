@@ -3,15 +3,14 @@
 exports[`renders consistently 1`] = `
 <div>
   <li
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+    class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
     role="menuitem"
     tabindex="-1"
     value="1"
   >
     1
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </li>
 </div>

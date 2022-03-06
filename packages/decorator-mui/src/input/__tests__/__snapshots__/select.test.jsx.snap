@@ -3,11 +3,12 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiInputBase-root MuiInput-root MuiInput-underline"
+    class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
   >
     <div
+      aria-expanded="false"
       aria-haspopup="listbox"
-      class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+      class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       role="button"
       tabindex="0"
     >
@@ -15,13 +16,14 @@ exports[`renders consistently 1`] = `
     </div>
     <input
       aria-hidden="true"
-      class="MuiSelect-nativeInput"
+      class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
       tabindex="-1"
       value="1"
     />
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSelect-icon"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -29,6 +31,20 @@ exports[`renders consistently 1`] = `
         d="M7 10l5 5 5-5z"
       />
     </svg>
+    <fieldset
+      aria-hidden="true"
+      class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+    >
+      <legend
+        class="css-hdw1oc"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </legend>
+    </fieldset>
   </div>
 </div>
 `;

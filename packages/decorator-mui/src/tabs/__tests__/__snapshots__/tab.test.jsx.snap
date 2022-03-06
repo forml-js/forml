@@ -3,37 +3,36 @@
 exports[`renders with form options elevation 0 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-25 makeStyles-vertical-27 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-25 makeStyles-vertical-27 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -42,37 +41,36 @@ exports[`renders with form options elevation 0 1`] = `
 exports[`renders with form options elevation 0 with layout 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-31 makeStyles-horizontal-35 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-31 makeStyles-horizontal-35 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -81,37 +79,36 @@ exports[`renders with form options elevation 0 with layout 1`] = `
 exports[`renders with form options elevation 1 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-37 makeStyles-vertical-39 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-37 makeStyles-vertical-39 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -120,37 +117,36 @@ exports[`renders with form options elevation 1 1`] = `
 exports[`renders with form options elevation 1 with layout 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-43 makeStyles-horizontal-47 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-43 makeStyles-horizontal-47 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -159,37 +155,36 @@ exports[`renders with form options elevation 1 with layout 1`] = `
 exports[`renders with form options elevation undefined 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-49 makeStyles-vertical-51 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-49 makeStyles-vertical-51 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -198,37 +193,36 @@ exports[`renders with form options elevation undefined 1`] = `
 exports[`renders with form options elevation undefined with layout 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-55 makeStyles-horizontal-59 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-55 makeStyles-horizontal-59 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         dynamic_form
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -237,37 +231,36 @@ exports[`renders with form options elevation undefined with layout 1`] = `
 exports[`renders with form options icon person 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-1 makeStyles-vertical-3 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-1 makeStyles-vertical-3 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         person
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -276,37 +269,36 @@ exports[`renders with form options icon person 1`] = `
 exports[`renders with form options icon person with layout 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-7 makeStyles-horizontal-11 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-7 makeStyles-horizontal-11 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     >
       <span
         aria-hidden="true"
-        class="material-icons MuiIcon-root"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
         person
       </span>
     </div>
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -315,27 +307,26 @@ exports[`renders with form options icon person with layout 1`] = `
 exports[`renders with form options icon undefined 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-13 makeStyles-vertical-15 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-13 makeStyles-vertical-15 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>
@@ -344,27 +335,26 @@ exports[`renders with form options icon undefined 1`] = `
 exports[`renders with form options icon undefined with layout 1`] = `
 <div>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root makeStyles-root-19 makeStyles-horizontal-23 MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-19 makeStyles-horizontal-23 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemText-root MuiListItemText-multiline"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-noWrap MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary css-1f0fhap-MuiTypography-root"
       >
         title
       </span>
       <span
-        class="MuiTypography-root MuiListItemText-secondary MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
       >
         description
       </span>
     </div>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </div>

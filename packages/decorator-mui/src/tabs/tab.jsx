@@ -13,15 +13,15 @@ const useStyles = makeStyles((theme) => ({
         transition: 'all 0.3s',
         borderBottomWidth: 0,
         borderBottomStyle: 'solid',
-        borderBottomColor: theme.palette.primary.main,
+        borderBottomColor: theme.palette?.primary?.main,
         borderRightWidth: 0,
         borderRightStyle: 'solid',
-        borderRightColor: theme.palette.primary.main,
+        borderRightColor: theme.palette?.primary?.main,
     },
     image: {
         objectFit: 'contain',
-        maxWidth: theme.spacing(7),
-        marginRight: theme.spacing(4),
+        maxWidth: theme.spacing?.(7),
+        marginRight: theme.spacing?.(4),
     },
     vertical: {
         display: 'inline-flex',
@@ -29,19 +29,19 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        paddingBottom: theme.spacing(0.5),
+        paddingBottom: theme.spacing?.(0.5),
         '&$active': {
-            borderBottomWidth: theme.spacing(0.5),
-            paddingBottom: theme.spacing(0.1),
+            borderBottomWidth: theme.spacing?.(0.5),
+            paddingBottom: theme.spacing?.(0.1),
         },
         '&:hover': {
-            borderBottomWidth: theme.spacing(0.5),
-            paddingBottom: theme.spacing(0.1),
+            borderBottomWidth: theme.spacing?.(0.5),
+            paddingBottom: theme.spacing?.(0.1),
         },
     },
     collapse: {
         '&$vertical': {
-            maxWidth: theme.spacing(7),
+            maxWidth: theme.spacing?.(7),
             overflow: 'hidden',
             transition: 'all 0.3s',
             '&:hover,&$active': {
@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     horizontal: {
-        paddingRight: theme.spacing(2),
+        paddingRight: theme.spacing?.(2),
         '&$active': {
-            borderRightWidth: theme.spacing(0.5),
-            paddingRight: theme.spacing(1.5),
+            borderRightWidth: theme.spacing?.(0.5),
+            paddingRight: theme.spacing?.(1.5),
         },
         '&:hover': {
-            borderRightWidth: theme.spacing(0.5),
-            paddingRight: theme.spacing(1.5),
+            borderRightWidth: theme.spacing?.(0.5),
+            paddingRight: theme.spacing?.(1.5),
         },
     },
     active: {},
@@ -81,7 +81,11 @@ export default function Tab(props) {
 
     let imageOrIcon = null;
     if (image) {
-        imageOrIcon = <img src={image} className={classes.image} />;
+        imageOrIcon = (
+            <ListItemIcon>
+                <img src={image} className={classes.image} />
+            </ListItemIcon>
+        );
     } else if (icon) {
         imageOrIcon = (
             <ListItemIcon key="icon">

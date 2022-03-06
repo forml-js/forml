@@ -3,6 +3,10 @@ import Context from '@forml/context';
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as decorator from '../';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import createTheme from '@mui/material/styles/createTheme';
+
+const theme = createTheme();
 
 describe('renders', function () {
     let form;
@@ -28,13 +32,17 @@ describe('renders', function () {
                     test(`${value}`, function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
-                            <Context.Provider value={{ decorator, localizer }}>
-                                <ArrayComponent
-                                    form={form}
-                                    title={title}
-                                    description={description}
-                                />
-                            </Context.Provider>
+                            <ThemeProvider theme={theme}>
+                                <Context.Provider
+                                    value={{ decorator, localizer }}
+                                >
+                                    <ArrayComponent
+                                        form={form}
+                                        title={title}
+                                        description={description}
+                                    />
+                                </Context.Provider>
+                            </ThemeProvider>
                         );
 
                         expect(container).toMatchSnapshot();
@@ -46,13 +54,15 @@ describe('renders', function () {
 
     test('with title and description', function () {
         const { container } = render(
-            <Context.Provider value={{ decorator, localizer }}>
-                <ArrayComponent
-                    form={form}
-                    title={title}
-                    description={description}
-                />
-            </Context.Provider>
+            <ThemeProvider theme={theme}>
+                <Context.Provider value={{ decorator, localizer }}>
+                    <ArrayComponent
+                        form={form}
+                        title={title}
+                        description={description}
+                    />
+                </Context.Provider>
+            </ThemeProvider>
         );
 
         expect(container).toMatchSnapshot();
@@ -60,9 +70,11 @@ describe('renders', function () {
 
     test('with title and no description', function () {
         const { container } = render(
-            <Context.Provider value={{ decorator, localizer }}>
-                <ArrayComponent form={form} title={title} />
-            </Context.Provider>
+            <ThemeProvider theme={theme}>
+                <Context.Provider value={{ decorator, localizer }}>
+                    <ArrayComponent form={form} title={title} />
+                </Context.Provider>
+            </ThemeProvider>
         );
 
         expect(container).toMatchSnapshot();
@@ -70,9 +82,11 @@ describe('renders', function () {
 
     test('with description and no title', function () {
         const { container } = render(
-            <Context.Provider value={{ decorator, localizer }}>
-                <ArrayComponent form={form} description={title} />
-            </Context.Provider>
+            <ThemeProvider theme={theme}>
+                <Context.Provider value={{ decorator, localizer }}>
+                    <ArrayComponent form={form} description={title} />
+                </Context.Provider>
+            </ThemeProvider>
         );
 
         expect(container).toMatchSnapshot();
@@ -80,9 +94,11 @@ describe('renders', function () {
 
     test('with no title or description', function () {
         const { container } = render(
-            <Context.Provider value={{ decorator, localizer }}>
-                <ArrayComponent form={form} />
-            </Context.Provider>
+            <ThemeProvider theme={theme}>
+                <Context.Provider value={{ decorator, localizer }}>
+                    <ArrayComponent form={form} />
+                </Context.Provider>
+            </ThemeProvider>
         );
 
         expect(container).toMatchSnapshot();

@@ -1,11 +1,15 @@
 import '@testing-library/jest-dom/extend-expect';
 
-import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentAdapter from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { render } from '@testing-library/react';
 import { SchemaForm, util } from '@forml/core';
-import { createElement as h } from 'react';
+import React from 'react';
 import * as mui from '../';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import createTheme from '@mui/material/styles/createTheme';
+
+const theme = createTheme({});
 
 describe('Material UI', function () {
     describe('with no model', function () {
@@ -53,11 +57,16 @@ describe('Material UI', function () {
             test(`renders empty ${name} consistently`, function () {
                 const model = util.defaultForSchema(schema);
                 const { container } = render(
-                    h(
-                        MuiPickersUtilsProvider,
-                        { utils: MomentUtils },
-                        h(SchemaForm, { schema, form, model, decorator })
-                    )
+                    <ThemeProvider theme={theme}>
+                        <LocalizationProvider dateAdapter={MomentAdapter}>
+                            <SchemaForm
+                                schema={schema}
+                                form={form}
+                                model={model}
+                                decorator={decorator}
+                            />
+                        </LocalizationProvider>
+                    </ThemeProvider>
                 );
 
                 expect(container).toMatchSnapshot();

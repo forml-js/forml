@@ -3,49 +3,41 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
   >
     <input
-      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       type="text"
       value=""
     />
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          attach_file
-        </span>
+        attach_file
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          clear
-        </span>
+        clear
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
@@ -59,49 +51,41 @@ exports[`renders consistently 1`] = `
 exports[`renders with form options format data_url 1`] = `
 <div>
   <div
-    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
   >
     <input
-      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       type="text"
       value=""
     />
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          attach_file
-        </span>
+        attach_file
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          clear
-        </span>
+        clear
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
@@ -115,49 +99,41 @@ exports[`renders with form options format data_url 1`] = `
 exports[`renders with form options format name 1`] = `
 <div>
   <div
-    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-adornedEnd"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
   >
     <input
-      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+      class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       type="text"
       value=""
     />
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          attach_file
-        </span>
+        attach_file
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-label"
+        aria-hidden="true"
+        class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
       >
-        <span
-          aria-hidden="true"
-          class="material-icons MuiIcon-root"
-        >
-          clear
-        </span>
+        clear
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>

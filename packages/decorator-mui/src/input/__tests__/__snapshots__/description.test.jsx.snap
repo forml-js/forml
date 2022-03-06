@@ -3,7 +3,7 @@
 exports[`renders with description 1`] = `
 <div>
   <p
-    class="MuiFormHelperText-root"
+    class="MuiFormHelperText-root css-1d1r5q-MuiFormHelperText-root"
   >
     description
   </p>
