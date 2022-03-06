@@ -9,9 +9,7 @@ export default function FieldSet(props) {
         <fieldset>
             {props.title && <legend>{props.title}</legend>}
             {props.description && <p>{props.description}</p>}
-            <div>
-                {props.children}
-            </div>
+            <div>{props.children}</div>
         </fieldset>
     );
 }

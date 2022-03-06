@@ -11,7 +11,7 @@ import clsx from 'clsx';
 /**
  * @component
  */
-const useStyles = makeStyles(function(theme) {
+const useStyles = makeStyles(function (theme) {
     return {
         paper: {
             flex: 1,

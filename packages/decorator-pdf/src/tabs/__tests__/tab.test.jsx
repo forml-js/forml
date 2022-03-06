@@ -1,22 +1,22 @@
-import { Tab } from "../";
-import Context from "@forml/context";
-import React from "react";
-import { render } from "@testing-library/react";
-import * as decorator from "../";
+import { Tab } from '../';
+import Context from '@forml/context';
+import React from 'react';
+import { render } from '@testing-library/react';
+import * as decorator from '../';
 
-describe("renders", function() {
+describe('renders', function () {
     let form;
     let parent;
-    let title = "title";
-    let description = "description";
+    let title = 'title';
+    let description = 'description';
 
-    beforeEach(function() {
+    beforeEach(function () {
         form = { type: 'fieldset', items: [{ key: [] }] };
         parent = { type: 'tabs', tabs: [form] };
     });
 
-    test('nothing', function() {
-        const { container } = render((<Tab>test</Tab>));
+    test('nothing', function () {
+        const { container } = render(<Tab>test</Tab>);
         expect(container.childNodes.length).toBe(0);
-    })
+    });
 });

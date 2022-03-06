@@ -1,19 +1,19 @@
-import Select from "../select";
-import Context from "@forml/context";
-import React from "react";
-import ReactPDF from "@react-pdf/renderer";
-import { render } from "@testing-library/react";
-import * as decorator from "../../";
+import Select from '../select';
+import Context from '@forml/context';
+import React from 'react';
+import ReactPDF from '@react-pdf/renderer';
+import { render } from '@testing-library/react';
+import * as decorator from '../../';
 
-describe("renders", function() {
+describe('renders', function () {
     let form;
     let styles;
     let input;
 
-    beforeEach(function() {
-        form = { type: "select" };
+    beforeEach(function () {
+        form = { type: 'select' };
 
-        input = jest.fn(() => ({ border: "1pt solid red" }));
+        input = jest.fn(() => ({ border: '1pt solid red' }));
 
         styles = {
             get input() {
@@ -22,7 +22,7 @@ describe("renders", function() {
         };
     });
 
-    test("with relevant formStyles", function() {
+    test('with relevant formStyles', function () {
         form = { ...form, styles };
         const { container } = render(
             <ReactPDF.Page>

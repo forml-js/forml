@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
             transition: 'all 0.3s',
             '&:hover,&$active': {
                 maxWidth: '100%',
-            }
-        }
+            },
+        },
     },
     horizontal: {
         paddingRight: theme.spacing(2),
@@ -81,9 +81,7 @@ export default function Tab(props) {
 
     let imageOrIcon = null;
     if (image) {
-        imageOrIcon = (
-            <img src={image} className={classes.image} />
-        );
+        imageOrIcon = <img src={image} className={classes.image} />;
     } else if (icon) {
         imageOrIcon = (
             <ListItemIcon key="icon">

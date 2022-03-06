@@ -1,34 +1,34 @@
-import FieldSet from "../fieldset";
-import Context from "@forml/context";
-import React from "react";
-import { render } from "@testing-library/react";
-import * as decorator from "../";
+import FieldSet from '../fieldset';
+import Context from '@forml/context';
+import React from 'react';
+import { render } from '@testing-library/react';
+import * as decorator from '../';
 
-describe("renders", function() {
+describe('renders', function () {
     let form;
-    let title = "title";
-    let description = "description";
+    let title = 'title';
+    let description = 'description';
 
-    beforeEach(function() {
-        form = { type: "fieldset", items: [{ key: [] }] };
+    beforeEach(function () {
+        form = { type: 'fieldset', items: [{ key: [] }] };
     });
 
-    describe("with form options", function() {
+    describe('with form options', function () {
         let fields = {
-            layout: ["horizontal", "vertical"],
+            layout: ['horizontal', 'vertical'],
             disableGutters: [true, false],
             disablePadding: [true, false],
             disableMargin: [true, false],
             fullWidth: [true, false],
             Component: ['div', 'fieldset'],
             elevation: [0, 1, 2],
-            icon: ['person', 'favorite']
+            icon: ['person', 'favorite'],
         };
 
-        Object.keys(fields).forEach(function(field) {
-            fields[field].forEach(function(value) {
-                describe(`${field}`, function() {
-                    test(`${value}`, function() {
+        Object.keys(fields).forEach(function (field) {
+            fields[field].forEach(function (value) {
+                describe(`${field}`, function () {
+                    test(`${value}`, function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
                             <Context.Provider value={{ decorator }}>
@@ -47,7 +47,7 @@ describe("renders", function() {
         });
     });
 
-    test("with title and description", function() {
+    test('with title and description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <FieldSet form={form} title={title} description={description} />
@@ -57,7 +57,7 @@ describe("renders", function() {
         expect(container).toMatchSnapshot();
     });
 
-    test("with title and no description", function() {
+    test('with title and no description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <FieldSet form={form} title={title} />
@@ -67,7 +67,7 @@ describe("renders", function() {
         expect(container).toMatchSnapshot();
     });
 
-    test("with description and no title", function() {
+    test('with description and no title', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <FieldSet form={form} description={title} />
@@ -77,7 +77,7 @@ describe("renders", function() {
         expect(container).toMatchSnapshot();
     });
 
-    test("with no title or description", function() {
+    test('with no title or description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <FieldSet form={form} />

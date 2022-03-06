@@ -7,7 +7,7 @@ import React, { Fragment, useRef } from 'react';
 /**
  * @component
  */
-const useStyles = makeStyles(function() {
+const useStyles = makeStyles(function () {
     return { fileInput: { display: 'none' } };
 });
 export default function Form(props) {

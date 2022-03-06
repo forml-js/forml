@@ -1,4 +1,4 @@
-import {createContext} from 'react';
+import { createContext } from 'react';
 
 /**
  * @typedef {Object} ModelMethods
@@ -10,10 +10,10 @@ import {createContext} from 'react';
  */
 
 const context = createContext({
-  mapper: {},
-  decorator: {},
-  localizer: {},
-  version: 0,
+    mapper: {},
+    decorator: {},
+    localizer: {},
+    version: 0,
 });
 
 export default context;

@@ -8,7 +8,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',

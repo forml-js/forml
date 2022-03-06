@@ -17,12 +17,10 @@ export default function DateTime(props) {
     return (
         <ReactPDF.View style={{ ...styles.root, ...formStyles.root }}>
             {(title || description) && (
-                <ReactPDF.View style={{ ...styles.header, ...formStyles.header }}>
-                    {title && (
-                        <deco.Label form={form}>
-                            {title}
-                        </deco.Label>
-                    )}
+                <ReactPDF.View
+                    style={{ ...styles.header, ...formStyles.header }}
+                >
+                    {title && <deco.Label form={form}>{title}</deco.Label>}
                     {description && (
                         <deco.Input.Description form={form}>
                             {description}

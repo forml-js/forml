@@ -1,19 +1,19 @@
-import Checkbox from "../checkbox";
-import Context from "@forml/context";
-import React from "react";
-import { render } from "@testing-library/react";
-import * as decorator from "../";
+import Checkbox from '../checkbox';
+import Context from '@forml/context';
+import React from 'react';
+import { render } from '@testing-library/react';
+import * as decorator from '../';
 
-describe("renders", function() {
+describe('renders', function () {
     let form;
-    let title = "title";
-    let description = "description";
+    let title = 'title';
+    let description = 'description';
 
-    beforeEach(function() {
-        form = { type: "checkbox", key: [] };
+    beforeEach(function () {
+        form = { type: 'checkbox', key: [] };
     });
 
-    test("with no title or description", function() {
+    test('with no title or description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <Checkbox form={form} />
@@ -23,7 +23,7 @@ describe("renders", function() {
         expect(container).toMatchSnapshot();
     });
 
-    test("with title but no description", function() {
+    test('with title but no description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <Checkbox form={form} title={title} />
@@ -33,7 +33,7 @@ describe("renders", function() {
         expect(container).toMatchSnapshot();
     });
 
-    test("when checked", function() {
+    test('when checked', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <Checkbox

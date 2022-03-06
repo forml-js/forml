@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { forwardRef } from 'react';
 import { useLocalizer } from '@forml/hooks';
 
-const useStyles = makeStyles(function(theme) {
+const useStyles = makeStyles(function (theme) {
     return {
         root: {
             margin: theme.spacing(1),

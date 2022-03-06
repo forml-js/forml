@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 
-const useStyles = makeStyles(function(theme) {
+const useStyles = makeStyles(function (theme) {
     return {
         forms: {
             display: 'flex',

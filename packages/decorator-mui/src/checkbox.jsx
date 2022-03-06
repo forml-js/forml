@@ -20,18 +20,16 @@ export default function Checkbox({
         <FormGroup row={false}>
             <FormControlLabel
                 checked={checked}
-                label={(
+                label={
                     <>
-                        <FormLabel>
-                            {title}
-                        </FormLabel>
+                        <FormLabel>{title}</FormLabel>
                         {(error || description) && (
                             <FormHelperText error={error}>
                                 {error || description}
                             </FormHelperText>
                         )}
                     </>
-                )}
+                }
                 control={
                     <MuiCheckbox
                         checked={checked}

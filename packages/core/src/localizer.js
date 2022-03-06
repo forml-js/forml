@@ -10,15 +10,15 @@
  * @return {Localizer}
  */
 export function defaultLocalizer() {
-  function noop(id) {
-    return id;
-  }
+    function noop(id) {
+        return id;
+    }
 
-  return {
-    getLocalizedString: noop,
-    getLocalizedNumber: noop,
-    getLocalizedDate: noop,
-  };
+    return {
+        getLocalizedString: noop,
+        getLocalizedNumber: noop,
+        getLocalizedDate: noop,
+    };
 }
 
 /**
@@ -26,5 +26,5 @@ export function defaultLocalizer() {
  * @return {Localizer}
  */
 export function getLocalizer(template) {
-  return {...defaultLocalizer(), ...template};
+    return { ...defaultLocalizer(), ...template };
 }
