@@ -1,4 +1,4 @@
-import InputLabel from '@material-ui/core/InputLabel';
+import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
 /**

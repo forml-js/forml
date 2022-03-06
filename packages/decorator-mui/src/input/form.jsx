@@ -1,4 +1,4 @@
-import Input from '@material-ui/core/Input';
+import Input from '@mui/material/Input';
 import React from 'react';
 
 import Date from './date';

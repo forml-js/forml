@@ -1,4 +1,4 @@
-import FormHelperText from '@material-ui/core/FormHelperText';
+import FormHelperText from '@mui/material/FormHelperText';
 import React from 'react';
 
 /**

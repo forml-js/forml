@@ -1,4 +1,4 @@
-import FormGroup from '@material-ui/core/FormGroup';
+import FormGroup from '@mui/material/FormGroup';
 import React from 'react';
 
 /**

@@ -1,7 +1,7 @@
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import Input from '@material-ui/core/Input';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon';
+import Input from '@mui/material/Input';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { Fragment, useRef } from 'react';
 
 /**

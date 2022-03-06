@@ -1,5 +1,5 @@
-import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import Input from '@material-ui/core/Input';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import Input from '@mui/material/Input';
 import React from 'react';
 
 export default function DateTime(props) {
@@ -16,7 +16,7 @@ export default function DateTime(props) {
     const otherProps = 'otherProps' in form ? form.otherProps : {};
 
     return (
-        <KeyboardDateTimePicker
+        <DateTimePicker
             value={value}
             onChange={onChange}
             fullWidth={fullWidth}
