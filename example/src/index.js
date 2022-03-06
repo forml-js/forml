@@ -1,14 +1,18 @@
-import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterMoment from '@mui/lab/AdapterMoment';
 import debug from 'debug';
 import { render } from 'react-dom';
 import ReactPDF from '@react-pdf/renderer';
 import Page from './components/Page';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import createTheme from '@mui/material/styles/createTheme';
 
 import MaterialIcons from 'material-icons/iconfont/MaterialIcons-Regular.ttf';
 import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
 import RobotoBold from 'fontsource-roboto/files/roboto-all-700-normal.woff';
 import RobotoLight from 'fontsource-roboto/files/roboto-all-300-normal.woff';
+
+const theme = createTheme();
 
 ReactPDF.Font.register({
     family: 'Material Icons',
@@ -47,9 +51,11 @@ async function init() {
     await loadPrism();
 
     render(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Page />
-        </MuiPickersUtilsProvider>,
+        <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+                <Page />
+            </LocalizationProvider>
+        </ThemeProvider>,
         document.getElementById('app')
     );
 }

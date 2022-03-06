@@ -3,13 +3,13 @@ const icon = 'person';
 
 module.exports.schema = {
     type: 'object',
-    title: "Nested Tabs",
+    title: 'Nested Tabs',
     properties: {
-        'foo': {type: 'string'},
-        'bar': {type: 'number'},
-        'baz': {type: 'boolean'}
-    }
-}
+        foo: { type: 'string' },
+        bar: { type: 'number' },
+        baz: { type: 'boolean' },
+    },
+};
 
 module.exports.form = [
     {
@@ -21,7 +21,7 @@ module.exports.form = [
         tabs: [
             {
                 type: 'tabs',
-                layout: 'vertical',
+                layout: 'horizontal',
                 title: 'First',
                 collapse: true,
                 icon,
@@ -32,52 +32,37 @@ module.exports.form = [
                         title: 'Standard',
                         description: 'The original layout of the items',
                         image,
-                        items: [
-                            'foo',
-                            'bar',
-                            'baz'
-                        ]
+                        items: ['foo', 'bar', 'baz'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Inverted',
                         image,
                         description: 'An inverted layout of the items',
-                        items: [
-                            'baz',
-                            'foo',
-                            'bar'
-                        ]
+                        items: ['baz', 'foo', 'bar'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Inverted Reversed',
                         image,
                         description: 'A reversed inverted version of the items',
-                        items: [
-                            'bar',
-                            'foo',
-                            'baz'
-                        ]
+                        items: ['bar', 'foo', 'baz'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Reversed',
                         icon,
                         description: 'A reversed version of the items',
-                        items: [
-                            'baz',
-                            'bar',
-                            'foo',
-                        ]
+                        items: ['baz', 'bar', 'foo'],
                     },
-                ]
-            },{
+                ],
+            },
+            {
                 type: 'tabs',
                 title: 'Second',
                 description: 'An alternative collection of tabs',
                 image,
-                layout: 'vertical',
+                layout: 'horizontal',
                 collapse: true,
                 tabs: [
                     {
@@ -85,47 +70,31 @@ module.exports.form = [
                         title: 'Inverted Reversed',
                         image,
                         description: 'A reversed inverted version of the items',
-                        items: [
-                            'bar',
-                            'foo',
-                            'baz'
-                        ]
+                        items: ['bar', 'foo', 'baz'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Reversed',
                         icon,
                         description: 'A reversed version of the items',
-                        items: [
-                            'baz',
-                            'bar',
-                            'foo',
-                        ]
+                        items: ['baz', 'bar', 'foo'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Standard',
                         icon,
                         description: 'The original layout of the items',
-                        items: [
-                            'foo',
-                            'bar',
-                            'baz'
-                        ]
+                        items: ['foo', 'bar', 'baz'],
                     },
                     {
                         type: 'fieldset',
                         title: 'Inverted',
                         image,
                         description: 'An inverted layout of the items',
-                        items: [
-                            'baz',
-                            'foo',
-                            'bar'
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-]
+                        items: ['baz', 'foo', 'bar'],
+                    },
+                ],
+            },
+        ],
+    },
+];
