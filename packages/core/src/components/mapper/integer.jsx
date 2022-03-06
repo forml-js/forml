@@ -1,4 +1,5 @@
 import t from 'prop-types';
+import ObjectPath from 'objectpath';
 import React from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
@@ -20,11 +21,18 @@ export default function Integer(props) {
         form.title || form.key[form.key.length - 1]
     );
     const description = localizer.getLocalizedString(form.description);
+    const id = ObjectPath.stringify(form.key);
 
     return (
         <deco.Input.Group form={form}>
             {label && (
-                <deco.Label key="label" form={form} value={value} error={error}>
+                <deco.Label
+                    key="label"
+                    htmlFor={id}
+                    form={form}
+                    value={value}
+                    error={error}
+                >
                     {label}
                 </deco.Label>
             )}
@@ -33,6 +41,7 @@ export default function Integer(props) {
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
+                id={id}
                 form={form}
                 error={error}
             />

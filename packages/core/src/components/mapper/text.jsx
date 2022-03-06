@@ -1,5 +1,6 @@
 import t from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
+import ObjectPath from 'objectpath';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -16,11 +17,18 @@ export default function Text(props) {
 
     const { title, description, placeholder } = form;
     const { readonly: disabled } = form;
+    const id = ObjectPath.stringify(form.key);
 
     return (
         <deco.Input.Group form={form}>
             {title && (
-                <deco.Label key="label" form={form} value={value} error={error}>
+                <deco.Label
+                    key="label"
+                    htmlFor={id}
+                    form={form}
+                    value={value}
+                    error={error}
+                >
                     {localizer.getLocalizedString(title)}
                 </deco.Label>
             )}
@@ -31,6 +39,7 @@ export default function Text(props) {
                 value={value}
                 error={error}
                 disabled={disabled}
+                id={id}
                 placeholder={localizer.getLocalizedString(placeholder)}
                 {...otherProps}
             />
