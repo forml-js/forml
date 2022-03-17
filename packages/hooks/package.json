@@ -1,6 +1,6 @@
 {
     "name": "@forml/hooks",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Hooks for use with @forml/core",
     "main": "lib/index.js",
     "scripts": {
@@ -44,7 +44,7 @@
         "jest": "^27.3.1"
     },
     "dependencies": {
-        "@forml/context": "^1.2.0"
+        "@forml/context": "^1.2.1"
     },
     "peerDependencies": {
         "react": "^17.0.0 || ^18.0.0"
