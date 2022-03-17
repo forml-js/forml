@@ -363,8 +363,8 @@ function ArrayComponent(props, ref) {
             return;
         } else {
             const [nextItems, nextValue] = items.move(
-                result.destination.index,
-                result.source.index
+                result.source.index,
+                result.destination.index
             );
             const nextModel = model.setValue(form.key, nextValue);
             model.onChange({ target: { value: nextModel } }, nextModel);
