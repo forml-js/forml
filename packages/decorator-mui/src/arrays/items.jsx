@@ -82,17 +82,6 @@ function Items(props, ref) {
                         primary={title}
                         secondary={error || description}
                     />
-                </ListItem>
-                {props.children}
-                {value && value.length === 0 && (
-                    <ListItem key="empty" divider>
-                        <ListItemText
-                            secondary="empty"
-                            secondaryTypographyProps={{ align: 'center' }}
-                        />
-                    </ListItem>
-                )}
-                <ListItem key="controls" dense className={classes.controls}>
                     <Button
                         onClick={props.add}
                         color={color}
@@ -103,6 +92,15 @@ function Items(props, ref) {
                         {localizer.getLocalizedString('Add')} {title}
                     </Button>
                 </ListItem>
+                {props.children}
+                {value && value.length === 0 && (
+                    <ListItem key="empty" divider>
+                        <ListItemText
+                            secondary="empty"
+                            secondaryTypographyProps={{ align: 'center' }}
+                        />
+                    </ListItem>
+                )}
             </List>
         </Paper>
     );
