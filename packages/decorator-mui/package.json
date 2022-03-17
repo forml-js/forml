@@ -52,7 +52,7 @@
         "@mui/lab": "^5.0.0-alpha.71",
         "@mui/material": "^5.4.4",
         "@mui/styles": "^5.4.4",
-        "react": "^17.0.2"
+        "react": "^17.0.0||^18.0.0"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef",
     "dependencies": {

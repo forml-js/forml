@@ -1,46 +1,46 @@
 {
-  "name": "@forml/decorator-pdf",
-  "version": "1.2.0",
-  "description": "A forml decorator designed to produce PDF forms!",
-  "main": "lib/index.js",
-  "scripts": {
-    "lint": "eslint src/**/*.js",
-    "build": "babel src --out-dir lib",
-    "watch": "babel src --out-dir lib --watch",
-    "prepublish": "npm run build",
-    "test": "jest --coverage --verbose --passWithNoTests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/forml-js/forml.git"
-  },
-  "keywords": [
-    "forml",
-    "decorator",
-    "react",
-    "json",
-    "schema",
-    "form"
-  ],
-  "author": "Zachary Hueras",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/forml-js/forml/issues"
-  },
-  "homepage": "https://github.com/forml-js/forml#readme",
-  "peerDependencies": {
-    "@forml/hooks": ">=1.0.0",
-    "@react-pdf/renderer": "^2.1.1",
-    "react": "^16.8.0 || ^17.0.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.12.7",
-    "@babel/core": "^7.12.7",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/preset-env": "^7.12.7",
-    "@babel/preset-react": "^7.12.7",
-    "@forml/context": "^1.2.0",
-    "@forml/hooks": "^1.2.0"
-  },
-  "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
+    "name": "@forml/decorator-pdf",
+    "version": "1.2.0",
+    "description": "A forml decorator designed to produce PDF forms!",
+    "main": "lib/index.js",
+    "scripts": {
+        "lint": "eslint src/**/*.js",
+        "build": "babel src --out-dir lib",
+        "watch": "babel src --out-dir lib --watch",
+        "prepublish": "npm run build",
+        "test": "jest --coverage --verbose --passWithNoTests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/forml-js/forml.git"
+    },
+    "keywords": [
+        "forml",
+        "decorator",
+        "react",
+        "json",
+        "schema",
+        "form"
+    ],
+    "author": "Zachary Hueras",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/forml-js/forml/issues"
+    },
+    "homepage": "https://github.com/forml-js/forml#readme",
+    "peerDependencies": {
+        "@forml/hooks": ">=1.0.0",
+        "@react-pdf/renderer": "^2.1.1",
+        "react": "^17.0.0 || ^18.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.7",
+        "@babel/core": "^7.12.7",
+        "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+        "@babel/preset-env": "^7.12.7",
+        "@babel/preset-react": "^7.12.7",
+        "@forml/context": "^1.2.0",
+        "@forml/hooks": "^1.2.0"
+    },
+    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }
