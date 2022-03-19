@@ -25,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         position: 'relative',
         zIndex: 5,
+        marginLeft: theme?.spacing?.(7),
     },
     tabs: {
-        position: 'relative',
+        position: 'absolute',
         top: 0,
         left: 0,
         display: 'flex',
