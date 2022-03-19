@@ -1,50 +1,36 @@
+import Box from '@mui/material/Box';
 import Icon from '@mui/material/Icon';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import styled from '@mui/material/styles/styled';
 import Paper from '@mui/material/Paper';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
-const GapProvider = function (props) {
-    const { target } = props;
-    const height = target?.scrollHeight; // Scroll height to get true element height
-    const width = target?.offsetWidth; // Offset width to get assumed width
-    console.log('GapProvider(target: %o)', target);
-    return (
-        <div
-            style={{
-                display: 'flex',
-                minHeight: `${height}px`,
-                minWidth: `${width}px`,
-                flex: 0,
-            }}
-        />
-    );
-};
-
-const useStyles = makeStyles((theme) => ({
-    root: {
+const Root = styled(Paper)(({ form }) => [
+    {
         display: 'flex',
         flexDirection: 'column',
-        flex: 1,
+        flexGrow: 1,
     },
-    content: {
-        display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
-    },
-    panels: {
-        display: 'flex',
-        flex: 1,
-        overflow: 'hidden',
+    form.disableMargin && { m: 0 },
+]);
+const Content = styled(Box)(({ theme, tabs, form }) => [
+    {
         position: 'relative',
-        zIndex: 5,
+        display: 'flex',
+        flexGrow: 1,
+        flexDirection: 'column',
+        minHeight: theme.spacing(tabs * 7 + 1 + tabs / 8),
     },
-    tabs: {
-        position: 'absolute',
+    form.disableMargin && { m: 0 },
+    form.disablePadding && { p: 0 },
+]);
+const Tabs = styled(Paper)(({ theme, form }) => [
+    {
+        display: 'flex',
+        flexGrow: 1,
         top: 0,
         left: 0,
         display: 'flex',
@@ -52,82 +38,87 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 10,
         alignItems: 'flex-start',
         whiteSpace: 'nowrap',
-        '&$vertical': {
-            flexDirection: 'row',
-            borderBottom: '1px solid black',
-            borderBottomColor: theme.palette?.divider,
-            right: 0,
-            bottom: 'auto',
-        },
-        '&$horizontal': {
-            bottom: 0,
-            right: 'auto',
-            flex: '0 0 auto',
-            flexDirection: 'column',
-            borderRight: '1px solid black',
-            borderRightColor: theme.palette?.divider,
-            '&$collapse': {
-                overflow: 'hidden',
-                maxWidth: theme.spacing?.(7),
-                transition: 'all 0.3s',
-                '&:hover': {
-                    maxWidth: '100%',
-                },
+    },
+    form?.layout !== 'horizontal' && {
+        right: 0,
+        bottom: 'auto',
+        borderBottom: '1px solid black',
+        borderBottomColor: theme.palette.divider,
+    },
+    form?.layout === 'horizontal' && {
+        bottom: 0,
+        right: 'auto',
+        borderRight: '1px solid black',
+        borderRightColor: theme.palette.divider,
+    },
+    form?.collapse &&
+        form.layout === 'horizontal' && {
+            position: 'absolute',
+            overflow: 'hidden',
+            maxWidth: theme.spacing(7),
+            transition: 'all 0.3s',
+            ':hover': {
+                maxWidth: '100%',
             },
         },
-    },
-    collapse: {},
-    content: {
-        position: 'relative',
-    },
-    titleRoot: {
-        display: 'flex',
-        flexDirection: 'column',
-        flex: 0,
-    },
-    horizontal: {
-        display: 'flex',
+]);
+const TabList = styled(List)(({ form }) => [
+    { display: 'flex', flexGrow: 1, maxWidth: 'fill-available' },
+    form.layout !== 'horizontal' && {
         flexDirection: 'row',
-        flex: 1,
     },
-    vertical: {
-        display: 'flex',
+    form.layout === 'horizontal' && {
         flexDirection: 'column',
+    },
+]);
+const Panels = styled(Box)(({ form, theme }) => [
+    {
+        display: 'flex',
         flex: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        zIndex: 5,
     },
-    title: {
-        flex: '0 0 0',
-        '$vertical>&': {
-            borderRight: '1px solid black',
-            borderRightColor: theme.palette?.divider,
+    !form.disableMargin && {
+        margin: theme.spacing(1),
+    },
+    form.layout === 'horizontal' &&
+        form.collapse && {
+            marginLeft: theme.spacing(7),
         },
-    },
+]);
+const TitleList = styled(List)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 0,
 }));
+const TitleListItem = styled(ListItem)(({ theme, form }) => [
+    { flex: '0 0 0' },
+    form?.layout !== 'horizontal' && {
+        borderRight: '1px solid black',
+        borderRightColor: theme.palette.divider,
+    },
+]);
 
 /**
  * @component
  */
 export default function Container(props) {
-    const { title, description, form } = props;
-    const classes = useStyles(props);
-    const [target, setTarget] = useState(null);
-    const ref = useCallback((nextTarget) => {
-        console.log('Container(nextTarget: %o)', nextTarget);
-        setTarget(nextTarget);
-    });
+    const { title, description, form, collapse } = props;
 
-    const layout = 'layout' in form ? form.layout : 'vertical';
-    const collapse = 'collapse' in form ? form.collapse : false;
-    const icon = 'icon' in form ? form.icon : 'view_carousel';
+    const icon = form.icon ?? 'view_carousel';
+    const showTitle = form.showTitle ?? true;
 
     return (
-        <Paper className={classes.root}>
-            {(title || description) && (
-                <List className={classes.titleRoot} dense disablePadding>
-                    <ListItem key="tab-bar" className={classes.title} divider>
-                        <ListItemIcon key="icon">
-                            <Icon fontSize="small">{icon}</Icon>
-                        </ListItemIcon>
+        <Root form={form}>
+            {(title || description) && showTitle && (
+                <TitleList form={form} dense disablePadding>
+                    <TitleListItem form={form} divider>
+                        {icon && (
+                            <ListItemIcon key="icon">
+                                <Icon fontSize="small">{icon}</Icon>
+                            </ListItemIcon>
+                        )}
                         <ListItemText
                             key="title"
                             primaryTypographyProps={{
@@ -142,28 +133,24 @@ export default function Container(props) {
                             }}
                             secondary={description}
                         />
-                    </ListItem>
-                </List>
+                    </TitleListItem>
+                </TitleList>
             )}
-            <div className={clsx(classes.content, classes[layout])}>
-                <Paper
-                    ref={ref}
-                    banana="farm"
-                    square
-                    elevation={0}
-                    className={clsx(classes.tabs, classes[layout], {
-                        [classes.collapse]: collapse,
-                    })}
-                >
-                    <List dense disablePadding>
+            <Content collapse={collapse} tabs={props.tabs.length} form={form}>
+                <Tabs collapse={collapse} form={form} square elevation={0}>
+                    <TabList
+                        collapse={collapse}
+                        form={form}
+                        dense
+                        disablePadding
+                    >
                         {props.tabs}
-                    </List>
-                </Paper>
-                {collapse && <GapProvider target={target} />}
-                <div key="tab-panel" className={clsx(classes.panels)}>
+                    </TabList>
+                </Tabs>
+                <Panels collapse={collapse} form={form}>
                     {props.panels}
-                </div>
-            </div>
-        </Paper>
+                </Panels>
+            </Content>
+        </Root>
     );
 }

@@ -1,12 +1,14 @@
-import FormGroup from '@mui/material/FormGroup';
-import FormLabel from '@mui/material/FormLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material';
+import Box from '@mui/material/Box';
 import Icon from '@mui/material/Icon';
-import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
 import makeStyles from '@mui/styles/makeStyles';
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 
 /**
  * @component
@@ -25,14 +27,6 @@ const useStyles = makeStyles(function (theme) {
         },
         disableMargin: {
             margin: theme.spacing?.(0),
-        },
-        disableGutters: {
-            '&$vertical, &$horizontal': {
-                paddingLeft: theme.spacing?.(0),
-                paddingRight: theme.spacing?.(0),
-            },
-            paddingLeft: theme.spacing?.(0),
-            paddingRight: theme.spacing?.(0),
         },
         disablePadding: {
             '&$vertical, &$horizontal': {
@@ -88,14 +82,38 @@ const useStyles = makeStyles(function (theme) {
         },
     };
 });
+const Root = styled(List)(({ theme, disablePadding }) => [
+    {
+        flexDirection: 'column',
+    },
+]);
+const Content = styled(Box)(({ theme, disablePadding, disableMargin }) => [
+    {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: theme.spacing(1),
+        margin: theme.spacing(1),
+    },
+    disablePadding && {
+        padding: 0,
+    },
+    disableMargin && {
+        margin: 0,
+    },
+]);
+const Surface = styled(Paper)(({ theme, disableMargin }) => [
+    {
+        flex: 1,
+        flexDirection: 'inherit',
+        m: 1,
+    },
+    disableMargin && { m: 0 },
+]);
 
 export default function FieldSet(props) {
     const { title, description, form } = props;
-    const classes = useStyles(props);
 
     const layout = 'layout' in form ? form.layout : 'vertical';
-    const disableGutters =
-        'disableGutters' in form ? form.disableGutters : false;
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
     const disableMargin = 'disableMargin' in form ? form.disableMargin : false;
@@ -104,55 +122,41 @@ export default function FieldSet(props) {
     const icon = 'icon' in form ? form.icon : null;
 
     let content = (
-        <FormGroup
-            className={clsx(classes.root, {
-                [classes.disableGutters]: true,
-                [classes.disablePadding]: true,
-            })}
-            component={Component}
-        >
+        <Root dense disablePadding>
             {(title || description) && (
-                <div className={classes.header}>
+                <ListItem disablePadding={disablePadding} divider>
                     {icon && (
-                        <Icon key="icon" className={classes.icon}>
-                            {icon}
-                        </Icon>
+                        <ListItemIcon>
+                            <Icon key="icon">{icon}</Icon>
+                        </ListItemIcon>
                     )}
-                    <div key="title" className={classes.title}>
-                        <FormLabel key="label" className={classes.formLabel}>
-                            <Typography variant="subtitle2">{title}</Typography>
-                        </FormLabel>
-                        <FormHelperText
-                            key="help"
-                            variant="caption"
-                            className={classes.formHelperText}
-                        >
-                            {description}
-                        </FormHelperText>
-                    </div>
-                </div>
+                    <ListItemText
+                        key="title"
+                        primary={title}
+                        primaryTypographyProps={{ noWrap: true }}
+                        secondary={description}
+                        secondaryTypographyProps={{
+                            nowrap: true,
+                            variant: 'caption',
+                        }}
+                    />
+                </ListItem>
             )}
-            <Component
-                className={clsx(classes[layout], {
-                    [classes.disableGutters]: disableGutters,
-                    [classes.disablePadding]: disablePadding,
-                })}
+            <Content
+                component={Component}
+                disableMargin={disableMargin}
+                disablePadding={disablePadding}
             >
                 {props.children}
-            </Component>
-        </FormGroup>
+            </Content>
+        </Root>
     );
 
     if (title || description) {
         content = (
-            <Paper
-                className={clsx(classes.paper, {
-                    [classes.disableMargin]: disableMargin,
-                })}
-                elevation={elevation}
-            >
+            <Surface disableMargin={disableMargin} elevation={elevation}>
                 {content}
-            </Paper>
+            </Surface>
         );
     }
 
