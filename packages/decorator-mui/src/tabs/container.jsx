@@ -1,12 +1,29 @@
-import Paper from '@mui/material/Paper';
+import Icon from '@mui/material/Icon';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Icon from '@mui/material/Icon';
-import React from 'react';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
+import React, { useCallback, useState } from 'react';
+
+const GapProvider = function (props) {
+    const { target } = props;
+    const height = target?.scrollHeight; // Scroll height to get true element height
+    const width = target?.offsetWidth; // Offset width to get assumed width
+    console.log('GapProvider(target: %o)', target);
+    return (
+        <div
+            style={{
+                display: 'flex',
+                minHeight: `${height}px`,
+                minWidth: `${width}px`,
+                flex: 0,
+            }}
+        />
+    );
+};
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         position: 'relative',
         zIndex: 5,
-        marginLeft: theme?.spacing?.(7),
     },
     tabs: {
         position: 'absolute',
@@ -94,6 +110,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Container(props) {
     const { title, description, form } = props;
     const classes = useStyles(props);
+    const [target, setTarget] = useState(null);
+    const ref = useCallback((nextTarget) => {
+        console.log('Container(nextTarget: %o)', nextTarget);
+        setTarget(nextTarget);
+    });
 
     const layout = 'layout' in form ? form.layout : 'vertical';
     const collapse = 'collapse' in form ? form.collapse : false;
@@ -126,6 +147,8 @@ export default function Container(props) {
             )}
             <div className={clsx(classes.content, classes[layout])}>
                 <Paper
+                    ref={ref}
+                    banana="farm"
                     square
                     elevation={0}
                     className={clsx(classes.tabs, classes[layout], {
@@ -136,6 +159,7 @@ export default function Container(props) {
                         {props.tabs}
                     </List>
                 </Paper>
+                {collapse && <GapProvider target={target} />}
                 <div key="tab-panel" className={clsx(classes.panels)}>
                     {props.panels}
                 </div>
