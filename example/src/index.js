@@ -1,3 +1,4 @@
+import CssBaseline from '@mui/material/CssBaseline';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterMoment from '@mui/lab/AdapterMoment';
 import debug from 'debug';
@@ -53,6 +54,7 @@ async function init() {
     render(
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterMoment}>
+                <CssBaseline />
                 <Page />
             </LocalizationProvider>
         </ThemeProvider>,
