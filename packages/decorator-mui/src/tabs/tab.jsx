@@ -17,79 +17,118 @@ const ImageIcon = styled('img')(({ theme, ...props }) => ({
     overflow: 'hidden',
 }));
 const Root = styled(ListItem)(({ theme, parent, active, form }) => [
-    parent.collapse &&
-        parent.layout !== 'horizontal' && {
-            maxWidth: theme.spacing(7),
-        },
-    parent.collapse &&
-        (parent.layout === 'horizontal' || active) && {
-            maxWidth: '100%',
-        },
     {
-        flexBasis: 'min-content',
-        flexGrow: 0,
-        flexShrink: 1,
         minHeight: theme.spacing(7),
         minWidth: theme.spacing(7),
         overflow: 'hidden',
         position: 'relative',
-        transition: 'all 0.3s',
+        transition: theme.transitions.create(),
+        opacity: theme.palette.action.disabledOpacity,
         ':hover': {
-            maxWidth: '100vh',
+            opacity: 1,
         },
-    },
-    parent.layout === 'horizontal' && {
         ':after': {
-            borderRight: '0px solid black',
-            borderRightColor: theme.palette.primary.main,
-            bottom: 0,
             content: '""',
             display: 'block',
-            left: 'auto',
             position: 'absolute',
             right: 0,
             top: 0,
-            transform: 'translateX(1px)',
-            transition: 'border 0.3s',
+            left: 0,
+            bottom: 0,
+            transition: theme.transitions.create(),
             zIndex: 100,
         },
-        ':hover': {
-            ':after': {
-                borderRightWidth: theme.spacing(0.5),
+    },
+
+    active && {
+        opacity: 1,
+    },
+
+    // Collapse modifications
+    parent.collapse && {
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: 'min-content',
+        maxWidth: theme.spacing(7),
+    },
+    // Collapse modifications: vertical layout
+    parent.collapse &&
+        parent.layout !== 'horizontal' && {
+            flexGrow: 0,
+            flexShrink: 0,
+            ':hover': {
+                flexBasis: 'min-content',
+                flexGrow: 0,
+                flexShrink: 0,
+                maxWidth: '100%',
             },
         },
-    },
-    parent.layout !== 'horizontal' && {
+    active &&
+        parent.collapse &&
+        parent.layout !== 'horizontal' && {
+            flexBasis: 'min-content',
+            flexGrow: 0,
+            flexShrink: 0,
+            maxWidth: '100%',
+        },
+
+    parent.collapse &&
+        parent.layout === 'horizontal' && {
+            maxWidth: '100%',
+            flexGrow: 1,
+        },
+
+    parent.layout === 'horizontal' && {
         ':after': {
-            borderBottom: '0px solid black',
-            borderBottomColor: theme.palette.primary.main,
-            bottom: 0,
-            content: '""',
-            display: 'block',
-            left: 0,
-            position: 'absolute',
-            right: 0,
-            top: 'auto',
-            transform: 'translateY(1px)',
-            transition: 'border 0.3s',
-            zIndex: 10,
-        },
-        ':hover': {
-            ':after': {
-                borderBottomWidth: theme.spacing(0.5),
-            },
+            left: 'auto',
+            width: '1px',
+            backgroundColor: theme.palette.divider,
+            transform: 'scaleX(100%)',
+            transformOrigin: 'right',
         },
     },
+    !active &&
+        parent.layout === 'horizontal' && {
+            ':hover': {
+                ':after': {
+                    backgroundColor: theme.palette.primary.main,
+                    transform: 'scaleX(300%)',
+                },
+            },
+        },
     active &&
         parent.layout === 'horizontal' && {
             ':after': {
-                borderRightWidth: theme.spacing(0.5),
+                backgroundColor: theme.palette.primary.main,
+                transform: 'scaleX(300%)',
+            },
+        },
+
+    parent.layout !== 'horizontal' && {
+        borderRight: '1px solid black',
+        borderRightColor: theme.palette.divider,
+        ':after': {
+            top: 'auto',
+            height: '1px',
+            backgroundColor: theme.palette.divider,
+            transform: 'scaleY(100%)',
+            transformOrigin: 'bottom',
+        },
+    },
+    !active &&
+        parent.layout !== 'horizontal' && {
+            ':hover': {
+                ':after': {
+                    backgroundColor: theme.palette.primary.main,
+                    transform: 'scaleY(300%)',
+                },
             },
         },
     active &&
         parent.layout !== 'horizontal' && {
             ':after': {
-                borderBottomWidth: theme.spacing(0.5),
+                backgroundColor: theme.palette.primary.main,
+                transform: 'scaleY(300%)',
             },
         },
 ]);

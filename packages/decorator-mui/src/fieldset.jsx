@@ -109,6 +109,7 @@ const Surface = styled(Paper)(({ theme, disableMargin }) => [
     },
     disableMargin && { m: 0 },
 ]);
+const Title = styled(ListItem)(({ theme }) => ({}));
 
 export default function FieldSet(props) {
     const { title, description, form } = props;
@@ -124,7 +125,7 @@ export default function FieldSet(props) {
     let content = (
         <Root dense disablePadding>
             {(title || description) && (
-                <ListItem disablePadding={disablePadding} divider>
+                <Title disablePadding={disablePadding} divider>
                     {icon && (
                         <ListItemIcon>
                             <Icon key="icon">{icon}</Icon>
@@ -140,7 +141,7 @@ export default function FieldSet(props) {
                             variant: 'caption',
                         }}
                     />
-                </ListItem>
+                </Title>
             )}
             <Content
                 component={Component}

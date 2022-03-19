@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import styled from '@mui/material/styles/styled';
 import Paper from '@mui/material/Paper';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Root = styled(Paper)(({ form }) => [
     {
@@ -16,13 +16,13 @@ const Root = styled(Paper)(({ form }) => [
     },
     form.disableMargin && { m: 0 },
 ]);
-const Content = styled(Box)(({ theme, tabs, form }) => [
+const Content = styled(Box)(({ theme, tabs, form, minHeight }) => [
     {
         position: 'relative',
         display: 'flex',
         flexGrow: 1,
         flexDirection: 'column',
-        minHeight: theme.spacing(tabs * 7 + 1 + tabs / 8),
+        minHeight,
     },
     form.disableMargin && { m: 0 },
     form.disablePadding && { p: 0 },
@@ -63,7 +63,11 @@ const Tabs = styled(Paper)(({ theme, form }) => [
         },
 ]);
 const TabList = styled(List)(({ form }) => [
-    { display: 'flex', flexGrow: 1, maxWidth: 'fill-available' },
+    {
+        display: 'flex',
+        flexGrow: 1,
+        maxWidth: 'fill-available',
+    },
     form.layout !== 'horizontal' && {
         flexDirection: 'row',
     },
@@ -93,7 +97,7 @@ const TitleList = styled(List)(() => ({
     flex: 0,
 }));
 const TitleListItem = styled(ListItem)(({ theme, form }) => [
-    { flex: '0 0 0' },
+    { flex: 0 },
     form?.layout !== 'horizontal' && {
         borderRight: '1px solid black',
         borderRightColor: theme.palette.divider,
@@ -105,9 +109,20 @@ const TitleListItem = styled(ListItem)(({ theme, form }) => [
  */
 export default function Container(props) {
     const { title, description, form, collapse } = props;
+    const ref = useRef(null);
+    const [minHeight, setMinHeight] = useState(0);
 
     const icon = form.icon ?? 'view_carousel';
     const showTitle = form.showTitle ?? true;
+
+    useEffect(
+        function () {
+            if (ref.current) {
+                setMinHeight(ref.current.scrollHeight);
+            }
+        },
+        [ref.current]
+    );
 
     return (
         <Root form={form}>
@@ -136,8 +151,19 @@ export default function Container(props) {
                     </TitleListItem>
                 </TitleList>
             )}
-            <Content collapse={collapse} tabs={props.tabs.length} form={form}>
-                <Tabs collapse={collapse} form={form} square elevation={0}>
+            <Content
+                collapse={collapse}
+                tabs={props.tabs.length}
+                form={form}
+                minHeight={minHeight}
+            >
+                <Tabs
+                    collapse={collapse}
+                    form={form}
+                    square
+                    elevation={0}
+                    ref={ref}
+                >
                     <TabList
                         collapse={collapse}
                         form={form}
