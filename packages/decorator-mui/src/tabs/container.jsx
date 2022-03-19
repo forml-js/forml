@@ -96,6 +96,7 @@ export default function Container(props) {
 
     const layout = 'layout' in form ? form.layout : 'vertical';
     const collapse = 'collapse' in form ? form.collapse : false;
+    const icon = 'icon' in form ? form.icon : 'view_carousel';
 
     return (
         <Paper className={classes.root}>
@@ -103,7 +104,7 @@ export default function Container(props) {
                 <List className={classes.titleRoot} dense disablePadding>
                     <ListItem key="tab-bar" className={classes.title} divider>
                         <ListItemIcon key="icon">
-                            <Icon fontSize="small">view_carousel</Icon>
+                            <Icon fontSize="small">{icon}</Icon>
                         </ListItemIcon>
                         <ListItemText
                             key="title"
