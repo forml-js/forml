@@ -60,7 +60,7 @@ export default function File(props) {
     );
 
     async function onChange(event) {
-        const [file] = event.target.files;
+        const [file] = event.target.files ?? [];
         let result = '';
 
         if (file) {
