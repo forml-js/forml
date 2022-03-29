@@ -14,20 +14,19 @@ import React from 'react';
 const Root = styled(List)(({ theme, disablePadding }) => [
     {
         flexDirection: 'column',
+        flexGrow: 1,
     },
 ]);
-const Content = styled(Box)(({ theme, disablePadding, disableMargin }) => [
+const Content = styled(Box)(({ theme, disablePadding, layout, alignItems }) => [
     {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: layout === 'vertical' ? 'column' : 'row',
         padding: theme.spacing(1),
-        margin: theme.spacing(1),
+        gap: theme.spacing(1),
+        alignItems: alignItems,
     },
     disablePadding && {
         padding: 0,
-    },
-    disableMargin && {
-        margin: 0,
     },
 ]);
 const Surface = styled(Paper)(({ theme, disableMargin }) => [
@@ -43,11 +42,11 @@ const Title = styled(ListItem)(({ theme }) => ({}));
 export default function FieldSet(props) {
     const { title, description, form } = props;
 
+    const alignItems = 'alignItems' in form ? form.alignItems : undefined;
     const layout = 'layout' in form ? form.layout : 'vertical';
     const showTitle = 'showTitle' in form ? form.showTitle : true;
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
-    const disableMargin = 'disableMargin' in form ? form.disableMargin : false;
     const Component = 'component' in form ? form.component : 'div';
     const elevation = 'elevation' in form ? form.elevation : 1;
     const icon = 'icon' in form ? form.icon : null;
@@ -74,9 +73,10 @@ export default function FieldSet(props) {
                 </Title>
             )}
             <Content
+                layout={layout}
                 component={Component}
-                disableMargin={disableMargin}
                 disablePadding={disablePadding}
+                alignItems={alignItems}
             >
                 {props.children}
             </Content>
@@ -84,11 +84,7 @@ export default function FieldSet(props) {
     );
 
     if (title || description) {
-        content = (
-            <Surface disableMargin={disableMargin} elevation={elevation}>
-                {content}
-            </Surface>
-        );
+        content = <Surface elevation={elevation}>{content}</Surface>;
     }
 
     return content;
