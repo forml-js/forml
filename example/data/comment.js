@@ -131,7 +131,7 @@ export function form(props, model) {
                     type: 'fieldset',
                     alignItems: 'flex-end',
                     items: [
-                        { key: 'comment', type: 'textarea' },
+                        { key: 'comment', type: 'textarea', fullWidth: true },
                         { key: 'tos' },
                     ],
                     layout: 'vertical',
@@ -140,7 +140,8 @@ export function form(props, model) {
         },
         {
             type: 'fieldset',
-            disableGutters: true,
+            disableMargin: true,
+            disablePadding: true,
             items: [
                 {
                     type: 'array',
