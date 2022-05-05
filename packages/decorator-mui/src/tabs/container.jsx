@@ -83,6 +83,10 @@ const Panels = styled(Box)(({ form, theme }) => [
         position: 'relative',
         zIndex: 5,
     },
+    form.layout === 'horizontal' && {
+        flexDirection: 'column',
+        flexGrow: 1,
+    },
     !form.disableMargin && {
         margin: theme.spacing(1),
     },
