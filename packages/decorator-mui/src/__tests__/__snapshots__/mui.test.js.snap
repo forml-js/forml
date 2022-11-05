@@ -6,13 +6,13 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
         aria-label="Choose date"
         aria-readonly="true"
-        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
         readonly=""
         type="text"
         value=""
@@ -21,7 +21,7 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
     <p
       class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
     >
-      should match format "date"
+      invalid schema
     </p>
   </div>
 </div>
@@ -33,13 +33,13 @@ exports[`Material UI with no model renders empty root date-time consistently 1`]
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
         aria-label="Choose date"
         aria-readonly="true"
-        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
         readonly=""
         type="text"
         value=""
@@ -48,7 +48,7 @@ exports[`Material UI with no model renders empty root date-time consistently 1`]
     <p
       class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
     >
-      should match format "date-time"
+      invalid schema
     </p>
   </div>
 </div>
@@ -60,12 +60,12 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+        class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
         role="button"
         tabindex="0"
       >
@@ -96,7 +96,7 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
     <p
       class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
     >
-      should be equal to one of the allowed values
+      must be equal to one of the allowed values
     </p>
   </div>
 </div>
@@ -108,12 +108,12 @@ exports[`Material UI with no model renders empty root integer consistently 1`] =
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
         aria-invalid="false"
-        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
         id=""
         type="text"
         value="0"
@@ -129,12 +129,12 @@ exports[`Material UI with no model renders empty root multiselect consistently 1
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-select MuiSelect-standard MuiSelect-multiple MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+        class="MuiSelect-select MuiSelect-standard MuiSelect-multiple MuiInputBase-input MuiInput-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
         role="button"
         tabindex="0"
       >
@@ -172,12 +172,12 @@ exports[`Material UI with no model renders empty root number consistently 1`] = 
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
         aria-invalid="false"
-        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
         id=""
         type="text"
         value="0"
@@ -199,12 +199,12 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
         class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
       >
         <div
-          class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
           form="[object Object]"
         >
           <input
             aria-invalid="false"
-            class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+            class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
             id="test"
             type="text"
             value=""
@@ -221,18 +221,18 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
             class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
           >
             <label
-              class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="true"
             >
               property
             </label>
             <div
-              class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
               form="[object Object]"
             >
               <input
                 aria-invalid="false"
-                class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
                 id="nested.property"
                 type="text"
                 value="0"
@@ -252,12 +252,12 @@ exports[`Material UI with no model renders empty root string consistently 1`] = 
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
         aria-invalid="false"
-        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
         id=""
         type="text"
         value=""

@@ -3,12 +3,12 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1qu3b92-MuiInputBase-root-MuiInput-root"
+    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary css-1qu3b92-MuiInputBase-root-MuiInput-root"
     form="[object Object]"
   >
     <input
       aria-invalid="false"
-      class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+      class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
       type="text"
       value=""
     />

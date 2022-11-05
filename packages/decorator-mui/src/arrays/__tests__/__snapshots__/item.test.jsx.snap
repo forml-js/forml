@@ -22,7 +22,7 @@ exports[`renders consistently 1`] = `
       class="makeStyles-controls-2"
     >
       <button
-        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -37,7 +37,7 @@ exports[`renders consistently 1`] = `
         />
       </button>
       <button
-        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -52,7 +52,7 @@ exports[`renders consistently 1`] = `
         />
       </button>
       <button
-        class="MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root makeStyles-destroy-6 css-kmxb0e-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-destroy-6 css-kmxb0e-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
