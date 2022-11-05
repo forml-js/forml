@@ -64,13 +64,15 @@ const useStyles = makeStyles(function (theme) {
  */
 export function ItemComponent(props, ref) {
     const classes = useStyles(props);
-    const { disabled } = props;
+    const { disabled, parent } = props;
     const { draggableProps, dragHandleProps } = props.otherProps;
 
     const dragHandleClass = clsx(
         dragHandleProps ? dragHandleProps.className : null,
         classes.dragHandle
     );
+    const renderMovementButtons =
+        'movementButtons' in parent ? parent.renderMovementButtons : true;
 
     return (
         <ListItem
@@ -85,16 +87,24 @@ export function ItemComponent(props, ref) {
             </div>
             <div className={classes.forms}>{props.children}</div>
             <div key="controls" className={classes.controls}>
-                <Button onClick={props.moveUp} size="small" disabled={disabled}>
-                    <Icon>keyboard_arrow_up</Icon>
-                </Button>
-                <Button
-                    onClick={props.moveDown}
-                    size="small"
-                    disabled={disabled}
-                >
-                    <Icon>keyboard_arrow_down</Icon>
-                </Button>
+                {renderMovementButtons ? (
+                    <>
+                        <Button
+                            onClick={props.moveUp}
+                            size="small"
+                            disabled={disabled}
+                        >
+                            <Icon>keyboard_arrow_up</Icon>
+                        </Button>
+                        <Button
+                            onClick={props.moveDown}
+                            size="small"
+                            disabled={disabled}
+                        >
+                            <Icon>keyboard_arrow_down</Icon>
+                        </Button>
+                    </>
+                ) : null}
                 <Button
                     onClick={props.destroy}
                     className={classes.destroy}
