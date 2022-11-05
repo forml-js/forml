@@ -55,7 +55,9 @@ function Items(props, ref) {
     const addText =
         'addText' in form
             ? form.addText
-            : `${localizer.getLocalizedString('Add')} ${title}`;
+            : title
+            ? `${localizer.getLocalizedString('Add')} ${title}`
+            : localizer.getLocalizedString('Add');
 
     return (
         <Paper

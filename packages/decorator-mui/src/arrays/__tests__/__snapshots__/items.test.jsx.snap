@@ -48,7 +48,6 @@ exports[`renders with description and no title 1`] = `
             </span>
           </span>
           Add
-           
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -111,9 +110,7 @@ exports[`renders with form options disableGutters false 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -176,9 +173,7 @@ exports[`renders with form options disableGutters true 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -241,9 +236,7 @@ exports[`renders with form options disablePadding false 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -306,9 +299,7 @@ exports[`renders with form options disablePadding true 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -371,9 +362,7 @@ exports[`renders with form options icon favorite 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -436,9 +425,7 @@ exports[`renders with form options icon person 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -491,7 +478,6 @@ exports[`renders with no title or description 1`] = `
             </span>
           </span>
           Add
-           
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -554,9 +540,7 @@ exports[`renders with title and description 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -614,9 +598,7 @@ exports[`renders with title and no description 1`] = `
               add
             </span>
           </span>
-          Add
-           
-          title
+          Add title
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
