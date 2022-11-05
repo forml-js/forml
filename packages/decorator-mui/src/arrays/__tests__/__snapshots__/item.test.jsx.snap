@@ -3,10 +3,10 @@
 exports[`renders consistently 1`] = `
 <div>
   <li
-    class="MuiListItem-root MuiListItem-padding MuiListItem-divider makeStyles-item-3 css-1kdod17-MuiListItem-root"
+    class="MuiListItem-root MuiListItem-padding MuiListItem-divider makeStyles-item-4 css-1kdod17-MuiListItem-root"
   >
     <div
-      class="makeStyles-dragHandle-5"
+      class="makeStyles-topDragHandle-7"
     >
       <span
         aria-hidden="true"
@@ -19,7 +19,7 @@ exports[`renders consistently 1`] = `
       class="makeStyles-forms-1"
     />
     <div
-      class="makeStyles-controls-2"
+      class="makeStyles-controls-3"
     >
       <button
         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
@@ -51,8 +51,11 @@ exports[`renders consistently 1`] = `
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
+      <div
+        class="makeStyles-spacer-2"
+      />
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-destroy-6 css-kmxb0e-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-destroy-9 css-kmxb0e-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
