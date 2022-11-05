@@ -72,6 +72,14 @@ async function init() {
                             height: '100vh',
                             overflow: 'hidden',
                         },
+                        '#app': {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexGrow: '1',
+                            maxHeight: 'fill-available',
+                            maxWidth: 'fill-available',
+                            overflow: 'hidden',
+                        },
                     }}
                 />
                 <Page />

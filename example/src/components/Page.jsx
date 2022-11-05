@@ -13,17 +13,34 @@ import RenderExample from './RenderExample';
 import SelectDecorator from './SelectDecorator';
 import SelectExample from './SelectExample';
 
-const useStyles = makeStyles(function () {
+const useStyles = makeStyles(function (theme) {
     return {
         root: {
             display: 'flex',
             flexDirection: 'row',
             flexGrow: 1,
+            maxHeight: 'fill-available',
             overflow: 'auto',
         },
         manager: { flex: '0 0 300px' },
-        example: { flex: '1 0 600px' },
-        exampleContent: { display: 'flex', flexDirection: 'column' },
+        example: {
+            display: 'flex',
+            flex: '1 0 auto',
+            flexDirection: 'column',
+            maxHeight: 'fill-available',
+        },
+        exampleContent: {
+            display: 'flex',
+            flexDirection: 'column',
+            flex: '1 0 0',
+            maxHeight: 'fill-available',
+            overflow: 'auto',
+            borderBottom: `1px solid ${theme.palette?.divider}`,
+        },
+        exampleFooter: {
+            flex: '0 0 fit-content',
+            maxHeight: '30%',
+        },
     };
 });
 
@@ -31,6 +48,8 @@ const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
+    overflow: 'hidden',
+    maxHeight: 'fill-available',
 }));
 
 export default function Page() {
@@ -67,7 +86,7 @@ export default function Page() {
                         decorator={decorator}
                     />
                 </CardContent>
-                <CardContent key="model">
+                <CardContent className={classes.exampleFooter} key="model">
                     <Typography key="title" variant="h6">
                         Model
                     </Typography>
