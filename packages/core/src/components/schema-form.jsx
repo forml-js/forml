@@ -131,7 +131,7 @@ export function SchemaForm({
         if (!valid) {
             for (const error of errors) {
                 const keys = ObjectPath.parse(
-                    error.dataPath.replace(/^\./, '')
+                    error.dataPath?.replace(/^\./, '') ?? ''
                 );
                 const normal = ObjectPath.stringify(keys);
                 errorMap = { ...errorMap, [normal]: error.message };
