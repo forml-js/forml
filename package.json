@@ -50,6 +50,7 @@
         "react-dom": "^17.0.2",
         "react-test-renderer": "^17.0.2",
         "semantic-release": "^19.0.5",
+        "semantic-release-lerna": "^0.7.1",
         "shortid": "^2.2.16"
     },
     "workspaces": [
