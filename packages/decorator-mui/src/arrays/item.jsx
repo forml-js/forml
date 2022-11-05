@@ -83,7 +83,7 @@ export function ItemComponent(props, ref) {
             <div {...dragHandleProps} className={dragHandleClass}>
                 <Icon>drag_handle</Icon>
             </div>
-            <div className={classes.forms}>{props.children}</div>,
+            <div className={classes.forms}>{props.children}</div>
             <div key="controls" className={classes.controls}>
                 <Button onClick={props.moveUp} size="small" disabled={disabled}>
                     <Icon>keyboard_arrow_up</Icon>
