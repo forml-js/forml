@@ -1,4 +1,5 @@
 import CssBaseline from '@mui/material/CssBaseline';
+import GlobalStyles from '@mui/material/GlobalStyles';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterMoment from '@mui/lab/AdapterMoment';
 import debug from 'debug';
@@ -55,6 +56,24 @@ async function init() {
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterMoment}>
                 <CssBaseline />
+                <GlobalStyles
+                    styles={{
+                        html: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '100vw',
+                            height: '100vh',
+                            overflow: 'hidden',
+                        },
+                        body: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '100vw',
+                            height: '100vh',
+                            overflow: 'hidden',
+                        },
+                    }}
+                />
                 <Page />
             </LocalizationProvider>
         </ThemeProvider>,
