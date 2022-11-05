@@ -1,6 +1,14 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "version": "independent"
+    "packages": [
+        "packages/context",
+        "packages/decorator-mui",
+        "packages/decorator-barebones",
+        "packages/ware",
+        "packages/decorator-bootstrap",
+        "packages/hooks",
+        "packages/core",
+        "packages/decorator-pdf"
+    ],
+    "useWorkspaces": true,
+    "version": "independent"
 }

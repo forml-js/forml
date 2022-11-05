@@ -40,7 +40,7 @@
         "babel-jest": "^27.3.1",
         "clsx": "^1.1.1",
         "jest": "^27.3.1",
-        "lerna": "^5.4.1",
+        "lerna": "^6.0.1",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.32",
         "objectpath": "^2.0.0",
@@ -48,10 +48,18 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-test-renderer": "^17.0.2",
+        "semantic-release": "^19.0.5",
         "shortid": "^2.2.8"
     },
     "workspaces": [
-        "./packages/*"
+        "packages/context",
+        "packages/decorator-mui",
+        "packages/decorator-barebones",
+        "packages/ware",
+        "packages/decorator-bootstrap",
+        "packages/hooks",
+        "packages/core",
+        "packages/decorator-pdf"
     ],
     "dependencies": {
         "@forml/context": "file:packages/context",
