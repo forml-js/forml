@@ -3,7 +3,7 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1qu3b92-MuiInputBase-root-MuiInput-root"
     form="[object Object]"
   >
     <input

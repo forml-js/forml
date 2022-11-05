@@ -3,7 +3,7 @@
 exports[`renders with form options autoOk false 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -21,7 +21,7 @@ exports[`renders with form options autoOk false 1`] = `
 exports[`renders with form options autoOk true 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -39,7 +39,7 @@ exports[`renders with form options autoOk true 1`] = `
 exports[`renders with form options disableFuture false 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -57,7 +57,7 @@ exports[`renders with form options disableFuture false 1`] = `
 exports[`renders with form options disableFuture true 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -75,7 +75,7 @@ exports[`renders with form options disableFuture true 1`] = `
 exports[`renders with form options disablePast false 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -93,7 +93,7 @@ exports[`renders with form options disablePast false 1`] = `
 exports[`renders with form options disablePast true 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="true"
@@ -111,7 +111,7 @@ exports[`renders with form options disablePast true 1`] = `
 exports[`renders with form options format LLLL 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -129,7 +129,7 @@ exports[`renders with form options format LLLL 1`] = `
 exports[`renders with form options format YYYY/MM/DD HH:mm:ss 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -147,7 +147,7 @@ exports[`renders with form options format YYYY/MM/DD HH:mm:ss 1`] = `
 exports[`renders with form options fullWidth false 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -165,7 +165,7 @@ exports[`renders with form options fullWidth false 1`] = `
 exports[`renders with form options fullWidth true 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -183,7 +183,7 @@ exports[`renders with form options fullWidth true 1`] = `
 exports[`renders with form options openTo datetime 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -201,7 +201,7 @@ exports[`renders with form options openTo datetime 1`] = `
 exports[`renders with form options openTo month 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -219,7 +219,7 @@ exports[`renders with form options openTo month 1`] = `
 exports[`renders with form options openTo year 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -237,7 +237,7 @@ exports[`renders with form options openTo year 1`] = `
 exports[`renders with form options readonly false 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -255,7 +255,7 @@ exports[`renders with form options readonly false 1`] = `
 exports[`renders with form options readonly true 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -274,7 +274,7 @@ exports[`renders with form options readonly true 1`] = `
 exports[`renders with form options variant dialog 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"
@@ -292,7 +292,7 @@ exports[`renders with form options variant dialog 1`] = `
 exports[`renders with form options variant inline 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       aria-invalid="false"

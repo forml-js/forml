@@ -3,7 +3,7 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
@@ -51,7 +51,7 @@ exports[`renders consistently 1`] = `
 exports[`renders with form options format data_url 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
@@ -99,7 +99,7 @@ exports[`renders with form options format data_url 1`] = `
 exports[`renders with form options format name 1`] = `
 <div>
   <div
-    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-a88p61-MuiInputBase-root-MuiInput-root"
+    class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-adornedEnd css-1tcs2i1-MuiInputBase-root-MuiInput-root"
   >
     <input
       class="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"

@@ -31,10 +31,6 @@ exports[`renders with description and no title 1`] = `
             title
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-45 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -99,10 +95,6 @@ exports[`renders with form options disableGutters false 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-10 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -168,10 +160,6 @@ exports[`renders with form options disableGutters true 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-5 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -237,10 +225,6 @@ exports[`renders with form options disablePadding false 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-20 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -306,10 +290,6 @@ exports[`renders with form options disablePadding true 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-15 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -375,10 +355,6 @@ exports[`renders with form options icon favorite 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-30 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -444,10 +420,6 @@ exports[`renders with form options icon person 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-25 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -502,10 +474,6 @@ exports[`renders with no title or description 1`] = `
         <div
           class="MuiListItemText-root MuiListItemText-dense css-tlelie-MuiListItemText-root"
         />
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-50 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -570,10 +538,6 @@ exports[`renders with title and description 1`] = `
             description
           </p>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-35 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"
@@ -634,10 +598,6 @@ exports[`renders with title and no description 1`] = `
             title
           </span>
         </div>
-      </li>
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding makeStyles-controls-40 css-6lnq02-MuiListItem-root"
-      >
         <button
           class="MuiButton-root MuiButton-text MuiButton-textInfo MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1hny3k0-MuiButtonBase-root-MuiButton-root"
           edge="end"

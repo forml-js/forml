@@ -3,7 +3,7 @@
 exports[`renders consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   />
 </div>
 `;

@@ -3,7 +3,9 @@
 exports[`renders with form options elevation 0 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-25 makeStyles-vertical-27 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1ynw4a6-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -41,7 +43,9 @@ exports[`renders with form options elevation 0 1`] = `
 exports[`renders with form options elevation 0 with layout 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-31 makeStyles-horizontal-35 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1oz3qhr-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -79,7 +83,9 @@ exports[`renders with form options elevation 0 with layout 1`] = `
 exports[`renders with form options elevation 1 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-37 makeStyles-vertical-39 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1ynw4a6-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -117,7 +123,9 @@ exports[`renders with form options elevation 1 1`] = `
 exports[`renders with form options elevation 1 with layout 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-43 makeStyles-horizontal-47 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1oz3qhr-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -155,7 +163,9 @@ exports[`renders with form options elevation 1 with layout 1`] = `
 exports[`renders with form options elevation undefined 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-49 makeStyles-vertical-51 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1ynw4a6-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -193,7 +203,9 @@ exports[`renders with form options elevation undefined 1`] = `
 exports[`renders with form options elevation undefined with layout 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-55 makeStyles-horizontal-59 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1oz3qhr-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -231,7 +243,9 @@ exports[`renders with form options elevation undefined with layout 1`] = `
 exports[`renders with form options icon person 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-1 makeStyles-vertical-3 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1ynw4a6-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -269,7 +283,9 @@ exports[`renders with form options icon person 1`] = `
 exports[`renders with form options icon person with layout 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-7 makeStyles-horizontal-11 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1oz3qhr-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -307,7 +323,9 @@ exports[`renders with form options icon person with layout 1`] = `
 exports[`renders with form options icon undefined 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-13 makeStyles-vertical-15 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1ynw4a6-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >
@@ -335,7 +353,9 @@ exports[`renders with form options icon undefined 1`] = `
 exports[`renders with form options icon undefined with layout 1`] = `
 <div>
   <div
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button makeStyles-root-19 makeStyles-horizontal-23 css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1oz3qhr-MuiButtonBase-root-MuiListItem-root"
+    form="[object Object]"
+    parent="[object Object]"
     role="button"
     tabindex="0"
   >

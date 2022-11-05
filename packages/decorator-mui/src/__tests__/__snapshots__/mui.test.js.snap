@@ -3,10 +3,10 @@
 exports[`Material UI with no model renders empty root date consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
@@ -30,10 +30,10 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
 exports[`Material UI with no model renders empty root date-time consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
@@ -57,10 +57,10 @@ exports[`Material UI with no model renders empty root date-time consistently 1`]
 exports[`Material UI with no model renders empty root enumeration consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl  css-88nv5c-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
@@ -105,10 +105,10 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
 exports[`Material UI with no model renders empty root integer consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
@@ -126,10 +126,10 @@ exports[`Material UI with no model renders empty root integer consistently 1`] =
 exports[`Material UI with no model renders empty root multiselect consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-88nv5c-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
@@ -169,10 +169,10 @@ exports[`Material UI with no model renders empty root multiselect consistently 1
 exports[`Material UI with no model renders empty root number consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
@@ -189,18 +189,17 @@ exports[`Material UI with no model renders empty root number consistently 1`] = 
 
 exports[`Material UI with no model renders empty root object consistently 1`] = `
 <div>
-  <div
-    class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5 css-dmmspl-MuiFormGroup-root"
-    component="div"
+  <ul
+    class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
   >
     <div
-      class="makeStyles-vertical-8"
+      class="MuiBox-root css-rwzwky"
     >
       <div
-        class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+        class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
       >
         <div
-          class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+          class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
           form="[object Object]"
         >
           <input
@@ -212,15 +211,14 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
           />
         </div>
       </div>
-      <div
-        class="MuiFormGroup-root makeStyles-root-2 makeStyles-disableGutters-4 makeStyles-disablePadding-5 css-dmmspl-MuiFormGroup-root"
-        component="div"
+      <ul
+        class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
       >
         <div
-          class="makeStyles-vertical-8"
+          class="MuiBox-root css-rwzwky"
         >
           <div
-            class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+            class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
           >
             <label
               class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
@@ -229,7 +227,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
               property
             </label>
             <div
-              class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+              class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
               form="[object Object]"
             >
               <input
@@ -242,19 +240,19 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
             </div>
           </div>
         </div>
-      </div>
+      </ul>
     </div>
-  </div>
+  </ul>
 </div>
 `;
 
 exports[`Material UI with no model renders empty root string consistently 1`] = `
 <div>
   <div
-    class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vp6a25-MuiInputBase-root-MuiInput-root"
       form="[object Object]"
     >
       <input
