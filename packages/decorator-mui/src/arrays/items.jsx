@@ -54,7 +54,7 @@ function Items(props, ref) {
     const icon = 'icon' in form ? form.icon : 'view_list';
     const addText =
         'addText' in form
-            ? form.addText
+            ? localizer.getLocalizedString(form.addText)
             : title
             ? `${localizer.getLocalizedString('Add')} ${title}`
             : localizer.getLocalizedString('Add');
