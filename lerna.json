@@ -10,5 +10,5 @@
         "packages/decorator-pdf"
     ],
     "useWorkspaces": true,
-    "version": "independent"
+    "version": "1.5.3"
 }
