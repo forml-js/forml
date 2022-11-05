@@ -1,0 +1,26 @@
+{
+    "extends": "nx/presets/npm.json",
+    "npmScope": "otpjs",
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "nx/tasks-runners/default",
+            "options": {
+                "cacheableOperations": [
+                    "build-client",
+                    "build",
+                    "watch-client",
+                    "watch"
+                ]
+            }
+        }
+    },
+    "targetDefaults": {
+        "build": {
+            "dependsOn": ["^build"]
+        }
+    },
+    "generators": {},
+    "affected": {
+        "defaultBase": "main"
+    }
+}
