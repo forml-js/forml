@@ -36,15 +36,15 @@
     "url": "https://github.com/forml-js/forml/issues"
   },
   "peerDependencies": {
-    "bootstrap": "^4.5.3",
-    "react-bootstrap": "^1.4.0"
+    "bootstrap": "^5.2.2",
+    "react-bootstrap": "^2.5.0"
   },
   "dependencies": {
     "@forml/hooks": "^1.2.2"
   },
   "devDependencies": {
     "@forml/context": "^1.2.2",
-    "bootstrap": "^4.5.3",
-    "react-bootstrap": "^1.4.0"
+    "bootstrap": "^5.2.2",
+    "react-bootstrap": "^2.5.0"
   }
 }
