@@ -1,3 +1,11 @@
+## 1.6.1 (2022-11-05)
+
+
+### Bug Fixes
+
+* **decorator-mui:** corrected addText calculation 9cd45ee
+* **decorator-mui:** customize addText 421e388
+
 # 1.6.0 (2022-11-05)
 
 
