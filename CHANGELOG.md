@@ -1,3 +1,15 @@
+# 1.6.0 (2022-11-05)
+
+
+### Bug Fixes
+
+* **decorator-mui:** better presentation for controls eb27b16
+
+
+### Features
+
+* **decorator-mui:** disable movement buttons 91d9d62
+
 ## 1.5.3 (2022-11-05)
 
 
