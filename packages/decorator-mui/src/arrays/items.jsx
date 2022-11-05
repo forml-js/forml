@@ -52,6 +52,10 @@ function Items(props, ref) {
     const disableGutters =
         'disableGutters' in form ? form.disableGutters : false;
     const icon = 'icon' in form ? form.icon : 'view_list';
+    const addText =
+        'addText' in form
+            ? form.addText
+            : `${localizer.getLocalizedString('Add')} ${title}`;
 
     return (
         <Paper
@@ -89,7 +93,7 @@ function Items(props, ref) {
                         startIcon={<Icon>add</Icon>}
                         disabled={disabled}
                     >
-                        {localizer.getLocalizedString('Add')} {title}
+                        {addText}
                     </Button>
                 </ListItem>
                 {props.children}
