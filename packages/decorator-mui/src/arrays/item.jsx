@@ -19,18 +19,26 @@ const useStyles = makeStyles(function (theme) {
             borderRightColor: theme.palette?.divider,
             padding: theme.spacing?.(1),
         },
+        spacer: {
+            flex: '1 0 auto',
+            borderBottom: `1px solid ${theme.palette?.divider}`,
+        },
         controls: {
             display: 'flex',
             flexDirection: 'column',
-            padding: '0 0 -1px',
-            '& button:not($destroy)': {
+            borderCollapse: 'collapse',
+            '&:has(button:only-child)': {
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+            },
+            '& button:not($destroy):not($onlyDestroy)': {
                 borderRadius: '0',
-                borderBottomWidth: '1px',
-                borderBottomStyle: 'solid',
-                borderBottomColor: theme.palette?.divider,
-                borderCollapse: 'collapse',
                 width: theme.spacing?.(6),
                 minWidth: theme.spacing?.(6),
+                '&:has(+ $(spacer))': {
+                    borderBottom: 'none !important',
+                },
             },
         },
         item: {
@@ -44,15 +52,23 @@ const useStyles = makeStyles(function (theme) {
             padding: theme.spacing?.(1.5),
         },
         dragHandle: {
+            display: 'flex',
+            flexDirection: 'column',
             padding: theme.spacing?.(1.5),
         },
+        topDragHandle: {
+            padding: theme.spacing?.(1.5),
+        },
+        onlyDestroy: {
+            display: 'inline-flex !important',
+            flexDirection: 'column',
+            width: theme.spacing?.(6),
+            minWidth: theme.spacing?.(6),
+            border: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
         destroy: {
-            marginTop: 'auto',
-            borderRadius: '0',
-            borderTopWidth: '1px',
-            borderTopStyle: 'solid',
-            borderTopColor: theme.palette?.divider,
-            borderCollapse: 'collapse',
             width: theme.spacing?.(6),
             minWidth: theme.spacing?.(6),
         },
@@ -64,15 +80,15 @@ const useStyles = makeStyles(function (theme) {
  */
 export function ItemComponent(props, ref) {
     const classes = useStyles(props);
-    const { disabled, parent } = props;
+    const { disabled, form } = props;
     const { draggableProps, dragHandleProps } = props.otherProps;
 
+    const renderMovementButtons =
+        'movementButtons' in form ? form.movementButtons : true;
     const dragHandleClass = clsx(
         dragHandleProps ? dragHandleProps.className : null,
-        classes.dragHandle
+        renderMovementButtons ? classes.topDragHandle : classes.dragHandle
     );
-    const renderMovementButtons =
-        'movementButtons' in parent ? parent.renderMovementButtons : true;
 
     return (
         <ListItem
@@ -103,11 +119,16 @@ export function ItemComponent(props, ref) {
                         >
                             <Icon>keyboard_arrow_down</Icon>
                         </Button>
+                        <div className={classes.spacer} />
                     </>
                 ) : null}
                 <Button
                     onClick={props.destroy}
-                    className={classes.destroy}
+                    className={
+                        renderMovementButtons
+                            ? classes.destroy
+                            : classes.onlyDestroy
+                    }
                     color="secondary"
                     size="small"
                     disabled={disabled}
