@@ -1,3 +1,10 @@
+## 1.6.2 (2022-11-05)
+
+
+### Bug Fixes
+
+* **decorator-mui:** localize addText 50d667b
+
 ## 1.6.1 (2022-11-05)
 
 
