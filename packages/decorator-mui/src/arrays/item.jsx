@@ -21,12 +21,12 @@ const useStyles = makeStyles(function (theme) {
         },
         spacer: {
             flex: '1 0 auto',
+            width: 'fill-available',
             borderBottom: `1px solid ${theme.palette?.divider}`,
         },
         controls: {
             display: 'flex',
             flexDirection: 'column',
-            borderCollapse: 'collapse',
             '&:has(button:only-child)': {
                 display: 'flex',
                 flexDirection: 'column',
@@ -44,6 +44,7 @@ const useStyles = makeStyles(function (theme) {
         item: {
             display: 'flex',
             alignItems: 'stretch',
+            flexDirection: 'row',
             paddingTop: 0,
             paddingBottom: 0,
             backgroundColor: theme.palette?.background?.paper,
@@ -95,6 +96,7 @@ export function ItemComponent(props, ref) {
             divider={true}
             className={classes.item}
             ref={ref}
+            dense
             disableGutters={true}
             {...draggableProps}
         >
