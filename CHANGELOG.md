@@ -1,3 +1,15 @@
+# 1.7.0 (2022-12-21)
+
+
+### Bug Fixes
+
+* **decorator-mui:** tweaks to array items e62d271
+
+
+### Features
+
+* **decorator-mui:** move to @mui/x-date-pickers 0d0ccbc
+
 ## 1.6.2 (2022-11-05)
 
 

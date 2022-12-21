@@ -1,6 +1,6 @@
 {
   "name": "@forml/decorator-bootstrap",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Bootstrap V4 forml decorator",
   "keywords": [
     "react",
@@ -40,10 +40,10 @@
     "react-bootstrap": "^2.5.0"
   },
   "dependencies": {
-    "@forml/hooks": "^1.6.0"
+    "@forml/hooks": "^1.7.0"
   },
   "devDependencies": {
-    "@forml/context": "^1.6.0",
+    "@forml/context": "^1.7.0",
     "bootstrap": "^5.2.2",
     "react-bootstrap": "^2.5.0"
   }
