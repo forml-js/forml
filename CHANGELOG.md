@@ -1,3 +1,10 @@
+## 1.7.1 (2022-12-21)
+
+
+### Bug Fixes
+
+* **decorator-mui:** empty string bbfe9db
+
 # 1.7.0 (2022-12-21)
 
 
