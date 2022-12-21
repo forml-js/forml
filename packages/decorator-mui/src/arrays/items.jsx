@@ -102,7 +102,7 @@ function Items(props, ref) {
                 {value && value.length === 0 && (
                     <ListItem key="empty" divider>
                         <ListItemText
-                            secondary="empty"
+                            secondary={localizer.getLocalizedString('empty')}
                             secondaryTypographyProps={{ align: 'center' }}
                         />
                     </ListItem>
