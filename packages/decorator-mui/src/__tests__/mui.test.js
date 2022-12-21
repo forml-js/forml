@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
-import MomentAdapter from '@mui/lab/AdapterMoment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { render } from '@testing-library/react';
 import { SchemaForm, util } from '@forml/core';
 import React from 'react';
@@ -58,7 +58,7 @@ describe('Material UI', function () {
                 const model = util.defaultForSchema(schema);
                 const { container } = render(
                     <ThemeProvider theme={theme}>
-                        <LocalizationProvider dateAdapter={MomentAdapter}>
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
                             <SchemaForm
                                 schema={schema}
                                 form={form}

@@ -1,4 +1,4 @@
-import DatePicker from '@mui/lab/DatePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Input from '@mui/material/Input';
 import React from 'react';
 

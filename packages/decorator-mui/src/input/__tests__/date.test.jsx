@@ -3,8 +3,8 @@ import Context from '@forml/context';
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as decorator from '../../';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import MomentAdapter from '@mui/lab/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -37,7 +37,7 @@ describe('renders', function () {
                     test(`${value}`, function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
-                            <LocalizationProvider dateAdapter={MomentAdapter}>
+                            <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <Context.Provider value={{ decorator }}>
                                     <DateComponent
                                         form={form}

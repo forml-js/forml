@@ -1,6 +1,7 @@
 module.exports = async () => {
     return {
         rootDir: __dirname,
+        testPathIgnorePatterns: ['lib/**/*.js'],
         coverageReporters: [
             'json',
             'text',

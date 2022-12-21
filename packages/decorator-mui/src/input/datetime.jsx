@@ -1,4 +1,4 @@
-import DateTimePicker from '@mui/lab/DateTimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Input from '@mui/material/Input';
 import React from 'react';
 
