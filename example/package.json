@@ -24,7 +24,7 @@
     "@forml/hooks": "file:../packages/hooks",
     "@react-pdf/renderer": "^2.1.1",
     "@webpack-cli/serve": "^1.0.1",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.3.0",
     "buffer": "^6.0.3",
     "classnames": "^2.2.6",
     "file-loader": "^6.2.0",
