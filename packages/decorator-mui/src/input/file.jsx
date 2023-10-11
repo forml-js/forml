@@ -15,6 +15,8 @@ export default function Form(props) {
     const ref = useRef();
     const classes = useStyles();
 
+    const accept = 'accept' in form ? form.accept : undefined;
+
     const endAdornment = (
         <>
             <Button onClick={onClick} key="attach">
@@ -39,6 +41,7 @@ export default function Form(props) {
                 type="file"
                 key="hidden"
                 className={classes.fileInput}
+                accept={accept}
                 ref={ref}
                 onChange={onChange}
             />
