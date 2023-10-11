@@ -1,3 +1,10 @@
+## 1.7.2 (2023-10-11)
+
+
+### Bug Fixes
+
+* **decorator-mui:** add file accept attribute 34138c0
+
 ## 1.7.1 (2022-12-21)
 
 
