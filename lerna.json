@@ -7,8 +7,8 @@
         "packages/decorator-bootstrap",
         "packages/hooks",
         "packages/core",
-        "packages/decorator-pdf"
+        "packages/decorator-pdf",
+        "example"
     ],
-    "useWorkspaces": true,
     "version": "1.7.1"
 }

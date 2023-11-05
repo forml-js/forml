@@ -41,7 +41,8 @@
         "eslint-plugin-react": "^7.31.10"
     },
     "peerDependencies": {
-        "react": "^17.0.0 || ^18.0.0"
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }

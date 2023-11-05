@@ -15,6 +15,7 @@
     ],
     "main": "lib/index.js",
     "scripts": {
+        "dev": "npm run -w @forml/example start",
         "lint": "eslint pacakges/*/src/**/*.jsx",
         "build": "lerna run build",
         "watch": "lerna run --parallel watch --stream",
@@ -38,22 +39,24 @@
         "@semantic-release/commit-analyzer": "^9.0.2",
         "@semantic-release/git": "^10.0.1",
         "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^12.1.5",
+        "@testing-library/react": "^14.0.0",
         "ajv": "^8.11.0",
         "babel-jest": "^29.2.2",
         "clsx": "^1.2.1",
         "jest": "^29.2.2",
         "jest-environment-jsdom": "^29.2.2",
-        "lerna": "^6.0.1",
+        "jsdom": "^22.1.0",
+        "lerna": "^7.4.2",
         "moment": "^2.29.4",
         "moment-timezone": "^0.5.38",
+        "nx": "^17.0.3",
         "objectpath": "^2.0.0",
         "prop-types": "^15.8.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-test-renderer": "^17.0.2",
-        "semantic-release": "^19.0.5",
-        "semantic-release-lerna": "^0.7.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-test-renderer": "^18.2.0",
+        "semantic-release": "^22.0.7",
+        "semantic-release-lerna": "^2.0.0",
         "shortid": "^2.2.16"
     },
     "workspaces": [
@@ -64,7 +67,8 @@
         "packages/decorator-bootstrap",
         "packages/hooks",
         "packages/core",
-        "packages/decorator-pdf"
+        "packages/decorator-pdf",
+        "example"
     ],
     "dependencies": {
         "@forml/context": "file:packages/context",
@@ -72,7 +76,11 @@
         "@forml/decorator-barebones": "file:packages/decorator-barebones",
         "@forml/decorator-mui": "file:packages/decorator-mui",
         "@forml/decorator-pdf": "file:packages/decorator-pdf",
-        "@forml/hooks": "file:packages/hooks",
-        "@mui/styles": "^5.10.10"
+        "@forml/example": "file:example",
+        "@forml/hooks": "file:packages/hooks"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     }
 }
