@@ -23,9 +23,24 @@ export function useMapper() {
  * @return {ModelMethods}
  */
 export function useModel() {
-    const { getValue, setValue, getError, setError, onChange, version } =
-        useContext();
-    return { getValue, setValue, getError, setError, onChange, version };
+    const {
+        getValue,
+        setValue,
+        getError,
+        setError,
+        onChange,
+        version,
+        schema,
+    } = useContext();
+    return {
+        getValue,
+        setValue,
+        getError,
+        setError,
+        onChange,
+        version,
+        schema,
+    };
 }
 
 /**
