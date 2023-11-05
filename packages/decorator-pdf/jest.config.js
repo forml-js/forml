@@ -1,13 +1,16 @@
 module.exports = async () => {
     return {
+        setupFilesAfterEnv: ['<rootDir>/setup-tests.js'],
         rootDir: __dirname,
-        coverageReporters: [
-            'json',
-            'text',
-            'clover',
-            ['lcov', { projectRoot: __dirname }],
+        reporters: ['default', 'jest-summary-reporter'],
+        testPathIgnorePatterns: [
+            '/node_modules/',
+            '/lib/',
+            '/decorator-bootstrap/',
         ],
-        collectCoverage: true,
+        transformIgnorePatterns: ['/node_modules/(?!(@mui|@babel)/)'],
+        testEnvironment: 'jsdom',
         collectCoverageFrom: ['src/**/*.js', 'src/**/*.jsx'],
+        coveragePathIgnorePatterns: ['/__tests__/', '/node_modules/', '/lib/'],
     };
 };
