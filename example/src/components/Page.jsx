@@ -1,10 +1,9 @@
 import { util } from '@forml/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
-import styled from '@mui/material/styles/styled';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 import React, { useMemo, useRef, useState } from 'react';
 import useEditable from '../hooks/useEditable';
 import { getSample } from '../samples';
@@ -13,37 +12,6 @@ import RenderExample from './RenderExample';
 import SelectDecorator from './SelectDecorator';
 import SelectExample from './SelectExample';
 
-const useStyles = makeStyles(function (theme) {
-    return {
-        root: {
-            display: 'flex',
-            flexDirection: 'row',
-            flexGrow: 1,
-            maxHeight: 'fill-available',
-            overflow: 'auto',
-        },
-        manager: { flex: '0 0 300px' },
-        example: {
-            display: 'flex',
-            flex: '1 0 auto',
-            flexDirection: 'column',
-            maxHeight: 'fill-available',
-        },
-        exampleContent: {
-            display: 'flex',
-            flexDirection: 'column',
-            flex: '1 0 0',
-            maxHeight: 'fill-available',
-            overflow: 'auto',
-            borderBottom: `1px solid ${theme.palette?.divider}`,
-        },
-        exampleFooter: {
-            flex: '0 0 fit-content',
-            maxHeight: '30%',
-        },
-    };
-});
-
 const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -51,10 +19,28 @@ const Root = styled(Box)(({ theme }) => ({
     overflow: 'hidden',
     maxHeight: 'fill-available',
 }));
+const ExampleCard = styled(Card)(({ theme }) => ({
+    display: 'flex',
+    flex: '1 0 auto',
+    flexDirection: 'column',
+    maxHeight: 'fill-available',
+}));
+const ExampleCardContent = styled(CardContent)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 0 0',
+    maxHeight: 'fill-available',
+    overflow: 'auto',
+    borderBottom: `1px solid ${theme.palette?.divider}`,
+}));
+const ExampleCardFooter = styled(CardContent)(({ theme }) => ({
+    flex: '0 0 fit-content',
+    maxHeight: '30%',
+}));
+const ManagerCard = styled(Card)({ flex: '0 0 300px' });
 
 export default function Page() {
     const pdfRef = useRef();
-    const classes = useStyles();
     const [selected, setSelected] = useState('');
     const [localizer, setLocalizer] = useState(undefined);
     const [decorator, setDecorator] = useState('mui');
@@ -68,12 +54,8 @@ export default function Page() {
 
     return (
         <Root>
-            <Card className={classes.example} key="primary-viewport">
-                <CardContent
-                    key="example"
-                    className={classes.exampleContent}
-                    ref={pdfRef}
-                >
+            <ExampleCard key="primary-viewport">
+                <ExampleCardContent key="example" ref={pdfRef}>
                     <RenderExample
                         key={`render-${decorator}-${schema.json}-${form.json}`}
                         schema={schema.value}
@@ -85,15 +67,15 @@ export default function Page() {
                         localizer={localizer}
                         decorator={decorator}
                     />
-                </CardContent>
-                <CardContent className={classes.exampleFooter} key="model">
+                </ExampleCardContent>
+                <ExampleCardFooter key="model">
                     <Typography key="title" variant="h6">
                         Model
                     </Typography>
                     <Editor key="editor" value={model.json} />
-                </CardContent>
-            </Card>
-            <Card className={classes.manager} key="secondary-viewport">
+                </ExampleCardFooter>
+            </ExampleCard>
+            <ManagerCard key="secondary-viewport">
                 <CardContent key="select-example">
                     <SelectExample selected={selected} onChange={onChange} />
                 </CardContent>
@@ -123,7 +105,7 @@ export default function Page() {
                         onChange={(e) => form.setJSON(e.target.value)}
                     />
                 </CardContent>
-            </Card>
+            </ManagerCard>
         </Root>
     );
 
