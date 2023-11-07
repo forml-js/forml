@@ -1,12 +1,9 @@
 import { styled } from '@mui/material';
-import Box from '@mui/material/Box';
 import Icon from '@mui/material/Icon';
 import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useTheme } from '@mui/styles';
-import React, { useRef } from 'react';
+import React from 'react';
 
 const ImageIcon = styled('img')(({ theme, ...props }) => ({
     objectFit: 'contain',

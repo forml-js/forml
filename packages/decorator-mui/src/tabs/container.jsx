@@ -16,17 +16,20 @@ const Root = styled(Paper)(({ form }) => [
     },
     form.disableMargin && { m: 0 },
 ]);
-const Content = styled(Box)(({ theme, tabs, form, minHeight }) => [
-    {
-        position: 'relative',
-        display: 'flex',
-        flexGrow: 1,
-        flexDirection: 'column',
-        minHeight,
-    },
-    form.disableMargin && { m: 0 },
-    form.disablePadding && { p: 0 },
-]);
+const Content = ({ form, minHeight, ...props }) => (
+    <Box
+        {...props}
+        sx={{
+            position: 'relative',
+            display: 'flex',
+            flexGrow: 1,
+            flexDirection: 'column',
+            minHeight,
+            m: form.disableMargin ? 0 : undefined,
+            p: form.disablePadding ? 0 : undefined,
+        }}
+    />
+);
 const Tabs = styled(Paper)(({ theme, form }) => [
     {
         display: 'flex',

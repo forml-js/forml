@@ -1,61 +1,71 @@
-import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import React, { useMemo } from 'react';
 import Paper from '@mui/material/Paper';
-import clsx from 'clsx';
+import { styled } from '@mui/material/styles';
 
 /**
  * @component
  */
 
-const useStyles = makeStyles(() => ({
-    root: {
-        position: 'absolute',
-        display: 'flex',
-        transition: 'all 0.3s',
-        flex: '1 1 100%',
-        height: '100%',
-        zIndex: 1,
-        '&$active': {
-            position: 'relative',
-            zIndex: 99,
-        },
-        '&$vertical': {
-            transform: 'translateX(-100vw)',
-            '$active ~ &': {
-                transform: 'translateX(100vw)',
-            },
-            '&$active': {
-                transform: 'translateX(0vw)',
-            },
-        },
-        '&$horizontal': {
-            transform: 'translateY(-100vh)',
-            '$active ~ &': {
-                transform: 'translateY(100vh)',
-            },
-            '&$active': {
-                transform: 'translateY(0vh)',
-            },
-        },
-    },
-    active: {},
-    horizontal: {},
-    vertical: {},
-}));
+function paperTransform(orientation, delta) {
+    if (orientation === 'vertical') {
+        if (delta === 0) {
+            return 'translateX(0vw)';
+        } else if (delta < 0) {
+            return 'translateX(-100vw)';
+        } else if (delta > 0) {
+            return 'translateX(100vw)';
+        }
+    } else {
+        if (delta === 0) {
+            return undefined;
+        } else if (delta < 0) {
+            return 'translateY(-100vh)';
+        } else if (delta > 0) {
+            return 'translateY(100vh)';
+        }
+    }
+}
+
+function paperPosition(delta) {
+    if (delta === 0) {
+        return 'relative';
+    } else {
+        return 'absolute';
+    }
+}
+
+function paperZIndex(delta) {
+    if (delta === 0) {
+        return 99;
+    } else {
+        return 1;
+    }
+}
+
 export default function Panel(props) {
-    const { active, form, parent } = props;
-    const classes = useStyles(props);
+    const { activeDelta, form, parent } = props;
 
-    const elevation = 'elevation' in form ? form.elevation : 0;
-    const layout = 'layout' in parent ? parent.layout : 'horizontal';
-
-    return (
-        <Paper
-            {...props}
-            elevation={elevation}
-            className={clsx(props.className, classes.root, classes[layout], {
-                [classes.active]: active,
-            })}
-        />
+    const settings = useMemo(
+        () => ({
+            elevation: 'elevation' in form ? form.elevation : 0,
+            orientation: 'layout' in parent ? parent.layout : 'horizontal',
+        }),
+        [form]
     );
+    const sx = useMemo(
+        () => ({
+            position: paperPosition(activeDelta),
+            display: 'flex',
+            transition: 'all 0.3s',
+            flex: '1 1 100%',
+            height: '100%',
+            zIndex: paperZIndex(activeDelta),
+            transform: paperTransform(settings.orientation, activeDelta),
+        }),
+        [settings.orientation, activeDelta]
+    );
+
+    console.log('Panel(key: %o, sx: %o)', form.title, sx);
+
+    return <Paper {...props} elevation={settings.elevation} sx={sx} />;
 }
