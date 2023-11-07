@@ -72,7 +72,7 @@ function makeUpwardMover(form, model, move, setItems) {
     };
 }
 
-function makeDownwardMover(form, model, move, setItems) {
+function makeDownwardMover(form, model, move, items, setItems) {
     return function downwardMover(index) {
         function mover(event) {
             if (index < items.length - 1) {
@@ -160,6 +160,7 @@ export function useArrayItems(form, disabled = false) {
         form,
         model,
         move,
+        items,
         setItems,
     ]);
 
