@@ -1,6 +1,12 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import React, { useEffect, useMemo, useState, forwardRef } from 'react';
+import React, {
+    useEffect,
+    useMemo,
+    useState,
+    forwardRef,
+    useCallback,
+} from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
@@ -15,22 +21,29 @@ import {
 } from '../../util';
 import { SchemaField } from '../schema-field';
 
+function useCallbackGenerator(generator, args) {
+    return useCallback(generator(...args), args);
+}
+
 export function mover(items, value) {
-    return move;
-    function move(start, end) {
+    return function move(start, end) {
         return [reorder(items, start, end), reorder(value, start, end)];
         function reorder(list, start, end) {
+            console.log('reorder(start: %o, end: %o)', start, end);
             const result = Array.from(list);
             const [removed] = result.splice(start, 1);
             result.splice(end, 0, removed);
             return result;
         }
-    }
+    };
+}
+
+function _mover(items, value) {
+    return useCallbackGenerator(mover, [items, value]);
 }
 
 export function creator(form) {
-    return create;
-    function create() {
+    return function create() {
         const forms = form.items.map(({ ...form }) => {
             const key = shortid();
             return { form, key };
@@ -38,15 +51,50 @@ export function creator(form) {
 
         const key = shortid();
         return { forms, key };
-    }
+    };
 }
+
+function _creator(form) {
+    return useCallbackGenerator(creator, [form]);
+}
+
+function makeUpwardMover(form, model, move, setItems) {
+    return function upwardMover(index) {
+        function mover(event) {
+            if (index > 0) {
+                const [nextItems, nextValue] = move(index, index - 1);
+                const nextModel = model.setValue(form.key, nextValue);
+                model.onChange(event, nextModel);
+                setItems(nextItems);
+            }
+        }
+
+        return mover;
+    };
+}
+
+function makeDownwardMover(form, model, move, setItems) {
+    return function downwardMover(index) {
+        function mover(event) {
+            if (index < items.length - 1) {
+                const [nextItems, nextValue] = move(index, index + 1);
+                const nextModel = model.setValue(form.key, nextValue);
+                model.onChange(event, nextModel);
+                setItems(nextItems);
+            }
+        }
+
+        return mover;
+    };
+}
+
 export function useArrayItems(form, disabled = false) {
     const [items, setItems] = useState([]);
     const model = useModel();
 
     const value = model.getValue(form.key);
-    const move = mover(items, value);
-    const create = creator(form);
+    const move = _mover(items, value);
+    const create = _creator(form);
 
     useEffect(
         function () {
@@ -71,155 +119,176 @@ export function useArrayItems(form, disabled = false) {
         [form]
     );
 
-    function add(event) {
-        const nextSchema = getNextSchema(form.schema, value.length);
-        const nextModel = model.setValue(
-            [...form.key, value.length],
-            defaultForSchema(nextSchema)
-        );
-        model.onChange(event, nextModel);
-        setItems([...items, create(items.length)]);
-    }
-
-    function destroyer(index) {
-        function destroy(event) {
-            const nextValue = Array.from(value);
-            nextValue.splice(index, 1);
-
-            const nextItems = Array.from(items);
-            nextItems.splice(index, 1);
-
-            const nextModel = model.setValue(form.key, nextValue);
+    const add = useCallback(
+        function add(event) {
+            const nextSchema = getNextSchema(form.schema, value.length);
+            const nextModel = model.setValue(
+                [...form.key, value.length],
+                defaultForSchema(nextSchema)
+            );
             model.onChange(event, nextModel);
-            setItems(nextItems);
-        }
+            setItems([...items, create(items.length)]);
+        },
+        [form, value, model, items, create]
+    );
 
-        return destroy;
-    }
+    const destroyer = useCallback(
+        function destroyer(index) {
+            function destroy(event) {
+                const nextValue = Array.from(value);
+                nextValue.splice(index, 1);
 
-    function upwardMover(index) {
-        function mover(event) {
-            if (index > 0) {
-                const [nextItems, nextValue] = move(index, index - 1);
+                const nextItems = Array.from(items);
+                nextItems.splice(index, 1);
+
                 const nextModel = model.setValue(form.key, nextValue);
                 model.onChange(event, nextModel);
                 setItems(nextItems);
             }
+
+            return destroy;
+        },
+        [value, items, model, form]
+    );
+
+    const upwardMover = useCallbackGenerator(makeUpwardMover, [
+        form,
+        model,
+        move,
+        setItems,
+    ]);
+    const downwardMover = useCallbackGenerator(makeDownwardMover, [
+        form,
+        model,
+        move,
+        setItems,
+    ]);
+
+    return useMemo(() => {
+        if (!disabled) {
+            return {
+                items,
+                setItems,
+                add,
+                destroyer,
+                upwardMover,
+                downwardMover,
+                move,
+            };
+        } else {
+            return {
+                items,
+                setItems,
+                add: /* istanbul ignore next */ () => null,
+                destroyer: () => null,
+                upwardMover: () => null,
+                downwardMover: () => null,
+                move: /* istanbul ignore next */ () => null,
+            };
         }
-
-        return mover;
-    }
-
-    function downwardMover(index) {
-        function mover(event) {
-            if (index < items.length - 1) {
-                const [nextItems, nextValue] = move(index, index + 1);
-                const nextModel = model.setValue(form.key, nextValue);
-                model.onChange(event, nextModel);
-                setItems(nextItems);
-            }
-        }
-
-        return mover;
-    }
-
-    let result = { items, setItems };
-    if (!disabled) {
-        result = {
-            ...result,
-            add,
-            destroyer,
-            upwardMover,
-            downwardMover,
-            move,
-        };
-    } else {
-        result = {
-            ...result,
-            add: /* istanbul ignore next */ () => null,
-            destroyer: () => null,
-            upwardMover: () => null,
-            downwardMover: () => null,
-            move: /* istanbul ignore next */ () => null,
-        };
-    }
-
-    return result;
+    }, [
+        items,
+        setItems,
+        add,
+        destroyer,
+        upwardMover,
+        downwardMover,
+        move,
+        disabled,
+    ]);
 }
 
 function BaseArrayItem(props, ref) {
-    const { form, index, items } = props;
+    const { form } = props;
+    const dragDrop = useMemo(
+        () => ('dragDrop' in form ? form.dragDrop : true),
+        [form]
+    );
+
+    const Component = useMemo(() => {
+        if (dragDrop) {
+            return DraggableArrayItem;
+        } else {
+            return NormalArrayItem;
+        }
+    }, [dragDrop]);
+
+    return <Component {...props} ref={ref} />;
+}
+
+const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
+    const { form, items, index } = props;
     const { readonly: disabled } = form;
-    const model = useModel();
     const deco = useDecorator();
+    const model = useModel();
     const localizer = useLocalizer();
     const value = model.getValue([...form.key, index]);
 
-    let title = form.title;
-    if (form.titleFun) {
-        title = form.titleFun(value);
-    }
+    const title = useMemo(() => {
+        let title = form.title;
+        if (form.titleFun) {
+            title = form.titleFun(value);
+        }
 
-    title = localizer.getLocalizedString(title);
+        return localizer.getLocalizedString(title);
+    }, [form, value, localizer]);
 
-    const destroy = useMemo(() => items.destroyer(index), [items, form, index]);
-    const moveUp = useMemo(
-        () => items.upwardMover(index),
-        [items, form, index]
+    const actions = useMemo(
+        () => ({
+            destroy: items.destroyer(index),
+            moveUp: items.upwardMover(index),
+            moveDown: items.downwardMover(index),
+        }),
+        [items, index]
     );
-    const moveDown = useMemo(
-        () => items.downwardMover(index),
-        [items, form, index]
+
+    return (
+        <deco.Arrays.Item
+            disabled={disabled}
+            title={title}
+            index={index}
+            form={form}
+            {...actions}
+            {...props}
+            ref={ref}
+        >
+            {props.children}
+        </deco.Arrays.Item>
     );
+});
 
-    const dragDrop = 'dragDrop' in form ? form.dragDrop : true;
-
-    if (dragDrop) {
-        return (
-            <Draggable draggableId={props.id} index={index}>
-                {(provided) => {
-                    return (
-                        <deco.Arrays.Item
-                            disabled={disabled}
-                            title={title}
-                            destroy={destroy}
-                            moveUp={moveUp}
-                            moveDown={moveDown}
-                            index={index}
-                            form={form}
-                            ref={(e) => {
-                                provided.innerRef(e);
-                                if (ref) ref(e);
-                            }}
-                            otherProps={{
-                                draggableProps: provided.draggableProps,
-                                dragHandleProps: provided.dragHandleProps,
-                            }}
-                        >
-                            {props.children}
-                        </deco.Arrays.Item>
-                    );
-                }}
-            </Draggable>
+function DraggableItemFactory(props, ref) {
+    return function DraggableItem(provided) {
+        const { draggableProps, dragHandleProps } = provided;
+        const injectRef = (e) => {
+            console.log('DraggableItem.innerRef(element: %o)', e);
+            provided.innerRef(e);
+            if (ref) ref(e);
+        };
+        const otherProps = useMemo(
+            () => ({ ...props.otherProps, draggableProps, dragHandleProps }),
+            [props, draggableProps, dragHandleProps]
         );
-    } else {
         return (
-            <deco.Arrays.Item
-                disabled={disabled}
-                title={title}
-                destroy={destroy}
-                moveUp={moveUp}
-                moveDown={moveDown}
-                index={index}
-                ref={ref}
-                form={form}
-                otherProps={{}}
+            <NormalArrayItem
+                {...props}
+                {...provided}
+                otherProps={otherProps}
+                ref={injectRef}
             >
                 {props.children}
-            </deco.Arrays.Item>
+            </NormalArrayItem>
         );
-    }
+    };
 }
+
+const DraggableArrayItem = forwardRef(function DraggableArrayItem(props, ref) {
+    return (
+        <Draggable draggableId={props.id} index={props.index}>
+            {DraggableItemFactory(props, ref)}
+        </Draggable>
+    );
+});
 
 export const ArrayItem = forwardRef(BaseArrayItem);
 
@@ -240,21 +309,13 @@ export const ArrayItem = forwardRef(BaseArrayItem);
  * ```
  */
 function ArrayComponent(props, ref) {
-    const { form, value } = props;
-    const { error } = props;
-
-    const { readonly: disabled, titleFun } = form;
+    const { form } = props;
+    const { readonly: disabled } = form;
 
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
-    const droppableId = useMemo(shortid);
     const items = useArrayItems(form, disabled);
-    const deco = useDecorator();
-    const localizer = useLocalizer();
-    const model = useModel();
 
-    let { otherProps } = form;
-
-    if (!otherProps) otherProps = {};
+    console.log('ArrayComponent(items: %o)', items);
 
     const parent = form;
     const arrays = useMemo(
@@ -272,7 +333,9 @@ function ArrayComponent(props, ref) {
                      * disabled - to propagate the disabled state to children
                      */
                     formCopy.titleFun =
-                        'titleFun' in formCopy ? formCopy.titleFun : titleFun;
+                        'titleFun' in formCopy
+                            ? formCopy.titleFun
+                            : form.titleFun;
                     formCopy.readonly =
                         'readonly' in formCopy ? formCopy.readonly : disabled;
 
@@ -305,38 +368,87 @@ function ArrayComponent(props, ref) {
         [items.items]
     );
 
-    const title = localizer.getLocalizedString(form.title);
-    const description = localizer.getLocalizedString(form.description);
-    const dragDrop = 'dragDrop' in form ? form.dragDrop : true;
+    const dragDrop = useMemo(
+        () => ('dragDrop' in form ? form.dragDrop : true),
+        [form]
+    );
+    const Component = useMemo(() =>
+        dragDrop ? DraggableArrayContainer : NormalArrayContainer
+    );
 
-    if (dragDrop) {
+    console.log('ArrayComponent(arrays: %o)', arrays);
+    return (
+        <Component items={items} {...props}>
+            {arrays}
+        </Component>
+    );
+}
+
+const DraggableArrayContainer = forwardRef(
+    function DraggableArrayContainer(props, ref) {
+        const { form, items } = props;
+        const droppableId = useMemo(shortid);
+        const model = useModel();
+        const onDragEnd = useCallback(
+            function onDragEnd(result) {
+                console.log('onDragEnd(result: %o)', result);
+                if (!result.destination) {
+                    return;
+                } else if (result.destination.index === result.source.index) {
+                    return;
+                } else {
+                    const [nextItems, nextValue] = items.move(
+                        result.source.index,
+                        result.destination.index
+                    );
+                    const nextModel = model.setValue(form.key, nextValue);
+                    model.onChange({ target: { value: nextModel } }, nextModel);
+                    items.setItems(nextItems);
+                }
+            },
+            [items, model, form]
+        );
+        const renderDraggableItems = (provided) => {
+            const injectRef = (e) => {
+                console.log('renderDraggableItems.innerRef(element: %o)', e);
+                provided.innerRef(e);
+                if (ref) ref(e);
+            };
+            console.log('renderDraggableItems(props: %o)', props);
+            return (
+                <NormalArrayContainer {...props} ref={injectRef}>
+                    {props.children}
+                    {provided.placeholder}
+                </NormalArrayContainer>
+            );
+        };
+
         return (
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId={droppableId}>
-                    {(provided) => (
-                        <deco.Arrays.Items
-                            className={form.htmlClass}
-                            add={items.add}
-                            value={value}
-                            title={title}
-                            description={description}
-                            error={error}
-                            ref={(...args) => {
-                                provided.innerRef(...args);
-                                if (ref) ref(...args);
-                            }}
-                            otherProps={otherProps}
-                            disabled={disabled}
-                            form={form}
-                        >
-                            {arrays}
-                            {provided.placeholder}
-                        </deco.Arrays.Items>
-                    )}
+                    {renderDraggableItems}
                 </Droppable>
             </DragDropContext>
         );
-    } else {
+    }
+);
+
+const NormalArrayContainer = forwardRef(
+    function NormalArrayContainer(props, ref) {
+        const { form, items } = props;
+        const { readonly: disabled, titleFun } = form;
+        const model = useModel();
+        const value = model.getValue(form.key);
+        const deco = useDecorator();
+        const localizer = useLocalizer();
+        const title = useMemo(
+            () => localizer.getLocalizedString(titleFun?.(value) ?? form.title),
+            [localizer, value, form, titleFun]
+        );
+        const description = localizer.getLocalizedString(form.description);
+        const { error } = props;
+        const otherProps = useMemo(() => form.otherProps ?? {}, [form]);
+
         return (
             <deco.Arrays.Items
                 className={form.htmlClass}
@@ -350,28 +462,12 @@ function ArrayComponent(props, ref) {
                 disabled={disabled}
                 form={form}
             >
-                {arrays}
+                {props.children}
             </deco.Arrays.Items>
         );
     }
+);
 
-    /* istanbul ignore next */
-    function onDragEnd(result) {
-        if (!result.destination) {
-            return;
-        } else if (result.destination.index === result.source.index) {
-            return;
-        } else {
-            const [nextItems, nextValue] = items.move(
-                result.source.index,
-                result.destination.index
-            );
-            const nextModel = model.setValue(form.key, nextValue);
-            model.onChange({ target: { value: nextModel } }, nextModel);
-            items.setItems(nextItems);
-        }
-    }
-}
 export default forwardRef(ArrayComponent);
 
 ArrayComponent.propTypes = {
