@@ -3,7 +3,7 @@
 exports[`renders with form options elevation 0 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-17 makeStyles-horizontal-19 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -15,7 +15,7 @@ exports[`renders with form options elevation 0 1`] = `
 exports[`renders with form options elevation 0 with layout 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-21 makeStyles-horizontal-23 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -27,7 +27,7 @@ exports[`renders with form options elevation 0 with layout 1`] = `
 exports[`renders with form options elevation 1 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-25 makeStyles-horizontal-27 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-5nkyt8-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -39,7 +39,7 @@ exports[`renders with form options elevation 1 1`] = `
 exports[`renders with form options elevation 1 with layout 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-29 makeStyles-horizontal-31 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-5nkyt8-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -51,7 +51,7 @@ exports[`renders with form options elevation 1 with layout 1`] = `
 exports[`renders with form options elevation undefined 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-33 makeStyles-horizontal-35 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-5nkyt8-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -63,7 +63,7 @@ exports[`renders with form options elevation undefined 1`] = `
 exports[`renders with form options elevation undefined with layout 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-37 makeStyles-horizontal-39 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-5nkyt8-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -75,7 +75,7 @@ exports[`renders with form options elevation undefined with layout 1`] = `
 exports[`renders with form options icon person 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-1 makeStyles-horizontal-3 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -87,7 +87,7 @@ exports[`renders with form options icon person 1`] = `
 exports[`renders with form options icon person with layout 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-5 makeStyles-horizontal-7 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -99,7 +99,7 @@ exports[`renders with form options icon person with layout 1`] = `
 exports[`renders with form options icon undefined 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-9 makeStyles-horizontal-11 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"
@@ -111,7 +111,7 @@ exports[`renders with form options icon undefined 1`] = `
 exports[`renders with form options icon undefined with layout 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 makeStyles-root-13 makeStyles-horizontal-15 css-ee20y-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-baxz4v-MuiPaper-root"
     description="description"
     form="[object Object]"
     parent="[object Object]"

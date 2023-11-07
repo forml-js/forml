@@ -3,10 +3,11 @@
 exports[`renders with description and no title 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-41 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-44 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -61,10 +62,11 @@ exports[`renders with description and no title 1`] = `
 exports[`renders with form options disableGutters false 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-6 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-9 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -124,10 +126,11 @@ exports[`renders with form options disableGutters false 1`] = `
 exports[`renders with form options disableGutters true 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-1 makeStyles-disableGutters-3 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-y2wfy2-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-4 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -187,10 +190,11 @@ exports[`renders with form options disableGutters true 1`] = `
 exports[`renders with form options disablePadding false 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-16 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-19 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -250,10 +254,11 @@ exports[`renders with form options disablePadding false 1`] = `
 exports[`renders with form options disablePadding true 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-11 makeStyles-disablePadding-12 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1it17ly-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-14 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -313,10 +318,11 @@ exports[`renders with form options disablePadding true 1`] = `
 exports[`renders with form options icon favorite 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-26 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-29 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -376,10 +382,11 @@ exports[`renders with form options icon favorite 1`] = `
 exports[`renders with form options icon person 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-21 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-24 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -439,10 +446,11 @@ exports[`renders with form options icon person 1`] = `
 exports[`renders with no title or description 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-46 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-49 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -491,10 +499,11 @@ exports[`renders with no title or description 1`] = `
 exports[`renders with title and description 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-31 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-34 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"
@@ -554,10 +563,11 @@ exports[`renders with title and description 1`] = `
 exports[`renders with title and no description 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-root-36 css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-qspd5l-MuiPaper-root"
   >
     <ul
-      class="MuiList-root MuiList-dense makeStyles-list-39 css-1mk9mw3-MuiList-root"
+      class="MuiList-root MuiList-dense css-v3lwd0-MuiList-root"
+      htmlname="items"
     >
       <li
         class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-1ih5jmd-MuiListItem-root"

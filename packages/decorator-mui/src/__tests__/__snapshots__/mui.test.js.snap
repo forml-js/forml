@@ -6,17 +6,40 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl MuiInputBase-adornedEnd css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
-        aria-label="Choose date"
-        aria-readonly="true"
-        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
-        readonly=""
-        type="text"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        placeholder="mm/dd/yyyy"
+        type="tel"
         value=""
       />
+      <div
+        class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-standard MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+      >
+        <button
+          aria-label="Choose date"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CalendarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
     </div>
     <p
       class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
@@ -33,17 +56,40 @@ exports[`Material UI with no model renders empty root date-time consistently 1`]
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-1ptx2yq-MuiInputBase-root-MuiInput-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl MuiInputBase-adornedEnd css-1ptx2yq-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="true"
-        aria-label="Choose date"
-        aria-readonly="true"
-        class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
-        readonly=""
-        type="text"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        placeholder="mm/dd/yyyy hh:mm (a|p)m"
+        type="tel"
         value=""
       />
+      <div
+        class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-standard MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+      >
+        <button
+          aria-label="Choose date"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CalendarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
     </div>
     <p
       class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"

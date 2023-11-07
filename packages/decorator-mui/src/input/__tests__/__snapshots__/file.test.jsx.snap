@@ -42,7 +42,7 @@ exports[`renders consistently 1`] = `
     </button>
   </div>
   <input
-    class="makeStyles-fileInput-3"
+    class="css-1hyfx7x"
     type="file"
   />
 </div>
@@ -90,7 +90,7 @@ exports[`renders with form options format data_url 1`] = `
     </button>
   </div>
   <input
-    class="makeStyles-fileInput-1"
+    class="css-1hyfx7x"
     type="file"
   />
 </div>
@@ -138,7 +138,7 @@ exports[`renders with form options format name 1`] = `
     </button>
   </div>
   <input
-    class="makeStyles-fileInput-2"
+    class="css-1hyfx7x"
     type="file"
   />
 </div>

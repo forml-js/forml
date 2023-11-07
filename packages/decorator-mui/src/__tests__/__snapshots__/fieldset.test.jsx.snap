@@ -8,19 +8,6 @@ exports[`renders with description and no title 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense css-tlelie-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            title
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -37,24 +24,6 @@ exports[`renders with form options Component div 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -71,24 +40,6 @@ exports[`renders with form options Component fieldset 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -105,24 +56,6 @@ exports[`renders with form options disableGutters false 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -139,24 +72,6 @@ exports[`renders with form options disableGutters true 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -173,24 +88,6 @@ exports[`renders with form options disableMargin false 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -207,24 +104,6 @@ exports[`renders with form options disableMargin true 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -241,24 +120,6 @@ exports[`renders with form options disablePadding false 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -275,24 +136,6 @@ exports[`renders with form options disablePadding true 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-divider css-cp1sa0-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-16twzsx"
       />
@@ -309,24 +152,6 @@ exports[`renders with form options elevation 0 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -343,24 +168,6 @@ exports[`renders with form options elevation 1 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -377,24 +184,6 @@ exports[`renders with form options elevation 2 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -411,24 +200,6 @@ exports[`renders with form options fullWidth false 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -445,24 +216,6 @@ exports[`renders with form options fullWidth true 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -479,34 +232,6 @@ exports[`renders with form options icon favorite 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
-        >
-          <span
-            aria-hidden="true"
-            class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
-          >
-            favorite
-          </span>
-        </div>
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -523,34 +248,6 @@ exports[`renders with form options icon person 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
-        >
-          <span
-            aria-hidden="true"
-            class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-kp9ftd-MuiIcon-root"
-          >
-            person
-          </span>
-        </div>
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -567,24 +264,6 @@ exports[`renders with form options layout horizontal 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-10au80u"
       />
@@ -601,24 +280,6 @@ exports[`renders with form options layout vertical 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -647,24 +308,6 @@ exports[`renders with title and description 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense MuiListItemText-multiline css-konndc-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-          <span
-            class="MuiTypography-root MuiTypography-caption MuiListItemText-secondary css-r17q5p-MuiTypography-root"
-          >
-            description
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
@@ -681,19 +324,6 @@ exports[`renders with title and no description 1`] = `
     <ul
       class="MuiList-root MuiList-dense css-183iplg-MuiList-root"
     >
-      <li
-        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-18tjoje-MuiListItem-root"
-      >
-        <div
-          class="MuiListItemText-root MuiListItemText-dense css-tlelie-MuiListItemText-root"
-        >
-          <span
-            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap MuiListItemText-primary css-1udidiq-MuiTypography-root"
-          >
-            title
-          </span>
-        </div>
-      </li>
       <div
         class="MuiBox-root css-rwzwky"
       />
