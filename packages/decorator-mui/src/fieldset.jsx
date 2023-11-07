@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 /**
  * @component
@@ -42,50 +42,68 @@ const Title = styled(ListItem)(({ theme }) => ({}));
 export default function FieldSet(props) {
     const { title, description, form } = props;
 
-    const alignItems = 'alignItems' in form ? form.alignItems : undefined;
-    const layout = 'layout' in form ? form.layout : 'vertical';
-    const showTitle = 'showTitle' in form ? form.showTitle : true;
-    const disablePadding =
-        'disablePadding' in form ? form.disablePadding : false;
-    const Component = 'component' in form ? form.component : 'div';
-    const elevation = 'elevation' in form ? form.elevation : 1;
-    const icon = 'icon' in form ? form.icon : null;
+    const settings = useMemo(
+        () => ({
+            alignItems: 'alignItems' in form ? form.alignItems : undefined,
+            layout: 'layout' in form ? form.layout : 'vertical',
+            showTitle: 'showTitle' in form ? form.showTitle : true,
+            disablePadding:
+                'disablePadding' in form ? form.disablePadding : false,
+            Component: 'component' in form ? form.component : 'div',
+            elevation: 'elevation' in form ? form.elevation : 1,
+            icon: 'icon' in form ? form.icon : null,
+        }),
+        [form]
+    );
+    const titleIcon = useMemo(
+        () =>
+            settings.icon ? (
+                <ListItemIcon>
+                    <Icon key="icon">{settings.icon}</Icon>
+                </ListItemIcon>
+            ) : null,
+        [settings.icon]
+    );
+    const titleComponent = useMemo(() => {
+        (title || description) && settings.showTitle && (
+            <Title disablePadding={settings.disablePadding} divider>
+                {titleIcon}
+                <ListItemText
+                    key="title"
+                    primary={title}
+                    primaryTypographyProps={{ noWrap: true }}
+                    secondary={description}
+                    secondaryTypographyProps={{
+                        nowrap: true,
+                        variant: 'caption',
+                    }}
+                />
+            </Title>
+        );
+    }, [title, titleIcon, description, settings]);
 
-    let content = (
-        <Root dense disablePadding>
-            {(title || description) && showTitle && (
-                <Title disablePadding={disablePadding} divider>
-                    {icon && (
-                        <ListItemIcon>
-                            <Icon key="icon">{icon}</Icon>
-                        </ListItemIcon>
-                    )}
-                    <ListItemText
-                        key="title"
-                        primary={title}
-                        primaryTypographyProps={{ noWrap: true }}
-                        secondary={description}
-                        secondaryTypographyProps={{
-                            nowrap: true,
-                            variant: 'caption',
-                        }}
-                    />
-                </Title>
-            )}
-            <Content
-                layout={layout}
-                component={Component}
-                disablePadding={disablePadding}
-                alignItems={alignItems}
-            >
-                {props.children}
-            </Content>
-        </Root>
+    const content = useMemo(
+        () => (
+            <Root dense disablePadding>
+                {titleComponent}
+                <Content
+                    layout={settings.layout}
+                    component={settings.Component}
+                    disablePadding={settings.disablePadding}
+                    alignItems={settings.alignItems}
+                >
+                    {props.children}
+                </Content>
+            </Root>
+        ),
+        [titleComponent, settings, props.children]
     );
 
-    if (title || description) {
-        content = <Surface elevation={elevation}>{content}</Surface>;
-    }
-
-    return content;
+    return useMemo(() => {
+        if (title || description) {
+            return <Surface elevation={settings.elevation}>{content}</Surface>;
+        } else {
+            return content;
+        }
+    }, [title, description, content]);
 }

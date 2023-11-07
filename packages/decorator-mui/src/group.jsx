@@ -1,5 +1,5 @@
 import FormGroup from '@mui/material/FormGroup';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 /**
  * @component
@@ -7,7 +7,10 @@ import React from 'react';
 export default function Group(props) {
     const { form } = props;
 
-    const fullWidth = 'fullWidth' in form ? form.fullWidth : false;
+    const fullWidth = useMemo(
+        () => ('fullWidth' in form ? form.fullWidth : false),
+        [form]
+    );
 
     return (
         <FormGroup fullWidth={fullWidth} {...form.otherProps}>

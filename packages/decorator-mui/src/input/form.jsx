@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 import BaseInput from '@mui/material/Input';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import Date from './date';
 import DateTime from './datetime';
@@ -10,26 +10,33 @@ const Input = styled(BaseInput)(({ theme, fullWidth, ...props }) => ({
     width: fullWidth ? 'fill-available' : 'auto',
 }));
 
+function Plain(props) {
+    const { form } = props;
+    const fullWidth = useMemo(
+        () => ('fullWidth' in form ? form.fullWidth : undefined),
+        [form]
+    );
+
+    return <Input {...props} fullWidth={fullWidth} />;
+}
+
 /**
  * @component
  */
 export default function Form({ error, ...props }) {
-    props = { error: !!error, ...props };
+    const Component = useMemo(() => {
+        if (props.type === 'file') {
+            return File;
+        } else if (props.type === 'date') {
+            return Date;
+        } else if (props.type === 'datetime-local') {
+            return DateTime;
+        } else {
+            return Plain;
+        }
+    }, [props.type]);
 
-    if (props.type === 'file') {
-        return <File {...props} />;
-    }
+    props = useMemo(() => ({ error: !!error, ...props }), [props, error]);
 
-    if (props.type === 'date') {
-        return <Date {...props} />;
-    }
-
-    if (props.type === 'datetime-local') {
-        return <DateTime {...props} />;
-    }
-
-    const { form } = props;
-    const fullWidth = 'fullWidth' in form ? form.fullWidth : undefined;
-
-    return <Input {...props} />;
+    return <Component {...props} />;
 }

@@ -1,5 +1,5 @@
 import MuiSelect from '@mui/material/Select';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 /**
  * @component
@@ -13,13 +13,16 @@ export default function Select({
     children,
     multiple,
 }) {
-    const selectProps = {
-        error: !!error,
-        onChange,
-        value,
-        placeholder,
-        disabled,
-        multiple,
-    };
+    const selectProps = useMemo(
+        () => ({
+            error: !!error,
+            onChange,
+            value,
+            placeholder,
+            disabled,
+            multiple,
+        }),
+        [error, onChange, value, placeholder, disabled, multiple]
+    );
     return <MuiSelect {...selectProps}>{children}</MuiSelect>;
 }

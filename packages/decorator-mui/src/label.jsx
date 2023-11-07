@@ -1,13 +1,19 @@
 import InputLabel from '@mui/material/InputLabel';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 /**
  * @component
  */
 export default function Label({ error, ...props }) {
-    const shrink =
-        props.focused || (props.value !== undefined && props.value !== '');
-    const inputProps = { shrink, error: !!error };
+    const shrink = useMemo(
+        () =>
+            props.focused || (props.value !== undefined && props.value !== ''),
+        [props.focused, props.value]
+    );
+    const inputProps = useMemo(
+        () => ({ shrink, error: !!error }),
+        [shrink, error]
+    );
 
     return <InputLabel {...inputProps}>{props.children}</InputLabel>;
 }

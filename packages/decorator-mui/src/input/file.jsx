@@ -1,21 +1,22 @@
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import Input from '@mui/material/Input';
-import makeStyles from '@mui/styles/makeStyles';
-import React, { Fragment, useRef } from 'react';
+import { styled } from '@mui/material/styles';
+import React, { useMemo, useRef } from 'react';
 
 /**
  * @component
  */
-const useStyles = makeStyles(function () {
-    return { fileInput: { display: 'none' } };
-});
+const HiddenFileInput = styled('input')({ display: 'none' });
+
 export default function Form(props) {
     const { form, value } = props;
     const ref = useRef();
-    const classes = useStyles();
 
-    const accept = 'accept' in form ? form.accept : undefined;
+    const accept = useMemo(
+        () => ('accept' in form ? form.accept : undefined),
+        [form]
+    );
 
     const endAdornment = (
         <>
@@ -37,10 +38,10 @@ export default function Form(props) {
                 value={value}
                 onClick={onClick}
             />
-            <input
+            <HiddenFileInput
                 type="file"
                 key="hidden"
-                className={classes.fileInput}
+                name={form.key}
                 accept={accept}
                 ref={ref}
                 onChange={onChange}

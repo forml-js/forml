@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactPDF from '@react-pdf/renderer';
+import { View, Text } from '@react-pdf/renderer';
 
 export default function Description(props) {
     const { form } = props;
@@ -14,10 +14,8 @@ export default function Description(props) {
     const formStyles = 'styles' in form ? form.styles : {};
 
     return (
-        <ReactPDF.View
-            style={{ ...styles.description, ...formStyles.description }}
-        >
-            <ReactPDF.Text>{props.children}</ReactPDF.Text>
-        </ReactPDF.View>
+        <View style={{ ...styles.description, ...formStyles.description }}>
+            <Text>{props.children}</Text>
+        </View>
     );
 }
