@@ -29,7 +29,6 @@ export function mover(items, value) {
     return function move(start, end) {
         return [reorder(items, start, end), reorder(value, start, end)];
         function reorder(list, start, end) {
-            console.log('reorder(start: %o, end: %o)', start, end);
             const result = Array.from(list);
             const [removed] = result.splice(start, 1);
             result.splice(end, 0, removed);
@@ -261,7 +260,6 @@ function DraggableItemFactory(props, ref) {
     return function DraggableItem(provided) {
         const { draggableProps, dragHandleProps } = provided;
         const injectRef = (e) => {
-            console.log('DraggableItem.innerRef(element: %o)', e);
             provided.innerRef(e);
             if (ref) ref(e);
         };
@@ -314,8 +312,6 @@ function ArrayComponent(props, ref) {
 
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
     const items = useArrayItems(form, disabled);
-
-    console.log('ArrayComponent(items: %o)', items);
 
     const parent = form;
     const arrays = useMemo(
@@ -376,7 +372,6 @@ function ArrayComponent(props, ref) {
         dragDrop ? DraggableArrayContainer : NormalArrayContainer
     );
 
-    console.log('ArrayComponent(arrays: %o)', arrays);
     return (
         <Component items={items} {...props}>
             {arrays}
@@ -391,7 +386,6 @@ const DraggableArrayContainer = forwardRef(
         const model = useModel();
         const onDragEnd = useCallback(
             function onDragEnd(result) {
-                console.log('onDragEnd(result: %o)', result);
                 if (!result.destination) {
                     return;
                 } else if (result.destination.index === result.source.index) {
@@ -410,11 +404,9 @@ const DraggableArrayContainer = forwardRef(
         );
         const renderDraggableItems = (provided) => {
             const injectRef = (e) => {
-                console.log('renderDraggableItems.innerRef(element: %o)', e);
                 provided.innerRef(e);
                 if (ref) ref(e);
             };
-            console.log('renderDraggableItems(props: %o)', props);
             return (
                 <NormalArrayContainer {...props} ref={injectRef}>
                     {props.children}

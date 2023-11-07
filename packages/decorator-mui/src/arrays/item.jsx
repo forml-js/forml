@@ -88,12 +88,6 @@ export function ItemComponent(props, ref) {
         [renderMovementButtons]
     );
 
-    console.log(
-        'ItemComponent(dragHandleProps: %o, draggableProps: %o)',
-        dragHandleProps,
-        draggableProps
-    );
-
     return (
         <StyledListItem
             divider={true}

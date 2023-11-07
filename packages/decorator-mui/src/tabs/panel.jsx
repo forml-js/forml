@@ -65,7 +65,5 @@ export default function Panel(props) {
         [settings.orientation, activeDelta]
     );
 
-    console.log('Panel(key: %o, sx: %o)', form.title, sx);
-
     return <Paper {...props} elevation={settings.elevation} sx={sx} />;
 }
