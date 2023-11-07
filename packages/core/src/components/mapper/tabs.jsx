@@ -1,8 +1,50 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
 import { SchemaField } from '../schema-field';
+
+const Tab = forwardRef(function Tab(props, ref) {
+    const { parent, index, activeIndex, activate } = props;
+    const localizer = useLocalizer();
+    const deco = useDecorator();
+    const form = parent.tabs[index];
+    const active = index === activeIndex;
+    const raiseTab = useCallback(() => activate(index), [activate, index]);
+    const title = localizer.getLocalizedString(form.title);
+    const description = localizer.getLocalizedString(form.description);
+    return (
+        <deco.Tabs.Tab
+            key={`tab-${index}`}
+            form={form}
+            title={title}
+            description={description}
+            active={active}
+            activate={raiseTab}
+            parent={parent}
+            ref={ref}
+        />
+    );
+});
+
+const Panel = forwardRef(function Panel(props, ref) {
+    const { parent, index, activeIndex } = props;
+    const deco = useDecorator();
+    const form = parent.tabs[index];
+    const activeDelta = index - activeIndex;
+    const { schema } = form;
+    return (
+        <deco.Tabs.Panel
+            key={`panel-${index}`}
+            form={form}
+            parent={parent}
+            activeDelta={activeDelta}
+            ref={ref}
+        >
+            <SchemaField form={form} schema={schema} />
+        </deco.Tabs.Panel>
+    );
+});
 
 /**
  * @component Tabs
@@ -15,41 +57,24 @@ export default function Tabs(props) {
 
     const title = localizer.getLocalizedString(form.title);
     const description = localizer.getLocalizedString(form.description);
-
-    const tabs = [];
-    const panels = [];
-    for (let index = 0; index < form.tabs.length; ++index) {
-        const tab = form.tabs[index];
-        const active = value === index;
-        const activate = () => setValue(index);
-
-        const { schema } = tab;
-
-        const title = localizer.getLocalizedString(tab.title);
-        const description = localizer.getLocalizedString(tab.description);
-
-        tabs.push(
-            <deco.Tabs.Tab
-                key={`tab-${index}`}
-                form={tab}
-                title={title}
-                description={description}
-                active={active}
-                activate={activate}
-                parent={form}
-            />
-        );
-        panels.push(
-            <deco.Tabs.Panel
-                key={`panel-${index}`}
-                form={tab}
-                parent={form}
-                active={active}
-            >
-                <SchemaField form={tab} schema={schema} />
-            </deco.Tabs.Panel>
-        );
-    }
+    const [tabs, panels] = useMemo(() => {
+        const tabs = [];
+        const panels = [];
+        for (let index = 0; index < form.tabs.length; ++index) {
+            tabs.push(
+                <Tab
+                    parent={form}
+                    index={index}
+                    activeIndex={value}
+                    activate={setValue}
+                />
+            );
+            panels.push(
+                <Panel parent={form} index={index} activeIndex={value} />
+            );
+        }
+        return [tabs, panels];
+    }, [form, value]);
 
     return (
         <deco.Tabs.Container
