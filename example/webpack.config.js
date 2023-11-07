@@ -50,7 +50,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-            { test: /\.js$/, enforce: 'pre', use: ['source-map-loader'] },
+            //        { test: /\.js$/, enforce: 'pre', use: ['source-map-loader'] },
             { test: /\.(eot|svg|ttf|woff|woff2)$/, use: ['file-loader'] },
         ],
     },

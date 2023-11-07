@@ -1,9 +1,9 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterMoment from '@mui/lab/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import debug from 'debug';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import ReactPDF from '@react-pdf/renderer';
 import Page from './components/Page';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
@@ -52,7 +52,8 @@ async function loadPrism() {
 async function init() {
     await loadPrism();
 
-    render(
+    const root = createRoot(document.getElementById('app'));
+    root.render(
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterMoment}>
                 <CssBaseline />
@@ -84,8 +85,7 @@ async function init() {
                 />
                 <Page />
             </LocalizationProvider>
-        </ThemeProvider>,
-        document.getElementById('app')
+        </ThemeProvider>
     );
 }
 
