@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import Ajv from 'ajv';
 import objectPath from 'objectpath';
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 
 /**
  * @namespace forml.util
@@ -450,13 +450,14 @@ export function useValidator(schema) {
         }
     }, [schema]);
 
-    function validate(model) {
-        const valid = compiled(model);
-        const { errors } = compiled;
-        return { valid, errors };
-    }
-
-    return validate;
+    return useCallback(
+        function validate(model) {
+            const valid = compiled(model);
+            const { errors } = compiled;
+            return { valid, errors };
+        },
+        [compiled]
+    );
 }
 
 /**
