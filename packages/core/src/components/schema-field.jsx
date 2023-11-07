@@ -1,7 +1,7 @@
 import debug from 'debug';
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 
 import { useMapper, useModel } from '@forml/hooks';
 import { FormType } from '../types';
@@ -13,19 +13,31 @@ export function SchemaField(props) {
 
     const mapper = useMapper();
     const model = useModel();
-    const Field = mapper[form.type];
-    const key = form.key !== undefined ? ObjectPath.stringify(form.key) : '';
+    const Field = useMemo(() => mapper[form.type], [mapper, form]);
+    const key = useMemo(
+        () => (form.key !== undefined ? ObjectPath.stringify(form.key) : ''),
+        [form]
+    );
+
+    const onChange = useCallback(
+        function onChange(event, value) {
+            const newModel = model.setValue(form.key, value);
+            model.onChange(event, newModel);
+        },
+        [model, form]
+    );
+
+    const [value, error] = useMemo(() => {
+        if (Field && form.key) {
+            return [model.getValue(form.key), model.getError(form.key)];
+        } else {
+            return [undefined, undefined];
+        }
+    }, [model, form]);
 
     if (!Field) {
         log('SchemaField(%s) : !Field : form : %o', key, form);
         return null;
-    }
-
-    let value = undefined;
-    let error = undefined;
-    if (form.key) {
-        value = model.getValue(form.key);
-        error = model.getError(form.key);
     }
 
     return (
@@ -38,11 +50,6 @@ export function SchemaField(props) {
             parent={parent}
         />
     );
-
-    function onChange(event, value) {
-        const newModel = model.setValue(form.key, value);
-        model.onChange(event, newModel);
-    }
 }
 
 SchemaField.propTypes = {

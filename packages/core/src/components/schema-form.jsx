@@ -16,13 +16,14 @@ import { defaultMapper, getMapper, mapperShape } from './mapper';
 import { SchemaField } from './schema-field';
 
 function useGenerator(generator, props, model, deps) {
-    if (typeof generator === 'function') {
-        // The genrator is a hook; use it
-        return generator(props, model, deps);
-    }
-
-    // The genrator is a value; return it
-    return generator;
+    return useMemo(() => {
+        if (typeof generator === 'function') {
+            // The genrator is a hook; use it
+            return generator(props, model, deps);
+        } else {
+            return generator;
+        }
+    }, [generator, props, model, deps]);
 }
 
 /**
@@ -55,7 +56,26 @@ export function SchemaForm({
         () => getLocalizer(props.localizer),
         [props.localizer]
     );
-    const errors = useMemo(computeErrors, [model, validate]);
+    const computeErrors = useCallback(
+        function computeErrors() {
+            const { valid, errors } = validate(model);
+            let errorMap = {};
+
+            if (!valid) {
+                for (const error of errors) {
+                    const keys = ObjectPath.parse(
+                        error.dataPath?.replace(/^\./, '') ?? ''
+                    );
+                    const normal = ObjectPath.stringify(keys);
+                    errorMap = { ...errorMap, [normal]: error.message };
+                }
+            }
+
+            return errorMap;
+        },
+        [validate]
+    );
+    const errors = useMemo(computeErrors, [model, validate, props.errors]);
 
     const version = useMemo(() => versions++, [model]);
     const getValue = useCallback(util.valueGetter(model, schema), [
@@ -67,6 +87,14 @@ export function SchemaForm({
         schema,
     ]);
     const getError = useCallback(util.errorGetter(errors), [errors]);
+    const onChange = useCallback(
+        function onChange(event, model) {
+            if (props.onChange) {
+                props.onChange(event, model);
+            }
+        },
+        [props.onChange]
+    );
 
     const contextValue = useMemo(
         function () {
@@ -97,19 +125,13 @@ export function SchemaForm({
             setValue,
             getError,
             version,
-            props.onChange,
+            onChange,
         ]
     );
 
-    function onChange(event, model) {
-        if (props.onChange) {
-            props.onChange(event, model);
-        }
-    }
-
-    return (
-        <Context.Provider value={contextValue}>
-            {merged.map((form, index) => {
+    const children = useMemo(
+        () =>
+            merged.map((form, index) => {
                 if (!form) return;
                 const { schema } = form;
                 return (
@@ -120,26 +142,11 @@ export function SchemaForm({
                         onChange={onChange}
                     />
                 );
-            })}
-        </Context.Provider>
+            }),
+        [merged, onChange]
     );
 
-    function computeErrors() {
-        const { valid, errors } = validate(model);
-        let errorMap = {};
-
-        if (!valid) {
-            for (const error of errors) {
-                const keys = ObjectPath.parse(
-                    error.dataPath?.replace(/^\./, '') ?? ''
-                );
-                const normal = ObjectPath.stringify(keys);
-                errorMap = { ...errorMap, [normal]: error.message };
-            }
-        }
-
-        return errorMap;
-    }
+    return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 }
 
 SchemaForm.propTypes = {
