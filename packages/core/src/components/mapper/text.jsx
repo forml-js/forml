@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useCallback } from 'react';
 import ObjectPath from 'objectpath';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
@@ -18,6 +18,12 @@ export default function Text(props) {
     const { title, description, placeholder } = form;
     const { readonly: disabled } = form;
     const id = ObjectPath.stringify(form.key);
+    const onChange = useCallback(
+        function onChange(e) {
+            props.onChange(e, e.target.value);
+        },
+        [props.onChange]
+    );
 
     return (
         <deco.Input.Group form={form}>
@@ -55,10 +61,6 @@ export default function Text(props) {
             )}
         </deco.Input.Group>
     );
-
-    function onChange(e) {
-        props.onChange(e, e.target.value);
-    }
 }
 
 Text.propTypes = {
