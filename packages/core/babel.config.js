@@ -1,5 +1,4 @@
 module.exports = function (api) {
-    api.cache(true);
     return {
         sourceMaps: api.env('production') ? false : 'both',
         presets: [
