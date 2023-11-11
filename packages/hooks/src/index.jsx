@@ -1,4 +1,4 @@
-import context from '@forml/context';
+import { ModelContext, RenderingContext } from '@forml/context';
 import { useContext as useReactContext } from 'react';
 
 /**
@@ -6,7 +6,11 @@ import { useContext as useReactContext } from 'react';
  * @return {Context}
  */
 export function useContext() {
-    return useReactContext(context);
+    return useReactContext(ModelContext);
+}
+
+export function useRenderingContext() {
+    return useReactContext(RenderingContext);
 }
 
 /**
@@ -14,8 +18,8 @@ export function useContext() {
  * @return {Mapper}
  */
 export function useMapper() {
-    const ctx = useContext();
-    return ctx.mapper;
+    const { mapper } = useRenderingContext();
+    return mapper;
 }
 
 /**
@@ -48,9 +52,7 @@ export function useModel() {
  * @return {Localizer}``
  */
 export function useLocalizer() {
-    const context = useContext();
-
-    const { localizer } = context;
+    const { localizer } = useRenderingContext();
     return localizer;
 }
 
@@ -59,6 +61,6 @@ export function useLocalizer() {
  * @return {Decorator}
  */
 export function useDecorator() {
-    const { decorator } = useContext();
+    const { decorator } = useRenderingContext();
     return decorator;
 }
