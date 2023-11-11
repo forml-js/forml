@@ -1,6 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -14,9 +14,34 @@ export default function Select(props) {
     const deco = useDecorator();
     const localizer = useLocalizer();
 
-    const title = localizer.getLocalizedString(form.title);
-    const placeholder = localizer.getLocalizedString(form.placeholder);
-    const description = localizer.getLocalizedString(form.description);
+    const getLabel = useCallback(
+        function getLabel(item) {
+            const { displayFn } = schema;
+
+            if (displayFn) {
+                return displayFn(item);
+            }
+
+            return item.name;
+        },
+        [schema]
+    );
+
+    const { title, placeholder, description } = useMemo(
+        () => ({
+            title: localizer.getLocalizedString(form.title),
+            placeholder: localizer.getLocalizedString(form.placeholder),
+            description: localizer.getLocalizedString(form.description),
+        }),
+        [localizer, form.title, form.placeholder, form.description]
+    );
+
+    const onChange = useCallback(
+        function onChange(event) {
+            props.onChange(event, event.target.value);
+        },
+        [props.onChange]
+    );
 
     const menuItems = useMemo(
         function () {
@@ -35,7 +60,7 @@ export default function Select(props) {
             }
             return menuItems;
         },
-        [form, value]
+        [form.titleMap, form.key, value, localizer]
     );
 
     return (
@@ -74,20 +99,6 @@ export default function Select(props) {
             )}
         </deco.Input.Group>
     );
-
-    function getLabel(item) {
-        const { displayFn } = schema;
-
-        if (displayFn) {
-            return displayFn(item);
-        }
-
-        return item.name;
-    }
-
-    function onChange(event) {
-        props.onChange(event, event.target.value);
-    }
 }
 
 Select.propTypes = {
