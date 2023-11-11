@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { SchemaForm } from '@forml/core';
 import * as decorator from '@forml/decorator-mui';
 import { samples } from '../samples';
 
 export default function SelectExample(props) {
-    const enm = Object.keys(samples);
-    const titles = enm.map((k) => samples[k].schema.title);
+    const enm = useMemo(() => Object.keys(samples), [samples]);
+    const titles = useMemo(
+        () => enm.map((k) => samples[k].schema.title),
+        [enm]
+    );
 
-    const form = [{ key: [], title: 'Sample', titles }];
-    const schema = { type: 'string', enum: enm };
+    const form = useMemo(() => [{ key: [], title: 'Sample', titles }], []);
+    const schema = useMemo(() => ({ type: 'string', enum: enm }), [enm]);
     const model = props.selected;
 
     return (
@@ -16,12 +19,8 @@ export default function SelectExample(props) {
             schema={schema}
             form={form}
             model={model}
-            onChange={onChange}
+            onChange={props.onChange}
             decorator={decorator}
         />
     );
-
-    function onChange(event, value) {
-        props.onChange(event, value);
-    }
 }

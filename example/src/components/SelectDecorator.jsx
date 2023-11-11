@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { SchemaForm } from '@forml/core';
 
 import decorators from '../decorators';
 
 export default function SelectDecorator(props) {
-    const schema = {
-        type: 'string',
-        enum: Object.keys(decorators),
-        enumNames: Object.keys(decorators),
-    };
-    const form = ['*'];
+    const schema = useMemo(
+        () => ({
+            type: 'string',
+            enum: Object.keys(decorators),
+            enumNames: Object.keys(decorators),
+        }),
+        [decorators]
+    );
+    const form = useMemo(() => ['*'], []);
+    const onChange = useCallback(
+        function onChange(event, nextModel) {
+            props.onChange(nextModel);
+        },
+        [props.onChange]
+    );
     const model = props.decorator;
 
     return (
@@ -20,9 +29,5 @@ export default function SelectDecorator(props) {
             onChange={onChange}
             decorator={decorators.mui}
         />
-    )
-
-    function onChange(event, nextModel) {
-        props.onChange(nextModel);
-    }
+    );
 }

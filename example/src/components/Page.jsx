@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import useEditable from '../hooks/useEditable';
 import { getSample } from '../samples';
 import Editor from './Editor';
@@ -52,6 +52,44 @@ export default function Page() {
     }, [schema.value]);
     const model = useEditable(defaultModel);
 
+    const onChange = useCallback(
+        async function onChange(event, example) {
+            // event.preventDefault();
+            const sample = getSample(example);
+            schema.setValue(sample.schema);
+            form.setValue(sample.form);
+            model.setValue(
+                sample.model || util.defaultForSchema(sample.schema)
+            );
+            setMapper(sample.mapper);
+            setLocalizer(sample.localization);
+            setSelected(example);
+        },
+        [
+            schema.setValue,
+            form.setValue,
+            model.setValue,
+            setMapper,
+            setLocalizer,
+            setSelected,
+        ]
+    );
+
+    const onModelChange = useCallback(
+        function onModelChange(event, ...args) {
+            model.setValue(args[0]);
+        },
+        [model.setValue]
+    );
+    const onSchemaChange = useCallback(
+        (e) => schema.setJSON(e.target.value),
+        [schema.setJSON]
+    );
+    const onFormChange = useCallback(
+        (e) => form.setJSON(e.target.value),
+        [form.setJSON]
+    );
+
     return (
         <Root>
             <ExampleCard key="primary-viewport">
@@ -92,7 +130,7 @@ export default function Page() {
                     <Editor
                         key="editor"
                         value={schema.json}
-                        onChange={(e) => schema.setJSON(e.target.value)}
+                        onChange={onSchemaChange}
                     />
                 </CardContent>
                 <CardContent key="form">
@@ -102,25 +140,10 @@ export default function Page() {
                     <Editor
                         key="editor"
                         value={form.json}
-                        onChange={(e) => form.setJSON(e.target.value)}
+                        onChange={onFormChange}
                     />
                 </CardContent>
             </ManagerCard>
         </Root>
     );
-
-    async function onChange(event, example) {
-        // event.preventDefault();
-        const sample = getSample(example);
-        schema.setValue(sample.schema);
-        form.setValue(sample.form);
-        model.setValue(sample.model || util.defaultForSchema(sample.schema));
-        setMapper(sample.mapper);
-        setLocalizer(sample.localization);
-        setSelected(example);
-    }
-
-    function onModelChange(event, ...args) {
-        model.setValue(args[0]);
-    }
 }
