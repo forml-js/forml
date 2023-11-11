@@ -9,11 +9,14 @@ import { createContext } from 'react';
  * a change in the model.
  */
 
-const context = createContext({
+export const ModelContext = createContext({
+    mapper: {},
+    version: 0,
+});
+export const RenderingContext = createContext({
     mapper: {},
     decorator: {},
     localizer: {},
-    version: 0,
 });
 
-export default context;
+export default ModelContext;
