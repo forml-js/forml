@@ -5,7 +5,7 @@ import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
-import Context from '@forml/context';
+import { ModelContext, RenderingContext } from '@forml/context';
 import { merge } from '../forms';
 import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
@@ -96,20 +96,17 @@ export function SchemaForm({
         [props.onChange]
     );
 
-    const contextValue = useMemo(
+    const modelContext = useMemo(
         function () {
             return {
                 model,
                 schema,
                 form: merged,
-                mapper,
                 getValue,
                 setValue,
                 getError,
                 onChange,
-                localizer,
                 errors: {},
-                decorator,
                 version,
             };
         },
@@ -127,6 +124,14 @@ export function SchemaForm({
             version,
             onChange,
         ]
+    );
+    const renderingContext = useMemo(
+        () => ({
+            localizer,
+            mapper,
+            decorator,
+        }),
+        [decorator, localizer, mapper]
     );
 
     const children = useMemo(
@@ -146,7 +151,13 @@ export function SchemaForm({
         [merged, onChange]
     );
 
-    return <Context.Provider value={contextValue}>{children}</Context.Provider>;
+    return (
+        <RenderingContext.Provider value={renderingContext}>
+            <ModelContext.Provider value={modelContext}>
+                {children}
+            </ModelContext.Provider>
+        </RenderingContext.Provider>
+    );
 }
 
 SchemaForm.propTypes = {
