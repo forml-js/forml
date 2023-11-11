@@ -217,12 +217,10 @@ function BaseArrayItem(props, ref) {
 }
 
 const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
-    const { form, items, index } = props;
+    const { form, items, value, index } = props;
     const { readonly: disabled } = form;
     const deco = useDecorator();
-    const model = useModel();
     const localizer = useLocalizer();
-    const value = model.getValue([...form.key, index]);
 
     const title = useMemo(() => {
         let title = form.title;
@@ -308,7 +306,7 @@ export const ArrayItem = forwardRef(BaseArrayItem);
  * ```
  */
 function ArrayComponent(props, ref) {
-    const { form } = props;
+    const { form, value } = props;
     const { readonly: disabled } = form;
 
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
@@ -352,6 +350,7 @@ function ArrayComponent(props, ref) {
                         id={item.key}
                         form={form}
                         index={i}
+                        value={value[i]}
                         items={items}
                         item={item}
                         type={type}
@@ -403,18 +402,21 @@ const DraggableArrayContainer = forwardRef(
             },
             [items, model, form]
         );
-        const renderDraggableItems = (provided) => {
-            const injectRef = (e) => {
-                provided.innerRef(e);
-                if (ref) ref(e);
-            };
-            return (
-                <NormalArrayContainer {...props} ref={injectRef}>
-                    {props.children}
-                    {provided.placeholder}
-                </NormalArrayContainer>
-            );
-        };
+        const renderDraggableItems = useCallback(
+            (provided) => {
+                const injectRef = (e) => {
+                    provided.innerRef(e);
+                    if (ref) ref(e);
+                };
+                return (
+                    <NormalArrayContainer {...props} ref={injectRef}>
+                        {props.children}
+                        {provided.placeholder}
+                    </NormalArrayContainer>
+                );
+            },
+            [props]
+        );
 
         return (
             <DragDropContext onDragEnd={onDragEnd}>
