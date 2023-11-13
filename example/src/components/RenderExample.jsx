@@ -32,21 +32,19 @@ export default function RenderExample(props) {
         if (wrapInDocument) {
             child = (
                 <ReactPDF.Document>
-                    <ReactPDF.Page size="A4">
-                        {child}
-                    </ReactPDF.Page>
+                    <ReactPDF.Page size="A4">{child}</ReactPDF.Page>
                 </ReactPDF.Document>
             );
         }
         child = (
             <ReactPDF.PDFViewer
                 key={key}
-                style={{ width: '100vw', height: '100vh' }}
+                style={useMemo(() => ({ width: '100vw', height: '100vh' }), [])}
             >
                 {child}
             </ReactPDF.PDFViewer>
         );
     }
 
-    return <ErrorBoundary>{child}</ErrorBoundary>
+    return <ErrorBoundary>{child}</ErrorBoundary>;
 }
