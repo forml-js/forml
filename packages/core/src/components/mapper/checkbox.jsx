@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -15,6 +15,12 @@ export default function Checkbox(props) {
 
     const deco = useDecorator();
     const localize = useLocalizer();
+    const onChange = useCallback(
+        function onChange(event) {
+            props.onChange(event, event.target.checked);
+        },
+        [props.onChange]
+    );
 
     return (
         <deco.Checkbox
@@ -27,10 +33,6 @@ export default function Checkbox(props) {
             disabled={disabled}
         />
     );
-
-    function onChange(event) {
-        props.onChange(event, event.target.checked);
-    }
 }
 
 Checkbox.propTypes = {

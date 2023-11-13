@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -14,6 +14,12 @@ export default function Date(props) {
     let { value, form, error } = props;
     let { title, description, placeholder } = form;
     const { readonly: disabled } = form;
+    const onChange = useCallback(
+        function onChange(e) {
+            props.onChange(e, e.target.value);
+        },
+        [props.onChange]
+    );
 
     /**
      * Apply localizations
@@ -52,10 +58,6 @@ export default function Date(props) {
             )}
         </deco.Input.Group>
     );
-
-    function onChange(e) {
-        props.onChange(e, e.target.value);
-    }
 }
 
 Date.propTypes = {

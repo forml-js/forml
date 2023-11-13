@@ -18,6 +18,22 @@ export default function File(props) {
 
     let { title, description, placeholder } = form;
     const { readonly: disabled } = form;
+    const onChange = useCallback(
+        async function onChange(event) {
+            const [file] = event.target.files ?? [];
+            let result = '';
+
+            if (file) {
+                result = await getFileFormat(form.format, file);
+                setDisplay(file.name);
+            } else {
+                setDisplay('');
+            }
+
+            return props.onChange(event, result);
+        },
+        [form.format, setDisplay, props.onChange]
+    );
 
     title = localizer.getLocalizedString(title);
     description = localizer.getLocalizedString(description);
@@ -58,22 +74,6 @@ export default function File(props) {
             )}
         </deco.Input.Group>
     );
-
-    async function onChange(event) {
-        const [file] = event.target.files ?? [];
-        let result = '';
-
-        if (file) {
-            result = await getFileFormat(form.format, file);
-            setDisplay(file.name);
-        } else {
-            setDisplay('');
-        }
-
-        log('result : %o', result);
-
-        return props.onChange(event, result);
-    }
 }
 
 function readAsDataURL(file) {

@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { FormType } from '../../types';
 
@@ -10,16 +10,15 @@ import Text from './text';
  */
 export default function TextArea(props) {
     const { form } = props;
-    return (
-        <Text
-            {...props}
-            otherProps={{
-                multiline: true,
-                rows: form.rows,
-                rowMax: form.rowMax,
-            }}
-        />
+    const otherProps = useMemo(
+        () => ({
+            multiline: true,
+            rows: form.rows,
+            rowMax: form.rowMax,
+        }),
+        [form.rows, form.rowMax]
     );
+    return <Text {...props} otherProps={otherProps} />;
 }
 
 TextArea.propTypes = {

@@ -1,6 +1,6 @@
 import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -23,7 +23,31 @@ export default function Number(props) {
     );
     const description = localizer.getLocalizedString(form.description);
 
-    const id = ObjectPath.stringify(form.key);
+    const id = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
+    const onChange = useCallback(
+        function onChange(e) {
+            let value = e.target.value;
+
+            if (valueExceptions.includes(value)) {
+                props.onChange(e, value);
+                return;
+            }
+
+            const appendPoint = /\.$/.test(value);
+
+            value = parseFloat(value);
+
+            if (isNaN(value)) {
+                e.preventDefault();
+                return;
+            }
+
+            if (appendPoint) value = `${value}.`;
+
+            props.onChange(e, value);
+        },
+        [props.onChange]
+    );
 
     return (
         <deco.Input.Group key={id} form={form}>
@@ -60,28 +84,6 @@ export default function Number(props) {
             )}
         </deco.Input.Group>
     );
-
-    function onChange(e) {
-        let value = e.target.value;
-
-        if (valueExceptions.includes(value)) {
-            props.onChange(e, value);
-            return;
-        }
-
-        const appendPoint = /\.$/.test(value);
-
-        value = parseFloat(value);
-
-        if (isNaN(value)) {
-            e.preventDefault();
-            return;
-        }
-
-        if (appendPoint) value = `${value}.`;
-
-        props.onChange(e, value);
-    }
 }
 
 Number.propTypes = {

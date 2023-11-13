@@ -1,5 +1,5 @@
 import t from 'prop-types';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -15,16 +15,41 @@ export default function Multiselect(props) {
     const placeholder = localizer.getLocalizedString(form.placeholder);
     const description = localizer.getLocalizedString(form.description);
 
-    const menuItems = [];
-    for (let i = 0; i < form.titleMap.length; i++) {
-        const name = localizer.getLocalizedString(getLabel(form.titleMap[i]));
-        const { value } = form.titleMap[i];
-        menuItems.push(
-            <deco.Input.Option key={name} value={value}>
-                {name}
-            </deco.Input.Option>
-        );
-    }
+    const getLabel = useCallback(
+        function getLabel(item) {
+            const { displayFn } = schema;
+
+            if (displayFn) {
+                return displayFn(item);
+            }
+
+            return item.name;
+        },
+        [schema]
+    );
+
+    const onChange = useCallback(
+        function onChange(event) {
+            props.onChange(event, event.target.value);
+        },
+        [props.onChange]
+    );
+
+    const menuItems = useMemo(() => {
+        const options = [];
+        for (let i = 0; i < form.titleMap.length; i++) {
+            const name = localizer.getLocalizedString(
+                getLabel(form.titleMap[i])
+            );
+            const { value } = form.titleMap[i];
+            options.push(
+                <deco.Input.Option key={name} value={value}>
+                    {name}
+                </deco.Input.Option>
+            );
+            return options;
+        }
+    }, [form.titleMap, localizer]);
 
     return (
         <deco.Input.Group form={form} error={error}>
@@ -63,20 +88,6 @@ export default function Multiselect(props) {
             )}
         </deco.Input.Group>
     );
-
-    function getLabel(item) {
-        const { displayFn } = schema;
-
-        if (displayFn) {
-            return displayFn(item);
-        }
-
-        return item.name;
-    }
-
-    function onChange(event) {
-        props.onChange(event, event.target.value);
-    }
 }
 
 Multiselect.propTypes = {

@@ -1,6 +1,6 @@
 import t from 'prop-types';
 import ObjectPath from 'objectpath';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types';
@@ -21,7 +21,27 @@ export default function Integer(props) {
         form.title || form.key[form.key.length - 1]
     );
     const description = localizer.getLocalizedString(form.description);
-    const id = ObjectPath.stringify(form.key);
+    const id = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
+    const onChange = useCallback(
+        function onChange(e) {
+            let value = e.target.value;
+
+            if (valueExceptions.includes(value)) {
+                props.onChange(e, value);
+                return;
+            }
+
+            value = parseInt(value);
+
+            if (isNaN(value)) {
+                e.preventDefault();
+                return;
+            }
+
+            props.onChange(e, value);
+        },
+        [props.onChange]
+    );
 
     return (
         <deco.Input.Group form={form}>
@@ -57,24 +77,6 @@ export default function Integer(props) {
             )}
         </deco.Input.Group>
     );
-
-    function onChange(e) {
-        let value = e.target.value;
-
-        if (valueExceptions.includes(value)) {
-            props.onChange(e, value);
-            return;
-        }
-
-        value = parseInt(value);
-
-        if (isNaN(value)) {
-            e.preventDefault();
-            return;
-        }
-
-        props.onChange(e, value);
-    }
 }
 
 Integer.propTypes = {
