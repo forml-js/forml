@@ -17,7 +17,7 @@ export default function Select({
         () => ({
             error: !!error,
             onChange,
-            value,
+            value: value ?? '',
             placeholder,
             disabled,
             multiple,
