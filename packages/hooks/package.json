@@ -47,7 +47,8 @@
         "react-test-renderer": "^18.2.0"
     },
     "dependencies": {
-        "@forml/context": "^1.7.0"
+        "@forml/context": "^1.7.0",
+        "reselect": "^4.1.8"
     },
     "peerDependencies": {
         "react": "^18.2.0",
