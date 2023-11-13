@@ -1,4 +1,4 @@
-import ObjectPath from 'objectpath';
+import objectPath from 'objectpath';
 import t from 'prop-types';
 import React, {
     useEffect,
@@ -309,8 +309,8 @@ function ArrayComponent(props, ref) {
     const { form, value } = props;
     const { readonly: disabled } = form;
 
-    const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
     const items = useArrayItems(form, disabled);
+    const type = useMemo(() => objectPath.stringify(form.key), [form.key]);
 
     const parent = form;
     const arrays = useMemo(
