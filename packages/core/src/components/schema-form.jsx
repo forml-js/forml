@@ -3,9 +3,10 @@
  */
 import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { ModelContext, RenderingContext } from '@forml/context';
+import { useModelReducer } from '@forml/hooks';
 import { merge } from '../forms';
 import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
@@ -15,7 +16,7 @@ import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
 import { defaultMapper, getMapper, mapperShape } from './mapper';
 import { SchemaField } from './schema-field';
 
-function useGenerator(generator, props, model, deps) {
+function useGenerator(generator, props, model, deps = []) {
     return useMemo(() => {
         if (typeof generator === 'function') {
             // The genrator is a hook; use it
@@ -23,7 +24,7 @@ function useGenerator(generator, props, model, deps) {
         } else {
             return generator;
         }
-    }, [generator, props, model, deps]);
+    }, [generator, model, ...deps]);
 }
 
 /**
@@ -56,37 +57,6 @@ export function SchemaForm({
         () => getLocalizer(props.localizer),
         [props.localizer]
     );
-    const computeErrors = useCallback(
-        function computeErrors() {
-            const { valid, errors } = validate(model);
-            let errorMap = {};
-
-            if (!valid) {
-                for (const error of errors) {
-                    const keys = ObjectPath.parse(
-                        error.dataPath?.replace(/^\./, '') ?? ''
-                    );
-                    const normal = ObjectPath.stringify(keys);
-                    errorMap = { ...errorMap, [normal]: error.message };
-                }
-            }
-
-            return errorMap;
-        },
-        [validate]
-    );
-    const errors = useMemo(computeErrors, [model, validate, props.errors]);
-
-    const version = useMemo(() => versions++, [model]);
-    const getValue = useCallback(util.valueGetter(model, schema), [
-        model,
-        schema,
-    ]);
-    const setValue = useCallback(util.valueSetter(model, schema), [
-        model,
-        schema,
-    ]);
-    const getError = useCallback(util.errorGetter(errors), [errors]);
     const onChange = useCallback(
         function onChange(event, model) {
             if (props.onChange) {
@@ -96,35 +66,7 @@ export function SchemaForm({
         [props.onChange]
     );
 
-    const modelContext = useMemo(
-        function () {
-            return {
-                model,
-                schema,
-                form: merged,
-                getValue,
-                setValue,
-                getError,
-                onChange,
-                errors: {},
-                version,
-            };
-        },
-        [
-            model,
-            schema,
-            merged,
-            mapper,
-            decorator,
-            localizer,
-            errors,
-            getValue,
-            setValue,
-            getError,
-            version,
-            onChange,
-        ]
-    );
+    const modelContext = useModelReducer(schema, model);
     const renderingContext = useMemo(
         () => ({
             localizer,
@@ -132,6 +74,19 @@ export function SchemaForm({
             decorator,
         }),
         [decorator, localizer, mapper]
+    );
+
+    const shouldFire = useRef(false);
+    useEffect(
+        function () {
+            if (shouldFire.current) {
+                const { model } = modelContext.state;
+                onChange({ target: { value: model } }, model);
+            } else {
+                shouldFire.current = true;
+            }
+        },
+        [modelContext.state, onChange]
     );
 
     const children = useMemo(
