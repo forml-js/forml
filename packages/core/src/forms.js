@@ -29,7 +29,7 @@ export function merge(schema, form = ['*'], options = {}) {
 
     const { lookup } = stdForm;
     form = form.reduce((acc, obj) => {
-        if (obj === undefined) {
+        if (obj === undefined || obj === null || obj === false || obj === 0) {
             return acc;
         }
 
