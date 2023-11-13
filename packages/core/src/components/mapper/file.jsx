@@ -1,5 +1,5 @@
 import debug from 'debug';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 
