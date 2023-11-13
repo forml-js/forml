@@ -76,8 +76,7 @@ const StyledListItem = forwardRef(function StyledListItem(props, ref) {
  * @return {React.Component}
  */
 export function ItemComponent(props, ref) {
-    const { disabled, form } = props;
-    const { draggableProps, dragHandleProps } = props.otherProps;
+    const { disabled, form, draggableProps, dragHandleProps } = props;
 
     const renderMovementButtons = useMemo(
         () => ('movementButtons' in form ? form.movementButtons : true),
