@@ -95,7 +95,7 @@ export default function Page() {
             <ExampleCard key="primary-viewport">
                 <ExampleCardContent key="example" ref={pdfRef}>
                     <RenderExample
-                        key={`render-${decorator}-${schema.json}-${form.json}`}
+                        key={`render-${decorator}-${selected}`}
                         schema={schema.value}
                         form={form.value}
                         model={model.value}
