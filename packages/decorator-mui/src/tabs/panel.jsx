@@ -25,7 +25,6 @@ function paperTransform(orientation, delta) {
         }
     }
 }
-
 function paperPosition(delta) {
     if (delta === 0) {
         return 'relative';
@@ -33,7 +32,6 @@ function paperPosition(delta) {
         return 'absolute';
     }
 }
-
 function paperZIndex(delta) {
     if (delta === 0) {
         return 99;

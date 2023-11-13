@@ -4,9 +4,15 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import styled from '@mui/material/styles/styled';
 import Paper from '@mui/material/Paper';
-import React, { useState, useEffect, useRef } from 'react';
+import styled from '@mui/material/styles/styled';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 
 const Root = styled(Paper)(({ form }) => [
     {
@@ -19,15 +25,18 @@ const Root = styled(Paper)(({ form }) => [
 const Content = ({ form, minHeight, ...props }) => (
     <Box
         {...props}
-        sx={{
-            position: 'relative',
-            display: 'flex',
-            flexGrow: 1,
-            flexDirection: 'column',
-            minHeight,
-            m: form.disableMargin ? 0 : undefined,
-            p: form.disablePadding ? 0 : undefined,
-        }}
+        sx={useMemo(
+            () => ({
+                position: 'relative',
+                display: 'flex',
+                flexGrow: 1,
+                flexDirection: 'column',
+                minHeight,
+                m: form.disableMargin ? 0 : undefined,
+                p: form.disablePadding ? 0 : undefined,
+            }),
+            [form.disableMargin, form.disablePadding]
+        )}
     />
 );
 const Tabs = styled(Paper)(({ theme, form }) => [
@@ -143,16 +152,22 @@ export default function Container(props) {
                         )}
                         <ListItemText
                             key="title"
-                            primaryTypographyProps={{
-                                variant: 'subtitle2',
-                                color: 'textPrimary',
-                                noWrap: true,
-                            }}
+                            primaryTypographyProps={useMemo(
+                                () => ({
+                                    variant: 'subtitle2',
+                                    color: 'textPrimary',
+                                    noWrap: true,
+                                }),
+                                []
+                            )}
                             primary={title}
-                            secondaryTypographyProps={{
-                                variant: 'caption',
-                                noWrap: true,
-                            }}
+                            secondaryTypographyProps={useMemo(
+                                () => ({
+                                    variant: 'caption',
+                                    noWrap: true,
+                                }),
+                                []
+                            )}
                             secondary={description}
                         />
                     </TitleListItem>

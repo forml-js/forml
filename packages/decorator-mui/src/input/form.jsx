@@ -1,14 +1,16 @@
 import { styled } from '@mui/material';
 import BaseInput from '@mui/material/Input';
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import Date from './date';
 import DateTime from './datetime';
 import File from './file';
 
-const Input = styled(BaseInput)(({ theme, fullWidth, ...props }) => ({
-    width: fullWidth ? 'fill-available' : 'auto',
-}));
+const Input = memo(
+    styled(BaseInput)(({ theme, fullWidth, ...props }) => ({
+        width: fullWidth ? 'fill-available' : 'auto',
+    }))
+);
 
 function Plain(props) {
     const { form } = props;

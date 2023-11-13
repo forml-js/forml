@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 /**
  * @component
@@ -16,6 +16,29 @@ export default function Form(props) {
     const accept = useMemo(
         () => ('accept' in form ? form.accept : undefined),
         [form]
+    );
+
+    const onChange = useCallback(
+        function onChange(event) {
+            props.onChange(event);
+        },
+        [props.onChange]
+    );
+    const onClick = useCallback(function onClick(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (ref.current) {
+            ref.current.click();
+        }
+    }, []);
+    const clear = useCallback(
+        function clear(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            props.onChange(event);
+        },
+        [props.onChange]
     );
 
     const endAdornment = (
@@ -48,23 +71,4 @@ export default function Form(props) {
             />
         </>
     );
-
-    async function onChange(event) {
-        props.onChange(event);
-    }
-
-    function onClick(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (ref.current) {
-            ref.current.click();
-        }
-    }
-
-    function clear(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        props.onChange(event);
-    }
 }

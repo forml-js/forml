@@ -3,7 +3,7 @@ import Icon from '@mui/material/Icon';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 const ImageIcon = styled('img')(({ theme, ...props }) => ({
     objectFit: 'contain',
@@ -141,20 +141,21 @@ export default function Tab(props) {
     const icon = 'icon' in form ? form.icon : 'dynamic_form';
     const image = 'image' in form ? form.image : null;
 
-    let imageOrIcon = null;
-    if (image) {
-        imageOrIcon = (
-            <ListItemIcon>
-                <ImageIcon src={image} />
-            </ListItemIcon>
-        );
-    } else if (icon) {
-        imageOrIcon = (
-            <ListItemIcon key="icon">
-                <Icon>{icon}</Icon>
-            </ListItemIcon>
-        );
-    }
+    let imageOrIcon = useMemo(() => {
+        if (image) {
+            return (
+                <ListItemIcon>
+                    <ImageIcon src={image} />
+                </ListItemIcon>
+            );
+        } else if (icon) {
+            return (
+                <ListItemIcon key="icon">
+                    <Icon>{icon}</Icon>
+                </ListItemIcon>
+            );
+        }
+    }, [image, icon]);
 
     return (
         <Root
@@ -169,12 +170,15 @@ export default function Tab(props) {
             <ListItemText
                 key="title"
                 primary={title}
-                primaryTypographyProps={{ noWrap: true }}
+                primaryTypographyProps={useMemo(() => ({ noWrap: true }), [])}
                 secondary={description}
-                secondaryTypographyProps={{
-                    nowrap: true,
-                    variant: 'caption',
-                }}
+                secondaryTypographyProps={useMemo(
+                    () => ({
+                        nowrap: true,
+                        variant: 'caption',
+                    }),
+                    []
+                )}
             />
         </Root>
     );
