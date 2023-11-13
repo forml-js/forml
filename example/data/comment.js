@@ -98,11 +98,13 @@ export function form(props, model) {
                             items: [
                                 'name',
                                 'email',
-                                'email' in model && {
-                                    key: 'spam',
-                                    type: 'checkbox',
-                                    title: 'Yes I want spam.',
-                                },
+                                model.email
+                                    ? {
+                                          key: 'spam',
+                                          type: 'checkbox',
+                                          title: 'Yes I want spam.',
+                                      }
+                                    : null,
                             ],
                             layout: 'vertical',
                         },
