@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useRenderingContext } from '@forml/hooks';
 
-export default function Dynamic(SchemaForm) {
-    return function (props) {
+export default function makeDynamic(SchemaForm) {
+    function GeneratedDynamic(props) {
         const { form: parent, value } = props;
+        const form = parent.generate(value);
+        return <BaseDynamic {...props} parent={parent} form={form} />;
+    }
+    function StaticDynamic(props) {
+        const { form: parent } = props;
         const form = parent.generate;
+        return <BaseDynamic {...props} parent={parent} form={form} />;
+    }
+    function BaseDynamic(props) {
+        const { form, parent, value } = props;
         const ctx = useRenderingContext();
         const { decorator, mapper, localizer } = ctx;
 
@@ -20,5 +29,17 @@ export default function Dynamic(SchemaForm) {
                 parent={parent}
             />
         );
+    }
+    return function Dynamic(props) {
+        const { form } = props;
+        const Component = useMemo(() => {
+            if (typeof form.generate === 'function') {
+                return GeneratedDynamic;
+            } else {
+                return StaticDynamic;
+            }
+        }, [form.generate]);
+
+        return <Component {...props} />;
     };
 }

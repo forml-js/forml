@@ -16,15 +16,13 @@ import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
 import { defaultMapper, getMapper, mapperShape } from './mapper';
 import { SchemaField } from './schema-field';
 
-function useGenerator(generator, props, model, deps = []) {
-    return useMemo(() => {
-        if (typeof generator === 'function') {
-            // The genrator is a hook; use it
-            return generator(props, model, deps);
-        } else {
-            return generator;
-        }
-    }, [generator, model, ...deps]);
+function useGenerator(generator, model) {
+    if (typeof generator === 'function') {
+        // The generator is a hook; use it
+        return generator(model);
+    } else {
+        return generator;
+    }
 }
 
 /**
@@ -40,8 +38,8 @@ export function SchemaForm({
     form: useForm,
     ...props
 }) {
-    const schema = useGenerator(useSchema, props, model, props.schemaDeps);
-    const form = useGenerator(useForm, props, model, props.formDeps);
+    const schema = useGenerator(useSchema, model);
+    const form = useGenerator(useForm, model);
 
     const merged = useMemo(() => merge(schema, form), [schema, form]);
     const validate = useCallback(util.useValidator(schema), [schema]);
