@@ -9,7 +9,10 @@ import React, { useMemo, forwardRef } from 'react';
 import { useLocalizer } from '@forml/hooks';
 import { styled } from '@mui/material/styles';
 
-const StyledPaper = styled(Paper)(({ theme, ...props }) => ({
+const StyledPaper = styled(Paper, {
+    shouldForwardProp: (prop) =>
+        !['disablePadding', 'disableGutters'].includes(prop),
+})(({ theme, ...props }) => ({
     margin: theme.spacing?.(1),
     flex: '1 1 auto',
     ...(props.disablePadding
@@ -29,7 +32,7 @@ const StyledList = forwardRef((props, ref) => (
     <List
         {...props}
         ref={ref}
-        htmlName="items"
+        htmlname="items"
         sx={{
             display: 'flex',
             flexDirection: 'column',
