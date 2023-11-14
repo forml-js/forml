@@ -8,6 +8,7 @@ import ReactPDF from '@react-pdf/renderer';
 import Page from './components/Page';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
+import React from 'react';
 
 import MaterialIcons from 'material-icons/iconfont/MaterialIcons-Regular.ttf';
 import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
