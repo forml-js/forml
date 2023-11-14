@@ -8,7 +8,9 @@ export default function Editor(props) {
     }, []);
     const onValueChange = useCallback(
         function onValueChange(value) {
-            props.onChange({ target: { value } }, value);
+            if (props.onChange) {
+                props.onChange({ target: { value } }, value);
+            }
         },
         [props.onChange]
     );
