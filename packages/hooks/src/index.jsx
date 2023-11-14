@@ -133,7 +133,7 @@ export function useKey(key) {
     }, [model.actions, path]);
 
     return useMemo(
-        () => ({ ...attributes, ...actions, validate }),
-        [attributes, actions, validate]
+        () => ({ ...attributes, ...actions, path, validate }),
+        [attributes, actions, path, validate]
     );
 }
