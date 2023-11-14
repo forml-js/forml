@@ -29,7 +29,7 @@ export default function Text(props) {
             {title && (
                 <deco.Label
                     key="label"
-                    htmlFor={id}
+                    htmlfor={id}
                     form={form}
                     value={value}
                     error={error}

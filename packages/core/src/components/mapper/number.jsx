@@ -57,7 +57,7 @@ export default function Number(props) {
                     form={form}
                     value={value}
                     error={error}
-                    htmlFor={id}
+                    htmlfor={id}
                 >
                     {label}
                 </deco.Label>

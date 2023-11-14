@@ -48,7 +48,7 @@ export default function Integer(props) {
             {label && (
                 <deco.Label
                     key="label"
-                    htmlFor={id}
+                    htmlfor={id}
                     form={form}
                     value={value}
                     error={error}
