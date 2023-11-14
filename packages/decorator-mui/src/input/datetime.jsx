@@ -28,7 +28,15 @@ export default function DateTime(props) {
     );
     const onChange = useCallback(
         function onChange(value) {
-            value = value ? value.toISOString(true) : value;
+            value = value
+                ? settings.format
+                    ? value.format
+                        ? value.format(settings.format)
+                        : value.toFormat
+                        ? value.toFormat(settings.format)
+                        : value.toLocaleString()
+                    : value.toLocaleString()
+                : value;
             if (props.onChange) {
                 props.onChange({ target: { value } });
             }
