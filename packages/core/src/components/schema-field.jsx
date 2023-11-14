@@ -1,11 +1,26 @@
 import debug from 'debug';
 import PropTypes from 'prop-types';
-import React, { useMemo, useCallback } from 'react';
+import React, { memo, useMemo, useCallback } from 'react';
+import isEqual from 'lodash/isEqual';
 
 import { useMappedField, useKey } from '@forml/hooks';
 import { FormType } from '../types';
 
 const log = debug('forml:schema-field');
+
+const FieldRenderer = memo(
+    function FieldRenderer(props) {
+        const { Field, ...forwardProps } = props;
+        return <Field {...forwardProps} />;
+    },
+    function arePropsEqual(oldProps, newProps) {
+        return (
+            oldProps.path === newProps.path &&
+            (Object.is(oldProps.value, newProps.value) ||
+                isEqual(oldProps.value, newProps.value))
+        );
+    }
+);
 
 function ValueField(props) {
     const { form, parent } = props;
@@ -29,8 +44,10 @@ function ValueField(props) {
     }
 
     return (
-        <Field
+        <FieldRenderer
+            Field={Field}
             form={form}
+            path={field.path}
             schema={field.schema}
             value={field.model}
             onChange={onChange}
