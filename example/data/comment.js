@@ -1,8 +1,7 @@
 import debug from 'debug';
-import ObjectPath from 'objectpath';
-import { createElement as h, useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { SchemaForm } from '@forml/core';
-import { useContext, useModel } from '@forml/hooks';
+import { useRenderingContext, useModel } from '@forml/hooks';
 
 const log = debug('rjsf:example:data:comment');
 
@@ -62,22 +61,20 @@ export const schema = {
 export const mapper = {
     comment(props) {
         const { form: parent, value } = props;
-        const ctx = useContext();
-        const { decorator, mapper, localizer } = ctx;
-
-        return h(SchemaForm, {
-            ...props,
-            decorator,
-            mapper,
-            localizer,
-            schema,
-            form,
-            model: value,
-        });
+        const ctx = useRenderingContext();
+        return (
+            <SchemaForm
+                {...props}
+                {...ctx}
+                schema={schema}
+                form={form}
+                model={value}
+            />
+        );
     },
 };
 
-export function form(props, model) {
+export function form(model) {
     return [
         {
             type: 'fieldset',
@@ -133,7 +130,11 @@ export function form(props, model) {
                     type: 'fieldset',
                     alignItems: 'flex-end',
                     items: [
-                        { key: 'comment', type: 'textarea', fullWidth: true },
+                        {
+                            key: 'comment',
+                            type: 'textarea',
+                            fullWidth: true,
+                        },
                         { key: 'tos' },
                     ],
                     layout: 'vertical',
