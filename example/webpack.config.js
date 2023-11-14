@@ -1,44 +1,44 @@
 const path = require('path');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 module.exports = {
     resolve: {
         fallback: {
-            events: false, //path.resolve('./node_modules/events'),
-            process: false, //path.resolve('./node_modules/process'),
-            zlib: false, //path.resolve('./node_modules/browserify-zlib'),
-            stream: false, //path.resolve('./node_modules/stream-browserify'),
-            util: false, //path.resolve('./node_modules/util'),
-            buffer: false, //path.resolve('./node_modules/buffer'),
-            asset: false, //path.resolve('./node_modules/assert'),
+            events: false,
+            process: false,
+            zlib: false,
+            stream: false,
+            util: false,
+            buffer: false,
+            asset: false,
         },
         alias: {
-            //react: path.resolve('./node_modules/react'),
-            //'react-dom': path.resolve('./node_modules/react-dom'),
-            //'@material-ui/core': path.resolve(
-            //    './node_modules/@material-ui/core'
-            //),
-            //'@material-ui/pickers': path.resolve(
-            //    './node_modules/@material-ui/pickers'
-            //),
-            //'@forml/core': path.resolve('./node_modules/@forml/core'),
-            //'@forml/hooks': path.resolve('./node_modules/@forml/hooks'),
-            //'@forml/context': path.resolve('./node_modules/@forml/context'),
-            //'@forml/decorator-barebones': path.resolve(
-            //    './node_modules/@forml/decorator-barebones'
-            //),
-            //'@forml/decorator-mui': path.resolve(
-            //    './node_modules/@forml/decorator-mui'
-            //),
-            //'@forml/decorator-pdf': path.resolve(
-            //    './node_modules/@forml/decorator-pdf'
-            //),
+            '@forml/core': path.resolve('../packages/core/src'),
+            '@forml/hooks': path.resolve('../packages/hooks/src'),
+            '@forml/context': path.resolve('../packages/context/src'),
+            '@forml/decorator-barebones': path.resolve(
+                '../packages/decorator-barebones/src'
+            ),
+            '@forml/decorator-mui': path.resolve(
+                '../packages/decorator-mui/src'
+            ),
+            '@forml/decorator-pdf': path.resolve(
+                '../packages/decorator-pdf/src'
+            ),
         },
         extensions: ['.*', '.js', '.jsx'],
     },
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    entry: path.resolve('./src/index.js'),
+    optimization: {
+        splitChunks: {},
+    },
+    entry: {
+        app: path.resolve('./src/index.js'),
+    },
     output: {
-        filename: 'bundle.js',
+        chunkFilename: '[name].bundle.js',
+        filename: '[name].bundle.js',
         publicPath: '/',
         path: path.resolve('./dist'),
     },
@@ -48,16 +48,27 @@ module.exports = {
             {
                 test: /\.m?jsx?$/,
                 exclude: /node_modules/,
-                use: ['babel-loader'],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                '@babel/preset-env',
+                                {
+                                    targets: {
+                                        browsers: ['last 1 Chrome versions'],
+                                    },
+                                },
+                            ],
+                            '@babel/preset-react',
+                        ],
+                        plugins: ['@babel/plugin-transform-runtime'],
+                    },
+                },
             },
             //        { test: /\.js$/, enforce: 'pre', use: ['source-map-loader'] },
             { test: /\.(eot|svg|ttf|woff|woff2)$/, use: ['file-loader'] },
         ],
     },
-    //plugins: [
-    //    new webpack.ProvidePlugin({
-    //        Buffer: ['buffer', 'Buffer'],
-    //        process: 'process/browser',
-    //    }),
-    //],
+    plugins: [],
 };
