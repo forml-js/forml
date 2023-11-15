@@ -1,46 +1,36 @@
-import { useMemo, useReducer } from 'react';
+import { ModelContext } from '@forml/context';
 import AJV from 'ajv';
 import debug from 'debug';
-
-const log = debug('forml:hooks:model');
+import objectPath from 'objectpath';
+import { useMemo, useContext as useReactContext, useReducer } from 'react';
+import { createSelector } from 'reselect';
 
 import {
     assertType,
-    getNextSchema,
     defaultForSchema,
+    getNextSchema,
     modelDrop,
     seek,
     unwind,
 } from './common';
+import { createAction, createReducer } from './reducer';
 
-function createAction(name, generator = (id) => id) {
-    const actionCreator = {
-        [name]: function (...args) {
-            const trace = Error().stack;
-            return { type: name, payload: generator(...args), trace };
-        },
-    }[name];
-    return actionCreator;
+const log = debug('forml:hooks:model');
+
+/**
+ * Hook to use the entire forml context
+ * @return {Context}
+ */
+export function useContext() {
+    return useReactContext(ModelContext);
 }
-function createReducer(builder) {
-    const cases = [];
-    let defaultCase = (state, _action) => state;
 
-    const addCase = (action, callback) =>
-        cases.push([(dispatch) => dispatch.type === action.name, callback]);
-    const addMatcher = (matcher, callback) => cases.push([matcher, callback]);
-    const addDefaultCase = (callback) => (defaultCase = callback);
-    builder({ addCase, addDefaultCase, addMatcher });
-    return function reduce(state, action) {
-        let index = 0;
-        while (index < cases.length) {
-            const [matcher, reducer] = cases[index++];
-            if (matcher(action)) {
-                return reducer(state, action);
-            }
-        }
-        return defaultCase(state, action);
-    };
+/**
+ * A hook to pull in the model methods for the closest parent form
+ * @return {ModelMethods}
+ */
+export function useModel() {
+    return useContext();
 }
 
 export const setValue = createAction('value/set', (key, value) => ({
@@ -179,4 +169,76 @@ export function useModelReducer(schema, model = undefined) {
     const ajv = useMemo(() => new AJV({ allErrors: true, strict: false }), []);
 
     return useMemo(() => ({ state, actions, ajv }), [state, actions]);
+}
+
+function selectModel(state) {
+    return state.model;
+}
+
+function selectSchema(state) {
+    return state.schema;
+}
+
+export function useSelector(selector) {
+    const context = useContext();
+    return selector(context.state);
+}
+export function useValue(key) {
+    const path = useMemo(() => objectPath.stringify(key), [key]);
+    const modelSelector = useMemo(
+        () =>
+            createSelector(selectModel, selectSchema, (model, schema) => {
+                const [_currentKey, currentModel] = seek(
+                    schema,
+                    key,
+                    model,
+                    []
+                );
+                return currentModel;
+            }),
+        [path]
+    );
+
+    return useSelector(modelSelector);
+}
+export function useKey(key) {
+    const path = useMemo(() => objectPath.stringify(key), [key]);
+    const keySelector = useMemo(
+        () =>
+            createSelector(selectModel, selectSchema, (model, schema) => {
+                const [_currentKey, currentModel, currentSchema] = seek(
+                    schema,
+                    key,
+                    model,
+                    []
+                );
+
+                return {
+                    model: currentModel,
+                    schema: currentSchema,
+                };
+            }),
+        [path]
+    );
+
+    const model = useModel();
+    const attributes = useSelector(keySelector);
+    //const validate = useMemo(
+    //    () => model.ajv.compile(attributes.schema),
+    //    [attributes.schema]
+    //);
+
+    const actions = useMemo(() => {
+        const keyActions = {};
+        for (let actionKey in model.actions) {
+            const action = model.actions[actionKey];
+            keyActions[actionKey] = (...args) => action(key, ...args);
+        }
+        return keyActions;
+    }, [model.actions, path]);
+
+    return useMemo(
+        () => ({ ...attributes, actions, path /*, validate*/ }),
+        [attributes, actions, path /*validate*/]
+    );
 }
