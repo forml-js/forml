@@ -1,129 +1,12 @@
+import { useArrayKey, useDecorator, useLocalizer } from '@forml/hooks';
 import objectPath from 'objectpath';
 import t from 'prop-types';
 import React, { forwardRef, useCallback, useMemo } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
-import { useDecorator, useKey, useLocalizer } from '@forml/hooks';
-import { ARRAY_PLACEHOLDER } from '../../constants';
-import { FormType } from '../../types';
-import { clone, traverseForm } from '../../util';
-import { SchemaField } from '../schema-field';
-
-function BaseArrayItem(props, ref) {
-    const { form, forms, index, disabled } = props;
-    const dragDrop = useMemo(
-        () => ('dragDrop' in form ? form.dragDrop : true),
-        [parent]
-    );
-
-    const Component = useMemo(() => {
-        if (dragDrop) {
-            return DraggableArrayItem;
-        } else {
-            return NormalArrayItem;
-        }
-    }, [dragDrop]);
-
-    const fields = useMemo(
-        () =>
-            forms.map(function (formTemplate) {
-                if (!formTemplate) return;
-                const form = copyWithIndex(formTemplate, index);
-                const path = objectPath.stringify(form.key);
-
-                /**
-                 * Override properties of the child form
-                 * titleFun - to generate a title for the sub-form
-                 * disabled - to propagate the disabled state to children
-                 */
-                form.titleFun =
-                    'titleFun' in form ? form.titleFun : parent.titleFun;
-                form.readonly = 'readonly' in form ? form.readonly : disabled;
-
-                return (
-                    <SchemaField
-                        key={path}
-                        form={form}
-                        schema={form.schema}
-                        parent={parent}
-                    />
-                );
-            }),
-        [parent, forms, index]
-    );
-
-    return (
-        <Component {...props} ref={ref}>
-            {fields}
-        </Component>
-    );
-}
-
-const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
-    const { form, array, value, index, dragHandleProps, draggableProps } =
-        props;
-    const { readonly: disabled } = form;
-    const deco = useDecorator();
-    const localizer = useLocalizer();
-
-    const title = useMemo(() => {
-        let title = form.title;
-        if (form.titleFun) {
-            title = form.titleFun(value);
-        }
-
-        return localizer.getLocalizedString(title);
-    }, [form, value, localizer]);
-
-    const actions = useMemo(
-        () => ({
-            destroy: () => array.removeArray(index),
-            moveUp: () => array.moveArrayUp(index),
-            moveDown: () => array.moveArrayDown(index),
-        }),
-        [array.removeArray, array.moveArrayUp, array.moveArrayDown, index]
-    );
-
-    return (
-        <deco.Arrays.Item
-            disabled={disabled}
-            title={title}
-            index={index}
-            form={form}
-            dragHandleProps={dragHandleProps}
-            draggableProps={draggableProps}
-            {...actions}
-            ref={ref}
-        >
-            {props.children}
-        </deco.Arrays.Item>
-    );
-});
-
-function DraggableItemFactory(props, ref) {
-    return function DraggableItem(provided) {
-        const injectRef = (e) => {
-            provided.innerRef(e);
-            if (ref) ref(e);
-        };
-        return (
-            <NormalArrayItem {...props} {...provided} ref={injectRef}>
-                {props.children}
-            </NormalArrayItem>
-        );
-    };
-}
-
-const DraggableArrayItem = forwardRef(function DraggableArrayItem(props, ref) {
-    return (
-        <Draggable draggableId={props.id} index={props.index}>
-            {DraggableItemFactory(props, ref)}
-        </Draggable>
-    );
-});
-
-export const ArrayItem = forwardRef(BaseArrayItem);
+import { FormType } from '../../../types';
+import Item from './Item';
 
 /**
  * @name ArrayComponent
@@ -144,10 +27,9 @@ export const ArrayItem = forwardRef(BaseArrayItem);
 
 function ArrayComponent(props, ref) {
     const { form, schema, value } = props;
-    const { readonly: disabled } = form;
 
     const type = useMemo(() => objectPath.stringify(form.key), [form.key]);
-    const array = useKey(form.key);
+    const array = useArrayKey(form.key);
 
     const parent = form;
     const items = useMemo(
@@ -155,18 +37,18 @@ function ArrayComponent(props, ref) {
             const arrays = [];
             const count = array.model?.length ?? 0;
             for (let index = 0; index < count; ++index) {
-                const key = [...parent.key, index];
-                const path = objectPath.stringify(key);
+                const key = array.keys[index];
                 arrays.push(
-                    <ArrayItem
-                        key={path}
-                        array={array}
-                        id={path}
+                    <Item
+                        key={key}
+                        {...array.actions}
+                        id={key}
                         form={form}
                         forms={parent.items}
                         index={index}
                         type={type}
                         schema={schema}
+                        value={array.model[index]}
                     />
                 );
             }
@@ -192,7 +74,7 @@ function ArrayComponent(props, ref) {
 
 const DraggableArrayContainer = forwardRef(
     function DraggableArrayContainer(props, ref) {
-        const { form, array } = props;
+        const { array } = props;
         const droppableId = useMemo(shortid);
         const onDragEnd = useCallback(
             function onDragEnd(result) {
@@ -201,13 +83,13 @@ const DraggableArrayContainer = forwardRef(
                 } else if (result.destination.index === result.source.index) {
                     return;
                 } else {
-                    array.moveArray(
+                    array.actions.moveArray(
                         result.source.index,
                         result.destination.index
                     );
                 }
             },
-            [array.moveArray]
+            [array.actions.moveArray]
         );
         const renderDraggableItems = useCallback(
             (provided) => {
@@ -238,7 +120,6 @@ const DraggableArrayContainer = forwardRef(
         );
     }
 );
-
 const NormalArrayContainer = forwardRef(
     function NormalArrayContainer(props, ref) {
         const { form, array } = props;
@@ -258,7 +139,7 @@ const NormalArrayContainer = forwardRef(
         return (
             <deco.Arrays.Items
                 className={form.htmlClass}
-                add={array.appendArray}
+                add={array.actions.appendArray}
                 value={array.model}
                 title={title}
                 description={description}
@@ -273,6 +154,7 @@ const NormalArrayContainer = forwardRef(
     }
 );
 
+export { ArrayComponent as Array, Item };
 export default forwardRef(ArrayComponent);
 
 ArrayComponent.propTypes = {
@@ -289,18 +171,3 @@ ArrayComponent.propTypes = {
 ArrayComponent.defaultProps = {
     value: [],
 };
-
-function copyWithIndex(form, index) {
-    const copy = clone(form);
-    copy.arrayIndex = index;
-    traverseForm(copy, setIndex(index));
-    return copy;
-}
-
-function setIndex(index) {
-    return function (form) {
-        if (form.key) {
-            form.key[form.key.indexOf(ARRAY_PLACEHOLDER)] = index;
-        }
-    };
-}
