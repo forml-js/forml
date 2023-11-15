@@ -35,6 +35,7 @@ module.exports = {
     },
     entry: {
         app: path.resolve('./src/index.js'),
+        iso: path.resolve('./src/iso.js'),
     },
     output: {
         chunkFilename: '[name].bundle.js',
