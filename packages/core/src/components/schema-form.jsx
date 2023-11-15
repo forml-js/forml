@@ -1,7 +1,6 @@
 /**
  * @namespace forml.SchemaForm
  */
-import ObjectPath from 'objectpath';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
@@ -10,7 +9,6 @@ import { useModelReducer } from '@forml/hooks';
 import { merge } from '../forms';
 import { defaultLocalizer, getLocalizer } from '../localizer';
 import * as Types from '../types';
-import * as util from '../util';
 
 import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
 import { defaultMapper, getMapper, mapperShape } from './mapper';
@@ -30,8 +28,6 @@ function useGenerator(generator, model) {
  * @description Renders a form from the provided schema, using the provided model as a value
  * and the provided forms as a guide.
  */
-let versions = 0;
-
 export function SchemaForm({
     model,
     schema: useSchema,
@@ -42,7 +38,7 @@ export function SchemaForm({
     const form = useGenerator(useForm, model);
 
     const merged = useMemo(() => merge(schema, form), [schema, form]);
-    const validate = useCallback(util.useValidator(schema), [schema]);
+    //const validate = useCallback(util.useValidator(schema), [schema]);
     const mapper = useMemo(
         () => getMapper(props.mapper, SchemaForm),
         [props.mapper]

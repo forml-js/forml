@@ -29,9 +29,9 @@ function ValueField(props) {
     const field = useKey(form.key);
     const onChange = useCallback(
         (event, value) => {
-            field.setValue(value);
+            field.actions.setValue(value);
         },
-        [field.setValue]
+        [field.actions.setValue]
     );
 
     if (!Field) {
@@ -62,7 +62,7 @@ function WrapperField(props) {
     const Field = useMappedField(form.type);
 
     if (!Field) {
-        log('SchemaField.fail(key: %o, form: %o)', form.key, form);
+        log('WrapperField.fail(key: %o, form: %o)', form.key, form);
         return null;
     }
 
