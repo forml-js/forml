@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, Suspense } from 'react';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 /**
  * @component
@@ -42,6 +42,7 @@ function paperZIndex(delta) {
 
 export default function Panel(props) {
     const { activeDelta, form, parent } = props;
+    const { children, ...forwardProps } = props;
 
     const settings = useMemo(
         () => ({
@@ -63,5 +64,9 @@ export default function Panel(props) {
         [settings.orientation, activeDelta]
     );
 
-    return <Paper {...props} elevation={settings.elevation} sx={sx} />;
+    return (
+        <Paper {...forwardProps} elevation={settings.elevation} sx={sx}>
+            <Suspense fallback={<CircularProgress />}>{children}</Suspense>
+        </Paper>
+    );
 }

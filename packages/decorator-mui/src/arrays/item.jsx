@@ -1,14 +1,18 @@
+import debug from 'debug';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
+import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import { styled } from '@mui/material/styles';
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef, memo, useMemo } from 'react';
 
-const DragHandle = styled('div')(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(1.5),
-}));
+const log = debug('forml:decorator-mui:arrays:item');
+
+const DragHandle = memo((props) => (
+    <Box {...props} sx={{ display: 'flex', flexDirection: 'column', p: 1.5 }}>
+        <Icon>drag_handle</Icon>
+    </Box>
+));
 const FormsContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -21,34 +25,82 @@ const FormsContainer = styled('div')(({ theme }) => ({
     borderRightColor: theme.palette.divider,
     padding: theme.spacing(1),
 }));
-const Controls = styled('div')(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    '&:has(button:only-child)': {
+const Controls = memo(
+    styled('div')(({ theme }) => ({
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-    },
-}));
+        '&:has(button:only-child)': {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+    }))
+);
 const Spacer = styled('div')(({ theme }) => ({
     flex: '1 0 auto',
     width: 'fill-available',
     borderBottom: `1px solid ${theme.palette?.divider}`,
 }));
-const OnlyDestroy = styled(Button)(({ theme }) => ({
-    display: 'inline-flex !important',
-    flexDirection: 'column',
-    width: theme.spacing?.(6),
-    minWidth: theme.spacing?.(6),
-    border: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-}));
-const Destroy = styled(Button)(({ theme }) => ({
-    width: theme.spacing?.(6),
-    minWidth: theme.spacing?.(6),
-}));
-const MovementButton = styled(Button)(({ theme, spacer }) => ({
+const OnlyDestroy = memo(
+    function OnlyDestroy(props) {
+        const { onClick, disabled } = props;
+        return (
+            <Button
+                onClick={onClick}
+                disabled={disabled}
+                color="secondary"
+                size="small"
+                sx={useMemo(
+                    () => ({
+                        display: 'inline-flex !important',
+                        flexDirection: 'column',
+                        width: (theme) => theme.spacing(6),
+                        minWidth: (theme) => theme.spacing(6),
+                        border: 0,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }),
+                    []
+                )}
+            >
+                <Icon>delete_forever</Icon>
+            </Button>
+        );
+    },
+    (oldProps, newProps) =>
+        ['onClick', 'disabled'].every((key) =>
+            Object.is(oldProps[key], newProps[key])
+        )
+);
+const Destroy = memo(
+    function Destroy(props) {
+        const { onClick, disabled } = props;
+        return (
+            <Button
+                onClick={onClick}
+                disabled={disabled}
+                color="secondary"
+                size="small"
+                sx={useMemo(
+                    () => ({
+                        width: (theme) => theme.spacing(6),
+                        minWidth: (theme) => theme.spacing(6),
+                    }),
+                    []
+                )}
+            >
+                <Icon>delete_forever</Icon>
+            </Button>
+        );
+    },
+    (oldProps, newProps) =>
+        ['onClick', 'disabled'].every((key) =>
+            Object.is(oldProps[key], newProps[key])
+        )
+);
+const MovementButton = styled(Button, {
+    shouldForwardProp: (prop) => !['spacer'].includes(prop),
+})(({ theme, spacer }) => ({
     borderRadius: '0',
     width: theme.spacing(6),
     minWidth: theme.spacing(6),
@@ -59,14 +111,17 @@ const StyledListItem = forwardRef(function StyledListItem(props, ref) {
         <ListItem
             {...props}
             ref={ref}
-            sx={{
-                display: 'flex',
-                alignItems: 'stretch',
-                flexDirection: 'row',
-                paddingTop: 0,
-                paddingBottom: 0,
-                backgroundColor: 'background.paper',
-            }}
+            sx={useMemo(
+                () => ({
+                    display: 'flex',
+                    alignItems: 'stretch',
+                    flexDirection: 'row',
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                    backgroundColor: 'background.paper',
+                }),
+                []
+            )}
         />
     );
 });
@@ -75,8 +130,9 @@ const StyledListItem = forwardRef(function StyledListItem(props, ref) {
  * @component
  * @return {React.Component}
  */
-export function ItemComponent(props, ref) {
+export const ItemComponent = function ItemComponent(props, ref) {
     const { disabled, form, draggableProps, dragHandleProps } = props;
+    const { moveUp, moveDown, destroy } = props;
 
     const renderMovementButtons = useMemo(
         () => ('movementButtons' in form ? form.movementButtons : true),
@@ -95,46 +151,53 @@ export function ItemComponent(props, ref) {
             disableGutters={true}
             {...draggableProps}
         >
-            <DragHandle {...dragHandleProps}>
-                <Icon>drag_handle</Icon>
-            </DragHandle>
+            <DragHandle {...dragHandleProps}></DragHandle>
             <FormsContainer>{props.children}</FormsContainer>
             <Controls key="controls">
-                {useMemo(
-                    () =>
-                        renderMovementButtons ? (
-                            <>
-                                <MovementButton
-                                    onClick={props.moveUp}
-                                    size="small"
-                                    disabled={disabled}
-                                >
-                                    <Icon>keyboard_arrow_up</Icon>
-                                </MovementButton>
-                                <MovementButton
-                                    onClick={props.moveDown}
-                                    size="small"
-                                    disabled={disabled}
-                                    spacer
-                                >
-                                    <Icon>keyboard_arrow_down</Icon>
-                                </MovementButton>
-                                <Spacer />
-                            </>
-                        ) : null,
-                    [renderMovementButtons]
-                )}
-                <DestroyButton
-                    onClick={props.destroy}
-                    color="secondary"
-                    size="small"
+                <MovementButtons
+                    moveUp={moveUp}
+                    moveDown={moveDown}
                     disabled={disabled}
-                >
-                    <Icon>delete_forever</Icon>
-                </DestroyButton>
+                    render={renderMovementButtons}
+                />
+                <DestroyButton onClick={destroy} disabled={disabled} />
             </Controls>
         </StyledListItem>
     );
-}
+};
 
-export default forwardRef(ItemComponent);
+const MovementButtons = memo(
+    function MovementButtons(props) {
+        const { render, moveUp, moveDown, disabled } = props;
+        if (render) {
+            return (
+                <>
+                    <MovementButton
+                        onClick={moveUp}
+                        size="small"
+                        disabled={disabled}
+                    >
+                        <Icon>keyboard_arrow_up</Icon>
+                    </MovementButton>
+                    <MovementButton
+                        onClick={moveDown}
+                        size="small"
+                        disabled={disabled}
+                        spacer
+                    >
+                        <Icon>keyboard_arrow_down</Icon>
+                    </MovementButton>
+                    <Spacer />
+                </>
+            );
+        } else {
+            return null;
+        }
+    },
+    (oldProps, newProps) =>
+        ['render', 'moveDown', 'moveUp', 'disabled'].every((key) =>
+            Object.is(oldProps[key], newProps[key])
+        )
+);
+
+export default memo(forwardRef(ItemComponent));
