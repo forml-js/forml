@@ -43,7 +43,7 @@ ReactPDF.Font.register({
     ],
 });
 
-const log = debug('rjsf:example');
+const log = debug('forml:example');
 
 async function loadPrism() {
     await import('prismjs/components/prism-clike');
