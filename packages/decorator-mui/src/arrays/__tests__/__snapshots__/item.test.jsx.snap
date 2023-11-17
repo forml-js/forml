@@ -6,7 +6,7 @@ exports[`renders consistently 1`] = `
     class="MuiListItem-root MuiListItem-dense MuiListItem-padding MuiListItem-divider css-a6gdoq-MuiListItem-root"
   >
     <div
-      class="css-10nd30h"
+      class="MuiBox-root css-10nd30h"
     >
       <span
         aria-hidden="true"
@@ -55,7 +55,7 @@ exports[`renders consistently 1`] = `
         class="css-14gl0ah"
       />
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall css-14cnctq-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall  css-1drevl3-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >

@@ -9,7 +9,7 @@ exports[`renders with form options autoOk false 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -50,7 +50,7 @@ exports[`renders with form options autoOk true 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -91,7 +91,7 @@ exports[`renders with form options disableFuture false 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -132,7 +132,7 @@ exports[`renders with form options disableFuture true 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -173,7 +173,7 @@ exports[`renders with form options disablePast false 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -214,7 +214,7 @@ exports[`renders with form options disablePast true 1`] = `
       aria-invalid="true"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -255,7 +255,7 @@ exports[`renders with form options format LL 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -296,7 +296,7 @@ exports[`renders with form options format YYYY/MM/DD 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -337,7 +337,7 @@ exports[`renders with form options fullWidth false 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -378,7 +378,7 @@ exports[`renders with form options fullWidth true 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -419,7 +419,7 @@ exports[`renders with form options openTo date 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -460,7 +460,7 @@ exports[`renders with form options openTo month 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -501,7 +501,7 @@ exports[`renders with form options openTo year 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -542,7 +542,7 @@ exports[`renders with form options readonly false 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -584,7 +584,7 @@ exports[`renders with form options readonly true 1`] = `
       class="MuiInputBase-input MuiInput-input Mui-disabled MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       disabled=""
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -623,7 +623,7 @@ exports[`renders with form options variant dialog 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div
@@ -664,7 +664,7 @@ exports[`renders with form options variant inline 1`] = `
       aria-invalid="false"
       class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       placeholder="mm/dd/yyyy"
-      type="tel"
+      type="text"
       value="01/01/1970"
     />
     <div

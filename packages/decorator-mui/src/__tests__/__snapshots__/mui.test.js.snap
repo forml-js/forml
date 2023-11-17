@@ -12,7 +12,7 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
         aria-invalid="true"
         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
         placeholder="mm/dd/yyyy"
-        type="tel"
+        type="text"
         value=""
       />
       <div
@@ -41,11 +41,6 @@ exports[`Material UI with no model renders empty root date consistently 1`] = `
         </button>
       </div>
     </div>
-    <p
-      class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
-    >
-      invalid schema
-    </p>
   </div>
 </div>
 `;
@@ -91,11 +86,6 @@ exports[`Material UI with no model renders empty root date-time consistently 1`]
         </button>
       </div>
     </div>
-    <p
-      class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
-    >
-      invalid schema
-    </p>
   </div>
 </div>
 `;
@@ -106,7 +96,7 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
     class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
@@ -139,11 +129,6 @@ exports[`Material UI with no model renders empty root enumeration consistently 1
         />
       </svg>
     </div>
-    <p
-      class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium css-1d1r5q-MuiFormHelperText-root"
-    >
-      must be equal to one of the allowed values
-    </p>
   </div>
 </div>
 `;
@@ -267,8 +252,8 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
             class="MuiFormControl-root css-1lq4zch-MuiFormControl-root"
           >
             <label
-              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
-              data-shrink="true"
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-colorPrimary css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
+              data-shrink="false"
             >
               property
             </label>
@@ -281,7 +266,7 @@ exports[`Material UI with no model renders empty root object consistently 1`] = 
                 class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
                 id="nested.property"
                 type="text"
-                value="0"
+                value=""
               />
             </div>
           </div>
