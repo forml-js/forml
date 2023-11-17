@@ -16,6 +16,8 @@ module.exports = {
                     'lerna.json',
                     'package.json',
                     'package-lock.json',
+                    'example/package.json',
+                    'example/package-lock.json',
                     'packages/*/package.json',
                 ],
             },
