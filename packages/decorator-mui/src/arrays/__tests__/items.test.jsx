@@ -1,5 +1,5 @@
 import ArrayComponent from '../items';
-import Context from '@forml/context';
+import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as decorator from '../';
@@ -33,7 +33,7 @@ describe('renders', function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
                             <ThemeProvider theme={theme}>
-                                <Context.Provider
+                                <RenderingContext.Provider
                                     value={{ decorator, localizer }}
                                 >
                                     <ArrayComponent
@@ -41,7 +41,7 @@ describe('renders', function () {
                                         title={title}
                                         description={description}
                                     />
-                                </Context.Provider>
+                                </RenderingContext.Provider>
                             </ThemeProvider>
                         );
 
@@ -55,13 +55,13 @@ describe('renders', function () {
     test('with title and description', function () {
         const { container } = render(
             <ThemeProvider theme={theme}>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <ArrayComponent
                         form={form}
                         title={title}
                         description={description}
                     />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ThemeProvider>
         );
 
@@ -71,9 +71,9 @@ describe('renders', function () {
     test('with title and no description', function () {
         const { container } = render(
             <ThemeProvider theme={theme}>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <ArrayComponent form={form} title={title} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ThemeProvider>
         );
 
@@ -83,9 +83,9 @@ describe('renders', function () {
     test('with description and no title', function () {
         const { container } = render(
             <ThemeProvider theme={theme}>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <ArrayComponent form={form} description={title} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ThemeProvider>
         );
 
@@ -95,9 +95,9 @@ describe('renders', function () {
     test('with no title or description', function () {
         const { container } = render(
             <ThemeProvider theme={theme}>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <ArrayComponent form={form} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ThemeProvider>
         );
 

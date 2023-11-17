@@ -1,5 +1,5 @@
 import DateTime from '../datetime';
-import Context from '@forml/context';
+import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as decorator from '../../';
@@ -38,9 +38,11 @@ describe('renders', function () {
                         form = { ...form, [field]: value };
                         const { container } = render(
                             <LocalizationProvider dateAdapter={AdapterMoment}>
-                                <Context.Provider value={{ decorator }}>
+                                <RenderingContext.Provider
+                                    value={{ decorator }}
+                                >
                                     <DateTime form={form} value={inputValue} />
-                                </Context.Provider>
+                                </RenderingContext.Provider>
                             </LocalizationProvider>
                         );
 

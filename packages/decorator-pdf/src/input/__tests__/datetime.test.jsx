@@ -1,5 +1,5 @@
 import DateTime from '../datetime';
-import Context from '@forml/context';
+import { RenderingContext } from '@forml/context';
 import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import { render } from '@testing-library/react';
@@ -44,13 +44,13 @@ describe('renders', function () {
     test('with title and description', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <DateTime
                         form={form}
                         title={title}
                         description={description}
                     />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -60,9 +60,9 @@ describe('renders', function () {
     test('with title and no description', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <DateTime form={form} title={title} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -72,9 +72,9 @@ describe('renders', function () {
     test('with description and no title', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <DateTime form={form} description={title} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -84,9 +84,9 @@ describe('renders', function () {
     test('with no title or description', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <DateTime form={form} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -97,13 +97,13 @@ describe('renders', function () {
         form = { ...form, styles };
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator, localizer }}>
+                <RenderingContext.Provider value={{ decorator, localizer }}>
                     <DateTime
                         form={form}
                         title={title}
                         description={description}
                     />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 

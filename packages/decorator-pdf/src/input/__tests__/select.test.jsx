@@ -1,5 +1,5 @@
 import Select from '../select';
-import Context from '@forml/context';
+import { RenderingContext } from '@forml/context';
 import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import { render } from '@testing-library/react';
@@ -26,9 +26,9 @@ describe('renders', function () {
         form = { ...form, styles };
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator }}>
+                <RenderingContext.Provider value={{ decorator }}>
                     <Select form={form} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 

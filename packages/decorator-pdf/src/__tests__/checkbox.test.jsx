@@ -1,5 +1,5 @@
 import Checkbox from '../checkbox';
-import Context from '@forml/context';
+import { RenderingContext } from '@forml/context';
 import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import { render } from '@testing-library/react';
@@ -37,9 +37,9 @@ describe('renders', function () {
     test('with no title or description', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator }}>
+                <RenderingContext.Provider value={{ decorator }}>
                     <Checkbox form={form} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -49,9 +49,9 @@ describe('renders', function () {
     test('with title but no description', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator }}>
+                <RenderingContext.Provider value={{ decorator }}>
                     <Checkbox form={form} title={title} />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -61,14 +61,14 @@ describe('renders', function () {
     test('when checked', function () {
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator }}>
+                <RenderingContext.Provider value={{ decorator }}>
                     <Checkbox
                         form={form}
                         title={title}
                         description={description}
                         checked={true}
                     />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
@@ -80,13 +80,13 @@ describe('renders', function () {
 
         const { container } = render(
             <ReactPDF.Page>
-                <Context.Provider value={{ decorator }}>
+                <RenderingContext.Provider value={{ decorator }}>
                     <Checkbox
                         form={form}
                         title={title}
                         description={description}
                     />
-                </Context.Provider>
+                </RenderingContext.Provider>
             </ReactPDF.Page>
         );
 
