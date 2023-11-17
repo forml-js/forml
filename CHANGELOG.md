@@ -1,3 +1,10 @@
+# 1.8.0-develop.2 (2023-11-17)
+
+
+### Bug Fixes
+
+* semantic-release/git to commit example mods 89dde8f
+
 # 1.8.0-develop.1 (2023-11-17)
 
 
