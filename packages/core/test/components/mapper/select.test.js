@@ -5,8 +5,8 @@ import * as barebones from '@forml/decorator-barebones';
 
 config.disabled = true;
 
-import { SchemaForm, util } from '../../../src';
-import { createElement as h } from 'react';
+import { SchemaForm } from '../../../src';
+import React from 'react';
 
 describe('select mapper', function () {
     let schema;
@@ -23,13 +23,15 @@ describe('select mapper', function () {
 
     test('is updated onChange', async function () {
         const { container } = render(
-            h(SchemaForm, {
-                schema,
-                form,
-                model,
-                onChange,
-                decorator: barebones,
-            })
+            <SchemaForm
+                {...{
+                    schema,
+                    form,
+                    model,
+                    onChange,
+                    decorator: barebones,
+                }}
+            />
         );
         const [button0, button1] = container.querySelectorAll('option');
         expect(button1).toBeDefined();

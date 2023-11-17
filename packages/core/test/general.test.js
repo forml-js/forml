@@ -155,7 +155,7 @@ describe('mapper', function () {
 
                 for (let input of inputs) {
                     const value = util.randomForSchema(schema);
-                    await fireEvent.change(input, {
+                    fireEvent.change(input, {
                         target: { value },
                     });
                     expect(newModel).toHaveBeenCalledWith(value);
