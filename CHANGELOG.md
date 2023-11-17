@@ -1,3 +1,48 @@
+# 1.8.0-develop.1 (2023-11-17)
+
+
+### Bug Fixes
+
+* **@forml/context, @forml/core, @forml/decorator-barebones, @forml/decorator-pdf, @forml/hooks:** remove caching in babel configs 0bba1f3
+* **@forml/decorator-mui:** missed babel config update 32efe1e
+* **core:** fix passing of html name attribute 7b4d782
+* **core:** ignore falsey forms 553b165
+* **core:** missing imports a5aa645
+* **core:** multiselect onChange value 457ee75
+* **core:** need items in downward mover c282f1e
+* **core:** point calculation in number 1c02e66
+* **core:** prevent unnecessary rerenders 6b429fb
+* **core:** refactor array mapper slightly 5bf768d
+* **core:** unnecessary rerenders in select mapper 56c4bbd
+* **core:** updated onChange in SchemaField 0075b59
+* **decorator-barebones:** new array format 56a5a4c
+* **decorator-mui:** add file accept attribute 34138c0
+* **decorator-mui:** broader date adapter support 07114d7
+* **decorator-mui:** extra props from root 7f7e951
+* **decorator-mui:** forwarding unsupported props e89d569
+* **decorator-mui:** increase memoization a59daac
+* **decorator-mui:** memos and callbacks 06ad210
+* **decorator-mui:** no undefined value in select 4a8d800
+* **example:** memoize styles in RenderExample 1c9e15b
+* **example:** missing React import 65b4412
+* **example:** prevent unnecessary rerenders d670ca0
+* **example:** replace old logging tag ba7b7a8
+* **example:** tolerate empty onChange in editor 648b17f
+* **example:** update localization provider 717fdfc
+* **example:** use new generator pattern c849766
+* **hooks:** include schema reference in useModel 599207d
+
+
+### Features
+
+* **context:** split rendering/model contexts 8039f6d
+* **core:** reactor to use split contexts 9e97446
+* **decorator-mui:** add path to useKey result 8f09393
+* **example:** add iso example for one-off testing 18fa8f7
+* **hooks:** dedicated array key handling c61f969
+* **hooks:** model reducer and assorted hooks c658a65
+* **hooks:** refactor to use split contexts 7b89411
+
 ## 1.7.1 (2022-12-21)
 
 

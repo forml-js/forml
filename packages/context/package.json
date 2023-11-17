@@ -1,6 +1,6 @@
 {
     "name": "@forml/context",
-    "version": "1.7.0",
+    "version": "1.8.0-develop.1",
     "description": "React context for @forml",
     "main": "lib/index.js",
     "scripts": {

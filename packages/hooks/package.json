@@ -1,6 +1,6 @@
 {
     "name": "@forml/hooks",
-    "version": "1.7.0",
+    "version": "1.8.0-develop.1",
     "description": "Hooks for use with @forml/core",
     "main": "lib/index.js",
     "scripts": {
@@ -47,7 +47,7 @@
         "react-test-renderer": "^18.2.0"
     },
     "dependencies": {
-        "@forml/context": "^1.7.0",
+        "@forml/context": "^1.8.0-develop.1",
         "reselect": "^4.1.8"
     },
     "peerDependencies": {
