@@ -7,8 +7,7 @@ import clsx from 'clsx';
  * @return {React.Component}
  */
 export function Item(props, ref) {
-    const { otherProps, disabled } = props;
-    const { draggableProps, dragHandleProps } = otherProps;
+    const { disabled, draggableProps, dragHandleProps } = props;
     return (
         <li
             {...draggableProps}
