@@ -33,7 +33,7 @@ export default function Number(props) {
                 return;
             }
 
-            const appendPoint = /\.$/.test(value);
+            const appendPoint = /^[0-9]+\.+$/.test(value);
 
             value = parseFloat(value);
 
