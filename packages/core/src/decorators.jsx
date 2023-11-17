@@ -1,8 +1,6 @@
 import merge from 'deepmerge';
 import PropTypes from 'prop-types';
 
-import { clone } from './util';
-
 export function defaultDecorator() {
     return {
         Arrays: {
