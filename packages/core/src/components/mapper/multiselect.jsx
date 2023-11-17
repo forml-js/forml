@@ -30,7 +30,12 @@ export default function Multiselect(props) {
 
     const onChange = useCallback(
         function onChange(event) {
-            props.onChange(event, event.target.value);
+            props.onChange(
+                event,
+                Array.from(event.target.selectedOptions).map(
+                    (option) => option.value
+                )
+            );
         },
         [props.onChange]
     );
