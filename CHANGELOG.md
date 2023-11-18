@@ -1,3 +1,10 @@
+# 1.8.0-next.2 (2023-11-18)
+
+
+### Bug Fixes
+
+* **decorator-mui:** fix broken dependencies 32fa29a
+
 # 1.8.0-next.1 (2023-11-17)
 
 
