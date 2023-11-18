@@ -1,3 +1,10 @@
+# 2.0.0-next.2 (2023-11-18)
+
+
+### Bug Fixes
+
+* don't publish js maps 8d6e62b
+
 # 2.0.0-next.1 (2023-11-18)
 
 
