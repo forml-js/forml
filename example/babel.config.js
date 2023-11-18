@@ -8,9 +8,6 @@ module.exports = function (api) {
             ],
             '@babel/preset-react',
         ],
-        plugins: [
-            '@babel/plugin-proposal-object-rest-spread',
-            '@babel/plugin-syntax-dynamic-import',
-        ],
+        plugins: [],
     };
 };
