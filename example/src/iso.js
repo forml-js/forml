@@ -9,10 +9,7 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
 import * as mui from '@forml/decorator-mui';
 
-import MaterialIcons from 'material-icons/iconfont/MaterialIcons-Regular.ttf';
-import Roboto from 'fontsource-roboto/files/roboto-all-400-normal.woff';
-import RobotoBold from 'fontsource-roboto/files/roboto-all-700-normal.woff';
-import RobotoLight from 'fontsource-roboto/files/roboto-all-300-normal.woff';
+import 'material-icons/iconfont/material-icons.css';
 
 const log = debug('forml:iso');
 const theme = createTheme({
