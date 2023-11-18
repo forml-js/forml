@@ -36,19 +36,19 @@
     "dependencies": {
         "@forml/context": "^1.8.0-develop.1",
         "@forml/hooks": "^1.8.0-develop.1",
-        "ajv": "^8.11.0",
-        "deepmerge": "^4.2.2",
+        "ajv": "^8.12.0",
+        "deepmerge": "^4.3.1",
         "objectpath": "^2.0.0",
         "prop-types": "^15.8.1",
         "react-beautiful-dnd": "^13.1.1",
         "shortid": "^2.2.16"
     },
     "devDependencies": {
-        "@babel/cli": "^7.19.3",
-        "@babel/core": "^7.20.2",
+        "@babel/cli": "^7.23.0",
+        "@babel/core": "^7.23.3",
         "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
-        "@babel/preset-env": "^7.20.2",
-        "@babel/preset-react": "^7.18.6",
+        "@babel/preset-env": "^7.23.3",
+        "@babel/preset-react": "^7.23.3",
         "@forml/decorator-barebones": "^1.8.0-develop.1"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
