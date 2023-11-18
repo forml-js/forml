@@ -1,3 +1,18 @@
+# 2.0.0-next.1 (2023-11-18)
+
+
+### Bug Fixes
+
+* **@forml/context, @forml/core, @forml/decorator-barebones, @forml/decorator-bootstrap, @forml/decorator-mui, @forml/decorator-pdf, @forml/hooks:** upgrade dependencies all around 2e0d738
+* **@forml/context, @forml/core, @forml/decorator-barebones, @forml/decorator-mui, @forml/decorator-pdf, @forml/hooks:** remove unneeded babel plugins 146c83f
+* **@forml/core, @forml/decorator-mui:** update tests after dep upgrades 0467c41
+* **example:** fix loading of material-icons ccd590c
+
+
+### BREAKING CHANGES
+
+* **@forml/context, @forml/core, @forml/decorator-barebones, @forml/decorator-bootstrap, @forml/decorator-mui, @forml/decorator-pdf, @forml/hooks:** multiple major version upgrades
+
 # 1.8.0-next.2 (2023-11-18)
 
 
