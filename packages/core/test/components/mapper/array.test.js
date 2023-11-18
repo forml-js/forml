@@ -1,7 +1,4 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import { ArrayComponent } from '../../../src/components/mapper/array';
-import '@testing-library/jest-dom/extend-expect';
-import shortid from 'shortid';
 
 import { SchemaForm, util, constants } from '../../../src';
 import React from 'react';

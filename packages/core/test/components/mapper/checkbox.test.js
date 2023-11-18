@@ -1,5 +1,4 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import * as barebones from '@forml/decorator-barebones';
 
 import { SchemaForm, getLocalizer, util } from '../../../src';

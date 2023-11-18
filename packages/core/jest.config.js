@@ -1,5 +1,6 @@
 module.exports = async () => {
     return {
+        setupFilesAfterEnv: ['<rootDir>/setup-tests.js'],
         rootDir: __dirname,
         reporters: ['default', 'jest-summary-reporter'],
         testPathIgnorePatterns: [
