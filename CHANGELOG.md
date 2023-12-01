@@ -1,3 +1,10 @@
+# 2.0.0-next.3 (2023-12-01)
+
+
+### Bug Fixes
+
+* wildcard for ignoring js maps e88d69a
+
 # 2.0.0-next.2 (2023-11-18)
 
 
