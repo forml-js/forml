@@ -9,4 +9,4 @@ test/
 docs/
 coverage/
 stats.json
-.js.map
+*.js.map
