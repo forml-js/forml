@@ -1,3 +1,10 @@
+# 2.0.0-next.10 (2025-02-19)
+
+
+### Bug Fixes
+
+* **core:** don't return in loop during multiselect option creation 2861c6e
+
 # 2.0.0-next.9 (2024-05-05)
 
 
