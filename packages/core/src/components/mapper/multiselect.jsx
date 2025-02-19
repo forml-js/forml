@@ -52,8 +52,8 @@ export default function Multiselect(props) {
                     {name}
                 </deco.Input.Option>
             );
-            return options;
         }
+        return options;
     }, [form.titleMap, localizer]);
 
     return (
