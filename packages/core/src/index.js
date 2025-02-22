@@ -2,12 +2,12 @@
  * @namespace forml
  */
 
-import * as util from './util';
-import * as constants from './constants';
+import * as util from './util.js';
+import * as constants from './constants.js';
 
-export * from './components/schema-form';
-export * from './components/schema-field';
-export * from './components/mapper';
-export * from './localizer';
+export * from './components/schema-form.js';
+export * from './components/schema-field.js';
+export * from './components/mapper.js';
+export * from './localizer.js';
 
 export { constants, util };

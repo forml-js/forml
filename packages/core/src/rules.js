@@ -1,6 +1,6 @@
-import * as constants from './constants';
-import { standardForm } from './forms';
-import { getPreferredType } from './util';
+import * as constants from './constants.js';
+import { standardForm } from './forms.js';
+import { getPreferredType } from './util.js';
 
 /**
  * @param {Array<*>} enm - The enumeration values to produce titles for

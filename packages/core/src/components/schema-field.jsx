@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
 import { useActionsFor, useMappedField, useModelFor } from '@forml/hooks';
-import { FormType } from '../types';
+import { FormType } from '../types.js';
 
 const log = debug('forml:core:schema-field');
 

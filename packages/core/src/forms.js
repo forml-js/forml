@@ -1,8 +1,8 @@
 import ObjectPath from 'objectpath';
 
-import { ARRAY_PLACEHOLDER } from './constants';
-import { test } from './rules';
-import { findSchema } from './util';
+import { ARRAY_PLACEHOLDER } from './constants.js';
+import { test } from './rules.js';
+import { findSchema } from './util.js';
 
 export function getDefaults(schema) {
     const form = [];

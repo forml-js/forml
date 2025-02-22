@@ -2,16 +2,16 @@
  * @namespace forml.SchemaForm
  */
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import { ModelContext, RenderingContext } from '@forml/context';
 import { createModelStore } from '@forml/hooks';
-import { defaultLocalizer, getLocalizer } from '../localizer';
-import { FormsType } from '../types';
-import { SchemaRender } from './schema-render';
+import { getLocalizer } from '../localizer.js';
+import { FormsType } from '../types.js';
+import { SchemaRender } from './schema-render.jsx';
 
-import { decoratorShape, defaultDecorator, getDecorator } from '../decorators';
-import { defaultMapper, getMapper, mapperShape } from './mapper';
+import { decoratorShape, getDecorator } from '../decorators.jsx';
+import { getMapper, mapperShape } from './mapper/index.jsx';
 
 /**
  * @component SchemaForm

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useArrayKeyRange } from '@forml/hooks';
 import ObjectPath from 'objectpath';
 
-import { Item } from './Item';
+import { Item } from './Item.jsx';
 
 export function Range(props) {
     const { start, end, form, onChange } = props;

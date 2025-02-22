@@ -5,9 +5,9 @@ import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
-import { FormType } from '../../../types';
-import { Item } from './Item';
-import { Range } from './Range';
+import { FormType } from '#types';
+import { Item } from './Item.jsx';
+import { Range } from './Range.jsx';
 
 /**
  * @name ArrayComponent

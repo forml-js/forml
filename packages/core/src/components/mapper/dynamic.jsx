@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { SchemaRender } from '../schema-render';
+import { SchemaRender } from '../schema-render.js';
 import { useRenderingContext, usePrefixed } from '@forml/hooks';
 import { RenderingContext } from '@forml/context';
 

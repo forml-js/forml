@@ -2,7 +2,7 @@ import t from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import { FormType } from '#types';
 
 /**
  * @component Date
