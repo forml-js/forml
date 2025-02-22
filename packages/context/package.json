@@ -2,12 +2,10 @@
     "name": "@forml/context",
     "version": "2.0.0-next.6",
     "description": "React context for @forml",
-    "main": "lib/index.js",
+    "main": "src/index.js",
+    "type": "module",
     "scripts": {
         "lint": "eslint src/**/*.jsx",
-        "build": "babel src --out-dir lib",
-        "watch": "babel src --out-dir lib --watch",
-        "prepublish": "npm run build",
         "test": "jest --coverage --verbose --passWithNoTests"
     },
     "repository": {
@@ -28,17 +26,8 @@
         "url": "https://github.com/forml-js/forml/issues"
     },
     "homepage": "https://www.forml.dev",
-    "devDependencies": {
-        "@babel/cli": "^7.24.1",
-        "@babel/core": "^7.24.4",
-        "@babel/plugin-proposal-class-properties": "^7.18.6",
-        "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
-        "@babel/preset-env": "^7.24.4",
-        "@babel/preset-react": "^7.24.1"
-    },
     "peerDependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react": ">=17"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }

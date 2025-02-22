@@ -2,12 +2,10 @@
     "name": "@forml/decorator-pdf",
     "version": "2.0.0-next.9",
     "description": "A forml decorator designed to produce PDF forms!",
-    "main": "lib/index.js",
+    "main": "src/index.js",
+    "type": "module",
     "scripts": {
         "lint": "eslint src/**/*.js",
-        "build": "babel src --out-dir lib",
-        "watch": "babel src --out-dir lib --watch",
-        "prepublish": "npm run build",
         "test": "jest --coverage --verbose --passWithNoTests"
     },
     "repository": {
@@ -29,19 +27,14 @@
     },
     "homepage": "https://github.com/forml-js/forml#readme",
     "peerDependencies": {
-        "@forml/hooks": ">=1.0.0",
-        "@react-pdf/renderer": "^3.4.4",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "@forml/hooks": "file:../hooks",
+        "@react-pdf/renderer": "^4.2.2",
+        "react": ">=17.0.0",
+        "react-dom": ">=17.0.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.24.1",
-        "@babel/core": "^7.24.4",
-        "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
-        "@babel/preset-env": "^7.24.4",
-        "@babel/preset-react": "^7.24.1",
-        "@forml/context": "^2.0.0-next.1",
-        "@forml/hooks": "^2.0.0-next.9"
+        "@forml/context": "file:../context",
+        "@forml/hooks": "file:../hooks"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }
