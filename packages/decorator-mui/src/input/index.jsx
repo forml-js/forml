@@ -1,8 +1,8 @@
-import Description from './description';
-import File from './file';
-import Form from './form';
-import Group from './group';
-import Option from './option';
-import Select from './select';
+import Description from './description.jsx';
+import File from './file.jsx';
+import Form from './form.jsx';
+import Group from './group.jsx';
+import Option from './option.jsx';
+import Select from './select.jsx';
 
 export { Description, File, Form, Group, Option, Select };

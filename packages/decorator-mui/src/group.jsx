@@ -1,4 +1,4 @@
-import FormGroup from '@mui/material/FormGroup';
+import { FormGroup } from '@mui/material';
 import React, { useMemo } from 'react';
 
 /**

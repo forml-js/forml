@@ -1,8 +1,8 @@
 import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
-import { SchemaField } from '../schema-field';
+import { FormType } from '#types';
+import { SchemaField } from '#components/schema-field.jsx';
 
 const Tab = forwardRef(function Tab(props, ref) {
     const { parent, index, activeIndex, activate } = props;

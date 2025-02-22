@@ -2,7 +2,7 @@ import t from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import { FormType } from '#types';
 
 export default function Multiselect(props) {
     const { value, schema, error, form } = props;

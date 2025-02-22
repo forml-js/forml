@@ -1,5 +1,5 @@
-import Container from './container';
-import Panel from './panel';
-import Tab from './tab';
+import Container from './container.jsx';
+import Panel from './panel.jsx';
+import Tab from './tab.jsx';
 
 export { Container, Panel, Tab };

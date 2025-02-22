@@ -1,7 +1,4 @@
-import Button from '@mui/material/Button';
-import Icon from '@mui/material/Icon';
-import Input from '@mui/material/Input';
-import { styled } from '@mui/material/styles';
+import { Button, Icon, Input, styled } from '@mui/material';
 import React, { useCallback, useMemo, useRef } from 'react';
 
 /**

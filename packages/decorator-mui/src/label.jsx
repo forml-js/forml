@@ -1,4 +1,4 @@
-import InputLabel from '@mui/material/InputLabel';
+import { InputLabel } from '@mui/material';
 import React, { useMemo } from 'react';
 
 /**

@@ -1,8 +1,4 @@
-import MuiCheckbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
-import FormGroup from '@mui/material/FormGroup';
-import FormHelperText from '@mui/material/FormHelperText';
+import { FormControlLabel, FormGroup, FormHelperText, FormLabel, Checkbox as MuiCheckbox } from '@mui/material';
 import React from 'react';
 
 /**

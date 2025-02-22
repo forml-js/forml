@@ -1,4 +1,4 @@
-import Item from './item';
-import Items from './items';
+import Item from './item.jsx';
+import Items from './items.jsx';
 
 export { Item, Items };

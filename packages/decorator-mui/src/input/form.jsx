@@ -1,11 +1,10 @@
+import { Input as BaseInput, styled } from '@mui/material';
 import debug from 'debug';
-import { styled } from '@mui/material';
-import BaseInput from '@mui/material/Input';
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
-import Date from './date';
-import DateTime from './datetime';
-import File from './file';
+import Date from './date.jsx';
+import DateTime from './datetime.jsx';
+import File from './file.jsx';
 
 const log = debug('forml:decorator-mui:input:form');
 

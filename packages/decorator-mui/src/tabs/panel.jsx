@@ -1,6 +1,5 @@
-import React, { useMemo, Suspense } from 'react';
-import Paper from '@mui/material/Paper';
-import CircularProgress from '@mui/material/CircularProgress';
+import { CircularProgress, Paper } from '@mui/material';
+import React, { Suspense, useMemo } from 'react';
 
 /**
  * @component

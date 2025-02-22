@@ -3,7 +3,7 @@ import t from 'prop-types';
 import React, { useMemo, useCallback } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import { FormType } from '#types';
 
 const valueExceptions = ['', '-'];
 

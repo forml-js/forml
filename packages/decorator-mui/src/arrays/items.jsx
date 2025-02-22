@@ -1,13 +1,6 @@
-import Button from '@mui/material/Button';
-import Icon from '@mui/material/Icon';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import React, { memo, useMemo, forwardRef } from 'react';
-import { useLocalizer, useLocalizedString } from '@forml/hooks';
-import { styled } from '@mui/material/styles';
+import { useLocalizedString, useLocalizer } from '@forml/hooks';
+import { Button, Icon, List, ListItem, ListItemIcon, ListItemText, Paper, styled } from '@mui/material';
+import React, { forwardRef, useMemo } from 'react';
 
 const StyledPaper = styled(Paper, {
     shouldForwardProp: (prop) =>

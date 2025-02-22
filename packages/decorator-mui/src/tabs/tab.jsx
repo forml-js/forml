@@ -1,8 +1,4 @@
-import { styled } from '@mui/material';
-import Icon from '@mui/material/Icon';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { Icon, ListItem, ListItemIcon, ListItemText, styled } from '@mui/material';
 import React, { useMemo } from 'react';
 
 const ImageIcon = styled('img')(({ theme, ...props }) => ({
@@ -50,30 +46,30 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
     },
     // Collapse modifications: vertical layout
     parent.collapse &&
-        parent.layout !== 'horizontal' && {
-            flexGrow: 0,
-            flexShrink: 0,
-            ':hover': {
-                flexBasis: 'min-content',
-                flexGrow: 0,
-                flexShrink: 0,
-                maxWidth: '100%',
-            },
-        },
-    active &&
-        parent.collapse &&
-        parent.layout !== 'horizontal' && {
+    parent.layout !== 'horizontal' && {
+        flexGrow: 0,
+        flexShrink: 0,
+        ':hover': {
             flexBasis: 'min-content',
             flexGrow: 0,
             flexShrink: 0,
             maxWidth: '100%',
         },
+    },
+    active &&
+    parent.collapse &&
+    parent.layout !== 'horizontal' && {
+        flexBasis: 'min-content',
+        flexGrow: 0,
+        flexShrink: 0,
+        maxWidth: '100%',
+    },
 
     parent.collapse &&
-        parent.layout === 'horizontal' && {
-            maxWidth: '100%',
-            flexGrow: 1,
-        },
+    parent.layout === 'horizontal' && {
+        maxWidth: '100%',
+        flexGrow: 1,
+    },
 
     parent.layout === 'horizontal' && {
         ':after': {
@@ -85,21 +81,21 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
         },
     },
     !active &&
-        parent.layout === 'horizontal' && {
-            ':hover': {
-                ':after': {
-                    backgroundColor: theme.palette.primary.main,
-                    transform: 'scaleX(300%)',
-                },
-            },
-        },
-    active &&
-        parent.layout === 'horizontal' && {
+    parent.layout === 'horizontal' && {
+        ':hover': {
             ':after': {
                 backgroundColor: theme.palette.primary.main,
                 transform: 'scaleX(300%)',
             },
         },
+    },
+    active &&
+    parent.layout === 'horizontal' && {
+        ':after': {
+            backgroundColor: theme.palette.primary.main,
+            transform: 'scaleX(300%)',
+        },
+    },
 
     parent.layout !== 'horizontal' && {
         borderRight: '1px solid black',
@@ -113,21 +109,21 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
         },
     },
     !active &&
-        parent.layout !== 'horizontal' && {
-            ':hover': {
-                ':after': {
-                    backgroundColor: theme.palette.primary.main,
-                    transform: 'scaleY(300%)',
-                },
-            },
-        },
-    active &&
-        parent.layout !== 'horizontal' && {
+    parent.layout !== 'horizontal' && {
+        ':hover': {
             ':after': {
                 backgroundColor: theme.palette.primary.main,
                 transform: 'scaleY(300%)',
             },
         },
+    },
+    active &&
+    parent.layout !== 'horizontal' && {
+        ':after': {
+            backgroundColor: theme.palette.primary.main,
+            transform: 'scaleY(300%)',
+        },
+    },
 ]);
 
 /**

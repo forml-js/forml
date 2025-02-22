@@ -3,7 +3,7 @@ import ObjectPath from 'objectpath';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import { FormType } from '#types';
 
 const valueExceptions = ['', '-'];
 const valueReplacements = { '0-': '-' };

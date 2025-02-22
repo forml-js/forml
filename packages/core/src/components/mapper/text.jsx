@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import ObjectPath from 'objectpath';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '../../types';
+import { FormType } from '#types';
 
 /**
  * @component Text

@@ -7,7 +7,7 @@ import React, { useMemo, useRef } from 'react';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { createModelStore } from '@forml/hooks';
 import { getLocalizer } from '../localizer.js';
-import { FormsType } from '../types.js';
+import { FormsType } from '#types';
 import { SchemaRender } from './schema-render.jsx';
 
 import { decoratorShape, getDecorator } from '../decorators.jsx';

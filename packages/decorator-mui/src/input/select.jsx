@@ -1,5 +1,5 @@
-import MuiSelect from '@mui/material/Select';
-import React, { useMemo } from 'react';
+import { Select as MuiSelect } from '@mui/material';
+import React from 'react';
 
 /**
  * @component

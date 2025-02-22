@@ -1,5 +1,4 @@
-import { styled } from '@mui/material';
-import BaseFormControl from '@mui/material/FormControl';
+import { FormControl as BaseFormControl, styled } from '@mui/material';
 import React, { useMemo } from 'react';
 
 const FormControl = styled(BaseFormControl)(

@@ -3,22 +3,22 @@
  */
 import t from 'prop-types';
 
-import Array from './array';
-import Checkbox from './checkbox';
-import Date from './date';
-import DateTime from './datetime';
-import Dynamic from './dynamic';
-import FieldSet from './fieldset';
-import File from './file';
-import Help from './help';
-import Integer from './integer';
-import Multiselect from './multiselect';
-import Null from './null';
-import Number from './number';
-import Select from './select';
-import Tabs from './tabs';
-import Text from './text';
-import TextArea from './textarea';
+import Array from './array/index.jsx';
+import Checkbox from './checkbox.jsx';
+import Date from './date.jsx';
+import DateTime from './datetime.jsx';
+import Dynamic from './dynamic.jsx';
+import FieldSet from './fieldset.jsx';
+import File from './file.jsx';
+import Help from './help.jsx';
+import Integer from './integer.jsx';
+import Multiselect from './multiselect.jsx';
+import Null from './null.jsx';
+import Number from './number.jsx';
+import Select from './select.jsx';
+import Tabs from './tabs.jsx';
+import Text from './text.jsx';
+import TextArea from './textarea.jsx';
 
 export function defaultMapper() {
     return {

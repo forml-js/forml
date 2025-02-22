@@ -1,10 +1,6 @@
+import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 import debug from 'debug';
-import Button from '@mui/material/Button';
-import Icon from '@mui/material/Icon';
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import { styled } from '@mui/material/styles';
-import React, { forwardRef, memo, useMemo } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 const log = debug('forml:decorator-mui:arrays:item');
 

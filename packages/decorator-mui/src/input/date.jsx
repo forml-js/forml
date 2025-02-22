@@ -1,7 +1,7 @@
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Input from '@mui/material/Input';
+import { DatePicker } from '@mui/x-date-pickers';
+import { Input } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
-import { usePickerUtils } from './date-utils';
+import { usePickerUtils } from './date-utils.js';
 
 const sx = {
     mt: 2,

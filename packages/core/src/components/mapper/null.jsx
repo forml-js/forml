@@ -1,4 +1,4 @@
-import { FormType } from '../../types';
+import { FormType } from '#types';
 /**
  * @component Null
  */

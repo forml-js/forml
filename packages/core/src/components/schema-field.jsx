@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
 import { useActionsFor, useMappedField, useModelFor } from '@forml/hooks';
-import { FormType } from '../types.js';
+import { FormType } from '#types';
 
 const log = debug('forml:core:schema-field');
-
-function FieldRenderer(props) {
-    const { Field, ...forwardProps } = props;
-    return <Field {...forwardProps} />;
-}
 
 function ValueField(props) {
     const { form, parent, onChange, prefix } = props;
@@ -66,8 +61,7 @@ function ValueField(props) {
     }
 
     return (
-        <FieldRenderer
-            Field={Field}
+        <Field
             form={form}
             path={field.path}
             schema={field.schema}
