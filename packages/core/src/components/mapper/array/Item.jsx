@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useMemo } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+// import { Draggable } from 'react-beautiful-dnd';
 import { useDecorator, useLocalizer, useArrayActions } from '@forml/hooks';
 
 import { ARRAY_PLACEHOLDER } from '#constants';
@@ -13,41 +13,40 @@ export const Item = forwardRef(function Item(props, ref) {
         [parent]
     );
 
-    const onChange = useCallback((event, nextModel) => {
-        props.onChange(event, nextModel);
-    }, [props.onChange, index])
+    const onChange = useCallback(
+        (event, nextModel) => {
+            props.onChange(event, nextModel);
+        },
+        [props.onChange, index]
+    );
     const Component = useMemo(() => {
-        if (dragDrop) {
-            return DraggableArrayItem;
-        } else {
-            return NormalArrayItem;
-        }
+        //if (dragDrop) {
+        //    return DraggableArrayItem;
+        //} else {
+        return NormalArrayItem;
+        //}
     }, [dragDrop]);
 
-    const fields = useMemo(
-        () => {
-            return forms.map((template, subFormIndex) => {
-                if (!template) return;
-                const form = copyWithIndex(template, index);
+    const fields = useMemo(() => {
+        return forms.map((template, subFormIndex) => {
+            if (!template) return;
+            const form = copyWithIndex(template, index);
 
-                form.titleFun =
-                    'titleFun' in form ? form.titleFun : parent.titleFun;
-                form.readonly =
-                    'readonly' in form ? form.readonly : disabled;
+            form.titleFun =
+                'titleFun' in form ? form.titleFun : parent.titleFun;
+            form.readonly = 'readonly' in form ? form.readonly : disabled;
 
-                return (
-                    <SchemaField
-                        key={subFormIndex}
-                        form={form}
-                        schema={form.schema}
-                        parent={parent}
-                        onChange={onChange}
-                    />
-                );
-            });
-        },
-        [forms, index, parent, onChange, disabled]
-    );
+            return (
+                <SchemaField
+                    key={subFormIndex}
+                    form={form}
+                    schema={form.schema}
+                    parent={parent}
+                    onChange={onChange}
+                />
+            );
+        });
+    }, [forms, index, parent, onChange, disabled]);
 
     return (
         <Component {...props} ref={ref}>
@@ -66,36 +65,32 @@ const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
     const localizer = useLocalizer();
 
     const title = localizer.getLocalizedString(
-        form.titleFun
-            ? form.titleFun()
-            : form.title
+        form.titleFun ? form.titleFun() : form.title
     );
 
     const arrayActions = useArrayActions(form.key);
-    const actions = useMemo(function() {
-        return {
-            destroy: function() {
-                const nextModel = arrayActions.removeArray(index);
-                onChange(new Event('change', { bubbles: true }), nextModel);
-                return nextModel;
-            },
-            moveUp: function() {
-                const nextModel = arrayActions.moveArray(index, index - 1)
-                onChange(new Event('change', { bubbles: true }), nextModel);
-                return nextModel;
-            },
-            moveDown: function() {
-                const nextModel = arrayActions.moveArray(index, index + 1)
-                onChange(new Event('change', { bubbles: true }), nextModel);
-                return nextModel;
-            },
-        };
-    }, [
-        arrayActions,
-        form.key,
-        index,
-        onChange
-    ]);
+    const actions = useMemo(
+        function () {
+            return {
+                destroy: function () {
+                    const nextModel = arrayActions.removeArray(index);
+                    onChange(new Event('change', { bubbles: true }), nextModel);
+                    return nextModel;
+                },
+                moveUp: function () {
+                    const nextModel = arrayActions.moveArray(index, index - 1);
+                    onChange(new Event('change', { bubbles: true }), nextModel);
+                    return nextModel;
+                },
+                moveDown: function () {
+                    const nextModel = arrayActions.moveArray(index, index + 1);
+                    onChange(new Event('change', { bubbles: true }), nextModel);
+                    return nextModel;
+                },
+            };
+        },
+        [arrayActions, form.key, index, onChange]
+    );
 
     return (
         <deco.Arrays.Item
@@ -143,7 +138,7 @@ function copyWithIndex(form, index) {
 }
 
 function setIndex(index) {
-    return function(form) {
+    return function (form) {
         if (form.key) {
             form.key[form.key.indexOf(ARRAY_PLACEHOLDER)] = index;
         }

@@ -1,8 +1,16 @@
-import { useValue, createArrayKeyStore, useDecorator, useLocalizer, useArrayKeys, useActionsFor, useArrayFormActions } from '@forml/hooks';
 import { FormContext } from '@forml/context';
+import {
+    createArrayKeyStore,
+    useActionsFor,
+    useArrayFormActions,
+    useArrayKeys,
+    useDecorator,
+    useLocalizer,
+    useValue,
+} from '@forml/hooks';
 import t from 'prop-types';
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+// import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 
 import { FormType } from '#types';
@@ -32,13 +40,7 @@ function ArrayComponent(props) {
     const array = useValue(form.key);
     const store = useRef(createArrayKeyStore(array)).current;
 
-    const dragDrop = useMemo(
-        () => ('dragDrop' in form ? form.dragDrop : true),
-        [form]
-    );
-    const Component = useMemo(() =>
-        dragDrop ? DraggableArrayContainer : NormalArrayContainer
-    );
+    const Component = useMemo(() => NormalArrayContainer, [form.dragDrop]);
 
     return (
         <FormContext.Provider value={store}>
@@ -53,7 +55,7 @@ function ArrayRanges(props) {
     const { form, onChange } = props;
     const keys = useArrayKeys();
     const ranges = useMemo(
-        function() {
+        function () {
             const ranges = [];
             const count = keys?.length ?? 0;
 
@@ -112,10 +114,7 @@ const DraggableArrayContainer = forwardRef(
                     if (ref) ref(e);
                 };
                 return (
-                    <NormalArrayContainer
-                        {...props}
-                        ref={injectRef}
-                    >
+                    <NormalArrayContainer {...props} ref={injectRef}>
                         {props.children}
                         {provided.placeholder}
                     </NormalArrayContainer>
@@ -139,19 +138,20 @@ const NormalArrayContainer = forwardRef(
         const { readonly: disabled, titleFun } = form;
         const deco = useDecorator();
         const localizer = useLocalizer();
-        const actions = useActionsFor(form.key, useArrayFormActions())
+        const actions = useActionsFor(form.key, useArrayFormActions());
         const title = localizer.getLocalizedString(
-            form.titleFun
-                ? form.titleFun()
-                : form.title
+            form.titleFun ? form.titleFun() : form.title
         );
         const description = localizer.getLocalizedString(form.description);
         const { error } = props;
 
-        const addItem = useCallback((event) => {
-            const nextModel = actions.appendArray();
-            onChange(event, nextModel);
-        }, [actions.appendArray, form.key, onChange]);
+        const addItem = useCallback(
+            (event) => {
+                const nextModel = actions.appendArray();
+                onChange(event, nextModel);
+            },
+            [actions.appendArray, form.key, onChange]
+        );
 
         return (
             <deco.Arrays.Items
