@@ -33,7 +33,7 @@ export function usePrefix() {
         } else {
             return [];
         }
-    })
+    });
 }
 
 export function usePrefixed(key) {
@@ -53,143 +53,171 @@ export function usePrefixed(key) {
 
 export function createModelStore(schema, model) {
     const ajv = useMemo(() => new AJV({ allErrors: true, strict: false }), []);
-    return createStore()(function() {
+    return createStore()(function () {
         return {
             schema,
             model: assertType(schema, model),
             ajv,
-        }
+        };
     });
-};
+}
 
 export function useAJV() {
-    return useStore(useModelContext(), useShallow(state => state.ajv));
+    return useStore(
+        useModelContext(),
+        useShallow((state) => state.ajv)
+    );
 }
 
 export function useActions() {
     const prefix = usePrefix();
     const store = useModelContext();
-    return useMemo(() => ({
-        setValue(key, value) {
-            let final;
-            store.setState((state) => {
-                const stack = [];
-                const [currentKey, currentModel, currentSchema] = seek(
-                    state.schema,
-                    [...prefix, ...key],
-                    state.model,
-                    stack
-                );
-                final = unwind(currentSchema, currentKey, value, stack);
-                return {
-                    ...state,
-                    model: final,
-                };
-            });
-            return final;
-        },
-        removeValue(key) {
-            let final;
-            store.setState((state) => {
-                const stack = [];
-                const [currentKey, currentModel, currentSchema] = seek(
-                    state.schema,
-                    [...prefix, ...key],
-                    state.model,
-                    stack
-                );
-                final = unwind(currentSchema, currentKey, currentModel, stack, 1);
-                return {
-                    ...state,
-                    model: final,
-                };
-            })
-            return final;
-        },
-        appendArray(key, value) {
-            let final;
-            store.setState(state => {
-                const stack = [];
-                const [currentKey, currentModel, currentSchema] = seek(
-                    state.schema,
-                    [...prefix, ...key],
-                    state.model,
-                    stack
-                );
-                const parentModel = currentModel ?? defaultForSchema(currentSchema);
-                stack.push([currentKey, parentModel, currentSchema]);
+    return useMemo(
+        () => ({
+            setValue(key, value) {
+                let final;
+                store.setState((state) => {
+                    const stack = [];
+                    const [currentKey, currentModel, currentSchema] = seek(
+                        state.schema,
+                        [...prefix, ...key],
+                        state.model,
+                        stack
+                    );
+                    final = unwind(currentSchema, currentKey, value, stack);
+                    return {
+                        ...state,
+                        model: final,
+                    };
+                });
+                return final;
+            },
+            removeValue(key) {
+                let final;
+                store.setState((state) => {
+                    const stack = [];
+                    const [currentKey, currentModel, currentSchema] = seek(
+                        state.schema,
+                        [...prefix, ...key],
+                        state.model,
+                        stack
+                    );
+                    final = unwind(
+                        currentSchema,
+                        currentKey,
+                        currentModel,
+                        stack,
+                        1
+                    );
+                    return {
+                        ...state,
+                        model: final,
+                    };
+                });
+                return final;
+            },
+            appendArray(key, value) {
+                let final;
+                store.setState((state) => {
+                    const stack = [];
+                    const [currentKey, currentModel, currentSchema] = seek(
+                        state.schema,
+                        [...prefix, ...key],
+                        state.model,
+                        stack
+                    );
+                    const parentModel =
+                        currentModel ?? defaultForSchema(currentSchema);
+                    stack.push([currentKey, parentModel, currentSchema]);
 
-                const itemKey = parentModel.length;
-                const itemSchema = getNextSchema(currentSchema, itemKey);
-                const itemModel = assertType(itemSchema, value);
+                    const itemKey = parentModel.length;
+                    const itemSchema = getNextSchema(currentSchema, itemKey);
+                    const itemModel = assertType(itemSchema, value);
 
-                final = unwind(itemSchema, itemKey, itemModel, stack);
+                    final = unwind(itemSchema, itemKey, itemModel, stack);
 
-                return {
-                    ...state,
-                    model: final,
-                };
-            });
-            return final;
-        },
-        removeArray(key, index) {
-            let final;
-            store.setState(state => {
-                const stack = [];
-                const [currentKey, currentModel, currentSchema] = seek(
-                    state.schema,
-                    [...prefix, ...key],
-                    state.model,
-                    stack
-                );
-                final = unwind(
-                    currentSchema,
-                    currentKey,
-                    modelDrop(currentSchema, currentModel, index),
-                    stack
-                );
-                return {
-                    ...state,
-                    model: final,
-                };
-            })
-            return final;
-        },
-        moveArray(key, from, to) {
-            let final;
-            store.setState(state => {
-                const stack = [];
-                const [currentKey, currentModel, currentSchema] = seek(
-                    state.schema,
-                    [...prefix, ...key],
-                    state.model,
-                    stack
-                );
-                const nextModel = currentModel
-                    ? Array.from(currentModel)
-                    : defaultForSchema(currentSchema);
-                const [removed] = nextModel.splice(from, 1);
-                nextModel.splice(to, 0, removed);
-                final = unwind(currentSchema, currentKey, nextModel, stack);
-                return {
-                    ...state,
-                    model: final,
-                };
-            })
-            return final;
-        }
-    }), [prefix, store]);
+                    return {
+                        ...state,
+                        model: final,
+                    };
+                });
+                return final;
+            },
+            removeArray(key, index) {
+                let final;
+                store.setState((state) => {
+                    const stack = [];
+                    const [currentKey, currentModel, currentSchema] = seek(
+                        state.schema,
+                        [...prefix, ...key],
+                        state.model,
+                        stack
+                    );
+                    final = unwind(
+                        currentSchema,
+                        currentKey,
+                        modelDrop(currentSchema, currentModel, index),
+                        stack
+                    );
+                    return {
+                        ...state,
+                        model: final,
+                    };
+                });
+                return final;
+            },
+            moveArray(key, from, to) {
+                let final;
+                store.setState((state) => {
+                    const stack = [];
+                    const [currentKey, currentModel, currentSchema] = seek(
+                        state.schema,
+                        [...prefix, ...key],
+                        state.model,
+                        stack
+                    );
+                    const nextModel = currentModel
+                        ? Array.from(currentModel)
+                        : defaultForSchema(currentSchema);
+                    const [removed] = nextModel.splice(from, 1);
+                    nextModel.splice(to, 0, removed);
+                    final = unwind(currentSchema, currentKey, nextModel, stack);
+                    return {
+                        ...state,
+                        model: final,
+                    };
+                });
+                return final;
+            },
+        }),
+        [prefix, store]
+    );
 }
 
 export function useActionsFor(key, mergeActions = {}) {
     const actions = useActions();
     return useMemo(
-        function() {
-            const setValue = mergeAction(actions.setValue, mergeActions.setValue);
-            const removeValue = mergeAction(actions.removeValue, mergeActions.removeValue);
-            const appendArray = mergeAction(actions.appendArray, mergeActions.appendArray);
-            const removeArray = mergeAction(actions.removeArray, mergeActions.removeArray);
-            const moveArray = mergeAction(actions.moveArray, mergeActions.moveArray);
+        function () {
+            const setValue = mergeAction(
+                actions.setValue,
+                mergeActions.setValue
+            );
+            const removeValue = mergeAction(
+                actions.removeValue,
+                mergeActions.removeValue
+            );
+            const appendArray = mergeAction(
+                actions.appendArray,
+                mergeActions.appendArray
+            );
+            const removeArray = mergeAction(
+                actions.removeArray,
+                mergeActions.removeArray
+            );
+            const moveArray = mergeAction(
+                actions.moveArray,
+                mergeActions.moveArray
+            );
             return {
                 ...actions,
                 setValue: (value) => setValue(key, value),
@@ -199,7 +227,8 @@ export function useActionsFor(key, mergeActions = {}) {
                 moveArray: (from, to) => moveArray(key, from, to),
             };
         },
-        [actions, key]);
+        [actions, key]
+    );
 }
 
 function mergeAction(action, mergeAction) {
@@ -230,7 +259,7 @@ export function useSchemaFor(key) {
     key = usePrefixed(key);
     const path = useMemo(() => objectPath.stringify(key), [key]);
     const schemaSelector = useCallback(
-        function({ model, schema }) {
+        function ({ model, schema }) {
             const [_currentKey, _currentModel, currentSchema] = seek(
                 schema,
                 key,
@@ -254,13 +283,8 @@ export function useValue(key = []) {
     key = usePrefixed(key);
     const path = useMemo(() => objectPath.stringify(key), [key]);
     const modelSelector = useCallback(
-        function({ model, schema }) {
-            const [_currentKey, currentModel] = seek(
-                schema,
-                key,
-                model,
-                []
-            );
+        function ({ model, schema }) {
+            const [_currentKey, currentModel] = seek(schema, key, model, []);
             return currentModel;
         },
         [path]
@@ -283,18 +307,18 @@ export function useValidatorFor(schema) {
                 } else {
                     return null;
                 }
-            }
+            };
             validators.set(schema, validate);
             return validate;
         }
-    }, [schema])
+    }, [schema]);
 }
 
 export function useModelFor(key) {
     key = usePrefixed(key);
     const path = useMemo(() => objectPath.stringify(key), [key]);
     const keySelector = useCallback(
-        function({ model, schema }) {
+        function ({ model, schema }) {
             const [_currentKey, currentModel, currentSchema] = seek(
                 schema,
                 key,
@@ -310,20 +334,19 @@ export function useModelFor(key) {
         [path]
     );
 
-    const { model, schema } = useStore(useModelContext(), useShallow(keySelector));
+    const { model, schema } = useStore(
+        useModelContext(),
+        useShallow(keySelector)
+    );
     const validate = useValidatorFor(schema);
 
     return useMemo(
         () => ({
             model,
             schema,
-            validate
+            validate,
         }),
-        [
-            model,
-            schema,
-            validate
-        ]
+        [model, schema, validate]
     );
 }
 

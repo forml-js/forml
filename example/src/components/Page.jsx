@@ -14,10 +14,13 @@ import RenderExample from './RenderExample';
 import SelectDecorator from './SelectDecorator';
 import SelectExample from './SelectExample';
 
-
 function Title(props) {
     if (props.title) {
-        return <Divider><Typography variant="caption">{props.title}</Typography></Divider>
+        return (
+            <Divider>
+                <Typography variant="caption">{props.title}</Typography>
+            </Divider>
+        );
     } else {
         return null;
     }
@@ -28,12 +31,12 @@ const miniBoxInnerStyle = {
     flexDirection: 'column',
     flex: '0 0 fit-content',
     padding: 1,
-    gap: 1
+    gap: 1,
 };
 const miniBoxOuterStyle = {
     display: 'grid',
     gridAutoRows: 'min-content',
-}
+};
 function MiniBox(props) {
     return (
         <Box sx={miniBoxOuterStyle}>
@@ -47,12 +50,12 @@ const maxiBoxOuterStyle = {
     display: 'grid',
     gridAutoRows: 'min-content auto',
     minHeight: '0',
-}
+};
 const maxiBoxInnerStyle = {
     flex: '1 0 100%',
     overflowY: 'auto',
     p: 1,
-    g: 1
+    g: 1,
 };
 function MaxiBox(props) {
     return (
@@ -106,13 +109,16 @@ export default function Page() {
                 const final = form.value(...args);
                 setFinalForm(final);
                 return final;
-            }
+            };
         } else {
             setFinalForm(form.value);
             return form.value;
         }
-    }, [form.value])
-    const finalFormJSON = useMemo(() => JSON.stringify(finalForm, null, 2), [finalForm]);
+    }, [form.value]);
+    const finalFormJSON = useMemo(
+        () => JSON.stringify(finalForm, null, 2),
+        [finalForm]
+    );
 
     const onModelChange = useCallback(
         function onModelChange(event, ...args) {
@@ -130,11 +136,43 @@ export default function Page() {
     );
 
     return (
-        <Box display="grid" gridAutoFlow="column" gridAutoColumns="4fr min-content 1fr" height="fill-available" maxHeight="fill-available" overflow="hidden">
-            <Box display="grid" gridAutoFlow="row" height="fill-available" gridAutoRows="2fr 1fr" gap={1} overflow="hidden" key="primary-viewport">
-                <Box key="example" display="flex" flexDirection="column" overflow="hidden" minHeight={0}>
-                    <Divider key="header"><Typography key="title" variant="caption">Rendered Example</Typography></Divider>
-                    <Box overflow="auto" maxHeight="fill-available" p={1} key="editor">
+        <Box
+            display="grid"
+            gridAutoFlow="column"
+            gridAutoColumns="4fr min-content 1fr"
+            height="fill-available"
+            maxHeight="fill-available"
+            overflow="hidden"
+        >
+            <Box
+                display="grid"
+                gridAutoFlow="row"
+                height="fill-available"
+                gridAutoRows="2fr 1fr"
+                gap={1}
+                overflow="hidden"
+                key="primary-viewport"
+            >
+                <Box
+                    key="example"
+                    display="flex"
+                    flexDirection="column"
+                    overflow="hidden"
+                    minHeight={0}
+                >
+                    <Divider key="header">
+                        <Typography key="title" variant="caption">
+                            Rendered Example
+                        </Typography>
+                    </Divider>
+                    <Box
+                        overflow="auto"
+                        maxHeight="fill-available"
+                        p={1}
+                        display="flex"
+                        flexDirection="column"
+                        key="editor"
+                    >
                         <RenderExample
                             key={`render-${decorator}-${selected}`}
                             schema={schema.value}
@@ -148,18 +186,40 @@ export default function Page() {
                         />
                     </Box>
                 </Box>
-                <Box key="model" display="flex" flexDirection="column" overflow="hidden">
-                    <Divider><Typography key="title" variant="caption">Model</Typography></Divider>
-                    <Box overflow="auto" maxHeight="fill-available" key="editor">
+                <Box
+                    key="model"
+                    display="flex"
+                    flexDirection="column"
+                    overflow="hidden"
+                >
+                    <Divider>
+                        <Typography key="title" variant="caption">
+                            Model
+                        </Typography>
+                    </Divider>
+                    <Box
+                        overflow="auto"
+                        maxHeight="fill-available"
+                        key="editor"
+                    >
                         <Editor key="editor" value={model.json} />
                     </Box>
                 </Box>
             </Box>
             <Divider orientation="vertical" />
-            <Box display="grid" gridAutoFlow="row" gridAutoRows="min-content auto auto" overflow="hidden" key="secondary-viewport">
+            <Box
+                display="grid"
+                gridAutoFlow="row"
+                gridAutoRows="min-content auto auto"
+                overflow="hidden"
+                key="secondary-viewport"
+            >
                 <MiniBox key="configure-example" title="Configure Example">
                     <MiniBox key="select-example">
-                        <SelectExample selected={selected} onChange={onChange} />
+                        <SelectExample
+                            selected={selected}
+                            onChange={onChange}
+                        />
                     </MiniBox>
                     <MiniBox key="select-decorator">
                         <SelectDecorator

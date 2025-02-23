@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     resolve: {
@@ -30,9 +29,6 @@ module.exports = {
         extensions: ['.*', '.js', '.jsx'],
     },
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    optimization: {
-        splitChunks: {},
-    },
     entry: {
         app: path.resolve('./src/index.js'),
         iso: path.resolve('./src/iso.js'),
@@ -57,18 +53,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [
-                            [
-                                '@babel/preset-env',
-                                {
-                                    targets: {
-                                        browsers: ['last 1 Chrome versions'],
-                                    },
-                                },
-                            ],
-                            '@babel/preset-react',
-                        ],
-                        plugins: ['@babel/plugin-transform-runtime'],
+                        presets: ['@babel/preset-react'],
                     },
                 },
             },

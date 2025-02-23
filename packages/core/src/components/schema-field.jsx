@@ -10,6 +10,7 @@ const log = debug('forml:core:schema-field');
 
 function ValueField(props) {
     const { form, parent, onChange, prefix } = props;
+
     const key = useMemo(() => {
         if (prefix) {
             if (typeof prefix === 'string') {
@@ -41,9 +42,9 @@ function ValueField(props) {
     );
 
     const error = useMemo(
-        function() {
+        function () {
             if (field.model) {
-                return field.validate(field.model)
+                return field.validate(field.model);
             } else {
                 return null;
             }
