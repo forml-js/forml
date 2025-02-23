@@ -106,7 +106,18 @@ export function getPreferredType(types) {
 
     return types[index];
 }
-export function defaultForSchema(schema) {
+
+function memo(fn) {
+    const cache = new WeakMap();
+    return function (arg) {
+        if (cache.has(arg)) return cache.get(arg);
+        const result = fn(arg);
+        cache.set(arg, result);
+        return result;
+    };
+}
+
+export const defaultForSchema = memo(function defaultForSchema(schema) {
     if (schema.default !== undefined) {
         return schema.default;
     }
@@ -155,7 +166,8 @@ export function defaultForSchema(schema) {
 
         return assertType(schema, base);
     }
-}
+});
+
 export function getNextValue(schema, value, key) {
     const nextSchema = getNextSchema(schema, key);
     if (value[key] === undefined) {
@@ -163,6 +175,7 @@ export function getNextValue(schema, value, key) {
     }
     return assertType(nextSchema, value[key]);
 }
+
 export function getNextSchema(schema, key) {
     const preferredType = getPreferredType(schema.type);
     if (preferredType === 'array') {
