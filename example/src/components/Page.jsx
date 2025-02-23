@@ -1,11 +1,7 @@
 import { util } from '@forml/core';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card'; import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import useEditable from '../hooks/useEditable';
 import { getSample } from '../samples';
