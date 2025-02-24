@@ -19,15 +19,8 @@ import { getMapper, mapperShape } from './mapper/index.jsx';
  * and the provided forms as a guide.
  */
 export function SchemaForm(props) {
-    const {
-        model = null,
-        schema = { type: 'null' },
-        form = ['*'],
-    } = props;
-    const mapper = useMemo(
-        () => getMapper(props.mapper ?? {}),
-        [props.mapper]
-    );
+    const { model = null, schema = { type: 'null' }, form = ['*'] } = props;
+    const mapper = useMemo(() => getMapper(props.mapper ?? {}), [props.mapper]);
     const decorator = useMemo(
         () => getDecorator(props.decorator ?? {}),
         [props.decorator]
@@ -37,7 +30,10 @@ export function SchemaForm(props) {
         [props.localizer]
     );
 
-    const renderingContext = useMemo(() => ({ mapper, decorator, localizer }), [mapper, decorator, localizer]);
+    const renderingContext = useMemo(
+        () => ({ mapper, decorator, localizer }),
+        [mapper, decorator, localizer]
+    );
     const modelContext = useRef(createModelStore(schema, model)).current;
 
     return (
