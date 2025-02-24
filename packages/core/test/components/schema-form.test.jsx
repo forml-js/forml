@@ -1,27 +1,34 @@
+import { describe, it } from 'mocha';
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import { SchemaForm } from '#form';
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
-test('uses the supplied mapper', function () {
+chai.use(sinonChai);
+const { expect } = chai;
+
+it('uses the supplied mapper', function () {
     const mapper = {
-        text: jest.fn((props) => <div {...props} />),
+        text: sinon.fake((props) => <div {...props} />),
     };
 
-    const component = renderer.create(
+    render(
         <SchemaForm schema={{ type: 'string' }} form={['*']} mapper={mapper} />
     );
 
-    expect(mapper.text).toHaveBeenCalled();
+    expect(mapper.text).to.have.been.called;
 });
 
-test('uses the supplied localizer', function () {
+it('uses the supplied localizer', function () {
     const localizer = {
-        getLocalizedString: jest.fn((string) => {
+        getLocalizedString: sinon.fake((string) => {
             return string;
         }),
     };
 
-    const component = renderer.create(
+    render(
         <SchemaForm
             schema={{ type: 'string', title: 'test' }}
             form={['*']}
@@ -29,20 +36,20 @@ test('uses the supplied localizer', function () {
         />
     );
 
-    expect(localizer.getLocalizedString).toHaveBeenCalledWith('test');
+    expect(localizer.getLocalizedString).to.have.been.calledWith('test');
 });
 
-test('uses the supplied decorator', function () {
+it('uses the supplied decorator', function () {
     const decorator = {
         Input: {
-            Group: jest.fn((props) => <div {...props} />),
-            Form: jest.fn((props) => <div {...props} />),
-            Description: jest.fn((props) => <div {...props} />),
+            Group: sinon.fake((props) => <div {...props} />),
+            Form: sinon.fake((props) => <div {...props} />),
+            Description: sinon.fake((props) => <div {...props} />),
         },
-        Label: jest.fn((props) => <div {...props} />),
+        Label: sinon.fake((props) => <div {...props} />),
     };
 
-    renderer.create(
+    render(
         <SchemaForm
             schema={{ type: 'string' }}
             form={[
@@ -52,8 +59,8 @@ test('uses the supplied decorator', function () {
         />
     );
 
-    expect(decorator.Label).toHaveBeenCalled();
-    expect(decorator.Input.Group).toHaveBeenCalled();
-    expect(decorator.Input.Description).toHaveBeenCalled();
-    expect(decorator.Input.Form).toHaveBeenCalled();
+    expect(decorator.Label).to.have.been.called;
+    expect(decorator.Input.Group).to.have.been.called;
+    expect(decorator.Input.Description).to.have.been.called;
+    expect(decorator.Input.Form).to.have.been.called;
 });

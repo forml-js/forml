@@ -1,7 +1,22 @@
-import React from 'react';
-import { useLocalizer, useDecorator, useMapper, useModel } from '../';
-import Context from '@forml/context';
+import * as chai from 'chai';
+import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import domChai from 'chai-dom';
+import React, { useRef } from 'react';
+import {
+    useLocalizer,
+    useDecorator,
+    useMapper,
+    useModel,
+    createModelStore,
+} from '../src/index.jsx';
+import { RenderingContext as Context, ModelContext } from '@forml/context';
 import { render } from '@testing-library/react';
+
+chai.use(sinonChai);
+chai.use(domChai);
+const { expect } = chai;
 
 describe('useLocalizer', function () {
     describe('returns method', function () {
@@ -11,9 +26,11 @@ describe('useLocalizer', function () {
         beforeEach(function () {
             date = new Date(0);
             localizer = {
-                getLocalizedString: jest.fn((string) => 'localized ' + string),
-                getLocalizedDate: jest.fn((date) => date.toLocaleString()),
-                getLocalizedNumber: jest.fn((number) =>
+                getLocalizedString: sinon.fake(
+                    (string) => 'localized ' + string
+                ),
+                getLocalizedDate: sinon.fake((date) => date.toLocaleString()),
+                getLocalizedNumber: sinon.fake((number) =>
                     number.toLocaleString()
                 ),
             };
@@ -32,43 +49,47 @@ describe('useLocalizer', function () {
         }
 
         describe('from Context.Provider', function () {
-            test('getLocalizedString', function () {
+            it('getLocalizedString', function () {
                 const { container } = render(
                     <Context.Provider value={{ localizer }}>
                         <TestComponent />
                     </Context.Provider>
                 );
 
-                expect(container.querySelector('#string').textContent).toBe(
+                expect(container.querySelector('#string').textContent).to.equal(
                     'localized test'
                 );
-                expect(localizer.getLocalizedString).toHaveBeenCalledWith(
+                expect(localizer.getLocalizedString).to.have.been.calledWith(
                     'test'
                 );
             });
-            test('getLocalizedDate', function () {
+            it('getLocalizedDate', function () {
                 const { container } = render(
                     <Context.Provider value={{ localizer }}>
                         <TestComponent />
                     </Context.Provider>
                 );
 
-                expect(container.querySelector('#date').textContent).toBe(
+                expect(container.querySelector('#date').textContent).to.equal(
                     date.toLocaleString()
                 );
-                expect(localizer.getLocalizedDate).toHaveBeenCalledWith(date);
+                expect(localizer.getLocalizedDate).to.have.been.calledWith(
+                    date
+                );
             });
-            test('getLocalizedNumber', function () {
+            it('getLocalizedNumber', function () {
                 const { container } = render(
                     <Context.Provider value={{ localizer }}>
                         <TestComponent />
                     </Context.Provider>
                 );
 
-                expect(container.querySelector('#number').textContent).toBe(
+                expect(container.querySelector('#number').textContent).to.equal(
                     '1,000'
                 );
-                expect(localizer.getLocalizedNumber).toHaveBeenCalledWith(1000);
+                expect(localizer.getLocalizedNumber).to.have.been.calledWith(
+                    1000
+                );
             });
         });
     });
@@ -84,13 +105,13 @@ describe('useDecorator', function () {
                 </deco.Input.Group>
             );
         }
-        test('uses the input decorator', function () {
+        it('uses the input decorator', function () {
             const decorator = {
                 Input: {
-                    Group: jest.fn((props) => (
+                    Group: sinon.fake((props) => (
                         <div id="group">{props.children}</div>
                     )),
-                    Form: jest.fn((props) => <input id="form" {...props} />),
+                    Form: sinon.fake((props) => <input id="form" {...props} />),
                 },
             };
 
@@ -100,10 +121,10 @@ describe('useDecorator', function () {
                 </Context.Provider>
             );
 
-            expect(container.querySelector('#group')).not.toBeNull();
-            expect(container.querySelector('#form')).not.toBeNull();
-            expect(decorator.Input.Group).toHaveBeenCalled();
-            expect(decorator.Input.Form).toHaveBeenCalled();
+            expect(container.querySelector('#group')).not.to.be.null;
+            expect(container.querySelector('#form')).not.to.be.null;
+            expect(decorator.Input.Group).to.have.been.called;
+            expect(decorator.Input.Form).to.have.been.called;
         });
     });
 });
@@ -117,18 +138,18 @@ describe('useMapper', function () {
         let mapper;
         beforeEach(function () {
             mapper = {
-                Text: jest.fn((props) => <input id="input" {...props} />),
+                Text: sinon.fake((props) => <input id="input" {...props} />),
             };
         });
-        test('uses the input mapper', function () {
+        it('uses the input mapper', function () {
             const { container } = render(
                 <Context.Provider value={{ mapper }}>
                     <TestComponent />
                 </Context.Provider>
             );
 
-            expect(container.querySelector('#input')).not.toBeNull();
-            expect(mapper.Text).toHaveBeenCalled();
+            expect(container.querySelector('#input')).not.to.be.null;
+            expect(mapper.Text).to.have.been.called;
         });
     });
 });
@@ -136,39 +157,41 @@ describe('useMapper', function () {
 describe('useModel', function () {
     describe('from Context.Provider', function () {
         let model;
+        let schema;
         beforeEach(function () {
-            model = {
-                getValue: jest.fn(() => 'value'),
-                getError: jest.fn(() => 'error'),
-                version: 101,
+            schema = {
+                type: 'string',
             };
+            model = 'value';
         });
+        function ModelProvider(props) {
+            const model = useRef(
+                createModelStore(props.schema, props.model)
+            ).current;
+            return (
+                <ModelContext.Provider value={model}>
+                    {props.children}
+                </ModelContext.Provider>
+            );
+        }
         function TestComponent(props) {
             const model = useModel();
             return (
                 <div>
-                    <div id="getValue">{model.getValue([])}</div>
-                    <div id="getError">{model.getError([])}</div>
-                    <div id="version">{model.version}</div>
+                    <div id="getValue">{model.model}</div>
                 </div>
             );
         }
-        test('uses the supplied values', function () {
+        it('uses the supplied values', function () {
             const { container } = render(
-                <Context.Provider value={{ ...model }}>
+                <ModelProvider schema={schema} model={model}>
                     <TestComponent />
-                </Context.Provider>
+                </ModelProvider>
             );
 
-            expect(container.querySelector('#getValue').textContent).toBe(
+            expect(container.querySelector('#getValue').textContent).to.equal(
                 'value'
             );
-            expect(container.querySelector('#getError').textContent).toBe(
-                'error'
-            );
-            expect(container.querySelector('#version').textContent).toBe('101');
-            expect(model.getValue).toHaveBeenCalled();
-            expect(model.getError).toHaveBeenCalled();
         });
     });
 });

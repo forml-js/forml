@@ -1,4 +1,4 @@
 module.exports = {
-    require: ['@babel/register', 'global-jsdom/register'],
     extensions: ['js', 'jsx'],
+    require: ['./setup-tests.js', 'global-jsdom/register'],
 };

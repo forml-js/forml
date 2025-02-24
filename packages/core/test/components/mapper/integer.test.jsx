@@ -1,7 +1,16 @@
+import * as chai from 'chai';
+import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import domChai from 'chai-dom';
 import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { fireEvent, render } from '@testing-library/react';
 import { createElement as h } from 'react';
+
+chai.use(sinonChai);
+chai.use(domChai);
+const { expect } = chai;
 
 describe('integer', function () {
     let schema, form, model, onChange, decorator;
@@ -10,11 +19,11 @@ describe('integer', function () {
         schema = { type: 'integer' };
         form = [{ key: [], type: 'integer' }];
         model = util.defaultForSchema(schema);
-        onChange = jest.fn((event, nextModel) => (model = nextModel));
+        onChange = sinon.fake((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
 
-    test('tolerates empty strings onChange', function () {
+    it('tolerates empty strings onChange', function () {
         const { container } = render(
             h(SchemaForm, { schema, form, model, onChange, decorator })
         );
@@ -23,11 +32,11 @@ describe('integer', function () {
             target: { value: '' },
         });
 
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe('');
+        expect(onChange).to.have.been.called;
+        expect(model).to.equal('');
     });
 
-    test('tolerates minus character onChange', function () {
+    it('tolerates minus character onChange', function () {
         const { container } = render(
             h(SchemaForm, {
                 schema,
@@ -42,11 +51,11 @@ describe('integer', function () {
             target: { value: '-' },
         });
 
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe('-');
+        expect(onChange).to.have.been.called;
+        expect(model).to.equal('-');
     });
 
-    test('does not tolerate non-numeric strings', function () {
+    it('does not tolerate non-numeric strings', function () {
         const { container } = render(
             h(SchemaForm, { schema, form, model, onChange, decorator })
         );
@@ -55,6 +64,6 @@ describe('integer', function () {
             target: { value: 'a' },
         });
 
-        expect(onChange).not.toHaveBeenCalled();
+        expect(onChange).not.to.have.been.called;
     });
 });

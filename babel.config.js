@@ -7,10 +7,10 @@ module.exports = function (api) {
                 '@babel/preset-env',
                 {
                     targets: { browsers: ['last 2 Chrome versions'] },
+                    modules: 'commonjs',
                 },
             ],
-            '@babel/preset-react',
+            ['@babel/preset-react', { runtime: 'automatic' }],
         ],
-        plugins: ['@babel/plugin-transform-runtime'],
     };
 };

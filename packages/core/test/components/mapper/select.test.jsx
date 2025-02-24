@@ -1,8 +1,14 @@
+import * as chai from 'chai';
+import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import domChai from 'chai-dom';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import { config } from 'react-transition-group';
 import * as barebones from '@forml/decorator-barebones';
 
-config.disabled = true;
+chai.use(sinonChai);
+chai.use(domChai);
+const { expect } = chai;
 
 import { SchemaForm } from '#core';
 import React from 'react';
@@ -17,10 +23,10 @@ describe('select mapper', function () {
         schema = { type: ['string', 'null'], enum: [null, 'a', 'b', 'c', 'd'] };
         form = ['*'];
         model = null;
-        onChange = jest.fn((event, newModel) => (model = newModel));
+        onChange = sinon.fake((event, newModel) => (model = newModel));
     });
 
-    test('is updated onChange', async function () {
+    it('is updated onChange', async function () {
         const { container } = render(
             <SchemaForm
                 {...{
@@ -33,13 +39,13 @@ describe('select mapper', function () {
             />
         );
         const [button0, button1] = container.querySelectorAll('option');
-        expect(button1).toBeDefined();
-        expect(button1).not.toBeNull();
+        expect(button1).not.to.be.undefined;
+        expect(button1).not.to.be.null;
 
         await fireEvent.change(container.querySelector('select'), {
             target: { value: 'a' },
         });
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe('a');
+        expect(onChange).to.have.been.called;
+        expect(model).to.equal('a');
     });
 });

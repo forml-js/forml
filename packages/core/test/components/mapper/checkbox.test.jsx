@@ -1,4 +1,4 @@
-import * as chai from 'chai'
+import * as chai from 'chai';
 import { describe, it } from 'mocha';
 import * as sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -11,33 +11,32 @@ import { createElement as h } from 'react';
 chai.use(sinonChai);
 const { expect } = chai;
 
-describe('checkbox mapper', function() {
+describe('checkbox mapper', function () {
     let schema, form, model, onChange, localizer;
 
-    beforeEach(function() {
+    beforeEach(function () {
         schema = { type: 'boolean' };
         form = [{ type: 'checkbox', key: [] }];
         model = util.defaultForSchema(schema);
-        onChange = jest.fn((event, nextModel) => (model = nextModel));
+        onChange = sinon.fake((event, nextModel) => (model = nextModel));
     });
 
-    test('renders itself', function() {
+    it('renders itself', function () {
         const { container } = render(
-            h(SchemaForm, {
-                model,
-                form,
-                schema,
-                onChange,
-                decorator: barebones,
-            })
+            <SchemaForm
+                model={model}
+                form={form}
+                schema={schema}
+                onChange={onChange}
+                decorator={barebones}
+            />
         );
 
-        expect(
-            container.querySelector('input[type="checkbox"]')
-        ).not.toBeNull();
+        expect(container.querySelector('input[type="checkbox"]')).not.to.be
+            .null;
     });
 
-    test('uses localizer for title and description', function() {
+    it('uses localizer for title and description', function () {
         const form = [
             {
                 type: 'checkbox',
@@ -47,21 +46,21 @@ describe('checkbox mapper', function() {
             },
         ];
         const localizer = getLocalizer({
-            getLocalizedString: jest.fn((id) => id),
+            getLocalizedString: sinon.fake((id) => id),
         });
         const { container } = render(
-            h(SchemaForm, {
-                model,
-                form,
-                schema,
-                onChange,
-                localizer,
-                decorator: barebones,
-            })
+            <SchemaForm
+                model={model}
+                form={form}
+                schema={schema}
+                onChange={onChange}
+                localizer={localizer}
+                decorator={barebones}
+            />
         );
 
-        expect(localizer.getLocalizedString).toHaveBeenCalledWith('title');
-        expect(localizer.getLocalizedString).toHaveBeenCalledWith(
+        expect(localizer.getLocalizedString).to.have.been.calledWith('title');
+        expect(localizer.getLocalizedString).to.have.been.calledWith(
             'description'
         );
     });

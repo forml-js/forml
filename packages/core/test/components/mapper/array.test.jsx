@@ -1,8 +1,17 @@
+import { describe, it } from 'mocha';
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import domChai from 'chai-dom';
 import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { useValue } from '@forml/hooks';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+
+chai.use(sinonChai);
+chai.use(domChai);
+const { expect } = chai;
 
 describe('items container', function () {
     let schema;
@@ -17,7 +26,7 @@ describe('items container', function () {
         decorator = barebones;
     });
 
-    test('is rendered', function () {
+    it('is rendered', function () {
         const props = {
             schema,
             form,
@@ -26,23 +35,21 @@ describe('items container', function () {
         };
         const { container } = render(<SchemaForm {...props} />);
 
-        expect(container).toMatchSnapshot();
-
-        expect(container.querySelector('.array')).not.toBeNull();
-        expect(container.querySelector('.array ul')).not.toBeNull();
-        expect(container.querySelector('.array ul')).toBeEmptyDOMElement();
+        expect(container.querySelector('.array')).not.to.be.null;
+        expect(container.querySelector('.array ul')).not.to.be.null;
+        expect(container.querySelector('.array ul')).to.be.empty;
     });
 
     describe('with an add button', function () {
-        test('which renders', function () {
+        it('which renders', function () {
             const props = { schema, form, model, decorator };
             const { container } = render(<SchemaForm {...props} />);
 
             const button = container.querySelector('button');
-            expect(button).not.toBeNull();
+            expect(button).not.to.be.null;
         });
-        test('which adds an item to the model', function () {
-            const onChange = jest.fn((event, newModel) => {
+        it('which adds an item to the model', function () {
+            const onChange = sinon.fake((event, newModel) => {
                 model = newModel;
             });
             const props = { schema, form, model, onChange, decorator };
@@ -50,12 +57,12 @@ describe('items container', function () {
 
             const button = container.querySelector('button');
             fireEvent.click(button);
-            expect(model.length).toBe(1);
+            expect(model.length).to.equal(1);
         });
     });
 
-    test('cannot be mutated if disabled', async function () {
-        let onChange = jest.fn((event, nextModel) => (model = nextModel));
+    it('cannot be mutated if disabled', async function () {
+        let onChange = sinon.fake((event, nextModel) => (model = nextModel));
         let schema = {
             type: 'array',
             items: { type: 'number' },
@@ -72,7 +79,9 @@ describe('items container', function () {
 
         // 4 because move up, move down, destroy, and add
         // as long as we only have 1 item in the model we're good
-        expect(container.querySelectorAll('button[disabled]').length).toBe(4);
+        expect(container.querySelectorAll('button[disabled]').length).to.equal(
+            4
+        );
     });
 });
 
@@ -100,24 +109,22 @@ function getComputedSpacing({
 }
 
 function mockGetComputedSpacing() {
-    jest.spyOn(window, 'getComputedStyle').mockImplementation(() =>
-        getComputedSpacing({})
-    );
+    const spy = sinon.spy(window, 'getComputedStyle');
+    spy.wrappedMethod = () => getComputedSpacing({});
 }
 
 function mockGetBoundingClientRect(el) {
-    jest.spyOn(el, 'getBoundingClientRect').mockImplementation(() => {
-        return {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            width: 0,
-            height: 0,
-            x: 0,
-            y: 0,
-            center: { x: 0, y: 0 },
-        };
+    const spy = sinon.spy(el, 'getBoundingClientRect');
+    spy.wrappedMethod = () => ({
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+        center: { x: 0, y: 0 },
     });
 }
 
@@ -145,30 +152,31 @@ describe('each item', function () {
     let decorator = null;
     let props = null;
 
+    before(function () {
+        mockGetComputedSpacing();
+    });
     beforeEach(function () {
         schema = { type: 'array', items: { type: 'number' } };
         form = ['*'];
         model = [1];
         setter = util.valueSetter(model, schema);
         getter = util.valueGetter(model, schema);
-        onChange = jest.fn((event, newModel) => {
+        onChange = sinon.fake((event, newModel) => {
             model = newModel;
         });
         decorator = barebones;
         props = { schema, form, model, decorator };
-
-        mockGetComputedSpacing();
     });
 
-    test('is rendered', function () {
+    it('is rendered', function () {
         const { container } = render(<SchemaForm {...props} />);
-        expect(container.querySelector('.array ul li')).not.toBeNull();
+        expect(container.querySelector('.array ul li')).not.to.be.null;
     });
 
     // jsdom can't effectively mock this well enough to make it work; skip until
     // we find a workaround
-    test.skip('can be dragged into a new position', async function () {
-        const onChange = jest.fn();
+    it.skip('can be dragged into a new position', async function () {
+        const onChange = sinon.fake();
         model = [1, 2, 3, 4];
         const utils = render(<SchemaForm {...{ ...props, model, onChange }} />);
         const { container } = utils;
@@ -184,11 +192,11 @@ describe('each item', function () {
         await fireEvent.keyDown(source, { keyCode: 40 });
         await fireEvent.keyDown(source, { keyCode: 32 });
 
-        expect(onChange).toHaveBeenCalled();
+        expect(onChange).to.have.been.called;
     });
 
     describe('in readonly mode', function () {
-        test.skip('propagates readonly', function () {
+        it.skip('propagates readonly', function () {
             model = [1];
             form = [
                 {
@@ -203,12 +211,12 @@ describe('each item', function () {
                 <SchemaForm {...{ ...props, model, form }} />
             );
 
-            expect(container.querySelectorAll('button[disabled]').length).toBe(
-                4
-            );
-            expect(container.querySelector('input').disabled).toBe(true);
+            expect(
+                container.querySelectorAll('button[disabled]').length
+            ).to.equal(4);
+            expect(container.querySelector('input').disabled).to.equal(true);
         });
-        test('can be overrideden by explicit setting', function () {
+        it('can be overrideden by explicit setting', function () {
             model = [1];
             form = [
                 {
@@ -223,82 +231,82 @@ describe('each item', function () {
                 <SchemaForm {...{ ...props, model, form }} />
             );
 
-            expect(container.querySelectorAll('button[disabled]').length).toBe(
-                4
-            );
-            expect(container.querySelector('input').disabled).toBe(false);
+            expect(
+                container.querySelectorAll('button[disabled]').length
+            ).to.equal(4);
+            expect(container.querySelector('input').disabled).to.equal(false);
         });
     });
 
     describe('has controls', function () {
-        test('to move up', function () {
+        it('to move up', function () {
             model = [1, 2];
             const { container } = render(
                 <SchemaForm {...{ schema, form, model, onChange, decorator }} />
             );
 
             let buttons = container.querySelectorAll('.array .item .move-up');
-            expect(buttons).not.toBeNull();
-            expect(buttons.length).toBe(2);
+            expect(buttons).not.to.be.null;
+            expect(buttons.length).to.equal(2);
 
             // Select the second button to move the second element UP into the first slot
             let [button1, button2] = buttons;
             fireEvent.click(button1);
-            expect(onChange).toHaveBeenCalled();
-            expect(model).toMatchObject([1, 2]);
+            expect(onChange).to.have.been.called;
+            expect(model).to.deep.equal([1, 2]);
 
             fireEvent.click(button2);
-            expect(onChange).toHaveBeenCalled();
-            expect(model).toMatchObject([2, 1]);
+            expect(onChange).to.have.been.called;
+            expect(model).to.deep.equal([2, 1]);
         });
 
-        test('to move down', function () {
+        it('to move down', function () {
             model = [1, 2];
             const { container } = render(
                 <SchemaForm {...{ schema, form, model, onChange, decorator }} />
             );
 
             let buttons = container.querySelectorAll('.array .item .move-down');
-            expect(buttons).not.toBeNull();
-            expect(buttons.length).toBe(2);
+            expect(buttons).not.to.be.null;
+            expect(buttons.length).to.equal(2);
 
             // Select the first button to move the first element DOWN into the second slot
             let [button1, button2] = buttons;
             fireEvent.click(button2);
-            expect(onChange).toHaveBeenCalled();
-            expect(model).toMatchObject([1, 2]);
+            expect(onChange).to.have.been.called;
+            expect(model).to.deep.equal([1, 2]);
 
             fireEvent.click(button1);
-            expect(onChange).toHaveBeenCalled();
-            expect(model).toMatchObject([2, 1]);
+            expect(onChange).to.have.been.called;
+            expect(model).to.deep.equal([2, 1]);
         });
 
-        test('to be destroyed', function () {
+        it('to be destroyed', function () {
             model = [1, 2];
             const { container } = render(
                 <SchemaForm {...{ schema, form, model, onChange, decorator }} />
             );
 
             let button = container.querySelectorAll('.array .item .delete');
-            expect(button).not.toBeNull();
-            expect(button.length).toBe(2);
+            expect(button).not.to.be.null;
+            expect(button.length).to.equal(2);
 
             // Select the first button to move the first element DOWN into the second slot
             button = button[0];
             fireEvent.click(button);
 
-            expect(onChange).toHaveBeenCalled();
-            expect(model).toMatchObject([2]);
+            expect(onChange).to.have.been.called;
+            expect(model).to.deep.equal([2]);
         });
     });
     describe('can specify titleFun', function () {
-        test('which overrides form.title in children', function () {
+        it('which overrides form.title in children', function () {
             model = [1, 2];
             form = [
                 {
                     key: [],
                     type: 'array',
-                    titleFun: jest.fn(() => {
+                    titleFun: sinon.fake(() => {
                         const value = useValue('[0]');
                         return `test ${value}`;
                     }),
@@ -315,9 +323,9 @@ describe('each item', function () {
                 />
             );
 
-            expect(form[0].titleFun).toHaveBeenCalled();
-            expect(container.querySelector('ul li h6')).not.toBeNull();
-            expect(container.querySelector('ul li h6').textContent).toBe(
+            expect(form[0].titleFun).to.have.been.called;
+            expect(container.querySelector('ul li h6')).not.to.be.null;
+            expect(container.querySelector('ul li h6').textContent).to.equal(
                 'test 1'
             );
         });
