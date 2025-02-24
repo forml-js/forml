@@ -1,14 +1,14 @@
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util } from '../../../src';
+import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
+import { fireEvent, render } from '@testing-library/react';
+import { createElement as h } from 'react';
 
-describe('number', function () {
+describe('integer', function () {
     let schema, form, model, onChange, decorator;
 
     beforeEach(function () {
-        schema = { type: 'number' };
-        form = [{ key: [], type: 'number' }];
+        schema = { type: 'integer' };
+        form = [{ key: [], type: 'integer' }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
         decorator = barebones;
@@ -29,7 +29,13 @@ describe('number', function () {
 
     test('tolerates minus character onChange', function () {
         const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange, decorator })
+            h(SchemaForm, {
+                schema,
+                form,
+                model,
+                onChange,
+                decorator,
+            })
         );
 
         fireEvent.change(container.querySelector('input'), {
@@ -38,39 +44,6 @@ describe('number', function () {
 
         expect(onChange).toHaveBeenCalled();
         expect(model).toBe('-');
-    });
-
-    test('tolerates trailing points despite parseFloat', function () {
-        const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange, decorator })
-        );
-
-        fireEvent.change(container.querySelector('input'), {
-            target: { value: '3.' },
-        });
-
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe('3.');
-
-        fireEvent.change(container.querySelector('input'), {
-            target: { value: '3..' },
-        });
-
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe('3.');
-    });
-
-    test('tolerates only one decimal point', function () {
-        const { container } = render(
-            h(SchemaForm, { schema, form, model, onChange, decorator })
-        );
-
-        fireEvent.change(container.querySelector('input'), {
-            target: { value: '3.1.' },
-        });
-
-        expect(onChange).toHaveBeenCalled();
-        expect(model).toBe(3.1);
     });
 
     test('does not tolerate non-numeric strings', function () {

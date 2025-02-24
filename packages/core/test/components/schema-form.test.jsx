@@ -1,24 +1,20 @@
-import { SchemaForm } from '../../src';
+import { SchemaForm } from '#form';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-test('uses the supplied mapper', function() {
+test('uses the supplied mapper', function () {
     const mapper = {
         text: jest.fn((props) => <div {...props} />),
     };
 
     const component = renderer.create(
-        <SchemaForm
-            schema={{ type: 'string' }}
-            form={['*']}
-            mapper={mapper}
-        />
+        <SchemaForm schema={{ type: 'string' }} form={['*']} mapper={mapper} />
     );
 
     expect(mapper.text).toHaveBeenCalled();
 });
 
-test('uses the supplied localizer', function() {
+test('uses the supplied localizer', function () {
     const localizer = {
         getLocalizedString: jest.fn((string) => {
             return string;
@@ -36,7 +32,7 @@ test('uses the supplied localizer', function() {
     expect(localizer.getLocalizedString).toHaveBeenCalledWith('test');
 });
 
-test('uses the supplied decorator', function() {
+test('uses the supplied decorator', function () {
     const decorator = {
         Input: {
             Group: jest.fn((props) => <div {...props} />),
@@ -49,7 +45,9 @@ test('uses the supplied decorator', function() {
     renderer.create(
         <SchemaForm
             schema={{ type: 'string' }}
-            form={[{ key: [], type: 'text', title: 'test', description: 'test' }]}
+            form={[
+                { key: [], type: 'text', title: 'test', description: 'test' },
+            ]}
             decorator={decorator}
         />
     );

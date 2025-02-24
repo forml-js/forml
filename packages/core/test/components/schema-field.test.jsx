@@ -1,11 +1,10 @@
+import { SchemaField } from '#field';
+import { getLocalizer } from '#localizer';
+import { getMapper } from '#mapper';
 import { ModelContext, RenderingContext } from '@forml/context';
-import { SchemaField } from '../../src/components/schema-field';
-import React from 'react';
-import { getMapper } from '../../src/components/mapper';
-import { getLocalizer } from '../../src/localizer';
-import * as util from '../../src/util';
-import { render } from '@testing-library/react';
 import * as barebones from '@forml/decorator-barebones';
+import { render } from '@testing-library/react';
+import React from 'react';
 import { createStore } from 'zustand';
 
 function getModelContext(schema, ajv, model = '', errors = {}) {

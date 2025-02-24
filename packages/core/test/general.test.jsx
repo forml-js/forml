@@ -1,10 +1,16 @@
+import { describe, it } from 'mocha';
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import { SchemaForm, getLocalizer, util } from '#core';
+import * as barebones from '@forml/decorator-barebones';
+import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 
-import { SchemaForm, getLocalizer, util } from '../src';
-import React, { createElement as h } from 'react';
-import * as barebones from '@forml/decorator-barebones';
+chai.use(sinonChai);
+const { expect } = chai;
 
-describe('mapper', function () {
+describe('mapper', function() {
     const title = 'title';
     const description = 'description';
     const decorator = barebones;
@@ -130,17 +136,23 @@ describe('mapper', function () {
     for (let form of forms) {
         const [{ type, schema }] = form;
 
-        test(`${type} localizes title and description`, function () {
+        it(`${type} localizes title and description`, function() {
             const model = schema ? util.defaultForSchema(schema) : null;
             const localizer = getLocalizer({
-                getLocalizedString: jest.fn((id) => id),
+                getLocalizedString: sinon.fake(),
             });
             const { container } = render(
-                h(SchemaForm, { model, form, schema, localizer, decorator })
+                <SchemaForm
+                    model={model}
+                    form={form}
+                    schema={schema}
+                    localizer={localizer}
+                    decorator={decorator}
+                />
             );
 
-            expect(localizer.getLocalizedString).toHaveBeenCalledWith(title);
-            expect(localizer.getLocalizedString).toHaveBeenCalledWith(
+            expect(localizer.getLocalizedString).to.have.been.calledWith(title);
+            expect(localizer.getLocalizedString).to.have.been.calledWith(
                 description
             );
         });
@@ -148,8 +160,8 @@ describe('mapper', function () {
         const excludeFromChangeEvents = ['file', 'checkbox', 'array'];
         if (schema && !excludeFromChangeEvents.includes(type)) {
             const model = util.defaultForSchema(schema);
-            test(`${type} processes change events`, async function () {
-                let newModel = jest.fn();
+            it(`${type} processes change events`, async function() {
+                let newModel = sinon.fake();
                 let onChange = (event, nextModel) => newModel(nextModel);
                 let { container } = render(
                     <SchemaForm
@@ -164,15 +176,15 @@ describe('mapper', function () {
                 let inputs = container.querySelectorAll(
                     'input, select, textarea'
                 );
-                expect(inputs.length).toBeGreaterThan(0);
+                expect(inputs.length).to.be.greaterThan(0);
 
                 for (let input of inputs) {
                     const value = util.randomForSchema(schema);
                     fireEvent.change(input, {
                         target: { value },
                     });
-                    expect(newModel).toHaveBeenCalledWith(value);
-                    newModel.mockClear();
+                    expect(newModel).to.have.been.calledWith(value);
+                    newModel.resetHistory();
                 }
             });
         }

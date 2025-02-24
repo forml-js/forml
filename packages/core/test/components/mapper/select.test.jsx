@@ -4,7 +4,7 @@ import * as barebones from '@forml/decorator-barebones';
 
 config.disabled = true;
 
-import { SchemaForm } from '../../../src';
+import { SchemaForm } from '#core';
 import React from 'react';
 
 describe('select mapper', function () {

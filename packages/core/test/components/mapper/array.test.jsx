@@ -1,9 +1,8 @@
-import { render, fireEvent } from '@testing-library/react';
-
-import { SchemaForm, util, constants } from '../../../src';
-import React from 'react';
+import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { useValue } from '@forml/hooks';
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 
 describe('items container', function () {
     let schema;

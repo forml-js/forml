@@ -1,106 +1,115 @@
-import * as util from '../src/util';
+import { describe, it } from 'mocha';
+import * as chai from 'chai';
+import sinonChai from 'sinon-chai';
+import * as sinon from 'sinon';
+import * as util from '#util';
 
-expect.extend({
-    toBeString(received) {
-        return { pass: typeof received === 'string' };
-    },
-    toBeNumber(received) {
-        return { pass: typeof received === 'number' };
-    },
-    toBeBoolean(received) {
-        return { pass: typeof received === 'boolean' };
-    },
+chai.use(sinonChai);
+
+const { expect } = chai;
+
+describe('getPreferredType', function () {
+    it('accepts a single string', function () {
+        expect(util.getPreferredType('string')).to.equal('string');
+    });
+    it('accepts an array of strings', function () {
+        expect(util.getPreferredType(['string', 'null'])).to.equal('string');
+    });
+    it('returns the first non-null type', function () {
+        expect(util.getPreferredType(['string', 'null'])).to.equal('string');
+        expect(util.getPreferredType(['null', 'string'])).to.equal('string');
+    });
 });
 
-describe('getPreferredType', function() {
-    test('accepts a single string', function() {
-        expect(util.getPreferredType('string')).toBe('string');
-    });
-    test('accepts an array of strings', function() {
-        expect(util.getPreferredType(['string', 'null'])).toBe('string');
-    });
-    test('returns the first non-null type', function() {
-        expect(util.getPreferredType(['string', 'null'])).toBe('string');
-        expect(util.getPreferredType(['null', 'string'])).toBe('string');
-    });
-});
-describe('randomForSchema', function() {
-    describe('when given one type', function() {
-        test('returns an random value of the type', function() {
-            expect(util.randomForSchema({ type: 'null' })).toBeNull();
-            expect(util.randomForSchema({ type: 'string' })).toBeString();
-            expect(util.randomForSchema({ type: 'number' })).toBeNumber();
-            expect(util.randomForSchema({ type: 'integer' })).toBeNumber();
-            expect(util.randomForSchema({ type: 'boolean' })).toBeBoolean();
+describe('randomForSchema', function () {
+    describe('when given one type', function () {
+        it('returns an random value of the type', function () {
+            expect(util.randomForSchema({ type: 'null' })).to.equal(null);
+            expect(util.randomForSchema({ type: 'string' })).to.be.a('string');
+            expect(util.randomForSchema({ type: 'number' })).to.be.a('number');
+            expect(util.randomForSchema({ type: 'integer' })).to.be.a('number');
+            expect(util.randomForSchema({ type: 'boolean' })).to.be.a(
+                'boolean'
+            );
 
             const list = util.randomForSchema({
                 type: 'array',
                 items: { type: 'string' },
             });
-            expect(list).toBeInstanceOf(Array);
-            expect(list.length).toBe(1);
-            expect(list[0]).toBeString();
+            expect(list).to.be.an('array');
+            expect(list.length).to.equal(1);
+            expect(list[0]).to.be.a('string');
 
             const tuple = util.randomForSchema({
                 type: 'array',
                 items: [{ type: 'string' }],
             });
-            expect(tuple).toBeInstanceOf(Array);
-            expect(tuple.length).toBe(1);
-            expect(tuple[0]).toBeString();
+            expect(tuple).to.be.an('array');
+            expect(tuple.length).to.equal(1);
+            expect(tuple[0]).to.be.a('string');
 
             const empty = util.randomForSchema({ type: 'object' });
-            expect(empty).toBeInstanceOf(Object);
+            expect(empty).to.be.an('object');
 
             const populated = util.randomForSchema({
                 type: 'object',
                 properties: { test: { type: 'string' } },
             });
-            expect(populated).toBeInstanceOf(Object);
-            expect(populated.test).toBeString();
+            expect(populated).to.be.an('object');
+            expect(populated.test).to.be.a('string');
 
-            expect(util.randomForSchema({ type: 'unknown' })).toBeUndefined();
+            expect(util.randomForSchema({ type: 'unknown' })).to.be.undefined;
         });
     });
 });
-describe('defaultForSchema', function() {
-    test('returns the default value if specified in the schema', function() {
-        expect(util.defaultForSchema({ type: 'string', default: 'test' })).toBe('test');
-        expect(util.defaultForSchema({ type: 'boolean', default: true })).toBe(true);
-        expect(util.defaultForSchema({ type: 'boolean', default: false })).toBe(false);
-        expect(util.defaultForSchema({ type: 'number', default: 3 })).toBe(3);
-        expect(util.defaultForSchema({ type: 'number', default: 3.1 })).toBeCloseTo(3.1);
+describe('defaultForSchema', function () {
+    it('returns the default value if specified in the schema', function () {
+        expect(
+            util.defaultForSchema({ type: 'string', default: 'test' })
+        ).to.equal('test');
+        expect(
+            util.defaultForSchema({ type: 'boolean', default: true })
+        ).to.equal(true);
+        expect(
+            util.defaultForSchema({ type: 'boolean', default: false })
+        ).to.equal(false);
+        expect(util.defaultForSchema({ type: 'number', default: 3 })).to.equal(
+            3
+        );
+        expect(
+            util.defaultForSchema({ type: 'number', default: 3.1 })
+        ).to.equal(3.1);
     });
-    describe('when given one type', function() {
-        test('returns an empty value of the type', function() {
-            expect(util.defaultForSchema({ type: 'null' })).toBeNull();
-            expect(util.defaultForSchema({ type: 'string' })).toBe('');
-            expect(util.defaultForSchema({ type: 'number' })).toBe(0.0);
-            expect(util.defaultForSchema({ type: 'integer' })).toBe(0);
-            expect(util.defaultForSchema({ type: 'boolean' })).toBe(false);
+    describe('when given one type', function () {
+        it('returns an empty value of the type', function () {
+            expect(util.defaultForSchema({ type: 'null' })).to.be.null;
+            expect(util.defaultForSchema({ type: 'string' })).to.equal('');
+            expect(util.defaultForSchema({ type: 'number' })).to.equal(0.0);
+            expect(util.defaultForSchema({ type: 'integer' })).to.equal(0);
+            expect(util.defaultForSchema({ type: 'boolean' })).to.equal(false);
             expect(
                 util.defaultForSchema({
                     type: 'array',
                     items: { type: 'string' },
                 })
-            ).toMatchObject([]);
+            ).to.deep.equal([]);
             expect(
                 util.defaultForSchema({
                     type: 'array',
                     items: [{ type: 'string' }],
                 })
-            ).toMatchObject(['']);
-            expect(util.defaultForSchema({ type: 'object' })).toMatchObject({});
+            ).to.deep.equal(['']);
+            expect(util.defaultForSchema({ type: 'object' })).to.deep.equal({});
             expect(
                 util.defaultForSchema({
                     type: 'object',
                     properties: {
                         test: {
                             type: 'string',
-                        }
+                        },
                     },
                 })
-            ).toMatchObject({});
+            ).to.deep.equal({});
             expect(
                 util.defaultForSchema({
                     type: 'object',
@@ -108,27 +117,27 @@ describe('defaultForSchema', function() {
                     properties: {
                         test: {
                             type: 'string',
-                        }
+                        },
                     },
                 })
-            ).toMatchObject({ test: '' });
-            expect(util.defaultForSchema({ type: 'unknown' })).toBeUndefined();
+            ).to.deep.equal({ test: '' });
+            expect(util.defaultForSchema({ type: 'unknown' })).to.be.undefined;
         });
     });
-    describe('when given many types', function() {
-        test('returns an empty value of the preferredType', function() {
-            expect(util.defaultForSchema({ type: ['string', 'integer'] })).toBe(
-                ''
-            );
-            expect(util.defaultForSchema({ type: ['number', 'string'] })).toBe(
-                0.0
-            );
-            expect(util.defaultForSchema({ type: ['integer', 'string'] })).toBe(
-                0
-            );
-            expect(util.defaultForSchema({ type: ['boolean', 'number'] })).toBe(
-                false
-            );
+    describe('when given many types', function () {
+        it('returns an empty value of the preferredType', function () {
+            expect(
+                util.defaultForSchema({ type: ['string', 'integer'] })
+            ).to.equal('');
+            expect(
+                util.defaultForSchema({ type: ['number', 'string'] })
+            ).to.equal(0.0);
+            expect(
+                util.defaultForSchema({ type: ['integer', 'string'] })
+            ).to.equal(0);
+            expect(
+                util.defaultForSchema({ type: ['boolean', 'number'] })
+            ).to.equal(false);
             expect(
                 util.defaultForSchema({
                     type: ['array', 'object'],
@@ -137,7 +146,7 @@ describe('defaultForSchema', function() {
                         test: { type: 'string' },
                     },
                 })
-            ).toMatchObject([]);
+            ).to.deep.equal([]);
             expect(
                 util.defaultForSchema({
                     type: ['array', 'object'],
@@ -146,169 +155,200 @@ describe('defaultForSchema', function() {
                         test: { type: 'string' },
                     },
                 })
-            ).toMatchObject(['']);
+            ).to.deep.equal(['']);
             expect(
                 util.defaultForSchema({ type: ['object', 'array'] })
-            ).toMatchObject({});
-            expect(
-                util.defaultForSchema({ type: ['unknown', 'integer'] })
-            ).toBeUndefined();
+            ).to.deep.equal({});
+            expect(util.defaultForSchema({ type: ['unknown', 'integer'] })).to
+                .be.undefined;
         });
     });
 });
-describe('assertType', function() {
-    test('nullifies falsey values if allowed', function() {
-        expect(util.assertType({ type: ['integer', 'null'] }, 0)).toBeNull();
-        expect(util.assertType({ type: ['number', 'null'] }, 0.0)).toBeNull();
-        expect(util.assertType({ type: ['string', 'null'] }, '')).toBeNull();
-        expect(
-            util.assertType({ type: ['boolean', 'null'] }, false)
-        ).toBeNull();
+describe('assertType', function () {
+    it('nullifies falsey values if allowed', function () {
+        expect(util.assertType({ type: ['integer', 'null'] }, 0)).to.be.null;
+        expect(util.assertType({ type: ['number', 'null'] }, 0.0)).to.be.null;
+        expect(util.assertType({ type: ['string', 'null'] }, '')).to.be.null;
+        expect(util.assertType({ type: ['boolean', 'null'] }, false)).to.be
+            .null;
     });
-    test('accepts values that match their type', function() {
-        expect(util.assertType({ type: 'number' }, 2.5)).toBe(2.5);
-        expect(util.assertType({ type: 'integer' }, 2)).toBe(2);
-        expect(util.assertType({ type: 'string' }, 'test')).toBe('test');
-        expect(util.assertType({ type: 'boolean' }, true)).toBe(true);
-        expect(util.assertType({ type: 'boolean' }, false)).toBe(false);
+    it('accepts values that match their type', function () {
+        expect(util.assertType({ type: 'number' }, 2.5)).to.equal(2.5);
+        expect(util.assertType({ type: 'integer' }, 2)).to.equal(2);
+        expect(util.assertType({ type: 'string' }, 'test')).to.equal('test');
+        expect(util.assertType({ type: 'boolean' }, true)).to.equal(true);
+        expect(util.assertType({ type: 'boolean' }, false)).to.equal(false);
 
         const array = [1, 2, 3];
-        expect(util.assertType({ type: 'array' }, array)).toBe(array);
+        expect(util.assertType({ type: 'array' }, array)).to.equal(array);
 
         const object = { a: 1, b: 2, c: 3 };
-        expect(util.assertType({ type: 'object' }, object)).toBe(object);
+        expect(util.assertType({ type: 'object' }, object)).to.equal(object);
     });
-    describe('when there is a default value', function() {
-        test('it allows the default to be overwritten', function() {
-            expect(util.assertType({
-                type: 'integer',
-                default: 1
-            }, 2)).toBe(2);
-            expect(util.assertType({
-                type: 'number',
-                default: 1.1
-            }, 3.1)).toBeCloseTo(3.1);
-            expect(util.assertType({
-                type: 'string',
-                default: 'test'
-            }, 'testb')).toBe('testb');
-            expect(util.assertType({
-                type: 'boolean',
-                default: true,
-            }, false)).toBe(false);
-            expect(util.assertType({
-                type: 'boolean',
-                default: false,
-            }, true)).toBe(true);
+    describe('when there is a default value', function () {
+        it('it allows the default to be overwritten', function () {
+            expect(
+                util.assertType(
+                    {
+                        type: 'integer',
+                        default: 1,
+                    },
+                    2
+                )
+            ).to.equal(2);
+            expect(
+                util.assertType(
+                    {
+                        type: 'number',
+                        default: 1.1,
+                    },
+                    3.1
+                )
+            ).to.equal(3.1);
+            expect(
+                util.assertType(
+                    {
+                        type: 'string',
+                        default: 'test',
+                    },
+                    'testb'
+                )
+            ).to.equal('testb');
+            expect(
+                util.assertType(
+                    {
+                        type: 'boolean',
+                        default: true,
+                    },
+                    false
+                )
+            ).to.equal(false);
+            expect(
+                util.assertType(
+                    {
+                        type: 'boolean',
+                        default: false,
+                    },
+                    true
+                )
+            ).to.equal(true);
         });
-    })
-    describe('when the preferred type is an integer', function() {
-        describe('when the type is allowed', function() {
-            test('allows the value', function() {
+    });
+    describe('when the preferred type is an integer', function () {
+        describe('when the type is allowed', function () {
+            it('allows the value', function () {
                 expect(
                     util.assertType({ type: ['integer', 'string'] }, 'test')
-                ).toBe('test');
+                ).to.equal('test');
                 expect(
                     util.assertType({ type: ['integer', 'boolean'] }, false)
-                ).toBe(false);
+                ).to.equal(false);
             });
         });
-        describe('when the type is a number', function() {
-            test('converts it to an integer', function() {
-                expect(util.assertType({ type: 'integer' }, 1.5)).toBe(1);
-                expect(util.assertType({ type: 'number' }, 1.5)).toBe(1.5);
+        describe('when the type is a number', function () {
+            it('converts it to an integer', function () {
+                expect(util.assertType({ type: 'integer' }, 1.5)).to.equal(1);
+                expect(util.assertType({ type: 'number' }, 1.5)).to.equal(1.5);
             });
         });
-        describe('when the type is a string', function() {
-            describe('and the value is empty', function() {
-                test('allows the value to pass', function() {
-                    expect(util.assertType({ type: 'integer' }, '')).toBe('');
+        describe('when the type is a string', function () {
+            describe('and the value is empty', function () {
+                it('allows the value to pass', function () {
+                    expect(util.assertType({ type: 'integer' }, '')).to.equal(
+                        ''
+                    );
                 });
 
                 // This covers a distinct form behavior: deleting the last
                 // remaining character.
-                test('does not return defaultForSchema', function() {
-                    expect(util.assertType(
-                        {
-                            type: 'integer',
-                            default: 1
-                        },
-                        ''
-                    )).toBe('');
-                })
-            })
-            test('allows the minus character', function() {
-                expect(util.assertType({ type: 'integer' }, '-')).toBe('-');
+                it('does not return defaultForSchema', function () {
+                    expect(
+                        util.assertType(
+                            {
+                                type: 'integer',
+                                default: 1,
+                            },
+                            ''
+                        )
+                    ).to.equal('');
+                });
             });
-            test('othewise parses an integer', function() {
-                expect(util.assertType({ type: 'integer' }, '1.5')).toBe(1);
-                expect(util.assertType({ type: 'integer' }, '2')).toBe(2);
+            it('allows the minus character', function () {
+                expect(util.assertType({ type: 'integer' }, '-')).to.equal('-');
+            });
+            it('othewise parses an integer', function () {
+                expect(util.assertType({ type: 'integer' }, '1.5')).to.equal(1);
+                expect(util.assertType({ type: 'integer' }, '2')).to.equal(2);
             });
         });
-        describe('when the type is not allowed', function() {
-            test('returns defaultForSchema', function() {
-                expect(util.assertType({ type: 'integer' }, null)).toBe(0);
+        describe('when the type is not allowed', function () {
+            it('returns defaultForSchema', function () {
+                expect(util.assertType({ type: 'integer' }, null)).to.equal(0);
             });
         });
     });
-    describe('when the preferred type is a number', function() {
-        describe('when the type is allowed', function() {
-            test('allows the value', function() {
+    describe('when the preferred type is a number', function () {
+        describe('when the type is allowed', function () {
+            it('allows the value', function () {
                 expect(
                     util.assertType({ type: ['number', 'string'] }, 'test')
-                ).toBe('test');
+                ).to.equal('test');
                 expect(
                     util.assertType({ type: ['number', 'boolean'] }, false)
-                ).toBe(false);
+                ).to.equal(false);
             });
         });
-        describe('when the type is a string', function() {
-            test('allows it if empty', function() {
-                expect(util.assertType({ type: 'number' }, '')).toBe('');
+        describe('when the type is a string', function () {
+            it('allows it if empty', function () {
+                expect(util.assertType({ type: 'number' }, '')).to.equal('');
             });
-            test('allows the minus character', function() {
-                expect(util.assertType({ type: 'number' }, '-')).toBe('-');
+            it('allows the minus character', function () {
+                expect(util.assertType({ type: 'number' }, '-')).to.equal('-');
             });
-            test('parses a float', function() {
-                expect(util.assertType({ type: 'number' }, '1.5')).toBe(1.5);
-                expect(util.assertType({ type: 'number' }, '2')).toBe(2);
-            });
-        });
-        describe('when the type is not allowed', function() {
-            test('returns defaultForSchema', function() {
-                expect(util.assertType({ type: 'number' }, null)).toBe(0.0);
+            it('parses a float', function () {
+                expect(util.assertType({ type: 'number' }, '1.5')).to.equal(
+                    1.5
+                );
+                expect(util.assertType({ type: 'number' }, '2')).to.equal(2);
             });
         });
-    });
-    describe('when the preferred type is a string', function() {
-        describe('when the type is a number', function() {
-            test('converts the number to a string', function() {
-                expect(util.assertType({ type: 'string' }, 1.5)).toBe('1.5');
+        describe('when the type is not allowed', function () {
+            it('returns defaultForSchema', function () {
+                expect(util.assertType({ type: 'number' }, null)).to.equal(0.0);
             });
         });
     });
-    describe('when the type does not match the preferred type', function() {
-        describe('when the value is falsey', function() {
-            test('returns defaultForSchema', function() {
-                expect(util.assertType({ type: 'string' }, null)).toBe('');
+    describe('when the preferred type is a string', function () {
+        describe('when the type is a number', function () {
+            it('converts the number to a string', function () {
+                expect(util.assertType({ type: 'string' }, 1.5)).to.equal(
+                    '1.5'
+                );
             });
         });
     });
-    describe('when the type is allowed', function() {
-        test('returns the value unchanged', function() {
-            expect(util.assertType({ type: ['string', 'boolean'] }, true)).toBe(
-                true
-            );
+    describe('when the type does not match the preferred type', function () {
+        describe('when the value is falsey', function () {
+            it('returns defaultForSchema', function () {
+                expect(util.assertType({ type: 'string' }, null)).to.equal('');
+            });
         });
     });
-    describe('when the type is not allowed', function() {
-        test('returns defaultForSchema', function() {
-            expect(util.assertType({ type: 'string' }, true)).toBe('');
+    describe('when the type is allowed', function () {
+        it('returns the value unchanged', function () {
+            expect(
+                util.assertType({ type: ['string', 'boolean'] }, true)
+            ).to.equal(true);
+        });
+    });
+    describe('when the type is not allowed', function () {
+        it('returns defaultForSchema', function () {
+            expect(util.assertType({ type: 'string' }, true)).to.equal('');
         });
     });
 });
-describe('findSchema', function() {
-    test('iterates over a schema following keys', function() {
+describe('findSchema', function () {
+    it('iterates over a schema following keys', function () {
         const schema = {
             type: 'object',
             properties: {
@@ -320,17 +360,17 @@ describe('findSchema', function() {
             },
         };
 
-        expect(util.findSchema([], schema)).toBe(schema);
-        expect(util.findSchema(['test'], schema)).toMatchObject({
+        expect(util.findSchema([], schema)).to.equal(schema);
+        expect(util.findSchema(['test'], schema)).to.deep.equal({
             type: 'string',
         });
-        expect(util.findSchema(['tuple', 1], schema)).toMatchObject({
+        expect(util.findSchema(['tuple', 1], schema)).to.deep.equal({
             type: 'number',
         });
     });
 });
-describe('valueGetter', function() {
-    test('traverses objects to retrieve a value', function() {
+describe('valueGetter', function () {
+    it('traverses objects to retrieve a value', function () {
         const get = util.valueGetter(
             { test: { property: 'a' } },
             {
@@ -346,11 +386,11 @@ describe('valueGetter', function() {
             }
         );
 
-        expect(get([])).toMatchObject({ test: { property: 'a' } });
-        expect(get('test')).toMatchObject({ property: 'a' });
-        expect(get(['test', 'property'])).toBe('a');
+        expect(get([])).to.deep.equal({ test: { property: 'a' } });
+        expect(get('test')).to.deep.equal({ property: 'a' });
+        expect(get(['test', 'property'])).to.equal('a');
     });
-    test('traverses arrays to retrieve a value', function() {
+    it('traverses arrays to retrieve a value', function () {
         const get = util.valueGetter([null, [3]], {
             type: 'array',
             items: [
@@ -359,19 +399,19 @@ describe('valueGetter', function() {
             ],
         });
 
-        expect(get([])).toMatchObject([null, [3]]);
-        expect(get(0)).toBeNull();
-        expect(get([1, 0])).toBe(3);
+        expect(get([])).to.deep.equal([null, [3]]);
+        expect(get(0)).to.be.null;
+        expect(get([1, 0])).to.equal(3);
     });
-    describe('when encountering undefined', function() {
-        test('treats empty strings like numbers', function() {
+    describe('when encountering undefined', function () {
+        it('treats empty strings like numbers', function () {
             const get = util.valueGetter('', {
-                type: 'integer'
+                type: 'integer',
             });
 
-            expect(get([])).toBe('');
-        })
-        test('uses defaultForSchema', function() {
+            expect(get([])).to.equal('');
+        });
+        it('uses defaultForSchema', function () {
             const get = util.valueGetter(undefined, {
                 type: 'object',
                 required: ['test'],
@@ -386,13 +426,13 @@ describe('valueGetter', function() {
                 },
             });
 
-            expect(get(['test', 'property'])).toBe('a');
-            expect(get([])).toMatchObject({ test: { property: 'a' } });
+            expect(get(['test', 'property'])).to.equal('a');
+            expect(get([])).to.deep.equal({ test: { property: 'a' } });
         });
-    })
+    });
 });
-describe('valueSetter', function() {
-    test('traverses objects to set a value', function() {
+describe('valueSetter', function () {
+    it('traverses objects to set a value', function () {
         const set = util.valueSetter(
             { test: { property: 'a' } },
             {
@@ -408,11 +448,11 @@ describe('valueSetter', function() {
             }
         );
 
-        expect(set(['test', 'property'], 'b')).toMatchObject({
+        expect(set(['test', 'property'], 'b')).to.deep.equal({
             test: { property: 'b' },
         });
     });
-    test('traverses arrays to set a value', function() {
+    it('traverses arrays to set a value', function () {
         const set = util.valueSetter([null, [1]], {
             type: 'array',
             items: [
@@ -421,9 +461,9 @@ describe('valueSetter', function() {
             ],
         });
 
-        expect(set([1, 1], 2)).toMatchObject([null, [1, 2]]);
+        expect(set([1, 1], 2)).to.deep.equal([null, [1, 2]]);
     });
-    test('accepts a string or array of strings for a key', function() {
+    it('accepts a string or array of strings for a key', function () {
         const set = util.valueSetter(
             {},
             {
@@ -433,10 +473,10 @@ describe('valueSetter', function() {
                 },
             }
         );
-        expect(set('test', 'a')).toMatchObject({ test: 'a' });
-        expect(set(['test'], 'b')).toMatchObject({ test: 'b' });
+        expect(set('test', 'a')).to.deep.equal({ test: 'a' });
+        expect(set(['test'], 'b')).to.deep.equal({ test: 'b' });
     });
-    test('uses defaultForSchema when traversing undefined trees', function() {
+    it('uses defaultForSchema when traversing undefined trees', function () {
         const set = util.valueSetter(undefined, {
             type: 'object',
             properties: {
@@ -449,20 +489,20 @@ describe('valueSetter', function() {
             },
         });
 
-        expect(set(['test', 'property'], 'a')).toMatchObject({
+        expect(set(['test', 'property'], 'a')).to.deep.equal({
             test: { property: 'a' },
         });
     });
-    test('respects number parsing rules regarding empty strings', function() {
+    it('respects number parsing rules regarding empty strings', function () {
         const set = util.valueSetter(750, {
             type: 'integer',
-            default: 750
+            default: 750,
         });
 
-        expect(set([], '')).toBe('');
-        expect(set([], '0')).toBe(0);
+        expect(set([], '')).to.equal('');
+        expect(set([], '0')).to.equal(0);
     });
-    test('pads arrays with defaultForSchema when traversing to an index > length', function() {
+    it('pads arrays with defaultForSchema when traversing to an index > length', function () {
         const set = util.valueSetter([null, []], {
             type: 'array',
             items: [
@@ -471,91 +511,97 @@ describe('valueSetter', function() {
             ],
         });
 
-        expect(set([1, 2], 1)).toMatchObject([null, [0, 0, 1]]);
+        expect(set([1, 2], 1)).to.deep.equal([null, [0, 0, 1]]);
     });
-    test('overwrites defaulted booleans when required', function() {
+    it('overwrites defaulted booleans when required', function () {
         const setFalse = util.valueSetter(true, {
             type: 'boolean',
-            default: true
+            default: true,
         });
-        expect(setFalse([], false)).toBe(false);
+        expect(setFalse([], false)).to.equal(false);
 
         const setTrue = util.valueSetter(false, {
             type: 'boolean',
-            default: false
+            default: false,
         });
-        expect(setTrue([], true)).toBe(true);
+        expect(setTrue([], true)).to.equal(true);
 
-        const setObjectFalse = util.valueSetter({}, {
-            type: 'object',
-            properties: {
-                bool: { type: 'boolean', default: true }
+        const setObjectFalse = util.valueSetter(
+            {},
+            {
+                type: 'object',
+                properties: {
+                    bool: { type: 'boolean', default: true },
+                },
             }
-        })
-        expect(setObjectFalse(['bool'], false)).toMatchObject({
-            bool: false
+        );
+        expect(setObjectFalse(['bool'], false)).to.deep.equal({
+            bool: false,
         });
 
-        const setObjectTrue = util.valueSetter({}, {
-            type: 'object',
-            properties: {
-                bool: { type: 'boolean', default: false }
+        const setObjectTrue = util.valueSetter(
+            {},
+            {
+                type: 'object',
+                properties: {
+                    bool: { type: 'boolean', default: false },
+                },
             }
-        })
-        expect(setObjectTrue(['bool'], true)).toMatchObject({
-            bool: true
+        );
+        expect(setObjectTrue(['bool'], true)).to.deep.equal({
+            bool: true,
         });
-    })
+    });
 });
-describe('traverseForm', function() {
-    test('takes a single form object or an array', function() {
+describe('traverseForm', function () {
+    it('takes a single form object or an array', function () {
         const forms = ['test', 'property'];
         const form = 'foo';
-        const callback = jest.fn();
+        const callback = sinon.fake();
 
         util.traverseForm(forms, callback);
         util.traverseForm(form, callback);
 
-        expect(callback).toHaveBeenCalledWith('test');
-        expect(callback).toHaveBeenCalledWith('property');
-        expect(callback).toHaveBeenCalledWith('foo');
+        expect(callback).to.have.been.calledWith('test');
+        expect(callback).to.have.been.calledWith('property');
+        expect(callback).to.have.been.calledWith('foo');
     });
-    test('visits nested children', function() {
+    it('visits nested children', function () {
         const nested = { key: 'property', items: ['foo'] };
         const forms = ['test', nested];
-        const callback = jest.fn();
+        const callback = sinon.fake();
 
         util.traverseForm(forms, callback);
 
-        expect(callback).toHaveBeenCalledWith('test');
-        expect(callback).toHaveBeenCalledWith(nested);
-        expect(callback).toHaveBeenCalledWith('foo');
+        expect(callback).to.have.been.calledWith('test');
+        expect(callback).to.have.been.calledWith(nested);
+        expect(callback).to.have.been.calledWith('foo');
     });
 });
-describe('clone', function() {
-    test('returns pass-by-copy values unmodified', function() {
-        expect(util.clone('test')).toBe('test');
-        expect(util.clone(1)).toBe(1);
+describe('clone', function () {
+    it('returns pass-by-copy values unmodified', function () {
+        expect(util.clone('test')).to.equal('test');
+        expect(util.clone(1)).to.equal(1);
     });
-    test('returns copies of pass-by-reference values', function() {
+    it('returns copies of pass-by-reference values', function () {
         const array = [1, 2, 3];
         const arrayClone = util.clone(array);
-        expect(arrayClone).toMatchObject(array);
-        expect(arrayClone).not.toBe(array);
+        expect(arrayClone).to.deep.equal(array);
+        expect(arrayClone).not.to.equal(array);
 
         const object = { a: 1, b: 2, c: 3 };
         const objectClone = util.clone(object);
-        expect(objectClone).toMatchObject(object);
-        expect(objectClone).not.toBe(object);
+        expect(objectClone).to.deep.equal(object);
+        expect(objectClone).not.to.equal(object);
     });
-    test('copies are deep copies', function() {
+    it('copies are deep copies', function () {
         const array = [1, 2, 3];
         const object = { array };
         const clone = util.clone(object);
 
-        expect(clone).toMatchObject(object);
-        expect(clone).not.toBe(object);
-        expect(clone.array).toMatchObject(array);
-        expect(clone.array).not.toBe(array);
+        expect(clone).to.deep.equal(object);
+        expect(clone).not.to.equal(object);
+        expect(clone.array).to.deep.equal(array);
+        expect(clone.array).not.to.equal(array);
     });
 });

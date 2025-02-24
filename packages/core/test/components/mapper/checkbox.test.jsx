@@ -1,20 +1,27 @@
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import * as chai from 'chai'
+import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import * as barebones from '@forml/decorator-barebones';
+import { render } from '@testing-library/react';
 
-import { SchemaForm, getLocalizer, util } from '../../../src';
+import { SchemaForm, getLocalizer, util } from '#core';
 import { createElement as h } from 'react';
 
-describe('checkbox mapper', function () {
+chai.use(sinonChai);
+const { expect } = chai;
+
+describe('checkbox mapper', function() {
     let schema, form, model, onChange, localizer;
 
-    beforeEach(function () {
+    beforeEach(function() {
         schema = { type: 'boolean' };
         form = [{ type: 'checkbox', key: [] }];
         model = util.defaultForSchema(schema);
         onChange = jest.fn((event, nextModel) => (model = nextModel));
     });
 
-    test('renders itself', function () {
+    test('renders itself', function() {
         const { container } = render(
             h(SchemaForm, {
                 model,
@@ -30,7 +37,7 @@ describe('checkbox mapper', function () {
         ).not.toBeNull();
     });
 
-    test('uses localizer for title and description', function () {
+    test('uses localizer for title and description', function() {
         const form = [
             {
                 type: 'checkbox',

@@ -1,23 +1,25 @@
-import { ARRAY_PLACEHOLDER } from '../src/constants';
-import * as rules from '../src/rules';
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import { ARRAY_PLACEHOLDER } from '#constants';
+import * as rules from '#rules';
 
 describe('enumToTitles', function () {
-    test('stringifies values to create titles', function () {
+    it('stringifies values to create titles', function () {
         expect(
             rules.enumToTitles(['a', 1, undefined, true, { test: 'b' }])
-        ).toMatchObject(['a', '1', 'undefined', 'true', '{"test":"b"}']);
+        ).to.deep.equal(['a', '1', 'undefined', 'true', '{"test":"b"}']);
     });
 });
 
 describe('test', function () {
     const options = { path: [], lookup: {} };
     describe('when the preferred type is object', function () {
-        test('chooses type fieldset', function () {
+        it('chooses type fieldset', function () {
             const schema = { type: 'object' };
             const form = { type: 'fieldset' };
-            expect(rules.test(schema, options)).toMatchObject(form);
+            expect(rules.test(schema, options)).to.deep.include(form);
         });
-        test('creates child items for its properties', function () {
+        it('creates child items for its properties', function () {
             const schema = {
                 type: 'object',
                 properties: {
@@ -27,9 +29,20 @@ describe('test', function () {
             };
             const form = {
                 type: 'fieldset',
-                items: [{ type: 'text' }, { type: 'number' }],
+                items: [
+                    {
+                        key: ['foo'],
+                        type: 'text',
+                        schema: schema.properties.foo,
+                    },
+                    {
+                        key: ['bar'],
+                        type: 'number',
+                        schema: schema.properties.bar,
+                    },
+                ],
             };
-            expect(rules.test(schema, options)).toMatchObject(form);
+            expect(rules.test(schema, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is array', function () {
@@ -40,16 +53,18 @@ describe('test', function () {
                 const enm = ['a', 'b', 'c'];
                 describe('when the schema requires uniqueItems', function () {
                     const uniqueItems = true;
-                    test('chooses type multiselect', function () {
+                    it('chooses type multiselect', function () {
                         const schema = {
                             type,
                             uniqueItems,
                             items: { ...items, enum: enm },
                         };
                         const form = { type: 'multiselect' };
-                        expect(rules.test(schema, options)).toMatchObject(form);
+                        expect(rules.test(schema, options)).to.deep.include(
+                            form
+                        );
                     });
-                    test("uses the schema's enumNames as titles", function () {
+                    it("uses the schema's enumNames as titles", function () {
                         const enumNames = ['A', 'B', 'C'];
                         const schema = {
                             type,
@@ -57,34 +72,44 @@ describe('test', function () {
                             items: { ...items, enum: enm, enumNames },
                         };
                         const form = { type: 'multiselect', titles: enumNames };
-                        expect(rules.test(schema, options)).toMatchObject(form);
+                        expect(rules.test(schema, options)).to.deep.include(
+                            form
+                        );
                     });
-                    test('adds titles if not provided', function () {
+                    it('adds titles if not provided', function () {
                         const schema = {
                             type,
                             uniqueItems,
                             items: { ...items, enum: enm },
                         };
                         const form = { type: 'multiselect', titles: enm };
-                        expect(rules.test(schema, options)).toMatchObject(form);
+                        expect(rules.test(schema, options)).to.deep.include(
+                            form
+                        );
                     });
                 });
             });
-            test('choose type array', function () {
+            it('choose type array', function () {
                 const schema = { type, items };
                 const form = {
                     type: 'array',
-                    items: [{ key: [ARRAY_PLACEHOLDER], type: 'text' }],
+                    items: [
+                        {
+                            key: [ARRAY_PLACEHOLDER],
+                            type: 'text',
+                            schema: schema.items,
+                        },
+                    ],
                 };
-                expect(rules.test(schema, options)).toMatchObject(form);
+                expect(rules.test(schema, options)).to.deep.include(form);
             });
         });
         describe('when the array is a tuple', function () {
             const items = [{ type: 'string' }, { type: 'integer' }];
-            test('chooses type tuple', function () {
+            it('chooses type tuple', function () {
                 const schema = { type, items };
                 const form = { type: 'tuple' };
-                expect(rules.test(schema, options)).toMatchObject(form);
+                expect(rules.test(schema, options)).to.deep.include(form);
             });
         });
     });
@@ -92,18 +117,18 @@ describe('test', function () {
         const match = { type: 'string', enum: ['a', 'b', 'c'] };
         const form = { type: 'select' };
         const titles = ['a', 'b', 'c'];
-        test('chooses type select', function () {
-            expect(rules.test(match, options)).toMatchObject(form);
+        it('chooses type select', function () {
+            expect(rules.test(match, options)).to.deep.include(form);
         });
-        test("uses the schema's enumNames", function () {
+        it("uses the schema's enumNames", function () {
             const enumNames = ['A', 'B', 'C'];
             const schema = { ...match, enumNames };
             const matchForm = { key: [], type: 'select', titles: enumNames };
 
-            expect(rules.test(schema, options)).toMatchObject(matchForm);
+            expect(rules.test(schema, options)).to.deep.include(matchForm);
         });
-        test('includes titles', function () {
-            expect(rules.test(match, options)).toMatchObject({
+        it('includes titles', function () {
+            expect(rules.test(match, options)).to.deep.include({
                 ...form,
                 titles,
             });
@@ -116,8 +141,8 @@ describe('test', function () {
                 key: [],
                 type: 'date',
             };
-            test('chooses type date', function () {
-                expect(rules.test(match, options)).toMatchObject(form);
+            it('chooses type date', function () {
+                expect(rules.test(match, options)).to.deep.include(form);
             });
         });
         describe('when the format is date-time', function () {
@@ -126,48 +151,48 @@ describe('test', function () {
                 type: 'datetime',
                 key: [],
             };
-            test('chooses type datetime', function () {
-                expect(rules.test(match, options)).toMatchObject(form);
+            it('chooses type datetime', function () {
+                expect(rules.test(match, options)).to.deep.include(form);
             });
         });
-        test('chooses type text', function () {
+        it('chooses type text', function () {
             const match = { type: 'string' };
             const form = { type: 'text' };
-            expect(rules.test(match, options)).toMatchObject(form);
+            expect(rules.test(match, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is boolean', function () {
-        test('chooses checkbox', function () {
+        it('chooses checkbox', function () {
             const match = { type: 'boolean' };
             const form = { type: 'checkbox' };
-            expect(rules.test(match, options)).toMatchObject(form);
+            expect(rules.test(match, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is integer', function () {
-        test('chooses type integer', function () {
+        it('chooses type integer', function () {
             const schema = { type: 'integer' };
             const form = { type: 'integer' };
-            expect(rules.test(schema, options)).toMatchObject(form);
+            expect(rules.test(schema, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is number', function () {
-        test('chooses type number', function () {
+        it('chooses type number', function () {
             const schema = { type: 'number' };
             const form = { type: 'number' };
-            expect(rules.test(schema, options)).toMatchObject(form);
+            expect(rules.test(schema, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is null', function () {
-        test('chooses type null', function () {
+        it('chooses type null', function () {
             const schema = { type: 'null' };
             const form = { type: 'null' };
-            expect(rules.test(schema, options)).toMatchObject(form);
+            expect(rules.test(schema, options)).to.deep.include(form);
         });
     });
     describe('when the preferred type is unrecognized', function () {
-        test('chooses no type', function () {
+        it('chooses no type', function () {
             const schema = { type: 'test' };
-            expect(rules.test(schema, options)).toBeUndefined();
+            expect(rules.test(schema, options)).to.be.undefined;
         });
     });
 });

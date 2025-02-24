@@ -1,7 +1,7 @@
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import { createElement as h } from 'react';
-import { SchemaForm, getLocalizer, util, decorators } from '../../../src';
+import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
+import { render } from '@testing-library/react';
+import { createElement as h } from 'react';
 
 describe('fieldset', function () {
     let schema, form, model, onChange, localizer, decorator;

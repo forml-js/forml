@@ -1,33 +1,33 @@
+import { describe, it } from 'mocha';
+import * as chai from 'chai';
 import ObjectPath from 'objectpath';
-import { merge, standardForm } from '../src/forms';
+import { merge, standardForm } from '#forms';
+
+const { expect } = chai;
 
 describe('merge', function () {
-    describe('requires', function () {
-        test('a schema', function () {
-            expect(merge(null)).toMatchObject([]);
-        });
-        test('a base form', function () {
-            expect(merge({ type: 'string' }, null)).toMatchObject([]);
-        });
+    it('requires a schema', function () {
+        expect(merge(null)).to.deep.equal([]);
     });
-    describe('ignores', function () {
-        test('undefined', function () {
-            const schema = { type: 'string' };
-            const form = ['', undefined];
-            expect(merge(schema, form)).toMatchObject([
-                {
-                    schema,
-                    type: 'text',
-                    key: [],
-                },
-            ]);
-        });
+    it('requires a base form', function () {
+        expect(merge({ type: 'string' }, null)).to.deep.equal([]);
+    });
+    it('ignores undefined', function () {
+        const schema = { type: 'string' };
+        const form = ['', undefined];
+        expect(merge(schema, form)).to.deep.equal([
+            {
+                schema,
+                type: 'text',
+                key: [],
+            },
+        ]);
     });
     describe('parses', function () {
-        test('an object', function () {
+        it('an object', function () {
             const schema = { type: 'string' };
             const type = 'text';
-            expect(merge(schema, [''])).toMatchObject([
+            expect(merge(schema, [''])).to.deep.equal([
                 {
                     key: [],
                     schema,
@@ -35,13 +35,15 @@ describe('merge', function () {
                 },
             ]);
         });
-        test('form generators', function () {
+        it('form generators', function () {
             const generator = function () {
                 return ['[]'];
             };
-            expect(merge({ type: 'string' }, [generator])[0]).toBe(generator);
+            expect(merge({ type: 'string' }, [generator])[0]).to.equal(
+                generator
+            );
         });
-        test('string keys', function () {
+        it('string keys', function () {
             const schema = {
                 type: 'object',
                 properties: {
@@ -54,7 +56,7 @@ describe('merge', function () {
             const form = ['foo.bar'];
             const type = 'text';
 
-            expect(merge(schema, form)).toMatchObject([
+            expect(merge(schema, form)).to.deep.equal([
                 {
                     key: ['foo', 'bar'],
                     schema: schema.properties.foo.properties.bar,
@@ -62,7 +64,7 @@ describe('merge', function () {
                 },
             ]);
         });
-        test('array keys', function () {
+        it('array keys', function () {
             const schema = {
                 type: 'object',
                 properties: {
@@ -75,7 +77,7 @@ describe('merge', function () {
             const form = [{ key: ['foo', 'bar'] }];
             const type = 'text';
 
-            expect(merge(schema, form)).toMatchObject([
+            expect(merge(schema, form)).to.deep.equal([
                 {
                     key: ['foo', 'bar'],
                     schema: schema.properties.foo.properties.bar,
@@ -84,7 +86,7 @@ describe('merge', function () {
             ]);
         });
         describe('child items', function () {
-            test('by merging them with the schema', function () {
+            it('by merging them with the schema', function () {
                 const schema = {
                     type: 'object',
                     properties: {
@@ -93,7 +95,7 @@ describe('merge', function () {
                     },
                 };
                 const form = [{ type: 'fieldset', items: ['foo', 'bar'] }];
-                expect(merge(schema, form)).toMatchObject([
+                expect(merge(schema, form)).to.deep.equal([
                     {
                         type: 'fieldset',
                         items: [
@@ -113,7 +115,7 @@ describe('merge', function () {
             });
         });
         describe('tabs', function () {
-            test('child items, merging them with schema', function () {
+            it('child items, merging them with schema', function () {
                 const schema = {
                     type: 'object',
                     properties: {
@@ -128,7 +130,7 @@ describe('merge', function () {
                     },
                 ];
 
-                expect(merge(schema, form)).toMatchObject([
+                expect(merge(schema, form)).to.deep.equal([
                     {
                         type: 'tabs',
                         tabs: [
@@ -162,10 +164,12 @@ describe('standardForm', function () {
     beforeEach(function () {
         options = { path: [], lookup: {} };
     });
-    test('tracks created forms', function () {
+    it('tracks created forms', function () {
         options.path = ['foo'];
         standardForm({}, options);
-        expect(options.lookup).toHaveProperty(ObjectPath.stringify(['foo']));
+        expect(options.lookup).to.have.own.property(
+            ObjectPath.stringify(['foo'])
+        );
     });
     describe('parses the schema', function () {
         describe('copying from the schema', function () {
@@ -178,27 +182,27 @@ describe('standardForm', function () {
             ];
 
             for (let attribute of attributes) {
-                test(attribute, function () {
+                it(attribute, function () {
                     expect(
                         standardForm({ [attribute]: 'test' }, options)
-                    ).toMatchObject({
+                    ).to.deep.include({
                         key: [],
                         [attribute]: 'test',
                     });
                 });
             }
 
-            test('readOnly as readonly', function () {
-                expect(standardForm({ readOnly: true }, options)).toMatchObject(
-                    {
-                        key: [],
-                        readonly: true,
-                    }
-                );
+            it('readOnly as readonly', function () {
+                expect(
+                    standardForm({ readOnly: true }, options)
+                ).to.deep.include({
+                    key: [],
+                    readonly: true,
+                });
             });
 
-            test('minimum with optional exclusiveMinimum', function () {
-                expect(standardForm({ minimum: 0 }, options)).toMatchObject({
+            it('minimum with optional exclusiveMinimum', function () {
+                expect(standardForm({ minimum: 0 }, options)).to.deep.include({
                     key: [],
                     minimum: 0,
                 });
@@ -207,14 +211,14 @@ describe('standardForm', function () {
                         { minimum: 0, exclusiveMinimum: true },
                         options
                     )
-                ).toMatchObject({
+                ).to.deep.include({
                     key: [],
                     minimum: 1,
                 });
             });
 
-            test('maximum with optional exclusiveMaximum', function () {
-                expect(standardForm({ maximum: 1 }, options)).toMatchObject({
+            it('maximum with optional exclusiveMaximum', function () {
+                expect(standardForm({ maximum: 1 }, options)).to.deep.include({
                     key: [],
                     maximum: 1,
                 });
@@ -223,7 +227,7 @@ describe('standardForm', function () {
                         { maximum: 1, exclusiveMaximum: true },
                         options
                     )
-                ).toMatchObject({
+                ).to.deep.include({
                     key: [],
                     maximum: 0,
                 });
@@ -234,16 +238,16 @@ describe('standardForm', function () {
             const attributes = ['required', 'readonly'];
 
             for (let attribute of attributes) {
-                test(attribute, function () {
+                it(attribute, function () {
                     expect(
                         standardForm({ [attribute]: true }, options)
-                    ).toMatchObject({
+                    ).to.deep.include({
                         key: [],
                         [attribute]: true,
                     });
                     expect(
                         standardForm({}, { ...options, [attribute]: true })
-                    ).toMatchObject({
+                    ).to.deep.include({
                         key: [],
                         [attribute]: true,
                     });
@@ -252,7 +256,7 @@ describe('standardForm', function () {
                             { [attribute]: true },
                             { ...options, [attribute]: false }
                         )
-                    ).toMatchObject({
+                    ).to.deep.include({
                         key: [],
                         [attribute]: true,
                     });
@@ -261,7 +265,7 @@ describe('standardForm', function () {
                             { [attribute]: false },
                             { ...options, [attribute]: true }
                         )
-                    ).toMatchObject({ key: [], [attribute]: false });
+                    ).to.deep.include({ key: [], [attribute]: false });
                 });
             }
         });
