@@ -135,22 +135,7 @@ export default function Container(props) {
                         )}
                         <ListItemText
                             key="title"
-                            primaryTypographyProps={useMemo(
-                                () => ({
-                                    variant: 'subtitle2',
-                                    color: 'textPrimary',
-                                    noWrap: true,
-                                }),
-                                []
-                            )}
                             primary={title}
-                            secondaryTypographyProps={useMemo(
-                                () => ({
-                                    variant: 'caption',
-                                    noWrap: true,
-                                }),
-                                []
-                            )}
                             secondary={description}
                         />
                     </TitleListItem>
