@@ -3,14 +3,18 @@
     "version": "2.0.0-next.10",
     "description": "A JSON Schema-based form generator powered by React",
     "main": "src/index.js",
-    "type": "module",
     "imports": {
-        "#constants": "./src/constants.js",
-        "#mapper": "./src/components/mapper/index.jsx",
         "#components/*": "./src/components/*",
+        "#constants": "./src/constants.js",
+        "#core": "./src/index.js",
         "#field": "./src/components/schema-field.jsx",
-        "#util": "./src/util.js",
-        "#types": "./src/types.js"
+        "#form": "./src/components/schema-form.jsx",
+        "#forms": "./src/forms.js",
+        "#localizer": "./src/localizer.jsx",
+        "#mapper": "./src/components/mapper/index.jsx",
+        "#rules": "./src/rules.js",
+        "#types": "./src/types.js",
+        "#util": "./src/util.js"
     },
     "scripts": {
         "lint": "eslint src/**/*.jsx",

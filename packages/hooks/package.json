@@ -2,7 +2,7 @@
     "name": "@forml/hooks",
     "version": "2.0.0-next.9",
     "description": "Hooks for use with @forml/core",
-    "main": "src/index.js",
+    "main": "src/index.jsx",
     "type": "module",
     "scripts": {
         "lint": "eslint src/**/*.jsx",
