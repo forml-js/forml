@@ -6,7 +6,7 @@ import { samples } from '../samples';
 export default function SelectExample(props) {
     const enm = useMemo(() => Object.keys(samples), [samples]);
     const titles = useMemo(
-        () => enm.map((k) => samples[k].schema.title),
+        () => enm.map((k) => `${samples[k].schema.title} (${k})`),
         [enm]
     );
 
