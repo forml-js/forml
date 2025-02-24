@@ -40,13 +40,11 @@ function ArrayComponent(props) {
     const array = useValue(form.key);
     const store = useRef(createArrayKeyStore(array)).current;
 
-    const Component = useMemo(() => NormalArrayContainer, [form.dragDrop]);
-
     return (
         <FormContext.Provider value={store}>
-            <Component {...props}>
+            <ArrayContainer {...props}>
                 <ArrayRanges form={form} onChange={onChange} />
-            </Component>
+            </ArrayContainer>
         </FormContext.Provider>
     );
 }
@@ -85,90 +83,41 @@ function ArrayRanges(props) {
     return <>{ranges}</>;
 }
 
-const DraggableArrayContainer = forwardRef(
-    function DraggableArrayContainer(props, ref) {
-        const { form } = props;
-        const actions = useActionsFor(form.key, useArrayFormActions());
-        const droppableId = useMemo(shortid, []);
-        const onDragEnd = useCallback(
-            function onDragEnd(result) {
-                if (!result.destination) {
-                    return;
-                } else if (result.destination.index === result.source.index) {
-                    return;
-                } else {
-                    const nextModel = actions.moveArray(
-                        result.source.index,
-                        result.destination.index
-                    );
-                    const event = new Event('change', { bubbles: true });
-                    props.onChange(event, nextModel);
-                }
-            },
-            [actions.moveArray]
-        );
-        const renderDraggableItems = useCallback(
-            (provided) => {
-                const injectRef = (e) => {
-                    provided.innerRef(e);
-                    if (ref) ref(e);
-                };
-                return (
-                    <NormalArrayContainer {...props} ref={injectRef}>
-                        {props.children}
-                        {provided.placeholder}
-                    </NormalArrayContainer>
-                );
-            },
-            [props]
-        );
+const ArrayContainer = forwardRef(function ArrayContainer(props, ref) {
+    const { form, onChange } = props;
+    const { readonly: disabled, titleFun } = form;
+    const deco = useDecorator();
+    const localizer = useLocalizer();
+    const actions = useActionsFor(form.key, useArrayFormActions());
+    const title = localizer.getLocalizedString(
+        form.titleFun ? form.titleFun() : form.title
+    );
+    const description = localizer.getLocalizedString(form.description);
+    const { error } = props;
 
-        return (
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId={droppableId}>
-                    {renderDraggableItems}
-                </Droppable>
-            </DragDropContext>
-        );
-    }
-);
-const NormalArrayContainer = forwardRef(
-    function NormalArrayContainer(props, ref) {
-        const { form, onChange } = props;
-        const { readonly: disabled, titleFun } = form;
-        const deco = useDecorator();
-        const localizer = useLocalizer();
-        const actions = useActionsFor(form.key, useArrayFormActions());
-        const title = localizer.getLocalizedString(
-            form.titleFun ? form.titleFun() : form.title
-        );
-        const description = localizer.getLocalizedString(form.description);
-        const { error } = props;
+    const addItem = useCallback(
+        (event) => {
+            const nextModel = actions.appendArray();
+            onChange(event, nextModel);
+        },
+        [actions.appendArray, form.key, onChange]
+    );
 
-        const addItem = useCallback(
-            (event) => {
-                const nextModel = actions.appendArray();
-                onChange(event, nextModel);
-            },
-            [actions.appendArray, form.key, onChange]
-        );
-
-        return (
-            <deco.Arrays.Items
-                className={form.htmlClass}
-                add={addItem}
-                title={title}
-                description={description}
-                error={error}
-                ref={ref}
-                disabled={disabled}
-                form={form}
-            >
-                {props.children}
-            </deco.Arrays.Items>
-        );
-    }
-);
+    return (
+        <deco.Arrays.Items
+            className={form.htmlClass}
+            add={addItem}
+            title={title}
+            description={description}
+            error={error}
+            ref={ref}
+            disabled={disabled}
+            form={form}
+        >
+            {props.children}
+        </deco.Arrays.Items>
+    );
+});
 
 export { ArrayComponent as Array, Item };
 export default ArrayComponent;

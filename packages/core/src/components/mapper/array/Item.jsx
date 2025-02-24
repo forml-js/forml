@@ -1,5 +1,4 @@
 import React, { forwardRef, useCallback, useMemo } from 'react';
-// import { Draggable } from 'react-beautiful-dnd';
 import { useDecorator, useLocalizer, useArrayActions } from '@forml/hooks';
 
 import { ARRAY_PLACEHOLDER } from '#constants';
@@ -8,10 +7,6 @@ import { SchemaField } from '#field';
 
 export const Item = forwardRef(function Item(props, ref) {
     const { form, parent, forms, index, disabled } = props;
-    const dragDrop = useMemo(
-        () => ('dragDrop' in form ? form.dragDrop : true),
-        [parent]
-    );
 
     const onChange = useCallback(
         (event, nextModel) => {
@@ -19,14 +14,6 @@ export const Item = forwardRef(function Item(props, ref) {
         },
         [props.onChange, index]
     );
-    const Component = useMemo(() => {
-        //if (dragDrop) {
-        //    return DraggableArrayItem;
-        //} else {
-        return NormalArrayItem;
-        //}
-    }, [dragDrop]);
-
     const fields = useMemo(() => {
         return forms.map((template, subFormIndex) => {
             if (!template) return;
@@ -49,24 +36,18 @@ export const Item = forwardRef(function Item(props, ref) {
     }, [forms, index, parent, onChange, disabled]);
 
     return (
-        <Component {...props} ref={ref}>
+        <ArrayItem {...props} ref={ref}>
             {fields}
-        </Component>
+        </ArrayItem>
     );
 });
 
 export default Item;
 
-const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
-    const { form, array, index, onChange, dragHandleProps, draggableProps } =
-        props;
+const ArrayItem = forwardRef(function ArrayItem(props, ref) {
+    const { form, index, onChange } = props;
     const { readonly: disabled } = form;
     const deco = useDecorator();
-    const localizer = useLocalizer();
-
-    const title = localizer.getLocalizedString(
-        form.titleFun ? form.titleFun() : form.title
-    );
 
     const arrayActions = useArrayActions(form.key);
     const actions = useMemo(
@@ -95,38 +76,13 @@ const NormalArrayItem = forwardRef(function NormalArrayItem(props, ref) {
     return (
         <deco.Arrays.Item
             disabled={disabled}
-            title={title}
             index={index}
             form={form}
-            dragHandleProps={dragHandleProps}
-            draggableProps={draggableProps}
             {...actions}
             ref={ref}
         >
             {props.children}
         </deco.Arrays.Item>
-    );
-});
-
-function DraggableItemFactory(props, ref) {
-    return function DraggableItem(provided) {
-        const injectRef = (e) => {
-            provided.innerRef(e);
-            if (ref) ref(e);
-        };
-        return (
-            <NormalArrayItem {...props} {...provided} ref={injectRef}>
-                {props.children}
-            </NormalArrayItem>
-        );
-    };
-}
-
-const DraggableArrayItem = forwardRef(function DraggableArrayItem(props, ref) {
-    return (
-        <Draggable draggableId={props.id} index={props.index}>
-            {DraggableItemFactory(props, ref)}
-        </Draggable>
     );
 });
 
