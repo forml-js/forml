@@ -1,7 +1,7 @@
 {
     "schema": {
         "type": "object",
-        "title": "Comment",
+        "title": "Simple Array Comment",
         "required": ["comments"],
         "properties": {
             "comments": {

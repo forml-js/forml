@@ -12,9 +12,11 @@ import React from 'react';
 
 import 'material-icons/iconfont/material-icons.css';
 
+Error.stackTraceLimit = Infinity;
+
 const theme = createTheme({
-    palette: {
-        mode: 'dark',
+    colorSchemes: {
+        dark: true,
     },
 });
 
@@ -46,14 +48,7 @@ const theme = createTheme({
 
 const log = debug('forml:example');
 
-async function loadPrism() {
-    await import('prismjs/components/prism-clike');
-    await import('prismjs/components/prism-javascript');
-}
-
 async function init() {
-    await loadPrism();
-
     const root = createRoot(document.getElementById('app'));
     root.render(
         <ThemeProvider theme={theme}>

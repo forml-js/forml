@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     resolve: {
@@ -44,11 +45,6 @@ module.exports = {
         rules: [
             {
                 test: /\.m?jsx?$/,
-                enforce: 'pre',
-                use: ['source-map-loader'],
-            },
-            {
-                test: /\.m?jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -57,9 +53,9 @@ module.exports = {
                     },
                 },
             },
-            { test: /\.css$/, type: 'asset/resource' },
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
             { test: /\.(eot|svg|ttf|woff|woff2)$/, type: 'asset/resource' },
         ],
     },
-    plugins: [],
+    plugins: [new MonacoEditorWebpackPlugin()],
 };

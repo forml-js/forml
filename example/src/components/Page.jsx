@@ -1,22 +1,43 @@
 import { util } from '@forml/core';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import useEditable from '../hooks/useEditable';
 import { getSample } from '../samples';
 import Editor from './Editor';
 import RenderExample from './RenderExample';
 import SelectDecorator from './SelectDecorator';
 import SelectExample from './SelectExample';
+import * as monaco from 'monaco-editor';
+import { loader } from '@monaco-editor/react';
+
+loader.config({ monaco });
+const loadingEditor = loader.init();
+
+function SectionHeader(props) {
+    return (
+        <Box
+            p={1}
+            bgcolor="primary.dark"
+            color="primary.contrastText"
+            textAlign="center"
+        >
+            <Typography variant="subtitle2">{props.children}</Typography>
+        </Box>
+    );
+}
 
 function Title(props) {
     if (props.title) {
-        return (
-            <Divider>
-                <Typography variant="caption">{props.title}</Typography>
-            </Divider>
-        );
+        return <SectionHeader>{props.title}</SectionHeader>;
     } else {
         return null;
     }
@@ -50,8 +71,6 @@ const maxiBoxOuterStyle = {
 const maxiBoxInnerStyle = {
     flex: '1 0 100%',
     overflowY: 'auto',
-    p: 1,
-    g: 1,
 };
 function MaxiBox(props) {
     return (
@@ -64,6 +83,7 @@ function MaxiBox(props) {
 
 export default function Page() {
     const pdfRef = useRef();
+    const [editorLoaded, setEditorLoaded] = useState(false);
     const [selected, setSelected] = useState('');
     const [localizer, setLocalizer] = useState(undefined);
     const [decorator, setDecorator] = useState('mui');
@@ -74,6 +94,10 @@ export default function Page() {
         return util.defaultForSchema(schema.value);
     }, [schema.value]);
     const model = useEditable(defaultModel);
+
+    useEffect(function () {
+        loadingEditor.then(() => setEditorLoaded(true));
+    }, []);
 
     const onChange = useCallback(
         async function onChange(event, example) {
@@ -117,10 +141,16 @@ export default function Page() {
     );
 
     const onModelChange = useCallback(
-        function onModelChange(event, ...args) {
-            model.setValue(args[0]);
+        function onModelChange(event, nextModel) {
+            model.setValue(nextModel);
         },
         [model.setValue]
+    );
+    const updateModelFromJSON = useCallback(
+        function updateModelFromJSON(...args) {
+            model.setJSON(args[1]);
+        },
+        [model.setJSON, model.setValue]
     );
     const onSchemaChange = useCallback(
         (e) => schema.setJSON(e.target.value),
@@ -131,11 +161,15 @@ export default function Page() {
         [form.setJSON]
     );
 
+    if (!editorLoaded) {
+        return <CircularProgress />;
+    }
+
     return (
         <Box
             display="grid"
             gridAutoFlow="column"
-            gridAutoColumns="4fr min-content 1fr"
+            gridAutoColumns="1fr min-content 3fr"
             height="fill-available"
             maxHeight="fill-available"
             overflow="hidden"
@@ -143,70 +177,7 @@ export default function Page() {
             <Box
                 display="grid"
                 gridAutoFlow="row"
-                height="fill-available"
-                gridAutoRows="2fr 1fr"
-                gap={1}
-                overflow="hidden"
-                key="primary-viewport"
-            >
-                <Box
-                    key="example"
-                    display="flex"
-                    flexDirection="column"
-                    overflow="hidden"
-                    minHeight={0}
-                >
-                    <Divider key="header">
-                        <Typography key="title" variant="caption">
-                            Rendered Example
-                        </Typography>
-                    </Divider>
-                    <Box
-                        overflow="auto"
-                        maxHeight="fill-available"
-                        p={1}
-                        display="flex"
-                        flexDirection="column"
-                        key="editor"
-                    >
-                        <RenderExample
-                            key={`render-${decorator}-${selected}`}
-                            schema={schema.value}
-                            form={forwardForm}
-                            model={model.value}
-                            onChange={onModelChange}
-                            wrapInDocument={selected != './kitchenSink.js'}
-                            mapper={mapper}
-                            localizer={localizer}
-                            decorator={decorator}
-                        />
-                    </Box>
-                </Box>
-                <Box
-                    key="model"
-                    display="flex"
-                    flexDirection="column"
-                    overflow="hidden"
-                >
-                    <Divider>
-                        <Typography key="title" variant="caption">
-                            Model
-                        </Typography>
-                    </Divider>
-                    <Box
-                        overflow="auto"
-                        maxHeight="fill-available"
-                        key="editor"
-                    >
-                        <Editor key="editor" value={model.json} />
-                    </Box>
-                </Box>
-            </Box>
-            <Divider orientation="vertical" />
-            <Box
-                display="grid"
-                gridAutoFlow="row"
-                gridAutoRows="min-content auto auto"
+                gridAutoRows="min-content auto auto auto"
                 overflow="hidden"
                 key="secondary-viewport"
             >
@@ -238,6 +209,53 @@ export default function Page() {
                         onChange={onFormChange}
                     />
                 </MaxiBox>
+                <MaxiBox key="model" title="Model">
+                    <Editor
+                        key="editor"
+                        onChange={updateModelFromJSON}
+                        value={model.json}
+                    />
+                </MaxiBox>
+            </Box>
+            <Divider orientation="vertical" />
+            <Box
+                display="grid"
+                gridAutoFlow="row"
+                height="fill-available"
+                gridAutoRows="2fr 1fr"
+                gap={1}
+                overflow="hidden"
+                key="primary-viewport"
+            >
+                <Box
+                    key="example"
+                    display="flex"
+                    flexDirection="column"
+                    overflow="hidden"
+                    minHeight={0}
+                >
+                    <SectionHeader key="header">Rendered Example</SectionHeader>
+                    <Box
+                        overflow="auto"
+                        maxHeight="fill-available"
+                        p={1}
+                        display="flex"
+                        flexDirection="column"
+                        key="editor"
+                    >
+                        <RenderExample
+                            key={`render-${decorator}-${selected}`}
+                            schema={schema.value}
+                            form={forwardForm}
+                            model={model.value}
+                            onChange={onModelChange}
+                            wrapInDocument={selected != './kitchenSink.js'}
+                            mapper={mapper}
+                            localizer={localizer}
+                            decorator={decorator}
+                        />
+                    </Box>
+                </Box>
             </Box>
         </Box>
     );

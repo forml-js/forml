@@ -1,33 +1,35 @@
 import React, { useCallback, useMemo } from 'react';
-import SimpleEditor from 'react-simple-code-editor';
-import Prism from 'prismjs';
+import MonacoEditor from '@monaco-editor/react';
+import { useMediaQuery } from '@mui/material';
 
 export default function Editor(props) {
-    const highlightFunction = useCallback((code) => {
-        return Prism.highlight(code, Prism.languages.javascript, 'javascript');
-    }, []);
-    const onValueChange = useCallback(
-        function onValueChange(value) {
+    const onChange = useCallback(
+        function onChange(value) {
             if (props.onChange) {
                 props.onChange({ target: { value } }, value);
             }
         },
         [props.onChange]
     );
-    const style = useMemo(
-        () => ({ fontFamily: 'Hack, monospace', fontSize: 12 }),
-        []
+
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const theme = useMemo(
+        () => (prefersDarkMode ? 'vs-dark' : 'vs'),
+        [prefersDarkMode]
     );
 
     if (!props.value) return null;
 
     return (
-        <SimpleEditor
+        <MonacoEditor
+            height="100%"
+            theme={theme}
+            language="json"
             value={props.value}
-            highlight={highlightFunction}
-            padding={10}
-            style={style}
-            onValueChange={onValueChange}
+            options={{
+                minimap: { enabled: false },
+            }}
+            onChange={onChange}
         />
     );
 }
