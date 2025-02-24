@@ -29,6 +29,7 @@ module.exports = {
             key: 'comments',
             add: 'New',
             disabled: true,
+            movementButtons: false,
             items: [{ key: 'comments[]', type: 'comment' }],
         },
     ],
