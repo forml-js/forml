@@ -1,6 +1,6 @@
-import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 import debug from 'debug';
 import React, { forwardRef, useMemo } from 'react';
+import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 
 const log = debug('forml:decorator-mui:arrays:item');
 
@@ -30,54 +30,38 @@ const Controls = styled('div')(({ theme }) => ({
         justifyContent: 'center',
     },
 }));
-const Spacer = styled('div')(({ theme }) => ({
-    flex: '1 0 auto',
-    width: 'fill-available',
-    borderBottom: `1px solid ${theme.palette?.divider}`,
+const DestroyButton = styled(Button)(({ divider, theme }) => ({
+    width: theme.spacing(6),
+    minWidth: theme.spacing(6),
+    marginTop: 'auto',
+    border: 0,
+    borderTop: divider ? `1px solid ${theme.palette?.divider}` : undefined,
 }));
 function OnlyDestroy(props) {
     const { onClick, disabled } = props;
     return (
-        <Button
+        <DestroyButton
             onClick={onClick}
             disabled={disabled}
             color="secondary"
             size="small"
-            sx={useMemo(
-                () => ({
-                    display: 'inline-flex !important',
-                    flexDirection: 'column',
-                    width: (theme) => theme.spacing(6),
-                    minWidth: (theme) => theme.spacing(6),
-                    border: 0,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }),
-                []
-            )}
         >
             <Icon>delete_forever</Icon>
-        </Button>
+        </DestroyButton>
     );
 }
 function Destroy(props) {
     const { onClick, disabled } = props;
     return (
-        <Button
+        <DestroyButton
             onClick={onClick}
             disabled={disabled}
             color="secondary"
             size="small"
-            sx={useMemo(
-                () => ({
-                    width: (theme) => theme.spacing(6),
-                    minWidth: (theme) => theme.spacing(6),
-                }),
-                []
-            )}
+            divider
         >
             <Icon>delete_forever</Icon>
-        </Button>
+        </DestroyButton>
     );
 }
 const MovementButton = styled(Button, {
@@ -168,7 +152,6 @@ function MovementButtons(props) {
                 >
                     <Icon>keyboard_arrow_down</Icon>
                 </MovementButton>
-                <Spacer />
             </>
         );
     } else {
