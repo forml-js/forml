@@ -1,22 +1,30 @@
-import { Box, Icon, List, ListItem, ListItemIcon, ListItemText, Paper } from '@mui/material';
+import {
+    Box,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+} from '@mui/material';
 import React, { useMemo } from 'react';
 
 /**
  * @component
  */
 function Root(props) {
-    return <List flexDirection="column" flexGrow={1} {...props} />
+    return <List flexDirection="column" flexGrow={1} {...props} />;
 }
 
 function Content(props) {
     const { disablePadding, layout, alignItems, ...forwardProps } = props;
     const gridLayout = useMemo(() => {
         if (layout === 'horizontal') {
-            return { gridAutoColumns: '1fr', gridAutoFlow: 'column' };
+            return { gridAutoColumns: 'auto', gridAutoFlow: 'column' };
         } else {
-            return { gridAutoRows: '1fr', gridAutoFlow: 'row' };
+            return { gridAutoRows: 'auto', gridAutoFlow: 'row' };
         }
-    }, [layout])
+    }, [layout]);
     return (
         <Box
             display="grid"
@@ -31,7 +39,13 @@ function Content(props) {
 
 function Surface(props) {
     const { disableMargin, ...forwardProps } = props;
-    return <Paper margin={disableMargin ? 0 : 1} {...forwardProps} />;
+    return (
+        <Paper
+            sx={{ flex: '1' }}
+            margin={disableMargin ? 0 : 1}
+            {...forwardProps}
+        />
+    );
 }
 
 function Title(props) {
