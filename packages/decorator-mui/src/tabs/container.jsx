@@ -1,8 +1,14 @@
-import { Box, Icon, List, ListItem, ListItemIcon, ListItemText, Paper, styled } from '@mui/material';
-import React, {
-    useMemo,
-    useRef
-} from 'react';
+import {
+    Box,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    styled,
+} from '@mui/material';
+import React, { useMemo, useRef } from 'react';
 
 const Root = styled(Paper)(({ form }) => [
     {
@@ -54,16 +60,16 @@ const Tabs = styled(Paper)(({ theme, form }) => [
         borderRightColor: theme.palette.divider,
     },
     form?.collapse &&
-    form.layout === 'horizontal' && {
-        position: 'relative',
-        overflow: 'hidden',
-        maxWidth: theme.spacing(7),
-        width: 'fit-content',
-        transition: 'all 0.3s',
-        ':hover': {
-            maxWidth: '100%',
+        form.layout === 'horizontal' && {
+            position: 'relative',
+            overflow: 'hidden',
+            maxWidth: theme.spacing(7),
+            width: 'fit-content',
+            transition: 'all 0.3s',
+            ':hover': {
+                maxWidth: '100%',
+            },
         },
-    },
 ]);
 const TabList = styled(List)(({ form }) => [
     {
@@ -95,9 +101,9 @@ const Panels = styled(Box)(({ form, theme }) => [
         margin: theme.spacing(1),
     },
     form.layout === 'horizontal' &&
-    form.collapse && {
-        marginLeft: theme.spacing(7),
-    },
+        form.collapse && {
+            marginLeft: theme.spacing(7),
+        },
 ]);
 const TitleList = styled(List)(() => ({
     display: 'flex',
