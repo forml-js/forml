@@ -5,7 +5,6 @@ import DateTime from './datetime.jsx';
 import FieldSet from './fieldset.jsx';
 import File from './file.jsx';
 import Help from './help.jsx';
-import Label from './label.jsx';
 import Multiselect from './multiselect.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs/index.jsx';

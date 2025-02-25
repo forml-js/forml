@@ -9,8 +9,6 @@ import {
 import React, { useCallback, useMemo, useRef } from 'react';
 import ObjectPath from 'objectpath';
 
-console.log('Select: %o, MenuItem: %o', MuiSelect, MenuItem);
-
 /**
  * @component
  */
@@ -24,7 +22,6 @@ export default function Multiselect(props) {
     const placeholder = localize(form.placeholder);
     const description = localize(form.description);
     const error = useError(form.key);
-    console.log('Multiselect(error: %o)', error);
     const helperText = useMemo(() => (error ? error : description), [error]);
     const value = useMemo(() => {
         return props.value.map((value) => {

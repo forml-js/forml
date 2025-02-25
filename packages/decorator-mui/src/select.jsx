@@ -8,27 +8,27 @@ import {
 import React, { useCallback, useMemo, useRef } from 'react';
 import ObjectPath from 'objectpath';
 
-console.log('Select: %o, MenuItem: %o', MuiSelect, MenuItem);
-
 /**
  * @component
  */
 export default function Select(props) {
     const { form } = props;
-    const localize = useLocalizer();
     const ref = useRef(null);
 
-    const disabled = 'readonly' in form ? form.readonly : false;
-    const title = localize(form.title);
-    const placeholder = localize(form.placeholder);
-    const description = localize(form.description);
-    const error = useError(form.key);
-    const helperText = useMemo(() => (error ? error : description), [error]);
     const value = useMemo(() => {
-        return form.titleMap.findIndex(
+        const index = form.titleMap.findIndex(
             (titleMap) => titleMap.value === props.value
         );
+        if (index === -1) return '';
+        return index;
     }, [form.titleMap, props.value]);
+    const title = useMemo(
+        () => ('titleFun' in form ? form.titleFun(value) : form.title),
+        [form.title, form.titleFun, value]
+    );
+    const disabled = 'readonly' in form ? form.readonly : false;
+    const error = useError(form.key);
+    const helperText = error ? error : form.description;
 
     const onChange = useCallback(
         (event) => {
@@ -51,13 +51,13 @@ export default function Select(props) {
                 const { name } = form.titleMap[i];
                 menuItems.push(
                     <MenuItem key={key} value={i}>
-                        {localize(name)}
+                        {name}
                     </MenuItem>
                 );
             }
             return menuItems;
         },
-        [form.titleMap, form.key, localize, value]
+        [form.titleMap, form.key, value]
     );
 
     return (
@@ -68,7 +68,7 @@ export default function Select(props) {
                 error={!!error}
                 label={title}
                 value={value ?? ''}
-                placeholder={placeholder}
+                placeholder={form.placeholder}
                 helperText={helperText}
                 disabled={disabled}
                 onChange={onChange}

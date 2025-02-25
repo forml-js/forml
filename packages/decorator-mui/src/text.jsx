@@ -8,24 +8,17 @@ import React, { useMemo } from 'react';
 export default function Text(props) {
     const { form, value, onChange, otherProps, ...forwardedProps } = props;
 
-    console.log('Text(props: %o)', props);
-
-    const localize = useLocalizer();
     const title = useMemo(() => {
         if (form.titleFun) {
-            return localize(form.titleFun(value));
+            return form.titleFun(value);
         } else {
-            return localize(form.title);
+            return form.title;
         }
-    }, [form.title, form.titleFun, localize, value]);
+    }, [form.title, form.titleFun, value]);
     const error = useError(form.key);
-    const description = useMemo(() => {
-        if (form.description) {
-            return localize(form.description);
-        }
-    });
-    const helperText = useMemo(() => (error ? error : description), [error]);
-    const color = useMemo(() => (error ? 'error' : 'info'), [error]);
+    const description = form.description;
+    const helperText = error ? error : description;
+    const color = error ? 'error' : 'info';
 
     return (
         <TextField
