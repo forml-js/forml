@@ -260,26 +260,3 @@ export default function Page() {
         </Box>
     );
 }
-
-/*
-            <Stack sx={{ "flex": "1 0 auto", maxHeight: 'fill-available', overflow: 'hidden' }} key="primary-viewport">
-                <Divider><Typography key="title" variant="caption">Rendered Example</Typography></Divider>
-                <Box sx={{ flex: "1 1 auto", height: 'fill-available', maxHeight: 'fill-available' }} key="example" ref={pdfRef}>
-                    <RenderExample
-                        key={`render-${decorator}-${selected}`}
-                        schema={schema.value}
-                        form={forwardForm}
-                        model={model.value}
-                        onChange={onModelChange}
-                        wrapInDocument={selected != './kitchenSink.js'}
-                        mapper={mapper}
-                        localizer={localizer}
-                        decorator={decorator}
-                    />
-                </Box>
-                <Divider><Typography key="title" variant="caption">Model</Typography></Divider>
-                <Box sx={{ flex: '0 0 auto', height: 'fill-available', maxHeight: '15rem', overflowY: 'auto' }} key="model">
-                    <Editor key="editor" value={model.json} />
-                </Box>
-            </Stack>
-*/
