@@ -6,21 +6,24 @@
             "name": {
                 "type": "string",
                 "minLength": 3
-              },
+            },
             "date": {
                 "title": "Birthday",
                 "type": "string"
             }
         },
-        "required": [
-            "name",
-            "date"
-          ]
+        "required": ["name", "date"]
     },
     "form": [
         {
-            "key": ["date"],
-            "type": "date"
+            "type": "fieldset",
+            "key": [],
+            "items": [
+                {
+                    "key": ["date"],
+                    "type": "date"
+                }
+            ]
         }
     ]
 }

@@ -2,22 +2,21 @@
     "schema": {
         "type": "object",
         "title": "Update Access Control",
-        "required": [
-            "accessLevel"
-        ],
+        "description": "Assign access control level to given user",
+        "required": ["accessLevel"],
         "properties": {
             "name": {
                 "title": "Name",
+                "description": "Identifier for the user whom is being modified",
                 "type": "string"
             },
             "accessLevel": {
                 "title": "Access Level",
+                "description": "The permissions being granted to the specified user",
                 "type": "array",
                 "items": {
                     "type": "string",
-                    "enum": [
-                        "A", "N", "C", "R", "U", "CR", "CU", "RU", "CRU"
-                    ]
+                    "enum": ["A", "N", "C", "R", "U", "CR", "CU", "RU", "CRU"]
                 },
                 "minItems": 2,
                 "maxItems": 3
@@ -25,21 +24,30 @@
         }
     },
     "form": [
-        "name",
         {
-            "key": "accessLevel",
-            "type": "multiselect",
-            "titleMap": [
-                {"value": "A", "name": "Authorized to anyone"},
-                {"value": "N", "name": "Not Accessible"},
-                {"value": "C", "name": "Client Based"},
-                {"value": "R", "name": "Role Based"},
-                {"value": "U", "name": "User Based"},
-                {"value": "CR", "name": "Client and Role Based"},
-                {"value": "CU", "name": "Client and User Based"},
-                {"value": "RU", "name": "Role and User Based"},
-                {"value": "CRU", "name": "Client, Role and User Based"}
-            ]            
+            "type": "fieldset",
+            "key": [],
+            "items": [
+                "name",
+                {
+                    "key": "accessLevel",
+                    "type": "multiselect",
+                    "titleMap": [
+                        { "value": "A", "name": "Authorized to anyone" },
+                        { "value": "N", "name": "Not Accessible" },
+                        { "value": "C", "name": "Client Based" },
+                        { "value": "R", "name": "Role Based" },
+                        { "value": "U", "name": "User Based" },
+                        { "value": "CR", "name": "Client and Role Based" },
+                        { "value": "CU", "name": "Client and User Based" },
+                        { "value": "RU", "name": "Role and User Based" },
+                        {
+                            "value": "CRU",
+                            "name": "Client, Role and User Based"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

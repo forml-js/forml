@@ -15,10 +15,16 @@
         "required": ["name", "date"]
     },
     "form": [
-        "name",
         {
-            "key": "date",
-            "type": "datetime"
+            "type": "fieldset",
+            "key": [],
+            "items": [
+                "name",
+                {
+                    "key": "date",
+                    "type": "datetime"
+                }
+            ]
         }
     ]
 }

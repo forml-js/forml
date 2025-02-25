@@ -24,7 +24,7 @@ export const schema = {
         phoneNumber: {
             title: 'Phone Number',
             type: 'string',
-            pattern: '^[0-9]{3}-[0-9]{3}-[0-9]{4}',
+            format: 'phone',
             description: 'The best number at which to reach you',
         },
         spam: { title: 'Spam', type: 'boolean', default: true },
