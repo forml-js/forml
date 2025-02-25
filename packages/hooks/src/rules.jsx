@@ -1,6 +1,25 @@
-import * as constants from './constants.js';
-import { standardForm } from './forms.js';
-import { getPreferredType } from './util.js';
+import * as constants from '#constants';
+import { standardForm } from '#forms';
+
+/**
+ * Return the first type from a type list
+ * @arg {string[]} types
+ */
+export function getPreferredType(types) {
+    const ignoredTypes = new Set(['null']);
+
+    let index = 0;
+
+    if (!Array.isArray(types)) return types;
+
+    // Skip ignored types
+    while (ignoredTypes.has(types[index])) index++;
+
+    // If we've run past the end, just use the first type
+    if (index >= types.length) index = 0;
+
+    return types[index];
+}
 
 /**
  * @param {Array<*>} enm - The enumeration values to produce titles for

@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
-import { useGenerator, useSchemaFor } from '@forml/hooks';
+import { useGenerator, useSchemaFor, useMerged } from '@forml/hooks';
 
-import { merge } from '../forms.js';
 import { SchemaField } from './schema-field.jsx';
 
 export function SchemaRender(props) {
     const schema = useSchemaFor(props.prefix);
     const form = useGenerator(props.form);
-    const merged = useMemo(function() {
-        return merge(schema, form, { prefix: props.prefix });
-    }, [schema, form]);
+    const merged = useMerged(schema, form);
 
     const children = useMemo(
         () =>
@@ -29,6 +26,5 @@ export function SchemaRender(props) {
         [merged, props.prefix, props.onChange]
     );
 
-    return <>{children}</>
+    return <>{children}</>;
 }
-

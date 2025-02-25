@@ -87,8 +87,6 @@ const ArrayContainer = forwardRef(function ArrayContainer(props, ref) {
     const ArrayDecorator = useDecorator('array');
     const actions = useActionsFor(form.key, useArrayFormActions());
 
-    console.log('ArrayContainer(ArrayDecorator: %o)', ArrayDecorator);
-
     const addItem = useCallback(
         (event) => {
             const nextModel = actions.appendArray();

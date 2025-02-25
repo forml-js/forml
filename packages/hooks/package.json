@@ -4,6 +4,20 @@
     "description": "Hooks for use with @forml/core",
     "main": "src/index.jsx",
     "type": "module",
+    "imports": {
+        "#renderer": "./src/renderer.jsx",
+        "#model": "./src/model.jsx",
+        "#constants": "./src/constants.jsx",
+        "#forms": "./src/forms.js",
+        "#rules": "./src/rules.jsx"
+    },
+    "exports": {
+        ".": "./src/index.jsx",
+        "./renderer": "./src/renderer.jsx",
+        "./model": "./src/model.jsx",
+        "./forms": "./src/forms.jsx",
+        "./constants": "./src/constants.jsx"
+    },
     "scripts": {
         "lint": "eslint src/**/*.jsx",
         "test": "jest --coverage --verbose --passWithNoTests"

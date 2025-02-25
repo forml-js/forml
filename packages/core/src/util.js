@@ -2,6 +2,7 @@ import shortid from 'shortid';
 import Ajv from 'ajv';
 import objectPath from 'objectpath';
 import { useMemo, useCallback } from 'react';
+import { getPreferredType } from '@forml/hooks/rules';
 
 /**
  * @namespace forml.util
@@ -148,26 +149,6 @@ export function randomForSchema(schema) {
 
         return assertType(schema, base);
     }
-}
-
-/**
- * Return the first type from a type list
- * @arg {string[]} types
- */
-export function getPreferredType(types) {
-    const ignoredTypes = new Set(['null']);
-
-    let index = 0;
-
-    if (!Array.isArray(types)) return types;
-
-    // Skip ignored types
-    while (ignoredTypes.has(types[index])) index++;
-
-    // If we've run past the end, just use the first type
-    if (index >= types.length) index = 0;
-
-    return types[index];
 }
 
 /**
@@ -352,47 +333,6 @@ export function valueSetter(model, schema) {
     }
 
     return set;
-}
-
-/**
- * Walk the schema along the path of keys and return the last entry visited
- * @arg {Array<string|number>} keys
- * @arg {object} schema
- * @return {object}
- */
-export function findSchema(keys, schema) {
-    if (keys.length === 0) return schema;
-
-    for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
-        schema = getNextSchema(schema, key);
-    }
-
-    return schema;
-}
-
-/**
- * Return the child schema defined by key in this schema
- * @arg {object} schema
- * @arg {string|number} key
- */
-export function getNextSchema(schema, key) {
-    if (schema.type === 'array') {
-        if (Array.isArray(schema.items)) {
-            return schema.items[key];
-        }
-        return schema.items;
-    }
-
-    if (schema.type === 'object') {
-        if (key in schema.properties) {
-            return schema.properties[key];
-        }
-
-        if (schema.additionalProperties) {
-            return schema.additionalProperties;
-        }
-    }
 }
 
 /**

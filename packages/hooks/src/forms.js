@@ -1,8 +1,50 @@
 import ObjectPath from 'objectpath';
+import { useMemo } from 'react';
 
-import { ARRAY_PLACEHOLDER } from './constants.js';
-import { test } from './rules.js';
-import { findSchema } from './util.js';
+import { ARRAY_PLACEHOLDER } from '#constants';
+import { useLocalizer } from '#renderer';
+import { test } from '#rules';
+
+/**
+ * Walk the schema along the path of keys and return the last entry visited
+ * @arg {Array<string|number>} keys
+ * @arg {object} schema
+ * @return {object}
+ */
+export function findSchema(keys, schema) {
+    if (keys.length === 0) return schema;
+
+    for (let i = 0; i < keys.length; ++i) {
+        const key = keys[i];
+        schema = getNextSchema(schema, key);
+    }
+
+    return schema;
+}
+
+/**
+ * Return the child schema defined by key in this schema
+ * @arg {object} schema
+ * @arg {string|number} key
+ */
+export function getNextSchema(schema, key) {
+    if (schema.type === 'array') {
+        if (Array.isArray(schema.items)) {
+            return schema.items[key];
+        }
+        return schema.items;
+    }
+
+    if (schema.type === 'object') {
+        if (key in schema.properties) {
+            return schema.properties[key];
+        }
+
+        if (schema.additionalProperties) {
+            return schema.additionalProperties;
+        }
+    }
+}
 
 export function getDefaults(schema) {
     const form = [];
@@ -18,6 +60,7 @@ export function merge(schema, form = ['*'], options = {}) {
     if (!form) return [];
 
     const stdForm = getDefaults(schema);
+    const { localize } = options;
 
     const idx = form.indexOf('*');
     if (idx !== -1) {
@@ -77,8 +120,18 @@ export function merge(schema, form = ['*'], options = {}) {
             const values = obj.schema.enum || obj.schema.items.enum;
             obj.titleMap = obj.titles.map((name, index) => {
                 const value = values[index];
+                name = localize ? localize(name) : name;
                 return { name, value };
             });
+        }
+
+        if (localize) {
+            if (obj.title) obj.title = localize(obj.title);
+            if (obj.description) obj.description = localize(obj.description);
+            if (obj.placeholder) obj.placeholder = localize(obj.placeholder);
+            if (obj.titleFun && !options.localize?.skipTitleFun) {
+                obj.titleFun = (...args) => localize(obj.titleFun(...args));
+            }
         }
 
         acc.push(obj);
@@ -143,4 +196,11 @@ export function standardForm(schema, options = {}) {
     f.schema = schema;
 
     return f;
+}
+
+export function useMerged(schema, form, options = {}) {
+    const localize = useLocalizer();
+    return useMemo(() => {
+        return merge(schema, form, { ...options, localize });
+    }, [form, schema, options, localize]);
 }

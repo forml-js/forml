@@ -11,11 +11,6 @@ export default function Multiselect(props) {
 
     const onChange = useCallback(
         function onChange(event, value) {
-            console.log(
-                'Multiselect.onChange(event: %o, value: %o)',
-                event,
-                value
-            );
             props.onChangeSet(event, value);
         },
         [props.onChange]

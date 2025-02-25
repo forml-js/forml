@@ -1,7 +1,11 @@
 import React, { forwardRef, useCallback, useMemo } from 'react';
-import { useDecorator, useLocalizer, useArrayActions } from '@forml/hooks';
+import {
+    ARRAY_PLACEHOLDER,
+    useDecorator,
+    useLocalizer,
+    useArrayActions,
+} from '@forml/hooks';
 
-import { ARRAY_PLACEHOLDER } from '#constants';
 import { clone, traverseForm } from '#util';
 import { SchemaField } from '#field';
 
@@ -73,12 +77,7 @@ const ArrayItem = forwardRef(function ArrayItem(props, ref) {
     );
 
     return (
-        <ArrayDecorator.Item
-            index={index}
-            form={form}
-            {...actions}
-            ref={ref}
-        >
+        <ArrayDecorator.Item index={index} form={form} {...actions} ref={ref}>
             {props.children}
         </ArrayDecorator.Item>
     );

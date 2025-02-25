@@ -11,7 +11,5 @@ export default function Text(props) {
         }
     }, [schema]);
 
-    console.log('Text(schema: %o, Component: %o)', schema, Component);
-
     return <Component {...props} />;
 }

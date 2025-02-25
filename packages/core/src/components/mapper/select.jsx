@@ -13,11 +13,6 @@ export default function Select(props) {
     const Select = useDecorator('select');
     const onChange = useCallback(
         function onChange(event, value) {
-            console.log(
-                'Select.onChangeSet(event: %o, value: %o)',
-                event,
-                value
-            );
             props.onChangeSet(event, value);
         },
         [props.onChange]
