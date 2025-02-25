@@ -47,6 +47,7 @@
         "@forml/hooks": "file:../hooks",
         "ajv": "^8.17.1",
         "deepmerge": "^4.3.1",
+        "libphonenumber-js": "^1.11.20",
         "objectpath": "^2.0.0",
         "prop-types": "^15.8.1",
         "shortid": "^2.2.17"

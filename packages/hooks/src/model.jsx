@@ -15,6 +15,7 @@ import {
 
 // validation temporarily disabled
 import AJV from 'ajv';
+import addFormats from 'ajv-formats';
 
 /**
  * Hook to use the entire forml context
@@ -52,7 +53,11 @@ export function usePrefixed(key) {
 }
 
 export function createModelStore(schema, model) {
-    const ajv = useMemo(() => new AJV({ allErrors: true, strict: false }), []);
+    const ajv = useMemo(() => {
+        const ajv = new AJV({ allErrors: true, strict: false });
+        addFormats(ajv);
+        return ajv;
+    }, []);
     return createStore()(function () {
         return {
             schema,
@@ -348,6 +353,12 @@ export function useModelFor(key) {
         }),
         [model, schema, validate]
     );
+}
+
+export function useError(key) {
+    const { validate, model } = useModelFor(key);
+    const error = useMemo(() => validate(model), [validate, model]);
+    return error;
 }
 
 export const useKey = useModelFor;

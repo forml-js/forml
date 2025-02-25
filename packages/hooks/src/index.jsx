@@ -53,7 +53,11 @@ export function useLocalizedString(string) {
  * A hook to pull in the closest parent form's decorator
  * @return {Decorator}
  */
-export function useDecorator() {
+export function useDecorator(type = null) {
     const { decorator } = useRenderingContext();
-    return decorator;
+    if (type && type in decorator.default) {
+        return decorator.default[type];
+    } else {
+        return decorator;
+    }
 }
