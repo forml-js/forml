@@ -16,7 +16,26 @@ Error.stackTraceLimit = Infinity;
 
 const theme = createTheme({
     colorSchemes: {
-        dark: true,
+        dark: {
+            palette: {
+                primary: {
+                    main: '#33833c',
+                },
+                secondary: {
+                    main: '#83337b',
+                },
+            },
+        },
+        light: {
+            palette: {
+                primary: {
+                    main: '#33833c',
+                },
+                secondary: {
+                    main: '#83337b',
+                },
+            },
+        },
     },
 });
 
