@@ -36,6 +36,8 @@ const DestroyButton = styled(Button)(({ divider, theme }) => ({
     marginTop: 'auto',
     border: 0,
     borderTop: divider ? `1px solid ${theme.palette?.divider}` : undefined,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
 }));
 function OnlyDestroy(props) {
     const { onClick, disabled } = props;

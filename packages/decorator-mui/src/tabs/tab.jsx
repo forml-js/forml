@@ -1,4 +1,11 @@
-import { Icon, ListItem, ListItemIcon, ListItemText, styled } from '@mui/material';
+import {
+    Icon,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    styled,
+} from '@mui/material';
+import { useLocalizer } from '@forml/hooks';
 import React, { useMemo } from 'react';
 
 const ImageIcon = styled('img')(({ theme, ...props }) => ({
@@ -46,30 +53,30 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
     },
     // Collapse modifications: vertical layout
     parent.collapse &&
-    parent.layout !== 'horizontal' && {
-        flexGrow: 0,
-        flexShrink: 0,
-        ':hover': {
+        parent.layout !== 'horizontal' && {
+            flexGrow: 0,
+            flexShrink: 0,
+            ':hover': {
+                flexBasis: 'min-content',
+                flexGrow: 0,
+                flexShrink: 0,
+                maxWidth: '100%',
+            },
+        },
+    active &&
+        parent.collapse &&
+        parent.layout !== 'horizontal' && {
             flexBasis: 'min-content',
             flexGrow: 0,
             flexShrink: 0,
             maxWidth: '100%',
         },
-    },
-    active &&
-    parent.collapse &&
-    parent.layout !== 'horizontal' && {
-        flexBasis: 'min-content',
-        flexGrow: 0,
-        flexShrink: 0,
-        maxWidth: '100%',
-    },
 
     parent.collapse &&
-    parent.layout === 'horizontal' && {
-        maxWidth: '100%',
-        flexGrow: 1,
-    },
+        parent.layout === 'horizontal' && {
+            maxWidth: '100%',
+            flexGrow: 1,
+        },
 
     parent.layout === 'horizontal' && {
         ':after': {
@@ -81,21 +88,21 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
         },
     },
     !active &&
-    parent.layout === 'horizontal' && {
-        ':hover': {
+        parent.layout === 'horizontal' && {
+            ':hover': {
+                ':after': {
+                    backgroundColor: theme.palette.primary.main,
+                    transform: 'scaleX(300%)',
+                },
+            },
+        },
+    active &&
+        parent.layout === 'horizontal' && {
             ':after': {
                 backgroundColor: theme.palette.primary.main,
                 transform: 'scaleX(300%)',
             },
         },
-    },
-    active &&
-    parent.layout === 'horizontal' && {
-        ':after': {
-            backgroundColor: theme.palette.primary.main,
-            transform: 'scaleX(300%)',
-        },
-    },
 
     parent.layout !== 'horizontal' && {
         borderRight: '1px solid black',
@@ -109,35 +116,37 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
         },
     },
     !active &&
-    parent.layout !== 'horizontal' && {
-        ':hover': {
+        parent.layout !== 'horizontal' && {
+            ':hover': {
+                ':after': {
+                    backgroundColor: theme.palette.primary.main,
+                    transform: 'scaleY(300%)',
+                },
+            },
+        },
+    active &&
+        parent.layout !== 'horizontal' && {
             ':after': {
                 backgroundColor: theme.palette.primary.main,
                 transform: 'scaleY(300%)',
             },
         },
-    },
-    active &&
-    parent.layout !== 'horizontal' && {
-        ':after': {
-            backgroundColor: theme.palette.primary.main,
-            transform: 'scaleY(300%)',
-        },
-    },
 ]);
 
 /**
  * @component
  */
 export default function Tab(props) {
-    const { title, description } = props;
     const { activate, active } = props;
     const { form, parent } = props;
+    const localize = useLocalizer();
 
+    const title = 'title' in form ? localize(form.title) : null;
+    const description =
+        'description' in form ? localize(form.description) : null;
     const icon = 'icon' in form ? form.icon : 'dynamic_form';
     const image = 'image' in form ? form.image : null;
-
-    let imageOrIcon = useMemo(() => {
+    const imageOrIcon = useMemo(() => {
         if (image) {
             return (
                 <ListItemIcon>
@@ -163,19 +172,7 @@ export default function Tab(props) {
             onClick={activate}
         >
             {imageOrIcon}
-            <ListItemText
-                key="title"
-                primary={title}
-                primaryTypographyProps={useMemo(() => ({ noWrap: true }), [])}
-                secondary={description}
-                secondaryTypographyProps={useMemo(
-                    () => ({
-                        nowrap: true,
-                        variant: 'caption',
-                    }),
-                    []
-                )}
-            />
+            <ListItemText key="title" primary={title} secondary={description} />
         </Root>
     );
 }

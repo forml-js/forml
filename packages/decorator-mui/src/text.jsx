@@ -1,24 +1,43 @@
-import { Typography } from '@mui/material';
-import React from 'react';
+import { TextField } from '@mui/material';
+import { useLocalizer, useError } from '@forml/hooks';
+import React, { useMemo } from 'react';
 
 /**
  * @component
  */
 export default function Text(props) {
-    const { form } = props;
-    const { variant, align, color } = form;
-    const { noWrap, paragraph } = form;
+    const { form, value, onChange, otherProps, ...forwardedProps } = props;
+
+    console.log('Text(props: %o)', props);
+
+    const localize = useLocalizer();
+    const title = useMemo(() => {
+        if (form.titleFun) {
+            return localize(form.titleFun(value));
+        } else {
+            return localize(form.title);
+        }
+    }, [form.title, form.titleFun, localize, value]);
+    const error = useError(form.key);
+    const description = useMemo(() => {
+        if (form.description) {
+            return localize(form.description);
+        }
+    });
+    const helperText = useMemo(() => (error ? error : description), [error]);
+    const color = useMemo(() => (error ? 'error' : 'info'), [error]);
 
     return (
-        <Typography
-            variant={variant}
-            align={align}
+        <TextField
+            variant="standard"
+            label={title}
+            error={!!error}
             color={color}
-            noWrap={noWrap}
-            paragraph={paragraph}
-            {...form.otherProps}
-        >
-            {props.children}
-        </Typography>
+            helperText={helperText}
+            value={value}
+            onChange={onChange}
+            {...forwardedProps}
+            {...otherProps}
+        />
     );
 }

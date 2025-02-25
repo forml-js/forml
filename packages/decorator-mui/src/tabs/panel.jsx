@@ -1,5 +1,5 @@
-import { CircularProgress, Paper } from '@mui/material';
-import React, { Suspense, useMemo } from 'react';
+import { CircularProgress, Paper, styled } from '@mui/material';
+import React, { Suspense } from 'react';
 
 /**
  * @component
@@ -39,33 +39,26 @@ function paperZIndex(delta) {
     }
 }
 
+const StyledPaper = styled(Paper)((props) => ({
+    display: 'flex',
+    transition: 'all 0.3s',
+    flex: '1 1 100%',
+    height: '100%',
+    position: paperPosition(props.delta),
+    zIndex: paperZIndex(props.delta),
+    transform: paperTransform(props.orientation, props.delta),
+}));
+
 export default function Panel(props) {
     const { activeDelta, form, parent } = props;
     const { children, ...forwardProps } = props;
 
-    const settings = useMemo(
-        () => ({
-            elevation: 'elevation' in form ? form.elevation : 0,
-            orientation: 'layout' in parent ? parent.layout : 'horizontal',
-        }),
-        [form]
-    );
-    const sx = useMemo(
-        () => ({
-            position: paperPosition(activeDelta),
-            display: 'flex',
-            transition: 'all 0.3s',
-            flex: '1 1 100%',
-            height: '100%',
-            zIndex: paperZIndex(activeDelta),
-            transform: paperTransform(settings.orientation, activeDelta),
-        }),
-        [settings.orientation, activeDelta]
-    );
+    const elevation = 'elevation' in form ? form.elevation : 0;
+    const orientation = 'layout' in parent ? parent.layout : 'horizontal';
 
     return (
-        <Paper {...forwardProps} elevation={settings.elevation} sx={sx}>
+        <StyledPaper orientation={orientation} elevation={elevation}>
             <Suspense fallback={<CircularProgress />}>{children}</Suspense>
-        </Paper>
+        </StyledPaper>
     );
 }

@@ -1,10 +1,39 @@
-import * as Arrays from './arrays/index.jsx';
+import Array from './arrays/index.jsx';
 import Checkbox from './checkbox.jsx';
+import Date from './date.jsx';
+import DateTime from './datetime.jsx';
 import FieldSet from './fieldset.jsx';
-import Group from './group.jsx';
-import * as Input from './input/index.jsx';
+import File from './file.jsx';
+import Help from './help.jsx';
 import Label from './label.jsx';
-import * as Tabs from './tabs/index.jsx';
+import Multiselect from './multiselect.jsx';
+import Select from './select.jsx';
+import Tabs from './tabs/index.jsx';
 import Text from './text.jsx';
 
-export { Arrays, Checkbox, FieldSet, Group, Input, Label, Tabs, Text };
+export default {
+    array: Array,
+    checkbox: Checkbox,
+    date: Date,
+    datetime: DateTime,
+    fieldset: FieldSet,
+    file: File,
+    help: Help,
+    multiselect: Multiselect,
+    select: Select,
+    tabs: Tabs,
+    text: Text,
+};
+
+export {
+    Array,
+    Checkbox,
+    Date,
+    DateTime,
+    FieldSet,
+    File,
+    Help,
+    Select,
+    Tabs,
+    Text,
+};

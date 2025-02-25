@@ -1,4 +1,6 @@
 import Item from './item.jsx';
-import Items from './items.jsx';
+import Array from './items.jsx';
 
-export { Item, Items };
+Array.Item = Item;
+export default Array;
+export { Item, Array };

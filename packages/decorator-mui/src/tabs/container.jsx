@@ -9,6 +9,7 @@ import {
     styled,
 } from '@mui/material';
 import React, { useMemo, useRef } from 'react';
+import { useLocalizer } from '@forml/hooks';
 
 const Root = styled(Paper)(({ form }) => [
     {
@@ -118,60 +119,61 @@ const TitleListItem = styled(ListItem)(({ theme, form }) => [
     },
 ]);
 
+function Title(props) {
+    const { form } = props;
+    const localize = useLocalizer();
+
+    const showTitle = 'showTitle' in form ? form.showTitle : true;
+    const icon = 'icon' in form ? form.icon : 'view_carousel';
+    const title = 'title' in form ? localize(form.title) : null;
+    const description =
+        'description' in form ? localize(form.description) : null;
+
+    if (!showTitle || (!title && !description)) {
+        return null;
+    }
+
+    return (
+        <TitleList form={form} dense disablePadding>
+            <TitleListItem form={form} divider>
+                {icon && (
+                    <ListItemIcon key="icon">
+                        <Icon fontSize="small">{icon}</Icon>
+                    </ListItemIcon>
+                )}
+                <ListItemText
+                    key="title"
+                    primary={title}
+                    secondary={description}
+                />
+            </TitleListItem>
+        </TitleList>
+    );
+}
+
 /**
  * @component
  */
 export default function Container(props) {
-    const { title, description, form, collapse } = props;
+    const { form } = props;
     const ref = useRef(null);
 
-    const icon = form.icon ?? 'view_carousel';
-    const showTitle = form.showTitle ?? true;
-    const orientation = form.layout ?? 'vertical';
+    const orientation = 'layout' in form ? form.layout : 'vertical';
 
     return (
         <Root form={form}>
-            {(title || description) && showTitle && (
-                <TitleList form={form} dense disablePadding>
-                    <TitleListItem form={form} divider>
-                        {icon && (
-                            <ListItemIcon key="icon">
-                                <Icon fontSize="small">{icon}</Icon>
-                            </ListItemIcon>
-                        )}
-                        <ListItemText
-                            key="title"
-                            primary={title}
-                            secondary={description}
-                        />
-                    </TitleListItem>
-                </TitleList>
-            )}
+            <Title form={form} />
             <Content
-                collapse={collapse}
                 tabs={props.tabs.length}
                 form={form}
                 orientation={orientation}
             >
-                <Tabs
-                    collapse={collapse}
-                    form={form}
-                    square
-                    elevation={0}
-                    ref={ref}
-                >
-                    <TabList
-                        collapse={collapse}
-                        form={form}
-                        dense
-                        disablePadding
-                    >
+                <Tabs form={form} square elevation={0} ref={ref}>
+                    <TabList form={form} dense disablePadding>
                         {props.tabs}
                     </TabList>
                 </Tabs>
-                <Panels collapse={collapse} form={form}>
-                    {props.panels}
-                </Panels>
+                <Panels form={form}>{props.panels}</Panels>
             </Content>
         </Root>
     );
