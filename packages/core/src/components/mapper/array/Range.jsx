@@ -8,9 +8,9 @@ export function Range(props) {
     const { start, end, form, onChange } = props;
     const keys = useArrayKeyRange(start, end);
     const type = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
-    const items = useMemo(() =>
-        keys.map(
-            (key, offset) => (
+    const items = useMemo(
+        () =>
+            keys.map((key, offset) => (
                 <Item
                     key={key}
                     id={key}
@@ -21,11 +21,8 @@ export function Range(props) {
                     forms={form.items}
                     type={type}
                 />
-            )
-        ),
+            )),
         [keys, onChange, form]
     );
-    return <>
-        {items}
-    </>;
+    return <>{items}</>;
 }

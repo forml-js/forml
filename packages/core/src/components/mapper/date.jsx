@@ -8,13 +8,12 @@ import { FormType } from '#types';
  * @component Date
  */
 export default function DateInput(props) {
-    const localizer = useLocalizer();
-    const deco = useDecorator();
+    const Decorator = useDecorator('date');
 
-    let { form, error } = props;
-    let { title, description, placeholder } = form;
-    const { readonly: disabled } = form;
-    const value = useMemo(() => props.value || new Date().toISOString(), [props.value]);
+    const value = useMemo(
+        () => props.value || new Date().toISOString(),
+        [props.value]
+    );
     const onChange = useCallback(
         function onChange(e) {
             props.onChangeSet(e, e.target.value);
@@ -22,43 +21,7 @@ export default function DateInput(props) {
         [props.onChange]
     );
 
-    /**
-     * Apply localizations
-     */
-    error = localizer.getLocalizedString(error);
-    title = localizer.getLocalizedString(title);
-    description = localizer.getLocalizedString(description);
-    placeholder = localizer.getLocalizedString(placeholder);
-
-    return (
-        <deco.Input.Group form={form} value={value} error={error}>
-            {title && (
-                <deco.Label key="label" form={form} value={value} error={error}>
-                    {title}
-                </deco.Label>
-            )}
-            <deco.Input.Form
-                key="form"
-                type="date"
-                onChange={onChange}
-                form={form}
-                value={value}
-                error={error}
-                placeholder={placeholder}
-                disabled={disabled}
-            />
-            {(error || description) && (
-                <deco.Input.Description
-                    key="description"
-                    form={form}
-                    value={value}
-                    error={!!error}
-                >
-                    {error || description}
-                </deco.Input.Description>
-            )}
-        </deco.Input.Group>
-    );
+    return <Decorator form={props.form} value={value} onChange={onChange} />;
 }
 
 Date.propTypes = {

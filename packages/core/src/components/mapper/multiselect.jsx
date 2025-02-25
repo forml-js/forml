@@ -5,94 +5,23 @@ import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '#types';
 
 export default function Multiselect(props) {
-    const { value, schema, error, form } = props;
-    const { readonly: disabled } = form;
+    const { form, value } = props;
 
-    const deco = useDecorator();
-    const localizer = useLocalizer();
-
-    const title = localizer.getLocalizedString(form.title);
-    const placeholder = localizer.getLocalizedString(form.placeholder);
-    const description = localizer.getLocalizedString(form.description);
-
-    const getLabel = useCallback(
-        function getLabel(item) {
-            const { displayFn } = schema;
-
-            if (displayFn) {
-                return displayFn(item);
-            }
-
-            return item.name;
-        },
-        [schema]
-    );
+    const Multiselect = useDecorator('multiselect');
 
     const onChange = useCallback(
-        function onChange(event) {
-            props.onChangeSet(
+        function onChange(event, value) {
+            console.log(
+                'Multiselect.onChange(event: %o, value: %o)',
                 event,
-                Array.from(event.target.selectedOptions).map(
-                    (option) => option.value
-                )
+                value
             );
+            props.onChangeSet(event, value);
         },
         [props.onChange]
     );
 
-    const menuItems = useMemo(() => {
-        const options = [];
-        for (let i = 0; i < form.titleMap.length; i++) {
-            const name = localizer.getLocalizedString(
-                getLabel(form.titleMap[i])
-            );
-            const { value } = form.titleMap[i];
-            options.push(
-                <deco.Input.Option key={name} value={value}>
-                    {name}
-                </deco.Input.Option>
-            );
-        }
-        return options;
-    }, [form.titleMap, localizer]);
-
-    return (
-        <deco.Input.Group form={form} error={error}>
-            {title && (
-                <deco.Label
-                    key="label"
-                    required={form.required}
-                    form={form}
-                    value={value}
-                    error={error}
-                >
-                    {title}
-                </deco.Label>
-            )}
-            <deco.Input.Select
-                key="select"
-                multiple
-                value={value}
-                placeholder={placeholder}
-                onChange={onChange}
-                form={form}
-                error={error}
-                disabled={disabled}
-            >
-                {menuItems}
-            </deco.Input.Select>
-            {(error || description) && (
-                <deco.Input.Description
-                    key="help"
-                    error={!!error}
-                    form={form}
-                    value={value}
-                >
-                    {localizer.getLocalizedString(error || description)}
-                </deco.Input.Description>
-            )}
-        </deco.Input.Group>
-    );
+    return <Multiselect value={value} onChange={onChange} form={form} />;
 }
 
 Multiselect.propTypes = {

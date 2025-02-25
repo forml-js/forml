@@ -6,7 +6,7 @@ import { clone, traverseForm } from '#util';
 import { SchemaField } from '#field';
 
 export const Item = forwardRef(function Item(props, ref) {
-    const { form, parent, forms, index, disabled } = props;
+    const { parent, forms, index, disabled } = props;
 
     const onChange = useCallback(
         (event, nextModel) => {
@@ -46,8 +46,7 @@ export default Item;
 
 const ArrayItem = forwardRef(function ArrayItem(props, ref) {
     const { form, index, onChange } = props;
-    const { readonly: disabled } = form;
-    const deco = useDecorator();
+    const ArrayDecorator = useDecorator('array');
 
     const arrayActions = useArrayActions(form.key);
     const actions = useMemo(
@@ -74,15 +73,14 @@ const ArrayItem = forwardRef(function ArrayItem(props, ref) {
     );
 
     return (
-        <deco.Arrays.Item
-            disabled={disabled}
+        <ArrayDecorator.Item
             index={index}
             form={form}
             {...actions}
             ref={ref}
         >
             {props.children}
-        </deco.Arrays.Item>
+        </ArrayDecorator.Item>
     );
 });
 

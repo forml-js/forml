@@ -17,7 +17,7 @@ import Null from './null.jsx';
 import Number from './number.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs.jsx';
-import Text from './text.jsx';
+import Text from './text/index.jsx';
 import TextArea from './textarea.jsx';
 
 export function defaultMapper() {

@@ -13,15 +13,11 @@ const log = debug('forml:core:fieldset');
  */
 export default function FieldSet(props) {
     const { form, onChange } = props;
-    const localizer = useLocalizer();
-    const title = localizer.getLocalizedString(form.title);
-    const description = localizer.getLocalizedString(form.description);
-    const { readonly: disabled } = form;
 
     const parent = form;
     const forms = useMemo(
         () =>
-            form.items.map(function(form, index) {
+            form.items.map(function (form, index) {
                 const { schema } = form;
                 const key = index.toString();
                 return (
@@ -37,18 +33,9 @@ export default function FieldSet(props) {
         [form.items, onChange]
     );
 
-    const deco = useDecorator();
+    const FieldSet = useDecorator('fieldset');
 
-    return (
-        <deco.FieldSet
-            form={form}
-            title={title}
-            description={description}
-            disabled={disabled}
-        >
-            {forms}
-        </deco.FieldSet>
-    );
+    return <FieldSet form={form}>{forms}</FieldSet>;
 }
 
 FieldSet.propTypes = {

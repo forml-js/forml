@@ -8,13 +8,9 @@ import { FormType } from '#types';
  * @component Checkbox
  */
 export default function Checkbox(props) {
-    const { form } = props;
-    const { error, value } = props;
-    const { title, description } = form;
-    const { readonly: disabled } = form;
+    const { form, value } = props;
 
-    const deco = useDecorator();
-    const localize = useLocalizer();
+    const Decorator = useDecorator('checkbox');
     const onChange = useCallback(
         function onChange(event) {
             props.onChangeSet(event, event.target.checked);
@@ -22,17 +18,7 @@ export default function Checkbox(props) {
         [props.onChange]
     );
 
-    return (
-        <deco.Checkbox
-            form={form}
-            checked={value}
-            title={localize.getLocalizedString(title)}
-            description={localize.getLocalizedString(description)}
-            error={error}
-            onChange={onChange}
-            disabled={disabled}
-        />
-    );
+    return <Decorator form={form} value={value} onChange={onChange} />;
 }
 
 Checkbox.propTypes = {

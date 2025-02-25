@@ -8,17 +8,8 @@ import { FormType } from '../../types';
  */
 export default function Help(props) {
     const { form } = props;
-    const { description } = form;
-
-    const localize = useLocalizer();
-    const deco = useDecorator();
-    const title = localize.getLocalizedString(form.title);
-
-    return (
-        <deco.Text form={form} title={title}>
-            {localize.getLocalizedString(description)}
-        </deco.Text>
-    );
+    const Decorator = useDecorator('help');
+    return <Decorator form={form} />;
 }
 
 Help.propTypes = {

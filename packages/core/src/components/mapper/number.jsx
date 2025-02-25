@@ -1,8 +1,7 @@
-import ObjectPath from 'objectpath';
 import t from 'prop-types';
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
+import { useDecorator } from '@forml/hooks';
 import { FormType } from '#types';
 
 const valueExceptions = ['', '-'];
@@ -11,19 +10,7 @@ const valueExceptions = ['', '-'];
  * @component Number
  */
 export default function Number(props) {
-    const { form, value, error } = props;
-    const { readonly: disabled } = form;
-
-    const deco = useDecorator();
-    const localizer = useLocalizer();
-
-    const placeholder = localizer.getLocalizedString(form.placeholder);
-    const label = localizer.getLocalizedString(
-        form.title || form.key[form.key.length - 1]
-    );
-    const description = localizer.getLocalizedString(form.description);
-
-    const id = useMemo(() => ObjectPath.stringify(form.key), [form.key]);
+    const Text = useDecorator('text');
     const onChange = useCallback(
         function onChange(e) {
             let value = e.target.value;
@@ -49,41 +36,7 @@ export default function Number(props) {
         [props.onChangeSet]
     );
 
-    return (
-        <deco.Input.Group key={id} form={form}>
-            {label && (
-                <deco.Label
-                    key="label"
-                    form={form}
-                    value={value}
-                    error={error}
-                    htmlfor={id}
-                >
-                    {label}
-                </deco.Label>
-            )}
-            <deco.Input.Form
-                key="input"
-                value={value}
-                error={error}
-                onChange={onChange}
-                placeholder={placeholder}
-                form={form}
-                id={id}
-                disabled={disabled}
-            />
-            {(error || description) && (
-                <deco.Input.Description
-                    key="description"
-                    form={form}
-                    value={value}
-                    error={!!error}
-                >
-                    {error || description}
-                </deco.Input.Description>
-            )}
-        </deco.Input.Group>
-    );
+    return <Text {...props} onChange={onChange} />;
 }
 
 Number.propTypes = {

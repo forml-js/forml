@@ -6,19 +6,14 @@ import { SchemaField } from '#components/schema-field.jsx';
 
 const Tab = forwardRef(function Tab(props, ref) {
     const { parent, index, activeIndex, activate } = props;
-    const localizer = useLocalizer();
-    const deco = useDecorator();
+    const Tabs = useDecorator('tabs');
     const form = parent.tabs[index];
     const active = index === activeIndex;
     const raiseTab = useCallback(() => activate(index), [activate, index]);
-    const title = localizer.getLocalizedString(form.title);
-    const description = localizer.getLocalizedString(form.description);
     return (
-        <deco.Tabs.Tab
+        <Tabs.Tab
             key={`tab-${index}`}
             form={form}
-            title={title}
-            description={description}
             active={active}
             activate={raiseTab}
             parent={parent}
@@ -29,12 +24,12 @@ const Tab = forwardRef(function Tab(props, ref) {
 
 const Panel = forwardRef(function Panel(props, ref) {
     const { parent, index, activeIndex, onChange } = props;
-    const deco = useDecorator();
+    const Tabs = useDecorator('tabs');
     const form = parent.tabs[index];
     const activeDelta = index - activeIndex;
     const { schema } = form;
     return (
-        <deco.Tabs.Panel
+        <Tabs.Panel
             key={`panel-${index}`}
             form={form}
             parent={parent}
@@ -42,7 +37,7 @@ const Panel = forwardRef(function Panel(props, ref) {
             ref={ref}
         >
             <SchemaField form={form} schema={schema} onChange={onChange} />
-        </deco.Tabs.Panel>
+        </Tabs.Panel>
     );
 });
 
@@ -52,11 +47,8 @@ const Panel = forwardRef(function Panel(props, ref) {
 export default function Tabs(props) {
     const { form, onChange } = props;
     const [value, setValue] = useState(0);
-    const deco = useDecorator();
-    const localizer = useLocalizer();
+    const Tabs = useDecorator('tabs');
 
-    const title = localizer.getLocalizedString(form.title);
-    const description = localizer.getLocalizedString(form.description);
     const [tabs, panels] = useMemo(() => {
         const tabs = [];
         const panels = [];
@@ -70,21 +62,24 @@ export default function Tabs(props) {
                 />
             );
             panels.push(
-                <Panel parent={form} index={index} activeIndex={value} onChange={onChange} />
+                <Panel
+                    parent={form}
+                    index={index}
+                    activeIndex={value}
+                    onChange={onChange}
+                />
             );
         }
         return [tabs, panels];
     }, [form, value]);
 
     return (
-        <deco.Tabs.Container
+        <Tabs
             className={form.htmlClass}
             form={form}
             value={value}
             tabs={tabs}
             panels={panels}
-            title={title}
-            description={description}
         />
     );
 }

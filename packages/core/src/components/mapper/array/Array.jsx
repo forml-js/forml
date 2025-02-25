@@ -5,7 +5,6 @@ import {
     useArrayFormActions,
     useArrayKeys,
     useDecorator,
-    useLocalizer,
     useValue,
 } from '@forml/hooks';
 import t from 'prop-types';
@@ -84,38 +83,24 @@ function ArrayRanges(props) {
 }
 
 const ArrayContainer = forwardRef(function ArrayContainer(props, ref) {
-    const { form, onChange } = props;
-    const { readonly: disabled, titleFun } = form;
-    const deco = useDecorator();
-    const localizer = useLocalizer();
+    const { form, value } = props;
+    const ArrayDecorator = useDecorator('array');
     const actions = useActionsFor(form.key, useArrayFormActions());
-    const title = localizer.getLocalizedString(
-        form.titleFun ? form.titleFun() : form.title
-    );
-    const description = localizer.getLocalizedString(form.description);
-    const { error } = props;
+
+    console.log('ArrayContainer(ArrayDecorator: %o)', ArrayDecorator);
 
     const addItem = useCallback(
         (event) => {
             const nextModel = actions.appendArray();
-            onChange(event, nextModel);
+            props.onChange(event, nextModel);
         },
-        [actions.appendArray, form.key, onChange]
+        [actions.appendArray, form.key, props.onChange]
     );
 
     return (
-        <deco.Arrays.Items
-            className={form.htmlClass}
-            add={addItem}
-            title={title}
-            description={description}
-            error={error}
-            ref={ref}
-            disabled={disabled}
-            form={form}
-        >
+        <ArrayDecorator add={addItem} ref={ref} form={form} value={value}>
             {props.children}
-        </deco.Arrays.Items>
+        </ArrayDecorator>
     );
 });
 

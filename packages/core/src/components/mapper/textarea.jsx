@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { FormType } from '../../types';
 
-import Text from './text.jsx';
+import Text from './text/index.jsx';
 
 /**
  * @component TextArea
