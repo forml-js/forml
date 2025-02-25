@@ -1,12 +1,12 @@
+import * as chai from 'chai';
+import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import domChai from 'chai-dom';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
-import * as chai from 'chai';
-import domChai from 'chai-dom';
-import { describe, it } from 'mocha';
-import React from 'react';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import React, { createElement as h } from 'react';
 
 chai.use(sinonChai);
 chai.use(domChai);
