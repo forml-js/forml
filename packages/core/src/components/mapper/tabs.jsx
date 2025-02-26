@@ -33,7 +33,7 @@ const Panel = forwardRef(function Panel(props, ref) {
             key={`panel-${index}`}
             form={form}
             parent={parent}
-            activeDelta={activeDelta}
+            delta={activeDelta}
             ref={ref}
         >
             <SchemaField form={form} schema={schema} onChange={onChange} />
