@@ -23,9 +23,13 @@ export const Item = forwardRef(function Item(props, ref) {
             if (!template) return;
             const form = copyWithIndex(template, index);
 
-            form.titleFun =
-                'titleFun' in form ? form.titleFun : parent.titleFun;
-            form.readonly = 'readonly' in form ? form.readonly : disabled;
+            if (!('titleFun' in form)) {
+                if ('titleFun' in parent) {
+                    form.titleFun = parent.titleFun;
+                }
+            }
+            form.readonly =
+                'readonly' in form ? form.readonly : (disabled ?? false);
 
             return (
                 <SchemaField
