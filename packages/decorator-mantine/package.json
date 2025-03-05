@@ -1,0 +1,46 @@
+{
+    "name": "@forml/decorator-mantine",
+    "version": "2.0.0-next.9",
+    "description": "A mantine decorator for forml",
+    "main": "src/index.jsx",
+    "type": "module",
+    "scripts": {
+        "lint": "eslint src/**/*.js",
+        "test": "jest --coverage --verbose --passWithNoTests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/forml-js/forml.git"
+    },
+    "keywords": [
+        "forml",
+        "decorator",
+        "react",
+        "json",
+        "schema",
+        "form"
+    ],
+    "author": "Zachary Hueras",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/forml-js/forml/issues"
+    },
+    "homepage": "https://www.forml.dev",
+    "peerDependencies": {
+        "@forml/context": "file:../context",
+        "@forml/hooks": "file:../hooks",
+        "@mantine/core": "^7.17.1",
+        "@mantine/dates": "^7.17.1",
+        "@mantine/form": "^7.17.1",
+        "@mantine/hooks": "^7.17.1",
+        "postcss": "^8.5.3",
+        "postcss-preset-mantine": "^1.17.0",
+        "postcss-simple-vars": "^7.0.1",
+        "react": ">=17.0.0"
+    },
+    "dependencies": {
+        "@tabler/icons-react": "^3.30.0",
+        "prop-types": "^15.8.1"
+    },
+    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
+}

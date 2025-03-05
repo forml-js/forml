@@ -1,0 +1,48 @@
+.forml-fieldset {
+    display: inline-flex;
+    flex-direction: column;
+    height: min-content;
+    box-shadow: var(--mantine-shadow-sm) !important;
+    margin: var(--mantine-spacing-xs);
+
+    &.forml-filled {
+        &>.forml-fieldset-header {
+            background-color: var(--mantine-primary-color-filled);
+            color: var(--mantine-primary-color-contrast);
+        }
+
+        &>.forml-fieldset-content-horizontal,
+        &>.forml-fieldset-content-vertical {
+            border: 1px solid var(--forml-border-color);
+            border-top: none;
+            border-bottom-left-radius: var(--mantine-radius-sm);
+            border-bottom-right-radius: var(--mantine-radius-sm);
+        }
+
+    }
+}
+
+.forml-fieldset-content-vertical {
+    display: grid;
+    grid-gap: var(--mantine-spacing-md);
+    grid-auto-flow: row;
+}
+
+.forml-fieldset-content-horizontal {
+    display: grid;
+    grid-gap: var(--mantine-spacing-md);
+    grid-auto-flow: column;
+}
+
+.forml-fieldset>.forml-fieldset-content-horizontal,
+.forml-fieldset>.forml-fieldset-content-vertical {
+    padding: var(--mantine-spacing-xs);
+}
+
+.forml-fieldset-header {
+    padding: var(--mantine-spacing-xs);
+    background-color: transparent;
+    color: inherit;
+    border-top-left-radius: var(--mantine-radius-sm);
+    border-top-right-radius: var(--mantine-radius-sm);
+}

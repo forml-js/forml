@@ -1,0 +1,201 @@
+.forml-array {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    box-shadow: var(--mantine-shadow-xs) !important;
+
+
+    .forml-array-item {
+        border-bottom: 1px solid var(--forml-border-color);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &.forml-filled .forml-array-item {
+        border: 1px solid var(--forml-border-color);
+        border-top: none;
+
+        &:last-child {
+            border-bottom-left-radius: var(--mantine-radius-sm);
+            border-bottom-right-radius: var(--mantine-radius-sm);
+        }
+    }
+
+    &.forml-filled .forml-array-header {
+        background-color: var(--mantine-primary-color-filled);
+        color: var(--mantine-primary-color-contrast);
+    }
+}
+
+.forml-array-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    vertical-align: middle;
+    align-items: center;
+    padding: var(--mantine-spacing-xs);
+    border-top-left-radius: var(--mantine-radius-sm);
+    border-top-right-radius: var(--mantine-radius-sm);
+
+    .forml-array-header-add-button {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        height: auto !important;
+        border-radius: 0;
+        border-top-right-radius: var(--mantine-radius-sm);
+    }
+
+    .forml-array-header-add {
+        user-select: none;
+        cursor: pointer;
+        display: grid;
+        grid-auto-flow: column;
+        grid-gap: var(--mantine-spacing-xs);
+        align-items: center;
+        gap: calc(var(--mantine-spacing-xs) / 2);
+        color: var(--mantine-primary-color-filled);
+        transition: all 300ms ease-in-out;
+        border-radius: var(--mantine-radius-sm);
+        padding: 0 var(--mantine-spacing-xs) 0 calc(var(--mantine-spacing-xs) / 2);
+
+        &:hover {
+            color: var(--mantine-primary-color-filled);
+            background-color: var(--mantine-primary-color-light);
+            filter: brightness(200%);
+        }
+
+        &:active {
+            color: var(--mantine-primary-color-filled);
+            background-color: var(--mantine-primary-color-dark);
+            filter: brightness(150%);
+        }
+
+        &:focus {
+            color: var(--mantine-primary-color-filled);
+            background-color: var(--mantine-primary-color-light);
+            filter: brightness(200%);
+        }
+    }
+
+    &.forml-filled .forml-array-header-add {
+        color: var(--mantine-primary-color-contrast);
+
+        &:hover {
+            color: var(--mantine-primary-color-contrast);
+            background-color: var(--mantine-primary-color-light);
+            filter: brightness(200%);
+        }
+
+        &:active {
+            color: var(--mantine-primary-color-contrast);
+            background-color: var(--mantine-primary-color-dark);
+            filter: brightness(150%);
+        }
+
+        &:focus {
+            color: var(--mantine-primary-color-contrast);
+            background-color: var(--mantine-primary-color-light);
+            filter: brightness(200%);
+        }
+    }
+
+}
+
+.forml-array-item {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto min-content 1fr min-content auto;
+
+    & .forml-array-item-draghandle {
+        user-select: none;
+        padding: var(--mantine-spacing-xs);
+        cursor: move;
+    }
+
+    & .forml-array-item-controls {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .forml-array-item-movement-button {
+        --forml-movement-button-color: var(--mantine-color-gray-8);
+        --forml-movement-button-contrast: var(--mantine-color-gray-0);
+
+        @media (prefers-color-scheme: dark) {
+            --forml-movement-button-color: var(--mantine-color-gray-8);
+            --forml-movement-button-contrast: var(--mantine-color-gray-1);
+        }
+
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: var(--mantine-spacing-xs);
+
+        &:hover {
+            background-color: --forml-movement-button-color;
+            color: --forml-movement-button-contrast;
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(80%);
+        }
+
+        &:active {
+            background-color: --forml-movement-button-color;
+            color: --forml-movement-button-contrast;
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(60%);
+        }
+
+        &:focus {
+            background-color: --forml-movement-button-color;
+            color: --forml-movement-button-contrast;
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(80%);
+        }
+    }
+
+    & .forml-array-item-destroy {
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: var(--mantine-spacing-xs);
+
+        &:only-child {
+            margin-top: 0;
+        }
+
+        &:hover {
+            background-color: rgba(from var(--mantine-color-red-8) r g b / 1);
+            color: rgba(from var(--mantine-color-red-0) r g b / 1.0);
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(80%);
+        }
+
+        &:active {
+            background-color: rgba(from var(--mantine-color-red-8) r g b / 1);
+            color: rgba(from var(--mantine-color-red-0) r g b / 1.0);
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(60%);
+        }
+
+        &:focus {
+            background-color: rgba(from var(--mantine-color-red-8) r g b / 1);
+            color: rgba(from var(--mantine-color-red-0) r g b / 1.0);
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(80%);
+        }
+    }
+
+    & .forml-array-item-forms {
+        padding: var(--mantine-spacing-xs);
+    }
+}

@@ -1,0 +1,20 @@
+.forml-tabs-root {
+    margin: var(--mantine-spacing-xs);
+
+    &.forml-filled {
+        .forml-tabs-header {
+            color: var(--mantine-primary-color-contrast);
+            background-color: var(--mantine-primary-color-filled);
+            padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+            border-top-left-radius: var(--mantine-radius-sm);
+            border-top-right-radius: var(--mantine-radius-sm);
+        }
+
+        .forml-tabs {
+            border: 1px solid var(--forml-border-color);
+            border-top: none;
+            border-bottom-left-radius: var(--mantine-radius-sm);
+            border-bottom-right-radius: var(--mantine-radius-sm);
+        }
+    }
+}

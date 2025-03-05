@@ -1,0 +1,73 @@
+import React, { Children, useMemo } from 'react';
+import { Button, Box, Paper, Divider, Text, Title } from '@mantine/core';
+import { useArrayKeyCount, useDecorator } from '@forml/hooks';
+import { IconPlus } from '@tabler/icons-react';
+
+import './array.css';
+
+function Empty(props) {
+    return (
+        <Box p="md" ta="center">
+            <Text c="gray.6" fs="italic">
+                Empty
+            </Text>
+        </Box>
+    );
+}
+
+function Header(props) {
+    const { title, description, addText } = props;
+    const options = useDecorator('options');
+    if (title || description) {
+        const rootClass = options.filled
+            ? 'forml-array-header forml-filled'
+            : 'forml-array-header';
+        return (
+            <Box className={rootClass}>
+                <Box className="forml-array-header-text">
+                    {title && <Title order={6}>{title}</Title>}
+                    {description && <Text size="xs">{description}</Text>}
+                </Box>
+                <Button
+                    variant="subtle"
+                    className="forml-array-header-add-button"
+                    color="green.3"
+                    onClick={props.onAdd}
+                >
+                    <IconPlus />
+                    {addText}
+                </Button>
+            </Box>
+        );
+    } else {
+        return null;
+    }
+}
+
+function Base(props) {
+    const options = useDecorator('options');
+    const className = options.filled
+        ? 'forml-array forml-filled'
+        : 'forml-array';
+    return <Paper className={className}>{props.children}</Paper>;
+}
+
+export default function ArrayForm(props) {
+    const { form, add } = props;
+    const itemCount = useArrayKeyCount(form.key);
+    const suffix = itemCount === 0 ? <Empty /> : null;
+    const options = useDecorator('options');
+    return (
+        <Base>
+            <Header
+                title={form.title}
+                description={form.description}
+                addText={form.addText}
+                onAdd={add}
+            />
+            <Divider />
+            {props.children}
+            {suffix}
+        </Base>
+    );
+}
