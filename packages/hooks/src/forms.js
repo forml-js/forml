@@ -215,7 +215,8 @@ export function standardForm(schema, options = {}) {
     return f;
 }
 
-export function useMerged(schema, form, options = {}) {
+export function useMerged(schema, form, options) {
+    options = useMemo(() => options ?? {}, [options]);
     const localize = useLocalizer();
     return useMemo(() => {
         return merge(schema, form, { ...options, localize });
