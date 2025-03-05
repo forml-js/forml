@@ -1,8 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
+    devServer: {
+        client: { overlay: { runtimeErrors: false } },
+    },
     resolve: {
         fallback: {
             events: false,
@@ -40,7 +44,13 @@ module.exports = {
         publicPath: '/',
         path: path.resolve('./dist'),
     },
-    devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            minSize: 20000,
+        },
+    },
+    devtool: 'eval-source-map',
     module: {
         rules: [
             {
@@ -49,13 +59,48 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-react'],
+                        presets: [
+                            [
+                                '@babel/preset-react',
+                                {
+                                    runtime: 'automatic',
+                                },
+                            ],
+                        ],
                     },
                 },
             },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: ['postcss-preset-mantine'],
+                            },
+                        },
+                    },
+                ],
+            },
             { test: /\.(eot|svg|ttf|woff|woff2)$/, type: 'asset/resource' },
         ],
     },
-    plugins: [new MonacoEditorWebpackPlugin()],
+    plugins: [
+        new MonacoEditorWebpackPlugin({
+            languages: ['json'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'iso.html',
+            chunks: ['iso'],
+            template: './public/iso.html',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            chunks: ['app'],
+            template: './public/index.html',
+        }),
+    ],
 };

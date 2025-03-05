@@ -98,18 +98,9 @@ module.exports = {
                             type: 'date',
                         },
                         {
-                            type: 'fieldset',
-                            disableGutters: true,
-                            disableMargin: true,
-                            disablePadding: true,
-                            elevation: 0,
-                            items: [
-                                {
-                                    type: 'dynamic',
-                                    key: ['comment'],
-                                    generate: comment.form,
-                                },
-                            ],
+                            type: 'dynamic',
+                            key: ['comment'],
+                            generate: comment.form,
                         },
                     ],
                 },
@@ -131,18 +122,9 @@ module.exports = {
                         'checkbox',
                         'date',
                         {
-                            type: 'fieldset',
-                            disableGutters: true,
-                            disableMargin: true,
-                            disablePadding: true,
-                            elevation: 0,
-                            items: [
-                                {
-                                    type: 'dynamic',
-                                    key: ['comment'],
-                                    generate: comment.form,
-                                },
-                            ],
+                            type: 'dynamic',
+                            key: ['comment'],
+                            generate: comment.form,
                         },
                     ],
                 },

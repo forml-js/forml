@@ -3,6 +3,8 @@ import { SchemaForm } from '@forml/core';
 
 import decorators from '../decorators';
 
+const blacklist = ['Raw HTML', 'PDF Renderer'];
+
 export default function SelectDecorator(props) {
     const schema = useMemo(
         () => ({
@@ -12,7 +14,17 @@ export default function SelectDecorator(props) {
         }),
         [decorators]
     );
-    const form = useMemo(() => [{ key: [], title: 'Decorator' }], []);
+    const form = useMemo(
+        () => [
+            {
+                key: [],
+                title: 'Decorator',
+                description:
+                    'The component collection to use for rendering the example form',
+            },
+        ],
+        []
+    );
     const onChange = useCallback(
         function onChange(event, nextModel) {
             props.onChange(nextModel);
@@ -20,6 +32,13 @@ export default function SelectDecorator(props) {
         [props.onChange]
     );
     const model = props.decorator;
+    const decorator = useMemo(
+        () =>
+            blacklist.includes(model)
+                ? decorators['Material UI (Standard)']
+                : decorators[model],
+        [model]
+    );
 
     return (
         <SchemaForm
@@ -27,7 +46,7 @@ export default function SelectDecorator(props) {
             form={form}
             model={model}
             onChange={onChange}
-            decorator={decorators.mui}
+            decorator={decorator}
         />
     );
 }

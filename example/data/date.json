@@ -9,6 +9,7 @@
             },
             "date": {
                 "title": "Birthday",
+                "description": "Date of birth",
                 "type": "string"
             }
         },

@@ -1,31 +1,51 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import { SchemaForm, util } from '@forml/core';
 import shortid from 'shortid';
 
+import {
+    useSample,
+    useSampleModel,
+    useSampleSchema,
+    useSampleForm,
+    useSampleMapper,
+    useSampleLocalizer,
+    useSampleDecorator,
+} from '../samples';
 import ErrorBoundary from './ErrorBoundary';
 
 import decorators from '../decorators';
 
 export default function RenderExample(props) {
-    const { schema, form, model } = props;
-    const { onChange } = props;
-    const { localizer } = props;
-    const { mapper } = props;
-    const { decorator } = props;
-    const { wrapInDocument } = props;
+    const [model, setModel] = useSampleModel();
+    const [decorator] = useSampleDecorator();
+    const sample = useSample();
+    const schema = useSampleSchema();
+    const form = useSampleForm();
+    const mapper = useSampleMapper();
+    const localizer = useSampleLocalizer();
+    const wrapInDocument = sample != './kitchenSink.js';
+
+    const onChange = useCallback(
+        (event, nextModel) => {
+            setModel(nextModel);
+        },
+        [setModel]
+    );
 
     const key = useMemo(() => shortid(), [decorator]);
 
-    let child = <SchemaForm
-        schema={schema}
-        form={form}
-        model={model}
-        decorator={decorators[decorator]}
-        localizer={localizer}
-        onChange={onChange}
-        mapper={mapper}
-    />;
+    let child = (
+        <SchemaForm
+            schema={schema}
+            form={form}
+            model={model}
+            decorator={decorators[decorator]}
+            localizer={localizer}
+            onChange={onChange}
+            mapper={mapper}
+        />
+    );
     if (decorator === 'pdf') {
         if (wrapInDocument) {
             child = (
@@ -37,7 +57,7 @@ export default function RenderExample(props) {
         child = (
             <ReactPDF.PDFViewer
                 key={key}
-                style={useMemo(() => ({ width: '100vw', height: '100vh' }), [])}
+                style={{ width: '100vw', height: '100vh' }}
             >
                 {child}
             </ReactPDF.PDFViewer>

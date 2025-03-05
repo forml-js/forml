@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Typography from '@mui/material/Typography';
 
 export default class ErrorBoundary extends Component {
     constructor(props) {
@@ -15,13 +14,9 @@ export default class ErrorBoundary extends Component {
         if (this.state.hasError) {
             return (
                 <>
-                    <Typography variant="h6">Something went wrong!</Typography>
-                    <Typography variant="body1">
-                        {this.state.error.stack}
-                    </Typography>
-                    <Typography variant="caption">
-                        {JSON.stringify(this.state.info)}
-                    </Typography>
+                    <h6>Something went wrong!</h6>
+                    <p>{this.state.error.stack}</p>
+                    <p>{JSON.stringify(this.state.info)}</p>
                 </>
             );
         }

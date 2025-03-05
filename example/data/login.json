@@ -20,11 +20,17 @@
         }
     },
     "form": [
-        "userIdEmail",
         {
-            "key": "password",
-            "type": "password"
-        },
-        "rememberMe"
+            "type": "fieldset",
+            "key": [],
+            "items": [
+                "userIdEmail",
+                {
+                    "key": "password",
+                    "type": "password"
+                },
+                "rememberMe"
+            ]
+        }
     ]
 }

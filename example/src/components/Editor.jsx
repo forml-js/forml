@@ -17,6 +17,12 @@ export default function Editor(props) {
         () => (prefersDarkMode ? 'vs-dark' : 'vs'),
         [prefersDarkMode]
     );
+    const options = useMemo(
+        () => ({
+            minimap: { enabled: false },
+        }),
+        []
+    );
 
     if (!props.value) return null;
 
@@ -26,9 +32,7 @@ export default function Editor(props) {
             theme={theme}
             language="json"
             value={props.value}
-            options={{
-                minimap: { enabled: false },
-            }}
+            options={options}
             onChange={onChange}
         />
     );

@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import { SchemaForm } from '@forml/core';
-import * as decorator from '@forml/decorator-mui';
 import { samples } from '../samples';
+import decorators from '../decorators';
+
+const blacklist = ['Raw HTML', 'PDF Renderer'];
 
 export default function SelectExample(props) {
     const enm = useMemo(() => Object.keys(samples), [samples]);
@@ -13,6 +15,13 @@ export default function SelectExample(props) {
     const form = useMemo(() => [{ key: [], title: 'Sample', titles }], []);
     const schema = useMemo(() => ({ type: 'string', enum: enm }), [enm]);
     const model = props.selected;
+    const decorator = useMemo(
+        () =>
+            blacklist.includes(props.decorator)
+                ? decorators['Material UI (Standard)']
+                : decorators[props.decorator],
+        [props.decorator]
+    );
 
     return (
         <SchemaForm

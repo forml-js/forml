@@ -1,0 +1,128 @@
+html,
+body,
+#app {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.forml-dashboard {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr min-content 3fr;
+    height: 100%;
+    overflow: hidden;
+}
+
+.forml-panel {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content 1fr 1fr 1fr;
+    height: 100%;
+    overflow: hidden;
+}
+
+.forml-canvas {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content 1fr;
+    height: 100%;
+    overflow: auto;
+    gap: 0;
+}
+
+.forml-canvas>.forml-canvas-content {
+    padding: var(--mantine-spacing-xs);
+}
+
+.forml-section-maxi {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content auto;
+    min-height: 0;
+}
+
+.forml-section-mini {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 fit-content;
+}
+
+.forml-section-header {
+    display: flex;
+    padding: var(--mantine-spacing-xs);
+    color: var(--mantine-primary-color-contrast);
+    background-color: var(--mantine-primary-color-filled);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.forml-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mantine-spacing-md);
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.forml-section-maxi .forml-section-content {
+    padding: 0;
+}
+
+.forml-section-mini .forml-section-content {
+    padding: var(--mantine-spacing-xs);
+}
+
+.forml-collapse {
+    display: flex;
+    flex-direction: column;
+
+    .forml-collapse-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        flex: 0 0 min-content;
+
+        &[data-active=true] {
+            flex: 1 1 auto;
+        }
+
+        &>.forml-collapse-control {
+            background-color: var(--mantine-primary-color-filled);
+            color: var(--mantine-primary-color-contrast);
+            text-align: center;
+
+            &>.mantine-Accordion-label {
+                font-weight: bold;
+                font-size: var(--mantine-font-size-sm);
+            }
+        }
+
+        &>.forml-collapse-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            padding: 0;
+            height: fill-available;
+            height: -webkit-fill-available;
+            height: -moz-fill-available;
+            height: -ms-fill-available;
+            height: -o-fill-available;
+
+
+            &>.mantine-Accordion-content {
+                padding: 0;
+                flex: 1 1 auto;
+                height: fill-available;
+                height: -webkit-fill-available;
+                height: -moz-fill-available;
+                height: -ms-fill-available;
+                height: -o-fill-available;
+            }
+        }
+    }
+}

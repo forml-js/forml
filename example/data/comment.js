@@ -63,6 +63,7 @@ export const mapper = {
         const { form: parent, onChangeSet } = props;
         const ctx = useRenderingContext();
         const model = useRef(props.value).current;
+        console.log('mapper.comment(props: %o, ctx: %o)', props, ctx);
         return (
             <SchemaForm
                 {...ctx}
@@ -160,7 +161,6 @@ export function form() {
                         items: [
                             {
                                 type: 'fieldset',
-                                key: 'references[]',
                                 layout: 'vertical',
                                 elevation: 0,
                                 wrap: false,
