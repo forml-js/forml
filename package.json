@@ -66,10 +66,12 @@
         "semantic-release-lerna": "^2.11.1",
         "shortid": "^2.2.17",
         "sinon": "^19.0.2",
-        "sinon-chai": "^4.0.0"
+        "sinon-chai": "^4.0.0",
+        "webpack-cli": "^6.0.1"
     },
     "workspaces": [
         "packages/context",
+        "packages/decorator-mantine",
         "packages/decorator-mui",
         "packages/decorator-barebones",
         "packages/ware",
@@ -83,6 +85,7 @@
         "@forml/context": "file:packages/context",
         "@forml/core": "file:packages/core",
         "@forml/decorator-barebones": "file:packages/decorator-barebones",
+        "@forml/decorator-mantine": "file:packages/decorator-mantine",
         "@forml/decorator-mui": "file:packages/decorator-mui",
         "@forml/decorator-pdf": "file:packages/decorator-pdf",
         "@forml/example": "file:example",

@@ -1,6 +1,7 @@
 {
     "packages": [
         "packages/context",
+        "packages/decorator-mantine",
         "packages/decorator-mui",
         "packages/decorator-barebones",
         "packages/ware",
