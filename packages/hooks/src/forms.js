@@ -132,6 +132,23 @@ export function merge(schema, form = ['*'], options = {}) {
             if (obj.titleFun && !options.localize?.skipTitleFun) {
                 obj.titleFun = (...args) => localize(obj.titleFun(...args));
             }
+            if (obj.type === 'array' && !obj.addText) {
+                if (obj.title) {
+                    obj.addText = `${localize('Add')} ${obj.title}`;
+                } else {
+                    obj.addText = localize('Add');
+                }
+            } else if (obj.addText) {
+                obj.addText = localize(obj.addText);
+            }
+        } else {
+            if (obj.type === 'array' && !obj.addText) {
+                if (obj.title) {
+                    obj.addText = `Add ${obj.title}`;
+                } else {
+                    obj.addText = 'Add';
+                }
+            }
         }
 
         acc.push(obj);
