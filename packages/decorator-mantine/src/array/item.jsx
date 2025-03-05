@@ -25,7 +25,7 @@ function Controls(props) {
 
 function Destroy(props) {
     return (
-        <Button variant="subtle" onClick={props.onClick}>
+        <Button variant="subtle" color="red.3" onClick={props.onClick}>
             <IconTrash />
         </Button>
     );
