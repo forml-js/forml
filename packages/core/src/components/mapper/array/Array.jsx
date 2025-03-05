@@ -3,14 +3,12 @@ import {
     createArrayKeyStore,
     useActionsFor,
     useArrayFormActions,
-    useArrayKeys,
+    useArrayKeyCount,
     useDecorator,
     useValue,
 } from '@forml/hooks';
 import t from 'prop-types';
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
-// import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import shortid from 'shortid';
 
 import { FormType } from '#types';
 import { Item } from './Item.jsx';
@@ -48,35 +46,52 @@ function ArrayComponent(props) {
     );
 }
 
+// TODO: Drop ranges -- use the same ref-based technique for the items themselves
 function ArrayRanges(props) {
     const { form, onChange } = props;
-    const keys = useArrayKeys();
-    const ranges = useMemo(
-        function () {
-            const ranges = [];
-            const count = keys?.length ?? 0;
+    const keys = useArrayKeyCount();
+    const perRange = 10;
+    const totalRanges = Math.ceil(keys / perRange);
+    const ranges = useRef([]).current;
 
-            if (count > 0) {
-                const perRange = Math.max(Math.ceil(Math.sqrt(count)), 10);
-                const totalRanges = Math.ceil(count / perRange);
-
-                for (let range = 0; range < totalRanges; range++) {
-                    const start = range * perRange;
-                    const end = start + perRange;
-                    ranges.push(
-                        <Range
-                            key={range}
-                            form={form}
-                            start={start}
-                            end={end}
-                            onChange={onChange}
-                        />
-                    );
-                }
-            }
-            return ranges;
+    const makeRange = useCallback(
+        function makeRange(index, start, end) {
+            return (
+                <Range
+                    key={index}
+                    form={form}
+                    start={start}
+                    end={end}
+                    onChange={onChange}
+                />
+            );
         },
-        [keys, form, onChange]
+        [form, onChange]
+    );
+
+    useMemo(
+        function () {
+            ranges.splice(0, ranges.length);
+            for (let i = 0; i < totalRanges; ++i) {
+                const start = i * perRange;
+                const end = start + perRange;
+                ranges.push(makeRange(i, start, end));
+            }
+        },
+        [makeRange]
+    );
+
+    useMemo(
+        function () {
+            if (ranges.length < totalRanges) {
+                const start = ranges.length * perRange;
+                const end = start + perRange;
+                ranges.push(makeRange(totalRanges, start, end));
+            } else if (ranges.length > totalRanges) {
+                ranges.pop();
+            }
+        },
+        [totalRanges]
     );
 
     return <>{ranges}</>;
