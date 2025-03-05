@@ -35,10 +35,16 @@ function ArrayComponent(props) {
     const { form, onChange } = props;
 
     const array = useValue(form.key);
-    const store = useRef(createArrayKeyStore(array)).current;
+    const store = useRef();
+
+    useMemo(() => {
+        if (!store.current) {
+            store.current = createArrayKeyStore(form.key, array);
+        }
+    }, []);
 
     return (
-        <FormContext.Provider value={store}>
+        <FormContext.Provider value={store.current}>
             <ArrayContainer {...props}>
                 <ArrayRanges form={form} onChange={onChange} />
             </ArrayContainer>
