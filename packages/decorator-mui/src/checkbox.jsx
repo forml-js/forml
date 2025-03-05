@@ -1,31 +1,30 @@
+import { useError, useDecorator } from '@forml/hooks';
 import {
     FormControl,
     FormControlLabel,
-    FormGroup,
     FormHelperText,
-    FormLabel,
     Checkbox as MuiCheckbox,
 } from '@mui/material';
-import { useLocalizer, useError } from '@forml/hooks';
 import React, { useMemo } from 'react';
 
 /**
  * @component
  */
 export default function Checkbox({ form, value, onChange }) {
-    const localize = useLocalizer();
+    const options = useDecorator('options');
+    const variant = 'variant' in options ? options.variant : 'standard';
     const disabled = 'readonly' in form ? form.readonly : false;
-    const title = 'title' in form ? localize(form.title) : null;
-    const description =
-        'description' in form ? localize(form.description) : null;
-    const error = useError(form.key);
-    const helperText = useMemo(
-        () => (error ? error : description),
-        [error, description]
+
+    const title = useMemo(
+        () => ('titleFun' in form ? form.titleFun(value) : form.title),
+        [form.title, form.titleFun, value]
     );
+    const error = useError(form.key);
+    const description = 'description' in form ? form.description : null;
+    const helperText = error ? error : description;
 
     return (
-        <FormControl variant="standard" error={!!error} row={false}>
+        <FormControl variant={variant} error={!!error}>
             <FormControlLabel
                 checked={value}
                 label={title}

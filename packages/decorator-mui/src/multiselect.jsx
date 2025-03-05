@@ -1,4 +1,4 @@
-import { useError, useLocalizer } from '@forml/hooks';
+import { useError, useDecorator, useSelect } from '@forml/hooks';
 import {
     FormControl,
     FormHelperText,
@@ -6,36 +6,31 @@ import {
     MenuItem,
     Select as MuiSelect,
 } from '@mui/material';
-import React, { useCallback, useMemo, useRef } from 'react';
 import ObjectPath from 'objectpath';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 /**
  * @component
  */
 export default function Multiselect(props) {
     const { form } = props;
-    const localize = useLocalizer();
     const ref = useRef(null);
+    const options = useDecorator('options');
+    const select = useSelect(form);
 
+    const variant = 'variant' in options ? options.variant : 'standard';
     const disabled = 'readonly' in form ? form.readonly : false;
-    const title = localize(form.title);
-    const placeholder = localize(form.placeholder);
-    const description = localize(form.description);
+    const title = 'titleFun' in form ? form.titleFun(props.value) : form.title;
+    const placeholder = 'placeholder' in form ? form.placeholder : null;
+    const description = 'description' in form ? form.description : null;
     const error = useError(form.key);
-    const helperText = useMemo(() => (error ? error : description), [error]);
-    const value = useMemo(() => {
-        return props.value.map((value) => {
-            return form.titleMap.findIndex(
-                (titleMap) => titleMap.value === value
-            );
-        });
-    }, [form.titleMap, props.value]);
+    const helperText = error ? error : description;
+    const value = select.indexOf(props.value);
 
     const onChange = useCallback(
         (event) => {
             const nextValue = event.target.value.map((selectedIndex) => {
-                const titleMap = form.titleMap[selectedIndex];
-                return titleMap.value;
+                return select.valueOf(selectedIndex);
             });
             props.onChange(
                 { ...event, target: { ...event.target, value: nextValue } },
@@ -45,7 +40,7 @@ export default function Multiselect(props) {
         [props.onChange, form.titleMap, value]
     );
 
-    const options = useMemo(
+    const menuItems = useMemo(
         function () {
             const menuItems = [];
             for (let i = 0; i < form.titleMap.length; i++) {
@@ -53,18 +48,18 @@ export default function Multiselect(props) {
                 const { name } = form.titleMap[i];
                 menuItems.push(
                     <MenuItem key={key} value={i}>
-                        {localize(name)}
+                        {name}
                     </MenuItem>
                 );
             }
             return menuItems;
         },
-        [form.titleMap, form.key, localize, value]
+        [form.titleMap, form.key, value]
     );
 
     return (
-        <FormControl variant="standard" error={!!error}>
-            {title ? <InputLabel>{title}</InputLabel> : null}
+        <FormControl variant={variant} error={!!error}>
+            {title ? <InputLabel variant={variant}>{title}</InputLabel> : null}
             <MuiSelect
                 inputRef={ref}
                 error={!!error}
@@ -74,7 +69,7 @@ export default function Multiselect(props) {
                 onChange={onChange}
                 multiple
             >
-                {options}
+                {menuItems}
             </MuiSelect>
             {helperText ? <FormHelperText>{helperText}</FormHelperText> : null}
         </FormControl>

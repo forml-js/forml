@@ -1,5 +1,14 @@
 import { useLocalizedString, useLocalizer } from '@forml/hooks';
-import { Button, Icon, List, ListItem, ListItemIcon, ListItemText, Paper, styled } from '@mui/material';
+import {
+    Button,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    styled,
+} from '@mui/material';
 import React, { forwardRef, useMemo } from 'react';
 
 const StyledPaper = styled(Paper, {
@@ -10,15 +19,15 @@ const StyledPaper = styled(Paper, {
     flex: '1 1 auto',
     ...(props.disablePadding
         ? {
-            marginTop: 0,
-            marginBottom: 0,
-        }
+              marginTop: 0,
+              marginBottom: 0,
+          }
         : {}),
     ...(props.disableGutters
         ? {
-            marginLeft: 0,
-            marginRight: 0,
-        }
+              marginLeft: 0,
+              marginRight: 0,
+          }
         : {}),
 }));
 const StyledList = forwardRef((props, ref) => (
@@ -54,15 +63,6 @@ function Items(props, ref) {
         }),
         [form]
     );
-    const addText = useMemo(
-        () =>
-            'addText' in form
-                ? localizer.getLocalizedString(form.addText)
-                : title
-                    ? `${localizer.getLocalizedString('Add')} ${title}`
-                    : localizer.getLocalizedString('Add'),
-        [form, localizer, title]
-    );
 
     const suffix = useMemo(
         () => (value && value.length === 0 ? <Empty /> : null),
@@ -76,7 +76,7 @@ function Items(props, ref) {
                     add={props.add}
                     icon={form.icon}
                     color={color}
-                    addText={addText}
+                    addText={form.addText}
                     disabled={disabled}
                     title={title}
                     error={error}

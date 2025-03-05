@@ -7,14 +7,17 @@ import {
     ListItemText,
     Paper,
 } from '@mui/material';
-import { useLocalizer } from '@forml/hooks';
 import React, { useMemo } from 'react';
 
 /**
  * @component
  */
 function Root(props) {
-    return <List flexDirection="column" flexGrow={1} {...props} />;
+    return (
+        <List dense disablePadding>
+            {props.children}
+        </List>
+    );
 }
 
 function Content(props) {
@@ -39,13 +42,11 @@ function Content(props) {
 }
 
 function Surface(props) {
-    const { disableMargin, ...forwardProps } = props;
+    const { disableMargin, children } = props;
     return (
-        <Paper
-            sx={{ flex: '1' }}
-            margin={disableMargin ? 0 : 1}
-            {...forwardProps}
-        />
+        <Paper sx={{ flex: '1' }} margin={disableMargin ? 0 : 1}>
+            {children}
+        </Paper>
     );
 }
 
@@ -55,11 +56,9 @@ function Title(props) {
 
 export default function FieldSet(props) {
     const { form } = props;
-    const localize = useLocalizer();
 
-    const title = 'title' in form ? localize(form.title) : null;
-    const description =
-        'description' in form ? localize(form.description) : null;
+    const title = 'title' in form ? form.title : null;
+    const description = 'description' in form ? form.description : null;
     const alignItems = 'alignItems' in form ? form.alignItems : undefined;
     const layout = 'layout' in form ? form.layout : 'vertical';
     const showTitle = 'showTitle' in form ? form.showTitle : true;
@@ -83,7 +82,7 @@ export default function FieldSet(props) {
     );
 
     const content = (
-        <Root dense disablePadding>
+        <Root>
             {titleComponent}
             <Content
                 layout={layout}

@@ -9,7 +9,8 @@ export default function DateTime(props) {
     const fullWidth = 'fullWidth' in form ? form.fullWidth : true;
     const disablePast = 'disablePast' in form ? form.disablePast : false;
     const disableFuture = 'disableFuture' in form ? form.disableFuture : false;
-    const variant = 'variant' in form ? form.variant : 'dialog';
+    const pickerVariant = 'variant' in form ? form.variant : 'dialog';
+    const inputVariant = 'variant' in options ? options.variant : 'standard';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
     const openTo = 'openTo' in form ? form.openTo : 'hours';
     const format = 'format' in form ? form.format : undefined;
@@ -36,11 +37,11 @@ export default function DateTime(props) {
     const slotProps = useMemo(
         () => ({
             textField: {
-                variant: 'standard',
+                variant: inputVariant,
                 fullWidth: fullWidth,
             },
         }),
-        [fullWidth]
+        [fullWidth, inputVariant]
     );
 
     return (
@@ -50,7 +51,7 @@ export default function DateTime(props) {
             disablePast={disablePast}
             disableFuture={disableFuture}
             slotProps={slotProps}
-            variant={variant}
+            variant={pickerVariant}
             autoOk={autoOk}
             openTo={openTo}
             format={format}

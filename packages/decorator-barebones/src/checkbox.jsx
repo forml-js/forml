@@ -1,16 +1,14 @@
-import * as Input from './input';
+import { useError } from '@forml/hooks';
 import React from 'react';
 
 /**
  * @component
  */
-export default function Checkbox({
-    title,
-    description,
-    error,
-    checked,
-    onChange,
-}) {
+export default function Checkbox({ form, value, onChange }) {
+    const title = 'titleFun' in form ? form.titleFun(value) : form.title;
+    const description = 'description' in form ? form.description : null;
+    const error = useError();
+    const checked = value;
     return (
         <div>
             <label key="label">
@@ -23,9 +21,7 @@ export default function Checkbox({
                 {title}
             </label>
             {(error || description) && (
-                <Input.Description key="description">
-                    {error || description}
-                </Input.Description>
+                <p key="description">{error || description}</p>
             )}
         </div>
     );

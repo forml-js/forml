@@ -7,18 +7,11 @@ import clsx from 'clsx';
  * @return {React.Component}
  */
 export function Item(props, ref) {
-    const { disabled, draggableProps, dragHandleProps } = props;
+    const { disabled } = props;
     return (
-        <li
-            {...draggableProps}
-            className={clsx(
-                draggableProps ? draggableProps.className : null,
-                'item'
-            )}
-            ref={ref}
-        >
+        <li className="item" ref={ref}>
             <div key="controls" className="controls">
-                <h6 key="title" {...dragHandleProps} className="title">
+                <h6 key="title" className="title">
                     {props.title}
                 </h6>
                 <button

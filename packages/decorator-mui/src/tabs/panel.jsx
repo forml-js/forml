@@ -44,20 +44,25 @@ const StyledPaper = styled(Paper)((props) => ({
     transition: 'all 0.3s',
     flex: '1 1 100%',
     height: '100%',
+    width: 'fill-available',
     position: paperPosition(props.delta),
     zIndex: paperZIndex(props.delta),
     transform: paperTransform(props.orientation, props.delta),
 }));
 
 export default function Panel(props) {
-    const { activeDelta, form, parent } = props;
-    const { children, ...forwardProps } = props;
+    const { form, parent, delta } = props;
+    const { children } = props;
 
     const elevation = 'elevation' in form ? form.elevation : 0;
     const orientation = 'layout' in parent ? parent.layout : 'horizontal';
 
     return (
-        <StyledPaper orientation={orientation} elevation={elevation}>
+        <StyledPaper
+            delta={delta}
+            orientation={orientation}
+            elevation={elevation}
+        >
             <Suspense fallback={<CircularProgress />}>{children}</Suspense>
         </StyledPaper>
     );

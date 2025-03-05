@@ -5,7 +5,6 @@ import {
     ListItemText,
     styled,
 } from '@mui/material';
-import { useLocalizer } from '@forml/hooks';
 import React, { useMemo } from 'react';
 
 const ImageIcon = styled('img')(({ theme, ...props }) => ({
@@ -139,11 +138,9 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
 export default function Tab(props) {
     const { activate, active } = props;
     const { form, parent } = props;
-    const localize = useLocalizer();
 
-    const title = 'title' in form ? localize(form.title) : null;
-    const description =
-        'description' in form ? localize(form.description) : null;
+    const title = 'title' in form ? form.title : null;
+    const description = 'description' in form ? form.description : null;
     const icon = 'icon' in form ? form.icon : 'dynamic_form';
     const image = 'image' in form ? form.image : null;
     const imageOrIcon = useMemo(() => {
@@ -167,7 +164,6 @@ export default function Tab(props) {
             parent={parent}
             form={form}
             active={active}
-            button
             divider={parent.layout === 'horizontal'}
             onClick={activate}
         >

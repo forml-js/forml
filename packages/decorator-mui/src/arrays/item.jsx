@@ -1,11 +1,14 @@
-import debug from 'debug';
 import React, { forwardRef, useMemo } from 'react';
 import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 
-const log = debug('forml:decorator-mui:arrays:item');
-
 const DragHandle = (props) => (
-    <Box {...props} sx={{ display: 'flex', flexDirection: 'column', p: 1.5 }}>
+    <Box
+        {...props}
+        sx={useMemo(
+            () => ({ display: 'flex', flexDirection: 'column', p: 1.5 }),
+            []
+        )}
+    >
         <Icon>drag_handle</Icon>
     </Box>
 );
@@ -60,7 +63,6 @@ function Destroy(props) {
             disabled={disabled}
             color="secondary"
             size="small"
-            divider
         >
             <Icon>delete_forever</Icon>
         </DestroyButton>

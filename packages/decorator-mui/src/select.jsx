@@ -1,12 +1,13 @@
-import { useError, useLocalizer } from '@forml/hooks';
+import { useError, useSelect, useDecorator } from '@forml/hooks';
 import {
     FormControl,
+    FormHelperText,
     InputLabel,
     MenuItem,
     Select as MuiSelect,
 } from '@mui/material';
-import React, { useCallback, useMemo, useRef } from 'react';
 import ObjectPath from 'objectpath';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 /**
  * @component
@@ -14,14 +15,11 @@ import ObjectPath from 'objectpath';
 export default function Select(props) {
     const { form } = props;
     const ref = useRef(null);
+    const options = useDecorator('options');
+    const select = useSelect(form);
 
-    const value = useMemo(() => {
-        const index = form.titleMap.findIndex(
-            (titleMap) => titleMap.value === props.value
-        );
-        if (index === -1) return '';
-        return index;
-    }, [form.titleMap, props.value]);
+    const value = select.indexOf(props.value);
+    const variant = 'variant' in options ? options.variant : 'standard';
     const title = useMemo(
         () => ('titleFun' in form ? form.titleFun(value) : form.title),
         [form.title, form.titleFun, value]
@@ -33,17 +31,16 @@ export default function Select(props) {
     const onChange = useCallback(
         (event) => {
             const selectedIndex = event.target.value;
-            const titleMap = form.titleMap[selectedIndex];
-            const value = titleMap.value;
+            const value = select.valueOf(selectedIndex);
             props.onChange(
                 { ...event, target: { ...event.target, value } },
                 value
             );
         },
-        [props.onChange, form.titleMap, value]
+        [props.onChange, select]
     );
 
-    const options = useMemo(
+    const menuItems = useMemo(
         function () {
             const menuItems = [];
             for (let i = 0; i < form.titleMap.length; i++) {
@@ -62,20 +59,20 @@ export default function Select(props) {
 
     return (
         <FormControl error={!!error}>
-            <InputLabel variant="standard">{title}</InputLabel>
+            {title ? <InputLabel variant={variant}>{title}</InputLabel> : null}
             <MuiSelect
                 inputRef={ref}
                 error={!!error}
                 label={title}
                 value={value ?? ''}
                 placeholder={form.placeholder}
-                helperText={helperText}
                 disabled={disabled}
                 onChange={onChange}
-                variant="standard"
+                variant={variant}
             >
-                {options}
+                {menuItems}
             </MuiSelect>
+            {helperText ? <FormHelperText>{helperText}</FormHelperText> : null}
         </FormControl>
     );
 }

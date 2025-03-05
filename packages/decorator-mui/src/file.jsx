@@ -1,5 +1,5 @@
 import { Button, Icon, TextField, styled } from '@mui/material';
-import { useError, useLocalizer } from '@forml/hooks';
+import { useError, useDecorator, useFileField } from '@forml/hooks';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 /**
@@ -10,38 +10,22 @@ const HiddenFileInput = styled('input')({ display: 'none' });
 export default function File(props) {
     const { form, value } = props;
     const ref = useRef();
-    const localize = useLocalizer();
+    const options = useDecorator('options');
 
-    const title = 'title' in form ? localize(form.title) : null;
-    const description =
-        'description' in form ? localize(form.description) : null;
+    const variant = 'variant' in options ? options.variant : 'standard';
+    const title = 'titleFun' in form ? form.titleFun(value) : form.title;
+    const description = 'description' in form ? form.description : null;
     const error = useError(form.key);
-    const helperText = useMemo(
-        () => (error ? error : description),
-        [error, description]
-    );
+    const helperText = error ? error : description;
+    const accept = 'accept' in form ? form.accept : undefined;
+    const fileField = useFileField(form);
 
-    const accept = useMemo(
-        () => ('accept' in form ? form.accept : undefined),
-        [form]
-    );
-
-    const [display, setDisplay] = useState(value);
     const onChange = useCallback(
         async function onChange(event) {
-            const [file] = event.target.files ?? [];
-            let result = '';
-
-            if (file) {
-                result = await getFileFormat(form.format, file);
-                setDisplay(file.name);
-            } else {
-                setDisplay('');
-            }
-
-            return props.onChange(event, result);
+            const value = await fileField.onChange(event);
+            return props.onChange(event, value);
         },
-        [form.format, setDisplay, props.onChangeSet]
+        [fileField.onChange, props.onChangeSet]
     );
 
     const onClick = useCallback(function onClick(event) {
@@ -56,7 +40,14 @@ export default function File(props) {
         function clear(event) {
             event.preventDefault();
             event.stopPropagation();
-            props.onChange(event);
+            const result = fileField.onChange({
+                ...event,
+                target: { ...event.target, files: [] },
+            });
+            props.onChange(
+                { ...event, target: { ...event.target, value: result } },
+                result
+            );
         },
         [props.onChange]
     );
@@ -87,8 +78,8 @@ export default function File(props) {
                 error={!!error}
                 helperText={helperText}
                 slotProps={slotProps}
-                value={display}
-                variant="standard"
+                value={fileField.display}
+                variant={variant}
                 onClick={onClick}
             />
             <HiddenFileInput
@@ -101,24 +92,4 @@ export default function File(props) {
             />
         </>
     );
-}
-
-function readAsDataURL(file) {
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => {
-            resolve(reader.result);
-        });
-        reader.readAsDataURL(file);
-    });
-}
-
-function getFileFormat(format, file) {
-    switch (format) {
-        case 'data_url':
-            return readAsDataURL(file);
-        case 'name':
-        default:
-            return file.name;
-    }
 }

@@ -9,7 +9,6 @@ import {
     styled,
 } from '@mui/material';
 import React, { useMemo, useRef } from 'react';
-import { useLocalizer } from '@forml/hooks';
 
 const Root = styled(Paper)(({ form }) => [
     {
@@ -93,6 +92,7 @@ const Panels = styled(Box)(({ form, theme }) => [
         position: 'relative',
         zIndex: 5,
         gridArea: '1 / -1',
+        transition: theme.transitions.create(),
     },
     form.layout === 'horizontal' && {
         flexDirection: 'column',
@@ -121,13 +121,11 @@ const TitleListItem = styled(ListItem)(({ theme, form }) => [
 
 function Title(props) {
     const { form } = props;
-    const localize = useLocalizer();
 
     const showTitle = 'showTitle' in form ? form.showTitle : true;
     const icon = 'icon' in form ? form.icon : 'view_carousel';
-    const title = 'title' in form ? localize(form.title) : null;
-    const description =
-        'description' in form ? localize(form.description) : null;
+    const title = 'title' in form ? form.title : null;
+    const description = 'description' in form ? form.description : null;
 
     if (!showTitle || (!title && !description)) {
         return null;

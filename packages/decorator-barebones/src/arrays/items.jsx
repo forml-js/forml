@@ -1,13 +1,10 @@
 import React, { forwardRef } from 'react';
-import { useLocalizer } from '@forml/hooks';
 
 /**
  * @component
  */
 function Items(props, ref) {
-    const { disabled } = props;
-
-    const { getLocalizedString } = useLocalizer();
+    const { disabled, form } = props;
 
     return (
         <div className="array" ref={ref}>
@@ -17,7 +14,7 @@ function Items(props, ref) {
                 disabled={disabled}
                 onClick={props.add}
             >
-                {getLocalizedString('Add')}
+                {form.addText}
             </button>
             <ul key="items">{props.children}</ul>
         </div>

@@ -1,20 +1,24 @@
 import { DatePicker } from '@mui/x-date-pickers';
 import React, { useCallback, useMemo } from 'react';
 import { usePickerUtils } from './date-utils.js';
+import { useError, useDecorator } from '@forml/hooks';
 
 export default function Date(props) {
     const { form, value } = props;
     const utils = usePickerUtils();
+    const options = useDecorator('options');
 
     const fullWidth = 'fullWidth' in form ? form.fullWidth : true;
     const disablePast = 'disablePast' in form ? form.disablePast : false;
     const disableFuture = 'disableFuture' in form ? form.disableFuture : false;
-    const variant = 'variant' in form ? form.variant : 'inline';
+    const pickerVariant = 'variant' in form ? form.variant : 'inline';
+    const inputVariant = 'variant' in options ? options.variant : 'standard';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
     const openTo = 'openTo' in form ? form.openTo : 'day';
     const format = 'format' in form ? form.format : undefined;
     const disabled = 'readonly' in form ? form.readonly : false;
     const otherProps = 'otherProps' in form ? form.otherProps : undefined;
+    const error = useError(form.key);
 
     const onChange = useCallback(
         function onChange(value) {
@@ -36,21 +40,25 @@ export default function Date(props) {
     const slotProps = useMemo(
         () => ({
             textField: {
-                variant: 'standard',
+                variant: inputVariant,
+                helperText: error ?? form.description,
                 fullWidth: fullWidth,
             },
         }),
-        [fullWidth]
+        [fullWidth, inputVariant, error, form.description]
     );
 
     return (
         <DatePicker
             value={utils.date(value)}
+            label={form.title}
+            helperText={form.error ?? form.description}
+            error={!!error}
             onChange={onChange}
             disablePast={disablePast}
             disableFuture={disableFuture}
             slotProps={slotProps}
-            variant={variant}
+            variant={pickerVariant}
             autoOk={autoOk}
             openTo={openTo}
             format={format}
