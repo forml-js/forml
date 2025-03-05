@@ -26,10 +26,12 @@ export function useMapper() {
  * A hook to pull in the closest parent form's decorator
  * @return {Decorator}
  */
-export function useDecorator(type = null) {
+export function useDecorator(type) {
     const { decorator } = useRenderingContext();
-    if (type && type in decorator.default) {
-        return decorator.default[type];
+    if (type && type in decorator) {
+        return decorator[type];
+    } else if (type !== undefined) {
+        return null;
     } else {
         return decorator;
     }
