@@ -14,7 +14,7 @@ const Tab = forwardRef(function Tab(props, ref) {
         <Tabs.Tab
             key={`tab-${index}`}
             form={form}
-            active={active}
+            index={index}
             activate={raiseTab}
             parent={parent}
             ref={ref}
@@ -34,6 +34,7 @@ const Panel = forwardRef(function Panel(props, ref) {
             form={form}
             parent={parent}
             delta={activeDelta}
+            index={index}
             ref={ref}
         >
             <SchemaField form={form} schema={schema} onChange={onChange} />
@@ -55,6 +56,7 @@ export default function Tabs(props) {
         for (let index = 0; index < form.tabs.length; ++index) {
             tabs.push(
                 <Tab
+                    key={`tab-${index}`}
                     parent={form}
                     index={index}
                     activeIndex={value}
@@ -63,6 +65,7 @@ export default function Tabs(props) {
             );
             panels.push(
                 <Panel
+                    key={`panel-${index}`}
                     parent={form}
                     index={index}
                     activeIndex={value}
@@ -80,6 +83,7 @@ export default function Tabs(props) {
             value={value}
             tabs={tabs}
             panels={panels}
+            activateTab={setValue}
         />
     );
 }

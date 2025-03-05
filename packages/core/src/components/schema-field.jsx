@@ -41,17 +41,6 @@ function ValueField(props) {
         [props.onChange]
     );
 
-    const error = useMemo(
-        function () {
-            if (field.model) {
-                return field.validate(field.model);
-            } else {
-                return null;
-            }
-        },
-        [field.model, field.validate]
-    );
-
     if (!Field) {
         log(
             'ValueField.fail(key: %o, form: %o) : !Field : form : %o',
@@ -66,9 +55,7 @@ function ValueField(props) {
             form={form}
             path={field.path}
             schema={field.schema}
-            value={field.model}
             onChangeSet={onChangeSet}
-            error={error}
             parent={parent}
             onChange={onChange}
         />
