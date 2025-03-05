@@ -1,8 +1,7 @@
 import t from 'prop-types';
-import ObjectPath from 'objectpath';
 import React, { useCallback, useMemo } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
+import { useDecorator, useValue } from '@forml/hooks';
 import { FormType } from '#types';
 
 const valueExceptions = ['-'];
@@ -12,8 +11,9 @@ const valueReplacements = { '0-': '-', '': 0 };
  * @component Integer
  */
 export default function Integer(props) {
-    const { value, form } = props;
+    const { form } = props;
     const Decorator = useDecorator('text');
+    const value = useValue(form.key);
     const onChange = useCallback(
         function onChange(e) {
             let value = e.target.value;

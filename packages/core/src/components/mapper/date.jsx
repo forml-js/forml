@@ -1,19 +1,17 @@
 import t from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
+import { useDecorator, useValue } from '@forml/hooks';
 import { FormType } from '#types';
 
 /**
  * @component Date
  */
 export default function DateInput(props) {
+    const { form } = props;
     const Decorator = useDecorator('date');
 
-    const value = useMemo(
-        () => props.value || new Date().toISOString(),
-        [props.value]
-    );
+    const value = useValue(form.key);
     const onChange = useCallback(
         function onChange(e) {
             props.onChangeSet(e, e.target.value);

@@ -1,14 +1,15 @@
 import t from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
+import { useDecorator, useValue } from '@forml/hooks';
 import { FormType } from '#types';
 
 /**
  * @component Select
  */
 export default function Select(props) {
-    const { form, value } = props;
+    const { form } = props;
+    const value = useValue(form.key);
 
     const Select = useDecorator('select');
     const onChange = useCallback(

@@ -2,13 +2,14 @@ import t from 'prop-types';
 import React, { useCallback } from 'react';
 
 import { FormType } from '#types';
-import { useDecorator } from '@forml/hooks';
+import { useDecorator, useValue } from '@forml/hooks';
 
 /**
  * @component Text
  */
 export default function BasicText(props) {
-    const { value, form, otherProps } = props;
+    const { form, otherProps } = props;
+    const value = useValue(form.key);
 
     const Text = useDecorator('text');
     const onChange = useCallback(
