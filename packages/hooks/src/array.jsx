@@ -50,6 +50,12 @@ export function useArrayKeys() {
         useShallow((state) => state.keys)
     );
 }
+export function useArrayKeyCount() {
+    return useStore(
+        useArrayKeyStore(),
+        useShallow((state) => state.keys.length)
+    );
+}
 export function useArrayKeyFor(index) {
     return useStore(
         useArrayKeyStore(),
