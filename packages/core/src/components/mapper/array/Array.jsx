@@ -1,12 +1,6 @@
+import ObjectPath from 'objectpath';
 import { FormContext } from '@forml/context';
-import {
-    createArrayKeyStore,
-    useActionsFor,
-    useArrayFormActions,
-    useArrayKeyCount,
-    useDecorator,
-    useValue,
-} from '@forml/hooks';
+import { useActionsFor, useDecorator, useArrayLength } from '@forml/hooks';
 import t from 'prop-types';
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 
@@ -33,80 +27,45 @@ import { Range } from './Range.jsx';
 
 function ArrayComponent(props) {
     const { form, onChange } = props;
-
-    const array = useValue(form.key);
-    const store = useRef();
-
-    useMemo(() => {
-        if (!store.current) {
-            store.current = createArrayKeyStore(form.key, array);
-        }
-    }, []);
-
     return (
-        <FormContext.Provider value={store.current}>
-            <ArrayContainer {...props}>
-                <ArrayRanges form={form} onChange={onChange} />
-            </ArrayContainer>
-        </FormContext.Provider>
+        <Container {...props}>
+            <ArrayRanges form={form} onChange={onChange} />
+        </Container>
     );
 }
 
-// TODO: Drop ranges -- use the same ref-based technique for the items themselves
 function ArrayRanges(props) {
     const { form, onChange } = props;
-    const keys = useArrayKeyCount();
-    const perRange = 10;
-    const totalRanges = Math.ceil(keys / perRange);
-    const ranges = useRef([]).current;
-
-    const makeRange = useCallback(
-        function makeRange(index, start, end) {
-            return (
+    const keys = useArrayLength(form.key);
+    const ranges = useMemo(() => {
+        const ranges = [];
+        const perRange = Math.ceil(Math.sqrt(keys));
+        let totalItems = 0;
+        while (totalItems < keys) {
+            const start = totalItems;
+            const end = totalItems + perRange;
+            const key = `${start}-${end}`;
+            totalItems += perRange;
+            ranges.push(
                 <Range
-                    key={index}
+                    key={key}
                     form={form}
                     start={start}
                     end={end}
                     onChange={onChange}
                 />
             );
-        },
-        [form, onChange]
-    );
-
-    useMemo(
-        function () {
-            ranges.splice(0, ranges.length);
-            for (let i = 0; i < totalRanges; ++i) {
-                const start = i * perRange;
-                const end = start + perRange;
-                ranges.push(makeRange(i, start, end));
-            }
-        },
-        [makeRange]
-    );
-
-    useMemo(
-        function () {
-            if (ranges.length < totalRanges) {
-                const start = ranges.length * perRange;
-                const end = start + perRange;
-                ranges.push(makeRange(totalRanges, start, end));
-            } else if (ranges.length > totalRanges) {
-                ranges.pop();
-            }
-        },
-        [totalRanges]
-    );
+        }
+        return ranges;
+    }, [keys, form, onChange]);
 
     return <>{ranges}</>;
 }
 
-const ArrayContainer = forwardRef(function ArrayContainer(props, ref) {
+const Container = forwardRef(function Container(props, ref) {
     const { form, value } = props;
     const ArrayDecorator = useDecorator('array');
-    const actions = useActionsFor(form.key, useArrayFormActions());
+    const actions = useActionsFor(form.key);
 
     const addItem = useCallback(
         (event) => {
