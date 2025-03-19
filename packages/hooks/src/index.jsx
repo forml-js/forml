@@ -4,7 +4,6 @@ import { useContext as useReactContext, useMemo } from 'react';
 export * from './renderer.jsx';
 export * from './reducer.js';
 export * from './model.jsx';
-export * from './array.jsx';
 export * from './forms.js';
 export * from './constants.jsx';
 

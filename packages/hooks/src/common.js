@@ -320,6 +320,56 @@ export function seek(schema, key, model, stack) {
 
     return [currentKey, currentModel, currentSchema];
 }
+export function walk(schema, model, visit) {
+    const stack = [];
+    let currentKey = [];
+    let currentModel = model;
+    let currentSchema = schema;
+    stack.push([currentKey, currentModel, currentSchema]);
+
+    while (stack.length > 0) {
+        [currentKey, currentModel, currentSchema] = stack.shift();
+
+        if (!currentModel) {
+            currentModel = defaultForSchema(currentSchema);
+        }
+
+        if (currentSchema.type === 'array') {
+            if (Array.isArray(currentSchema.items)) {
+                for (let index = 0; index < currentModel.length; index++) {
+                    stack.push([
+                        [...currentKey, index],
+                        currentModel[index],
+                        currentSchema.items[index],
+                    ]);
+                }
+            } else {
+                for (let index = 0; index < currentModel.length; index++) {
+                    stack.push([
+                        [...currentKey, index],
+                        currentModel[index],
+                        currentSchema.items,
+                    ]);
+                }
+            }
+        }
+
+        if (currentSchema.type === 'object') {
+            for (const key in currentModel) {
+                stack.push([
+                    [...currentKey, key],
+                    currentModel[key],
+                    currentSchema.properties[key] ??
+                        currentSchema.additionalProperties,
+                ]);
+            }
+        }
+
+        visit(currentKey, currentModel, currentSchema);
+    }
+
+    return [currentKey, currentModel, currentSchema];
+}
 export function unwind(schema, key, model, stack, drop = 0) {
     let currentKey = key;
     let currentModel = model;
