@@ -34,11 +34,11 @@ function ValueField(props) {
     const onChangeSet = useCallback(
         (event, value) => {
             const nextModel = actions.setValue(value);
-            if (props.onChange) {
-                props.onChange(event, nextModel);
+            if (onChange) {
+                onChange(event, nextModel);
             }
         },
-        [props.onChange]
+        [onChange]
     );
 
     if (!Field) {
@@ -79,7 +79,7 @@ export function SchemaField(props) {
 
     const Component = useMemo(
         () => ('key' in form ? ValueField : WrapperField),
-        [form.key]
+        [form]
     );
 
     return <Component {...props} />;
