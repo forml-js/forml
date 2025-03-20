@@ -37,6 +37,7 @@ export const schema = {
         },
         type: {
             title: 'Type',
+            description: 'Home, work, mobile, etc',
             type: 'string',
             enum: ['home', 'work', 'mobile', 'fax', 'etc'],
         },
