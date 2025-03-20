@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React, { useMemo, useRef } from 'react';
 
 import { ModelContext, RenderingContext } from '@forml/context';
-import { createModelStore } from '@forml/hooks';
+import { useModelStore } from '@forml/hooks';
 import { getLocalizer } from '../localizer.js';
 import { FormsType } from '#types';
 import { SchemaRender } from './schema-render.jsx';
@@ -34,7 +34,7 @@ export function SchemaForm(props) {
         () => ({ mapper, decorator, localizer }),
         [mapper, decorator, localizer]
     );
-    const modelContext = useRef(createModelStore(schema, model)).current;
+    const modelContext = useModelStore(schema, model);
 
     return (
         <RenderingContext.Provider value={renderingContext}>
