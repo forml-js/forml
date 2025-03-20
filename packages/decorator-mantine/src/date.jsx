@@ -11,7 +11,6 @@ export default function DateForm(props) {
     );
     const onChange = useCallback(
         (nextDateObject) => {
-            console.log('onChange(nextDateObject: %o)', nextDateObject);
             const nextDate = nextDateObject.toLocaleDateString();
             props.onChange({ target: { value: nextDate } }, nextDate);
         },

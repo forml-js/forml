@@ -10,7 +10,6 @@ export default function DateTime(props) {
     const description = error ? error : form.description;
     const onChange = useCallback(
         (date) => {
-            console.log('DateTime.onChange(date: %o)', date);
             const value = date.toLocaleString();
             props.onChange({ target: { value } }, value);
         },

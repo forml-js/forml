@@ -9,11 +9,6 @@ export default function Tab(props) {
             let icon = form.icon.replace(/^([a-z])/, (c) => c.toUpperCase());
             icon = icon.replace(/_([a-z])/g, (c) => c[1].toUpperCase());
             icon = `Icon${icon}`;
-            console.log(
-                'Tab(iconName: %o, Icons[iconName]: %o)',
-                icon,
-                Icons[icon]
-            );
             return Icons[icon];
         } else {
             return undefined;

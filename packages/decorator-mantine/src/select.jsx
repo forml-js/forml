@@ -23,7 +23,7 @@ export default function Select(props) {
             const value = select.valueOf(Number(selectedIndex));
             props.onChange({ target: { value } }, value);
         },
-        [props.onChange, select]
+        [props.onChange, select.valueOf]
     );
     const description = error ? error : form.description;
     return (

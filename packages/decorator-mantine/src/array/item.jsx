@@ -6,6 +6,7 @@ import {
     IconChevronDown,
     IconTrash,
 } from '@tabler/icons-react';
+import { useIsFirstArrayItem, useIsLastArrayItem } from '@forml/hooks';
 
 function DragHandle(props) {
     return (
@@ -44,13 +45,17 @@ function MovementButton(props) {
 }
 
 function MovementButtons(props) {
-    const { moveUp, moveDown } = props;
+    const { moveUp, moveDown, form, id } = props;
+
+    const isFirst = useIsFirstArrayItem(form.key, id);
+    const isLast = useIsLastArrayItem(form.key, id);
+
     return (
         <>
-            <MovementButton key="moveUp" onClick={props.moveUp}>
+            <MovementButton key="moveUp" onClick={moveUp} disabled={isFirst}>
                 <IconChevronUp />
             </MovementButton>
-            <MovementButton key="moveDown" onClick={props.moveDown}>
+            <MovementButton key="moveDown" onClick={moveDown} disabled={isLast}>
                 <IconChevronDown />
             </MovementButton>
             <Divider key="divider" />
@@ -63,7 +68,8 @@ function Base(props) {
 }
 
 export default function Item(props) {
-    const { children, destroy, moveUp, moveDown } = props;
+    const { children, id, form, destroy, moveUp, moveDown } = props;
+
     return (
         <Base>
             <DragHandle />
@@ -71,7 +77,12 @@ export default function Item(props) {
             <Forms>{children}</Forms>
             <Divider orientation="vertical" />
             <Controls>
-                <MovementButtons moveUp={moveUp} moveDown={moveDown} />
+                <MovementButtons
+                    form={form}
+                    id={id}
+                    moveUp={moveUp}
+                    moveDown={moveDown}
+                />
                 <Destroy onClick={destroy} />
             </Controls>
         </Base>

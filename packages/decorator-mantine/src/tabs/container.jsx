@@ -3,7 +3,6 @@ import { Box, Paper, Tabs, Title, Text } from '@mantine/core';
 import React from 'react';
 
 function Header(props) {
-    console.log('Title(props: %o)', props);
     const { form } = props;
     if (form.title || form.description) {
         return (
@@ -30,10 +29,7 @@ export default function Container(props) {
                 className="forml-tabs"
                 value={String(value)}
                 orientation={form.layout}
-                onChange={(value) => {
-                    console.log('Tabs.Container.onChange(value: %s)', value);
-                    activateTab(value);
-                }}
+                onChange={activateTab}
             >
                 <Tabs.List form={form} className="forml-tabs-list">
                     {props.tabs}

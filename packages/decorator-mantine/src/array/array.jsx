@@ -1,6 +1,6 @@
 import React, { Children, useMemo } from 'react';
 import { Button, Box, Paper, Divider, Text, Title } from '@mantine/core';
-import { useArrayKeyCount, useDecorator } from '@forml/hooks';
+import { useArrayLength, useDecorator } from '@forml/hooks';
 import { IconPlus } from '@tabler/icons-react';
 
 import './array.css';
@@ -54,7 +54,7 @@ function Base(props) {
 
 export default function ArrayForm(props) {
     const { form, add } = props;
-    const itemCount = useArrayKeyCount(form.key);
+    const itemCount = useArrayLength(form.key);
     const suffix = itemCount === 0 ? <Empty /> : null;
     const options = useDecorator('options');
     return (

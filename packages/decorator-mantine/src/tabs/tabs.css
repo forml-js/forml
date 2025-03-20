@@ -1,11 +1,11 @@
 .forml-tabs-root {
-    margin: var(--mantine-spacing-xs);
+    margin: var(--forml-spacing);
 
     &.forml-filled {
         .forml-tabs-header {
             color: var(--mantine-primary-color-contrast);
             background-color: var(--mantine-primary-color-filled);
-            padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+            padding: var(--forml-spacing);
             border-top-left-radius: var(--mantine-radius-sm);
             border-top-right-radius: var(--mantine-radius-sm);
         }
