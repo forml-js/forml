@@ -56,4 +56,7 @@ export default {
             ],
         },
     ],
+    model: {
+        array: [0, new Array(500).fill('')],
+    },
 };
