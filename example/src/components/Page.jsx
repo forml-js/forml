@@ -27,21 +27,36 @@ export default function Page(props) {
     const [schemaJSON, setSchemaJSON] = useSampleSchemaJSON();
     const [formJSON, setFormJSON] = useSampleFormJSON();
 
-    const onSampleChange = useCallback((_event, nextValue) => {
-        setSample(nextValue);
-    });
-    const onModelJSONChange = useCallback((_event, nextValue) => {
-        setModelJSON(nextValue);
-    });
-    const onSchemaJSONChange = useCallback((_event, nextValue) => {
-        setSchemaJSON(nextValue);
-    });
-    const onFormJSONChange = useCallback((_event, nextValue) => {
-        setFormJSON(nextValue);
-    });
-    const onDecoratorChange = useCallback((nextValue) => {
-        setDecorator(nextValue);
-    });
+    const onSampleChange = useCallback(
+        (_event, nextValue) => {
+            setSample(nextValue);
+        },
+        [setSample]
+    );
+    const onModelJSONChange = useCallback(
+        (_event, nextValue) => {
+            setModelJSON(nextValue);
+        },
+        [setModelJSON]
+    );
+    const onSchemaJSONChange = useCallback(
+        (_event, nextValue) => {
+            setSchemaJSON(nextValue);
+        },
+        [setSchemaJSON]
+    );
+    const onFormJSONChange = useCallback(
+        (_event, nextValue) => {
+            setFormJSON(nextValue);
+        },
+        [setFormJSON]
+    );
+    const onDecoratorChange = useCallback(
+        (nextValue) => {
+            setDecorator(nextValue);
+        },
+        [setDecorator]
+    );
 
     return (
         <Dashboard>
@@ -52,30 +67,32 @@ export default function Page(props) {
                     title="Configure Example"
                 >
                     <SelectExample
+                        key="example"
                         selected={sample}
                         decorator={decorator}
                         onChange={onSampleChange}
                     />
                     <SelectDecorator
+                        key="decorator"
                         decorator={decorator}
                         onChange={onDecoratorChange}
                     />
                 </Panel.Section>
-                <Panel.Collapse defaultExpanded="Model">
+                <Panel.Collapse key="editors" defaultExpanded="Model">
                     <Editor
-                        key="editor"
+                        key="schema"
                         title="Schema"
                         value={schemaJSON}
                         onChange={onSchemaJSONChange}
                     />
                     <Editor
-                        key="editor"
+                        key="form"
                         title="Form"
                         value={formJSON}
                         onChange={onFormJSONChange}
                     />
                     <Editor
-                        key="editor"
+                        key="model"
                         title="Model"
                         value={modelJSON}
                         onChange={onModelJSONChange}
