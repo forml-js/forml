@@ -1,3 +1,10 @@
+# 2.0.0-next.17 (2025-04-27)
+
+
+### Bug Fixes
+
+* **@forml/context, @forml/core, @forml/decorator-barebones, @forml/decorator-bootstrap, @forml/decorator-mantine, @forml/decorator-mui, @forml/decorator-pdf, @forml/hooks:** react peer version across all packages dec9c7e
+
 # 2.0.0-next.16 (2025-04-27)
 
 
