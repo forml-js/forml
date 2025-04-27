@@ -8,6 +8,7 @@
         "#core": "./src/index.js",
         "#field": "./src/components/schema-field.jsx",
         "#form": "./src/components/schema-form.jsx",
+        "#localizer": "./src/localizer.js",
         "#mapper": "./src/components/mapper/index.jsx",
         "#util": "./src/util.js",
         "#types": "./src/types.js"
