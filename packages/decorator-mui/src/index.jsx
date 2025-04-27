@@ -37,7 +37,6 @@ const decorator = {
     text,
     options: {},
 };
-
 export default decorator;
 
 export function withOptions(options) {
