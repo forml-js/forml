@@ -1,3 +1,28 @@
+# 2.0.0-next.11 (2025-04-27)
+
+
+### Bug Fixes
+
+* **@forml/core:** passing delta to tabs decorator fd5e76c
+* **core:** better titleFun copying for array items d639b49
+* **core:** createModelStore -> useModelStore 876fb64
+* **core:** missing subpath import causing failing build 54d7ae3
+* **core:** update wrapper vs. value field dependency 24cfb98
+* **core:** value injection in the mapper 2398fff
+* **decorator-mui:** grid calculations in fieldset 086d929
+* **hooks:** memoize defaultForSchema to prevent looping cfa698f
+* **hooks:** missing subpath export caused failing build 14c3d16
+* **hooks:** no default object arguments in hooks 569efb6
+
+
+### Features
+
+* **core:** improve array performance using ref for keys 5e0b6b9
+* **core:** optimizations for array items from @forml/hooks bef6b5b
+* **decorator-mantine:** add mantine decorator a8bbde8
+* **hooks:** optimizations for array elements and manipulation 110a88d
+* **hooks:** useArrayKeyCount ea7a222
+
 # 2.0.0-next.10 (2025-02-19)
 
 

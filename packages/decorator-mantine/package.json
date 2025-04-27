@@ -1,6 +1,6 @@
 {
     "name": "@forml/decorator-mantine",
-    "version": "2.0.0-next.9",
+    "version": "2.0.0-next.11",
     "description": "A mantine decorator for forml",
     "main": "src/index.jsx",
     "type": "module",
