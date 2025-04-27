@@ -1,3 +1,10 @@
+# 2.0.0-next.12 (2025-04-27)
+
+
+### Bug Fixes
+
+* remove invalid package from lerna.json 7ed8e6e
+
 # 2.0.0-next.11 (2025-04-27)
 
 
