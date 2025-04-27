@@ -1,3 +1,10 @@
+# 2.0.0-next.18 (2025-04-27)
+
+
+### Bug Fixes
+
+* **decorator-mui:** missing the x in jsx ae5b451
+
 # 2.0.0-next.17 (2025-04-27)
 
 
