@@ -39,9 +39,6 @@
         "react-dom": "^19.0.0",
         "react-test-renderer": "^19.0.0"
     },
-    "dependencies": {
-        "nanoid": "^5.1.0"
-    },
     "peerDependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
@@ -51,5 +48,10 @@
         "@mui/x-date-pickers": "^7.27.0",
         "react": ">=17.0.0"
     },
-    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
+    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef",
+    "dependencies": {
+        "@forml/context": "file:../context",
+        "@forml/hooks": "file:../hooks",
+        "nanoid": "^5.1.0"
+    }
 }
