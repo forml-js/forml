@@ -1,3 +1,10 @@
+# 2.0.0-next.16 (2025-04-27)
+
+
+### Bug Fixes
+
+* **decorator-mui:** merge dependencies properties 6fa9954
+
 # 2.0.0-next.15 (2025-04-27)
 
 
