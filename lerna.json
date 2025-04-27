@@ -4,11 +4,10 @@
         "packages/decorator-mantine",
         "packages/decorator-mui",
         "packages/decorator-barebones",
-        "packages/ware",
         "packages/decorator-bootstrap",
+        "packages/decorator-pdf",
         "packages/hooks",
         "packages/core",
-        "packages/decorator-pdf",
         "example"
     ],
     "version": "2.0.0-next.11"
