@@ -1,14 +1,12 @@
 {
     "packages": [
         "packages/context",
-        "packages/decorator-mantine",
         "packages/decorator-mui",
         "packages/decorator-barebones",
         "packages/decorator-bootstrap",
         "packages/decorator-pdf",
         "packages/hooks",
-        "packages/core",
-        "example"
+        "packages/core"
     ],
     "version": "2.0.0-next.12"
 }
