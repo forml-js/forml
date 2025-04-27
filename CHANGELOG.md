@@ -1,3 +1,10 @@
+# 2.0.0-next.15 (2025-04-27)
+
+
+### Bug Fixes
+
+* **decorator-mui:** context and hooks as regular dependencies b645e37
+
 # 2.0.0-next.14 (2025-04-27)
 
 

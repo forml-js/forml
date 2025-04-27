@@ -1,6 +1,6 @@
 {
     "name": "@forml/decorator-mui",
-    "version": "2.0.0-next.14",
+    "version": "2.0.0-next.15",
     "description": "A forml decorator using MaterialUI",
     "main": "src/index.js",
     "type": "module",
@@ -40,8 +40,7 @@
         "react-test-renderer": "^19.0.0"
     },
     "dependencies": {
-        "@forml/context": "file:../context",
-        "@forml/hooks": "file:../hooks"
+        "nanoid": "^5.1.0"
     },
     "peerDependencies": {
         "@emotion/react": "^11.14.0",
@@ -52,8 +51,5 @@
         "@mui/x-date-pickers": "^7.27.0",
         "react": ">=17.0.0"
     },
-    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef",
-    "dependencies": {
-        "nanoid": "^5.1.0"
-    }
+    "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }
