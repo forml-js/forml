@@ -14,6 +14,7 @@
     "exports": {
         ".": "./src/index.jsx",
         "./renderer": "./src/renderer.jsx",
+        "./rules": "./src/rules.jsx",
         "./model": "./src/model.jsx",
         "./forms": "./src/forms.jsx",
         "./constants": "./src/constants.jsx"
