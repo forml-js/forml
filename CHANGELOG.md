@@ -4,6 +4,17 @@
 ### Bug Fixes
 
 * **decorator-mui:** force build with whitespace c2018f3
+* **decorator-mui:** maybe? d448fbd
+* **decorator-mui:** now skipping the malformed version 649fee7
+* **decorator-mui:** once more unto the breach dcc4a4e
+* removing unpublished packages from lerna 54a9f04
+
+# 2.0.0-next.13 (2025-04-27)
+
+
+### Bug Fixes
+
+* **decorator-mui:** force build with whitespace c2018f3
 * **decorator-mui:** now skipping the malformed version 649fee7
 * **decorator-mui:** once more unto the breach dcc4a4e
 * removing unpublished packages from lerna 54a9f04
