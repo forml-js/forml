@@ -2,7 +2,7 @@
     "name": "@forml/decorator-mui",
     "version": "2.0.0-next.17",
     "description": "A forml decorator using MaterialUI",
-    "main": "src/index.js",
+    "main": "src/index.jsx",
     "type": "module",
     "scripts": {
         "lint": "eslint src/**/*.jsx",
