@@ -1,3 +1,10 @@
+# 2.0.0-next.14 (2025-04-27)
+
+
+### Bug Fixes
+
+* **decorator-mui:** might have actually fixed it 132d796
+
 # 2.0.0-next.13 (2025-04-27)
 
 
