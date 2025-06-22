@@ -1,3 +1,11 @@
+# 2.0.0-next.19 (2025-06-22)
+
+
+### Bug Fixes
+
+* **@forml/core, @forml/decorator-barebones, @forml/decorator-mui, @forml/hooks:** test cases and implementation errors a136f87
+* **workflows:** fix coverage reporting under mocha 7ca3de2
+
 # 2.0.0-next.18 (2025-04-27)
 
 

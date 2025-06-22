@@ -1,6 +1,6 @@
 {
     "name": "@forml/core",
-    "version": "2.0.0-next.17",
+    "version": "2.0.0-next.19",
     "description": "A JSON Schema-based form generator powered by React",
     "main": "src/index.js",
     "type": "module",
@@ -10,7 +10,6 @@
         "#localizer": "./src/localizer.js",
         "#field": "./src/components/schema-field.jsx",
         "#form": "./src/components/schema-form.jsx",
-        "#localizer": "./src/localizer.js",
         "#mapper": "./src/components/mapper/index.jsx",
         "#util": "./src/util.js",
         "#types": "./src/types.js"
