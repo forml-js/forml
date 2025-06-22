@@ -7,6 +7,7 @@ import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { fireEvent, render } from '@testing-library/react';
 import { createElement as h } from 'react';
+import * as jsf from 'json-schema-faker';
 
 chai.use(sinonChai);
 chai.use(domChai);
@@ -18,7 +19,7 @@ describe('integer', function () {
     beforeEach(function () {
         schema = { type: 'integer' };
         form = [{ key: [], type: 'integer' }];
-        model = util.defaultForSchema(schema);
+        model = jsf.generate(schema);
         onChange = sinon.fake((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
@@ -33,7 +34,7 @@ describe('integer', function () {
         });
 
         expect(onChange).to.have.been.called;
-        expect(model).to.equal('');
+        expect(model).to.equal(0);
     });
 
     it('tolerates minus character onChange', function () {

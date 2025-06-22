@@ -4,6 +4,7 @@ import * as sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import domChai from 'chai-dom';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import * as barebones from '@forml/decorator-barebones';
 
 chai.use(sinonChai);
@@ -42,9 +43,8 @@ describe('select mapper', function () {
         expect(button1).not.to.be.undefined;
         expect(button1).not.to.be.null;
 
-        await fireEvent.change(container.querySelector('select'), {
-            target: { value: 'a' },
-        });
+        await userEvent.selectOptions(container.querySelector('select'), 'a');
+
         expect(onChange).to.have.been.called;
         expect(model).to.equal('a');
     });

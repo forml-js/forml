@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import * as chai from 'chai';
 import ObjectPath from 'objectpath';
-import { merge, standardForm } from '#forms';
+import { merge, standardForm, findSchema } from '#forms';
 
 const { expect } = chai;
 
@@ -268,6 +268,28 @@ describe('standardForm', function () {
                     ).to.deep.include({ key: [], [attribute]: false });
                 });
             }
+        });
+    });
+});
+describe('findSchema', function () {
+    it('iterates over a schema following keys', function () {
+        const schema = {
+            type: 'object',
+            properties: {
+                test: { type: 'string' },
+                tuple: {
+                    type: 'array',
+                    items: [{ type: 'string' }, { type: 'number' }],
+                },
+            },
+        };
+
+        expect(findSchema([], schema)).to.equal(schema);
+        expect(findSchema(['test'], schema)).to.deep.equal({
+            type: 'string',
+        });
+        expect(findSchema(['tuple', 1], schema)).to.deep.equal({
+            type: 'number',
         });
     });
 });

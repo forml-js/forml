@@ -1,7 +1,7 @@
 import t from 'prop-types';
 import React, { useCallback } from 'react';
 
-import { useDecorator } from '@forml/hooks';
+import { useDecorator, useValue } from '@forml/hooks';
 import { FormType } from '#types';
 
 const valueExceptions = ['', '-'];
@@ -10,7 +10,9 @@ const valueExceptions = ['', '-'];
  * @component Number
  */
 export default function Number(props) {
+    const { form } = props;
     const Text = useDecorator('text');
+    const value = useValue(form.key);
     const onChange = useCallback(
         function onChange(e) {
             let value = e.target.value;
@@ -36,7 +38,7 @@ export default function Number(props) {
         [props.onChangeSet]
     );
 
-    return <Text {...props} onChange={onChange} />;
+    return <Text form={form} value={value} onChange={onChange} />;
 }
 
 Number.propTypes = {

@@ -1,7 +1,5 @@
-import debug from 'debug';
-
-const log = debug('forml:hooks:common');
-
+import objectPath from 'objectpath';
+import { ArrayPlaceholder } from '#model';
 export function modelSetArray(
     targetSchema,
     targetModel,
@@ -24,6 +22,7 @@ export function modelSetArray(
     const nextModel = prefix.concat([assertType(schema, model)]).concat(suffix);
     return assertType(targetSchema, nextModel);
 }
+
 export function modelSetObject(
     targetSchema,
     targetModel,
@@ -42,6 +41,7 @@ export function modelSetObject(
         return nextModel;
     }
 }
+
 export function modelDrop(targetSchema, targetModel, targetKey) {
     const preferredType = getPreferredType(targetSchema.type);
     if (preferredType === 'array') {
@@ -62,6 +62,7 @@ export function modelDrop(targetSchema, targetModel, targetKey) {
         return assertType(targetSchema, nextModel);
     }
 }
+
 export function modelSet(targetSchema, targetModel, targetKey, schema, model) {
     const preferredType = getPreferredType(targetSchema.type);
     if (preferredType === 'array') {
@@ -91,6 +92,7 @@ export function getTypeOf(value) {
     else if (Array.isArray(value)) return 'array';
     else return typeof value;
 }
+
 export function getPreferredType(types) {
     const ignoredTypes = new Set(['null']);
 
@@ -201,6 +203,7 @@ export function getNextSchema(schema, key) {
         throw Error(`untraversable schema type: ${schema.type}`);
     }
 }
+
 export function getNext(schema, key, value) {
     const preferredType = getPreferredType(schema.type);
     if (preferredType === 'array') {
@@ -219,9 +222,18 @@ export function getNext(schema, key, value) {
             return [nextSchema, nextValue];
         }
     } else if (preferredType === 'object') {
-        if (key in schema.properties) {
+        if (schema.properties && key in schema.properties) {
             const nextSchema = schema.properties[key];
             const nextValue = assertType(nextSchema, value[key]);
+            return [nextSchema, nextValue];
+        } else if (
+            schema.additionalProperties === true ||
+            typeof key === 'number' ||
+            !isNaN(Number(key))
+        ) {
+            // Allow numeric keys and additionalProperties
+            const nextSchema = schema.additionalProperties || {};
+            const nextValue = value[key];
             return [nextSchema, nextValue];
         } else if (schema.additionalProperties) {
             const nextSchema = schema.additionalProperties;
@@ -234,6 +246,7 @@ export function getNext(schema, key, value) {
         throw Error(`untraversable schema type: ${schema.type}`);
     }
 }
+
 export function assertType(schema, value) {
     const preferred = getPreferredType(schema.type);
     const allowed = new Set(
@@ -276,6 +289,7 @@ export function assertType(schema, value) {
         return defaultForSchema(schema);
     }
 }
+
 export function isRequired(schema, key) {
     if (schema.required) {
         return schema.required.includes(key);
@@ -283,6 +297,7 @@ export function isRequired(schema, key) {
         return false;
     }
 }
+
 export function isSaturated(value) {
     if (Array.isArray(value)) {
         return value.length > 0;
@@ -290,7 +305,10 @@ export function isSaturated(value) {
         if (value === null) {
             return false;
         } else {
-            return Object.keys(value).length > 0;
+            for (let key in value) {
+                return true;
+            }
+            return false;
         }
     } else {
         return value !== undefined;
@@ -320,6 +338,7 @@ export function seek(schema, key, model, stack) {
 
     return [currentKey, currentModel, currentSchema];
 }
+
 export function walk(schema, model, visit) {
     const stack = [];
     let currentKey = [];
@@ -370,6 +389,76 @@ export function walk(schema, model, visit) {
 
     return [currentKey, currentModel, currentSchema];
 }
+
+export function walkSchema(schema, model, visit) {
+    const stack = [];
+    let currentKey = [];
+    let currentModel = model;
+    let currentSchema = schema;
+    stack.push([currentKey, currentModel, currentSchema]);
+
+    while (stack.length > 0) {
+        [currentKey, currentModel, currentSchema] = stack.shift();
+
+        if (!currentModel) {
+            currentModel = defaultForSchema(currentSchema);
+        }
+
+        if (
+            currentSchema.type === 'array' ||
+            (Array.isArray(currentSchema.type) &&
+                currentSchema.type.includes('array'))
+        ) {
+            if (Array.isArray(currentSchema.items)) {
+                for (
+                    let index = 0;
+                    index < currentSchema.items.length;
+                    index++
+                ) {
+                    stack.push([
+                        [...currentKey, index],
+                        currentModel[index],
+                        currentSchema.items[index],
+                    ]);
+                }
+            } else if (Array.isArray(currentModel)) {
+                for (let index = 0; index < currentModel.length; index++) {
+                    stack.push([
+                        [...currentKey, index],
+                        currentModel[index],
+                        currentSchema.items,
+                    ]);
+                }
+            }
+        }
+
+        if (currentSchema.type === 'object') {
+            const additions = [];
+            const allKeys = new Set([
+                ...Object.getOwnPropertyNames(currentModel),
+            ]);
+            if (currentSchema.properties) {
+                Object.getOwnPropertyNames(currentSchema.properties).forEach(
+                    (key) => allKeys.add(key)
+                );
+            }
+            for (const key of allKeys) {
+                additions.push([
+                    [...currentKey, key],
+                    currentModel[key],
+                    currentSchema.properties[key] ??
+                        currentSchema.additionalProperties,
+                ]);
+            }
+            stack.push(...additions);
+        }
+
+        visit(currentKey, currentModel, currentSchema);
+    }
+
+    return [currentKey, currentModel, currentSchema];
+}
+
 export function unwind(schema, key, model, stack, drop = 0) {
     let currentKey = key;
     let currentModel = model;

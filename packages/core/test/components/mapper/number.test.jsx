@@ -5,8 +5,10 @@ import sinonChai from 'sinon-chai';
 import domChai from 'chai-dom';
 import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createElement as h } from 'react';
+import * as jsf from 'json-schema-faker';
 
 chai.use(sinonChai);
 chai.use(domChai);
@@ -18,12 +20,12 @@ describe('number', function () {
     beforeEach(function () {
         schema = { type: 'number' };
         form = [{ key: [], type: 'number' }];
-        model = util.defaultForSchema(schema);
+        model = jsf.generate(schema);
         onChange = sinon.fake((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
 
-    it('tolerates empty strings onChange', function () {
+    it('tolerates empty strings onChange', async function () {
         const { container } = render(
             h(SchemaForm, { schema, form, model, onChange, decorator })
         );
@@ -31,8 +33,7 @@ describe('number', function () {
         fireEvent.change(container.querySelector('input'), {
             target: { value: '' },
         });
-
-        expect(onChange).to.have.been.called;
+        await waitFor(() => expect(onChange).to.have.been.called);
         expect(model).to.equal('');
     });
 

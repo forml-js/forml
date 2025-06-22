@@ -7,11 +7,11 @@ import React, { useMemo } from 'react';
  */
 export default function Text(props) {
     const { form, value, onChange, otherProps } = props;
-    const options = useDecorator('options');
+    const options = useDecorator('options') || {};
 
     const title = useMemo(
         () => ('titleFun' in form ? form.titleFun(value) : form.title),
-        [form.titleFun, form.title]
+        [form.titleFun, form.title, value]
     );
     const variant = 'variant' in options ? options.variant : 'standard';
     const description = 'description' in form ? form.description : null;

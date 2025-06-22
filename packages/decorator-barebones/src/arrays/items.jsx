@@ -4,7 +4,8 @@ import React, { forwardRef } from 'react';
  * @component
  */
 function Items(props, ref) {
-    const { disabled, form } = props;
+    const { form } = props;
+    const disabled = form.readonly ?? false;
 
     return (
         <div className="array" ref={ref}>

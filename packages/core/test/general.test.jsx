@@ -2,15 +2,17 @@ import { describe, it } from 'mocha';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import * as jsf from 'json-schema-faker';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 chai.use(sinonChai);
 const { expect } = chai;
 
-describe('mapper', function() {
+describe('mapper', function () {
     const title = 'title';
     const description = 'description';
     const decorator = barebones;
@@ -78,6 +80,11 @@ describe('mapper', function() {
                 type: 'multiselect',
                 title,
                 description,
+                titleMap: [
+                    { name: 'a', value: 'a' },
+                    { name: 'b', value: 'b' },
+                    { name: 'c', value: 'c' },
+                ],
                 schema: {
                     type: 'array',
                     items: { type: 'string' },
@@ -101,6 +108,11 @@ describe('mapper', function() {
                 type: 'select',
                 title,
                 description,
+                titleMap: [
+                    { name: 'a', value: 'a' },
+                    { name: 'b', value: 'b' },
+                    { name: 'c', value: 'c' },
+                ],
                 schema: { type: 'string', enum: ['a', 'b', 'c'] },
             },
         ],
@@ -136,7 +148,7 @@ describe('mapper', function() {
     for (let form of forms) {
         const [{ type, schema }] = form;
 
-        it(`${type} localizes title and description`, function() {
+        it(`${type} localizes title and description`, function () {
             const model = schema ? util.defaultForSchema(schema) : null;
             const localizer = getLocalizer({
                 getLocalizedString: sinon.fake(),
@@ -158,9 +170,44 @@ describe('mapper', function() {
         });
 
         const excludeFromChangeEvents = ['file', 'checkbox', 'array'];
+        const makeChangeMap = {
+            select: (form, input, nextValue) =>
+                userEvent.selectOptions(
+                    input,
+                    String(
+                        form[0].titleMap.findIndex(
+                            ({ value }) => value === nextValue
+                        )
+                    )
+                ),
+            multiselect: (form, input, nextValue) => {
+                if (!Array.isArray(nextValue)) nextValue = [nextValue];
+                userEvent.selectOptions(
+                    input,
+                    nextValue.map((nextValue) =>
+                        String(
+                            form[0].titleMap.findIndex(
+                                ({ value }) => value === nextValue
+                            )
+                        )
+                    ),
+                    { multiple: true }
+                );
+            },
+            datetime: (form, input, nextValue) =>
+                userEvent.type(input, nextValue),
+            default: (form, input, nextValue) =>
+                fireEvent.change(input, {
+                    target: { value: nextValue },
+                }),
+        };
+        const valueGenerator = {
+            datetime: (schema) => new Date(jsf.generate(schema)).toISOString(),
+            default: jsf.generate,
+        };
         if (schema && !excludeFromChangeEvents.includes(type)) {
             const model = util.defaultForSchema(schema);
-            it(`${type} processes change events`, async function() {
+            it(`${type} processes change events`, async function () {
                 let newModel = sinon.fake();
                 let onChange = (event, nextModel) => newModel(nextModel);
                 let { container } = render(
@@ -179,10 +226,12 @@ describe('mapper', function() {
                 expect(inputs.length).to.be.greaterThan(0);
 
                 for (let input of inputs) {
-                    const value = util.randomForSchema(schema);
-                    fireEvent.change(input, {
-                        target: { value },
-                    });
+                    const generateValue =
+                        valueGenerator[type] ?? valueGenerator.default;
+                    const value = generateValue(schema);
+                    const makeChange =
+                        makeChangeMap[type] ?? makeChangeMap.default;
+                    await makeChange(form, input, value);
                     expect(newModel).to.have.been.calledWith(value);
                     newModel.resetHistory();
                 }

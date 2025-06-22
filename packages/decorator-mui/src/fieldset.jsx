@@ -61,7 +61,8 @@ export default function FieldSet(props) {
     const description = 'description' in form ? form.description : null;
     const alignItems = 'alignItems' in form ? form.alignItems : undefined;
     const layout = 'layout' in form ? form.layout : 'vertical';
-    const showTitle = 'showTitle' in form ? form.showTitle : true;
+    const showTitle =
+        'showTitle' in form ? form.showTitle : Boolean(title || description);
     const disablePadding =
         'disablePadding' in form ? form.disablePadding : false;
     const Component = 'component' in form ? form.component : 'div';
@@ -74,14 +75,14 @@ export default function FieldSet(props) {
         </ListItemIcon>
     ) : null;
 
-    const titleComponent = (title || description) && showTitle && (
+    const titleComponent = (title || description) && (
         <Title disablePadding={disablePadding} divider>
             {titleIcon}
             <ListItemText key="title" primary={title} secondary={description} />
         </Title>
     );
 
-    const content = (
+    const content = showTitle ? (
         <Root>
             {titleComponent}
             <Content
@@ -93,11 +94,18 @@ export default function FieldSet(props) {
                 {props.children}
             </Content>
         </Root>
+    ) : (
+        <Root>
+            <Content
+                layout={layout}
+                component={Component}
+                disablePadding={disablePadding}
+                alignItems={alignItems}
+            >
+                {props.children}
+            </Content>
+        </Root>
     );
 
-    if (title || description) {
-        return <Surface elevation={elevation}>{content}</Surface>;
-    } else {
-        return content;
-    }
+    return content;
 }

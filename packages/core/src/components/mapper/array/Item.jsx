@@ -3,6 +3,7 @@ import {
     ArrayPlaceholder,
     useActionsFor,
     useDecorator,
+    usePrefix,
 } from '@forml/hooks';
 import React, { forwardRef, memo, useCallback, useMemo } from 'react';
 
@@ -14,6 +15,7 @@ export const Item = memo(
         const { form, id, ref, disabled } = props;
         const parent = form;
         const forms = form.items;
+        const prefix = usePrefix();
 
         const onChange = useCallback(
             (event, nextModel) => {
@@ -24,7 +26,11 @@ export const Item = memo(
         const fields = useMemo(() => {
             return forms.map((template, subFormIndex) => {
                 if (!template) return;
-                const form = copyWithKey(parent.key, template, id);
+                const form = copyWithKey(
+                    [...prefix, ...parent.key],
+                    template,
+                    id
+                );
 
                 if (!('titleFun' in form)) {
                     if ('titleFun' in parent) {

@@ -4,7 +4,7 @@ import { createStore, useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 const log = debug('forml:example:samples');
 
-const DEFAULT_SAMPLE = './array-basic.js';
+const DEFAULT_SAMPLE = './kitchenSink.js';
 const DEFAULT_DECORATOR = 'Mantine (Filled)';
 
 function importAll(context) {

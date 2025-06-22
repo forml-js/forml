@@ -19,9 +19,7 @@ export default function BasicText(props) {
         [props.onChangeSet]
     );
 
-    return (
-        <Text form={form} value={value} onChange={onChange} {...otherProps} />
-    );
+    return <Text form={form} value={value} onChange={onChange} />;
 }
 
 BasicText.propTypes = {

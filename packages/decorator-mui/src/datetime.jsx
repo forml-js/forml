@@ -1,9 +1,11 @@
 import { DateTimePicker } from '@mui/x-date-pickers';
 import React, { useCallback, useMemo } from 'react';
+import { useDecorator } from '@forml/hooks';
 import { usePickerUtils } from './date-utils.js';
 
 export default function DateTime(props) {
     const { value, form } = props;
+    const options = useDecorator('options');
     const utils = usePickerUtils();
 
     const fullWidth = 'fullWidth' in form ? form.fullWidth : true;

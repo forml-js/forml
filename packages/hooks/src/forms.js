@@ -93,6 +93,10 @@ export function merge(schema, form = ['*'], options = {}) {
             obj.key = options.prefix.concat(obj.key);
         }
 
+        if (options.readonly) {
+            obj.readonly = obj.readonly ?? true;
+        }
+
         if (obj.key) {
             while (obj.key.includes('')) {
                 obj.key[obj.key.indexOf('')] = ARRAY_PLACEHOLDER;
@@ -109,7 +113,12 @@ export function merge(schema, form = ['*'], options = {}) {
         }
 
         if (Array.isArray(obj.items)) {
-            obj.items = merge(schema, obj.items, { ...options });
+            const readonly =
+                options.readonly ??
+                obj.readonly ??
+                obj.schema?.readOnly ??
+                false;
+            obj.items = merge(schema, obj.items, { ...options, readonly });
         }
 
         if (Array.isArray(obj.tabs)) {
@@ -130,7 +139,8 @@ export function merge(schema, form = ['*'], options = {}) {
             if (obj.description) obj.description = localize(obj.description);
             if (obj.placeholder) obj.placeholder = localize(obj.placeholder);
             if (obj.titleFun && !options.localize?.skipTitleFun) {
-                obj.titleFun = (...args) => localize(obj.titleFun(...args));
+                const originalTitleFun = obj.titleFun;
+                obj.titleFun = (value) => localize(originalTitleFun(value));
             }
             if (obj.type === 'array' && !obj.addText) {
                 if (obj.title) {

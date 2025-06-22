@@ -1,26 +1,7 @@
-import shortid from 'shortid';
-import Ajv from 'ajv';
-import objectPath from 'objectpath';
-import { useMemo, useCallback } from 'react';
 import { getPreferredType } from '@forml/hooks/rules';
 
 /**
  * @namespace forml.util
- */
-
-/**
- * @typedef {Function} ValueGetter
- * @param {Array<string|number>} keys - Object path to get
- * @return {*} - The value found at keys
- * @description Searches the enclosed model along the path of keys
- */
-
-/**
- * @typedef {Function} ValueSetter
- * @param {Array<string|number>} keys - Object path to set
- * @param {*} value - Value to set at keys
- * @return {*} - The new model
- * @description Updates the enclosed model with value along the path of keys
  */
 
 /**
@@ -81,108 +62,6 @@ export function defaultForSchema(schema) {
     }
 }
 
-export function randomForSchema(schema) {
-    if (schema.default !== undefined) {
-        return schema.default;
-    }
-
-    return buildSchema(schema);
-
-    function buildSchema(schema) {
-        const type = getPreferredType(schema.type);
-        let base = undefined;
-
-        switch (type) {
-            case 'array':
-                base = [];
-                if (Array.isArray(schema.items)) {
-                    for (const item of schema.items) {
-                        base.push(randomForSchema(item));
-                    }
-                } else {
-                    base.push(randomForSchema(schema.items));
-                }
-                break;
-            case 'object':
-                base = {};
-                for (const property in schema.properties) {
-                    const item = randomForSchema(schema.properties[property]);
-                    base[property] = item;
-                }
-                break;
-            case 'string':
-                base = shortid();
-                if (schema.format === 'date') {
-                    const date = new Date(
-                        Math.floor(Math.random() * new Date().getTime())
-                    );
-                    base = date
-                        .toISOString()
-                        .match(/([0-9]{4}-[0-9]{2}-[0-9]{2})/)[1];
-                } else if (schema.format === 'date-time') {
-                    base = new Date(
-                        Math.floor(Math.random() * new Date().getTime())
-                    ).toISOString();
-                }
-                break;
-            case 'number':
-                base = Math.random();
-                break;
-            case 'integer':
-                base = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-                break;
-            case 'boolean':
-                base = Math.random() > 0.5 ? true : false;
-                break;
-            case 'null':
-                base = null;
-                break;
-            default:
-                // throw new Error(`Unhandled randomForSchema type: ${type}`);
-                base = undefined;
-        }
-
-        if (schema.enum) {
-            const index = Math.floor(Math.random() * (schema.enum.length - 1));
-            base = schema.enum[index];
-        }
-
-        return assertType(schema, base);
-    }
-}
-
-/**
- * @arg {*} model
- * @arg {object} schema
- * @return {ValueGetter}
- */
-export function valueGetter(model, schema) {
-    function get(keys) {
-        if (!Array.isArray(keys)) {
-            keys = [keys];
-        }
-
-        if (model === undefined) {
-            model = defaultForSchema(schema);
-        }
-
-        if (keys.length === 0) return model;
-
-        let current = model;
-        let currentSchema = schema;
-
-        for (let i = 0; i < keys.length; ++i) {
-            const key = keys[i];
-            currentSchema = getNextSchema(currentSchema, key);
-            current = getNextValue(currentSchema, current, key);
-        }
-
-        return assertType(currentSchema, current);
-    }
-
-    return get;
-}
-
 export function assertType(schema, value) {
     const preferred = getPreferredType(schema.type);
     const allowed = new Set(
@@ -226,70 +105,6 @@ export function assertType(schema, value) {
     }
 }
 
-/**
- * @arg {object} errors - Map of object path to error
- * @return {Function}
- */
-export function errorGetter(errors) {
-    return function (keys) {
-        const key = objectPath.stringify(keys);
-        return errors[key];
-    };
-}
-
-/**
- * Walk a key path along a schema tree and model, updating the model according
- * to the schema along the way, until reaching the final key, whereupon we set
- * the supplied value. Returns the updated model or value set.
- * @arg {Array<string|number>} keys - The object path to walk
- * @arg {*} model - The model to update
- * @arg {object} schema - The schema definition for the model
- * @arg {*} value - The final value to write
- * @arg {number} depth - The current depth of recursion
- * @return {*}
- */
-function updateAndClone(keys, model, schema, value, depth = 0) {
-    if (keys.length === 0) {
-        return assertType(schema, value);
-    }
-
-    const [next, ...rest] = keys;
-    const nextSchema = getNextSchema(schema, next);
-    const nextModel = updateAndClone(
-        rest,
-        getNextValue(nextSchema, model, next),
-        nextSchema,
-        value,
-        depth + 1
-    );
-
-    if (getPreferredType(schema.type) === 'array') {
-        const firstSlice = model.slice(0, next);
-        const lastSlice = model.slice(next + 1);
-
-        while (firstSlice.length < next) {
-            firstSlice.push(
-                defaultForSchema(getNextSchema(schema, firstSlice.length))
-            );
-        }
-
-        const result = [...firstSlice, nextModel, ...lastSlice];
-        return result;
-    }
-
-    if (getPreferredType(schema.type) === 'object') {
-        if (isRequired(schema, next) || isSaturated(nextModel)) {
-            const result = { ...model, [next]: nextModel };
-            return result;
-        } else {
-            const { [next]: oldModel, ...nextResult } = model;
-            return nextResult;
-        }
-    }
-
-    throw new Error('Bad ObjectPath');
-}
-
 export function isRequired(schema, key) {
     if (schema.required) {
         return schema.required.includes(key);
@@ -310,29 +125,6 @@ export function isSaturated(value) {
     } else {
         return value !== undefined;
     }
-}
-
-/**
- * Set a value using a hook setter
- * @arg {*} model
- * @arg {object} schema
- * @arg {Function} setModel
- */
-export function valueSetter(model, schema) {
-    function set(keys, value) {
-        if (!Array.isArray(keys)) {
-            keys = [keys];
-        }
-
-        if (model === undefined) {
-            model = defaultForSchema(schema);
-        }
-
-        const newModel = updateAndClone(keys, model, schema, value);
-        return assertType(schema, newModel);
-    }
-
-    return set;
 }
 
 /**
@@ -373,34 +165,6 @@ export function traverseForm(forms, visit) {
 }
 
 /**
- * A hook that uses a memoized Ajv instance and a compiled version of the schema
- * to produce a validate function.
- * @arg object schema - The schema to compile for validation
- */
-const ajv = new Ajv({ allErrors: true });
-export function useValidator(schema) {
-    const compiled = useMemo(() => {
-        try {
-            const validator = ajv.compile(schema);
-            return validator;
-        } catch (err) {
-            const validator = () => false;
-            validator.errors = [{ dataPath: '.', message: 'invalid schema' }];
-            return validator;
-        }
-    }, [schema]);
-
-    return useCallback(
-        function validate(model) {
-            const valid = compiled(model);
-            const { errors } = compiled;
-            return { valid, errors };
-        },
-        [compiled]
-    );
-}
-
-/**
  * A copy of clone that works on ES6 modules. Does not actually clone
  * primitives.
  * @arg * value - The value to clone
@@ -419,8 +183,11 @@ export function clone(value) {
                 return value.map(clone);
             }
 
-            const result = {};
-            for (const key in value) {
+            const result = Object.create(Object.getPrototypeOf(value));
+            for (const key of Object.getOwnPropertyNames(value)) {
+                result[key] = clone(value[key]);
+            }
+            for (const key of Object.getOwnPropertySymbols(value)) {
                 result[key] = clone(value[key]);
             }
             return result;

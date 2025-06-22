@@ -1,11 +1,12 @@
 import React from 'react';
 
 export default function DateTime(props) {
-    const { form } = props;
+    const { form, onChange, value } = props;
+
     return (
         <div>
             {form.title && <label>{form.title}</label>}
-            <input type="datetime-local" {...props} />
+            <input type="text" value={value} onChange={onChange} />
             {form.description && <p>{form.description}</p>}
         </div>
     );

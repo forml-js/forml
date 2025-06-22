@@ -57,6 +57,7 @@ describe('items container', function () {
 
             const button = container.querySelector('button');
             fireEvent.click(button);
+            expect(onChange).to.have.been.called;
             expect(model.length).to.equal(1);
         });
     });
@@ -79,9 +80,7 @@ describe('items container', function () {
 
         // 4 because move up, move down, destroy, and add
         // as long as we only have 1 item in the model we're good
-        expect(container.querySelectorAll('button[disabled]').length).to.equal(
-            4
-        );
+        expect(onChange).not.to.have.been.called;
     });
 });
 
@@ -146,8 +145,6 @@ describe('each item', function () {
     let schema = null;
     let form = null;
     let model = null;
-    let setter = null;
-    let getter = null;
     let onChange = null;
     let decorator = null;
     let props = null;
@@ -159,8 +156,6 @@ describe('each item', function () {
         schema = { type: 'array', items: { type: 'number' } };
         form = ['*'];
         model = [1];
-        setter = util.valueSetter(model, schema);
-        getter = util.valueGetter(model, schema);
         onChange = sinon.fake((event, newModel) => {
             model = newModel;
         });
@@ -196,7 +191,7 @@ describe('each item', function () {
     });
 
     describe('in readonly mode', function () {
-        it.skip('propagates readonly', function () {
+        it('propagates readonly', function () {
             model = [1];
             form = [
                 {
@@ -208,7 +203,7 @@ describe('each item', function () {
             ];
 
             const { container } = render(
-                <SchemaForm {...{ ...props, model, form }} />
+                <SchemaForm {...props} model={model} form={form} />
             );
 
             expect(
@@ -306,10 +301,7 @@ describe('each item', function () {
                 {
                     key: [],
                     type: 'array',
-                    titleFun: sinon.fake(() => {
-                        const value = useValue('[0]');
-                        return `test ${value}`;
-                    }),
+                    titleFun: sinon.fake((value) => `test ${value}`),
                     items: ['[]'],
                 },
             ];
@@ -324,8 +316,8 @@ describe('each item', function () {
             );
 
             expect(form[0].titleFun).to.have.been.called;
-            expect(container.querySelector('ul li h6')).not.to.be.null;
-            expect(container.querySelector('ul li h6').textContent).to.equal(
+            expect(container.querySelector('ul li label')).not.to.be.null;
+            expect(container.querySelector('ul li label').textContent).to.equal(
                 'test 1'
             );
         });

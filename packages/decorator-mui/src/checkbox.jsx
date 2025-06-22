@@ -16,7 +16,7 @@ export default function Checkbox({ form, value, onChange }) {
     const disabled = 'readonly' in form ? form.readonly : false;
 
     const title = useMemo(
-        () => ('titleFun' in form ? form.titleFun(value) : form.title),
+        () => ('titleFun' in form ? form.titleFun(value) : form.title || ''),
         [form.title, form.titleFun, value]
     );
     const error = useError(form.key);

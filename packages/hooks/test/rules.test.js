@@ -3,6 +3,19 @@ import { expect } from 'chai';
 import { ARRAY_PLACEHOLDER } from '#constants';
 import * as rules from '#rules';
 
+describe('getPreferredType', function () {
+    it('accepts a single string', function () {
+        expect(rules.getPreferredType('string')).to.equal('string');
+    });
+    it('accepts an array of strings', function () {
+        expect(rules.getPreferredType(['string', 'null'])).to.equal('string');
+    });
+    it('returns the first non-null type', function () {
+        expect(rules.getPreferredType(['string', 'null'])).to.equal('string');
+        expect(rules.getPreferredType(['null', 'string'])).to.equal('string');
+    });
+});
+
 describe('enumToTitles', function () {
     it('stringifies values to create titles', function () {
         expect(

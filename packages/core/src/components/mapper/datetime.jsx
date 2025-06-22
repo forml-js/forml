@@ -11,14 +11,10 @@ export default function DateTime(props) {
     const { form } = props;
     const Decorator = useDecorator('datetime');
 
-    const currentValue = useValue(form.key);
-    const value = useMemo(
-        () => (currentValue ? new Date(currentValue) : new Date()),
-        [currentValue]
-    );
+    const value = useValue(form.key);
     const onChange = useCallback(
-        function onChange(e) {
-            props.onChangeSet(e, e.target.value);
+        function onChange(event) {
+            props.onChangeSet(event, event.target.value);
         },
         [props.onChange]
     );

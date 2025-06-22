@@ -7,7 +7,8 @@ import clsx from 'clsx';
  * @return {React.Component}
  */
 export function Item(props, ref) {
-    const { disabled } = props;
+    const { form } = props;
+    const disabled = form.readonly ?? false;
     return (
         <li className="item" ref={ref}>
             <div key="controls" className="controls">

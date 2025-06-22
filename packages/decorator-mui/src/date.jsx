@@ -14,7 +14,8 @@ export default function Date(props) {
     const pickerVariant = 'variant' in form ? form.variant : 'inline';
     const inputVariant = 'variant' in options ? options.variant : 'standard';
     const autoOk = 'autoOk' in form ? form.autoOk : true;
-    const openTo = 'openTo' in form ? form.openTo : 'day';
+    const openTo = 'openTo' in form ? 
+        (form.openTo === 'date' ? 'day' : form.openTo) : 'day';
     const format = 'format' in form ? form.format : undefined;
     const disabled = 'readonly' in form ? form.readonly : false;
     const otherProps = 'otherProps' in form ? form.otherProps : undefined;
@@ -50,7 +51,7 @@ export default function Date(props) {
 
     return (
         <DatePicker
-            value={utils.date(value)}
+            value={utils?.date ? utils.date(value) : value}
             label={form.title}
             helperText={form.error ?? form.description}
             error={!!error}

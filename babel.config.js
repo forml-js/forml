@@ -1,13 +1,13 @@
 module.exports = function (api) {
     console.log('babel.config.js');
+    api.cache(true);
     return {
-        sourceMaps: api.env('production') ? false : 'both',
+        exclude: ['node_modules'],
         presets: [
             [
                 '@babel/preset-env',
                 {
                     targets: { browsers: ['last 2 Chrome versions'] },
-                    modules: 'commonjs',
                 },
             ],
             ['@babel/preset-react', { runtime: 'automatic' }],

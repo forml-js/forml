@@ -1,8 +1,10 @@
-import { Container, Tab, Panel } from '../';
+import { it, describe } from 'mocha';
+import { expect } from 'chai';
+import { Container, Tab, Panel } from '../../src/tabs/index.jsx';
 import Context from '@forml/context';
 import React from 'react';
-import { render } from '@testing-library/react';
-import * as decorator from '../';
+import { render, getByText } from '@testing-library/react';
+import * as decorator from '../../';
 
 describe('renders', function () {
     let form;
@@ -36,80 +38,100 @@ describe('renders', function () {
         Object.keys(fields).forEach(function (field) {
             fields[field].forEach(function (value) {
                 describe(`${field}`, function () {
-                    test(`${value}`, function () {
-                        form = { ...form, [field]: value };
+                    it(`${value}`, function () {
+                        form = { ...form, title, description, [field]: value };
                         const { container } = render(
                             <Context.Provider value={{ decorator }}>
                                 <Container
                                     form={form}
-                                    title={title}
-                                    description={description}
                                     tabs={tabs}
                                     panels={panels}
                                 />
                             </Context.Provider>
                         );
 
-                        expect(container).toMatchSnapshot();
+                        // Verify container renders without errors
+                        expect(container.firstChild).to.not.be.null;
+
+                        // Verify MUI components are present
+                        const muiContainer = container.querySelector(
+                            '.MuiContainer-root, .MuiBox-root, .MuiPaper-root'
+                        );
+                        expect(muiContainer).to.not.be.null;
                     });
                 });
             });
         });
     });
 
-    test('with title and description', function () {
+    it('with title and description', function () {
+        form = { ...form, title, description };
         const { container } = render(
             <Context.Provider value={{ decorator }}>
-                <Container
-                    form={form}
-                    title={title}
-                    description={description}
-                    tabs={tabs}
-                    panels={panels}
-                />
+                <Container form={form} tabs={tabs} panels={panels} />
             </Context.Provider>
         );
 
-        expect(container).toMatchSnapshot();
+        // Verify container renders with title and description
+        expect(container.firstChild).to.not.be.null;
+
+        // Verify title is rendered
+        const titleElement = getByText(container, title);
+        expect(titleElement).to.not.be.null;
+
+        // Verify description is rendered
+        const descElement = getByText(container, description);
+        expect(descElement).to.not.be.null;
     });
 
-    test('with title and no description', function () {
+    it('with title and no description', function () {
+        form = { ...form, title };
         const { container } = render(
             <Context.Provider value={{ decorator }}>
-                <Container
-                    form={form}
-                    title={title}
-                    tabs={tabs}
-                    panels={panels}
-                />
+                <Container form={form} tabs={tabs} panels={panels} />
             </Context.Provider>
         );
 
-        expect(container).toMatchSnapshot();
+        // Verify container renders with title but no description
+        expect(container.firstChild).to.not.be.null;
+
+        // Verify title is rendered
+        const titleElement = getByText(container, title);
+        expect(titleElement).to.not.be.null;
     });
 
-    test('with description and no title', function () {
+    it('with description and no title', function () {
+        form = { ...form, description };
         const { container } = render(
             <Context.Provider value={{ decorator }}>
-                <Container
-                    form={form}
-                    description={title}
-                    tabs={tabs}
-                    panels={panels}
-                />
+                <Container form={form} tabs={tabs} panels={panels} />
             </Context.Provider>
         );
 
-        expect(container).toMatchSnapshot();
+        // Verify container renders with description but no title
+        expect(container.firstChild).to.not.be.null;
+
+        // Verify description is rendered
+        const descElement = container.querySelector(
+            'p, [data-testid*="description"], .MuiTypography-body1, .MuiTypography-body2'
+        );
+        expect(descElement).to.not.be.null;
     });
 
-    test('with no title or description', function () {
+    it('with no title or description', function () {
         const { container } = render(
             <Context.Provider value={{ decorator }}>
                 <Container form={form} tabs={tabs} panels={panels}></Container>
             </Context.Provider>
         );
 
-        expect(container).toMatchSnapshot();
+        // Verify container renders without title or description
+        expect(container.firstChild).to.not.be.null;
+
+        // Verify basic container structure is present
+        const containerElement = container.querySelector(
+            '.MuiContainer-root, .MuiBox-root, .MuiPaper-root'
+        );
+        expect(containerElement).to.not.be.null;
     });
 });

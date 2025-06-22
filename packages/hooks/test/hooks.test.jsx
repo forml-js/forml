@@ -9,7 +9,7 @@ import {
     useDecorator,
     useMapper,
     useModel,
-    createModelStore,
+    useModelStore,
 } from '../src/index.jsx';
 import { RenderingContext as Context, ModelContext } from '@forml/context';
 import { render } from '@testing-library/react';
@@ -165,9 +165,7 @@ describe('useModel', function () {
             model = 'value';
         });
         function ModelProvider(props) {
-            const model = useRef(
-                createModelStore(props.schema, props.model)
-            ).current;
+            const model = useModelStore(props.schema, props.model);
             return (
                 <ModelContext.Provider value={model}>
                     {props.children}

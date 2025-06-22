@@ -66,13 +66,16 @@ const Container = forwardRef(function Container(props, ref) {
     const { form, value } = props;
     const ArrayDecorator = useDecorator('array');
     const actions = useActionsFor(form.key);
+    const disabled = form.schema.readonly ?? false;
 
     const addItem = useCallback(
         (event) => {
-            const nextModel = actions.appendArray();
-            props.onChange(event, nextModel);
+            if (!disabled) {
+                const nextModel = actions.appendArray();
+                props.onChange(event, nextModel);
+            }
         },
-        [actions.appendArray, form.key, props.onChange]
+        [actions.appendArray, form.key, props.onChange, disabled]
     );
 
     return (

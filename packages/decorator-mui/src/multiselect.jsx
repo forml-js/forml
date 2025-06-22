@@ -26,6 +26,7 @@ export default function Multiselect(props) {
     const error = useError(form.key);
     const helperText = error ? error : description;
     const value = select.indexOf(props.value);
+    const safeValue = Array.isArray(value) ? value : [];
 
     const onChange = useCallback(
         (event) => {
@@ -63,7 +64,7 @@ export default function Multiselect(props) {
             <MuiSelect
                 inputRef={ref}
                 error={!!error}
-                value={value}
+                value={safeValue}
                 placeholder={placeholder}
                 disabled={disabled}
                 onChange={onChange}

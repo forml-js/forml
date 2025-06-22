@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useSelect, useError } from '@forml/hooks';
 
 export default function Select(props) {
@@ -17,12 +17,21 @@ export default function Select(props) {
         },
         [props.onChange, select]
     );
+    const options = useMemo(
+        () =>
+            form.titleMap.map(({ name, value }) => (
+                <option key={name} value={select.indexOf(value)}>
+                    {name}
+                </option>
+            )),
+        [form.titleMap, select]
+    );
     return (
         <div>
             {form.title && <p>{form.title}</p>}
             {(error || form.description) && <p>{error || form.description}</p>}
             <select onChange={onChange} value={value}>
-                {props.children}
+                {options}
             </select>
         </div>
     );

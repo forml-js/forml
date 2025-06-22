@@ -11,7 +11,7 @@ const { expect } = chai;
 
 it('uses the supplied mapper', function () {
     const mapper = {
-        text: sinon.fake((props) => <div {...props} />),
+        text: sinon.fake((props) => <div />),
     };
 
     render(
@@ -27,12 +27,16 @@ it('uses the supplied localizer', function () {
             return string;
         }),
     };
+    const decorator = {
+        text: sinon.fake((props) => <div />),
+    };
 
     render(
         <SchemaForm
             schema={{ type: 'string', title: 'test' }}
             form={['*']}
             localizer={localizer}
+            decorator={decorator}
         />
     );
 
@@ -41,12 +45,8 @@ it('uses the supplied localizer', function () {
 
 it('uses the supplied decorator', function () {
     const decorator = {
-        Input: {
-            Group: sinon.fake((props) => <div {...props} />),
-            Form: sinon.fake((props) => <div {...props} />),
-            Description: sinon.fake((props) => <div {...props} />),
-        },
-        Label: sinon.fake((props) => <div {...props} />),
+        text: sinon.fake((props) => <div />),
+        options: {},
     };
 
     render(
@@ -59,8 +59,5 @@ it('uses the supplied decorator', function () {
         />
     );
 
-    expect(decorator.Label).to.have.been.called;
-    expect(decorator.Input.Group).to.have.been.called;
-    expect(decorator.Input.Description).to.have.been.called;
-    expect(decorator.Input.Form).to.have.been.called;
+    expect(decorator.text).to.have.been.called;
 });
