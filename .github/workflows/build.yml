@@ -25,7 +25,7 @@ jobs:
             - name: Build
               run: npm run build --if-present
             - name: Test
-              run: npx nyc --reporter=lcovonly --reporter=text npm test
+              run: npx c8 --reporter=lcovonly --reporter=text npm test
             - name: Coveralls
               uses: coverallsapp/github-action@v1.1.2
               with:
