@@ -7,6 +7,8 @@ import * as util from '#util';
 chai.use(sinonChai);
 const { expect } = chai;
 
+const { clone, getNextValue, getTypeOf } = util;
+
 describe('defaultForSchema', function () {
     it('returns the default value if specified in the schema', function () {
         expect(
@@ -342,5 +344,39 @@ describe('clone', function () {
         expect(clone).not.to.equal(object);
         expect(clone.array).to.deep.equal(array);
         expect(clone.array).not.to.equal(array);
+    });
+});
+describe('getNextValue', function () {
+    it('returns defaultForSchema when value[key] is undefined', function () {
+        const schema = { type: 'string', default: 'test default' };
+        const value = { otherKey: 'exists' };
+        const key = 'missingKey';
+
+        const result = getNextValue(schema, value, key);
+        expect(result).to.equal('test default');
+    });
+
+    it('returns assertType result when value[key] exists', function () {
+        const schema = { type: 'string' };
+        const value = { existingKey: 'test value' };
+        const key = 'existingKey';
+
+        const result = getNextValue(schema, value, key);
+        expect(result).to.equal('test value');
+    });
+});
+describe('getTypeOf', function () {
+    it('returns getPreferredType result for undefined values', function () {
+        const schema = { type: ['string', 'number'] };
+        const result = getTypeOf(schema, undefined);
+
+        expect(result).to.equal('string'); // First non-null type
+    });
+
+    it('handles schema with single type', function () {
+        const schema = { type: 'integer' };
+        const result = getTypeOf(schema, undefined);
+
+        expect(result).to.equal('integer');
     });
 });

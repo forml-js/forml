@@ -66,7 +66,7 @@ export function useArrayKeyFor(key, index) {
     const path = useMemo(() => objectPath.stringify(key), [key]);
     const selector = useCallback(
         function ({ keyMaps }) {
-            return keyMaps[path][index];
+            return keyMaps[path].indexToKey[index];
         },
         [path, index]
     );

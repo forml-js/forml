@@ -30,7 +30,24 @@ function autoTemplate(template) {
                 template
             );
         }
-        return template;
+        
+        // Create a routing function that uses the specialized methods
+        function route(value) {
+            if (value instanceof Date) {
+                return template.getLocalizedDate(value);
+            } else if (typeof value === 'number') {
+                return template.getLocalizedNumber(value);
+            } else {
+                return template.getLocalizedString(value);
+            }
+        }
+        
+        // Copy all the specialized methods to the route function
+        route.getLocalizedString = template.getLocalizedString;
+        route.getLocalizedDate = template.getLocalizedDate;
+        route.getLocalizedNumber = template.getLocalizedNumber;
+        
+        return route;
     } else {
         Object.assign(
             route,

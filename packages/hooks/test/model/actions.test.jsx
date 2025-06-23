@@ -179,12 +179,10 @@ describe('useActions', function () {
                 const fullContext = renderHook(() => useModelContext(), {
                     wrapper,
                 });
-                console.log('fullContext: %o', fullContext);
                 const {
                     result: { current: postStore },
                 } = fullContext;
                 const { model: postModel } = postStore.getState();
-                console.log('postModel: %o', postModel);
                 expect(postModel.baz).to.deep.equal([value]);
             });
         });

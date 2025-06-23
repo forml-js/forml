@@ -6,7 +6,6 @@
     "type": "module",
     "imports": {
         "#renderer": "./src/renderer.jsx",
-        "#reducer": "./src/reducer.js",
         "#model": "./src/model/index.jsx",
         "#constants": "./src/constants.jsx",
         "#forms": "./src/forms.js",

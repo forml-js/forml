@@ -4,5 +4,5 @@ import React from 'react';
  */
 export default function Panel(props) {
     const { active, children } = props;
-    return <div active={active}>{children}</div>;
+    return <div active={active ? 'true' : 'false'}>{children}</div>;
 }

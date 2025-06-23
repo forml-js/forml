@@ -137,7 +137,7 @@ export const defaultForSchema = memo(function defaultForSchema(schema) {
                         base.push(defaultForSchema(item));
                     }
                 }
-                break;
+                return assertType(schema, base);
             case 'object':
                 const required = schema.required || [];
                 base = {};
@@ -145,28 +145,27 @@ export const defaultForSchema = memo(function defaultForSchema(schema) {
                     const item = defaultForSchema(schema.properties[property]);
                     base[property] = item;
                 }
-                break;
+                return assertType(schema, base);
             case 'string':
                 base = '';
-                break;
+                return assertType(schema, base);
             case 'number':
                 base = 0.0;
-                break;
+                return assertType(schema, base);
             case 'integer':
                 base = 0;
-                break;
+                return assertType(schema, base);
             case 'boolean':
                 base = false;
-                break;
+                return assertType(schema, base);
             case 'null':
                 base = null;
-                break;
+                return assertType(schema, base);
             default:
                 // throw new Error(`Unhandled defaultForSchema type: ${type}`);
                 base = undefined;
+                return base;
         }
-
-        return assertType(schema, base);
     }
 });
 
@@ -195,7 +194,17 @@ export function getNextSchema(schema, key) {
         if (key in schema.properties) {
             return schema.properties[key];
         } else if (schema.additionalProperties) {
-            return schema.additionalProperties;
+            if (schema.additionalProperties === true) {
+                throw Error(
+                    'additionalProperties: true is not supported - form rendering requires explicit type information'
+                );
+            } else if (typeof schema.additionalProperties !== 'object') {
+                throw Error(
+                    'additionalProperties must be a schema object with type information'
+                );
+            } else {
+                return schema.additionalProperties;
+            }
         } else {
             throw Error(`disallowed object key: ${key}`);
         }
@@ -226,16 +235,12 @@ export function getNext(schema, key, value) {
             const nextSchema = schema.properties[key];
             const nextValue = assertType(nextSchema, value[key]);
             return [nextSchema, nextValue];
-        } else if (
-            schema.additionalProperties === true ||
-            typeof key === 'number' ||
-            !isNaN(Number(key))
-        ) {
-            // Allow numeric keys and additionalProperties
-            const nextSchema = schema.additionalProperties || {};
-            const nextValue = value[key];
-            return [nextSchema, nextValue];
         } else if (schema.additionalProperties) {
+            if (schema.additionalProperties === true) {
+                throw Error(
+                    'additionalProperties: true is not supported - form rendering requires explicit type information'
+                );
+            }
             const nextSchema = schema.additionalProperties;
             const nextValue = assertType(nextSchema, value[key]);
             return [nextSchema, nextValue];
@@ -247,7 +252,7 @@ export function getNext(schema, key, value) {
     }
 }
 
-export function assertType(schema, value) {
+export function assertType(schema, value, fromDefault) {
     const preferred = getPreferredType(schema.type);
     const allowed = new Set(
         Array.isArray(schema.type) ? schema.type : [schema.type]
@@ -286,7 +291,11 @@ export function assertType(schema, value) {
     } else if (allowed.has(type)) {
         return value;
     } else {
-        return defaultForSchema(schema);
+        if (!fromDefault) {
+            return defaultForSchema(schema);
+        } else {
+            return undefined;
+        }
     }
 }
 

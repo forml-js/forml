@@ -9,15 +9,18 @@ export const FormType = t.oneOfType([
 ]);
 export const FormsType = t.arrayOf(
     function (propValue, key, componentName, location, propFullName) {
-        const isString = typeof propValue[key] === 'string';
-        const isObject =
-            typeof propValue[key] === 'object' && propValue[key] !== null;
+        const item = propValue[key];
+        const isString = typeof item === 'string';
+        const isObject = typeof item === 'object' && item !== null;
 
         if (!isString && !isObject) {
             return new Error(
-                `Invalid prop \`${propFullName}\` of type \`${typeof propValue[key]}\` supplied to \`${componentName}\`, expected \`string\` or \`object\`.`
+                `Invalid prop \`${propFullName}\` of type \`${typeof item}\` supplied to \`${componentName}\`, expected \`string\` or \`object\`.`
             );
         }
+        
+        // Return null for valid cases (string or object)
+        return null;
     }
 );
 FormType.items = FormsType;
