@@ -14,7 +14,7 @@ import React, { useMemo } from 'react';
  */
 function Root(props) {
     return (
-        <List dense disablePadding>
+        <List sx={{ width: 'fill-available' }} dense disablePadding>
             {props.children}
         </List>
     );

@@ -22,13 +22,19 @@ export default function Container(props) {
     const paperClass = options.filled
         ? 'forml-tabs-root forml-filled'
         : 'forml-tabs-root';
+    const orientation =
+        'layout' in form
+            ? form.layout === 'horizontal'
+                ? 'vertical'
+                : 'horizontal'
+            : 'horizontal';
     return (
         <Paper className={paperClass}>
             <Header form={form} />
             <Tabs
                 className="forml-tabs"
                 value={String(value)}
-                orientation={form.layout}
+                orientation={orientation}
                 onChange={activateTab}
             >
                 <Tabs.List form={form} className="forml-tabs-list">

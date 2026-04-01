@@ -93,7 +93,6 @@ describe('buildKeyMaps', function () {
                 beforeEach(function () {
                     model = ['a', 'b', 'c'];
                     keyMaps = buildKeyMaps(schema, model);
-                    console.error('keyMaps: %o', keyMaps);
                     keyMap = keyMaps[''];
                 });
                 it('creates a key for each item', function () {

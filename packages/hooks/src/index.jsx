@@ -1,3 +1,4 @@
+/* c8 ignore next 5 */
 export * from '#renderer';
 export * from '#model';
 export * from '#forms';

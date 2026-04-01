@@ -1,5 +1,6 @@
 import objectPath from 'objectpath';
 import { ArrayPlaceholder } from '#model';
+
 export function modelSetArray(
     targetSchema,
     targetModel,

@@ -3,16 +3,18 @@ import { describe, it } from 'mocha';
 import * as sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import domChai from 'chai-dom';
-import React, { useRef } from 'react';
+import React from 'react';
 import {
     useLocalizer,
     useDecorator,
     useMapper,
     useModel,
     useModelStore,
+    useGenerator,
+    useMerged,
 } from '../src/index.jsx';
 import { RenderingContext as Context, ModelContext } from '@forml/context';
-import { render } from '@testing-library/react';
+import { render, renderHook } from '@testing-library/react';
 
 chai.use(sinonChai);
 chai.use(domChai);
@@ -94,7 +96,6 @@ describe('useLocalizer', function () {
         });
     });
 });
-
 describe('useDecorator', function () {
     describe('from Context.Provider', function () {
         function TestComponent() {
@@ -128,7 +129,6 @@ describe('useDecorator', function () {
         });
     });
 });
-
 describe('useMapper', function () {
     describe('from Context.Provider', function () {
         function TestComponent(props) {
@@ -153,7 +153,6 @@ describe('useMapper', function () {
         });
     });
 });
-
 describe('useModel', function () {
     describe('from Context.Provider', function () {
         let model;
@@ -190,6 +189,75 @@ describe('useModel', function () {
             expect(container.querySelector('#getValue').textContent).to.equal(
                 'value'
             );
+        });
+    });
+});
+describe('useGenerator', function () {
+    describe('when given anything but a function', function () {
+        it('returns the value unmodified', function () {
+            const schema = {};
+            const { result } = renderHook(() => useGenerator(schema));
+            expect(result.current).to.equal(schema);
+        });
+    });
+    describe('when given a function', function () {
+        it('invokes the function and returns the result', function () {
+            const schema = {};
+            const generator = sinon.spy(() => schema);
+            const { result } = renderHook(() => useGenerator(generator));
+
+            expect(result.current).to.equal(schema);
+            expect(generator).to.have.been.calledOnce;
+        });
+    });
+});
+
+describe('useMerged', function () {
+    let date;
+    let localizer;
+    let schema;
+    let form;
+    let options;
+    let wrapper;
+
+    beforeEach(function () {
+        schema = {
+            type: 'string',
+        };
+        form = [{ key: [] }];
+        wrapper = function ({ children }) {
+            return (
+                <RenderingContext.Provider value={{}}>
+                    <ModelContext.Provider value={{}}>
+                        {children}
+                    </ModelContext.Provider>
+                </RenderingContext.Provider>
+            );
+        };
+    });
+
+    describe('given options', function () {
+        let options;
+        beforeEach(function () {
+            options = { readonly: true };
+        });
+        it('returns the merged form', function () {
+            const { result } = renderHook(() =>
+                useMerged(schema, form, options)
+            );
+            const merged = result.current[0];
+            expect(merged.type).to.equal('text');
+            expect(merged.readonly).to.be.true;
+            expect(merged.schema).to.equal(schema);
+        });
+    });
+    describe('without options', function () {
+        it('returns the merged form', function () {
+            const { result } = renderHook(() => useMerged(schema, form));
+            const merged = result.current[0];
+            expect(merged.type).to.equal('text');
+            expect(merged.readonly).to.be.undefined;
+            expect(merged.schema).to.equal(schema);
         });
     });
 });

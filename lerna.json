@@ -2,6 +2,7 @@
     "packages": [
         "packages/context",
         "packages/decorator-mui",
+        "packages/decorator-mantine",
         "packages/decorator-barebones",
         "packages/decorator-bootstrap",
         "packages/decorator-pdf",

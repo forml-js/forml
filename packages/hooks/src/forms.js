@@ -16,7 +16,7 @@ export function findSchema(keys, schema) {
 
     for (let i = 0; i < keys.length; ++i) {
         const key = keys[i];
-        schema = getNextSchema(schema, key);
+        schema = findNextSchema(schema, key);
     }
 
     return schema;
@@ -27,12 +27,13 @@ export function findSchema(keys, schema) {
  * @arg {object} schema
  * @arg {string|number} key
  */
-export function getNextSchema(schema, key) {
+export function findNextSchema(schema, key) {
     if (schema.type === 'array') {
         if (Array.isArray(schema.items)) {
             return schema.items[key];
+        } else {
+            return schema.items;
         }
-        return schema.items;
     }
 
     if (schema.type === 'object') {
@@ -168,7 +169,7 @@ export function merge(schema, form = ['*'], options = {}) {
     return form;
 }
 
-export function standardForm(schema, options = {}) {
+export function standardForm(schema, options) {
     const f = {};
 
     f.key = Array.from(options.path);

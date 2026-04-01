@@ -1,8 +1,15 @@
+import debug from 'debug';
+import * as sinon from 'sinon';
 import { it, describe } from 'mocha';
 import { expect } from 'chai';
 import Checkbox from '../src/checkbox.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
+import React from 'react';
+import { render, renderHook } from '@testing-library/react';
+import { withOptions } from '../src/index.jsx';
+
+const log = debug('forml:decorator-mui:test:checkbox');
 
 function makeWrapper({ modelStore, renderingContext }) {
     return ({ children }) => (
@@ -13,10 +20,6 @@ function makeWrapper({ modelStore, renderingContext }) {
         </RenderingContext.Provider>
     );
 }
-
-import React from 'react';
-import { render, renderHook } from '@testing-library/react';
-import { withOptions } from '../src/index.jsx';
 
 describe('renders', function () {
     let form;
@@ -29,7 +32,7 @@ describe('renders', function () {
     let wrapper;
 
     beforeEach(function () {
-        form = { type: 'checkbox', title, description, key: [] };
+        form = { type: 'checkbox', title, description, key: ['field'] };
         decorator = withOptions({});
         schema = {
             type: 'object',
@@ -48,6 +51,21 @@ describe('renders', function () {
 
         const input = container.querySelector('input[type="checkbox"]');
         expect(input).to.exist;
+    });
+
+    it('with a titleFun', function () {
+        form.titleFun = sinon.spy((value) => `title ${value}`);
+        const value = 'test';
+        const { container } = render(
+            <Checkbox form={form} value={value} title={title} />,
+            {
+                wrapper,
+            }
+        );
+
+        const label = container.querySelector('label');
+        expect(label).to.exist;
+        expect(label.textContent).to.equal(`title test`);
     });
 
     it('with title but no description', function () {
@@ -76,5 +94,60 @@ describe('renders', function () {
         expect(helper).to.exist;
         expect(helper.textContent).to.equal(description);
         expect(input.checked).to.be.true;
+    });
+
+    describe('with readonly enabled', function () {
+        beforeEach(function () {
+            form = {
+                type: 'checkbox',
+                title,
+                description,
+                key: ['field'],
+                readonly: true,
+            };
+        });
+        it('disables the input field', function () {
+            const { container } = render(
+                <Checkbox form={form} value={true} />,
+                {
+                    wrapper,
+                }
+            );
+
+            const input = container.querySelector('input[type="checkbox"]');
+            expect(input.disabled).to.be.true;
+            expect(input.getAttribute('disabled')).not.to.be.undefined;
+        });
+    });
+
+    describe('with an error state', function () {
+        let ajv;
+        let validator;
+        let errorText;
+        beforeEach(function () {
+            validator = sinon.spy((_value) => false);
+            errorText = 'error';
+            ajv = {
+                compile: sinon.spy(() => validator),
+                errorsText: sinon.spy(() => errorText),
+            };
+            model = { field: 'not a boolean' };
+            // First create modelStore with a dummy wrapper
+            modelStore = renderHook(() => useModelStore(schema, model)).result
+                .current;
+            modelStore.setState((state) => (state.ajv = ajv));
+            wrapper = makeWrapper({
+                modelStore,
+                renderingContext: { decorator },
+            });
+        });
+        it('the description displays an error message', function () {
+            const { container } = render(<Checkbox form={form} />, {
+                wrapper,
+            });
+            const helper = container.querySelector('.MuiFormHelperText-root');
+            expect(helper).to.exist;
+            expect(helper.textContent).to.equal(errorText);
+        });
     });
 });

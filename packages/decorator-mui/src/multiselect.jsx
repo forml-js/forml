@@ -1,11 +1,9 @@
 import { useError, useDecorator, useSelect } from '@forml/hooks';
-import {
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    MenuItem,
-    Select as MuiSelect,
-} from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import ObjectPath from 'objectpath';
 import React, { useCallback, useMemo, useRef } from 'react';
 
@@ -61,7 +59,7 @@ export default function Multiselect(props) {
     return (
         <FormControl variant={variant} error={!!error}>
             {title ? <InputLabel variant={variant}>{title}</InputLabel> : null}
-            <MuiSelect
+            <Select
                 inputRef={ref}
                 error={!!error}
                 value={safeValue}
@@ -71,7 +69,7 @@ export default function Multiselect(props) {
                 multiple
             >
                 {menuItems}
-            </MuiSelect>
+            </Select>
             {helperText ? <FormHelperText>{helperText}</FormHelperText> : null}
         </FormControl>
     );
