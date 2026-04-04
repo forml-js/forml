@@ -41,11 +41,12 @@ const createSampleStore = createStore(function (set) {
     const schema = sample.schema ?? { type: 'null' };
     const form = sample.form ?? ['*'];
     const model = sample.model ?? null;
+    const localizer = sample.localizer ?? null;
     return {
         sample: DEFAULT_SAMPLE,
         decorator: DEFAULT_DECORATOR,
         mapper: null,
-        localizer: null,
+        localizer,
         schema: {
             setJSON(json) {
                 set((state) => ({
@@ -119,10 +120,11 @@ const createSampleStore = createStore(function (set) {
             json: JSON.stringify(model, undefined, 2),
         },
         setSample(sample) {
-            const { schema, form, model } = getSample(sample);
+            const { schema, form, model, localizer } = getSample(sample);
             set((state) => ({
                 ...state,
                 sample,
+                localizer: localizer ?? null,
                 schema: {
                     ...state.schema,
                     value: schema,
