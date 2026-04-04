@@ -3,7 +3,7 @@
         "type": "object",
         "title": "Comment",
         "properties": {
-            "name":  {
+            "name": {
                 "title": "Name",
                 "type": "string",
                 "default": "Steve"
@@ -13,18 +13,47 @@
     },
     "form": [
         {
-            "type": "help",
-            "description": "You can inject any text on your form.",
-            "variant": "h4",
-            "align": "left",
-            "color": "secondary"
-        },
-        {
-            "type": "help",
-            "description": "variant h2, align center",
-            "variant": "h2",
-            "align": "center"
-        },
-        "name"
+            "type": "fieldset",
+            "layout": "vertical",
+            "items": [
+                {
+                    "type": "help",
+                    "description": "You can inject any text on your form.",
+                    "variant": "h4",
+                    "align": "left",
+                    "color": "red"
+                },
+                {
+                    "type": "help",
+                    "variant": "span",
+                    "description": "Work with different sizes, variants, and styles.",
+                    "style": "italic"
+                },
+                {
+                    "type": "help",
+                    "variant": "span",
+                    "description": " Work with different sizes, variants, and styles.",
+                    "weight": "bold",
+                    "decoration": "underline",
+                    "transform": "bookcase"
+                },
+                {
+                    "type": "help",
+                    "description": "variant h2, align center",
+                    "variant": "h2",
+                    "size": "xl",
+                    "align": "center"
+                },
+                "name",
+                {
+                    "type": "notice",
+                    "color": "red",
+                    "title": "Here's an alert",
+                    "description": "All is well",
+                    "icon": "info",
+                    "variant": "light"
+                }
+            ]
+        }
     ]
 }
