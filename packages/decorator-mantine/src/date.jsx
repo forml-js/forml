@@ -6,13 +6,22 @@ export default function DateForm(props) {
     const { form } = props;
     const currentValue = useValue(form.key);
     const value = useMemo(
-        () => (currentValue ? new Date(currentValue) : new Date()),
+        () =>
+            currentValue
+                ? new Date(currentValue).toISOString().split('T')[0]
+                : undefined,
         [currentValue]
     );
+    console.error('DateForm(currentValue: %o, value: %o)', currentValue, value);
     const onChange = useCallback(
         (nextDateObject) => {
-            const nextDate = nextDateObject.toLocaleDateString();
-            props.onChange({ target: { value: nextDate } }, nextDate);
+            if (nextDateObject instanceof Date) {
+                const nextDate = nextDateObject.toLocaleDateString();
+                props.onChange({ target: { value: nextDate } }, nextDate);
+            } else {
+                const nextDate = nextDateObject;
+                props.onChange({ target: { value: nextDate } }, nextDate);
+            }
         },
         [props.onChange]
     );
