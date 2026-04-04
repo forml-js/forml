@@ -1,14 +1,15 @@
 import t from 'prop-types';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '#types';
+import { useDecorator, useValue } from '@forml/hooks';
 
 /**
  * @component Checkbox
  */
 export default function Checkbox(props) {
-    const { form, value } = props;
+    const { form } = props;
+    const value = useValue(form.key);
 
     const Decorator = useDecorator('checkbox');
     const onChange = useCallback(
