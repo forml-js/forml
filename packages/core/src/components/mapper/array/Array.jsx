@@ -1,10 +1,12 @@
+import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
+import { DragDropProvider } from '@dnd-kit/react';
+import { useActionsFor, useArrayLength, useDecorator } from '@forml/hooks';
 import ObjectPath from 'objectpath';
-import { FormContext } from '@forml/context';
-import { useActionsFor, useDecorator, useArrayLength } from '@forml/hooks';
 import t from 'prop-types';
-import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { FormType } from '#types';
+import { useMergedRef } from '#util';
 import { Item } from './Item.jsx';
 import { Range } from './Range.jsx';
 
@@ -37,6 +39,7 @@ function ArrayComponent(props) {
 function ArrayRanges(props) {
     const { form, onChange } = props;
     const keys = useArrayLength(form.key);
+    const dragType = ObjectPath.stringify(form.key);
     const ranges = useMemo(() => {
         const ranges = [];
         const perRange = Math.ceil(Math.sqrt(keys));
@@ -52,6 +55,7 @@ function ArrayRanges(props) {
                     form={form}
                     start={start}
                     end={end}
+                    dragType={dragType}
                     onChange={onChange}
                 />
             );
@@ -67,6 +71,8 @@ const Container = forwardRef(function Container(props, ref) {
     const ArrayDecorator = useDecorator('array');
     const actions = useActionsFor(form.key);
     const disabled = form.schema.readonly ?? false;
+    const [rootElement, setRootElement] = useState(null);
+    const mergedRef = useMergedRef(ref, setRootElement);
 
     const addItem = useCallback(
         (event) => {
@@ -77,10 +83,29 @@ const Container = forwardRef(function Container(props, ref) {
         },
         [actions.appendArray, form.key, props.onChange, disabled]
     );
+    const onDragEnd = useCallback(
+        (event) => {
+            const { source, target, canceled } = event.operation;
+            if (!canceled) {
+                const nextModel = actions.moveArray(source.id, source.index);
+                props.onChange(event, nextModel);
+            }
+        },
+        [actions.moveArray, form.key, props.onChange]
+    );
+    const installModifiers = useCallback(
+        (defaults) => [...defaults, RestrictToVerticalAxis],
+        []
+    );
 
     return (
-        <ArrayDecorator add={addItem} ref={ref} form={form} value={value}>
-            {props.children}
+        <ArrayDecorator add={addItem} ref={mergedRef} form={form} value={value}>
+            <DragDropProvider
+                modifiers={installModifiers}
+                onDragEnd={onDragEnd}
+            >
+                {props.children}
+            </DragDropProvider>
         </ArrayDecorator>
     );
 });

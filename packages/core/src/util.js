@@ -1,4 +1,5 @@
 import { getPreferredType } from '@forml/hooks/rules';
+import { useCallback } from 'react';
 
 /**
  * @namespace forml.util
@@ -197,4 +198,19 @@ export function clone(value) {
             return value;
         }
     }
+}
+
+function assignRef(ref, value) {
+    if (typeof ref === 'function') {
+        ref(value);
+    } else if (ref != null) {
+        ref.current = value;
+    }
+    return ref;
+}
+
+export function useMergedRef(...refs) {
+    return useCallback((value) => {
+        refs.map((ref) => assignRef(ref, value));
+    }, refs);
 }

@@ -5,17 +5,19 @@ import {
     useDecorator,
     usePrefix,
 } from '@forml/hooks';
-import React, { forwardRef, memo, useCallback, useMemo } from 'react';
+import { forwardRef, memo, useCallback, useMemo } from 'react';
 
 import { SchemaField } from '#field';
 import { clone, traverseForm } from '#util';
+import { useSortable } from '@dnd-kit/react/sortable';
 
 export const Item = memo(
     function Item(props) {
-        const { form, id, ref, disabled } = props;
+        const { form, id, index, dragType: type, disabled } = props;
         const parent = form;
         const forms = form.items;
         const prefix = usePrefix();
+        const sortable = useSortable({ id, index });
 
         const onChange = useCallback(
             (event, nextModel) => {
@@ -23,6 +25,7 @@ export const Item = memo(
             },
             [props.onChange]
         );
+
         const fields = useMemo(() => {
             return forms.map((template, subFormIndex) => {
                 if (!template) return;
@@ -53,7 +56,11 @@ export const Item = memo(
         }, [forms, parent, onChange, disabled]);
 
         return (
-            <ArrayItem {...props} ref={ref}>
+            <ArrayItem
+                {...props}
+                handleRef={sortable.handleRef}
+                ref={sortable.ref}
+            >
                 {fields}
             </ArrayItem>
         );
@@ -64,7 +71,7 @@ export const Item = memo(
 export default Item;
 
 const ArrayItem = forwardRef(function ArrayItem(props, ref) {
-    const { form, id, onChange } = props;
+    const { form, id, handleRef, onChange } = props;
     const ArrayDecorator = useDecorator('array');
     const modelActions = useActionsFor(form.key);
 
@@ -94,13 +101,27 @@ const ArrayItem = forwardRef(function ArrayItem(props, ref) {
                     onChange(new Event('change', { bubbles: true }), nextModel);
                     return nextModel;
                 },
+                moveTo: function (index) {
+                    const nextModel = modelActions.moveArray(
+                        form.key,
+                        id,
+                        index
+                    );
+                    onChange(new Event('change', { bubbles: true }), nextModel);
+                },
             };
         },
         [modelActions, id, form.key, onChange]
     );
 
     return (
-        <ArrayDecorator.Item form={form} id={id} {...actions} ref={ref}>
+        <ArrayDecorator.Item
+            form={form}
+            id={id}
+            {...actions}
+            dragRef={ref}
+            handleRef={handleRef}
+        >
             {props.children}
         </ArrayDecorator.Item>
     );
