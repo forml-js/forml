@@ -1,5 +1,5 @@
 import { useDecorator } from '@forml/hooks';
-import { Box, Paper, Tabs, Title, Text } from '@mantine/core';
+import { Box, Paper, Tabs, Scroller, Title, Text } from '@mantine/core';
 import React from 'react';
 
 function Header(props) {
@@ -38,7 +38,11 @@ export default function Container(props) {
                 onChange={activateTab}
             >
                 <Tabs.List form={form} className="forml-tabs-list">
-                    {props.tabs}
+                    {orientation === 'vertical' ? (
+                        props.tabs
+                    ) : (
+                        <Scroller>{props.tabs}</Scroller>
+                    )}
                 </Tabs.List>
                 {props.panels}
             </Tabs>
