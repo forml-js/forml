@@ -13,6 +13,7 @@ import File from './file.jsx';
 import Help from './help.jsx';
 import Integer from './integer.jsx';
 import Multiselect from './multiselect.jsx';
+import Notice from './notice.jsx';
 import Null from './null.jsx';
 import Number from './number.jsx';
 import Select from './select.jsx';
@@ -31,6 +32,7 @@ export function defaultMapper() {
         help: Help,
         integer: Integer,
         multiselect: Multiselect,
+        notice: Notice,
         null: Null,
         number: Number,
         password: Text,
@@ -56,6 +58,7 @@ export const mapperTypes = [
     'help',
     'integer',
     'multiselect',
+    'notice',
     'null',
     'number',
     'password',
@@ -75,6 +78,7 @@ export const mapperShape = t.shape({
     help: t.elementType,
     integer: t.elementType,
     multiselect: t.elementType,
+    notice: t.elementType,
     null: t.elementType,
     number: t.elementType,
     password: t.elementType,
