@@ -4,13 +4,16 @@ export default {
         type: 'object',
         title: 'Title',
         properties: {
-            firstName: {title: 'first.name', type: 'string'},
+            firstName: { title: 'first.name', type: 'string' },
             date: {
                 title: 'first.name',
                 type: 'string',
                 format: 'date',
-            }
-        }
+            },
+        },
     },
-    localization: {getLocalizedString: value => value === 'first.name' ? 'First Name' : value}
+    localizer: {
+        getLocalizedString: (value) =>
+            value === 'first.name' ? 'First Name' : value,
+    },
 };
