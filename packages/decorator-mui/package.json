@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "lint": "eslint src/**/*.jsx",
-        "test": "jest"
+        "test": "mocha 'test/**/*.test.{js,jsx}'"
     },
     "repository": {
         "type": "git",

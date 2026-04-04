@@ -24,7 +24,7 @@
     },
     "scripts": {
         "lint": "eslint src/**/*.jsx",
-        "test": "jest --coverage --verbose --passWithNoTests"
+        "test": "mocha 'test/**/*.test.{js,jsx}'"
     },
     "repository": {
         "type": "git",
