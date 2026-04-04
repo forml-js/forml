@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
 import { useError } from '@forml/hooks';
 import { Checkbox } from '@mantine/core';
+import React, { useCallback } from 'react';
 
 export default function CheckboxDecorator(props) {
     const { form, value } = props;

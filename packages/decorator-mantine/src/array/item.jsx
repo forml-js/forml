@@ -1,4 +1,5 @@
-import React from 'react';
+import cx from 'clsx';
+import React, { forwardRef } from 'react';
 import { Box, Button, Divider } from '@mantine/core';
 import {
     IconMenu,
@@ -8,13 +9,13 @@ import {
 } from '@tabler/icons-react';
 import { useIsFirstArrayItem, useIsLastArrayItem } from '@forml/hooks';
 
-function DragHandle(props) {
+const DragHandle = forwardRef(function DragHandle(props, ref) {
     return (
-        <Box className="forml-array-item-draghandle">
+        <Box {...props} ref={ref} className="forml-array-item-draghandle">
             <IconMenu />
         </Box>
     );
-}
+});
 
 function Forms(props) {
     return <Box className="forml-array-item-forms">{props.children}</Box>;
@@ -63,16 +64,35 @@ function MovementButtons(props) {
     );
 }
 
-function Base(props) {
-    return <Box className="forml-array-item">{props.children}</Box>;
-}
+const Base = forwardRef(function Base(props, ref) {
+    const { isDragging } = props;
+    const className = cx(
+        'forml-array-item',
+        isDragging && 'forml-array-item-dragging'
+    );
+    return (
+        <Box ref={ref} className={className}>
+            {props.children}
+        </Box>
+    );
+});
 
-export default function Item(props) {
-    const { children, id, form, destroy, moveUp, moveDown } = props;
+export default forwardRef(function Item(props, ref) {
+    const {
+        children,
+        id,
+        form,
+        dragRef,
+        handleRef,
+        destroy,
+        moveUp,
+        moveDown,
+        isDragging,
+    } = props;
 
     return (
-        <Base>
-            <DragHandle />
+        <Base isDragging={isDragging} ref={dragRef}>
+            <DragHandle ref={handleRef} />
             <Divider orientation="vertical" />
             <Forms>{children}</Forms>
             <Divider orientation="vertical" />
@@ -87,4 +107,4 @@ export default function Item(props) {
             </Controls>
         </Base>
     );
-}
+});
