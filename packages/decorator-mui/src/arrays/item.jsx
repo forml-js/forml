@@ -1,17 +1,20 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 
-const DragHandle = (props) => (
-    <Box
-        {...props}
-        sx={useMemo(
-            () => ({ display: 'flex', flexDirection: 'column', p: 1.5 }),
-            []
-        )}
-    >
-        <Icon>drag_handle</Icon>
-    </Box>
-);
+const DragHandle = forwardRef(function DragHandle(props, ref) {
+    return (
+        <Box
+            {...props}
+            ref={ref}
+            sx={useMemo(
+                () => ({ display: 'flex', flexDirection: 'column', p: 1.5 }),
+                []
+            )}
+        >
+            <Icon>drag_handle</Icon>
+        </Box>
+    );
+});
 const FormsContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -100,8 +103,8 @@ const StyledListItem = forwardRef(function StyledListItem(props, ref) {
  * @component
  * @return {React.Component}
  */
-export const ItemComponent = function ItemComponent(props, ref) {
-    const { disabled, form, draggableProps, dragHandleProps } = props;
+export function ItemComponent(props, ref) {
+    const { disabled, form, dragRef, handleRef } = props;
     const { moveUp, moveDown, destroy } = props;
 
     const renderMovementButtons = useMemo(
@@ -116,12 +119,11 @@ export const ItemComponent = function ItemComponent(props, ref) {
     return (
         <StyledListItem
             divider={true}
-            ref={ref}
             dense
             disableGutters={true}
-            {...draggableProps}
+            ref={dragRef}
         >
-            <DragHandle {...dragHandleProps}></DragHandle>
+            <DragHandle ref={handleRef} />
             <FormsContainer>{props.children}</FormsContainer>
             <Controls key="controls">
                 <MovementButtons
@@ -134,7 +136,7 @@ export const ItemComponent = function ItemComponent(props, ref) {
             </Controls>
         </StyledListItem>
     );
-};
+}
 
 function MovementButtons(props) {
     const { render, moveUp, moveDown, disabled } = props;
