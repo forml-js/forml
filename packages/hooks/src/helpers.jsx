@@ -101,3 +101,33 @@ function getFileFormat(format, file) {
             return file.name;
     }
 }
+
+export function using(form) {
+    const props = {};
+    const _self = {
+        add(componentKey, value = undefined) {
+            if (value === undefined) {
+                return {
+                    from(formKey, defaultValue = undefined) {
+                        if (formKey in form) {
+                            props[componentKey] = form[formKey];
+                        } else if (defaultValue !== undefined) {
+                            props[componentKey] = defaultValue;
+                        }
+                        return _self;
+                    },
+                    with(builder) {
+                        props[componentKey] = builder(form);
+                        return _self;
+                    },
+                };
+            } else {
+                props[componentKey] = value;
+            }
+        },
+        get value() {
+            return props;
+        },
+    };
+    return _self;
+}
