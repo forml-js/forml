@@ -60,6 +60,7 @@ export const Item = memo(
                 {...props}
                 handleRef={sortable.handleRef}
                 ref={sortable.ref}
+                isDragging={sortable.isDragging}
             >
                 {fields}
             </ArrayItem>
@@ -71,7 +72,7 @@ export const Item = memo(
 export default Item;
 
 const ArrayItem = forwardRef(function ArrayItem(props, ref) {
-    const { form, id, handleRef, onChange } = props;
+    const { form, id, handleRef, isDragging, onChange } = props;
     const ArrayDecorator = useDecorator('array');
     const modelActions = useActionsFor(form.key);
 
@@ -119,6 +120,7 @@ const ArrayItem = forwardRef(function ArrayItem(props, ref) {
             form={form}
             id={id}
             {...actions}
+            isDragging={isDragging}
             dragRef={ref}
             handleRef={handleRef}
         >
