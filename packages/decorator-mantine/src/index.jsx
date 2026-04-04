@@ -5,6 +5,7 @@ import DateTime from './datetime.jsx';
 import Fieldset from './fieldset.jsx';
 import File from './file.jsx';
 import Help from './help.jsx';
+import Notice from './notice.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs/index.jsx';
 import Text from './text.jsx';
@@ -21,6 +22,7 @@ const decorator = {
     fieldset: Fieldset,
     file: File,
     help: Help,
+    notice: Notice,
     options: {},
     withOptions,
     select: Select,

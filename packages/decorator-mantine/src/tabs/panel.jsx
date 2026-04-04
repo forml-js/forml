@@ -1,6 +1,5 @@
 import { Tabs } from '@mantine/core';
 import React from 'react';
-import ObjectPath from 'objectpath';
 
 export default function Panel(props) {
     const { index } = props;
