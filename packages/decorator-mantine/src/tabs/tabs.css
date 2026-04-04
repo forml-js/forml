@@ -16,5 +16,24 @@
             border-bottom-left-radius: var(--mantine-radius-sm);
             border-bottom-right-radius: var(--mantine-radius-sm);
         }
+
+        .forml-tabs-list {
+            background-color: var(--forml-panel-color);
+
+            &[data-orientation=vertical] {
+                .mantine-Tabs-tab {
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: unset;
+                    }
+                }
+
+                .mantine-Tabs-tabLabel {
+                    text-align: start;
+                }
+
+            }
+        }
     }
 }
