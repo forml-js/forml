@@ -17,6 +17,10 @@
         border: 1px solid var(--forml-border-color);
         border-top: none;
 
+        &.forml-array-item-dragging {
+            border-top: 1px solid var(--forml-border-color);
+        }
+
         &:last-child {
             border-bottom-left-radius: var(--mantine-radius-sm);
             border-bottom-right-radius: var(--mantine-radius-sm);
@@ -109,10 +113,12 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: auto min-content 1fr min-content auto;
+    background-color: var(--forml-panel-color);
 
     & .forml-array-item-draghandle {
         user-select: none;
         padding: var(--mantine-spacing-xs);
+        background-color: var(--forml-raised-color);
         cursor: move;
     }
 
