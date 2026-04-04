@@ -1,12 +1,9 @@
 import t from 'prop-types';
 import React, { useMemo } from 'react';
-import debug from 'debug';
 
 import { useDecorator, useLocalizer } from '@forml/hooks';
 import { FormType } from '../../types.js';
 import { SchemaField } from '../schema-field.jsx';
-
-const log = debug('forml:core:fieldset');
 
 /**
  * @component FieldSet

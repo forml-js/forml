@@ -5,7 +5,7 @@ import {
     useDecorator,
     usePrefix,
 } from '@forml/hooks';
-import { forwardRef, memo, useCallback, useMemo } from 'react';
+import React, { forwardRef, memo, useCallback, useMemo } from 'react';
 
 import { SchemaField } from '#field';
 import { clone, traverseForm } from '#util';

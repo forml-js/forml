@@ -1,3 +1,4 @@
+import React from 'react';
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DragDropProvider } from '@dnd-kit/react';
 import { useActionsFor, useArrayLength, useDecorator } from '@forml/hooks';
