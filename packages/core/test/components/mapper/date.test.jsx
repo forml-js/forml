@@ -5,7 +5,7 @@ import sinonChai from 'sinon-chai';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
-import React, { createElement as h } from 'react';
+import React from 'react';
 
 chai.use(sinonChai);
 const { expect } = chai;

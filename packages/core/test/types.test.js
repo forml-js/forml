@@ -1,4 +1,3 @@
-import { describe, it } from 'mocha';
 import * as chai from 'chai';
 import PropTypes from 'prop-types';
 import { FormType, FormsType } from '../src/types.js';
@@ -213,4 +212,3 @@ describe('FormsType', function () {
         expect(errorMessage).to.contain('testProp');
     });
 });
-
