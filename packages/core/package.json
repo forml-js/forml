@@ -43,9 +43,9 @@
     "dependencies": {
         "@forml/context": "file:../context",
         "@forml/hooks": "file:../hooks",
-        "ajv": "^8.17.1",
+        "ajv": "^8.18.0",
         "deepmerge": "^4.3.1",
-        "libphonenumber-js": "^1.11.20",
+        "libphonenumber-js": "^1.12.41",
         "objectpath": "^2.0.0",
         "prop-types": "^15.8.1",
         "shortid": "^2.2.17"
