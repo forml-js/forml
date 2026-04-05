@@ -1,3 +1,29 @@
+# 2.0.0-next.21 (2026-04-05)
+
+
+### Bug Fixes
+
+* **core:** fix checkbox value injection a996cdc
+* **core:** fix Notice component reference 71d62a1
+* **decorator-mantine:** add background colors to highlight active tabs 5be9080
+* **decorator-mantine:** fix date value handling 4cfa22c
+* **decorator-mantine:** help now honors form settings a0fa460
+* **example:** fixed localization sample 53d3fa1
+
+
+### Features
+
+* **core:** add notice mapper e3ed2d3
+* **core:** pass isDragging to array item decorators 4482b89
+* **core:** restore drag/drop behaviors with dnd-kit f70b7d2
+* **decorator-mantine:** add Icon component 647d11d
+* **decorator-mantine:** add Notice component ccb3ad3
+* **decorator-mantine:** add panel/raised color definitions dd6bec6
+* **decorator-mantine:** set up for dnd-kit array sorting 2a87d12
+* **decorator-mantine:** wrap horizontal tabs with Scroller 1588412
+* **decorator-mui:** restore drag/drop behavior with dnd-kit 5122306
+* **hooks:** sugary helper for prop generation based on forms e344aa9
+
 # 2.0.0-next.20 (2025-06-23)
 
 

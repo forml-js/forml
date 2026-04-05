@@ -1,6 +1,6 @@
 {
     "name": "@forml/decorator-barebones",
-    "version": "2.0.0-next.20",
+    "version": "2.0.0-next.21",
     "description": "A barebones decorator for forml; intended for testing, not production",
     "main": "src/index.jsx",
     "type": "module",
