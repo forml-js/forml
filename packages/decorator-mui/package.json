@@ -4,6 +4,10 @@
     "description": "A forml decorator using MaterialUI",
     "main": "src/index.jsx",
     "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "lint": "eslint src/**/*.jsx",
         "test": "mocha 'test/**/*.test.{js,jsx}'"
