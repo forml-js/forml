@@ -1,3 +1,10 @@
+# 2.0.0-next.22 (2026-04-05)
+
+
+### Bug Fixes
+
+* **decorator-mantine:** publishConfig for the new package 0ef1f1a
+
 # 2.0.0-next.21 (2026-04-05)
 
 
