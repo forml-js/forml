@@ -12,6 +12,6 @@ export default function Notice(props) {
     return <Decorator form={form} />;
 }
 
-Help.propTypes = {
+Notice.propTypes = {
     form: FormType,
 };
