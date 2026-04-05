@@ -6,9 +6,9 @@ import {
     useIsFirstArrayItem,
     useIsLastArrayItem,
     useArrayKeyFor,
-} from '../../src/model/array.jsx';
+} from '../../src/model/array.js';
 import { ModelContext, RenderingContext } from '@forml/context';
-import { buildKeyMaps } from '../../src/model/keys.jsx';
+import { buildKeyMaps } from '../../src/model/keys.js';
 import { useModelStore } from '#model';
 
 const { expect } = chai;
@@ -122,4 +122,3 @@ describe('Array Hooks', function () {
         });
     });
 });
-

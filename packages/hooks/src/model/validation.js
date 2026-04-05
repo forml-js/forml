@@ -1,5 +1,5 @@
 import { useModelContext } from '#model';
-import { useModelFor } from './model.jsx';
+import { useModelFor } from './model.js';
 import { useMemo } from 'react';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';

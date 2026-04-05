@@ -1,6 +1,12 @@
 import { useMemo } from 'react';
 
-import { assertType, getNextSchema, modelDrop, seek, unwind } from '../common';
+import {
+    assertType,
+    getNextSchema,
+    modelDrop,
+    seek,
+    unwind,
+} from '../common.js';
 import {
     addArrayKeyForIndex,
     addNewKeyMaps,
@@ -9,8 +15,8 @@ import {
     mappedIndexOfKey,
     moveArrayKeyForIndex,
     usePrefix,
-} from './keys';
-import { useModelContext } from './store';
+} from './keys.js';
+import { useModelContext } from './store.js';
 
 export function useActions() {
     const prefix = usePrefix();

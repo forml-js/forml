@@ -4,8 +4,8 @@ import addFormats from 'ajv-formats';
 import { useMemo, useContext as useReactContext } from 'react';
 import { createStore } from 'zustand';
 
-import { assertType } from '../common';
-import { buildKeyMaps, usePrefix } from './keys';
+import { assertType } from '../common.js';
+import { buildKeyMaps, usePrefix } from './keys.js';
 
 /**
  * A hook to pull in the model methods for the closest parent form

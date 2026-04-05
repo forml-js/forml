@@ -1,12 +1,6 @@
-import debug from 'debug';
 import { RenderingContext } from '@forml/context';
-import {
-    useCallback,
-    useContext as useReactContext,
-    useMemo,
-    useState,
-} from 'react';
-import { useValue } from '#model';
+import debug from 'debug';
+import { useMemo, useContext as useReactContext } from 'react';
 
 const log = debug('forml:hooks:renderer');
 

@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import * as chai from 'chai';
 import { renderHook, act } from '@testing-library/react';
-import { useSelect, useFileField } from '../src/helpers.jsx';
+import { useSelect, useFileField } from '../src/helpers.js';
 
 const { expect } = chai;
 
@@ -249,4 +249,3 @@ describe('useFileField', function () {
         expect(result.current).to.equal(firstResult);
     });
 });
-

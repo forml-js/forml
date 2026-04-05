@@ -12,7 +12,7 @@ import {
     useModelStore,
     useGenerator,
     useMerged,
-} from '../src/index.jsx';
+} from '../src/index.js';
 import { RenderingContext as Context, ModelContext } from '@forml/context';
 import { render, renderHook } from '@testing-library/react';
 

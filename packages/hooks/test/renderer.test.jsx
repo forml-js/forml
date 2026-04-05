@@ -1,3 +1,4 @@
+import React from 'react';
 import { describe, it } from 'mocha';
 import * as chai from 'chai';
 import * as sinon from 'sinon';

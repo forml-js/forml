@@ -3,8 +3,8 @@ import objectPath from 'objectpath';
 import { useCallback, useMemo } from 'react';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
-import { seek } from '../common';
-import { mapArrayKeysToIndex, usePrefixed } from './keys';
+import { seek } from '../common.js';
+import { mapArrayKeysToIndex, usePrefixed } from './keys.js';
 
 export function useArrayLength(key) {
     key = usePrefixed(key);

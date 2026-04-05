@@ -3,7 +3,7 @@ import objectPath from 'objectpath';
 import { useMemo } from 'react';
 import shortid from 'shortid';
 
-import { walkSchema } from '../common';
+import { walkSchema } from '../common.js';
 
 class _ArrayPlaceholder {
     #parentKey;

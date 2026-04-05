@@ -5,21 +5,21 @@
     "main": "src/index.jsx",
     "type": "module",
     "imports": {
-        "#renderer": "./src/renderer.jsx",
-        "#model": "./src/model/index.jsx",
-        "#constants": "./src/constants.jsx",
+        "#renderer": "./src/renderer.js",
+        "#model": "./src/model/index.js",
+        "#constants": "./src/constants.js",
         "#forms": "./src/forms.js",
-        "#helpers": "./src/helpers.jsx",
-        "#rules": "./src/rules.jsx",
+        "#helpers": "./src/helpers.js",
+        "#rules": "./src/rules.js",
         "#util": "./src/common.js"
     },
     "exports": {
-        ".": "./src/index.jsx",
-        "./rules": "./src/rules.jsx",
-        "./renderer": "./src/renderer.jsx",
-        "./model": "./src/model.jsx",
-        "./forms": "./src/forms.jsx",
-        "./constants": "./src/constants.jsx",
+        ".": "./src/index.js",
+        "./rules": "./src/rules.js",
+        "./renderer": "./src/renderer.js",
+        "./model": "./src/model.js",
+        "./forms": "./src/forms.js",
+        "./constants": "./src/constants.js",
         "./util": "./src/common.js"
     },
     "scripts": {
