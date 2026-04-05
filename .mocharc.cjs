@@ -1,4 +1,5 @@
+const path = require('node:path');
 module.exports = {
     extensions: ['js', 'jsx'],
-    require: ['./setup-tests.js'],
+    require: path.resolve(__dirname, 'setup-tests.js'),
 };

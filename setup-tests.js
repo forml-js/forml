@@ -1,6 +1,8 @@
 const babelRegister = require('@babel/register');
-const jsdom = require('global-jsdom');
+require('global-jsdom/register');
+const mocha = require('mocha');
 const chai = require('chai');
+const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const {
     JestAsymmetricMatchers,
@@ -14,11 +16,13 @@ babelRegister({
     configFile: './babel.config.js',
     rootMode: 'upward',
 });
-jsdom({
-    pretendToBeVisual: true,
-    url: 'http://localhost:3000',
-});
 chai.use(sinonChai.default);
 chai.use(JestExtend);
 chai.use(JestChaiExpect);
 chai.use(JestAsymmetricMatchers);
+
+global.ResizeObserver = class ResizeObserver {
+    observe = sinon.spy();
+    unobserver = sinon.spy();
+    disconnect = sinon.spy();
+};
