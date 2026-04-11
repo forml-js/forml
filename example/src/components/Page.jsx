@@ -38,8 +38,6 @@ export default function Page(props) {
     const mode = useMode();
     const switchMode = useModeSwitcher();
 
-    console.log('Page(mode: %o)', mode);
-
     const onSampleChange = useCallback(
         (_event, nextValue) => {
             setSample(nextValue);

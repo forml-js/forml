@@ -5,8 +5,6 @@ import decorators from '../decorators.js';
 
 const blacklist = ['Raw HTML', 'PDF Renderer'];
 
-console.log('Samples: %O', samples);
-
 export default function SelectExample(props) {
     const enm = useMemo(() => Object.keys(samples), [samples]);
     const titles = useMemo(

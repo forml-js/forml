@@ -26,13 +26,10 @@ function Provider(props) {
     const [decorator] = useSampleDecorator();
     const ComponentProvider = useMemo(() => {
         if (decorator.startsWith('Mantine')) {
-            console.log('Provider: Mantine');
             return MantineProvider;
         } else if (decorator.startsWith('Material UI')) {
-            console.log('Provider: Material UI');
             return MaterialUIProvider;
         } else {
-            console.log('Default Provider: Material UI');
             return MaterialUIProvider;
         }
     });

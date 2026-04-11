@@ -35,7 +35,9 @@ export function useMode() {
 }
 
 export function useModeSwitcher() {
-    const { toggleColorScheme } = useMantineColorScheme();
+    const { toggleColorScheme } = useMantineColorScheme({
+        keepTransitions: true,
+    });
     return toggleColorScheme;
 }
 
