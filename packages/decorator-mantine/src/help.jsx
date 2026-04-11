@@ -28,11 +28,5 @@ export default function Help(props) {
         return [Component, props.value];
     }, [form]);
 
-    console.log(
-        'Help(attributes: %o, description: %o)',
-        attributes,
-        description
-    );
-
     return <Component {...attributes}>{description}</Component>;
 }
