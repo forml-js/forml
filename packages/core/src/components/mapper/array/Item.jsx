@@ -2,6 +2,7 @@ import {
     ARRAY_PLACEHOLDER,
     ArrayPlaceholder,
     useActionsFor,
+    useArrayIndexFor,
     useDecorator,
     usePrefix,
 } from '@forml/hooks';
@@ -13,10 +14,11 @@ import { useSortable } from '@dnd-kit/react/sortable';
 
 export const Item = memo(
     function Item(props) {
-        const { form, id, index, dragType: type, disabled } = props;
+        const { form, id, dragType: type, disabled } = props;
         const parent = form;
         const forms = form.items;
         const prefix = usePrefix();
+        const index = useArrayIndexFor(form.key, id);
         const sortable = useSortable({ id, index });
 
         const onChange = useCallback(

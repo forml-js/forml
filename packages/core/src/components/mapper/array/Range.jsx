@@ -10,7 +10,6 @@ export function Range(props) {
             <Item
                 key={key}
                 id={key}
-                index={start + index}
                 dragType={dragType}
                 onChange={onChange}
                 form={form}
