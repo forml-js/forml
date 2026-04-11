@@ -73,6 +73,18 @@ export function useArrayKeyFor(key, index) {
     return useStore(useModelContext(), useShallow(selector));
 }
 
+export function useArrayIndexFor(parentKey, key) {
+    parentKey = usePrefixed(parentKey);
+    const path = useMemo(() => objectPath.stringify(parentKey), [parentKey]);
+    const selector = useCallback(
+        function ({ keyMaps }) {
+            return keyMaps[path].keyToIndex[key];
+        },
+        [path, key]
+    );
+    return useStore(useModelContext(), useShallow(selector));
+}
+
 export function useIsFirstArrayItem(key, id) {
     key = usePrefixed(key);
     const keySelector = useCallback(
