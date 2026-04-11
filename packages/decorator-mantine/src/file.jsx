@@ -13,7 +13,7 @@ export default function File(props) {
     return (
         <FileInput
             label={form.title}
-            error={!!error}
+            error={error}
             description={description}
             onChange={onChange}
         />
