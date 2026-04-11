@@ -19,3 +19,8 @@ global.ResizeObserver = class ResizeObserver {
     unobserve = sinon.spy();
     disconnect = sinon.spy();
 };
+
+function noop() {
+    return null;
+}
+require.extensions['.css'] = noop;
