@@ -1,3 +1,4 @@
+const path = require('node:path');
 const babelRegister = require('@babel/register');
 require('global-jsdom/register');
 const mocha = require('mocha');
@@ -8,7 +9,7 @@ const sourceMapSupport = require('source-map-support');
 
 sourceMapSupport.install();
 babelRegister({
-    configFile: './babel.config.js',
+    configFile: path.resolve(__dirname, 'babel.config.js'),
     rootMode: 'upward',
 });
 chai.use(sinonChai.default);
