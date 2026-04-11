@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
+const { EsmUrlPlugin } = require('@vscode/esm-url-webpack-plugin');
+//const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     devServer: {
@@ -89,9 +90,10 @@ module.exports = {
         ],
     },
     plugins: [
-        new MonacoEditorWebpackPlugin({
-            languages: ['json'],
-        }),
+        //new MonacoEditorWebpackPlugin({
+        //    languages: ['json'],
+        //}),
+        new EsmUrlPlugin(),
         new HtmlWebpackPlugin({
             filename: 'iso.html',
             chunks: ['iso'],

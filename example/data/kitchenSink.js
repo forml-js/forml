@@ -43,6 +43,8 @@ module.exports = {
             },
             checkbox: {
                 title: 'Checkbox',
+                description:
+                    'Checkboxes are used to represent simple boolean values.',
                 type: 'boolean',
             },
             date: {
