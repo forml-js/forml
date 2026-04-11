@@ -1,26 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 import { DatePickerInput } from '@mantine/dates';
-import { useError, useValue } from '@forml/hooks';
+import { useError } from '@forml/hooks';
 
 export default function DateForm(props) {
-    const { form } = props;
-    const currentValue = useValue(form.key);
+    const { form, value: currentValue } = props;
     const value = useMemo(
         () =>
             currentValue
                 ? new Date(currentValue).toISOString().split('T')[0]
-                : undefined,
+                : new Date().toISOString().split('T')[0],
         [currentValue]
     );
     const onChange = useCallback(
         (nextDateObject) => {
-            if (nextDateObject instanceof Date) {
-                const nextDate = nextDateObject.toLocaleDateString();
-                props.onChange({ target: { value: nextDate } }, nextDate);
-            } else {
-                const nextDate = nextDateObject;
-                props.onChange({ target: { value: nextDate } }, nextDate);
-            }
+            const nextDate = nextDateObject;
+            props.onChange({ target: { value: nextDate } }, nextDate);
         },
         [props.onChange]
     );

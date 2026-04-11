@@ -9,8 +9,8 @@ export default function DateTime(props) {
     const title = form.title;
     const description = error ? error : form.description;
     const onChange = useCallback(
-        (date) => {
-            const value = date.toLocaleString();
+        (value) => {
+            value = new Date(value).toISOString();
             props.onChange({ target: { value } }, value);
         },
         [props.onChange]
