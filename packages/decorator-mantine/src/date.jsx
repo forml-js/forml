@@ -12,7 +12,6 @@ export default function DateForm(props) {
                 : undefined,
         [currentValue]
     );
-    console.error('DateForm(currentValue: %o, value: %o)', currentValue, value);
     const onChange = useCallback(
         (nextDateObject) => {
             if (nextDateObject instanceof Date) {
