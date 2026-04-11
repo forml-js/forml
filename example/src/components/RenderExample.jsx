@@ -11,10 +11,10 @@ import {
     useSampleMapper,
     useSampleLocalizer,
     useSampleDecorator,
-} from '../samples';
-import ErrorBoundary from './ErrorBoundary';
+} from '../samples.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
 
-import decorators from '../decorators';
+import decorators from '../decorators.js';
 
 export default function RenderExample(props) {
     const [model, setModel] = useSampleModel();

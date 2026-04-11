@@ -1,7 +1,7 @@
 import * as mui from '@forml/decorator-mui';
 import mantine from '@forml/decorator-mantine';
 import barebones from '@forml/decorator-barebones';
-import * as pdf from '@forml/decorator-pdf';
+//import * as pdf from '@forml/decorator-pdf';
 import { util } from '@forml/core';
 
 const muiStandard = mui.withOptions({ variant: 'standard' });
@@ -16,5 +16,5 @@ export default {
     Mantine: mantine,
     'Mantine (Filled)': mantineFilled,
     'Raw HTML': barebones,
-    'PDF Renderer': util.clone(pdf),
+    //'PDF Renderer': util.clone(pdf),
 };

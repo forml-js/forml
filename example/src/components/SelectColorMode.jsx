@@ -1,13 +1,18 @@
 import React, { useMemo } from 'react';
 import { SchemaForm } from '@forml/core';
-import { samples } from '../samples.jsx';
 import decorators from '../decorators.js';
+import { useComponents } from '../hooks/useComponents.jsx';
 
 const blacklist = ['Raw HTML', 'PDF Renderer'];
 
 console.log('Samples: %O', samples);
 
+const options = ['dark', 'light'];
+
 export default function SelectExample(props) {
+    const { useMode, useModeSwitcher } = useComponents();
+    const mode = useMode();
+    const switchMode = useModeSwitcher();
     const enm = useMemo(() => Object.keys(samples), [samples]);
     const titles = useMemo(
         () =>
@@ -21,13 +26,6 @@ export default function SelectExample(props) {
     const form = useMemo(() => [{ key: [], title: 'Sample', titles }], []);
     const schema = useMemo(() => ({ type: 'string', enum: enm }), [enm]);
     const model = props.selected;
-    const decorator = useMemo(
-        () =>
-            blacklist.includes(props.decorator)
-                ? decorators['Material UI (Standard)']
-                : decorators[props.decorator],
-        [props.decorator]
-    );
 
     return (
         <SchemaForm

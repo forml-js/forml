@@ -4,25 +4,10 @@ import { createStore, useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 const log = debug('forml:example:samples');
 
-const DEFAULT_SAMPLE = './kitchenSink.js';
+const DEFAULT_SAMPLE = '../data/kitchenSink.js';
 const DEFAULT_DECORATOR = 'Mantine (Filled)';
 
-function importAll(context) {
-    const keys = context.keys();
-    const result = {};
-
-    for (let key of keys) {
-        result[key] = context(key);
-        if (result[key].default) result[key] = result[key].default;
-        if (!result[key].schema) Reflect.deleteProperty(result, key);
-    }
-
-    return result;
-}
-
-export const samples = importAll(
-    require.context('../data/', true, /\.js(on)?$/)
-);
+export const samples = import.meta.glob('../data/*', { eager: true });
 
 const defaultSample = { schema: { type: 'null' }, form: ['*'] };
 export function getSample(name) {
@@ -94,6 +79,10 @@ const createSampleStore = createStore(function (set) {
             },
             value: form,
             json: JSON.stringify(form, undefined, 2),
+        },
+        mode: 'dark',
+        setMode(mode) {
+            set((state) => ({ ...state, mode }));
         },
         model: {
             setJSON(json) {

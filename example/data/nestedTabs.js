@@ -1,7 +1,7 @@
-const image = require('../src/assets/react-icon.svg').default;
+import image from '../src/assets/react-icon.svg';
 const icon = 'person';
 
-module.exports.schema = {
+export const schema = {
     type: 'object',
     title: 'Nested Tabs',
     properties: {
@@ -23,7 +23,7 @@ module.exports.schema = {
     },
 };
 
-module.exports.form = [
+export const form = [
     {
         type: 'tabs',
         layout: 'vertical',

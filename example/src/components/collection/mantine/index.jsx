@@ -6,8 +6,12 @@ import {
     MantineProvider,
     RingProgress,
     Text,
+    Switch,
     createTheme,
+    useMantineColorScheme,
+    useComputedColorScheme,
 } from '@mantine/core';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import React, { useCallback, useMemo, useState } from 'react';
 import './style.css';
 
@@ -23,6 +27,16 @@ export function Dashboard(props) {
 
 export function Panel(props) {
     return <Box className="forml-panel">{props.children}</Box>;
+}
+
+export function useMode() {
+    const colorScheme = useComputedColorScheme();
+    return colorScheme;
+}
+
+export function useModeSwitcher() {
+    const { toggleColorScheme } = useMantineColorScheme();
+    return toggleColorScheme;
 }
 
 export function Collapse(props) {
@@ -111,12 +125,16 @@ export function Canvas(props) {
     );
 }
 
+export function Toggle(props) {
+    const { title, value, onChange } = props;
+    return <Switch checked={value} label={title} onChange={onChange} />;
+}
+
 const theme = createTheme({
     colors: {
         forml: generateColors('#444a63'),
     },
     primaryColor: 'forml',
-    primaryShade: 9,
 });
 export function Provider(props) {
     return (

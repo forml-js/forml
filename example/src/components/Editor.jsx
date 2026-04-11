@@ -1,8 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import MonacoEditor from '@monaco-editor/react';
-import { useMediaQuery } from '@mui/material';
+import { useComponents } from '../hooks/useComponents';
 
 export default function Editor(props) {
+    const { useMode } = useComponents();
+    const mode = useMode();
     const onChange = useCallback(
         function onChange(value) {
             if (props.onChange) {
@@ -12,11 +14,7 @@ export default function Editor(props) {
         [props.onChange]
     );
 
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    const theme = useMemo(
-        () => (prefersDarkMode ? 'vs-dark' : 'vs'),
-        [prefersDarkMode]
-    );
+    const theme = useMemo(() => (mode === 'dark' ? 'vs-dark' : 'vs'), [mode]);
     const options = useMemo(
         () => ({
             minimap: { enabled: false },

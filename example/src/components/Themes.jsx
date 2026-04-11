@@ -1,9 +1,9 @@
 import React, { useMemo, useRef } from 'react';
-import * as MuiComponents from './collection/mui';
-import * as MantineComponents from './collection/mantine';
+import * as MuiComponents from './collection/mui/index.jsx';
+import * as MantineComponents from './collection/mantine/index.jsx';
 import Page from './Page';
-import ComponentProvider from './ComponentProvider';
-import { SampleProvider, useSampleDecorator } from '../samples';
+import ComponentProvider from './ComponentProvider.jsx';
+import { SampleProvider, useSampleDecorator } from '../samples.jsx';
 
 function MantineProvider(props) {
     return (

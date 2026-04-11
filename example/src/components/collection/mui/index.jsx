@@ -1,21 +1,26 @@
-import 'material-icons/iconfont/material-icons.css';
-import React, { useMemo, useState } from 'react';
 import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    CssBaseline,
-    GlobalStyles,
     Box,
-    Icon,
     CircularProgress,
+    CssBaseline,
+    FormControlLabel,
+    FormGroup,
+    GlobalStyles,
+    Icon,
     Divider as MuiDivider,
-    Typography,
+    Switch,
     ThemeProvider,
+    Typography,
     createTheme,
+    useColorScheme,
+    useMediaQuery,
 } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import 'material-icons/iconfont/material-icons.css';
+import { useCallback, useMemo, useState } from 'react';
 
 function Title(props) {
     if (props.children?.length > 0) {
@@ -27,6 +32,17 @@ function Title(props) {
 
 export const Progress = CircularProgress;
 export const Divider = () => <MuiDivider orientation="vertical" />;
+export function useMode() {
+    const { mode } = useColorScheme();
+    return mode;
+}
+export function useModeSwitcher() {
+    const { mode, setMode } = useColorScheme();
+    return useCallback(
+        () => (mode === 'light' ? setMode('dark') : setMode('light')),
+        [mode, setMode]
+    );
+}
 
 export function Dashboard(props) {
     return (
@@ -86,6 +102,7 @@ export function Collapse(props) {
 Panel.Collapse = Collapse;
 
 function Section(props) {
+    const { mode } = useColorScheme();
     const panelSectionSx = useMemo(
         () => ({
             display: 'grid',
@@ -96,11 +113,11 @@ function Section(props) {
     const panelSectionTitleSx = useMemo(
         () => ({
             textAlign: 'center',
-            backgroundColor: 'primary.dark',
+            bgcolor: `primary.${mode}`,
             color: 'primary.contrastText',
             padding: 1,
         }),
-        []
+        [mode]
     );
     const panelSectionContentSx = useMemo(
         () => ({
@@ -131,6 +148,7 @@ Panel.Section = Section;
 
 function CollapseSection(props) {
     const { expanded } = props;
+    const { mode } = useColorScheme();
     const accordionSx = useMemo(
         () => ({
             display: 'flex',
@@ -171,7 +189,7 @@ function CollapseSection(props) {
     return (
         <Accordion
             disableGutters
-            slotProps={{ transition: { unmountOnExit: true } }}
+            slotProps={{ transition: { unmountOnExit: false } }}
             expanded={expanded}
             square
             sx={accordionSx}
@@ -180,7 +198,7 @@ function CollapseSection(props) {
                 key="summary"
                 sx={{
                     flex: '0 0 auto',
-                    bgcolor: 'primary.dark',
+                    bgcolor: `primary.${mode}`,
                     color: 'primary.contrastText',
                 }}
                 expandIcon={<Icon>expand_more</Icon>}
@@ -200,10 +218,11 @@ function CollapseSection(props) {
 Panel.CollapseSection = CollapseSection;
 
 export function Header(props) {
+    const { mode } = useColorScheme();
     return (
         <Box
             p={1}
-            bgcolor="primary.dark"
+            bgcolor={`primary.${mode}`}
             color="primary.contrastText"
             textAlign="center"
         >
@@ -231,6 +250,20 @@ export function Canvas(props) {
     );
 }
 
+export function Toggle(props) {
+    const { title, value, onChange } = props;
+    return (
+        <FormGroup>
+            <FormControlLabel
+                control={
+                    <Switch checked={value} title={title} onChange={onChange} />
+                }
+                label={title}
+            />
+        </FormGroup>
+    );
+}
+
 const globalStyles = {
     html: {
         display: 'flex',
@@ -255,31 +288,35 @@ const globalStyles = {
         overflow: 'hidden',
     },
 };
-const theme = createTheme({
-    colorSchemes: {
-        dark: {
-            palette: {
-                primary: {
-                    main: '#444a63',
-                },
-                secondary: {
-                    main: '#596181',
-                },
-            },
-        },
-        light: {
-            palette: {
-                primary: {
-                    main: '#444a63',
-                },
-                secondary: {
-                    main: '#596181',
-                },
-            },
-        },
-    },
-});
 export function Provider(props) {
+    const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
+    const theme = useMemo(() =>
+        createTheme({
+            defaultColorScheme: prefersDark ? 'dark' : 'light',
+            colorSchemes: {
+                dark: {
+                    palette: {
+                        primary: {
+                            main: '#444a63',
+                        },
+                        secondary: {
+                            main: '#596181',
+                        },
+                    },
+                },
+                light: {
+                    palette: {
+                        primary: {
+                            main: '#444a63',
+                        },
+                        secondary: {
+                            main: '#596181',
+                        },
+                    },
+                },
+            },
+        })
+    );
     return (
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterMoment}>

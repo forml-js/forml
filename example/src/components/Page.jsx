@@ -1,7 +1,8 @@
 import { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useComponents } from '../hooks/useComponents';
+import { useComponents } from '../hooks/useComponents.jsx';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
     useSample,
     useSampleModel,
@@ -11,21 +12,33 @@ import {
     useSampleMapper,
     useSampleLocalizer,
     useSampleDecorator,
-} from '../samples';
-import Editor from './Editor';
-import RenderExample from './RenderExample';
-import SelectDecorator from './SelectDecorator';
-import SelectExample from './SelectExample';
+} from '../samples.jsx';
+import Editor from './Editor.jsx';
+import RenderExample from './RenderExample.jsx';
+import SelectDecorator from './SelectDecorator.jsx';
+import SelectExample from './SelectExample.jsx';
 
 loader.config({ monaco });
 
 export default function Page(props) {
-    const { Dashboard, Divider, Panel, Canvas } = useComponents();
+    const {
+        Dashboard,
+        Divider,
+        Panel,
+        Canvas,
+        useModeSwitcher,
+        useMode,
+        Toggle,
+    } = useComponents();
     const [sample, setSample] = useSample();
     const [decorator, setDecorator] = useSampleDecorator();
     const [modelJSON, setModelJSON] = useSampleModelJSON();
     const [schemaJSON, setSchemaJSON] = useSampleSchemaJSON();
     const [formJSON, setFormJSON] = useSampleFormJSON();
+    const mode = useMode();
+    const switchMode = useModeSwitcher();
+
+    console.log('Page(mode: %o)', mode);
 
     const onSampleChange = useCallback(
         (_event, nextValue) => {
@@ -57,6 +70,16 @@ export default function Page(props) {
         },
         [setDecorator]
     );
+    const onModeChange = useCallback(
+        (event, next) => {
+            if (event.target.checked) {
+                switchMode('light');
+            } else {
+                switchMode('dark');
+            }
+        },
+        [switchMode]
+    );
 
     return (
         <Dashboard>
@@ -76,6 +99,12 @@ export default function Page(props) {
                         key="decorator"
                         decorator={decorator}
                         onChange={onDecoratorChange}
+                    />
+                    <Toggle
+                        key="mode"
+                        title="Color Mode"
+                        value={mode === 'dark' ? false : true}
+                        onChange={onModeChange}
                     />
                 </Panel.Section>
                 <Panel.Collapse key="editors" defaultExpanded="Model">
