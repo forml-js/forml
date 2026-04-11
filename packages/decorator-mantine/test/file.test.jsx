@@ -2,11 +2,11 @@ import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
-import { render, renderHook, fireEvent } from '@testing-library/react';
+import { render, renderHook, fireEvent, act } from '@testing-library/react';
 import { expect } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
 import * as sinon from 'sinon';
-import File from '../src/file.jsx';
+import FileComponent from '../src/file.jsx';
 import { withOptions } from '../src/index.jsx';
 
 function makeWrapper({ modelStore, renderingContext }) {
@@ -47,18 +47,24 @@ describe('File', function () {
     });
 
     it('renders a file input', function () {
-        const { container } = render(<File form={form} onChange={onChange} />, {
-            wrapper,
-        });
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
 
         const input = container.querySelector('input[type="file"]');
         expect(input).to.exist;
     });
 
     it('displays the title as a label', function () {
-        const { container } = render(<File form={form} onChange={onChange} />, {
-            wrapper,
-        });
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
 
         const label = container.querySelector('label');
         expect(label).to.exist;
@@ -67,18 +73,24 @@ describe('File', function () {
 
     it('renders without a title', function () {
         form = { ...form, title: undefined };
-        const { container } = render(<File form={form} onChange={onChange} />, {
-            wrapper,
-        });
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
 
         const label = container.querySelector('label');
         expect(label).to.not.exist;
     });
 
     it('displays the description', function () {
-        const { container } = render(<File form={form} onChange={onChange} />, {
-            wrapper,
-        });
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
 
         const desc = container.querySelector('.mantine-FileInput-description');
         expect(desc).to.exist;
@@ -87,12 +99,50 @@ describe('File', function () {
 
     it('renders without a description', function () {
         form = { ...form, description: undefined };
-        const { container } = render(<File form={form} onChange={onChange} />, {
-            wrapper,
-        });
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
 
         const desc = container.querySelector('.mantine-FileInput-description');
         expect(desc).to.not.exist;
+    });
+
+    it('calls onChange with a synthetic event and the processed file result', async function () {
+        form = { ...form, format: 'name' };
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
+
+        const file = new File(['content'], 'test.txt', { type: 'text/plain' });
+        const input = container.querySelector('input[type="file"]');
+
+        await act(async () => {
+            fireEvent.change(input, { target: { files: [file] } });
+        });
+
+        expect(onChange.calledOnce).to.be.true;
+        const [event, result] = onChange.firstCall.args;
+        expect(event.target.files).to.deep.equal([file]);
+        expect(result).to.equal('test.txt');
+    });
+
+    it('passes accept to the file input', function () {
+        form = { ...form, accept: 'image/*' };
+        const { container } = render(
+            <FileComponent form={form} onChange={onChange} />,
+            {
+                wrapper,
+            }
+        );
+
+        const input = container.querySelector('input[type="file"]');
+        expect(input.getAttribute('accept')).to.equal('image/*');
     });
 
     describe('with an error state', function () {
@@ -119,7 +169,7 @@ describe('File', function () {
 
         it('shows the error message in place of description', function () {
             const { container } = render(
-                <File form={form} onChange={onChange} />,
+                <FileComponent form={form} onChange={onChange} />,
                 { wrapper }
             );
 
@@ -132,7 +182,7 @@ describe('File', function () {
 
         it('sets the error state on the input', function () {
             const { container } = render(
-                <File form={form} onChange={onChange} />,
+                <FileComponent form={form} onChange={onChange} />,
                 { wrapper }
             );
 
