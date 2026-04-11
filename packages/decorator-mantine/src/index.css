@@ -1,12 +1,6 @@
 :root {
-    --forml-border-color: var(--mantine-color-gray-3);
-    --forml-panel-color: var(--mantine-color-gray-2);
-    --forml-raised-color: var(--mantine-color-gray-1);
+    --forml-border-color: var(--mantine-color-border);
+    --forml-panel-color: var(--mantine-color-body);
+    --forml-raised-color: var(--mantine-color-disabled);
     --forml-spacing: var(--mantine-spacing-xs);
-
-    @media (prefers-color-scheme: dark) {
-        --forml-border-color: var(--mantine-color-dark-4);
-        --forml-panel-color: var(--mantine-color-dark-7);
-        --forml-raised-color: var(--mantine-color-dark-8);
-    }
 }
