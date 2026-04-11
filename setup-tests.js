@@ -16,6 +16,6 @@ chai.use(sinonChai.default);
 
 global.ResizeObserver = class ResizeObserver {
     observe = sinon.spy();
-    unobserver = sinon.spy();
+    unobserve = sinon.spy();
     disconnect = sinon.spy();
 };
