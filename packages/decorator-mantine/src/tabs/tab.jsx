@@ -12,7 +12,7 @@ export default function Tab(props) {
         }
     }, [form.icon]);
     return (
-        <Tabs.Tab rightSection={icon} value={String(index)}>
+        <Tabs.Tab rightSection={icon} value={String(index)} data-index={index}>
             {form.title}
         </Tabs.Tab>
     );
