@@ -17,7 +17,7 @@ export default function Fieldset(props) {
                 ? 'forml-fieldset forml-filled'
                 : 'forml-fieldset';
             const header = (
-                <Box className="forml-fieldset-header">
+                <Box className="forml-header">
                     {form.title && <Title order={6}>{form.title}</Title>}
                     {form.description && (
                         <Text size="xs">{form.description}</Text>

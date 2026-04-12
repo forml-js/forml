@@ -1,6 +1,18 @@
 :root {
-    --forml-border-color: var(--mantine-color-border);
-    --forml-panel-color: var(--mantine-color-body);
-    --forml-raised-color: var(--mantine-color-disabled);
+    --forml-color-header: var(--mantine-primary-color-filled);
+    --forml-color-header-color: var(--mantine-primary-color-contrast);
+    --forml-color-border: var(--mantine-color-border);
+    --forml-color-panel: var(--mantine-color-body);
+    --forml-color-raised: var(--mantine-color-disabled);
     --forml-spacing: var(--mantine-spacing-xs);
+}
+
+.forml-filled {
+
+    &.forml-header,
+    & .forml-header {
+        color: var(--forml-color-header-color);
+        background-color: var(--forml-color-header);
+        padding: var(--forml-spacing);
+    }
 }

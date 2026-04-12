@@ -6,7 +6,7 @@
     margin: 0 var(--forml-spacing);
 
     .forml-array-item {
-        border-bottom: 1px solid var(--forml-border-color);
+        border-bottom: 1px solid var(--forml-color-border);
 
         &:last-child {
             border-bottom: none;
@@ -14,11 +14,11 @@
     }
 
     &.forml-filled .forml-array-item {
-        border: 1px solid var(--forml-border-color);
+        border: 1px solid var(--forml-color-border);
         border-top: none;
 
         &.forml-array-item-dragging {
-            border-top: 1px solid var(--forml-border-color);
+            border-top: 1px solid var(--forml-color-border);
         }
 
         &:last-child {
@@ -26,14 +26,9 @@
             border-bottom-right-radius: var(--mantine-radius-sm);
         }
     }
-
-    &.forml-filled .forml-array-header {
-        background-color: var(--mantine-primary-color-filled);
-        color: var(--mantine-primary-color-contrast);
-    }
 }
 
-.forml-array-header {
+.forml-array .forml-header {
     position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -113,12 +108,12 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: auto min-content 1fr min-content auto;
-    background-color: var(--forml-panel-color);
+    background-color: var(--forml-color-panel);
 
     & .forml-array-item-draghandle {
         user-select: none;
         padding: var(--mantine-spacing-xs);
-        background-color: var(--forml-raised-color);
+        background-color: var(--forml-color-raised);
         cursor: move;
     }
 

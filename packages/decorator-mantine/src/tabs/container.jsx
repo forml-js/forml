@@ -6,7 +6,7 @@ function Header(props) {
     const { form } = props;
     if (form.title || form.description) {
         return (
-            <Box className="forml-tabs-header">
+            <Box className="forml-header">
                 {form.title && <Title order={6}>{form.title}</Title>}
                 {form.description && <Text size="xs">{form.description}</Text>}
             </Box>
