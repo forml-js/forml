@@ -1,0 +1,28 @@
+.forml-pages {
+    &[data-collapse=true] {
+        max-width: fill-available;
+        min-width: fit-content;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .forml-content {
+        margin: var(--forml-spacing) 0;
+
+        .mantine-Stepper-separator {
+            min-width: calc(2 * var(--forml-spacing));
+        }
+
+        .forml-pages-progress {
+            padding: var(--forml-spacing) 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: var(--forml-spacing);
+        }
+
+        .forml-pages-page {
+            margin: var(--forml-spacing);
+        }
+    }
+}

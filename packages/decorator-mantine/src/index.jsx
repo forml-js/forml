@@ -6,6 +6,7 @@ import Fieldset from './fieldset.jsx';
 import File from './file.jsx';
 import Help from './help.jsx';
 import Notice from './notice.jsx';
+import Pages from './pages.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs/index.jsx';
 import Text from './text.jsx';
@@ -24,6 +25,7 @@ const decorator = {
     help: Help,
     notice: Notice,
     options: {},
+    pages: Pages,
     withOptions,
     select: Select,
     tabs: Tabs,
