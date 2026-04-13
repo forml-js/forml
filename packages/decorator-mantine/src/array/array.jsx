@@ -19,12 +19,9 @@ function Header(props) {
     const { title, description, addText } = props;
     const options = useDecorator('options');
     if (title || description) {
-        const rootClass = options.filled
-            ? 'forml-header forml-filled'
-            : 'forml-header';
         return (
             <>
-                <Box className={rootClass}>
+                <Box className="forml-header" data-filled={options.filled}>
                     <Box className="forml-array-header-text">
                         {title && <Title order={6}>{title}</Title>}
                         {description && <Text size="xs">{description}</Text>}

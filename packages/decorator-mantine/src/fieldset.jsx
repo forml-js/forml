@@ -13,11 +13,8 @@ export default function Fieldset(props) {
             <Box className={`forml-fieldset-content-${layout}`}>{children}</Box>
         );
         if (form.description || form.title) {
-            const baseClass = options.filled
-                ? 'forml-fieldset forml-filled'
-                : 'forml-fieldset';
             const header = (
-                <Box className="forml-header">
+                <Box className="forml-header" data-filled={options.filled}>
                     {form.title && <Title order={6}>{form.title}</Title>}
                     {form.description && (
                         <Text size="xs">{form.description}</Text>
@@ -25,7 +22,7 @@ export default function Fieldset(props) {
                 </Box>
             );
             component = (
-                <Paper className={baseClass} shadow="xs" padding="md">
+                <Paper className="forml-fieldset" shadow="xs" padding="md">
                     {header}
                     <Divider />
                     {component}
@@ -33,5 +30,5 @@ export default function Fieldset(props) {
             );
         }
         return component;
-    }, [form.title, form.description, children]);
+    }, [form.title, form.description, children, options.filled]);
 }

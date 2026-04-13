@@ -4,9 +4,10 @@ import React from 'react';
 
 function Header(props) {
     const { form } = props;
+    const options = useDecorator('options');
     if (form.title || form.description) {
         return (
-            <Box className="forml-header">
+            <Box className="forml-header" data-filled={options.filled}>
                 {form.title && <Title order={6}>{form.title}</Title>}
                 {form.description && <Text size="xs">{form.description}</Text>}
             </Box>

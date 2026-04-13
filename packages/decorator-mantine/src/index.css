@@ -7,10 +7,9 @@
     --forml-spacing: var(--mantine-spacing-xs);
 }
 
-.forml-filled {
-
-    &.forml-header,
-    & .forml-header {
+&.forml-header,
+& .forml-header {
+    &[data-filled=true] {
         color: var(--forml-color-header-color);
         background-color: var(--forml-color-header);
         padding: var(--forml-spacing);
