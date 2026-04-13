@@ -126,6 +126,12 @@ export function merge(schema, form = ['*'], options = {}) {
             obj.tabs = merge(schema, obj.tabs, { ...options });
         }
 
+        if (Array.isArray(obj.pages)) {
+            obj.pages = merge(schema, obj.pages, { ...options });
+            if (!obj.backText) obj.backText = 'Back';
+            if (!obj.nextText) obj.nextText = 'Next';
+        }
+
         if (obj.titles && !obj.titleMap) {
             const values = obj.schema.enum || obj.schema.items.enum;
             obj.titleMap = obj.titles.map((name, index) => {
@@ -143,6 +149,8 @@ export function merge(schema, form = ['*'], options = {}) {
                 const originalTitleFun = obj.titleFun;
                 obj.titleFun = (value) => localize(originalTitleFun(value));
             }
+            if (obj.backText) obj.backText = localize(obj.backText);
+            if (obj.nextText) obj.nextText = localize(obj.nextText);
             if (obj.type === 'array' && !obj.addText) {
                 if (obj.title) {
                     obj.addText = `${localize('Add')} ${obj.title}`;
