@@ -16,6 +16,7 @@ import Multiselect from './multiselect.jsx';
 import Notice from './notice.jsx';
 import Null from './null.jsx';
 import Number from './number.jsx';
+import Pages from './pages.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs.jsx';
 import Text from './text/index.jsx';
@@ -35,6 +36,7 @@ export function defaultMapper() {
         notice: Notice,
         null: Null,
         number: Number,
+        pages: Pages,
         password: Text,
         select: Select,
         tabs: Tabs,
@@ -61,6 +63,7 @@ export const mapperTypes = [
     'notice',
     'null',
     'number',
+    'pages',
     'password',
     'select',
     'tabs',
@@ -81,6 +84,7 @@ export const mapperShape = t.shape({
     notice: t.elementType,
     null: t.elementType,
     number: t.elementType,
+    pages: t.elementType,
     password: t.elementType,
     select: t.elementType,
     tabs: t.elementType,
