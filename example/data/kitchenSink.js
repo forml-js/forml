@@ -1,4 +1,5 @@
 import * as comment from './comment';
+import * as forml from '@forml/core';
 
 export const schema = {
     type: 'object',
@@ -98,11 +99,7 @@ export const form = [
                         key: 'date',
                         type: 'date',
                     },
-                    {
-                        type: 'dynamic',
-                        key: ['comment'],
-                        generate: comment.form,
-                    },
+                    forml.compose(comment.form, ['comment']),
                 ],
             },
             {

@@ -214,3 +214,11 @@ export function useMergedRef(...refs) {
         refs.map((ref) => assignRef(ref, value));
     }, refs);
 }
+
+export function compose(form, key = []) {
+    return {
+        type: 'dynamic',
+        key,
+        generate: form,
+    };
+}
