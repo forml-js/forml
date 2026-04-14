@@ -14,6 +14,7 @@ import {
     ThemeProvider,
     Typography,
     createTheme,
+    styled,
     useColorScheme,
     useMediaQuery,
 } from '@mui/material';
@@ -44,45 +45,31 @@ export function useModeSwitcher() {
     );
 }
 
-export function Dashboard(props) {
-    return (
-        <Box
-            display="grid"
-            gridAutoFlow="column"
-            gridAutoColumns="1fr min-content 3fr"
-            height="fill-available"
-            maxHeight="fill-available"
-            overflow="hidden"
-        >
-            {props.children}
-        </Box>
-    );
-}
+export const Dashboard = styled(Box)(() => ({
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gridAutoColumns: '1fr min-content 3fr',
+    height: 'fill-available',
+    maxHeight: 'fill-available',
+    overflow: 'hidden',
+}));
 
-export function Panel(props) {
-    const panelSx = useMemo(
-        () => ({
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'stretch',
-            overflow: 'hidden',
-        }),
-        []
-    );
-    return <Box sx={panelSx}>{props.children}</Box>;
-}
+export const Panel = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'stretch',
+    overflow: 'hidden',
+}));
+
+export const SubPanel = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    height: 'fill-available',
+    overflow: 'hidden',
+}));
 
 export function Collapse(props) {
     const [expanded, setExpanded] = useState(props.defaultExpanded);
-    const subPanelSx = useMemo(
-        () => ({
-            display: 'flex',
-            flexDirection: 'column',
-            height: 'fill-available',
-            overflow: 'hidden',
-        }),
-        []
-    );
     const children = useMemo(
         () =>
             props.children.map((child) => (
@@ -97,156 +84,152 @@ export function Collapse(props) {
             )),
         [props.children, expanded]
     );
-    return <Box sx={subPanelSx}>{children}</Box>;
+    return <SubPanel>{children}</SubPanel>;
 }
 Panel.Collapse = Collapse;
 
+const PanelSection = styled(Box)(() => ({
+    display: 'grid',
+    gridAutoRows: 'min-content auto',
+}));
+const PanelSectionTitle = styled(Box)(({ theme }) => ({
+    textAlign: 'center',
+    bgcolor: theme.palette.primary[theme.palette.mode],
+    color: 'primary.contrastText',
+    padding: 1,
+}));
+const PanelSectionContent = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 1 auto',
+    overflow: 'auto',
+}));
 function Section(props) {
-    const { mode } = useColorScheme();
-    const panelSectionSx = useMemo(
-        () => ({
-            display: 'grid',
-            gridAutoRows: 'min-content auto',
-        }),
-        []
-    );
-    const panelSectionTitleSx = useMemo(
-        () => ({
-            textAlign: 'center',
-            bgcolor: `primary.${mode}`,
-            color: 'primary.contrastText',
-            padding: 1,
-        }),
-        [mode]
-    );
-    const panelSectionContentSx = useMemo(
-        () => ({
-            display: 'flex',
-            flexDirection: 'column',
-            flex: '1 1 auto',
-            overflow: 'auto',
-        }),
-        []
-    );
     return (
-        <Box sx={panelSectionSx}>
-            <Box sx={panelSectionTitleSx} key="title">
+        <PanelSection>
+            <PanelSectionTitle key="title">
                 <Typography variant="subtitle2">{props.title}</Typography>
-            </Box>
-            <Box
+            </PanelSectionTitle>
+            <PanelSectionContent
                 key="content"
-                sx={panelSectionContentSx}
                 p={props.padded ? 1 : 0}
                 gap={props.padded ? 1 : 0}
             >
                 {props.children}
-            </Box>
-        </Box>
+            </PanelSectionContent>
+        </PanelSection>
     );
 }
 Panel.Section = Section;
 
+const StyledAccordion = styled(Accordion)(({ expanded, theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flex: expanded ? '1 1 fill-available' : '0 0 0',
+    height: expanded ? 'fill-available' : 'min-content',
+    '& .MuiCollapse-root': {
+        flex: '1 1 auto',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    '& .MuiCollapse-wrapper': {
+        flex: '1 1 auto',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    '& .MuiCollapse-wrapperInner': {
+        flex: '1 1 auto',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    '& .MuiAccordion-region': {
+        flex: '1 1 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        maxHeight: expanded ? '100%' : '0%',
+        transition: theme.transitions.create('max-height'),
+    },
+    '& .MuiAccordionDetails-root': {
+        height: expanded ? '100%' : '0%',
+        maxHeight: 'fill-available',
+        transition: theme.transitions.create('height'),
+    },
+}));
+const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
+    flex: '0 0 auto',
+    bgcolor: theme.palette.primary[theme.palette.mode],
+    color: 'primary.contrastText',
+}));
+const StyledAccordionDetails = styled(AccordionDetails)(() => ({
+    flex: '1 1 auto',
+    padding: 0,
+}));
+
 function CollapseSection(props) {
     const { expanded } = props;
     const { mode } = useColorScheme();
-    const accordionSx = useMemo(
-        () => ({
-            display: 'flex',
-            flexDirection: 'column',
-            flex: expanded ? '1 1 fill-available' : '0 0 0',
-            height: expanded ? 'fill-available' : 'min-content',
-            '& .MuiCollapse-root': {
-                flex: '1 1 auto',
-                display: 'flex',
-                flexDirection: 'column',
-            },
-            '& .MuiCollapse-wrapper': {
-                flex: '1 1 auto',
-                display: 'flex',
-                flexDirection: 'column',
-            },
-            '& .MuiCollapse-wrapperInner': {
-                flex: '1 1 auto',
-                display: 'flex',
-                flexDirection: 'column',
-            },
-            '& .MuiAccordion-region': {
-                flex: '1 1 auto',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                maxHeight: expanded ? '100%' : '0%',
-                transition: (theme) => theme.transitions.create('max-height'),
-            },
-            '& .MuiAccordionDetails-root': {
-                height: expanded ? '100%' : '0%',
-                maxHeight: 'fill-available',
-                transition: (theme) => theme.transitions.create('height'),
-            },
-        }),
-        [expanded]
-    );
     return (
-        <Accordion
+        <StyledAccordion
             disableGutters
             slotProps={{ transition: { unmountOnExit: false } }}
             expanded={expanded}
             square
-            sx={accordionSx}
         >
-            <AccordionSummary
+            <StyledAccordionSummary
                 key="summary"
-                sx={{
-                    flex: '0 0 auto',
-                    bgcolor: `primary.${mode}`,
-                    color: 'primary.contrastText',
-                }}
                 expandIcon={<Icon>expand_more</Icon>}
                 onClick={props.onChange}
             >
                 {props.title}
-            </AccordionSummary>
-            <AccordionDetails
-                key="details"
-                sx={{ flex: '1 1 auto', padding: 0 }}
-            >
+            </StyledAccordionSummary>
+            <StyledAccordionDetails key="details">
                 {props.children}
-            </AccordionDetails>
-        </Accordion>
+            </StyledAccordionDetails>
+        </StyledAccordion>
     );
 }
 Panel.CollapseSection = CollapseSection;
 
+const HeaderBox = styled(Box)(({ theme }) => ({
+    padding: theme.spacing(1),
+    backgroundColor: theme.palette.primary[theme.palette.mode],
+    color: theme.palette.primary.contrastText,
+    textAlign: 'center',
+}));
 export function Header(props) {
     const { mode } = useColorScheme();
     return (
-        <Box
+        <HeaderBox
             p={1}
             bgcolor={`primary.${mode}`}
             color="primary.contrastText"
             textAlign="center"
         >
             <Typography variant="subtitle2">{props.children}</Typography>
-        </Box>
+        </HeaderBox>
     );
 }
 
+const CanvasBox = styled(Box)(() => ({
+    display: 'grid',
+    gridAutoFlow: 'row',
+    height: 'fill-available',
+    gridAutoRows: 'min-content 1fr',
+    overflow: 'auto',
+}));
+const CanvasContent = styled(Box)(({ pad, theme }) => ({
+    padding: pad ? theme.spacing(1) : 0,
+}));
 export function Canvas(props) {
     const { title } = props;
     return (
-        <Box
-            display="grid"
-            gridAutoFlow="row"
-            height="fill-available"
-            gridAutoRows="min-content 1fr"
-            overflow="auto"
-            key="primary-viewport"
-        >
+        <CanvasBox key="primary-viewport">
             <Title key="title">{title}</Title>
-            <Box key="content" sx={{ padding: title ? 1 : 0 }}>
+            <CanvasContent key="content" pad={!!title}>
                 {props.children}
-            </Box>
-        </Box>
+            </CanvasContent>
+        </CanvasBox>
     );
 }
 
