@@ -6,6 +6,7 @@ import FieldSet from './fieldset.jsx';
 import File from './file.jsx';
 import Help from './help.jsx';
 import Multiselect from './multiselect.jsx';
+import Pages from './pages.jsx';
 import Select from './select.jsx';
 import Tabs from './tabs/index.jsx';
 import Text from './text.jsx';
@@ -18,6 +19,7 @@ export const fieldset = FieldSet;
 export const file = File;
 export const help = Help;
 export const multiselect = Multiselect;
+export const pages = Pages;
 export const select = Select;
 export const tabs = Tabs;
 export const text = Text;
@@ -31,6 +33,7 @@ const decorator = {
     file,
     help,
     multiselect,
+    pages,
     select,
     tabs,
     text,
