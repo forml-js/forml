@@ -13,14 +13,15 @@ function ValueField(props) {
 
     const key = useMemo(() => {
         if (prefix) {
-            if (typeof prefix === 'string') {
-                prefix = ObjectPath.parse(prefix);
+            let base = prefix;
+            if (typeof base === 'string') {
+                base = ObjectPath.parse(base);
             }
             if (typeof form.key === 'string') {
                 const key = ObjectPath.parse(form.key);
-                return [...prefix, ...key];
+                return [...base, ...key];
             } else {
-                return [...prefix, ...form.key];
+                return [...base, ...form.key];
             }
         } else {
             return form.key;
@@ -38,7 +39,7 @@ function ValueField(props) {
                 onChange(event, nextModel);
             }
         },
-        [onChange]
+        [actions, onChange]
     );
 
     if (!Field) {
