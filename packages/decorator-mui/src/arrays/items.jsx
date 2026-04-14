@@ -30,18 +30,11 @@ const StyledPaper = styled(Paper, {
           }
         : {}),
 }));
-const StyledList = forwardRef((props, ref) => (
-    <List
-        {...props}
-        ref={ref}
-        htmlname="items"
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            flex: '1 1 auto',
-        }}
-    />
-));
+const StyledList = styled(List)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 1 auto',
+}));
 
 /**
  * @component

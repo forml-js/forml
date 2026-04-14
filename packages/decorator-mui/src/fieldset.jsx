@@ -6,49 +6,43 @@ import {
     ListItemIcon,
     ListItemText,
     Paper,
+    styled,
 } from '@mui/material';
 import React, { useMemo } from 'react';
 
 /**
  * @component
  */
+const RootList = styled(List)(() => ({ width: 'fill-available' }));
 function Root(props) {
     return (
-        <List sx={{ width: 'fill-available' }} dense disablePadding>
+        <RootList dense disablePadding>
             {props.children}
-        </List>
+        </RootList>
     );
 }
 
-function Content(props) {
-    const { disablePadding, layout, alignItems, ...forwardProps } = props;
-    const gridLayout = useMemo(() => {
-        if (layout === 'horizontal') {
-            return { gridAutoColumns: 'auto', gridAutoFlow: 'column' };
-        } else {
-            return { gridAutoRows: 'auto', gridAutoFlow: 'row' };
-        }
-    }, [layout]);
-    return (
-        <Box
-            display="grid"
-            padding={disablePadding ? 0 : 1}
-            gap={1}
-            alignItems={alignItems}
-            {...gridLayout}
-            {...forwardProps}
-        />
-    );
-}
-
-function Surface(props) {
-    const { disableMargin, children } = props;
-    return (
-        <Paper sx={{ flex: '1' }} margin={disableMargin ? 0 : 1}>
-            {children}
-        </Paper>
-    );
-}
+const Content = styled(Box)(({ theme, disablePadding, layout, alignItems }) => [
+    {
+        display: 'grid',
+        gap: theme.spacing(1),
+        alignItems: alignItems,
+    },
+    layout === 'horizontal' && {
+        gridAutoColumns: 'auto',
+        gridAutoFlow: 'column,',
+    },
+    layout === 'vertical' && {
+        gridAutoRows: 'auto',
+        gridAutoFlow: 'row',
+    },
+    disablePadding && {
+        padding: 0,
+    },
+    !disablePadding && {
+        padding: theme.spacing(1),
+    },
+]);
 
 function Title(props) {
     return <ListItem {...props} />;

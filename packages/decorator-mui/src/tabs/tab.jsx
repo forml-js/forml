@@ -37,6 +37,9 @@ const Root = styled(ListItem)(({ theme, parent, active, form }) => [
             transition: theme.transitions.create(),
             zIndex: 100,
         },
+        '& .MuiListItemIcon-root': {
+            marginRight: '3px',
+        },
     },
 
     active && {

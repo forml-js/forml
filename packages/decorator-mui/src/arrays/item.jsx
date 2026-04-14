@@ -1,18 +1,16 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Box, Button, Icon, ListItem, styled } from '@mui/material';
 
+const DragHandleContainer = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(1.5),
+}));
 const DragHandle = forwardRef(function DragHandle(props, ref) {
     return (
-        <Box
-            {...props}
-            ref={ref}
-            sx={useMemo(
-                () => ({ display: 'flex', flexDirection: 'column', p: 1.5 }),
-                []
-            )}
-        >
+        <DragHandleContainer>
             <Icon>drag_handle</Icon>
-        </Box>
+        </DragHandleContainer>
     );
 });
 const FormsContainer = styled('div')(({ theme }) => ({
@@ -79,25 +77,14 @@ const MovementButton = styled(Button, {
     minWidth: theme.spacing(6),
     borderBottom: spacer ? 'none !important' : undefined,
 }));
-const StyledListItem = forwardRef(function StyledListItem(props, ref) {
-    return (
-        <ListItem
-            {...props}
-            ref={ref}
-            sx={useMemo(
-                () => ({
-                    display: 'flex',
-                    alignItems: 'stretch',
-                    flexDirection: 'row',
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                    backgroundColor: 'background.paper',
-                }),
-                []
-            )}
-        />
-    );
-});
+const StyledListItem = styled(ListItem)(() => ({
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'row',
+    paddingTop: 0,
+    paddingBottom: 0,
+    backgroundColor: theme.palette.background.paper,
+}));
 
 /**
  * @component

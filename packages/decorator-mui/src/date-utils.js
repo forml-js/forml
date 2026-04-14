@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { MuiPickersAdapterContext } from '@mui/x-date-pickers';
+import { usePickerAdapter } from '@mui/x-date-pickers';
 export function usePickerUtils() {
-    return useContext(MuiPickersAdapterContext).utils;
+    return usePickerAdapter();
 }

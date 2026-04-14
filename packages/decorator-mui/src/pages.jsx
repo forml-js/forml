@@ -44,21 +44,15 @@ const Steps = styled(Box)(({ theme }) => ({
     flex: '0 0 min-content',
     margin: `${theme.spacing(1)} ${theme.spacing(1)} 0`,
 }));
-const Content = ({ form, orientation, ...props }) => (
-    <Box
-        {...props}
-        sx={useMemo(
-            () => ({
-                display: 'flex',
-                flexDirection: 'column',
-                flex: '1 1 auto',
-                m: form.disableMargin ? 0 : 1,
-                p: form.disablePadding ? 0 : 1,
-            }),
-            [form.disableMargin, form.disablePadding]
-        )}
-    />
-);
+const Content = styled(Box)(({ form, theme }) => [
+    {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1 1 auto',
+    },
+    form.disableMargin && { margin: 0 },
+    form.disablePadding && { padding: 0 },
+]);
 
 function Title(props) {
     const { form } = props;
@@ -99,6 +93,13 @@ const StyledPaper = styled(Paper)((props) => ({
     p: 1,
     width: 'fill-available',
 }));
+const ProgressRoot = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: theme.spacing(1),
+    padding: theme.spacing(0, 1, 1, 1),
+}));
 
 function Progress(props) {
     const { setPage, activePage, form } = props;
@@ -111,23 +112,14 @@ function Progress(props) {
         [setPage, activePage]
     );
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                gap: 1,
-                padding: 1,
-                paddingTop: 0,
-            }}
-        >
+        <ProgressRoot>
             <Button variant="contained" onClick={goBack}>
                 {form.backText}
             </Button>
             <Button variant="contained" onClick={goNext}>
                 {form.nextText}
             </Button>
-        </Box>
+        </ProgressRoot>
     );
 }
 

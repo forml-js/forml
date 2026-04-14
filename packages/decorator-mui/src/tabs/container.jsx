@@ -18,22 +18,18 @@ const Root = styled(Paper)(({ form }) => [
     },
     form.disableMargin && { m: 0 },
 ]);
-const Content = ({ form, orientation, ...props }) => (
-    <Box
-        {...props}
-        sx={useMemo(
-            () => ({
-                position: 'relative',
-                display: orientation === 'horizontal' ? 'grid' : 'flex',
-                flexGrow: 1,
-                flexDirection: 'column',
-                m: form.disableMargin ? 0 : undefined,
-                p: form.disablePadding ? 0 : undefined,
-            }),
-            [form.disableMargin, form.disablePadding]
-        )}
-    />
-);
+const Content = styled(Box)(({ form, orientation }) => [
+    {
+        position: 'relative',
+        flexGrow: 1,
+        flexDirection: 'column',
+    },
+    orientation === 'horizontal' && { display: 'grid' },
+    orientation === 'vertical' && { display: 'flex' },
+    form.disableMargin && { margin: 0 },
+    form.disablePadding && { padding: 0 },
+]);
+
 const Tabs = styled(Paper)(({ theme, form }) => [
     {
         display: 'flex',
@@ -99,7 +95,7 @@ const Panels = styled(Box)(({ form, theme }) => [
         flexGrow: 1,
     },
     !form.disableMargin && {
-        margin: theme.spacing(1),
+        margin: theme.spacing(0, 1),
     },
     form.layout === 'horizontal' &&
         form.collapse && {
