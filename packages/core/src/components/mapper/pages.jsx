@@ -1,9 +1,7 @@
-import React, { forwardRef, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { useDecorator, useLocalizer } from '@forml/hooks';
-import { FormType } from '#types';
 import { SchemaField } from '#components/schema-field.jsx';
-import PropTypes from 'prop-types';
+import { useDecorator } from '@forml/hooks';
 
 export function Page(props) {
     const { index, parent, form, onChange, activePage, setPage } = props;
