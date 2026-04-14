@@ -97,6 +97,8 @@ export function form() {
                 layout: 'vertical',
                 icon: 'alternate_email',
                 title: 'Comment Submission',
+                disableMargin: true,
+                disablePadding: true,
                 description:
                     'Give us some feedback that could help improve your experience.',
                 items: [

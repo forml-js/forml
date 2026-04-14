@@ -13,6 +13,8 @@ export const form = [
             {
                 type: 'fieldset',
                 title: 'Simple Keys',
+                disableMargin: true,
+                disablePadding: true,
                 description: 'Forms rendered without customization',
                 items: [
                     'textWithDefault',
@@ -25,6 +27,8 @@ export const form = [
             {
                 type: 'fieldset',
                 title: 'Full Forms',
+                disableMargin: true,
+                disablePadding: true,
                 description: 'Highly customized forms',
                 items: [
                     {
@@ -49,31 +53,9 @@ export const form = [
             },
             {
                 type: 'fieldset',
-                title: 'Combo Forms',
-                description: 'Highly customized standard forms',
-                items: [
-                    {
-                        key: 'textArea',
-                        type: 'textarea',
-                        placeholder: 'Make a comment',
-                    },
-                    {
-                        key: 'helpMessage',
-                        variant: 'body2',
-                        type: 'help',
-                    },
-                    'checkbox',
-                    'date',
-                    {
-                        type: 'dynamic',
-                        key: ['comment'],
-                        generate: comment.form,
-                    },
-                ],
-            },
-            {
-                type: 'fieldset',
                 title: 'Singular Field',
+                disableMargin: true,
+                disablePadding: true,
                 description:
                     'A single field to ensure heights are calculated correctly',
                 items: ['checkbox'],
