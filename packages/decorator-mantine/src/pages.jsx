@@ -55,12 +55,22 @@ export function Pages(props) {
     const steps = form.pages;
     const collapse = 'collapse' in form ? form.collapse : false;
     const children = Children.map(props.children, (child, index) => {
-        const step = steps[index];
-        return (
-            <Stepper.Step label={step.title} icon={step.icon}>
-                {child}
-            </Stepper.Step>
-        );
+        if (index < steps.length) {
+            const step = steps[index];
+            return (
+                <Stepper.Step
+                    key={`step-${index}`}
+                    label={step.title}
+                    icon={step.icon}
+                >
+                    {child}
+                </Stepper.Step>
+            );
+        } else {
+            return (
+                <Stepper.Completed key="completed">{child}</Stepper.Completed>
+            );
+        }
     });
     return (
         <Base className={className} data-collapse={collapse}>

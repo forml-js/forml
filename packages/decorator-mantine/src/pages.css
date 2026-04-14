@@ -6,6 +6,12 @@
         margin: 0 auto;
     }
 
+    &[data-padding=true] {
+        .forml-pages-page {
+            margin: var(--forml-spacing);
+        }
+    }
+
     .forml-content {
         margin: var(--forml-spacing) 0;
 
@@ -21,8 +27,5 @@
             gap: var(--forml-spacing);
         }
 
-        .forml-pages-page {
-            margin: var(--forml-spacing);
-        }
     }
 }
