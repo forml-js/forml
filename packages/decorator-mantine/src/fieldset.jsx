@@ -6,12 +6,11 @@ import './fieldset.css';
 export default function Fieldset(props) {
     const { form, children } = props;
     const layout = 'layout' in form ? form.layout : 'vertical';
+    const padding = 'disablePadding' in form ? !form.disablePadding : true;
+    const margin = 'disableMargin' in form ? !form.disableMargin : true;
     const options = useDecorator('options');
 
     return useMemo(() => {
-        let component = (
-            <Box className={`forml-fieldset-content-${layout}`}>{children}</Box>
-        );
         if (form.description || form.title) {
             const header = (
                 <Box className="forml-header" data-filled={options.filled}>
@@ -21,12 +20,33 @@ export default function Fieldset(props) {
                     )}
                 </Box>
             );
-            component = (
-                <Paper className="forml-fieldset" shadow="xs" padding="md">
+            return (
+                <Paper
+                    className="forml-fieldset"
+                    shadow="xs"
+                    data-padding={padding}
+                    data-margin={margin}
+                >
                     {header}
                     <Divider />
-                    {component}
+                    <Box
+                        className="forml-fieldset-content"
+                        data-orientation={layout}
+                    >
+                        {children}
+                    </Box>
                 </Paper>
+            );
+        } else {
+            return (
+                <Box
+                    className="forml-fieldset-content"
+                    data-padding={padding}
+                    data-margin={margin}
+                    data-orientation={layout}
+                >
+                    {children}
+                </Box>
             );
         }
         return component;

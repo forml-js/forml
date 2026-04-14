@@ -5,14 +5,23 @@
     box-shadow: var(--mantine-shadow-sm) !important;
     margin: var(--forml-spacing);
 
+    &[data-padding=false] {
+        padding: var(--forml-spacing) 0;
+    }
+
+    &[data-margin=false] {
+        margin: 0;
+    }
+
+
     &.forml-filled {
         &>.forml-fieldset-header {
             background-color: var(--mantine-primary-color-filled);
             color: var(--mantine-primary-color-contrast);
         }
 
-        &>.forml-fieldset-content-horizontal,
-        &>.forml-fieldset-content-vertical {
+        &>.forml-fieldset-content,
+        &>.forml-fieldset-content {
             border: 1px solid var(--forml-color-border);
             border-top: none;
             border-bottom-left-radius: var(--mantine-radius-sm);
@@ -22,7 +31,7 @@
     }
 }
 
-.forml-fieldset-content-vertical {
+.forml-fieldset-content[data-orientation=vertical] {
     display: flex;
     flex-direction: column;
     gap: var(--forml-spacing);
@@ -30,13 +39,14 @@
     justify-content: flex-start;
 }
 
-.forml-fieldset-content-horizontal {
+.forml-fieldset-content[data-orientation=horizontal] {
     display: grid;
     grid-gap: var(--forml-spacing);
     grid-auto-flow: column;
 }
 
-.forml-fieldset>.forml-fieldset-content-horizontal,
-.forml-fieldset>.forml-fieldset-content-vertical {
+.forml-fieldset>.forml-fieldset-content,
+.forml-fieldset>.forml-fieldset-content {
     padding: var(--forml-spacing);
+
 }
