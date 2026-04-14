@@ -25,27 +25,57 @@ export function Page(props) {
 export default function Pages(props) {
     const { form, onChange } = props;
     const [pageNumber, setPageNumber] = useState(0);
+    const setPage = useCallback(
+        (number) => {
+            if (number < 0) {
+                setPageNumber(0);
+            } else if (number >= form.pages.length) {
+                if (form.completed) {
+                    setPageNumber(form.pages.length);
+                } else {
+                    setPageNumber(form.pages.length - 1);
+                }
+            } else {
+                setPageNumber(number);
+            }
+        },
+        [setPageNumber, form]
+    );
     const Pages = useDecorator('pages');
-    const children = useMemo(
-        () =>
-            form.pages.map((form, index) => (
+    const children = useMemo(() => {
+        const pages = form.pages.map((step, index) => (
+            <Page
+                key={index}
+                index={index}
+                parent={form}
+                form={step}
+                onChange={onChange}
+                activePage={pageNumber}
+                setPage={setPage}
+            />
+        ));
+
+        if (form.completed) {
+            pages.push(
                 <Page
-                    index={index}
+                    key="completed"
+                    index={children.length}
                     parent={form}
-                    form={form}
+                    form={form.completed}
                     onChange={onChange}
                     activePage={pageNumber}
-                    setPage={setPageNumber}
+                    setPage={setPage}
                 />
-            )),
-        [pageNumber, form, setPageNumber, onChange]
-    );
+            );
+        }
+        return pages;
+    }, [pageNumber, form, setPage, onChange]);
     return (
         <Pages
             className={form.htmlClass}
             form={form}
             active={pageNumber}
-            setPage={setPageNumber}
+            setPage={setPage}
             onChange={onChange}
         >
             {children}
