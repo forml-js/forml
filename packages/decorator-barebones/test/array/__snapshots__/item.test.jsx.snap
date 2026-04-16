@@ -1,10 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renders its children 1`] = `
+exports[`Item > renders its children 1`] = `
 <div>
   <li
     class="item"
   >
+    <div
+      class="handle"
+    />
     <div
       class="controls"
     >

@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Container > renders its tabs and panels 1`] = `
+<div>
+  <div
+    class="tabs-container"
+  >
+    <div
+      class="tabs"
+    >
+      <button>
+        tab title
+      </button>
+    </div>
+    <div
+      class="panels"
+    >
+      <div
+        active="false"
+      >
+        <div
+          id="panel_test"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,15 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renders its children 1`] = `
+exports[`Array > renders its children 1`] = `
 <div>
   <div
     class="array"
   >
     <button
       class="add"
-    >
-      Add
-    </button>
+    />
     <ul>
       <div
         id="test"

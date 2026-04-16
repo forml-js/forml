@@ -1,13 +1,13 @@
-import Label from '../label';
+import Items from '../../src/arrays/items.jsx';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-describe('renders', function () {
-    test('its children', function () {
+describe('Array', function () {
+    it('renders its children', function () {
         const { container } = render(
-            <Label>
+            <Items form={{ type: 'array' }}>
                 <div id="test">test</div>
-            </Label>
+            </Items>
         );
 
         expect(container).toMatchSnapshot();

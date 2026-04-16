@@ -1,11 +1,8 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
+import { expect } from 'vitest';
 import React from 'react';
 import { render } from '@testing-library/react';
 import Panel from '../src/tabs/panel.jsx';
 import Tab from '../src/tabs/tab.jsx';
-
-const { expect } = chai;
 
 describe('Barebones Tabs Components', function () {
     describe('Panel', function () {
@@ -64,4 +61,3 @@ describe('Barebones Tabs Components', function () {
         });
     });
 });
-

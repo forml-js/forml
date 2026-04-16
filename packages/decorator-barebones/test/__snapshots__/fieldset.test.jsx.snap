@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renders with description and no title 1`] = `
+exports[`renders > with description and no title 1`] = `
 <div>
   <fieldset>
     <p>
@@ -11,7 +11,7 @@ exports[`renders with description and no title 1`] = `
 </div>
 `;
 
-exports[`renders with no title or description 1`] = `
+exports[`renders > with no title or description 1`] = `
 <div>
   <fieldset>
     <div />
@@ -19,7 +19,7 @@ exports[`renders with no title or description 1`] = `
 </div>
 `;
 
-exports[`renders with title and description 1`] = `
+exports[`renders > with title and description 1`] = `
 <div>
   <fieldset>
     <legend>
@@ -33,7 +33,7 @@ exports[`renders with title and description 1`] = `
 </div>
 `;
 
-exports[`renders with title and no description 1`] = `
+exports[`renders > with title and no description 1`] = `
 <div>
   <fieldset>
     <legend>

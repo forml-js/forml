@@ -1,17 +1,18 @@
-import Panel from '../panel';
+import Item from '../../src/arrays/item.jsx';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-describe('renders', function () {
+describe('Item', function () {
     let form;
+
     beforeEach(function () {
-        form = { type: 'tabs', tabs: [] };
+        form = { type: 'array', key: [], items: [{ type: 'string' }] };
     });
-    test('its children', function () {
+    it('renders its children', function () {
         const { container } = render(
-            <Panel form={form}>
+            <Item form={form} otherProps={{}}>
                 <div id="test">test</div>
-            </Panel>
+            </Item>
         );
 
         expect(container).toMatchSnapshot();

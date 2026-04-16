@@ -1,10 +1,10 @@
-import Container from '../container';
-import Tab from '../tab';
-import Panel from '../panel';
+import Container from '../../src/tabs/container.jsx';
+import Tab from '../../src/tabs/tab.jsx';
+import Panel from '../../src/tabs/panel.jsx';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-describe('renders', function () {
+describe('Container', function () {
     let form;
     let tabForm;
     let panelForm;
@@ -13,7 +13,7 @@ describe('renders', function () {
         tabForm = { title: 'tab title' };
         panelForm = tabForm;
     });
-    test('its tabs and panels', function () {
+    it('renders its tabs and panels', function () {
         const { container } = render(
             <Container
                 tabs={[<Tab form={tabForm} />]}

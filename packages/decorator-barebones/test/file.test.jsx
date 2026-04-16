@@ -1,13 +1,10 @@
 import React from 'react';
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
+import { expect } from 'vitest';
 import { render, fireEvent, screen, renderHook } from '@testing-library/react';
 import { RenderingContext, ModelContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 
 import FileComponent from '../src/file.jsx';
-
-const { expect } = chai;
 
 function makeWrapper({ modelStore, renderingContext }) {
     return ({ children }) => {
@@ -213,4 +210,3 @@ describe('Barebones File Decorator', function () {
         expect(textInput.readOnly).to.equal(true);
     });
 });
-
