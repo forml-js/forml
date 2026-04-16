@@ -18,7 +18,7 @@
         "lint": "eslint pacakges/*/src/**/*.jsx",
         "build": "lerna run build",
         "watch": "lerna run --parallel watch --stream",
-        "test": "cross-env NODE_ENV=test mocha --config .mocharc.cjs 'packages/*/test/**/*.test.{js,jsx}'"
+        "test": "vitest --config vitest.config.js"
     },
     "author": "Zachary Hueras",
     "license": "MIT",
@@ -39,6 +39,10 @@
         "@semantic-release/git": "^10.0.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.1",
+        "@vitejs/plugin-react": "^6.0.1",
+        "@vitest/browser-playwright": "^4.1.4",
+        "@vitest/coverage-v8": "^4.1.4",
+        "@vitest/ui": "^4.1.4",
         "ajv": "^8.18.0",
         "babel-loader": "^10.1.1",
         "c8": "^11.0.0",
@@ -47,7 +51,7 @@
         "chai-dom": "^1.12.1",
         "clsx": "^2.1.1",
         "cross-env": "^10.1.0",
-        "global-jsdom": "^29.0.0",
+        "happy-dom": "^20.9.0",
         "ignore-styles": "^5.0.1",
         "jsdom": "^29.0.2",
         "lerna": "^9.0.7",
@@ -67,6 +71,7 @@
         "sinon": "^21.1.2",
         "sinon-chai": "^4.0.1",
         "source-map-support": "^0.5.21",
+        "vitest": "^4.1.4",
         "webpack-cli": "^7.0.2"
     },
     "workspaces": [
@@ -77,20 +82,19 @@
         "packages/ware",
         "packages/decorator-bootstrap",
         "packages/hooks",
-        "packages/core",
-        "example"
+        "packages/core"
     ],
     "dependencies": {
-        "@forml/context": "file:packages/context",
-        "@forml/core": "file:packages/core",
-        "@forml/decorator-barebones": "file:packages/decorator-barebones",
-        "@forml/decorator-mantine": "file:packages/decorator-mantine",
-        "@forml/decorator-mui": "file:packages/decorator-mui",
-        "@forml/example": "file:example",
-        "@forml/hooks": "file:packages/hooks"
+        "@forml/context": "workspace:2.0.0-next.21",
+        "@forml/core": "workspace:2.0.0-next.21",
+        "@forml/decorator-barebones": "workspace:2.0.0-next.21",
+        "@forml/decorator-mantine": "workspace:2.0.0-next.21",
+        "@forml/decorator-mui": "workspace:2.0.0-next.21",
+        "@forml/hooks": "workspace:2.0.0-next.21"
     },
     "peerDependencies": {
         "react": ">=17.0.0",
         "react-dom": ">=17.0.0"
-    }
+    },
+    "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
 }
