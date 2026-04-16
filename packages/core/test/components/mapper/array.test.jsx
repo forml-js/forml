@@ -1,17 +1,9 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
+import { expect, vi, describe, it } from 'vitest';
 import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { useValue } from '@forml/hooks';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 describe('items container', function () {
     let schema;
@@ -37,7 +29,11 @@ describe('items container', function () {
 
         expect(container.querySelector('.array')).not.to.be.null;
         expect(container.querySelector('.array ul')).not.to.be.null;
-        expect(container.querySelector('.array ul')).to.be.empty;
+        console.log(
+            'container: %s',
+            screen.debug(container.querySelector('.array ul'))
+        );
+        expect(container.querySelector('.array ul').children).to.be.empty;
     });
 
     describe('with an add button', function () {
@@ -49,7 +45,7 @@ describe('items container', function () {
             expect(button).not.to.be.null;
         });
         it('which adds an item to the model', function () {
-            const onChange = sinon.fake((event, newModel) => {
+            const onChange = vi.fn((event, newModel) => {
                 model = newModel;
             });
             const props = { schema, form, model, onChange, decorator };
@@ -63,7 +59,7 @@ describe('items container', function () {
     });
 
     it('cannot be mutated if disabled', async function () {
-        let onChange = sinon.fake((event, nextModel) => (model = nextModel));
+        let onChange = vi.fn((event, nextModel) => (model = nextModel));
         let schema = {
             type: 'array',
             items: { type: 'number' },
@@ -108,12 +104,12 @@ function getComputedSpacing({
 }
 
 function mockGetComputedSpacing() {
-    const spy = sinon.spy(window, 'getComputedStyle');
+    const spy = vi.spyOn(window, 'getComputedStyle');
     spy.wrappedMethod = () => getComputedSpacing({});
 }
 
 function mockGetBoundingClientRect(el) {
-    const spy = sinon.spy(el, 'getBoundingClientRect');
+    const spy = vi.spyOn(el, 'getBoundingClientRect');
     spy.wrappedMethod = () => ({
         top: 0,
         right: 0,
@@ -149,14 +145,14 @@ describe('each item', function () {
     let decorator = null;
     let props = null;
 
-    before(function () {
+    beforeAll(function () {
         mockGetComputedSpacing();
     });
     beforeEach(function () {
         schema = { type: 'array', items: { type: 'number' } };
         form = ['*'];
         model = [1];
-        onChange = sinon.fake((event, newModel) => {
+        onChange = vi.fn((event, newModel) => {
             model = newModel;
         });
         decorator = barebones;
@@ -171,7 +167,7 @@ describe('each item', function () {
     // jsdom can't effectively mock this well enough to make it work; skip until
     // we find a workaround
     it.skip('can be dragged into a new position', async function () {
-        const onChange = sinon.fake();
+        const onChange = vi.fn();
         model = [1, 2, 3, 4];
         const utils = render(<SchemaForm {...{ ...props, model, onChange }} />);
         const { container } = utils;
@@ -301,7 +297,7 @@ describe('each item', function () {
                 {
                     key: [],
                     type: 'array',
-                    titleFun: sinon.fake((value) => `test ${value}`),
+                    titleFun: vi.fn((value) => `test ${value}`),
                     items: ['[]'],
                 },
             ];

@@ -41,9 +41,10 @@
         "react": "^17.0.0||^18.0.0||^19.0.0"
     },
     "dependencies": {
-        "@forml/context": "file:../context",
-        "@forml/hooks": "file:../hooks",
+        "@forml/context": "workspace:../context",
+        "@forml/hooks": "workspace:../hooks",
         "ajv": "^8.18.0",
+        "debug": "^4.4.3",
         "deepmerge": "^4.3.1",
         "libphonenumber-js": "^1.12.41",
         "objectpath": "^2.0.0",
@@ -53,8 +54,9 @@
     "devDependencies": {
         "@dnd-kit/react": "^0.4.0",
         "@dnd-kit/sortable": "^10.0.0",
-        "@forml/decorator-barebones": "file:../decorator-barebones",
-        "json-schema-faker": "^0.6.1"
+        "@forml/decorator-barebones": "workspace:../decorator-barebones",
+        "json-schema-faker": "^0.6.0",
+        "zustand": "^5.0.12"
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef"
 }

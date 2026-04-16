@@ -1,18 +1,9 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
 import { SchemaForm, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createElement as h } from 'react';
 import * as jsf from 'json-schema-faker';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 describe('number', function () {
     let schema, form, model, onChange, decorator;
@@ -21,7 +12,7 @@ describe('number', function () {
         schema = { type: 'number' };
         form = [{ key: [], type: 'number' }];
         model = jsf.generate(schema);
-        onChange = sinon.fake((event, nextModel) => (model = nextModel));
+        onChange = vi.fn((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
 

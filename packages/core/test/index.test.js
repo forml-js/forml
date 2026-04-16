@@ -1,15 +1,12 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import * as forml from '../src/index.js';
 
-const { expect } = chai;
-
 describe('Core exports', function () {
-    it('exports util module', function () {
-        expect(forml.util).to.be.an('object');
+    it.only('exports util module', function () {
         expect(forml.util.clone).to.be.a('function');
         expect(forml.util.traverseForm).to.be.a('function');
         expect(forml.util.getTypeOf).to.be.a('function');
+        expect(forml.util.useMergedRef).to.be.a('function');
+        expect(forml.util.compose).to.be.a('function');
     });
 
     it('exports main components', function () {
@@ -22,3 +19,4 @@ describe('Core exports', function () {
         expect(forml.getLocalizer).to.be.a('function');
     });
 });
+

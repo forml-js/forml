@@ -1,14 +1,7 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
 import React from 'react';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 describe('date', function () {
     let schema, form, model, onChange, localizer, decorator;
@@ -17,7 +10,7 @@ describe('date', function () {
         schema = { type: 'string', format: 'date' };
         form = [{ key: [], type: 'date' }];
         model = util.defaultForSchema(schema);
-        onChange = sinon.fake((event, nextModel) => (model = nextModel));
+        onChange = vi.fn((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
 
@@ -45,7 +38,7 @@ describe('date', function () {
             },
         ];
         const localizer = getLocalizer({
-            getLocalizedString: sinon.fake((id) => id),
+            getLocalizedString: vi.fn((id) => id),
         });
         const { container } = render(
             <SchemaForm

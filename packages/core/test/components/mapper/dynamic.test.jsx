@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import React from 'react';
 import { render, renderHook } from '@testing-library/react';
 import { RenderingContext, ModelContext } from '@forml/context';
@@ -99,4 +97,3 @@ describe('Dynamic Component', function () {
         expect(container.firstChild).to.exist;
     });
 });
-

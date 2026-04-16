@@ -1,11 +1,7 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { RenderingContext, ModelContext } from '@forml/context';
 import Tabs from '../../../src/components/mapper/tabs.jsx';
-
-const { expect } = chai;
 
 describe('Tabs Component', function () {
     // Mock tab decorator
@@ -179,4 +175,3 @@ describe('Tabs Component', function () {
         expect(getByTestId('tabs-container')).to.exist;
     });
 });
-

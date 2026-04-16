@@ -1,12 +1,9 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
+import { expect, vi } from 'vitest';
 import React from 'react';
 import { render, fireEvent, renderHook } from '@testing-library/react';
 import { RenderingContext, ModelContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import PhoneNumber from '../../../../../src/components/mapper/text/format/phone.jsx';
-
-const { expect } = chai;
 
 describe('PhoneNumber Component', function () {
     const mockRenderingContext = {
@@ -142,4 +139,3 @@ describe('PhoneNumber Component', function () {
         expect(input.value).to.equal('(555) 123-4567');
     });
 });
-

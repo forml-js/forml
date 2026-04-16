@@ -1,11 +1,4 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import * as util from '#util';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 const { clone, getNextValue, getTypeOf } = util;
 
@@ -298,7 +291,7 @@ describe('traverseForm', function () {
     it('takes a single form object or an array', function () {
         const forms = ['test', 'property'];
         const form = 'foo';
-        const callback = sinon.fake();
+        const callback = vi.fn();
 
         util.traverseForm(forms, callback);
         util.traverseForm(form, callback);
@@ -310,7 +303,7 @@ describe('traverseForm', function () {
     it('visits nested children', function () {
         const nested = { key: 'property', items: ['foo'] };
         const forms = ['test', nested];
-        const callback = sinon.fake();
+        const callback = vi.fn();
 
         util.traverseForm(forms, callback);
 

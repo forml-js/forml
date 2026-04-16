@@ -1,8 +1,5 @@
-import * as chai from 'chai';
 import PropTypes from 'prop-types';
 import { FormType, FormsType } from '../src/types.js';
-
-const { expect } = chai;
 
 describe('FormType', function () {
     it('accepts string values', function () {

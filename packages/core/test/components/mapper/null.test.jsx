@@ -1,20 +1,16 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import React from 'react';
 import { render } from '@testing-library/react';
 import Null from '../../../src/components/mapper/null.jsx';
-
-const { expect } = chai;
 
 describe('Null Component', function () {
     it('renders and returns null', function () {
         const mockForm = {
             type: 'null',
-            title: 'Null Field'
+            title: 'Null Field',
         };
 
         const { container } = render(<Null form={mockForm} />);
-        
+
         // The null component should render nothing
         expect(container.firstChild).to.be.null;
     });
@@ -23,3 +19,4 @@ describe('Null Component', function () {
         expect(Null.name).to.equal('Null');
     });
 });
+

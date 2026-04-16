@@ -1,8 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
-import * as sinon from 'sinon';
 import { SchemaField } from '#field';
 import { getLocalizer } from '#localizer';
 import { getMapper } from '#mapper';
@@ -11,10 +6,6 @@ import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { createStore } from 'zustand';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 function getModelContext(schema, ajv, model = '', errors = {}) {
     return createStore()((set) => ({
@@ -31,24 +22,24 @@ function getRenderingContext() {
         decorator: barebones,
         localizer: getLocalizer({}),
         mapper: getMapper({
-            array: sinon.fake(() => 'array'),
-            checkbox: sinon.fake(() => 'checkbox'),
-            date: sinon.fake(() => 'date'),
-            datetime: sinon.fake(() => 'datetime'),
-            dynamic: sinon.fake(() => 'dynamic'),
-            fieldset: sinon.fake(() => 'fieldset'),
-            help: sinon.fake(() => 'help'),
-            integer: sinon.fake(() => 'integer'),
-            multiselect: sinon.fake(() => 'multiselect'),
-            null: sinon.fake(() => 'null'),
-            number: sinon.fake(() => 'number'),
-            password: sinon.fake(() => 'password'),
-            select: sinon.fake(() => 'select'),
-            tabs: sinon.fake(() => 'tabs'),
-            text: sinon.fake(() => 'text'),
-            textarea: sinon.fake(() => 'textarea'),
-            tuple: sinon.fake(() => 'tuple'),
-            file: sinon.fake(() => 'file'),
+            array: vi.fn(() => 'array'),
+            checkbox: vi.fn(() => 'checkbox'),
+            date: vi.fn(() => 'date'),
+            datetime: vi.fn(() => 'datetime'),
+            dynamic: vi.fn(() => 'dynamic'),
+            fieldset: vi.fn(() => 'fieldset'),
+            help: vi.fn(() => 'help'),
+            integer: vi.fn(() => 'integer'),
+            multiselect: vi.fn(() => 'multiselect'),
+            null: vi.fn(() => 'null'),
+            number: vi.fn(() => 'number'),
+            password: vi.fn(() => 'password'),
+            select: vi.fn(() => 'select'),
+            tabs: vi.fn(() => 'tabs'),
+            text: vi.fn(() => 'text'),
+            textarea: vi.fn(() => 'textarea'),
+            tuple: vi.fn(() => 'tuple'),
+            file: vi.fn(() => 'file'),
         }),
     };
 }
@@ -57,8 +48,8 @@ describe('SchemaField', function () {
     it('does not render if no mapped Field is found for type', function () {
         const schema = { type: 'object' };
         const form = { key: [], type: 'custom', schema };
-        const validate = sinon.fake();
-        const ajv = { compile: sinon.fake(() => validate) };
+        const validate = vi.fn();
+        const ajv = { compile: vi.fn(() => validate) };
         const modelContext = getModelContext(schema, ajv, {});
         const renderingContext = getRenderingContext();
 
@@ -70,14 +61,14 @@ describe('SchemaField', function () {
             </RenderingContext.Provider>
         );
 
-        expect(container).to.be.empty;
+        expect(container.children).to.be.empty;
     });
 
     it('uses mapper from context', function () {
         const schema = { type: 'string' };
         const form = { key: [], type: 'text', schema };
-        const validate = sinon.fake();
-        const ajv = { compile: sinon.fake(() => validate) };
+        const validate = vi.fn();
+        const ajv = { compile: vi.fn(() => validate) };
         const modelContext = getModelContext(schema, ajv, {});
         const renderingContext = getRenderingContext();
 

@@ -1,16 +1,7 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
 import React, { createElement as h } from 'react';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 describe('fieldset', function () {
     let schema, form, model, onChange, localizer, decorator;
@@ -19,7 +10,7 @@ describe('fieldset', function () {
         schema = { type: 'object', properties: { foo: { type: 'string' } } };
         form = [{ type: 'fieldset', items: ['foo'] }];
         model = util.defaultForSchema(schema);
-        onChange = sinon.fake((event, nextModel) => (model = nextModel));
+        onChange = vi.fn((event, nextModel) => (model = nextModel));
         decorator = barebones;
     });
 
@@ -48,7 +39,7 @@ describe('fieldset', function () {
             },
         ];
         const localizer = getLocalizer({
-            getLocalizedString: sinon.fake((id) => id),
+            getLocalizedString: vi.fn((id) => id),
         });
         const { container } = render(
             <SchemaForm

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { SchemaField } from '#components/schema-field.jsx';
 import { useDecorator } from '@forml/hooks';
@@ -7,7 +7,6 @@ export function Page(props) {
     const { index, parent, form, onChange, activePage, setPage } = props;
     const Pages = useDecorator('pages');
     const { schema } = form;
-    console.log('Page(form: %o)', form);
     return (
         <Pages.Page
             title={form.title}
@@ -59,7 +58,7 @@ export default function Pages(props) {
             pages.push(
                 <Page
                     key="completed"
-                    index={children.length}
+                    index={pages.length}
                     parent={form}
                     form={form.completed}
                     onChange={onChange}

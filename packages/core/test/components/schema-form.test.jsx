@@ -1,17 +1,10 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import { SchemaForm } from '#form';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-chai.use(sinonChai);
-const { expect } = chai;
-
 it('uses the supplied mapper', function () {
     const mapper = {
-        text: sinon.fake((props) => <div />),
+        text: vi.fn((props) => <div />),
     };
 
     render(
@@ -23,12 +16,12 @@ it('uses the supplied mapper', function () {
 
 it('uses the supplied localizer', function () {
     const localizer = {
-        getLocalizedString: sinon.fake((string) => {
+        getLocalizedString: vi.fn((string) => {
             return string;
         }),
     };
     const decorator = {
-        text: sinon.fake((props) => <div />),
+        text: vi.fn((props) => <div />),
     };
 
     render(
@@ -45,7 +38,7 @@ it('uses the supplied localizer', function () {
 
 it('uses the supplied decorator', function () {
     const decorator = {
-        text: sinon.fake((props) => <div />),
+        text: vi.fn((props) => <div />),
         options: {},
     };
 

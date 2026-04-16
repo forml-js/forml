@@ -1,15 +1,6 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as barebones from '@forml/decorator-barebones';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 import { SchemaForm } from '#core';
 import React from 'react';
@@ -24,7 +15,7 @@ describe('select mapper', function () {
         schema = { type: ['string', 'null'], enum: [null, 'a', 'b', 'c', 'd'] };
         form = ['*'];
         model = null;
-        onChange = sinon.fake((event, newModel) => (model = newModel));
+        onChange = vi.fn((event, newModel) => (model = newModel));
     });
 
     it('is updated onChange', async function () {

@@ -1,15 +1,9 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import { expect, vi } from 'vitest';
 import * as barebones from '@forml/decorator-barebones';
 import { render } from '@testing-library/react';
 
 import { SchemaForm, getLocalizer, util } from '#core';
-import { createElement as h } from 'react';
-
-chai.use(sinonChai);
-const { expect } = chai;
+import React from 'react';
 
 describe('checkbox mapper', function () {
     let schema, form, model, onChange, localizer;
@@ -18,7 +12,7 @@ describe('checkbox mapper', function () {
         schema = { type: 'boolean' };
         form = [{ type: 'checkbox', key: [] }];
         model = util.defaultForSchema(schema);
-        onChange = sinon.fake((event, nextModel) => (model = nextModel));
+        onChange = vi.fn((event, nextModel) => (model = nextModel));
     });
 
     it('renders itself', function () {
@@ -46,7 +40,7 @@ describe('checkbox mapper', function () {
             },
         ];
         const localizer = getLocalizer({
-            getLocalizedString: sinon.fake((id) => id),
+            getLocalizedString: vi.fn((id) => id),
         });
         const { container } = render(
             <SchemaForm

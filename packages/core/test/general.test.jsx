@@ -1,16 +1,9 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import * as jsf from 'json-schema-faker';
 import { SchemaForm, getLocalizer, util } from '#core';
 import * as barebones from '@forml/decorator-barebones';
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 describe('mapper', function () {
     const title = 'title';
@@ -151,7 +144,7 @@ describe('mapper', function () {
         it(`${type} localizes title and description`, function () {
             const model = schema ? util.defaultForSchema(schema) : null;
             const localizer = getLocalizer({
-                getLocalizedString: sinon.fake(),
+                getLocalizedString: vi.fn(),
             });
             const { container } = render(
                 <SchemaForm
@@ -202,13 +195,14 @@ describe('mapper', function () {
                 }),
         };
         const valueGenerator = {
-            datetime: (schema) => new Date(jsf.generate(schema)).toISOString(),
+            datetime: async (schema) =>
+                new Date(await jsf.generate(schema)).toISOString(),
             default: jsf.generate,
         };
         if (schema && !excludeFromChangeEvents.includes(type)) {
             const model = util.defaultForSchema(schema);
-            it(`${type} processes change events`, async function () {
-                let newModel = sinon.fake();
+            it.only(`${type} processes change events`, async function () {
+                let newModel = vi.fn();
                 let onChange = (event, nextModel) => newModel(nextModel);
                 let { container } = render(
                     <SchemaForm
@@ -228,12 +222,13 @@ describe('mapper', function () {
                 for (let input of inputs) {
                     const generateValue =
                         valueGenerator[type] ?? valueGenerator.default;
-                    const value = generateValue(schema);
+                    const value = await generateValue(schema);
+                    console.log('value: %o', value);
                     const makeChange =
                         makeChangeMap[type] ?? makeChangeMap.default;
                     await makeChange(form, input, value);
                     expect(newModel).to.have.been.calledWith(value);
-                    newModel.resetHistory();
+                    newModel.mockClear();
                 }
             });
         }
