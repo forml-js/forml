@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import {
     modelSetArray,
     modelSetObject,
@@ -19,8 +17,6 @@ import {
     walkSchema,
     unwind,
 } from '../src/common.js';
-
-const { expect } = chai;
 
 describe('common.js utility functions', function () {
     describe('getTypeOf', function () {
@@ -571,4 +567,3 @@ describe('common.js utility functions', function () {
         });
     });
 });
-

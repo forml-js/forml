@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import { renderHook } from '@testing-library/react';
 import {
     useArrayKeyRange,

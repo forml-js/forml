@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
 import { renderHook, act } from '@testing-library/react';
 import { useSelect, useFileField } from '../src/helpers.js';
 

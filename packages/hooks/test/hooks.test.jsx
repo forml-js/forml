@@ -1,8 +1,3 @@
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import domChai from 'chai-dom';
 import React from 'react';
 import {
     useLocalizer,
@@ -16,10 +11,6 @@ import {
 import { RenderingContext as Context, ModelContext } from '@forml/context';
 import { render, renderHook } from '@testing-library/react';
 
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
-
 describe('useLocalizer', function () {
     describe('returns method', function () {
         let date;
@@ -28,13 +19,9 @@ describe('useLocalizer', function () {
         beforeEach(function () {
             date = new Date(0);
             localizer = {
-                getLocalizedString: sinon.fake(
-                    (string) => 'localized ' + string
-                ),
-                getLocalizedDate: sinon.fake((date) => date.toLocaleString()),
-                getLocalizedNumber: sinon.fake((number) =>
-                    number.toLocaleString()
-                ),
+                getLocalizedString: vi.fn((string) => 'localized ' + string),
+                getLocalizedDate: vi.fn((date) => date.toLocaleString()),
+                getLocalizedNumber: vi.fn((number) => number.toLocaleString()),
             };
         });
         function TestComponent(props) {
@@ -109,10 +96,10 @@ describe('useDecorator', function () {
         it('uses the input decorator', function () {
             const decorator = {
                 Input: {
-                    Group: sinon.fake((props) => (
+                    Group: vi.fn((props) => (
                         <div id="group">{props.children}</div>
                     )),
-                    Form: sinon.fake((props) => <input id="form" {...props} />),
+                    Form: vi.fn((props) => <input id="form" {...props} />),
                 },
             };
 
@@ -138,7 +125,7 @@ describe('useMapper', function () {
         let mapper;
         beforeEach(function () {
             mapper = {
-                Text: sinon.fake((props) => <input id="input" {...props} />),
+                Text: vi.fn((props) => <input id="input" {...props} />),
             };
         });
         it('uses the input mapper', function () {
@@ -203,7 +190,7 @@ describe('useGenerator', function () {
     describe('when given a function', function () {
         it('invokes the function and returns the result', function () {
             const schema = {};
-            const generator = sinon.spy(() => schema);
+            const generator = vi.fn(() => schema);
             const { result } = renderHook(() => useGenerator(generator));
 
             expect(result.current).to.equal(schema);

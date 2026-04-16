@@ -12,28 +12,8 @@ import {
     useModelStore,
 } from '#model';
 import { ModelContext, RenderingContext } from '@forml/context';
-import * as chai from 'chai';
-import domChai from 'chai-dom';
-import { describe, it } from 'mocha';
 import React from 'react';
 import { renderHook } from '@testing-library/react';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
-
-function makeWrapper({ modelStore, renderingContext }) {
-    return ({ children }) => {
-        return (
-            <RenderingContext.Provider value={renderingContext}>
-                <ModelContext.Provider value={modelStore}>
-                    {children}
-                </ModelContext.Provider>
-            </RenderingContext.Provider>
-        );
-    };
-}
 
 let schema;
 let renderingContext;

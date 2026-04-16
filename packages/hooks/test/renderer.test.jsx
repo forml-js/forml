@@ -1,15 +1,8 @@
 import React from 'react';
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import ObjectPath from 'objectpath';
 import { renderHook } from '@testing-library/react';
 import * as renderer from '#renderer';
 import { RenderingContext } from '@forml/context';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 describe('useTitleFor', function () {
     describe('without a form', function () {
@@ -21,7 +14,7 @@ describe('useTitleFor', function () {
         describe('with a titleFun', function () {
             let titleFun;
             beforeEach(function () {
-                titleFun = sinon.fake((value) => value);
+                titleFun = vi.fn((value) => value);
             });
             describe('given a value', function () {
                 it('calls the titleFun with the value', function () {
@@ -140,7 +133,7 @@ describe('useLocalizer', function () {
 
 describe('useLocalizedString', function () {
     const localizer = {
-        getLocalizedString: sinon.fake((id) => id),
+        getLocalizedString: vi.fn((id) => id),
     };
     const wrapper = ({ children }) => (
         <RenderingContext.Provider value={{ localizer }}>

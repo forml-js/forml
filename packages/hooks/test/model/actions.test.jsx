@@ -7,16 +7,8 @@ import {
 } from '#model';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { act, renderHook } from '@testing-library/react';
-import * as chai from 'chai';
-import domChai from 'chai-dom';
-import { describe, it } from 'mocha';
 import objectPath from 'objectpath';
 import React from 'react';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 function makeWrapper({ modelStore, renderingContext }) {
     return ({ children }) => {
@@ -284,15 +276,6 @@ describe('useActions', function () {
             expect(postModel2.baz).to.deep.equal(['b', 'a', 'c']);
         });
     });
-
-    describe('with a prefix', function () {
-        let prefix;
-        beforeEach(function () {
-            prefix = ['foo', 'bar'];
-            renderingContext = { prefix };
-        });
-    });
-    describe('without a prefix', function () {});
 });
 
 describe('useActionsFor', function () {

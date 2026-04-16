@@ -1,0 +1,9 @@
+import { defineProject } from 'vitest/config';
+
+export default defineProject({
+    test: {
+        environment: 'happy-dom',
+        include: ['test/**/*.{js,jsx}'],
+        globals: true,
+    },
+});

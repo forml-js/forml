@@ -1,6 +1,3 @@
-import { describe, it } from 'mocha';
-import * as chai from 'chai';
-import * as sinon from 'sinon';
 import ObjectPath from 'objectpath';
 import {
     merge,
@@ -10,12 +7,6 @@ import {
     getDefaults,
 } from '#forms';
 import { ARRAY_PLACEHOLDER } from '#constants';
-
-const { expect } = chai;
-
-afterEach(function () {
-    sinon.restore();
-});
 
 describe('merge', function () {
     describe('when the form descriptor includes an asterisk', function () {
@@ -337,7 +328,7 @@ describe('merge', function () {
                         type: 'array',
                         items: { type: 'number', enum: [1, 2, 3] },
                     };
-                    const localize = sinon.spy((name) => `localized ${name}`);
+                    const localize = vi.fn((name) => `localized ${name}`);
                     const merged = merge(
                         schema,
                         [{ key: [], titles: ['a', 'b', 'c'] }],
@@ -383,7 +374,7 @@ describe('merge', function () {
         let localize;
         let schema;
         beforeEach(function () {
-            localize = sinon.spy((text) => `localized ${text}`);
+            localize = vi.fn((text) => `localized ${text}`);
             schema = { type: 'array', items: { type: 'string' } };
         });
         describe('given a form with a title', function () {
@@ -413,7 +404,7 @@ describe('merge', function () {
         describe('given a form with a titleFun', function () {
             let titleFun;
             beforeEach(function () {
-                titleFun = sinon.spy((value) => `titled ${value}`);
+                titleFun = vi.fn((value) => `titled ${value}`);
             });
             describe('while skipTitleFun is true', function () {
                 it('does not modify the titleFun', function () {
@@ -705,9 +696,14 @@ describe('findNextSchema', function () {
                 type: 'array',
                 items: [firstSchema, secondSchema],
             };
-            expect(findNextSchema(arraySchema, [0])).to.equal(firstSchema);
-            expect(findNextSchema(arraySchema, [1])).to.equal(secondSchema);
-            expect(findNextSchema(arraySchema, [2])).to.be.undefined;
+
+            it('rturns the child schema from the corresponding index', function () {
+                expect(findNextSchema(arraySchema, [0])).to.equal(firstSchema);
+                expect(findNextSchema(arraySchema, [1])).to.equal(secondSchema);
+            });
+            it('returns undefined the index does not match a child', function () {
+                expect(findNextSchema(arraySchema, [2])).to.be.undefined;
+            });
         });
         describe('with items being a single schema', function () {
             const childSchema = { type: 'number' };
@@ -716,9 +712,11 @@ describe('findNextSchema', function () {
                 items: childSchema,
             };
 
-            expect(findNextSchema(arraySchema, [0])).to.equal(childSchema);
-            expect(findNextSchema(arraySchema, [1])).to.equal(childSchema);
-            expect(findNextSchema(arraySchema, [2])).to.equal(childSchema);
+            it('returns the same child schema every time', function () {
+                expect(findNextSchema(arraySchema, [0])).to.equal(childSchema);
+                expect(findNextSchema(arraySchema, [1])).to.equal(childSchema);
+                expect(findNextSchema(arraySchema, [2])).to.equal(childSchema);
+            });
         });
     });
     describe('given an object schema', function () {
