@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import ReactPDF from '@react-pdf/renderer';
+//import ReactPDF from '@react-pdf/renderer';
 import { SchemaForm, util } from '@forml/core';
 import shortid from 'shortid';
 
@@ -46,23 +46,23 @@ export default function RenderExample(props) {
             mapper={mapper}
         />
     );
-    if (decorator === 'pdf') {
-        if (wrapInDocument) {
-            child = (
-                <ReactPDF.Document>
-                    <ReactPDF.Page size="A4">{child}</ReactPDF.Page>
-                </ReactPDF.Document>
-            );
-        }
-        child = (
-            <ReactPDF.PDFViewer
-                key={key}
-                style={{ width: '100vw', height: '100vh' }}
-            >
-                {child}
-            </ReactPDF.PDFViewer>
-        );
-    }
+    //if (decorator === 'pdf') {
+    //    if (wrapInDocument) {
+    //        child = (
+    //            <ReactPDF.Document>
+    //                <ReactPDF.Page size="A4">{child}</ReactPDF.Page>
+    //            </ReactPDF.Document>
+    //        );
+    //    }
+    //    child = (
+    //        <ReactPDF.PDFViewer
+    //            key={key}
+    //            style={{ width: '100vw', height: '100vh' }}
+    //        >
+    //            {child}
+    //        </ReactPDF.PDFViewer>
+    //    );
+    //}
 
     return <ErrorBoundary>{child}</ErrorBoundary>;
 }
