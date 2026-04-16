@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`renders with relevant formStyles 1`] = `
 <div>
   <page>
     <view
-      style="margin: 2pt; padding: 2pt; border: 1px solid red;"
+      style="border: 1px solid red;"
     />
   </page>
 </div>
@@ -13,9 +13,7 @@ exports[`renders with relevant formStyles 1`] = `
 exports[`renders without formStyles 1`] = `
 <div>
   <page>
-    <view
-      style="margin: 2pt; padding: 2pt;"
-    />
+    <view />
   </page>
 </div>
 `;

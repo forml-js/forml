@@ -78,7 +78,6 @@
         "packages/decorator-bootstrap",
         "packages/hooks",
         "packages/core",
-        "packages/decorator-pdf",
         "example"
     ],
     "dependencies": {
@@ -87,7 +86,6 @@
         "@forml/decorator-barebones": "file:packages/decorator-barebones",
         "@forml/decorator-mantine": "file:packages/decorator-mantine",
         "@forml/decorator-mui": "file:packages/decorator-mui",
-        "@forml/decorator-pdf": "file:packages/decorator-pdf",
         "@forml/example": "file:example",
         "@forml/hooks": "file:packages/hooks"
     },
