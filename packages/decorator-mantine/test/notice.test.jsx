@@ -1,8 +1,6 @@
 import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { render, getByText } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
 import Notice from '../src/notice.jsx';
 
 function wrapper({ children }) {

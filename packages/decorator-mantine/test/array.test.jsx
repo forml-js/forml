@@ -1,3 +1,4 @@
+/* eslint-env vitest */
 import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
@@ -9,9 +10,7 @@ import {
     getByText,
     queryByText,
 } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
-import * as sinon from 'sinon';
+import { vi, expect } from 'vitest';
 import Array from '../src/array/index.jsx';
 import { withOptions } from '../src/index.jsx';
 
@@ -55,7 +54,7 @@ describe('Array', function () {
             .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        add = sinon.spy();
+        add = vi.fn();
     });
 
     it('renders the array container', function () {
@@ -105,7 +104,10 @@ describe('Array', function () {
             model = { items: ['a'] };
             modelStore = renderHook(() => useModelStore(schema, model)).result
                 .current;
-            wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
+            wrapper = makeWrapper({
+                modelStore,
+                renderingContext: { decorator },
+            });
 
             const { container } = render(
                 <Array form={form} add={add}>
@@ -170,7 +172,7 @@ describe('Array', function () {
                 '.forml-array-header-add-button'
             );
             fireEvent.click(addButton);
-            expect(add.calledOnce).to.be.true;
+            expect(add).to.have.been.calledOnce;
         });
 
         it('does not render when no title or description', function () {
@@ -190,10 +192,13 @@ describe('Array', function () {
     describe('with filled option', function () {
         beforeEach(function () {
             decorator = withOptions({ filled: true });
-            wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
+            wrapper = makeWrapper({
+                modelStore,
+                renderingContext: { decorator },
+            });
         });
 
-        it('adds forml-filled class to the container', function () {
+        it('adds data-filled attribute to the container', function () {
             const { container } = render(
                 <Array form={form} add={add}>
                     {[]}
@@ -202,10 +207,10 @@ describe('Array', function () {
             );
 
             const el = container.querySelector('.forml-array');
-            expect(el.classList.contains('forml-filled')).to.be.true;
+            expect(el.getAttribute('data-filled')).to.equal('true');
         });
 
-        it('adds forml-filled class to the header', function () {
+        it('adds data-filled attribute to the header', function () {
             const { container } = render(
                 <Array form={form} add={add}>
                     {[]}
@@ -213,8 +218,9 @@ describe('Array', function () {
                 { wrapper }
             );
 
-            const header = container.querySelector('.forml-array-header');
-            expect(header.classList.contains('forml-filled')).to.be.true;
+            const header = container.querySelector('.forml-header');
+            expect(header).to.exist;
+            expect(header.getAttribute('data-filled')).to.equal('true');
         });
     });
 
@@ -260,9 +266,9 @@ describe('Array.Item', function () {
             .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        destroy = sinon.spy();
-        moveUp = sinon.spy();
-        moveDown = sinon.spy();
+        destroy = vi.fn();
+        moveUp = vi.fn();
+        moveDown = vi.fn();
 
         const { keyMaps } = modelStore.getState();
         firstId = keyMaps['items'].indexToKey[0];
@@ -323,7 +329,7 @@ describe('Array.Item', function () {
 
         const buttons = container.querySelectorAll('button');
         fireEvent.click(buttons[0]);
-        expect(moveUp.calledOnce).to.be.true;
+        expect(moveUp).to.have.been.calledOnce;
     });
 
     it('calls moveDown when the move down button is clicked', function () {
@@ -342,7 +348,7 @@ describe('Array.Item', function () {
 
         const buttons = container.querySelectorAll('button');
         fireEvent.click(buttons[1]);
-        expect(moveDown.calledOnce).to.be.true;
+        expect(moveDown).to.have.been.calledOnce;
     });
 
     it('calls destroy when the destroy button is clicked', function () {
@@ -361,7 +367,7 @@ describe('Array.Item', function () {
 
         const buttons = container.querySelectorAll('button');
         fireEvent.click(buttons[2]);
-        expect(destroy.calledOnce).to.be.true;
+        expect(destroy).to.have.been.calledOnce;
     });
 
     it('disables move up button for the first item', function () {
@@ -471,6 +477,7 @@ describe('Array.Item', function () {
         );
 
         const item = container.querySelector('.forml-array-item');
-        expect(item.classList.contains('forml-array-item-dragging')).to.be.false;
+        expect(item.classList.contains('forml-array-item-dragging')).to.be
+            .false;
     });
 });

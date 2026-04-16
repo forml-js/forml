@@ -3,9 +3,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { render, renderHook, fireEvent, act } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
-import * as sinon from 'sinon';
 import FileComponent from '../src/file.jsx';
 import { withOptions } from '../src/index.jsx';
 
@@ -43,7 +40,7 @@ describe('File', function () {
             .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        onChange = sinon.spy();
+        onChange = vi.fn();
     });
 
     it('renders a file input', function () {
@@ -126,10 +123,11 @@ describe('File', function () {
             fireEvent.change(input, { target: { files: [file] } });
         });
 
-        expect(onChange.calledOnce).to.be.true;
-        const [event, result] = onChange.firstCall.args;
-        expect(event.target.files).to.deep.equal([file]);
-        expect(result).to.equal('test.txt');
+        expect(onChange).to.have.been.calledOnce;
+        expect(onChange).to.have.been.calledWith(
+            { target: { files: [file] } },
+            'test.txt'
+        );
     });
 
     it('passes accept to the file input', function () {
@@ -151,11 +149,11 @@ describe('File', function () {
         let errorText;
 
         beforeEach(function () {
-            validator = sinon.spy((_value) => false);
+            validator = vi.fn((_value) => false);
             errorText = 'error';
             ajv = {
-                compile: sinon.spy(() => validator),
-                errorsText: sinon.spy(() => errorText),
+                compile: vi.fn(() => validator),
+                errorsText: vi.fn(() => errorText),
             };
             model = { field: 'not valid' };
             modelStore = renderHook(() => useModelStore(schema, model)).result

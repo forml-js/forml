@@ -3,9 +3,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { render, renderHook, screen } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
 import Icon from '../src/icon.jsx';
 import { withOptions } from '../src/index.jsx';
 

@@ -27,8 +27,8 @@
     },
     "homepage": "https://www.forml.dev",
     "peerDependencies": {
-        "@forml/context": "file:../context",
-        "@forml/hooks": "file:../hooks",
+        "@forml/context": "workspace:../context",
+        "@forml/hooks": "workspace:../hooks",
         "@fortawesome/fontawesome-svg-core": "^7.2.0",
         "@fortawesome/free-solid-svg-icons": "^7.2.0",
         "@fortawesome/react-fontawesome": "^3.3.0",

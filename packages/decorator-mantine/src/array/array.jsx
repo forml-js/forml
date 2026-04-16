@@ -46,10 +46,12 @@ function Header(props) {
 
 function Base(props) {
     const options = useDecorator('options');
-    const className = options.filled
-        ? 'forml-array forml-filled'
-        : 'forml-array';
-    return <Paper className={className}>{props.children}</Paper>;
+    const filled = !!options.filled;
+    return (
+        <Paper className="forml-array" data-filled={filled}>
+            {props.children}
+        </Paper>
+    );
 }
 
 export default function ArrayForm(props) {

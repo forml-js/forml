@@ -3,9 +3,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { render, renderHook, screen } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
 import DateForm from '../src/date.jsx';
 import { withOptions } from '../src/index.jsx';
 
@@ -88,12 +85,13 @@ describe('renders', function () {
     });
 
     it('calls onChange with event and value', async function () {
-        const onChange = sinon.spy();
+        const onChange = vi.fn();
         const { container } = render(
             <DateForm form={form} value={'2025-07-03'} onChange={onChange} />,
             { wrapper }
         );
 
+        const root = container.querySelector('.mantine-DatePickerInput-root');
         const button = container.querySelector(
             '.mantine-DatePickerInput-input'
         );
@@ -104,13 +102,13 @@ describe('renders', function () {
         const day = document.querySelector('.mantine-DatePickerInput-day');
         day.click();
 
-        expect(onChange).to.have.been.calledOnce;
-        onChange.calledWithMatch(
-            { target: { value: day.ariaLabel } },
-            day.ariaLabel
-        );
+        const hiddenInput = root.nextElementSibling;
 
-        expect(onChange.calledOnce).to.be.true;
+        expect(onChange).to.have.been.calledOnce;
+        expect(onChange).toHaveBeenCalledWith(
+            { target: { value: '2025-06-30' } },
+            '2025-06-30'
+        );
     });
 
     describe('with an error state', function () {
@@ -119,11 +117,11 @@ describe('renders', function () {
         let errorText;
 
         beforeEach(function () {
-            validator = sinon.spy((_value) => false);
+            validator = vi.fn((_value) => false);
             errorText = 'error';
             ajv = {
-                compile: sinon.spy(() => validator),
-                errorsText: sinon.spy(() => errorText),
+                compile: vi.fn(() => validator),
+                errorsText: vi.fn(() => errorText),
             };
             model = { field: 'not a boolean' };
             modelStore = renderHook(() => useModelStore(schema, model)).result

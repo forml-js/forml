@@ -3,9 +3,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { render, renderHook } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import * as sinon from 'sinon';
 import Checkbox from '../src/checkbox.jsx';
 import { withOptions } from '../src/index.jsx';
 
@@ -78,7 +75,7 @@ describe('renders', function () {
     });
 
     it('calls onChange with event and value', function () {
-        const onChange = sinon.spy();
+        const onChange = vi.fn();
         const { container } = render(
             <Checkbox form={form} value={false} onChange={onChange} />,
             { wrapper }
@@ -87,7 +84,7 @@ describe('renders', function () {
         const input = container.querySelector('input[type="checkbox"]');
         input.click();
 
-        expect(onChange.calledOnce).to.be.true;
+        expect(onChange).to.have.been.calledOnce;
     });
 
     describe('with an error state', function () {
@@ -96,11 +93,11 @@ describe('renders', function () {
         let errorText;
 
         beforeEach(function () {
-            validator = sinon.spy((_value) => false);
+            validator = vi.fn((_value) => false);
             errorText = 'error';
             ajv = {
-                compile: sinon.spy(() => validator),
-                errorsText: sinon.spy(() => errorText),
+                compile: vi.fn(() => validator),
+                errorsText: vi.fn(() => errorText),
             };
             model = { field: 'not a boolean' };
             modelStore = renderHook(() => useModelStore(schema, model)).result

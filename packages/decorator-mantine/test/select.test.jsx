@@ -3,9 +3,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { render, renderHook } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
-import * as sinon from 'sinon';
 import Select from '../src/select.jsx';
 import { withOptions } from '../src/index.jsx';
 
@@ -51,7 +48,7 @@ describe('renders', function () {
             .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        onChange = sinon.spy();
+        onChange = vi.fn();
     });
 
     it('renders the select input', function () {
@@ -136,10 +133,8 @@ describe('renders', function () {
         expect(option2).to.exist;
         option2.click();
 
-        expect(onChange.calledOnce).to.be.true;
-        const [event, val] = onChange.firstCall.args;
-        expect(val).to.equal(2);
-        expect(event.target.value).to.equal(2);
+        expect(onChange).to.have.been.calledOnce;
+        expect(onChange).to.have.been.calledWith({ target: { value: 2 } }, 2);
     });
 
     describe('with an error state', function () {
@@ -148,11 +143,11 @@ describe('renders', function () {
         let errorText;
 
         beforeEach(function () {
-            validator = sinon.spy((_value) => false);
+            validator = vi.fn((_value) => false);
             errorText = 'error';
             ajv = {
-                compile: sinon.spy(() => validator),
-                errorsText: sinon.spy(() => errorText),
+                compile: vi.fn(() => validator),
+                errorsText: vi.fn(() => errorText),
             };
             model = { field: 1 };
             modelStore = renderHook(() => useModelStore(schema, model)).result

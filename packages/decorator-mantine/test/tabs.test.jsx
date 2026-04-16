@@ -2,9 +2,6 @@ import React from 'react';
 import { MantineProvider, Tabs } from '@mantine/core';
 import { RenderingContext } from '@forml/context';
 import { render, fireEvent, getByText } from '@testing-library/react';
-import { expect } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
-import * as sinon from 'sinon';
 import Container from '../src/tabs/container.jsx';
 import Tab from '../src/tabs/tab.jsx';
 import Panel from '../src/tabs/panel.jsx';
@@ -38,7 +35,7 @@ describe('Container', function () {
         form = { title: 'My Tabs', description: 'Tab description' };
         decorator = withOptions({});
         wrapper = makeWrapper({ renderingContext: { decorator } });
-        activateTab = sinon.spy();
+        activateTab = vi.fn();
     });
 
     it('renders the tabs root', function () {
@@ -140,8 +137,8 @@ describe('Container', function () {
 
         const secondTab = getByText(container, 'Second');
         fireEvent.click(secondTab);
-        expect(activateTab.calledOnce).to.be.true;
-        expect(activateTab.firstCall.args[0]).to.equal('1');
+        expect(activateTab).to.have.been.calledOnce;
+        expect(activateTab).to.have.been.calledWith('1');
     });
 
     describe('header', function () {
@@ -157,7 +154,7 @@ describe('Container', function () {
                 { wrapper }
             );
 
-            const header = container.querySelector('.forml-tabs-header');
+            const header = container.querySelector('.forml-header');
             expect(header).to.exist;
         });
 

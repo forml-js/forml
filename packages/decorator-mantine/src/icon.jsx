@@ -1,5 +1,5 @@
 import * as Icons from '@phosphor-icons/react';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 export default function Icon(props) {
     const { icon: iconName, ...rest } = props;

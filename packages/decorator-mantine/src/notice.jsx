@@ -1,6 +1,6 @@
 import { using } from '@forml/hooks';
 import { Alert, Text } from '@mantine/core';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Icon from './icon.jsx';
 
 export default function Notice(props) {
