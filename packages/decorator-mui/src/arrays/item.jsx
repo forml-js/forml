@@ -77,7 +77,7 @@ const MovementButton = styled(Button, {
     minWidth: theme.spacing(6),
     borderBottom: spacer ? 'none !important' : undefined,
 }));
-const StyledListItem = styled(ListItem)(() => ({
+const StyledListItem = styled(ListItem)(({ theme }) => ({
     display: 'flex',
     alignItems: 'stretch',
     flexDirection: 'row',

@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import DateTime from '../../src/datetime.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
@@ -74,8 +72,9 @@ describe('renders', function () {
                         );
 
                         // Verify the DateTimePicker component renders
-                        const dateTimePicker =
-                            container.querySelector('.MuiTextField-root');
+                        const dateTimePicker = container.querySelector(
+                            '.MuiPickersInputBase-root'
+                        );
                         expect(dateTimePicker).to.exist;
 
                         // Verify the input element exists

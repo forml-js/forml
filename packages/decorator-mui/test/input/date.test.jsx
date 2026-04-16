@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import DateComponent from '../../src/date.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
@@ -77,7 +75,7 @@ describe('renders', function () {
 
                         // Verify MUI DatePicker is present
                         const dateInput = container.querySelector(
-                            'input[type="text"], input[placeholder*="MM"], .MuiInputBase-input'
+                            '.MuiPickersInputBase-input'
                         );
                         expect(dateInput).to.not.be.null;
                     });

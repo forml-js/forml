@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import Help from '../src/help.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
@@ -31,7 +29,8 @@ describe('renders', function () {
         form = { type: 'help' };
         schema = { type: 'object', properties: { field: { type: 'string' } } };
         model = {};
-        modelStore = renderHook(() => useModelStore(schema, model)).result.current;
+        modelStore = renderHook(() => useModelStore(schema, model)).result
+            .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
     });
@@ -60,21 +59,23 @@ describe('renders', function () {
                         // Set description on the form object for this test case
                         form = { ...form, description };
 
-                        const { container } = render(
-                            <Help
-                                form={form}
-                            />, { wrapper }
-                        );
+                        const { container } = render(<Help form={form} />, {
+                            wrapper,
+                        });
 
                         // Assert the Typography component is rendered
-                        const typography = container.querySelector('.MuiTypography-root');
+                        const typography = container.querySelector(
+                            '.MuiTypography-root'
+                        );
                         expect(typography).to.exist;
 
                         // The description text should be rendered
                         const helper = queryByText(container, form.description);
                         if (form.description) {
                             expect(helper).to.exist;
-                            expect(helper.textContent).to.equal(form.description);
+                            expect(helper.textContent).to.equal(
+                                form.description
+                            );
                         } else {
                             expect(helper).to.not.exist;
                         }

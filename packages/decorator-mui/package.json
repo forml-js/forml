@@ -32,7 +32,7 @@
     "homepage": "https://www.forml.dev",
     "devDependencies": {
         "@date-io/moment": "^3.2.0",
-        "@forml/core": "file:../core",
+        "@forml/core": "workspace:../core",
         "@testing-library/react": "^16.3.2",
         "moment": "^2.30.1",
         "react": "^19.2.5",
@@ -49,8 +49,9 @@
     },
     "gitHead": "070e7bf9829f1b21c2d7100f935fdc624d43fdef",
     "dependencies": {
-        "@forml/context": "file:../context",
-        "@forml/hooks": "file:../hooks",
+        "@forml/context": "workspace:../context",
+        "@forml/hooks": "workspace:../hooks",
+        "debug": "^4.4.3",
         "nanoid": "^5.1.7"
     }
 }

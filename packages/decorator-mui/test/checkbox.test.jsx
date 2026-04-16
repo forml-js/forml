@@ -1,7 +1,4 @@
 import debug from 'debug';
-import * as sinon from 'sinon';
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import Checkbox from '../src/checkbox.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
@@ -54,7 +51,7 @@ describe('renders', function () {
     });
 
     it('with a titleFun', function () {
-        form.titleFun = sinon.spy((value) => `title ${value}`);
+        form.titleFun = vi.fn((value) => `title ${value}`);
         const value = 'test';
         const { container } = render(
             <Checkbox form={form} value={value} title={title} />,
@@ -125,11 +122,11 @@ describe('renders', function () {
         let validator;
         let errorText;
         beforeEach(function () {
-            validator = sinon.spy((_value) => false);
+            validator = vi.fn((_value) => false);
             errorText = 'error';
             ajv = {
-                compile: sinon.spy(() => validator),
-                errorsText: sinon.spy(() => errorText),
+                compile: vi.fn(() => validator),
+                errorsText: vi.fn(() => errorText),
             };
             model = { field: 'not a boolean' };
             // First create modelStore with a dummy wrapper

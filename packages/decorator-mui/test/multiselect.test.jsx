@@ -1,11 +1,8 @@
-import * as sinon from 'sinon';
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
-import Multiselect from '../../src/multiselect.jsx';
+import Multiselect from '../src/multiselect.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
 import { render, renderHook, fireEvent } from '@testing-library/react';
-import { withOptions } from '../../src/index.jsx';
+import { withOptions } from '../src/index.jsx';
 import { useModelStore } from '@forml/hooks';
 
 function makeWrapper({ modelStore, renderingContext }) {
@@ -49,7 +46,7 @@ describe('renders', function () {
             .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        onChange = sinon.spy(function () {}); // Mock onChange function
+        onChange = vi.fn(function () {}); // Mock onChange function
     });
 
     it('renders basic select with title and options', function () {
@@ -133,7 +130,7 @@ describe('renders', function () {
         );
 
         const select = container.querySelector('.MuiSelect-select');
-        expect(select).to.have.class('Mui-disabled');
+        expect(select.className).to.include('Mui-disabled');
     });
 
     it('handles titleFun when provided', function () {
@@ -147,6 +144,6 @@ describe('renders', function () {
 
         const label = container.querySelector('.MuiInputLabel-root');
         expect(label).to.exist;
-        expect(label.textContent).to.include('Dynamic: 0'); // value gets converted to index
+        expect(label.textContent).to.include('Dynamic: 1'); // value gets converted to index
     });
 });

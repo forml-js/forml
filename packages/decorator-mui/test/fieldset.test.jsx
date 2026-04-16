@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import { renderHook, render, getByText } from '@testing-library/react';
 import FieldSet from '../src/fieldset.jsx';
 import { withOptions } from '../src/index.jsx';

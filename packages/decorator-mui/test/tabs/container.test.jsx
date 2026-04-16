@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import { Container, Tab, Panel } from '../../src/tabs/index.jsx';
 import Context from '@forml/context';
 import React from 'react';

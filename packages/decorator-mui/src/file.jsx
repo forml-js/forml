@@ -22,9 +22,7 @@ export default function File(props) {
 
     const onChange = useCallback(
         async function onChange(event) {
-            console.error('FileComponent.onChange(event: %o)', event);
             const value = await fileField.onChange(event);
-            console.error('FileComponent.onChange(value: %o)', value);
             return props.onChange(event, value);
         },
         [fileField.onChange, props.onChange]

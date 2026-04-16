@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import { Tab } from '../../src/tabs/index.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
@@ -49,36 +47,32 @@ describe('renders', function () {
                     it(`${value}`, function () {
                         form = { ...form, [field]: value, title, description };
                         const { container, getByText, queryByText } = render(
-                            <Tab
-                                form={form}
-                                parent={parent}
-                            />,
+                            <Tab form={form} parent={parent} />,
                             { wrapper }
                         );
 
                         // Verify tab renders without errors
                         expect(container.firstChild).to.exist;
-                        
+
                         // Verify MUI ListItem structure is present
-                        const listItem = container.querySelector('.MuiListItem-root');
+                        const listItem =
+                            container.querySelector('.MuiListItem-root');
                         expect(listItem).to.not.be.null;
                     });
                     it(`${value} with layout`, function () {
                         parent = { ...parent, layout: 'horizontal' };
                         form = { ...form, [field]: value, title, description };
                         const { container, getByText, queryByText } = render(
-                            <Tab
-                                form={form}
-                                parent={parent}
-                            />,
+                            <Tab form={form} parent={parent} />,
                             { wrapper }
                         );
 
                         // Verify tab with layout renders without errors
                         expect(container.firstChild).to.exist;
-                        
+
                         // Verify MUI ListItem structure is present
-                        const listItem = container.querySelector('.MuiListItem-root');
+                        const listItem =
+                            container.querySelector('.MuiListItem-root');
                         expect(listItem).to.not.be.null;
                     });
                 });

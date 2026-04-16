@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import { Panel } from '../../src/tabs/index.jsx';
 import Context from '@forml/context';
 import React from 'react';
@@ -41,9 +39,11 @@ describe('renders', function () {
 
                         // Verify panel renders without errors
                         expect(container.firstChild).to.not.be.null;
-                        
+
                         // Verify MUI panel components are present
-                        const panelElement = container.querySelector('.MuiPaper-root, .MuiBox-root, .MuiContainer-root');
+                        const panelElement = container.querySelector(
+                            '.MuiPaper-root, .MuiBox-root, .MuiContainer-root'
+                        );
                         expect(panelElement).to.not.be.null;
                     });
                     it(`${value} with layout`, function () {
@@ -62,9 +62,11 @@ describe('renders', function () {
 
                         // Verify panel with layout renders without errors
                         expect(container.firstChild).to.not.be.null;
-                        
+
                         // Verify MUI panel components are present
-                        const panelElement = container.querySelector('.MuiPaper-root, .MuiBox-root, .MuiContainer-root');
+                        const panelElement = container.querySelector(
+                            '.MuiPaper-root, .MuiBox-root, .MuiContainer-root'
+                        );
                         expect(panelElement).to.not.be.null;
                     });
                 });

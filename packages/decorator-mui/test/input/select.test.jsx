@@ -1,5 +1,3 @@
-import { it, describe } from 'mocha';
-import { expect } from 'chai';
 import Select from '../../src/select.jsx';
 import { ModelContext, RenderingContext } from '@forml/context';
 import React from 'react';
@@ -30,33 +28,31 @@ describe('renders', function () {
     let wrapper;
 
     beforeEach(function () {
-        form = { 
-            type: 'string', 
+        form = {
+            type: 'string',
             key: 'field',
-            title, 
+            title,
             description,
             titleMap: [
                 { name: 'Option 1', value: 1 },
                 { name: 'Option 2', value: 2 },
-                { name: 'Option 3', value: 3 }
+                { name: 'Option 3', value: 3 },
             ],
-            enum: [1, 2, 3]
+            enum: [1, 2, 3],
         };
         schema = { type: 'object', properties: { field: { type: 'string' } } };
         model = {};
-        modelStore = renderHook(() => useModelStore(schema, model)).result.current;
+        modelStore = renderHook(() => useModelStore(schema, model)).result
+            .current;
         decorator = withOptions({});
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
-        onChange = function() {}; // Mock onChange function
+        onChange = function () {}; // Mock onChange function
     });
 
     it('renders basic select with title and options', function () {
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         // Check for FormControl
@@ -80,13 +76,10 @@ describe('renders', function () {
 
     it('renders without title', function () {
         form = { ...form, title: undefined };
-        
+
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         const formControl = container.querySelector('.MuiFormControl-root');
@@ -98,13 +91,10 @@ describe('renders', function () {
 
     it('renders without description', function () {
         form = { ...form, description: undefined };
-        
+
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         const formControl = container.querySelector('.MuiFormControl-root');
@@ -119,16 +109,13 @@ describe('renders', function () {
         wrapper = makeWrapper({ modelStore, renderingContext: { decorator } });
 
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         const select = container.querySelector('.MuiSelect-root');
         expect(select).to.exist;
-        
+
         // Check for outlined variant
         const outlinedInput = container.querySelector('.MuiOutlinedInput-root');
         expect(outlinedInput).to.exist;
@@ -136,29 +123,23 @@ describe('renders', function () {
 
     it('handles readonly state', function () {
         form = { ...form, readonly: true };
-        
+
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         const select = container.querySelector('.MuiSelect-select');
-        expect(select).to.have.class('Mui-disabled');
+        expect(select.className).to.include('Mui-disabled');
     });
 
     it('handles titleFun when provided', function () {
         const titleFun = (val) => `Dynamic: ${val}`;
         form = { ...form, title: undefined, titleFun };
-        
+
         const { container } = render(
-            <Select
-                form={form}
-                value={value}
-                onChange={onChange}
-            />, { wrapper }
+            <Select form={form} value={value} onChange={onChange} />,
+            { wrapper }
         );
 
         const label = container.querySelector('.MuiInputLabel-root');

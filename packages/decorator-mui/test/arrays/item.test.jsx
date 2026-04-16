@@ -2,17 +2,9 @@ import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { createTheme } from '@mui/material';
 import { render, renderHook } from '@testing-library/react';
-import * as chai from 'chai';
-import domChai from 'chai-dom';
-import { describe, it } from 'mocha';
 import React from 'react';
-import sinonChai from 'sinon-chai';
 import Item from '../../src/arrays/item.jsx';
 import { withOptions } from '../../src/index.jsx';
-
-chai.use(sinonChai);
-chai.use(domChai);
-const { expect } = chai;
 
 const theme = createTheme({});
 

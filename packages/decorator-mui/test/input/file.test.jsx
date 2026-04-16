@@ -2,8 +2,6 @@ import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react';
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
 import React from 'react';
 import FileComponent from '../../src/file.jsx';
 import { withOptions } from '../../src/index.jsx';
@@ -98,7 +96,6 @@ describe('file interaction', function () {
         let capturedEvent = null;
         let capturedValue = null;
         const mockOnChange = (event, value) => {
-            console.error('mockOnChange(value: %o)', value);
             capturedEvent = event;
             capturedValue = value;
         };

@@ -2,16 +2,9 @@ import { ModelContext, RenderingContext } from '@forml/context';
 import { useModelStore } from '@forml/hooks';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { render, renderHook } from '@testing-library/react';
-import * as chai from 'chai';
-import { describe, it } from 'mocha';
 import React from 'react';
-import * as sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import ArrayComponent from '../../src/arrays/items.jsx';
 import { withOptions } from '../../src/index.jsx';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 const theme = createTheme();
 
@@ -36,7 +29,7 @@ describe('renders', function () {
 
     beforeEach(function () {
         form = { type: 'array', items: [{ key: [] }] };
-        localizer = { getLocalizedString: sinon.fake((id) => id) };
+        localizer = { getLocalizedString: vi.fn((id) => id) };
         const decorator = withOptions({});
         const schema = {
             type: 'object',
